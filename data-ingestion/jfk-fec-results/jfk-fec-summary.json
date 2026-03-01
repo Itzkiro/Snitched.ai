@@ -1,0 +1,41 @@
+{
+  "total_politicians": 188,
+  "processed": 188,
+  "with_fec_data": 6,
+  "with_aipac_funding": 4,
+  "errors": 0,
+  "total_aipac_funding": 114500.0,
+  "total_raised_all": 70080154.03999999,
+  "duration_seconds": 150.547429,
+  "timestamp": "2026-02-22T07:49:26.934831",
+  "top_10_aipac_recipients": [
+    {
+      "name": "Sheila Cherfilus-McCormick",
+      "office": "U.S. House of Representatives",
+      "party": "Democratic",
+      "aipac_total": 52500.0,
+      "aipac_count": 74
+    },
+    {
+      "name": "Frederica S. Wilson",
+      "office": "U.S. House of Representatives",
+      "party": "Democratic",
+      "aipac_total": 36000.0,
+      "aipac_count": 12
+    },
+    {
+      "name": "Vern Buchanan",
+      "office": "U.S. House of Representatives",
+      "party": "Republican",
+      "aipac_total": 25000.0,
+      "aipac_count": 5
+    },
+    {
+      "name": "Aaron Bean",
+      "office": "U.S. House of Representatives",
+      "party": "Republican",
+      "aipac_total": 1000.0,
+      "aipac_count": 4
+    }
+  ]
+}
