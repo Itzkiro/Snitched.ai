@@ -1,11 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { getAllPoliticians } from '@/lib/real-data';
+import React, { useState } from 'react';
 import PoliticianCard from '@/components/PoliticianCard';
-
-// Disable static generation to avoid build-time errors
-export const dynamic = 'force-dynamic';
 
 export default function BrowsePage() {
   const [filterLevel, setFilterLevel] = useState<string>('all');
@@ -15,18 +11,23 @@ export default function BrowsePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Load politicians on client side only
+  // Load politicians from API route
   React.useEffect(() => {
-    try {
-      const data = getAllPoliticians();
-      setPoliticians(data);
-    } catch (error) {
-      console.error('Error loading:', error);
-      setError(error instanceof Error ? error.message : 'Failed to load data');
-      setPoliticians([]);
-    } finally {
-      setLoading(false);
+    async function loadData() {
+      try {
+        const res = await fetch('/api/politicians');
+        if (!res.ok) throw new Error(`API error: ${res.status}`);
+        const data = await res.json();
+        setPoliticians(data);
+      } catch (error) {
+        console.error('Error loading:', error);
+        setError(error instanceof Error ? error.message : 'Failed to load data');
+        setPoliticians([]);
+      } finally {
+        setLoading(false);
+      }
     }
+    loadData();
   }, []);
 
   const filteredPoliticians = politicians.filter(p => {
@@ -82,7 +83,7 @@ export default function BrowsePage() {
           <span className="alert-icon">📊</span>
           <span>DATABASE STATUS: ONLINE</span>
           <span style={{ fontSize: '0.875rem', color: 'var(--terminal-text-dim)', marginLeft: '1rem' }}>
-            {filteredPoliticians.length} / {getAllPoliticians().filter(p => p.isActive).length} RECORDS
+            {filteredPoliticians.length} / {politicians.filter(p => p.isActive).length} RECORDS
           </span>
         </div>
       </div>

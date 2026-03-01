@@ -1,30 +1,16 @@
 // Bills data service for Snitched.ai
-// Manages bill storage, classification, and retrieval
-
-import { createClient } from '@supabase/supabase-js';
-
-// Supabase client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-
-let supabaseClient: ReturnType<typeof createClient> | null = null;
-
-function getSupabase() {
-  if (!supabaseClient && supabaseUrl && supabaseKey) {
-    supabaseClient = createClient(supabaseUrl, supabaseKey);
-  }
-  return supabaseClient;
-}
+// Client-safe: read operations use API routes, no direct Supabase access.
+// Write operations use server-side Supabase client (only callable from server context).
 
 // Bill classification categories
-export type BillCategory = 
-  | 'ISRAEL' 
-  | 'DEFENSE' 
-  | 'FOREIGN' 
-  | 'DOMESTIC' 
-  | 'ANTI_AMERICA_FIRST' 
-  | 'ECONOMY' 
-  | 'HEALTHCARE' 
+export type BillCategory =
+  | 'ISRAEL'
+  | 'DEFENSE'
+  | 'FOREIGN'
+  | 'DOMESTIC'
+  | 'ANTI_AMERICA_FIRST'
+  | 'ECONOMY'
+  | 'HEALTHCARE'
   | 'IMMIGRATION';
 
 export interface Bill {
@@ -39,10 +25,10 @@ export interface Bill {
   policy_area: string | null;
   subjects: string[] | null;
   introduced_date: string | null;
-  latest_action: any;
-  sponsors: any;
+  latest_action: unknown;
+  sponsors: unknown;
   cosponsors_count: number;
-  committees: any;
+  committees: unknown;
   ai_primary_category: BillCategory | null;
   ai_confidence: number | null;
   ai_reasoning: string | null;
@@ -90,39 +76,27 @@ export interface BillWithVote extends Vote {
 
 // Get bill by Congress API ID
 export async function getBill(id: string): Promise<Bill | null> {
-  const supabase = getSupabase();
-  if (!supabase) return null;
-
-  const { data, error } = await supabase
-    .from('bills')
-    .select('*')
-    .eq('id', id)
-    .single();
-
-  if (error) {
+  try {
+    const res = await fetch(`/api/bills?id=${encodeURIComponent(id)}`);
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (error) {
     console.error('Error fetching bill:', error);
     return null;
   }
-
-  return data;
 }
 
 // Get multiple bills by IDs
 export async function getBills(ids: string[]): Promise<Bill[]> {
-  const supabase = getSupabase();
-  if (!supabase) return [];
-
-  const { data, error } = await supabase
-    .from('bills')
-    .select('*')
-    .in('id', ids);
-
-  if (error) {
+  if (ids.length === 0) return [];
+  try {
+    const res = await fetch(`/api/bills?ids=${ids.map(encodeURIComponent).join(',')}`);
+    if (!res.ok) return [];
+    return await res.json();
+  } catch (error) {
     console.error('Error fetching bills:', error);
     return [];
   }
-
-  return data || [];
 }
 
 // Get bills by category
@@ -130,22 +104,14 @@ export async function getBillsByCategory(
   category: BillCategory,
   limit: number = 50
 ): Promise<Bill[]> {
-  const supabase = getSupabase();
-  if (!supabase) return [];
-
-  const { data, error } = await supabase
-    .from('bills')
-    .select('*')
-    .eq('ai_primary_category', category)
-    .order('updated_at', { ascending: false })
-    .limit(limit);
-
-  if (error) {
+  try {
+    const res = await fetch(`/api/bills?category=${encodeURIComponent(category)}&limit=${limit}`);
+    if (!res.ok) return [];
+    return await res.json();
+  } catch (error) {
     console.error('Error fetching bills by category:', error);
     return [];
   }
-
-  return data || [];
 }
 
 // Get votes for a politician with bill details
@@ -153,49 +119,30 @@ export async function getPoliticianVotes(
   bioguideId: string,
   category?: BillCategory
 ): Promise<BillWithVote[]> {
-  const supabase = getSupabase();
-  if (!supabase) return [];
-
-  let query = supabase
-    .from('politician_votes')
-    .select(`
-      position,
-      votes!inner(
-        *,
-        bills(*)
-      )
-    `)
-    .eq('politician_bioguide_id', bioguideId);
-
-  if (category) {
-    query = query.eq('votes.bills.ai_primary_category', category);
-  }
-
-  const { data, error } = await query
-    .order('votes(vote_date)', { ascending: false })
-    .limit(50);
-
-  if (error) {
+  try {
+    let url = `/api/politicians/votes?bioguideId=${encodeURIComponent(bioguideId)}`;
+    if (category) {
+      url += `&category=${encodeURIComponent(category)}`;
+    }
+    const res = await fetch(url);
+    if (!res.ok) return [];
+    return await res.json();
+  } catch (error) {
     console.error('Error fetching politician votes:', error);
     return [];
   }
-
-  // Transform nested data
-  return (data || []).map((pv: any) => ({
-    ...pv.votes,
-    bills: pv.votes.bills,
-    politician_votes: [{ position: pv.position }]
-  }));
 }
 
-// Store a new bill
+// Store a new bill (server-side only)
 export async function storeBill(bill: Partial<Bill>): Promise<boolean> {
-  const supabase = getSupabase();
+  // Dynamic import to avoid bundling server code into client
+  const { getServerSupabase } = await import('./supabase-server');
+  const supabase = getServerSupabase();
   if (!supabase) return false;
 
   const { error } = await supabase
     .from('bills')
-    .upsert([bill] as any, { onConflict: 'id' });
+    .upsert([bill] as Record<string, unknown>[], { onConflict: 'id' });
 
   if (error) {
     console.error('Error storing bill:', error);
@@ -205,19 +152,21 @@ export async function storeBill(bill: Partial<Bill>): Promise<boolean> {
   return true;
 }
 
-// Store vote and politician position
+// Store vote and politician position (server-side only)
 export async function storeVote(
   vote: Partial<Vote>,
   politicianBioguideId: string,
   position: string
 ): Promise<boolean> {
-  const supabase = getSupabase();
+  // Dynamic import to avoid bundling server code into client
+  const { getServerSupabase } = await import('./supabase-server');
+  const supabase = getServerSupabase();
   if (!supabase) return false;
 
   // Store vote first
   const { error: voteError } = await supabase
     .from('votes')
-    .upsert([vote] as any, { onConflict: 'id' });
+    .upsert([vote] as Record<string, unknown>[], { onConflict: 'id' });
 
   if (voteError) {
     console.error('Error storing vote:', voteError);
@@ -231,8 +180,8 @@ export async function storeVote(
       politician_bioguide_id: politicianBioguideId,
       vote_id: vote.id,
       position: position
-    }] as any, { 
-      onConflict: 'politician_bioguide_id,vote_id' 
+    }] as Record<string, unknown>[], {
+      onConflict: 'politician_bioguide_id,vote_id'
     });
 
   if (pvError) {
@@ -245,38 +194,24 @@ export async function storeVote(
 
 // Get bills that need AI analysis (null category)
 export async function getBillsNeedingAnalysis(limit: number = 10): Promise<Bill[]> {
-  const supabase = getSupabase();
-  if (!supabase) return [];
-
-  const { data, error } = await supabase
-    .from('bills')
-    .select('*')
-    .is('ai_primary_category', null)
-    .limit(limit);
-
-  if (error) {
+  try {
+    const res = await fetch(`/api/bills?needsAnalysis=true&limit=${limit}`);
+    if (!res.ok) return [];
+    return await res.json();
+  } catch (error) {
     console.error('Error fetching bills needing analysis:', error);
     return [];
   }
-
-  return data || [];
 }
 
 // Search bills
 export async function searchBills(query: string, limit: number = 20): Promise<Bill[]> {
-  const supabase = getSupabase();
-  if (!supabase) return [];
-
-  const { data, error } = await supabase
-    .from('bills')
-    .select('*')
-    .or(`title.ilike.%${query}%,summary.ilike.%${query}%,description.ilike.%${query}%`)
-    .limit(limit);
-
-  if (error) {
+  try {
+    const res = await fetch(`/api/bills/search?q=${encodeURIComponent(query)}&limit=${limit}`);
+    if (!res.ok) return [];
+    return await res.json();
+  } catch (error) {
     console.error('Error searching bills:', error);
     return [];
   }
-
-  return data || [];
 }

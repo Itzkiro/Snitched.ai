@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { getAllPoliticiansFromSupabase } from '@/lib/supabase-data';
 import type { Politician } from '@/lib/types';
 
 export default function TerminalHome() {
@@ -13,7 +12,9 @@ export default function TerminalHome() {
   useEffect(() => {
     async function loadData() {
       try {
-        const allPoliticians = await getAllPoliticiansFromSupabase();
+        const res = await fetch('/api/politicians');
+        if (!res.ok) throw new Error(`API error: ${res.status}`);
+        const allPoliticians: Politician[] = await res.json();
         console.log('Loaded politicians:', allPoliticians.length);
         setPoliticians(allPoliticians);
       } catch (error) {

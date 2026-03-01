@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { getAllPoliticians } from '@/lib/real-data';
 import type { Politician } from '@/lib/types';
 
 interface HierarchyNode {
@@ -15,16 +14,18 @@ interface HierarchyNode {
 
 export default function HierarchyPage() {
   const [path, setPath] = useState<string[]>(['florida']);
-  const [activeTab, setActiveTab] = useState<string>(''); // For tabbed views
   const [hierarchyData, setHierarchyData] = useState<HierarchyNode | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    try {
-      const allPoliticians = getAllPoliticians();
-      
-      const data: HierarchyNode = {
+    async function loadData() {
+      try {
+        const res = await fetch('/api/politicians');
+        if (!res.ok) throw new Error(`API error: ${res.status}`);
+        const allPoliticians: Politician[] = await res.json();
+
+        const data: HierarchyNode = {
         id: 'florida',
         name: 'Florida',
         count: 8, // Will be 8000+ in production
@@ -111,13 +112,15 @@ export default function HierarchyPage() {
         ],
       };
       
-      setHierarchyData(data);
-    } catch (error) {
-      console.error('Error loading:', error);
-      setError(error instanceof Error ? error.message : 'Failed to load data');
-    } finally {
-      setLoading(false);
+        setHierarchyData(data);
+      } catch (error) {
+        console.error('Error loading:', error);
+        setError(error instanceof Error ? error.message : 'Failed to load data');
+      } finally {
+        setLoading(false);
+      }
     }
+    loadData();
   }, []);
 
   if (loading || !hierarchyData) {

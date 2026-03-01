@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { getAllPoliticians } from '@/lib/real-data';
+import type { Politician } from '@/lib/types';
 
 // JFK-VOTING: Congress API configuration
 const JFK_CONGRESS_API_KEY = process.env.NEXT_PUBLIC_CONGRESS_API_KEY || '';
@@ -45,6 +45,8 @@ type JFKBillFilter = 'all' | 'israel' | 'defense' | 'domestic' | 'foreign' | 'an
 export default function PoliticianPage() {
   const params = useParams();
   const [activeTab, setActiveTab] = useState<string>('overview');
+  const [politician, setPolitician] = useState<Politician | null>(null);
+  const [politicianLoading, setPoliticianLoading] = useState(true);
 
   // JFK-VOTING: State for votes data
   const [jfkVotes, setJfkVotes] = useState<JFKVoteRecord[]>([]);
@@ -52,7 +54,24 @@ export default function PoliticianPage() {
   const [jfkVotesError, setJfkVotesError] = useState<string | null>(null);
   const [jfkBillFilter, setJfkBillFilter] = useState<JFKBillFilter>('all');
 
-  const politician = getAllPoliticians().find(p => p.id === params.id);
+  // Load politician data from API route
+  useEffect(() => {
+    async function loadPolitician() {
+      try {
+        const res = await fetch('/api/politicians');
+        if (!res.ok) throw new Error(`API error: ${res.status}`);
+        const allPoliticians: Politician[] = await res.json();
+        const found = allPoliticians.find(p => p.id === params.id);
+        setPolitician(found || null);
+      } catch (error) {
+        console.error('Error loading politician:', error);
+        setPolitician(null);
+      } finally {
+        setPoliticianLoading(false);
+      }
+    }
+    loadPolitician();
+  }, [params.id]);
 
   // JFK-VOTING: Fetch votes when votes tab is active
   useEffect(() => {
@@ -289,6 +308,10 @@ export default function PoliticianPage() {
     return position.toUpperCase();
   };
 
+  if (politicianLoading) {
+    return <div style={{ padding: '2rem', textAlign: 'center', color: 'white' }}>Loading...</div>;
+  }
+
   if (!politician) {
     return (
       <div style={{ minHeight: '100vh', background: 'var(--terminal-bg)', color: 'var(--terminal-text)' }}>
@@ -515,7 +538,12 @@ export default function PoliticianPage() {
                         letterSpacing: '0.1em',
                         textTransform: 'uppercase',
                       }}>
-                        {politician.dataStatus === 'live' ? '✓ LIVE DATA' : '⚠ MOCK DATA'}
+                          {politician.dataStatus === 'live' ? '✓ LIVE DATA' : '⚠ MOCK DATA'}
+                        {politician.dataSource && (
+                          <span style={{ marginLeft: '0.5rem', fontWeight: 400, fontSize: '0.6rem', color: 'var(--terminal-text-dim)' }}>
+                            — {politician.dataSource}
+                          </span>
+                        )}
                       </span>
                       {politician.lastUpdated && (
                         <span style={{

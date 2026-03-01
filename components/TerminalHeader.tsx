@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import SearchBar from './SearchBar';
 
 export default function TerminalHeader() {
   const pathname = usePathname();
@@ -27,11 +28,12 @@ export default function TerminalHeader() {
       </div>
 
       {/* Navigation */}
-      <div style={{ 
-        background: 'var(--terminal-surface)', 
+      <div style={{
+        background: 'var(--terminal-surface)',
         borderBottom: '1px solid var(--terminal-border)',
         padding: '0.75rem 2rem',
         display: 'flex',
+        alignItems: 'center',
         gap: '2rem'
       }}>
         <Link 
@@ -113,6 +115,12 @@ export default function TerminalHeader() {
         >
           🔍 DATABASE
         </Link>
+
+        {/* Spacer to push search to the right */}
+        <div style={{ flex: 1 }} />
+
+        {/* Global Search */}
+        <SearchBar />
       </div>
     </>
   );

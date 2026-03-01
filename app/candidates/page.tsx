@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { getAllPoliticians } from '@/lib/real-data';
 import type { Politician } from '@/lib/types';
 
 export default function CandidatesPage() {
@@ -11,15 +10,20 @@ export default function CandidatesPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    try {
-      const allPoliticians = getAllPoliticians();
-      setPoliticians(allPoliticians);
-    } catch (error) {
-      console.error('Error loading:', error);
-      setError(error instanceof Error ? error.message : 'Failed to load data');
-    } finally {
-      setLoading(false);
+    async function loadData() {
+      try {
+        const res = await fetch('/api/politicians');
+        if (!res.ok) throw new Error(`API error: ${res.status}`);
+        const data: Politician[] = await res.json();
+        setPoliticians(data);
+      } catch (error) {
+        console.error('Error loading:', error);
+        setError(error instanceof Error ? error.message : 'Failed to load data');
+      } finally {
+        setLoading(false);
+      }
     }
+    loadData();
   }, []);
 
   if (loading) {
