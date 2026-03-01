@@ -1,0 +1,152 @@
+[
+  {
+    "politician_id": "test-uuid-001",
+    "donor_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE PAC",
+    "donor_type": "PAC",
+    "amount": 5000.00,
+    "date": "2024-03-15",
+    "is_aipac": true,
+    "fec_id": "C00024869",
+    "source": "FEC"
+  },
+  {
+    "politician_id": "test-uuid-001",
+    "donor_name": "UNITED DEMOCRACY PROJECT",
+    "donor_type": "SuperPAC",
+    "amount": 25000.00,
+    "date": "2024-05-22",
+    "is_aipac": true,
+    "fec_id": "C00795617",
+    "source": "FEC"
+  },
+  {
+    "politician_id": "test-uuid-001",
+    "donor_name": "John Smith",
+    "donor_type": "Individual",
+    "amount": 2800.00,
+    "date": "2024-01-10",
+    "is_aipac": false,
+    "fec_id": null,
+    "source": "FEC"
+  },
+  {
+    "politician_id": "test-uuid-001",
+    "donor_name": "Tech Industry PAC",
+    "donor_type": "PAC",
+    "amount": 10000.00,
+    "date": "2024-02-28",
+    "is_aipac": false,
+    "fec_id": "C00123456",
+    "source": "FEC"
+  },
+  {
+    "politician_id": "test-uuid-001",
+    "donor_name": "Jane Doe",
+    "donor_type": "Individual",
+    "amount": 1500.00,
+    "date": "2024-04-05",
+    "is_aipac": false,
+    "fec_id": null,
+    "source": "FEC"
+  },
+  {
+    "politician_id": "test-uuid-002",
+    "donor_name": "NORPAC",
+    "donor_type": "PAC",
+    "amount": 5000.00,
+    "date": "2024-03-20",
+    "is_aipac": true,
+    "fec_id": "C00292870",
+    "source": "FEC"
+  },
+  {
+    "politician_id": "test-uuid-002",
+    "donor_name": "PRO-ISRAEL AMERICA PAC",
+    "donor_type": "PAC",
+    "amount": 5000.00,
+    "date": "2024-06-15",
+    "is_aipac": true,
+    "fec_id": "C00725713",
+    "source": "FEC"
+  },
+  {
+    "politician_id": "test-uuid-002",
+    "donor_name": "Healthcare Workers United",
+    "donor_type": "PAC",
+    "amount": 7500.00,
+    "date": "2024-01-25",
+    "is_aipac": false,
+    "fec_id": "C00234567",
+    "source": "FEC"
+  },
+  {
+    "politician_id": "test-uuid-002",
+    "donor_name": "Robert Johnson",
+    "donor_type": "Individual",
+    "amount": 2800.00,
+    "date": "2024-03-01",
+    "is_aipac": false,
+    "fec_id": null,
+    "source": "FEC"
+  },
+  {
+    "politician_id": "test-uuid-002",
+    "donor_name": "Tech Giants Inc",
+    "donor_type": "Corporate",
+    "amount": 50000.00,
+    "date": "2024-05-10",
+    "is_aipac": false,
+    "fec_id": "C00345678",
+    "source": "FEC"
+  },
+  {
+    "politician_id": "test-uuid-003",
+    "donor_name": "DEMOCRATIC MAJORITY FOR ISRAEL",
+    "donor_type": "PAC",
+    "amount": 10000.00,
+    "date": "2024-04-12",
+    "is_aipac": true,
+    "fec_id": "C00698357",
+    "source": "FEC"
+  },
+  {
+    "politician_id": "test-uuid-003",
+    "donor_name": "Energy Sector Coalition",
+    "donor_type": "PAC",
+    "amount": 15000.00,
+    "date": "2024-02-18",
+    "is_aipac": false,
+    "fec_id": "C00456789",
+    "source": "FEC"
+  },
+  {
+    "politician_id": "test-uuid-003",
+    "donor_name": "Sarah Williams",
+    "donor_type": "Individual",
+    "amount": 2800.00,
+    "date": "2024-01-15",
+    "is_aipac": false,
+    "fec_id": null,
+    "source": "FEC"
+  },
+  {
+    "politician_id": "test-uuid-003",
+    "donor_name": "J STREET PAC",
+    "donor_type": "PAC",
+    "amount": 5000.00,
+    "date": "2024-05-30",
+    "is_aipac": true,
+    "fec_id": "C00483909",
+    "source": "FEC"
+  },
+  {
+    "politician_id": "test-uuid-003",
+    "donor_name": "Real Estate Developers Association",
+    "donor_type": "Corporate",
+    "amount": 25000.00,
+    "date": "2024-03-25",
+    "is_aipac": false,
+    "fec_id": "C00567890",
+    "source": "FEC"
+  }
+]

@@ -1,0 +1,113 @@
+[
+  {
+    "politician_id": "test-uuid-001",
+    "platform": "Twitter",
+    "content": "Proud to announce new infrastructure funding for our district! $50M will go toward improving roads and bridges. #Infrastructure #LocalGov",
+    "post_url": "https://twitter.com/testpolitician/status/1893456789012345678",
+    "posted_at": "2026-02-21T10:30:00",
+    "likes_count": 1523,
+    "shares_count": 234,
+    "comments_count": 89,
+    "sentiment_score": 0.65
+  },
+  {
+    "politician_id": "test-uuid-001",
+    "platform": "Twitter",
+    "content": "Thank you to all the volunteers who came out today! Your dedication to our community is inspiring. Together we can make a difference.",
+    "post_url": "https://twitter.com/testpolitician/status/1893456789012345679",
+    "posted_at": "2026-02-20T15:45:00",
+    "likes_count": 892,
+    "shares_count": 67,
+    "comments_count": 45,
+    "sentiment_score": 0.82
+  },
+  {
+    "politician_id": "test-uuid-001",
+    "platform": "Facebook",
+    "content": "LIVE NOW: Town hall meeting discussing proposed education reforms. Join us to have your voice heard!",
+    "post_url": "https://facebook.com/testpolitician/posts/123456789012345",
+    "posted_at": "2026-02-19T18:00:00",
+    "likes_count": 2341,
+    "shares_count": 456,
+    "comments_count": 178,
+    "sentiment_score": 0.45
+  },
+  {
+    "politician_id": "test-uuid-001",
+    "platform": "Facebook",
+    "content": "My opponent continues to spread misinformation. Here are the facts: [link to policy document]",
+    "post_url": "https://facebook.com/testpolitician/posts/123456789012346",
+    "posted_at": "2026-02-18T12:20:00",
+    "likes_count": 678,
+    "shares_count": 234,
+    "comments_count": 312,
+    "sentiment_score": -0.25
+  },
+  {
+    "politician_id": "test-uuid-001",
+    "platform": "Instagram",
+    "content": "Behind the scenes at today's committee hearing. Working hard for you! 💪 #PublicService #Florida",
+    "post_url": "https://instagram.com/p/sample123abc",
+    "posted_at": "2026-02-17T14:30:00",
+    "likes_count": 4523,
+    "shares_count": 0,
+    "comments_count": 234,
+    "sentiment_score": 0.55
+  },
+  {
+    "politician_id": "test-uuid-002",
+    "platform": "Twitter",
+    "content": "Just voted YES on HB 123 to protect our environment. Clean water and air are fundamental rights, not privileges.",
+    "post_url": "https://twitter.com/politician2/status/1893456789012345680",
+    "posted_at": "2026-02-21T09:15:00",
+    "likes_count": 3421,
+    "shares_count": 892,
+    "comments_count": 156,
+    "sentiment_score": 0.78
+  },
+  {
+    "politician_id": "test-uuid-002",
+    "platform": "Facebook",
+    "content": "Congratulations to our local high school robotics team on winning the state championship! Proof that investment in STEM education pays off.",
+    "post_url": "https://facebook.com/politician2/posts/789012345678901",
+    "posted_at": "2026-02-20T16:45:00",
+    "likes_count": 1876,
+    "shares_count": 234,
+    "comments_count": 67,
+    "sentiment_score": 0.92
+  },
+  {
+    "politician_id": "test-uuid-002",
+    "platform": "Twitter",
+    "content": "Meeting with constituents is the best part of my job. Thank you for sharing your concerns about healthcare access.",
+    "post_url": "https://twitter.com/politician2/status/1893456789012345681",
+    "posted_at": "2026-02-19T11:30:00",
+    "likes_count": 567,
+    "shares_count": 89,
+    "comments_count": 34,
+    "sentiment_score": 0.68
+  },
+  {
+    "politician_id": "test-uuid-003",
+    "platform": "Twitter",
+    "content": "BREAKING: Major ethics violations uncovered in opponent's campaign. Full report at 6pm. This is corruption at its worst.",
+    "post_url": "https://twitter.com/politician3/status/1893456789012345682",
+    "posted_at": "2026-02-21T08:00:00",
+    "likes_count": 8934,
+    "shares_count": 2341,
+    "comments_count": 892,
+    "sentiment_score": -0.65,
+    "is_deleted": false
+  },
+  {
+    "politician_id": "test-uuid-003",
+    "platform": "Facebook",
+    "content": "Town hall tonight at 7pm - Main Street Community Center. Topics: taxes, education, public safety. See you there!",
+    "post_url": "https://facebook.com/politician3/posts/345678901234567",
+    "posted_at": "2026-02-20T10:00:00",
+    "likes_count": 234,
+    "shares_count": 67,
+    "comments_count": 23,
+    "sentiment_score": 0.35
+  }
+]

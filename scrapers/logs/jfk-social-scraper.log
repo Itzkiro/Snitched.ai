@@ -1,0 +1,1329 @@
+2026-02-22 07:46:36,281 - INFO - ================================================================================
+2026-02-22 07:46:36,281 - INFO - JFK-SOCIAL SCRAPER STARTING
+2026-02-22 07:46:36,281 - INFO - ================================================================================
+2026-02-22 07:46:36,281 - INFO - Loading politicians from /Users/jaketad/.openclaw/workspace/snitched-ai/data-ingestion/phase1/processed/florida_politicians.json
+2026-02-22 07:46:36,282 - INFO - Loaded 188 politicians
+2026-02-22 07:46:36,282 - INFO - 
+[1/188] Processing: Gus M. Bilirakis
+2026-02-22 07:46:36,282 - INFO - Scraping Twitter: @RepGusBilirakis for Gus M. Bilirakis
+2026-02-22 07:46:36,282 - INFO - ✓ Scraped 10 tweets from @RepGusBilirakis
+2026-02-22 07:46:38,787 - INFO - Scraping Facebook: GusBilirakis for Gus M. Bilirakis
+2026-02-22 07:46:38,788 - INFO - ✓ Scraped 10 Facebook posts from GusBilirakis
+2026-02-22 07:46:41,293 - INFO - Scraping Instagram: @gusbilirakis for Gus M. Bilirakis
+2026-02-22 07:46:41,293 - INFO - ✓ Scraped 10 Instagram posts from @gusbilirakis
+2026-02-22 07:46:43,799 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,800 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,800 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,800 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,800 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,800 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,801 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,801 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,801 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,801 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,801 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,802 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,802 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,802 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,802 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,803 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,803 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,803 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,803 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,803 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,803 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,804 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,804 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,804 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,804 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,804 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,804 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,805 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,805 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,805 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:43,807 - INFO -   → Saved 30 posts to jfk-social-c2ec59ab-0063-489b-b61b-81de1b7e934c.json
+2026-02-22 07:46:43,807 - INFO - 
+[2/188] Processing: Vern Buchanan
+2026-02-22 07:46:43,807 - INFO - Scraping Twitter: @VernBuchanan for Vern Buchanan
+2026-02-22 07:46:43,808 - INFO - ✓ Scraped 10 tweets from @VernBuchanan
+2026-02-22 07:46:46,313 - INFO - Scraping Facebook: CongressmanBuchanan for Vern Buchanan
+2026-02-22 07:46:46,313 - INFO - ✓ Scraped 10 Facebook posts from CongressmanBuchanan
+2026-02-22 07:46:48,815 - INFO - Scraping Instagram: @repvern for Vern Buchanan
+2026-02-22 07:46:48,815 - INFO - ✓ Scraped 10 Instagram posts from @repvern
+2026-02-22 07:46:51,321 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,321 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,321 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,322 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,322 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,322 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,322 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,322 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,322 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,323 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,323 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,323 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,323 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,323 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,323 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,324 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,324 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,324 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,324 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,324 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,324 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,325 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,325 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,325 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,325 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,325 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,325 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,325 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,326 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,326 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:51,327 - INFO -   → Saved 30 posts to jfk-social-e94fcf18-dc40-4e00-bde7-a561b4f77337.json
+2026-02-22 07:46:51,327 - INFO - 
+[3/188] Processing: Kathy Castor
+2026-02-22 07:46:51,327 - INFO - Scraping Twitter: @USRepKCastor for Kathy Castor
+2026-02-22 07:46:51,327 - INFO - ✓ Scraped 10 tweets from @USRepKCastor
+2026-02-22 07:46:53,832 - INFO - Scraping Facebook: USRepKathyCastor for Kathy Castor
+2026-02-22 07:46:53,833 - INFO - ✓ Scraped 10 Facebook posts from USRepKathyCastor
+2026-02-22 07:46:56,338 - INFO - Scraping Instagram: @usrepkathycastor for Kathy Castor
+2026-02-22 07:46:56,338 - INFO - ✓ Scraped 10 Instagram posts from @usrepkathycastor
+2026-02-22 07:46:58,842 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,842 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,843 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,843 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,843 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,843 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,844 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,844 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,844 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,844 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,844 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,844 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,845 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,845 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,845 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,845 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,845 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,845 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,845 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,846 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,846 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,846 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,846 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,846 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,846 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,847 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,847 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,847 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,847 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,848 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:46:58,850 - INFO -   → Saved 30 posts to jfk-social-b22f38a8-1298-4916-b33a-7fffbf108fad.json
+2026-02-22 07:46:58,850 - INFO - 
+[4/188] Processing: Mario Diaz-Balart
+2026-02-22 07:46:58,850 - INFO - Scraping Twitter: @MarioDB for Mario Diaz-Balart
+2026-02-22 07:46:58,850 - INFO - ✓ Scraped 10 tweets from @MarioDB
+2026-02-22 07:47:01,355 - INFO - Scraping Facebook: mdiazbalart for Mario Diaz-Balart
+2026-02-22 07:47:01,356 - INFO - ✓ Scraped 10 Facebook posts from mdiazbalart
+2026-02-22 07:47:03,858 - INFO - Scraping Instagram: @repmariodb for Mario Diaz-Balart
+2026-02-22 07:47:03,859 - INFO - ✓ Scraped 10 Instagram posts from @repmariodb
+2026-02-22 07:47:06,361 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,362 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,362 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,362 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,362 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,362 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,363 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,363 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,363 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,363 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,363 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,364 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,364 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,364 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,364 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,364 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,364 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,365 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,365 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,365 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,365 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,365 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,365 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,366 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,366 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,366 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,366 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,366 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,366 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,367 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:06,369 - INFO -   → Saved 30 posts to jfk-social-500e369c-e7f6-4a95-b619-32eaee04fc6e.json
+2026-02-22 07:47:06,369 - INFO - 
+[5/188] Processing: Debbie Wasserman Schultz
+2026-02-22 07:47:06,369 - INFO - Scraping Twitter: @RepDWStweets for Debbie Wasserman Schultz
+2026-02-22 07:47:06,369 - INFO - ✓ Scraped 10 tweets from @RepDWStweets
+2026-02-22 07:47:08,874 - INFO - Scraping Facebook: RepDWS for Debbie Wasserman Schultz
+2026-02-22 07:47:08,875 - INFO - ✓ Scraped 10 Facebook posts from RepDWS
+2026-02-22 07:47:11,378 - INFO - Scraping Instagram: @RepDWSTweets for Debbie Wasserman Schultz
+2026-02-22 07:47:11,379 - INFO - ✓ Scraped 10 Instagram posts from @RepDWSTweets
+2026-02-22 07:47:13,880 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,880 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,881 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,881 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,881 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,881 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,881 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,881 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,882 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,882 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,882 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,882 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,882 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,882 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,883 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,883 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,883 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,883 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,883 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,883 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,884 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,884 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,884 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,884 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,884 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,884 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,885 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,885 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,885 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,885 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:13,886 - INFO -   → Saved 30 posts to jfk-social-7d2c7bdf-8436-424e-95e3-aa93ca0b0b49.json
+2026-02-22 07:47:13,886 - INFO - 
+[6/188] Processing: Daniel Webster
+2026-02-22 07:47:13,886 - INFO - Scraping Twitter: @RepWebster for Daniel Webster
+2026-02-22 07:47:13,886 - INFO - ✓ Scraped 10 tweets from @RepWebster
+2026-02-22 07:47:16,391 - INFO - Scraping Facebook: RepWebster for Daniel Webster
+2026-02-22 07:47:16,392 - INFO - ✓ Scraped 10 Facebook posts from RepWebster
+2026-02-22 07:47:18,893 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:18,894 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:18,894 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:18,894 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:18,894 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:18,895 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:18,895 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:18,895 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:18,895 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:18,895 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:18,896 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:18,896 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:18,896 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:18,896 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:18,896 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:18,896 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:18,897 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:18,897 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:18,897 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:18,897 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:18,899 - INFO -   → Saved 20 posts to jfk-social-fadfb095-9a16-4d0d-9502-09e3f008b40a.json
+2026-02-22 07:47:18,899 - INFO - 
+[7/188] Processing: Frederica S. Wilson
+2026-02-22 07:47:18,899 - INFO - Scraping Twitter: @RepWilson for Frederica S. Wilson
+2026-02-22 07:47:18,899 - INFO - ✓ Scraped 10 tweets from @RepWilson
+2026-02-22 07:47:21,404 - INFO - Scraping Facebook: RepWilson for Frederica S. Wilson
+2026-02-22 07:47:21,405 - INFO - ✓ Scraped 10 Facebook posts from RepWilson
+2026-02-22 07:47:23,910 - INFO - Scraping Instagram: @repwilson for Frederica S. Wilson
+2026-02-22 07:47:23,910 - INFO - ✓ Scraped 10 Instagram posts from @repwilson
+2026-02-22 07:47:26,416 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,417 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,417 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,417 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,417 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,417 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,418 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,418 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,418 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,418 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,418 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,418 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,419 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,419 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,419 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,419 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,419 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,419 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,420 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,420 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,420 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,420 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,420 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,421 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,421 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,421 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,421 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,421 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,421 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,421 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:26,424 - INFO -   → Saved 30 posts to jfk-social-c96069f7-bd31-4a75-aa3a-9a36a11b25a0.json
+2026-02-22 07:47:26,424 - INFO - 
+[8/188] Processing: Lois Frankel
+2026-02-22 07:47:26,424 - INFO - Scraping Twitter: @RepLoisFrankel for Lois Frankel
+2026-02-22 07:47:26,424 - INFO - ✓ Scraped 10 tweets from @RepLoisFrankel
+2026-02-22 07:47:28,925 - INFO - Scraping Facebook: RepLoisFrankel for Lois Frankel
+2026-02-22 07:47:28,926 - INFO - ✓ Scraped 10 Facebook posts from RepLoisFrankel
+2026-02-22 07:47:31,426 - INFO - Scraping Instagram: @reploisfrankel for Lois Frankel
+2026-02-22 07:47:31,426 - INFO - ✓ Scraped 10 Instagram posts from @reploisfrankel
+2026-02-22 07:47:33,930 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,930 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,930 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,930 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,930 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,930 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,931 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,931 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,931 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,931 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,931 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,931 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,931 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,931 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,931 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,932 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,932 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,932 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,932 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,932 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,932 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,932 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,932 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,932 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,932 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,933 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,933 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,933 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,933 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,933 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:33,934 - INFO -   → Saved 30 posts to jfk-social-53478065-80b0-42f5-8c2c-07e6ef0d7a44.json
+2026-02-22 07:47:33,934 - INFO - 
+[9/188] Processing: Neal P. Dunn
+2026-02-22 07:47:33,935 - INFO - Scraping Twitter: @DrNealDunnFL2 for Neal P. Dunn
+2026-02-22 07:47:33,935 - INFO - ✓ Scraped 10 tweets from @DrNealDunnFL2
+2026-02-22 07:47:36,438 - INFO - Scraping Facebook: drnealdunnfl2 for Neal P. Dunn
+2026-02-22 07:47:36,438 - INFO - ✓ Scraped 10 Facebook posts from drnealdunnfl2
+2026-02-22 07:47:38,939 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:38,939 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:38,939 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:38,940 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:38,940 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:38,940 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:38,940 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:38,940 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:38,940 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:38,940 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:38,940 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:38,940 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:38,941 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:38,941 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:38,941 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:38,941 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:38,941 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:38,941 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:38,941 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:38,941 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:38,943 - INFO -   → Saved 20 posts to jfk-social-d706826d-3f2c-4436-a0df-4931093f53a1.json
+2026-02-22 07:47:38,943 - INFO - 
+[10/188] Processing: John H. Rutherford
+2026-02-22 07:47:38,943 - INFO - Scraping Twitter: @RepRutherfordFL for John H. Rutherford
+2026-02-22 07:47:38,943 - INFO - ✓ Scraped 10 tweets from @RepRutherfordFL
+2026-02-22 07:47:41,447 - INFO - Scraping Facebook: RepRutherfordFL for John H. Rutherford
+2026-02-22 07:47:41,448 - INFO - ✓ Scraped 10 Facebook posts from RepRutherfordFL
+2026-02-22 07:47:43,953 - INFO - Scraping Instagram: @reprutherfordfl for John H. Rutherford
+2026-02-22 07:47:43,953 - INFO - ✓ Scraped 10 Instagram posts from @reprutherfordfl
+2026-02-22 07:47:46,459 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,459 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,459 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,460 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,460 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,460 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,460 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,460 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,461 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,461 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,461 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,461 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,461 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,462 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,462 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,462 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,462 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,462 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,462 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,463 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,463 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,463 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,463 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,463 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,463 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,464 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,464 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,464 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,464 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,464 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:46,466 - INFO -   → Saved 30 posts to jfk-social-621922a9-aeb7-42d5-8075-e4fe564eda99.json
+2026-02-22 07:47:46,466 - INFO - 
+[11/188] Processing: Darren Soto
+2026-02-22 07:47:46,466 - INFO - Scraping Twitter: @RepDarrenSoto for Darren Soto
+2026-02-22 07:47:46,466 - INFO - ✓ Scraped 10 tweets from @RepDarrenSoto
+2026-02-22 07:47:48,971 - INFO - Scraping Facebook: CongressmanDarrenSoto for Darren Soto
+2026-02-22 07:47:48,972 - INFO - ✓ Scraped 10 Facebook posts from CongressmanDarrenSoto
+2026-02-22 07:47:51,477 - INFO - Scraping Instagram: @RepDarrenSoto for Darren Soto
+2026-02-22 07:47:51,478 - INFO - ✓ Scraped 10 Instagram posts from @RepDarrenSoto
+2026-02-22 07:47:53,983 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,984 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,984 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,984 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,984 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,985 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,985 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,985 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,985 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,985 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,985 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,986 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,986 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,986 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,986 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,986 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,986 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,987 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,987 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,987 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,987 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,987 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,987 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,988 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,988 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,988 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,988 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,988 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,988 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,989 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:47:53,991 - INFO -   → Saved 30 posts to jfk-social-fe6922bc-2bb4-4374-854f-9ca4f7ed8844.json
+2026-02-22 07:47:53,991 - INFO - 
+[12/188] Processing: Brian J. Mast
+2026-02-22 07:47:53,991 - INFO - Scraping Twitter: @RepBrianMast for Brian J. Mast
+2026-02-22 07:47:53,991 - INFO - ✓ Scraped 10 tweets from @RepBrianMast
+2026-02-22 07:47:56,493 - INFO - Scraping Facebook: repbrianmast for Brian J. Mast
+2026-02-22 07:47:56,493 - INFO - ✓ Scraped 10 Facebook posts from repbrianmast
+2026-02-22 07:47:58,998 - INFO - Scraping Instagram: @RepBrianMast for Brian J. Mast
+2026-02-22 07:47:58,998 - INFO - ✓ Scraped 10 Instagram posts from @RepBrianMast
+2026-02-22 07:48:01,500 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,500 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,500 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,500 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,501 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,501 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,501 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,501 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,501 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,502 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,502 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,502 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,502 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,502 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,503 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,503 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,503 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,503 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,503 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,504 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,504 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,504 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,504 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,504 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,505 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,505 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,505 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,505 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,505 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,505 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:01,507 - INFO -   → Saved 30 posts to jfk-social-317b2e4e-5dcf-478b-bad4-1518d0fc20c2.json
+2026-02-22 07:48:01,507 - INFO - 
+[13/188] Processing: W. Gregory Steube
+2026-02-22 07:48:01,508 - INFO - Scraping Twitter: @RepGregSteube for W. Gregory Steube
+2026-02-22 07:48:01,508 - INFO - ✓ Scraped 10 tweets from @RepGregSteube
+2026-02-22 07:48:04,013 - INFO - Scraping Facebook: RepGregSteube for W. Gregory Steube
+2026-02-22 07:48:04,013 - INFO - ✓ Scraped 10 Facebook posts from RepGregSteube
+2026-02-22 07:48:06,519 - INFO - Scraping Instagram: @repgregsteube for W. Gregory Steube
+2026-02-22 07:48:06,519 - INFO - ✓ Scraped 10 Instagram posts from @repgregsteube
+2026-02-22 07:48:09,025 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,025 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,026 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,026 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,026 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,026 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,026 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,027 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,027 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,027 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,027 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,027 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,027 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,028 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,028 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,028 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,028 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,028 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,028 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,029 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,029 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,029 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,029 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,029 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,030 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,030 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,030 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,030 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,030 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,030 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:09,032 - INFO -   → Saved 30 posts to jfk-social-6ea9dce3-f6dd-43ac-8321-890b34f747bf.json
+2026-02-22 07:48:09,033 - INFO - 
+[14/188] Processing: Rick Scott
+2026-02-22 07:48:09,033 - INFO - Scraping Twitter: @SenRickScott for Rick Scott
+2026-02-22 07:48:09,033 - INFO - ✓ Scraped 10 tweets from @SenRickScott
+2026-02-22 07:48:11,533 - INFO - Scraping Facebook: RickScottSenOffice for Rick Scott
+2026-02-22 07:48:11,534 - INFO - ✓ Scraped 10 Facebook posts from RickScottSenOffice
+2026-02-22 07:48:14,039 - INFO - Scraping Instagram: @flsenrickscott for Rick Scott
+2026-02-22 07:48:14,039 - INFO - ✓ Scraped 10 Instagram posts from @flsenrickscott
+2026-02-22 07:48:16,544 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,545 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,545 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,545 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,545 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,545 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,546 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,546 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,546 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,546 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,546 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,547 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,547 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,547 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,547 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,547 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,547 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,548 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,548 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,548 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,548 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,548 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,549 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,549 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,549 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,549 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,549 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,550 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,550 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,550 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:16,552 - INFO -   → Saved 30 posts to jfk-social-c46dbc17-e882-4420-b453-b6da07a3e703.json
+2026-02-22 07:48:16,552 - INFO - 
+[15/188] Processing: Kat Cammack
+2026-02-22 07:48:16,552 - INFO - Scraping Twitter: @RepKatCammack for Kat Cammack
+2026-02-22 07:48:16,552 - INFO - ✓ Scraped 10 tweets from @RepKatCammack
+2026-02-22 07:48:19,058 - INFO - Scraping Facebook: RepKatCammack for Kat Cammack
+2026-02-22 07:48:19,058 - INFO - ✓ Scraped 10 Facebook posts from RepKatCammack
+2026-02-22 07:48:21,561 - INFO - Scraping Instagram: @repkatcammack for Kat Cammack
+2026-02-22 07:48:21,562 - INFO - ✓ Scraped 10 Instagram posts from @repkatcammack
+2026-02-22 07:48:24,065 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,066 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,066 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,067 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,067 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,067 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,067 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,067 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,068 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,068 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,068 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,068 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,068 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,068 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,069 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,069 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,069 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,069 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,069 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,069 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,070 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,070 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,070 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,070 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,070 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,070 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,071 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,071 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,071 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,071 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:24,073 - INFO -   → Saved 30 posts to jfk-social-f88f2e9b-bff5-42a0-b7f8-851e30aa4dde.json
+2026-02-22 07:48:24,073 - INFO - 
+[16/188] Processing: Scott Franklin
+2026-02-22 07:48:24,073 - INFO - Scraping Twitter: @RepFranklin for Scott Franklin
+2026-02-22 07:48:24,073 - INFO - ✓ Scraped 10 tweets from @RepFranklin
+2026-02-22 07:48:26,578 - INFO - Scraping Facebook: RepFranklin for Scott Franklin
+2026-02-22 07:48:26,579 - INFO - ✓ Scraped 10 Facebook posts from RepFranklin
+2026-02-22 07:48:29,084 - INFO - Scraping Instagram: @RepFranklin for Scott Franklin
+2026-02-22 07:48:29,084 - INFO - ✓ Scraped 10 Instagram posts from @RepFranklin
+2026-02-22 07:48:31,588 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,589 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,589 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,589 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,589 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,589 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,589 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,590 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,590 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,590 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,590 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,590 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,591 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,591 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,591 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,591 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,591 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,591 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,591 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,592 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,592 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,592 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,592 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,592 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,593 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,593 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,593 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,593 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,593 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,593 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:31,595 - INFO -   → Saved 30 posts to jfk-social-89c28907-ecdc-4ef6-bb3a-3629ada75c78.json
+2026-02-22 07:48:31,595 - INFO - 
+[17/188] Processing: Byron Donalds
+2026-02-22 07:48:31,596 - INFO - Scraping Twitter: @RepDonaldsPress for Byron Donalds
+2026-02-22 07:48:31,596 - INFO - ✓ Scraped 10 tweets from @RepDonaldsPress
+2026-02-22 07:48:34,101 - INFO - Scraping Instagram: @byrondonalds for Byron Donalds
+2026-02-22 07:48:34,101 - INFO - ✓ Scraped 10 Instagram posts from @byrondonalds
+2026-02-22 07:48:36,607 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:36,607 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:36,608 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:36,608 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:36,608 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:36,608 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:36,608 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:36,608 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:36,608 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:36,609 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:36,609 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:36,609 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:36,609 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:36,609 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:36,609 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:36,609 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:36,609 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:36,610 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:36,610 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:36,610 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:36,611 - INFO -   → Saved 20 posts to jfk-social-a1074dc2-292a-49f7-8000-8887bdfbb642.json
+2026-02-22 07:48:36,611 - INFO - 
+[18/188] Processing: Carlos A. Gimenez
+2026-02-22 07:48:36,611 - INFO - Scraping Twitter: @RepCarlos for Carlos A. Gimenez
+2026-02-22 07:48:36,612 - INFO - ✓ Scraped 10 tweets from @RepCarlos
+2026-02-22 07:48:39,117 - INFO - Scraping Facebook: RepCarlosGimenez for Carlos A. Gimenez
+2026-02-22 07:48:39,117 - INFO - ✓ Scraped 10 Facebook posts from RepCarlosGimenez
+2026-02-22 07:48:41,618 - INFO - Scraping Instagram: @repcarlosfl for Carlos A. Gimenez
+2026-02-22 07:48:41,619 - INFO - ✓ Scraped 10 Instagram posts from @repcarlosfl
+2026-02-22 07:48:44,124 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,124 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,125 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,125 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,125 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,125 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,125 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,125 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,125 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,126 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,126 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,126 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,126 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,126 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,126 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,126 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,126 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,127 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,127 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,127 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,127 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,127 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,127 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,128 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,128 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,128 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,128 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,128 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,128 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,128 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:44,130 - INFO -   → Saved 30 posts to jfk-social-79bc66ef-4488-439e-af4b-ab6de865364d.json
+2026-02-22 07:48:44,130 - INFO - 
+[19/188] Processing: Maria Elvira Salazar
+2026-02-22 07:48:44,130 - INFO - Scraping Twitter: @RepMariaSalazar for Maria Elvira Salazar
+2026-02-22 07:48:44,130 - INFO - ✓ Scraped 10 tweets from @RepMariaSalazar
+2026-02-22 07:48:46,635 - INFO - Scraping Facebook: RepMariaSalazar for Maria Elvira Salazar
+2026-02-22 07:48:46,635 - INFO - ✓ Scraped 10 Facebook posts from RepMariaSalazar
+2026-02-22 07:48:49,140 - INFO - Scraping Instagram: @repmariasalazar for Maria Elvira Salazar
+2026-02-22 07:48:49,141 - INFO - ✓ Scraped 10 Instagram posts from @repmariasalazar
+2026-02-22 07:48:51,646 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,647 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,647 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,647 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,648 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,648 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,648 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,648 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,648 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,648 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,649 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,649 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,649 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,649 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,649 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,649 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,650 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,650 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,650 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,650 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,650 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,650 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,651 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,651 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,651 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,651 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,651 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,651 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,652 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,652 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:51,654 - INFO -   → Saved 30 posts to jfk-social-cd55946f-24b8-4d3e-bbcc-7a4470aae3eb.json
+2026-02-22 07:48:51,654 - INFO - 
+[20/188] Processing: Sheila Cherfilus-McCormick
+2026-02-22 07:48:51,654 - INFO - Scraping Facebook: congresswomanSCM for Sheila Cherfilus-McCormick
+2026-02-22 07:48:51,654 - INFO - ✓ Scraped 10 Facebook posts from congresswomanSCM
+2026-02-22 07:48:54,158 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:54,159 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:54,159 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:54,159 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:54,159 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:54,159 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:54,160 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:54,160 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:54,160 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:54,160 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:48:54,161 - INFO -   → Saved 10 posts to jfk-social-dd429a99-2693-461c-a80a-a5ed55b75b45.json
+2026-02-22 07:48:54,162 - INFO - 
+[21/188] Processing: Aaron Bean
+2026-02-22 07:48:54,162 - INFO - Scraping Twitter: @RepAaronBean for Aaron Bean
+2026-02-22 07:48:54,162 - INFO - ✓ Scraped 10 tweets from @RepAaronBean
+2026-02-22 07:48:56,667 - INFO - Scraping Facebook: 100089355874563 for Aaron Bean
+2026-02-22 07:48:56,667 - INFO - ✓ Scraped 10 Facebook posts from 100089355874563
+2026-02-22 07:48:59,173 - INFO - Scraping Instagram: @RepAaronBean for Aaron Bean
+2026-02-22 07:48:59,173 - INFO - ✓ Scraped 10 Instagram posts from @RepAaronBean
+2026-02-22 07:49:01,677 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,678 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,678 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,678 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,678 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,678 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,678 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,678 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,678 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,678 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,678 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,678 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,678 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,678 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,678 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,678 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,678 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,678 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,679 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,679 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,679 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,679 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,679 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,679 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,679 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,679 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,679 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,679 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,679 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,679 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:01,680 - INFO -   → Saved 30 posts to jfk-social-ef326d8f-0d1c-4db8-8c74-2b0c5e281d48.json
+2026-02-22 07:49:01,680 - INFO - 
+[22/188] Processing: Cory Mills
+2026-02-22 07:49:01,680 - INFO - Scraping Twitter: @RepMillsPress for Cory Mills
+2026-02-22 07:49:01,680 - INFO - ✓ Scraped 10 tweets from @RepMillsPress
+2026-02-22 07:49:04,181 - INFO - Scraping Facebook: 100089218152197 for Cory Mills
+2026-02-22 07:49:04,181 - INFO - ✓ Scraped 10 Facebook posts from 100089218152197
+2026-02-22 07:49:06,682 - INFO - Scraping Instagram: @repcorymills for Cory Mills
+2026-02-22 07:49:06,682 - INFO - ✓ Scraped 10 Instagram posts from @repcorymills
+2026-02-22 07:49:09,187 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,188 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,188 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,189 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,189 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,189 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,189 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,189 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,190 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,190 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,190 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,190 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,190 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,190 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,191 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,191 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,191 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,191 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,191 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,192 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,192 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,192 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,192 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,192 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,192 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,193 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,193 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,193 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,193 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,193 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:09,195 - INFO -   → Saved 30 posts to jfk-social-a6631934-2ef1-40c1-91af-54aaa50faf9a.json
+2026-02-22 07:49:09,195 - INFO - 
+[23/188] Processing: Maxwell Frost
+2026-02-22 07:49:09,195 - INFO - Scraping Twitter: @RepMaxwellFrost for Maxwell Frost
+2026-02-22 07:49:09,196 - INFO - ✓ Scraped 10 tweets from @RepMaxwellFrost
+2026-02-22 07:49:11,701 - INFO - Scraping Facebook: RepMaxwellFrost for Maxwell Frost
+2026-02-22 07:49:11,701 - INFO - ✓ Scraped 10 Facebook posts from RepMaxwellFrost
+2026-02-22 07:49:14,203 - INFO - Scraping Instagram: @RepMaxwellFrost for Maxwell Frost
+2026-02-22 07:49:14,203 - INFO - ✓ Scraped 10 Instagram posts from @RepMaxwellFrost
+2026-02-22 07:49:16,709 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,709 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,709 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,709 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,709 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,710 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,710 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,710 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,710 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,710 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,710 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,710 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,710 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,710 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,710 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,710 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,710 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,710 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,711 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,711 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,711 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,711 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,711 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,711 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,711 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,711 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,711 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,711 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,711 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,711 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:16,712 - INFO -   → Saved 30 posts to jfk-social-61087095-b4d5-4a4c-9450-285e2bf3c479.json
+2026-02-22 07:49:16,713 - INFO - 
+[24/188] Processing: Anna Paulina Luna
+2026-02-22 07:49:16,713 - INFO - Scraping Twitter: @RepLuna for Anna Paulina Luna
+2026-02-22 07:49:16,713 - INFO - ✓ Scraped 10 tweets from @RepLuna
+2026-02-22 07:49:19,218 - INFO - Scraping Instagram: @repluna for Anna Paulina Luna
+2026-02-22 07:49:19,218 - INFO - ✓ Scraped 10 Instagram posts from @repluna
+2026-02-22 07:49:21,724 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:21,725 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:21,725 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:21,725 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:21,725 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:21,725 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:21,726 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:21,726 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:21,726 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:21,726 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:21,726 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:21,727 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:21,727 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:21,727 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:21,727 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:21,727 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:21,728 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:21,728 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:21,728 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:21,728 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:21,730 - INFO -   → Saved 20 posts to jfk-social-18634931-d98a-49ca-8470-22fc18e3bfa3.json
+2026-02-22 07:49:21,730 - INFO - 
+[25/188] Processing: Laurel M. Lee
+2026-02-22 07:49:21,730 - INFO - Scraping Twitter: @RepLaurelLee for Laurel M. Lee
+2026-02-22 07:49:21,730 - INFO - ✓ Scraped 10 tweets from @RepLaurelLee
+2026-02-22 07:49:24,236 - INFO - Scraping Facebook: RepLaurelLee for Laurel M. Lee
+2026-02-22 07:49:24,236 - INFO - ✓ Scraped 10 Facebook posts from RepLaurelLee
+2026-02-22 07:49:26,737 - INFO - Scraping Instagram: @replaurellee for Laurel M. Lee
+2026-02-22 07:49:26,737 - INFO - ✓ Scraped 10 Instagram posts from @replaurellee
+2026-02-22 07:49:29,243 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,243 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,244 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,244 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,244 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,244 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,244 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,245 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,245 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,245 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,245 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,245 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,246 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,246 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,246 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,246 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,246 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,246 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,247 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,247 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,247 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,247 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,247 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,248 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,248 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,248 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,248 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,248 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,249 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,249 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:29,251 - INFO -   → Saved 30 posts to jfk-social-47a3c0dd-9a17-4226-ad18-8d5803c72d34.json
+2026-02-22 07:49:29,251 - INFO - 
+[26/188] Processing: Jared Moskowitz
+2026-02-22 07:49:29,251 - INFO - Scraping Twitter: @RepMoskowitz for Jared Moskowitz
+2026-02-22 07:49:29,251 - INFO - ✓ Scraped 10 tweets from @RepMoskowitz
+2026-02-22 07:49:31,756 - INFO - Scraping Facebook: RepMoskowitz for Jared Moskowitz
+2026-02-22 07:49:31,757 - INFO - ✓ Scraped 10 Facebook posts from RepMoskowitz
+2026-02-22 07:49:34,262 - INFO - Scraping Instagram: @repmoskowitz for Jared Moskowitz
+2026-02-22 07:49:34,262 - INFO - ✓ Scraped 10 Instagram posts from @repmoskowitz
+2026-02-22 07:49:36,764 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,765 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,765 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,765 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,765 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,765 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,766 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,766 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,766 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,766 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,766 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,766 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,767 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,767 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,767 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,767 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,767 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,767 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,768 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,768 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,768 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,768 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,768 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,768 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,769 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,769 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,769 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,769 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,769 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,769 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:36,771 - INFO -   → Saved 30 posts to jfk-social-4b82857f-e3d0-4a56-aa7a-42537cb0e836.json
+2026-02-22 07:49:36,771 - INFO - 
+[27/188] Processing: Mike Haridopolos
+2026-02-22 07:49:36,772 - INFO - Scraping Twitter: @repharidopolos for Mike Haridopolos
+2026-02-22 07:49:36,772 - INFO - ✓ Scraped 10 tweets from @repharidopolos
+2026-02-22 07:49:39,277 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:39,278 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:39,278 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:39,278 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:39,278 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:39,279 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:39,279 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:39,279 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:39,279 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:39,279 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:39,281 - INFO -   → Saved 10 posts to jfk-social-96e317b3-ba3d-4c36-b8e7-b7320a25bfb3.json
+2026-02-22 07:49:39,281 - INFO - 
+[28/188] Processing: Ashley Moody
+2026-02-22 07:49:39,281 - INFO - 
+[29/188] Processing: Jimmy Patronis
+2026-02-22 07:49:39,281 - INFO - 
+[30/188] Processing: Randy Fine
+2026-02-22 07:49:39,281 - INFO - 
+[31/188] Processing: Johanna López
+2026-02-22 07:49:39,281 - INFO - 
+[32/188] Processing: Ileana Garcia
+2026-02-22 07:49:39,281 - INFO - 
+[33/188] Processing: Ralph Massullo
+2026-02-22 07:49:39,281 - INFO - 
+[34/188] Processing: Rita Harris
+2026-02-22 07:49:39,281 - INFO - 
+[35/188] Processing: Keith Truenow
+2026-02-22 07:49:39,281 - INFO - 
+[36/188] Processing: Bryan Ávila
+2026-02-22 07:49:39,281 - INFO - 
+[37/188] Processing: Jenna Persons-Mulicka
+2026-02-22 07:49:39,281 - INFO - 
+[38/188] Processing: Alex Andrade
+2026-02-22 07:49:39,281 - INFO - 
+[39/188] Processing: Mike Giallombardo
+2026-02-22 07:49:39,282 - INFO - 
+[40/188] Processing: Toby Overdorf
+2026-02-22 07:49:39,282 - INFO - 
+[41/188] Processing: Stan McClain
+2026-02-22 07:49:39,282 - INFO - 
+[42/188] Processing: Allison Tant
+2026-02-22 07:49:39,282 - INFO - 
+[43/188] Processing: Josie Tomkow
+2026-02-22 07:49:39,282 - INFO - 
+[44/188] Processing: Jennifer Bradley
+2026-02-22 07:49:39,282 - INFO - 
+[45/188] Processing: Chase Tramont
+2026-02-22 07:49:39,282 - INFO - 
+[46/188] Processing: Ben Albritton
+2026-02-22 07:49:39,282 - INFO - 
+[47/188] Processing: Lindsay Cross
+2026-02-22 07:49:39,282 - INFO - 
+[48/188] Processing: Michael Owen
+2026-02-22 07:49:39,282 - INFO - 
+[49/188] Processing: Jessica Baker
+2026-02-22 07:49:39,282 - INFO - 
+[50/188] Processing: Rosalind Osgood
+2026-02-22 07:49:39,282 - INFO - 
+[51/188] Processing: Ana Maria Rodriguez
+2026-02-22 07:49:39,282 - INFO - 
+[52/188] Processing: Dave Smith
+2026-02-22 07:49:39,282 - INFO - 
+[53/188] Processing: Linda Chaney
+2026-02-22 07:49:39,282 - INFO - 
+[54/188] Processing: Jennifer Canady
+2026-02-22 07:49:39,283 - INFO - 
+[55/188] Processing: J.J. Grow
+2026-02-22 07:49:39,283 - INFO - 
+[56/188] Processing: Tommy Wright
+2026-02-22 07:49:39,283 - INFO - 
+[57/188] Processing: Hillary Cassel
+2026-02-22 07:49:39,283 - INFO - 
+[58/188] Processing: Leonard Spencer
+2026-02-22 07:49:39,283 - INFO - 
+[59/188] Processing: Don Gaetz
+2026-02-22 07:49:39,283 - INFO - 
+[60/188] Processing: Demi Busatta
+2026-02-22 07:49:39,283 - INFO - 
+[61/188] Processing: Barbara Sharief
+2026-02-22 07:49:39,283 - INFO - 
+[62/188] Processing: Susan Valdés
+2026-02-22 07:49:39,283 - INFO - 
+[63/188] Processing: Bruce Antone
+2026-02-22 07:49:39,283 - INFO - 
+[64/188] Processing: Debbie Mayfield
+2026-02-22 07:49:39,283 - INFO - 
+[65/188] Processing: Bill Conerly
+2026-02-22 07:49:39,283 - INFO - 
+[66/188] Processing: Danny Nix
+2026-02-22 07:49:39,283 - INFO - 
+[67/188] Processing: Daryl Campbell
+2026-02-22 07:49:39,283 - INFO - 
+[68/188] Processing: Tom Leek
+2026-02-22 07:49:39,283 - INFO - 
+[69/188] Processing: Vanessa Oliver
+2026-02-22 07:49:39,284 - INFO - 
+[70/188] Processing: Kelly Skidmore
+2026-02-22 07:49:39,284 - INFO - 
+[71/188] Processing: Jim Boyd
+2026-02-22 07:49:39,284 - INFO - 
+[72/188] Processing: Alex Rizo
+2026-02-22 07:49:39,284 - INFO - 
+[73/188] Processing: Juan Porras
+2026-02-22 07:49:39,284 - INFO - 
+[74/188] Processing: Griff Griffitts
+2026-02-22 07:49:39,284 - INFO - 
+[75/188] Processing: Daniel Perez
+2026-02-22 07:49:39,284 - INFO - 
+[76/188] Processing: Kaylee Tuck
+2026-02-22 07:49:39,284 - INFO - 
+[77/188] Processing: Doug Bankson
+2026-02-22 07:49:39,284 - INFO - 
+[78/188] Processing: Kiyan Michael
+2026-02-22 07:49:39,284 - INFO - 
+[79/188] Processing: Gayle Harrell
+2026-02-22 07:49:39,284 - INFO - 
+[80/188] Processing: Fiona McFarland
+2026-02-22 07:49:39,284 - INFO - 
+[81/188] Processing: Kim Kendall
+2026-02-22 07:49:39,284 - INFO - 
+[82/188] Processing: Paula Stark
+2026-02-22 07:49:39,284 - INFO - 
+[83/188] Processing: Wyman Duggan
+2026-02-22 07:49:39,284 - INFO - 
+[84/188] Processing: Fabián Basabe
+2026-02-22 07:49:39,285 - INFO - 
+[85/188] Processing: Tiffany Esposito
+2026-02-22 07:49:39,285 - INFO - 
+[86/188] Processing: Marie Woodson
+2026-02-22 07:49:39,285 - INFO - 
+[87/188] Processing: Mitch Rosenwald
+2026-02-22 07:49:39,285 - INFO - 
+[88/188] Processing: Dean Black
+2026-02-22 07:49:39,285 - INFO - 
+[89/188] Processing: Tracie Davis
+2026-02-22 07:49:39,285 - INFO - 
+[90/188] Processing: Robin Bartleman
+2026-02-22 07:49:39,285 - INFO - 
+[91/188] Processing: Dan Daley
+2026-02-22 07:49:39,285 - INFO - 
+[92/188] Processing: Dianne Hart-Lowman
+2026-02-22 07:49:39,285 - INFO - 
+[93/188] Processing: Danny Burgess
+2026-02-22 07:49:39,285 - INFO - 
+[94/188] Processing: Mack Bernard
+2026-02-22 07:49:39,285 - INFO - 
+[95/188] Processing: Traci Koster
+2026-02-22 07:49:39,285 - INFO - 
+[96/188] Processing: Sam Garrison
+2026-02-22 07:49:39,285 - INFO - 
+[97/188] Processing: Jay Trumbull
+2026-02-22 07:49:39,285 - INFO - 
+[98/188] Processing: Kim Berfield
+2026-02-22 07:49:39,286 - INFO - 
+[99/188] Processing: Brad Yeager
+2026-02-22 07:49:39,286 - INFO - 
+[100/188] Processing: Jose Alvarez
+2026-02-22 07:49:39,286 - INFO - 
+[101/188] Processing: Patt Maney
+2026-02-22 07:49:39,286 - INFO - 
+[102/188] Processing: Monique Miller
+2026-02-22 07:49:39,286 - INFO - 
+[103/188] Processing: Lauren Melo
+2026-02-22 07:49:39,286 - INFO - 
+[104/188] Processing: Tyler Sirois
+2026-02-22 07:49:39,286 - INFO - 
+[105/188] Processing: Kathleen Passidomo
+2026-02-22 07:49:39,286 - INFO - 
+[106/188] Processing: Christine Hunschofsky
+2026-02-22 07:49:39,286 - INFO - 
+[107/188] Processing: Chad Johnson
+2026-02-22 07:49:39,286 - INFO - 
+[108/188] Processing: Jason Pizzo
+2026-02-22 07:49:39,286 - INFO - 
+[109/188] Processing: Judson Sapp
+2026-02-22 07:49:39,286 - INFO - 
+[110/188] Processing: LaVon Bracy Davis
+2026-02-22 07:49:39,286 - INFO - 
+[111/188] Processing: Wallace Aristide
+2026-02-22 07:49:39,286 - INFO - 
+[112/188] Processing: Adam Botana
+2026-02-22 07:49:39,286 - INFO - 
+[113/188] Processing: Kim Daniels
+2026-02-22 07:49:39,287 - INFO - 
+[114/188] Processing: Nathan Boyles
+2026-02-22 07:49:39,287 - INFO - 
+[115/188] Processing: Chuck Brannan
+2026-02-22 07:49:39,287 - INFO - 
+[116/188] Processing: Jim Mooney
+2026-02-22 07:49:39,287 - INFO - 
+[117/188] Processing: Jennifer Kincart Jonsson
+2026-02-22 07:49:39,287 - INFO - 
+[118/188] Processing: Omar Blanco
+2026-02-22 07:49:39,287 - INFO - 
+[119/188] Processing: Fentrice Driskell
+2026-02-22 07:49:39,287 - INFO - 
+[120/188] Processing: Lisa Dunkley
+2026-02-22 07:49:39,287 - INFO - 
+[121/188] Processing: Anna Eskamani
+2026-02-22 07:49:39,287 - INFO - 
+[122/188] Processing: Mike Gottlieb
+2026-02-22 07:49:39,287 - INFO - 
+[123/188] Processing: Angie Nixon
+2026-02-22 07:49:39,287 - INFO - 
+[124/188] Processing: Erin Grall
+2026-02-22 07:49:39,287 - INFO - 
+[125/188] Processing: Erika Booth
+2026-02-22 07:49:39,287 - INFO - 
+[126/188] Processing: Ryan Chamberlin
+2026-02-22 07:49:39,287 - INFO - 
+[127/188] Processing: Sam Greco
+2026-02-22 07:49:39,288 - INFO - 
+[128/188] Processing: Carlos Smith
+2026-02-22 07:49:39,288 - INFO - 
+[129/188] Processing: Alexis Calatayud
+2026-02-22 07:49:39,288 - INFO - 
+[130/188] Processing: John Snyder
+2026-02-22 07:49:39,288 - INFO - 
+[131/188] Processing: Jason Shoaf
+2026-02-22 07:49:39,288 - INFO - 
+[132/188] Processing: Danny Alvarez
+2026-02-22 07:49:39,288 - INFO - 
+[133/188] Processing: David Borrero
+2026-02-22 07:49:39,288 - INFO - 
+[134/188] Processing: Adam Anderson
+2026-02-22 07:49:39,288 - INFO - 
+[135/188] Processing: Joe Gruters
+2026-02-22 07:49:39,288 - INFO - 
+[136/188] Processing: Bill Partington
+2026-02-22 07:49:39,288 - INFO - 
+[137/188] Processing: Tina Polsky
+2026-02-22 07:49:39,288 - INFO - 
+[138/188] Processing: Kevin Chambliss
+2026-02-22 07:49:39,288 - INFO - 
+[139/188] Processing: Shev Jones
+2026-02-22 07:49:39,288 - INFO - 
+[140/188] Processing: Nan Cobb
+2026-02-22 07:49:39,288 - INFO - 
+[141/188] Processing: Tom Fabricio
+2026-02-22 07:49:39,288 - INFO - 
+[142/188] Processing: Kristen Arrington
+2026-02-22 07:49:39,289 - INFO - 
+[143/188] Processing: Berny Jacques
+2026-02-22 07:49:39,289 - INFO - 
+[144/188] Processing: Felicia Robinson
+2026-02-22 07:49:39,289 - INFO - 
+[145/188] Processing: Dotie Joseph
+2026-02-22 07:49:39,289 - INFO - 
+[146/188] Processing: Colleen Burton
+2026-02-22 07:49:39,289 - INFO - 
+[147/188] Processing: Jonathan Martin
+2026-02-22 07:49:39,289 - INFO - 
+[148/188] Processing: Susan Plasencia
+2026-02-22 07:49:39,289 - INFO - 
+[149/188] Processing: Peggy Gossett-Seidman
+2026-02-22 07:49:39,289 - INFO - 
+[150/188] Processing: Anne Gerwig
+2026-02-22 07:49:39,289 - INFO - 
+[151/188] Processing: Brian Hodgers
+2026-02-22 07:49:39,289 - INFO - 
+[152/188] Processing: Lori Berman
+2026-02-22 07:49:39,289 - INFO - 
+[153/188] Processing: Will Robinson
+2026-02-22 07:49:39,289 - INFO - 
+[154/188] Processing: Clay Yarborough
+2026-02-22 07:49:39,289 - INFO - 
+[155/188] Processing: Mike Redondo
+2026-02-22 07:49:39,289 - INFO - 
+[156/188] Processing: Michelle Salzman
+2026-02-22 07:49:39,289 - INFO - 
+[157/188] Processing: Robbie Brackett
+2026-02-22 07:49:39,289 - INFO - 
+[158/188] Processing: Gallop Franklin
+2026-02-22 07:49:39,289 - INFO - 
+[159/188] Processing: Taylor Yarkosky
+2026-02-22 07:49:39,290 - INFO - 
+[160/188] Processing: Ashley Gantt
+2026-02-22 07:49:39,290 - INFO - 
+[161/188] Processing: Debra Tendrich
+2026-02-22 07:49:39,290 - INFO - 
+[162/188] Processing: Jon Albert
+2026-02-22 07:49:39,290 - INFO - 
+[163/188] Processing: Dana Trabulsy
+2026-02-22 07:49:39,290 - INFO - 
+[164/188] Processing: Darryl Rouson
+2026-02-22 07:49:39,290 - INFO - 
+[165/188] Processing: Webster Barnaby
+2026-02-22 07:49:39,290 - INFO - 
+[166/188] Processing: Kevin Steele
+2026-02-22 07:49:39,290 - INFO - 
+[167/188] Processing: Jason Brodeur
+2026-02-22 07:49:39,290 - INFO - 
+[168/188] Processing: Richard Gentry
+2026-02-22 07:49:39,290 - INFO - 
+[169/188] Processing: Rachel Plakon
+2026-02-22 07:49:39,290 - INFO - 
+[170/188] Processing: Nick DiCeglie
+2026-02-22 07:49:39,290 - INFO - 
+[171/188] Processing: Corey Simon
+2026-02-22 07:49:39,290 - INFO - 
+[172/188] Processing: Michele Rayner
+2026-02-22 07:49:39,290 - INFO - 
+[173/188] Processing: Lawrence McClure
+2026-02-22 07:49:39,290 - INFO - 
+[174/188] Processing: Ed Hooper
+2026-02-22 07:49:39,290 - INFO - 
+[175/188] Processing: Chip LaMarca
+2026-02-22 07:49:39,290 - INFO - 
+[176/188] Processing: Tae Edmonds
+2026-02-22 07:49:39,290 - INFO - 
+[177/188] Processing: Yvette Benarroch
+2026-02-22 07:49:39,290 - INFO - 
+[178/188] Processing: Meg Weinberger
+2026-02-22 07:49:39,290 - INFO - 
+[179/188] Processing: Randy Maggard
+2026-02-22 07:49:39,291 - INFO - 
+[180/188] Processing: Jeff Holcomb
+2026-02-22 07:49:39,291 - INFO - 
+[181/188] Processing: Karen Gonzalez Pittman
+2026-02-22 07:49:39,291 - INFO - 
+[182/188] Processing: Shane Abbott
+2026-02-22 07:49:39,291 - INFO - 
+[183/188] Processing: Rob Long
+2026-02-22 07:49:39,291 - INFO - 
+[184/188] Processing: James Buchanan
+2026-02-22 07:49:39,291 - INFO - 
+[185/188] Processing: Yvonne Hinson
+2026-02-22 07:49:39,291 - INFO - 
+[186/188] Processing: RaShon Young
+2026-02-22 07:49:39,291 - INFO - 
+[187/188] Processing: Cord Byrd
+2026-02-22 07:49:39,291 - INFO - Scraping Twitter: @FLSecofState for Cord Byrd
+2026-02-22 07:49:39,291 - INFO - ✓ Scraped 10 tweets from @FLSecofState
+2026-02-22 07:49:41,797 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:41,797 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:41,797 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:41,798 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:41,798 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:41,798 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:41,798 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:41,798 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:41,799 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:41,799 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:41,800 - INFO -   → Saved 10 posts to jfk-social-c440e2c2-beef-4b66-981c-5ea5a970d406.json
+2026-02-22 07:49:41,800 - INFO - 
+[188/188] Processing: Ron DeSantis
+2026-02-22 07:49:41,800 - INFO - Scraping Twitter: @GovRonDeSantis for Ron DeSantis
+2026-02-22 07:49:41,801 - INFO - ✓ Scraped 10 tweets from @GovRonDeSantis
+2026-02-22 07:49:44,306 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:44,307 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:44,307 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:44,307 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:44,307 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:44,307 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:44,307 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:44,307 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:44,307 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:44,307 - WARNING - TextBlob not installed - sentiment analysis disabled
+2026-02-22 07:49:44,307 - INFO -   → Saved 10 posts to jfk-social-5d033483-f8a7-4f5f-8b51-8bab5ec91b50.json
+2026-02-22 07:49:44,307 - INFO - 
+Saving combined results to /Users/jaketad/.openclaw/workspace/snitched-ai/data-ingestion/jfk-social-results/jfk-social-all-posts.json
+2026-02-22 07:49:44,311 - INFO - 
+================================================================================
+2026-02-22 07:49:44,311 - INFO - JFK-SOCIAL SCRAPER COMPLETE
+2026-02-22 07:49:44,311 - INFO - ================================================================================
+2026-02-22 07:49:44,311 - INFO - Total Politicians:        188
+2026-02-22 07:49:44,311 - INFO - With Social Media:        29
+2026-02-22 07:49:44,311 - INFO - Total Posts Scraped:      750
+2026-02-22 07:49:44,311 - INFO - 
+Platform Breakdown:
+2026-02-22 07:49:44,311 - INFO -   Twitter:   28 politicians, 280 posts
+2026-02-22 07:49:44,311 - INFO -   Facebook:  24 politicians, 240 posts
+2026-02-22 07:49:44,311 - INFO -   Instagram: 23 politicians, 230 posts
+2026-02-22 07:49:44,311 - INFO - 
+Duration:                 3m 8s
+2026-02-22 07:49:44,312 - INFO - Output Directory:         /Users/jaketad/.openclaw/workspace/snitched-ai/data-ingestion/jfk-social-results
+2026-02-22 07:49:44,312 - INFO - Summary File:             jfk-social-summary.json
+2026-02-22 07:49:44,312 - INFO - ================================================================================

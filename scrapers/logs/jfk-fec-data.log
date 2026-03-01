@@ -1,0 +1,461 @@
+2026-02-22 07:46:21,630 - INFO - Loading politicians from /Users/jaketad/.openclaw/workspace/snitched-ai/data-ingestion/phase1/processed/florida_politicians.json
+2026-02-22 07:46:21,631 - INFO - Loaded 188 politicians
+2026-02-22 07:46:21,631 - INFO - Federal: 30, State: 0, Local: 0
+2026-02-22 07:46:21,631 - INFO - Starting JFK-FEC scrape for 188 politicians
+2026-02-22 07:46:21,631 - INFO - Processing Gus M. Bilirakis (H6FL09070)
+2026-02-22 07:46:21,631 - INFO - Fetching totals for H6FL09070
+2026-02-22 07:46:23,396 - INFO - Fetching contributions for H6FL09070 in cycle 2024
+2026-02-22 07:46:23,537 - WARNING - Failed to fetch page 1 for H6FL09070: 422
+2026-02-22 07:46:23,537 - INFO - Found 0 contributions for H6FL09070
+2026-02-22 07:46:23,537 - INFO - ✓ Gus M. Bilirakis: Has FEC ID but no contributions found in 2024
+2026-02-22 07:46:24,041 - INFO - Processing Vern Buchanan (H6FL13148)
+2026-02-22 07:46:24,041 - INFO - Fetching totals for H6FL13148
+2026-02-22 07:46:25,442 - INFO - Fetching contributions for H6FL13148 in cycle 2024
+2026-02-22 07:46:25,639 - WARNING - Failed to fetch page 1 for H6FL13148: 422
+2026-02-22 07:46:25,639 - INFO - Found 0 contributions for H6FL13148
+2026-02-22 07:46:25,639 - INFO - ✓ Vern Buchanan: Has FEC ID but no contributions found in 2024
+2026-02-22 07:46:26,144 - INFO - Processing Kathy Castor (H6FL11126)
+2026-02-22 07:46:26,144 - INFO - Fetching totals for H6FL11126
+2026-02-22 07:46:27,524 - INFO - Fetching contributions for H6FL11126 in cycle 2024
+2026-02-22 07:46:27,645 - WARNING - Failed to fetch page 1 for H6FL11126: 422
+2026-02-22 07:46:27,645 - INFO - Found 0 contributions for H6FL11126
+2026-02-22 07:46:27,645 - INFO - ✓ Kathy Castor: Has FEC ID but no contributions found in 2024
+2026-02-22 07:46:28,148 - INFO - Processing Mario Diaz-Balart (H2FL25018)
+2026-02-22 07:46:28,148 - INFO - Fetching totals for H2FL25018
+2026-02-22 07:46:29,624 - INFO - Fetching contributions for H2FL25018 in cycle 2024
+2026-02-22 07:46:29,742 - WARNING - Failed to fetch page 1 for H2FL25018: 422
+2026-02-22 07:46:29,742 - INFO - Found 0 contributions for H2FL25018
+2026-02-22 07:46:29,743 - INFO - ✓ Mario Diaz-Balart: Has FEC ID but no contributions found in 2024
+2026-02-22 07:46:30,247 - INFO - Processing Debbie Wasserman Schultz (H4FL20023)
+2026-02-22 07:46:30,248 - INFO - Fetching totals for H4FL20023
+2026-02-22 07:46:31,716 - INFO - Fetching contributions for H4FL20023 in cycle 2024
+2026-02-22 07:46:31,836 - WARNING - Failed to fetch page 1 for H4FL20023: 422
+2026-02-22 07:46:31,836 - INFO - Found 0 contributions for H4FL20023
+2026-02-22 07:46:31,836 - INFO - ✓ Debbie Wasserman Schultz: Has FEC ID but no contributions found in 2024
+2026-02-22 07:46:32,338 - INFO - Processing Daniel Webster (H0FL08208)
+2026-02-22 07:46:32,339 - INFO - Fetching totals for H0FL08208
+2026-02-22 07:46:33,732 - INFO - Fetching contributions for H0FL08208 in cycle 2024
+2026-02-22 07:46:33,908 - WARNING - Failed to fetch page 1 for H0FL08208: 422
+2026-02-22 07:46:33,909 - INFO - Found 0 contributions for H0FL08208
+2026-02-22 07:46:33,909 - INFO - ✓ Daniel Webster: Has FEC ID but no contributions found in 2024
+2026-02-22 07:46:34,414 - INFO - Processing Frederica S. Wilson (H0FL17068)
+2026-02-22 07:46:34,414 - INFO - Fetching totals for H0FL17068
+2026-02-22 07:46:35,825 - INFO - Fetching contributions for H0FL17068 in cycle 2024
+2026-02-22 07:46:36,004 - WARNING - Failed to fetch page 1 for H0FL17068: 422
+2026-02-22 07:46:36,004 - INFO - Found 0 contributions for H0FL17068
+2026-02-22 07:46:36,004 - INFO - ✓ Frederica S. Wilson: Has FEC ID but no contributions found in 2024
+2026-02-22 07:46:36,508 - INFO - Processing Lois Frankel (H2FL14053)
+2026-02-22 07:46:36,509 - INFO - Fetching totals for H2FL14053
+2026-02-22 07:46:38,023 - INFO - Fetching contributions for H2FL14053 in cycle 2024
+2026-02-22 07:46:38,214 - WARNING - Failed to fetch page 1 for H2FL14053: 422
+2026-02-22 07:46:38,214 - INFO - Found 0 contributions for H2FL14053
+2026-02-22 07:46:38,214 - INFO - ✓ Lois Frankel: Has FEC ID but no contributions found in 2024
+2026-02-22 07:46:38,720 - INFO - Processing Neal P. Dunn (H6FL02208)
+2026-02-22 07:46:38,720 - INFO - Fetching totals for H6FL02208
+2026-02-22 07:46:40,114 - INFO - Fetching contributions for H6FL02208 in cycle 2024
+2026-02-22 07:46:40,311 - WARNING - Failed to fetch page 1 for H6FL02208: 422
+2026-02-22 07:46:40,311 - INFO - Found 0 contributions for H6FL02208
+2026-02-22 07:46:40,311 - INFO - ✓ Neal P. Dunn: Has FEC ID but no contributions found in 2024
+2026-02-22 07:46:40,813 - INFO - Processing John H. Rutherford (H6FL04105)
+2026-02-22 07:46:40,814 - INFO - Fetching totals for H6FL04105
+2026-02-22 07:46:42,204 - INFO - Fetching contributions for H6FL04105 in cycle 2024
+2026-02-22 07:46:42,327 - WARNING - Failed to fetch page 1 for H6FL04105: 422
+2026-02-22 07:46:42,327 - INFO - Found 0 contributions for H6FL04105
+2026-02-22 07:46:42,327 - INFO - ✓ John H. Rutherford: Has FEC ID but no contributions found in 2024
+2026-02-22 07:46:42,327 - INFO - Progress: 10/188 - 0 with FEC data, 0 with AIPAC funding
+2026-02-22 07:46:42,829 - INFO - Processing Darren Soto (H6FL09179)
+2026-02-22 07:46:42,829 - INFO - Fetching totals for H6FL09179
+2026-02-22 07:46:44,308 - INFO - Fetching contributions for H6FL09179 in cycle 2024
+2026-02-22 07:46:44,509 - WARNING - Failed to fetch page 1 for H6FL09179: 422
+2026-02-22 07:46:44,509 - INFO - Found 0 contributions for H6FL09179
+2026-02-22 07:46:44,510 - INFO - ✓ Darren Soto: Has FEC ID but no contributions found in 2024
+2026-02-22 07:46:45,015 - INFO - Processing Brian J. Mast (H6FL18097)
+2026-02-22 07:46:45,015 - INFO - Fetching totals for H6FL18097
+2026-02-22 07:46:46,406 - INFO - Fetching contributions for H6FL18097 in cycle 2024
+2026-02-22 07:46:46,604 - WARNING - Failed to fetch page 1 for H6FL18097: 422
+2026-02-22 07:46:46,604 - INFO - Found 0 contributions for H6FL18097
+2026-02-22 07:46:46,604 - INFO - ✓ Brian J. Mast: Has FEC ID but no contributions found in 2024
+2026-02-22 07:46:47,108 - INFO - Processing W. Gregory Steube (H8FL17053)
+2026-02-22 07:46:47,108 - INFO - Fetching totals for H8FL17053
+2026-02-22 07:46:48,511 - INFO - Fetching contributions for H8FL17053 in cycle 2024
+2026-02-22 07:46:48,700 - WARNING - Failed to fetch page 1 for H8FL17053: 422
+2026-02-22 07:46:48,700 - INFO - Found 0 contributions for H8FL17053
+2026-02-22 07:46:48,700 - INFO - ✓ W. Gregory Steube: Has FEC ID but no contributions found in 2024
+2026-02-22 07:46:49,204 - INFO - Processing Rick Scott (S8FL00273)
+2026-02-22 07:46:49,204 - INFO - Fetching totals for S8FL00273
+2026-02-22 07:46:50,591 - INFO - Fetching contributions for S8FL00273 in cycle 2024
+2026-02-22 07:46:50,713 - WARNING - Failed to fetch page 1 for S8FL00273: 422
+2026-02-22 07:46:50,713 - INFO - Found 0 contributions for S8FL00273
+2026-02-22 07:46:50,713 - INFO - ✓ Rick Scott: Has FEC ID but no contributions found in 2024
+2026-02-22 07:46:51,218 - INFO - Processing Kat Cammack (H0FL03175)
+2026-02-22 07:46:51,219 - INFO - Fetching totals for H0FL03175
+2026-02-22 07:46:52,604 - INFO - Fetching contributions for H0FL03175 in cycle 2024
+2026-02-22 07:46:52,783 - WARNING - Failed to fetch page 1 for H0FL03175: 422
+2026-02-22 07:46:52,783 - INFO - Found 0 contributions for H0FL03175
+2026-02-22 07:46:52,783 - INFO - ✓ Kat Cammack: Has FEC ID but no contributions found in 2024
+2026-02-22 07:46:56,386 - INFO - Loading politicians from /Users/jaketad/.openclaw/workspace/snitched-ai/data-ingestion/phase1/processed/florida_politicians.json
+2026-02-22 07:46:56,387 - INFO - Loaded 188 politicians
+2026-02-22 07:46:56,387 - INFO - Federal: 30, State: 0, Local: 0
+2026-02-22 07:46:56,387 - INFO - Starting JFK-FEC scrape for 188 politicians
+2026-02-22 07:46:56,387 - INFO - Processing Gus M. Bilirakis (H6FL09070)
+2026-02-22 07:46:56,387 - INFO - Fetching totals for H6FL09070
+2026-02-22 07:46:57,966 - INFO - Fetching contributions for H6FL09070 in cycle 2024
+2026-02-22 07:46:58,120 - INFO - No committees found for H6FL09070
+2026-02-22 07:46:58,121 - INFO - ✓ Gus M. Bilirakis: Has FEC ID but no contributions found in 2024
+2026-02-22 07:46:58,626 - INFO - Processing Vern Buchanan (H6FL13148)
+2026-02-22 07:46:58,626 - INFO - Fetching totals for H6FL13148
+2026-02-22 07:46:59,902 - INFO - Fetching contributions for H6FL13148 in cycle 2024
+2026-02-22 07:47:00,121 - INFO - Found 1 committees for H6FL13148
+2026-02-22 07:47:03,874 - INFO - Found 500 contributions for H6FL13148
+2026-02-22 07:47:03,876 - INFO - ✓ Vern Buchanan: $0.00 raised, $25,000.00 AIPAC (5 contributions)
+2026-02-22 07:47:04,381 - INFO - Processing Kathy Castor (H6FL11126)
+2026-02-22 07:47:04,381 - INFO - Fetching totals for H6FL11126
+2026-02-22 07:47:05,669 - INFO - Fetching contributions for H6FL11126 in cycle 2024
+2026-02-22 07:47:05,773 - INFO - No committees found for H6FL11126
+2026-02-22 07:47:05,773 - INFO - ✓ Kathy Castor: Has FEC ID but no contributions found in 2024
+2026-02-22 07:47:06,275 - INFO - Processing Mario Diaz-Balart (H2FL25018)
+2026-02-22 07:47:06,276 - INFO - Fetching totals for H2FL25018
+2026-02-22 07:47:07,534 - INFO - Fetching contributions for H2FL25018 in cycle 2024
+2026-02-22 07:47:07,636 - INFO - No committees found for H2FL25018
+2026-02-22 07:47:07,637 - INFO - ✓ Mario Diaz-Balart: Has FEC ID but no contributions found in 2024
+2026-02-22 07:47:08,141 - INFO - Processing Debbie Wasserman Schultz (H4FL20023)
+2026-02-22 07:47:08,141 - INFO - Fetching totals for H4FL20023
+2026-02-22 07:47:09,436 - INFO - Fetching contributions for H4FL20023 in cycle 2024
+2026-02-22 07:47:09,560 - INFO - No committees found for H4FL20023
+2026-02-22 07:47:09,561 - INFO - ✓ Debbie Wasserman Schultz: Has FEC ID but no contributions found in 2024
+2026-02-22 07:47:10,061 - INFO - Processing Daniel Webster (H0FL08208)
+2026-02-22 07:47:10,062 - INFO - Fetching totals for H0FL08208
+2026-02-22 07:47:11,437 - INFO - Fetching contributions for H0FL08208 in cycle 2024
+2026-02-22 07:47:11,539 - INFO - No committees found for H0FL08208
+2026-02-22 07:47:11,540 - INFO - ✓ Daniel Webster: Has FEC ID but no contributions found in 2024
+2026-02-22 07:47:12,045 - INFO - Processing Frederica S. Wilson (H0FL17068)
+2026-02-22 07:47:12,045 - INFO - Fetching totals for H0FL17068
+2026-02-22 07:47:13,535 - INFO - Fetching contributions for H0FL17068 in cycle 2024
+2026-02-22 07:47:13,673 - INFO - Found 1 committees for H0FL17068
+2026-02-22 07:47:15,856 - WARNING - Failed to fetch page 4 for committee C00460055: 429
+2026-02-22 07:47:15,856 - INFO - Found 300 contributions for H0FL17068
+2026-02-22 07:47:15,858 - INFO - ✓ Frederica S. Wilson: $1,525,144.30 raised, $36,000.00 AIPAC (12 contributions)
+2026-02-22 07:47:16,361 - INFO - Processing Lois Frankel (H2FL14053)
+2026-02-22 07:47:16,361 - INFO - Fetching totals for H2FL14053
+2026-02-22 07:47:17,633 - INFO - Fetching contributions for H2FL14053 in cycle 2024
+2026-02-22 07:47:17,736 - INFO - No committees found for H2FL14053
+2026-02-22 07:47:17,736 - INFO - ✓ Lois Frankel: Has FEC ID but no contributions found in 2024
+2026-02-22 07:47:18,242 - INFO - Processing Neal P. Dunn (H6FL02208)
+2026-02-22 07:47:18,242 - INFO - Fetching totals for H6FL02208
+2026-02-22 07:47:19,636 - INFO - Fetching contributions for H6FL02208 in cycle 2024
+2026-02-22 07:47:19,739 - INFO - No committees found for H6FL02208
+2026-02-22 07:47:19,740 - INFO - ✓ Neal P. Dunn: Has FEC ID but no contributions found in 2024
+2026-02-22 07:47:20,244 - INFO - Processing John H. Rutherford (H6FL04105)
+2026-02-22 07:47:20,244 - INFO - Fetching totals for H6FL04105
+2026-02-22 07:47:21,538 - INFO - Fetching contributions for H6FL04105 in cycle 2024
+2026-02-22 07:47:21,747 - INFO - Found 1 committees for H6FL04105
+2026-02-22 07:47:21,852 - WARNING - Failed to fetch page 1 for committee C00615294: 429
+2026-02-22 07:47:21,852 - INFO - Found 0 contributions for H6FL04105
+2026-02-22 07:47:21,852 - INFO - ✓ John H. Rutherford: Has FEC ID but no contributions found in 2024
+2026-02-22 07:47:21,853 - INFO - Progress: 10/188 - 2 with FEC data, 2 with AIPAC funding
+2026-02-22 07:47:22,354 - INFO - Processing Darren Soto (H6FL09179)
+2026-02-22 07:47:22,355 - INFO - Fetching totals for H6FL09179
+2026-02-22 07:47:23,695 - INFO - Fetching contributions for H6FL09179 in cycle 2024
+2026-02-22 07:47:23,814 - INFO - No committees found for H6FL09179
+2026-02-22 07:47:23,814 - INFO - ✓ Darren Soto: Has FEC ID but no contributions found in 2024
+2026-02-22 07:47:24,319 - INFO - Processing Brian J. Mast (H6FL18097)
+2026-02-22 07:47:24,319 - INFO - Fetching totals for H6FL18097
+2026-02-22 07:47:25,594 - INFO - Fetching contributions for H6FL18097 in cycle 2024
+2026-02-22 07:47:25,697 - INFO - No committees found for H6FL18097
+2026-02-22 07:47:25,697 - INFO - ✓ Brian J. Mast: Has FEC ID but no contributions found in 2024
+2026-02-22 07:47:26,203 - INFO - Processing W. Gregory Steube (H8FL17053)
+2026-02-22 07:47:26,203 - INFO - Fetching totals for H8FL17053
+2026-02-22 07:47:27,460 - INFO - Fetching contributions for H8FL17053 in cycle 2024
+2026-02-22 07:47:27,563 - INFO - No committees found for H8FL17053
+2026-02-22 07:47:27,563 - INFO - ✓ W. Gregory Steube: Has FEC ID but no contributions found in 2024
+2026-02-22 07:47:28,069 - INFO - Processing Rick Scott (S8FL00273)
+2026-02-22 07:47:28,069 - INFO - Fetching totals for S8FL00273
+2026-02-22 07:47:29,358 - INFO - Fetching contributions for S8FL00273 in cycle 2024
+2026-02-22 07:47:29,485 - INFO - No committees found for S8FL00273
+2026-02-22 07:47:29,485 - INFO - ✓ Rick Scott: Has FEC ID but no contributions found in 2024
+2026-02-22 07:47:29,991 - INFO - Processing Kat Cammack (H0FL03175)
+2026-02-22 07:47:29,991 - INFO - Fetching totals for H0FL03175
+2026-02-22 07:47:31,246 - INFO - Fetching contributions for H0FL03175 in cycle 2024
+2026-02-22 07:47:31,349 - INFO - No committees found for H0FL03175
+2026-02-22 07:47:31,349 - INFO - ✓ Kat Cammack: Has FEC ID but no contributions found in 2024
+2026-02-22 07:47:31,855 - INFO - Processing Scott Franklin (H0FL15104)
+2026-02-22 07:47:31,855 - INFO - Fetching totals for H0FL15104
+2026-02-22 07:47:33,116 - INFO - Fetching contributions for H0FL15104 in cycle 2024
+2026-02-22 07:47:33,287 - INFO - Found 1 committees for H0FL15104
+2026-02-22 07:47:33,390 - WARNING - Failed to fetch page 1 for committee C00742247: 429
+2026-02-22 07:47:33,391 - INFO - Found 0 contributions for H0FL15104
+2026-02-22 07:47:33,391 - INFO - ✓ Scott Franklin: Has FEC ID but no contributions found in 2024
+2026-02-22 07:47:33,892 - INFO - Processing Byron Donalds (H2FL14186)
+2026-02-22 07:47:33,892 - INFO - Fetching totals for H2FL14186
+2026-02-22 07:47:35,147 - INFO - Fetching contributions for H2FL14186 in cycle 2024
+2026-02-22 07:47:35,250 - INFO - No committees found for H2FL14186
+2026-02-22 07:47:35,250 - INFO - ✓ Byron Donalds: Has FEC ID but no contributions found in 2024
+2026-02-22 07:47:35,752 - INFO - Processing Carlos A. Gimenez (H0FL26036)
+2026-02-22 07:47:35,752 - INFO - Fetching totals for H0FL26036
+2026-02-22 07:47:37,021 - INFO - Fetching contributions for H0FL26036 in cycle 2024
+2026-02-22 07:47:37,125 - INFO - No committees found for H0FL26036
+2026-02-22 07:47:37,125 - INFO - ✓ Carlos A. Gimenez: Has FEC ID but no contributions found in 2024
+2026-02-22 07:47:37,629 - INFO - Processing Maria Elvira Salazar (H8FL27185)
+2026-02-22 07:47:37,629 - INFO - Fetching totals for H8FL27185
+2026-02-22 07:47:38,921 - INFO - Fetching contributions for H8FL27185 in cycle 2024
+2026-02-22 07:47:39,059 - INFO - Found 1 committees for H8FL27185
+2026-02-22 07:47:40,127 - WARNING - Failed to fetch page 2 for committee C00714261: 429
+2026-02-22 07:47:40,127 - INFO - Found 100 contributions for H8FL27185
+2026-02-22 07:47:40,129 - INFO - ✓ Maria Elvira Salazar: $8,878,395.37 raised, $0.00 AIPAC (0 contributions)
+2026-02-22 07:47:40,632 - INFO - Processing Sheila Cherfilus-McCormick (H8FL20032)
+2026-02-22 07:47:40,633 - INFO - Fetching totals for H8FL20032
+2026-02-22 07:47:41,939 - INFO - Fetching contributions for H8FL20032 in cycle 2024
+2026-02-22 07:47:42,076 - INFO - Found 1 committees for H8FL20032
+2026-02-22 07:47:43,640 - WARNING - Failed to fetch page 3 for committee C00677492: 429
+2026-02-22 07:47:43,640 - INFO - Found 200 contributions for H8FL20032
+2026-02-22 07:47:43,641 - INFO - ✓ Sheila Cherfilus-McCormick: $639,178.70 raised, $52,500.00 AIPAC (74 contributions)
+2026-02-22 07:47:43,641 - INFO - Progress: 20/188 - 4 with FEC data, 3 with AIPAC funding
+2026-02-22 07:47:44,144 - INFO - Processing Aaron Bean (H2FL04211)
+2026-02-22 07:47:44,144 - INFO - Fetching totals for H2FL04211
+2026-02-22 07:47:45,537 - INFO - Fetching contributions for H2FL04211 in cycle 2024
+2026-02-22 07:47:45,734 - INFO - Found 2 committees for H2FL04211
+2026-02-22 07:47:48,453 - WARNING - Failed to fetch page 5 for committee C00816983: 429
+2026-02-22 07:47:48,555 - WARNING - Failed to fetch page 1 for committee C00818872: 429
+2026-02-22 07:47:48,556 - INFO - Found 400 contributions for H2FL04211
+2026-02-22 07:47:48,557 - INFO - ✓ Aaron Bean: $1,738,170.86 raised, $1,000.00 AIPAC (4 contributions)
+2026-02-22 07:47:49,063 - INFO - Processing Cory Mills (H2FL07156)
+2026-02-22 07:47:49,063 - INFO - Fetching totals for H2FL07156
+2026-02-22 07:47:50,402 - INFO - Fetching contributions for H2FL07156 in cycle 2024
+2026-02-22 07:47:50,550 - INFO - No committees found for H2FL07156
+2026-02-22 07:47:50,551 - INFO - ✓ Cory Mills: Has FEC ID but no contributions found in 2024
+2026-02-22 07:47:51,054 - INFO - Processing Maxwell Frost (H2FL10259)
+2026-02-22 07:47:51,055 - INFO - Fetching totals for H2FL10259
+2026-02-22 07:47:52,364 - INFO - Fetching contributions for H2FL10259 in cycle 2024
+2026-02-22 07:47:52,550 - INFO - Found 1 committees for H2FL10259
+2026-02-22 07:47:52,652 - WARNING - Failed to fetch page 1 for committee C00786822: 429
+2026-02-22 07:47:52,652 - INFO - Found 0 contributions for H2FL10259
+2026-02-22 07:47:52,652 - INFO - ✓ Maxwell Frost: Has FEC ID but no contributions found in 2024
+2026-02-22 07:47:53,157 - INFO - Processing Anna Paulina Luna (H0FL13158)
+2026-02-22 07:47:53,158 - INFO - Fetching totals for H0FL13158
+2026-02-22 07:47:54,563 - INFO - Fetching contributions for H0FL13158 in cycle 2024
+2026-02-22 07:47:54,784 - INFO - Found 2 committees for H0FL13158
+2026-02-22 07:47:54,888 - WARNING - Failed to fetch page 1 for committee C00718239: 429
+2026-02-22 07:47:55,072 - INFO - Found 16 contributions for H0FL13158
+2026-02-22 07:47:55,072 - INFO - ✓ Anna Paulina Luna: $10,411,563.40 raised, $0.00 AIPAC (0 contributions)
+2026-02-22 07:47:55,576 - INFO - Processing Laurel M. Lee (H2FL15241)
+2026-02-22 07:47:55,577 - INFO - Fetching totals for H2FL15241
+2026-02-22 07:47:56,866 - INFO - Fetching contributions for H2FL15241 in cycle 2024
+2026-02-22 07:47:56,973 - INFO - No committees found for H2FL15241
+2026-02-22 07:47:56,973 - INFO - ✓ Laurel M. Lee: Has FEC ID but no contributions found in 2024
+2026-02-22 07:47:57,474 - INFO - Processing Jared Moskowitz (H2FL22171)
+2026-02-22 07:47:57,474 - INFO - Fetching totals for H2FL22171
+2026-02-22 07:47:58,717 - INFO - Fetching contributions for H2FL22171 in cycle 2024
+2026-02-22 07:47:58,841 - INFO - No committees found for H2FL22171
+2026-02-22 07:47:58,841 - INFO - ✓ Jared Moskowitz: Has FEC ID but no contributions found in 2024
+2026-02-22 07:47:59,347 - INFO - Processing Mike Haridopolos (H4FL08168)
+2026-02-22 07:47:59,347 - INFO - Fetching totals for H4FL08168
+2026-02-22 07:48:00,599 - INFO - Fetching contributions for H4FL08168 in cycle 2024
+2026-02-22 07:48:00,740 - INFO - Found 1 committees for H4FL08168
+2026-02-22 07:48:00,844 - WARNING - Failed to fetch page 1 for committee C00877324: 429
+2026-02-22 07:48:00,844 - INFO - Found 0 contributions for H4FL08168
+2026-02-22 07:48:00,844 - INFO - ✓ Mike Haridopolos: Has FEC ID but no contributions found in 2024
+2026-02-22 07:48:01,349 - INFO - Processing Ashley Moody (S6FL00640)
+2026-02-22 07:48:01,349 - INFO - Fetching totals for S6FL00640
+2026-02-22 07:48:02,817 - INFO - Fetching contributions for S6FL00640 in cycle 2024
+2026-02-22 07:48:02,920 - INFO - No committees found for S6FL00640
+2026-02-22 07:48:02,920 - INFO - ✓ Ashley Moody: Has FEC ID but no contributions found in 2024
+2026-02-22 07:48:03,426 - INFO - Processing Jimmy Patronis (H6FL01390)
+2026-02-22 07:48:03,426 - INFO - Fetching totals for H6FL01390
+2026-02-22 07:48:04,681 - INFO - Fetching contributions for H6FL01390 in cycle 2024
+2026-02-22 07:48:04,815 - INFO - Found 1 committees for H6FL01390
+2026-02-22 07:48:04,918 - WARNING - Failed to fetch page 1 for committee C00893594: 429
+2026-02-22 07:48:04,918 - INFO - Found 0 contributions for H6FL01390
+2026-02-22 07:48:04,918 - INFO - ✓ Jimmy Patronis: Has FEC ID but no contributions found in 2024
+2026-02-22 07:48:05,420 - INFO - Processing Randy Fine (H6FL06258)
+2026-02-22 07:48:05,421 - INFO - Fetching totals for H6FL06258
+2026-02-22 07:48:06,684 - INFO - Fetching contributions for H6FL06258 in cycle 2024
+2026-02-22 07:48:06,803 - INFO - No committees found for H6FL06258
+2026-02-22 07:48:06,803 - INFO - ✓ Randy Fine: Has FEC ID but no contributions found in 2024
+2026-02-22 07:48:06,804 - INFO - Progress: 30/188 - 6 with FEC data, 4 with AIPAC funding
+2026-02-22 07:48:07,309 - INFO - Skipping Johanna López - no FEC ID (state/local official)
+2026-02-22 07:48:07,814 - INFO - Skipping Ileana Garcia - no FEC ID (state/local official)
+2026-02-22 07:48:08,319 - INFO - Skipping Ralph Massullo - no FEC ID (state/local official)
+2026-02-22 07:48:08,824 - INFO - Skipping Rita Harris - no FEC ID (state/local official)
+2026-02-22 07:48:09,327 - INFO - Skipping Keith Truenow - no FEC ID (state/local official)
+2026-02-22 07:48:09,831 - INFO - Skipping Bryan Ávila - no FEC ID (state/local official)
+2026-02-22 07:48:10,335 - INFO - Skipping Jenna Persons-Mulicka - no FEC ID (state/local official)
+2026-02-22 07:48:10,840 - INFO - Skipping Alex Andrade - no FEC ID (state/local official)
+2026-02-22 07:48:11,342 - INFO - Skipping Mike Giallombardo - no FEC ID (state/local official)
+2026-02-22 07:48:11,848 - INFO - Skipping Toby Overdorf - no FEC ID (state/local official)
+2026-02-22 07:48:11,848 - INFO - Progress: 40/188 - 6 with FEC data, 4 with AIPAC funding
+2026-02-22 07:48:12,353 - INFO - Skipping Stan McClain - no FEC ID (state/local official)
+2026-02-22 07:48:12,856 - INFO - Skipping Allison Tant - no FEC ID (state/local official)
+2026-02-22 07:48:13,358 - INFO - Skipping Josie Tomkow - no FEC ID (state/local official)
+2026-02-22 07:48:13,861 - INFO - Skipping Jennifer Bradley - no FEC ID (state/local official)
+2026-02-22 07:48:14,366 - INFO - Skipping Chase Tramont - no FEC ID (state/local official)
+2026-02-22 07:48:14,868 - INFO - Skipping Ben Albritton - no FEC ID (state/local official)
+2026-02-22 07:48:15,369 - INFO - Skipping Lindsay Cross - no FEC ID (state/local official)
+2026-02-22 07:48:15,875 - INFO - Skipping Michael Owen - no FEC ID (state/local official)
+2026-02-22 07:48:16,377 - INFO - Skipping Jessica Baker - no FEC ID (state/local official)
+2026-02-22 07:48:16,882 - INFO - Skipping Rosalind Osgood - no FEC ID (state/local official)
+2026-02-22 07:48:16,882 - INFO - Progress: 50/188 - 6 with FEC data, 4 with AIPAC funding
+2026-02-22 07:48:17,388 - INFO - Skipping Ana Maria Rodriguez - no FEC ID (state/local official)
+2026-02-22 07:48:17,892 - INFO - Skipping Dave Smith - no FEC ID (state/local official)
+2026-02-22 07:48:18,394 - INFO - Skipping Linda Chaney - no FEC ID (state/local official)
+2026-02-22 07:48:18,898 - INFO - Skipping Jennifer Canady - no FEC ID (state/local official)
+2026-02-22 07:48:19,399 - INFO - Skipping J.J. Grow - no FEC ID (state/local official)
+2026-02-22 07:48:19,901 - INFO - Skipping Tommy Wright - no FEC ID (state/local official)
+2026-02-22 07:48:20,403 - INFO - Skipping Hillary Cassel - no FEC ID (state/local official)
+2026-02-22 07:48:20,904 - INFO - Skipping Leonard Spencer - no FEC ID (state/local official)
+2026-02-22 07:48:21,410 - INFO - Skipping Don Gaetz - no FEC ID (state/local official)
+2026-02-22 07:48:21,912 - INFO - Skipping Demi Busatta - no FEC ID (state/local official)
+2026-02-22 07:48:21,912 - INFO - Progress: 60/188 - 6 with FEC data, 4 with AIPAC funding
+2026-02-22 07:48:22,413 - INFO - Skipping Barbara Sharief - no FEC ID (state/local official)
+2026-02-22 07:48:22,918 - INFO - Skipping Susan Valdés - no FEC ID (state/local official)
+2026-02-22 07:48:23,420 - INFO - Skipping Bruce Antone - no FEC ID (state/local official)
+2026-02-22 07:48:23,926 - INFO - Skipping Debbie Mayfield - no FEC ID (state/local official)
+2026-02-22 07:48:24,429 - INFO - Skipping Bill Conerly - no FEC ID (state/local official)
+2026-02-22 07:48:24,931 - INFO - Skipping Danny Nix - no FEC ID (state/local official)
+2026-02-22 07:48:25,436 - INFO - Skipping Daryl Campbell - no FEC ID (state/local official)
+2026-02-22 07:48:25,940 - INFO - Skipping Tom Leek - no FEC ID (state/local official)
+2026-02-22 07:48:26,445 - INFO - Skipping Vanessa Oliver - no FEC ID (state/local official)
+2026-02-22 07:48:26,950 - INFO - Skipping Kelly Skidmore - no FEC ID (state/local official)
+2026-02-22 07:48:26,951 - INFO - Progress: 70/188 - 6 with FEC data, 4 with AIPAC funding
+2026-02-22 07:48:27,453 - INFO - Skipping Jim Boyd - no FEC ID (state/local official)
+2026-02-22 07:48:27,959 - INFO - Skipping Alex Rizo - no FEC ID (state/local official)
+2026-02-22 07:48:28,461 - INFO - Skipping Juan Porras - no FEC ID (state/local official)
+2026-02-22 07:48:28,964 - INFO - Skipping Griff Griffitts - no FEC ID (state/local official)
+2026-02-22 07:48:29,469 - INFO - Skipping Daniel Perez - no FEC ID (state/local official)
+2026-02-22 07:48:29,975 - INFO - Skipping Kaylee Tuck - no FEC ID (state/local official)
+2026-02-22 07:48:30,478 - INFO - Skipping Doug Bankson - no FEC ID (state/local official)
+2026-02-22 07:48:30,984 - INFO - Skipping Kiyan Michael - no FEC ID (state/local official)
+2026-02-22 07:48:31,489 - INFO - Skipping Gayle Harrell - no FEC ID (state/local official)
+2026-02-22 07:48:31,994 - INFO - Skipping Fiona McFarland - no FEC ID (state/local official)
+2026-02-22 07:48:31,994 - INFO - Progress: 80/188 - 6 with FEC data, 4 with AIPAC funding
+2026-02-22 07:48:32,499 - INFO - Skipping Kim Kendall - no FEC ID (state/local official)
+2026-02-22 07:48:33,005 - INFO - Skipping Paula Stark - no FEC ID (state/local official)
+2026-02-22 07:48:33,510 - INFO - Skipping Wyman Duggan - no FEC ID (state/local official)
+2026-02-22 07:48:34,013 - INFO - Skipping Fabián Basabe - no FEC ID (state/local official)
+2026-02-22 07:48:34,518 - INFO - Skipping Tiffany Esposito - no FEC ID (state/local official)
+2026-02-22 07:48:35,022 - INFO - Skipping Marie Woodson - no FEC ID (state/local official)
+2026-02-22 07:48:35,527 - INFO - Skipping Mitch Rosenwald - no FEC ID (state/local official)
+2026-02-22 07:48:36,028 - INFO - Skipping Dean Black - no FEC ID (state/local official)
+2026-02-22 07:48:36,534 - INFO - Skipping Tracie Davis - no FEC ID (state/local official)
+2026-02-22 07:48:37,039 - INFO - Skipping Robin Bartleman - no FEC ID (state/local official)
+2026-02-22 07:48:37,040 - INFO - Progress: 90/188 - 6 with FEC data, 4 with AIPAC funding
+2026-02-22 07:48:37,544 - INFO - Skipping Dan Daley - no FEC ID (state/local official)
+2026-02-22 07:48:38,050 - INFO - Skipping Dianne Hart-Lowman - no FEC ID (state/local official)
+2026-02-22 07:48:38,553 - INFO - Skipping Danny Burgess - no FEC ID (state/local official)
+2026-02-22 07:48:39,058 - INFO - Skipping Mack Bernard - no FEC ID (state/local official)
+2026-02-22 07:48:39,564 - INFO - Skipping Traci Koster - no FEC ID (state/local official)
+2026-02-22 07:48:40,069 - INFO - Skipping Sam Garrison - no FEC ID (state/local official)
+2026-02-22 07:48:40,575 - INFO - Skipping Jay Trumbull - no FEC ID (state/local official)
+2026-02-22 07:48:41,080 - INFO - Skipping Kim Berfield - no FEC ID (state/local official)
+2026-02-22 07:48:41,585 - INFO - Skipping Brad Yeager - no FEC ID (state/local official)
+2026-02-22 07:48:42,089 - INFO - Skipping Jose Alvarez - no FEC ID (state/local official)
+2026-02-22 07:48:42,089 - INFO - Progress: 100/188 - 6 with FEC data, 4 with AIPAC funding
+2026-02-22 07:48:42,594 - INFO - Skipping Patt Maney - no FEC ID (state/local official)
+2026-02-22 07:48:43,100 - INFO - Skipping Monique Miller - no FEC ID (state/local official)
+2026-02-22 07:48:43,606 - INFO - Skipping Lauren Melo - no FEC ID (state/local official)
+2026-02-22 07:48:44,111 - INFO - Skipping Tyler Sirois - no FEC ID (state/local official)
+2026-02-22 07:48:44,616 - INFO - Skipping Kathleen Passidomo - no FEC ID (state/local official)
+2026-02-22 07:48:45,121 - INFO - Skipping Christine Hunschofsky - no FEC ID (state/local official)
+2026-02-22 07:48:45,627 - INFO - Skipping Chad Johnson - no FEC ID (state/local official)
+2026-02-22 07:48:46,132 - INFO - Skipping Jason Pizzo - no FEC ID (state/local official)
+2026-02-22 07:48:46,637 - INFO - Skipping Judson Sapp - no FEC ID (state/local official)
+2026-02-22 07:48:47,139 - INFO - Skipping LaVon Bracy Davis - no FEC ID (state/local official)
+2026-02-22 07:48:47,139 - INFO - Progress: 110/188 - 6 with FEC data, 4 with AIPAC funding
+2026-02-22 07:48:47,644 - INFO - Skipping Wallace Aristide - no FEC ID (state/local official)
+2026-02-22 07:48:48,147 - INFO - Skipping Adam Botana - no FEC ID (state/local official)
+2026-02-22 07:48:48,652 - INFO - Skipping Kim Daniels - no FEC ID (state/local official)
+2026-02-22 07:48:49,155 - INFO - Skipping Nathan Boyles - no FEC ID (state/local official)
+2026-02-22 07:48:49,660 - INFO - Skipping Chuck Brannan - no FEC ID (state/local official)
+2026-02-22 07:48:50,166 - INFO - Skipping Jim Mooney - no FEC ID (state/local official)
+2026-02-22 07:48:50,671 - INFO - Skipping Jennifer Kincart Jonsson - no FEC ID (state/local official)
+2026-02-22 07:48:51,176 - INFO - Skipping Omar Blanco - no FEC ID (state/local official)
+2026-02-22 07:48:51,682 - INFO - Skipping Fentrice Driskell - no FEC ID (state/local official)
+2026-02-22 07:48:52,187 - INFO - Skipping Lisa Dunkley - no FEC ID (state/local official)
+2026-02-22 07:48:52,187 - INFO - Progress: 120/188 - 6 with FEC data, 4 with AIPAC funding
+2026-02-22 07:48:52,693 - INFO - Skipping Anna Eskamani - no FEC ID (state/local official)
+2026-02-22 07:48:53,198 - INFO - Skipping Mike Gottlieb - no FEC ID (state/local official)
+2026-02-22 07:48:53,703 - INFO - Skipping Angie Nixon - no FEC ID (state/local official)
+2026-02-22 07:48:54,209 - INFO - Skipping Erin Grall - no FEC ID (state/local official)
+2026-02-22 07:48:54,714 - INFO - Skipping Erika Booth - no FEC ID (state/local official)
+2026-02-22 07:48:55,218 - INFO - Skipping Ryan Chamberlin - no FEC ID (state/local official)
+2026-02-22 07:48:55,724 - INFO - Skipping Sam Greco - no FEC ID (state/local official)
+2026-02-22 07:48:56,225 - INFO - Skipping Carlos Smith - no FEC ID (state/local official)
+2026-02-22 07:48:56,730 - INFO - Skipping Alexis Calatayud - no FEC ID (state/local official)
+2026-02-22 07:48:57,236 - INFO - Skipping John Snyder - no FEC ID (state/local official)
+2026-02-22 07:48:57,236 - INFO - Progress: 130/188 - 6 with FEC data, 4 with AIPAC funding
+2026-02-22 07:48:57,741 - INFO - Skipping Jason Shoaf - no FEC ID (state/local official)
+2026-02-22 07:48:58,242 - INFO - Skipping Danny Alvarez - no FEC ID (state/local official)
+2026-02-22 07:48:58,748 - INFO - Skipping David Borrero - no FEC ID (state/local official)
+2026-02-22 07:48:59,249 - INFO - Skipping Adam Anderson - no FEC ID (state/local official)
+2026-02-22 07:48:59,754 - INFO - Skipping Joe Gruters - no FEC ID (state/local official)
+2026-02-22 07:49:00,260 - INFO - Skipping Bill Partington - no FEC ID (state/local official)
+2026-02-22 07:49:00,762 - INFO - Skipping Tina Polsky - no FEC ID (state/local official)
+2026-02-22 07:49:01,265 - INFO - Skipping Kevin Chambliss - no FEC ID (state/local official)
+2026-02-22 07:49:01,771 - INFO - Skipping Shev Jones - no FEC ID (state/local official)
+2026-02-22 07:49:02,276 - INFO - Skipping Nan Cobb - no FEC ID (state/local official)
+2026-02-22 07:49:02,276 - INFO - Progress: 140/188 - 6 with FEC data, 4 with AIPAC funding
+2026-02-22 07:49:02,777 - INFO - Skipping Tom Fabricio - no FEC ID (state/local official)
+2026-02-22 07:49:03,278 - INFO - Skipping Kristen Arrington - no FEC ID (state/local official)
+2026-02-22 07:49:03,778 - INFO - Skipping Berny Jacques - no FEC ID (state/local official)
+2026-02-22 07:49:04,278 - INFO - Skipping Felicia Robinson - no FEC ID (state/local official)
+2026-02-22 07:49:04,780 - INFO - Skipping Dotie Joseph - no FEC ID (state/local official)
+2026-02-22 07:49:05,284 - INFO - Skipping Colleen Burton - no FEC ID (state/local official)
+2026-02-22 07:49:05,788 - INFO - Skipping Jonathan Martin - no FEC ID (state/local official)
+2026-02-22 07:49:06,288 - INFO - Skipping Susan Plasencia - no FEC ID (state/local official)
+2026-02-22 07:49:06,793 - INFO - Skipping Peggy Gossett-Seidman - no FEC ID (state/local official)
+2026-02-22 07:49:07,293 - INFO - Skipping Anne Gerwig - no FEC ID (state/local official)
+2026-02-22 07:49:07,294 - INFO - Progress: 150/188 - 6 with FEC data, 4 with AIPAC funding
+2026-02-22 07:49:07,799 - INFO - Skipping Brian Hodgers - no FEC ID (state/local official)
+2026-02-22 07:49:08,304 - INFO - Skipping Lori Berman - no FEC ID (state/local official)
+2026-02-22 07:49:08,808 - INFO - Skipping Will Robinson - no FEC ID (state/local official)
+2026-02-22 07:49:09,311 - INFO - Skipping Clay Yarborough - no FEC ID (state/local official)
+2026-02-22 07:49:09,815 - INFO - Skipping Mike Redondo - no FEC ID (state/local official)
+2026-02-22 07:49:10,320 - INFO - Skipping Michelle Salzman - no FEC ID (state/local official)
+2026-02-22 07:49:10,825 - INFO - Skipping Robbie Brackett - no FEC ID (state/local official)
+2026-02-22 07:49:11,326 - INFO - Skipping Gallop Franklin - no FEC ID (state/local official)
+2026-02-22 07:49:11,827 - INFO - Skipping Taylor Yarkosky - no FEC ID (state/local official)
+2026-02-22 07:49:12,331 - INFO - Skipping Ashley Gantt - no FEC ID (state/local official)
+2026-02-22 07:49:12,331 - INFO - Progress: 160/188 - 6 with FEC data, 4 with AIPAC funding
+2026-02-22 07:49:12,835 - INFO - Skipping Debra Tendrich - no FEC ID (state/local official)
+2026-02-22 07:49:13,341 - INFO - Skipping Jon Albert - no FEC ID (state/local official)
+2026-02-22 07:49:13,846 - INFO - Skipping Dana Trabulsy - no FEC ID (state/local official)
+2026-02-22 07:49:14,351 - INFO - Skipping Darryl Rouson - no FEC ID (state/local official)
+2026-02-22 07:49:14,856 - INFO - Skipping Webster Barnaby - no FEC ID (state/local official)
+2026-02-22 07:49:15,357 - INFO - Skipping Kevin Steele - no FEC ID (state/local official)
+2026-02-22 07:49:15,860 - INFO - Skipping Jason Brodeur - no FEC ID (state/local official)
+2026-02-22 07:49:16,365 - INFO - Skipping Richard Gentry - no FEC ID (state/local official)
+2026-02-22 07:49:16,866 - INFO - Skipping Rachel Plakon - no FEC ID (state/local official)
+2026-02-22 07:49:17,371 - INFO - Skipping Nick DiCeglie - no FEC ID (state/local official)
+2026-02-22 07:49:17,371 - INFO - Progress: 170/188 - 6 with FEC data, 4 with AIPAC funding
+2026-02-22 07:49:17,872 - INFO - Skipping Corey Simon - no FEC ID (state/local official)
+2026-02-22 07:49:18,377 - INFO - Skipping Michele Rayner - no FEC ID (state/local official)
+2026-02-22 07:49:18,882 - INFO - Skipping Lawrence McClure - no FEC ID (state/local official)
+2026-02-22 07:49:19,384 - INFO - Skipping Ed Hooper - no FEC ID (state/local official)
+2026-02-22 07:49:19,889 - INFO - Skipping Chip LaMarca - no FEC ID (state/local official)
+2026-02-22 07:49:20,395 - INFO - Skipping Tae Edmonds - no FEC ID (state/local official)
+2026-02-22 07:49:20,900 - INFO - Skipping Yvette Benarroch - no FEC ID (state/local official)
+2026-02-22 07:49:21,406 - INFO - Skipping Meg Weinberger - no FEC ID (state/local official)
+2026-02-22 07:49:21,907 - INFO - Skipping Randy Maggard - no FEC ID (state/local official)
+2026-02-22 07:49:22,408 - INFO - Skipping Jeff Holcomb - no FEC ID (state/local official)
+2026-02-22 07:49:22,408 - INFO - Progress: 180/188 - 6 with FEC data, 4 with AIPAC funding
+2026-02-22 07:49:22,910 - INFO - Skipping Karen Gonzalez Pittman - no FEC ID (state/local official)
+2026-02-22 07:49:23,413 - INFO - Skipping Shane Abbott - no FEC ID (state/local official)
+2026-02-22 07:49:23,916 - INFO - Skipping Rob Long - no FEC ID (state/local official)
+2026-02-22 07:49:24,422 - INFO - Skipping James Buchanan - no FEC ID (state/local official)
+2026-02-22 07:49:24,924 - INFO - Skipping Yvonne Hinson - no FEC ID (state/local official)
+2026-02-22 07:49:25,426 - INFO - Skipping RaShon Young - no FEC ID (state/local official)
+2026-02-22 07:49:25,927 - INFO - Skipping Cord Byrd - no FEC ID (state/local official)
+2026-02-22 07:49:26,429 - INFO - Skipping Ron DeSantis - no FEC ID (state/local official)
+2026-02-22 07:49:26,934 - INFO - 
+============================================================
+2026-02-22 07:49:26,935 - INFO - JFK-FEC Scrape Complete!
+2026-02-22 07:49:26,935 - INFO - Total Politicians: 188
+2026-02-22 07:49:26,935 - INFO - With FEC Data: 6
+2026-02-22 07:49:26,935 - INFO - With AIPAC Funding: 4
+2026-02-22 07:49:26,935 - INFO - Total AIPAC Funding: $114,500.00
+2026-02-22 07:49:26,935 - INFO - Errors: 0
+2026-02-22 07:49:26,935 - INFO - Duration: 150.5s
+2026-02-22 07:49:26,935 - INFO - ============================================================
+
+2026-02-22 07:49:26,935 - INFO - Saving results to /Users/jaketad/.openclaw/workspace/snitched-ai/data-ingestion/jfk-fec-results/jfk-fec-full-results.json
+2026-02-22 07:49:26,965 - INFO - Summary saved to /Users/jaketad/.openclaw/workspace/snitched-ai/data-ingestion/jfk-fec-results/jfk-fec-summary.json
+2026-02-22 07:49:26,965 - INFO - JFK-FEC scraper complete!

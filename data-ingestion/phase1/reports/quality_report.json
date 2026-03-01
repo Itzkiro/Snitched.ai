@@ -1,0 +1,59 @@
+{
+  "generated_at": "2026-02-22T10:55:43.250081",
+  "summary": {
+    "total_officials": 188,
+    "target_officials": 192,
+    "coverage_percentage": 97.92
+  },
+  "breakdown": {
+    "federal": 30,
+    "state_legislature": 156,
+    "state_executive": 2
+  },
+  "quality_metrics": {
+    "photo_url_coverage": {
+      "count": 184,
+      "percentage": 97.87,
+      "target": "90%+",
+      "meets_target": true
+    },
+    "party_affiliation_coverage": {
+      "count": 188,
+      "percentage": 100.0,
+      "target": "90%+",
+      "meets_target": true
+    },
+    "social_media_coverage": {
+      "count": 29,
+      "percentage": 15.43,
+      "target": "60%+",
+      "meets_target": false
+    },
+    "duplicate_records": {
+      "count": 0,
+      "percentage": 0.0,
+      "target": "<2%",
+      "meets_target": true
+    }
+  },
+  "data_gaps": {
+    "missing_photos": [
+      "Nathan Boyles",
+      "Brian Hodgers",
+      "Rob Long",
+      "RaShon Young"
+    ],
+    "missing_social_media": [
+      "Ashley Moody",
+      "Jimmy Patronis",
+      "Randy Fine",
+      "Johanna L\u00f3pez",
+      "Ileana Garcia",
+      "Ralph Massullo",
+      "Rita Harris",
+      "Keith Truenow",
+      "Bryan \u00c1vila",
+      "Jenna Persons-Mulicka"
+    ]
+  }
+}
