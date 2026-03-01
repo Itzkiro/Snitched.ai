@@ -1076,252 +1076,98 @@ export default function PoliticianPage() {
           {/* Voting & Policy Tab */}
           {activeTab === 'votes' && (
             <div>
-              {/* Error state */}
               {votesError ? (
                 <div className="terminal-card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
                   <div style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--terminal-red)' }}>!</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-text)' }}>
-                    CONGRESS API DATA AVAILABLE FOR FEDERAL OFFICIALS ONLY
-                  </div>
-                  <div style={{ color: 'var(--terminal-text-dim)', marginTop: '1rem' }}>
-                    Voting records require a Congress.gov bioguide ID.<br />
-                    This politician is {politician.office.toLowerCase()} and may not have federal voting records.
-                  </div>
-                </div>
-              ) : votesError ? (
-                // JFK-VOTING: Error state
-                <div className="terminal-card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
-                  <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>⚠️</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-red)' }}>
-                    ERROR LOADING VOTING RECORDS
-                  </div>
-                  <div style={{ color: 'var(--terminal-text-dim)', marginTop: '1rem', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.875rem' }}>
-                    {votesError}
-                  </div>
-                  <button
-                    onClick={() => fetchVotingRecords()}
-                    style={{
-                      marginTop: '2rem',
-                      padding: '1rem 2rem',
-                      background: 'var(--terminal-amber)',
-                      color: '#000',
-                      border: 'none',
-                      fontFamily: 'JetBrains Mono, monospace',
-                      fontWeight: 700,
-                      fontSize: '0.875rem',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.05em',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    🔄 RETRY
-                  </button>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-red)' }}>ERROR LOADING VOTING RECORDS</div>
+                  <div style={{ color: 'var(--terminal-text-dim)', marginTop: '1rem', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.875rem' }}>{votesError}</div>
+                  <button onClick={() => { setVotesFetched(false); setVotesError(null); }} style={{ marginTop: '2rem', padding: '1rem 2rem', background: 'var(--terminal-amber)', color: '#000', border: 'none', fontFamily: 'JetBrains Mono, monospace', fontWeight: 700, fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em', cursor: 'pointer' }}>RETRY</button>
                 </div>
               ) : votesLoading ? (
-                // JFK-VOTING: Loading state
                 <div className="terminal-card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
-                  <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>⏳</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', fontFamily: 'JetBrains Mono, monospace' }}>
-                    LOADING VOTING RECORDS...
-                  </div>
-                  <div style={{ color: 'var(--terminal-text-dim)', marginTop: '1rem', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.875rem' }}>
-                    Fetching data from Congress.gov API
+                  <div style={{ width: '48px', height: '48px', margin: '0 auto 1.5rem', border: '3px solid var(--terminal-border)', borderTop: '3px solid var(--terminal-amber)', borderRadius: '50%', animation: 'voteSpin 1s linear infinite' }} />
+                  <style>{`@keyframes voteSpin { to { transform: rotate(360deg); } }`}</style>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem', fontFamily: 'JetBrains Mono, monospace' }}>LOADING VOTING RECORDS...</div>
+                  <div style={{ color: 'var(--terminal-text-dim)', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.875rem' }}>{isFederal ? 'Querying Congress.gov / Supabase' : isStateLeg ? 'Querying LegiScan API' : 'Searching records'}</div>
+                </div>
+              ) : !isFederal && !isStateLeg ? (
+                <div className="terminal-card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
+                  <div style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--terminal-text-dim)' }}>--</div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-text)' }}>NO VOTING DATA SOURCE</div>
+                  <div style={{ color: 'var(--terminal-text-dim)', marginTop: '0.5rem', maxWidth: '500px', margin: '0.5rem auto 0', lineHeight: 1.7 }}>
+                    Voting records are available for federal legislators (Congress.gov) and state legislators (LegiScan). This official&apos;s role ({politician.office}) does not have a legislative voting record.
                   </div>
                 </div>
+              ) : votingRecords.length === 0 ? (
+                <div className="terminal-card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
+                  <div style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--terminal-text-dim)' }}>[ ]</div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-text)' }}>NO VOTING RECORDS FOUND</div>
+                  <div style={{ color: 'var(--terminal-text-dim)', marginTop: '0.5rem' }}>{isFederal ? `No vote data returned for Bioguide ID ${politician.source_ids?.bioguide_id}. The data source may be temporarily unavailable.` : `No legislative activity found in LegiScan for ${politician.name}.`}</div>
+                  <button onClick={() => { setVotesFetched(false); }} style={{ marginTop: '2rem', padding: '0.75rem 1.5rem', background: 'transparent', border: '1px solid var(--terminal-border)', color: 'var(--terminal-text)', fontFamily: 'JetBrains Mono, monospace', fontWeight: 700, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', cursor: 'pointer' }}>RETRY</button>
+                </div>
               ) : (
-                // JFK-VOTING: Display votes
                 <div style={{ display: 'grid', gap: '2rem' }}>
-                  {/* JFK-VOTING: Vote Breakdown Statistics */}
                   <div className="terminal-card">
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--terminal-amber)', fontFamily: 'JetBrains Mono, monospace' }}>
-                      📊 VOTE BREAKDOWN (LAST {votingRecords.length} VOTES)
-                    </h3>
-                    <div style={{ 
-                      display: 'grid', 
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', 
-                      gap: '1.5rem',
-                    }}>
-                      {(() => {
-                        const breakdown = calculateBreakdown(votingRecords);
-                        return (
-                          <>
-                            <div>
-                              <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'JetBrains Mono, monospace' }}>
-                                YES
-                              </div>
-                              <div style={{ fontSize: '3rem', fontWeight: 700, color: 'var(--terminal-green)', fontFamily: 'JetBrains Mono, monospace' }}>
-                                {breakdown.yea}
-                              </div>
-                            </div>
-                            <div>
-                              <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'JetBrains Mono, monospace' }}>
-                                NO
-                              </div>
-                              <div style={{ fontSize: '3rem', fontWeight: 700, color: 'var(--terminal-red)', fontFamily: 'JetBrains Mono, monospace' }}>
-                                {breakdown.nay}
-                              </div>
-                            </div>
-                            <div>
-                              <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'JetBrains Mono, monospace' }}>
-                                ABSTAIN
-                              </div>
-                              <div style={{ fontSize: '3rem', fontWeight: 700, color: 'var(--terminal-amber)', fontFamily: 'JetBrains Mono, monospace' }}>
-                                {breakdown.abstain}
-                              </div>
-                            </div>
-                            <div>
-                              <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'JetBrains Mono, monospace' }}>
-                                ABSENT
-                              </div>
-                              <div style={{ fontSize: '3rem', fontWeight: 700, color: 'var(--terminal-text-dim)', fontFamily: 'JetBrains Mono, monospace' }}>
-                                {breakdown.absent}
-                              </div>
-                            </div>
-                          </>
-                        );
-                      })()}
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--terminal-amber)', fontFamily: 'JetBrains Mono, monospace' }}>VOTE BREAKDOWN ({votingRecords.length} RECORDS)</h3>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '1.5rem' }}>
+                      {(() => { const bd = calculateBreakdown(votingRecords); return (<>
+                        <div><div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'JetBrains Mono, monospace' }}>YEA</div><div style={{ fontSize: '3rem', fontWeight: 700, color: 'var(--terminal-green)', fontFamily: 'JetBrains Mono, monospace' }}>{bd.yea}</div></div>
+                        <div><div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'JetBrains Mono, monospace' }}>NAY</div><div style={{ fontSize: '3rem', fontWeight: 700, color: 'var(--terminal-red)', fontFamily: 'JetBrains Mono, monospace' }}>{bd.nay}</div></div>
+                        <div><div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'JetBrains Mono, monospace' }}>ABSTAIN</div><div style={{ fontSize: '3rem', fontWeight: 700, color: 'var(--terminal-amber)', fontFamily: 'JetBrains Mono, monospace' }}>{bd.abstain}</div></div>
+                        <div><div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'JetBrains Mono, monospace' }}>ABSENT</div><div style={{ fontSize: '3rem', fontWeight: 700, color: 'var(--terminal-text-dim)', fontFamily: 'JetBrains Mono, monospace' }}>{bd.absent}</div></div>
+                      </>); })()}
                     </div>
                   </div>
-
-                  {/* JFK-VOTING: Filter Buttons */}
-                  <div style={{ 
-                    display: 'flex', 
-                    gap: '0.5rem', 
-                    flexWrap: 'wrap',
-                    padding: '1rem',
-                    background: 'rgba(255, 255, 255, 0.02)',
-                    border: '1px solid var(--terminal-border)',
-                  }}>
-                    <div style={{ 
-                      fontSize: '0.75rem', 
-                      color: 'var(--terminal-text-dim)', 
-                      textTransform: 'uppercase', 
-                      letterSpacing: '0.1em',
-                      fontFamily: 'JetBrains Mono, monospace',
-                      display: 'flex',
-                      alignItems: 'center',
-                      marginRight: '1rem',
-                    }}>
-                      FILTER:
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', padding: '1rem', background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--terminal-border)' }}>
+                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'JetBrains Mono, monospace', marginRight: '0.5rem' }}>FILTER:</div>
+                      {(['all', 'israel', 'defense', 'foreign', 'anti-america-first', 'domestic'] as VoteCategoryFilter[]).map((f) => (
+                        <button key={f} onClick={() => setVoteCategoryFilter(f)} style={{ padding: '0.4rem 0.75rem', background: voteCategoryFilter === f ? 'var(--terminal-amber)' : 'transparent', border: `1px solid ${voteCategoryFilter === f ? 'var(--terminal-amber)' : 'var(--terminal-border)'}`, color: voteCategoryFilter === f ? '#000' : 'var(--terminal-text)', fontSize: '0.7rem', fontFamily: 'JetBrains Mono, monospace', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', cursor: 'pointer', transition: 'all 0.2s' }}>
+                          {f.toUpperCase().replace(/-/g, ' ')}{f !== 'all' && ` (${filterByCategory(votingRecords, f).length})`}
+                        </button>
+                      ))}
                     </div>
-                    {(['all', 'israel', 'defense', 'foreign', 'anti-america-first', 'domestic'] as VoteCategoryFilter[]).map((filter) => (
-                      <button
-                        key={filter}
-                        onClick={() => setVoteCategoryFilter(filter)}
-                        style={{
-                          padding: '0.5rem 1rem',
-                          background: voteCategoryFilter === filter ? 'var(--terminal-amber)' : 'transparent',
-                          border: `1px solid ${voteCategoryFilter === filter ? 'var(--terminal-amber)' : 'var(--terminal-border)'}`,
-                          color: voteCategoryFilter === filter ? '#000' : 'var(--terminal-text)',
-                          fontSize: '0.75rem',
-                          fontFamily: 'JetBrains Mono, monospace',
-                          fontWeight: 700,
-                          textTransform: 'uppercase',
-                          letterSpacing: '0.05em',
-                          cursor: 'pointer',
-                          transition: 'all 0.2s',
-                        }}
-                      >
-                        {filter === 'israel' && '🇮🇱 '}
-                        {filter === 'defense' && '🛡️ '}
-                        {filter === 'foreign' && '🌍 '}
-                        {filter === 'anti-america-first' && '🌐 '}
-                        {filter === 'domestic' && '🏛️ '}
-                        {filter === 'all' && '📋 '}
-                        {filter.toUpperCase()}
-                        {filter !== 'all' && ` (${filterByCategory(votingRecords, filter).length})`}
-                      </button>
-                    ))}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', fontFamily: 'JetBrains Mono, monospace', textTransform: 'uppercase', letterSpacing: '0.1em', flexShrink: 0 }}>SEARCH:</span>
+                      <input type="text" value={voteSearchQuery} onChange={(e) => setVoteSearchQuery(e.target.value)} placeholder="keyword, bill number..." style={{ flex: 1, padding: '0.5rem 0.75rem', background: 'var(--terminal-bg)', border: '1px solid var(--terminal-border)', color: 'var(--terminal-text)', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.8rem', outline: 'none' }} />
+                      {voteSearchQuery && (<button onClick={() => setVoteSearchQuery('')} style={{ padding: '0.4rem 0.6rem', background: 'transparent', border: '1px solid var(--terminal-border)', color: 'var(--terminal-text-dim)', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', cursor: 'pointer' }}>CLEAR</button>)}
+                    </div>
                   </div>
-
-                  {/* JFK-VOTING: Recent Votes Grid */}
                   <div className="terminal-card">
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--terminal-amber)', fontFamily: 'JetBrains Mono, monospace' }}>
-                      🗳️ RECENT VOTES
-                    </h3>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--terminal-amber)', fontFamily: 'JetBrains Mono, monospace' }}>VOTING RECORDS</h3>
                     {(() => {
-                      const filteredVotes = filterByCategory(votingRecords, voteCategoryFilter);
-                      
-                      if (filteredVotes.length === 0) {
-                        return (
-                          <div style={{ textAlign: 'center', padding: '3rem 2rem', color: 'var(--terminal-text-dim)' }}>
-                            <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🔍</div>
-                            <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.875rem' }}>
-                              No votes found for filter: {voteCategoryFilter.toUpperCase()}
+                      const filtered = getFilteredRecords();
+                      if (filtered.length === 0) return (<div style={{ textAlign: 'center', padding: '3rem 2rem', color: 'var(--terminal-text-dim)' }}><div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>--</div><div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.875rem' }}>No records match the current filters.{voteSearchQuery && ' Try a different keyword.'}</div></div>);
+                      return (<div style={{ display: 'grid', gap: '0.75rem' }}>
+                        {filtered.map((record) => { const posColor = getVoteColor(record.votePosition); const posLabel = normalizePosition(record.votePosition); return (
+                          <div key={record.id} style={{ padding: '1.25rem', background: 'rgba(255, 255, 255, 0.02)', border: `1px solid ${posColor}40`, borderLeft: `4px solid ${posColor}`, fontFamily: 'JetBrains Mono, monospace' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', gap: '1rem' }}>
+                              <div style={{ flex: 1, minWidth: 0 }}>
+                                <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)', marginBottom: '0.35rem', textTransform: 'uppercase', letterSpacing: '0.1em', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                                  <span>{record.billNumber || 'VOTE'}</span>
+                                  {record.category && (<span style={{ color: 'var(--terminal-cyan)', padding: '0 0.4rem', border: '1px solid var(--terminal-cyan)', fontSize: '0.6rem' }}>{record.category}</span>)}
+                                </div>
+                                <div style={{ fontSize: '0.9rem', fontWeight: 700, marginBottom: '0.4rem', color: 'var(--terminal-text)', lineHeight: 1.4 }}>
+                                  {record.billUrl ? (<a href={record.billUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--terminal-text)', textDecoration: 'none', borderBottom: '1px dashed var(--terminal-text-dim)' }}>{record.billTitle}</a>) : record.billTitle}
+                                </div>
+                                {record.billDescription && (<div style={{ fontSize: '0.8rem', color: 'var(--terminal-text-dim)', marginBottom: '0.5rem', lineHeight: 1.5 }}>{record.billDescription.length > 250 ? record.billDescription.substring(0, 250) + '...' : record.billDescription}</div>)}
+                                <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dimmer)' }}>
+                                  {record.voteDate && <span>{new Date(record.voteDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>}
+                                  {record.chamber && <span> | {record.chamber}</span>}
+                                  {record.result && <span> | {record.result}</span>}
+                                  <span> | src: {record.source}</span>
+                                </div>
+                              </div>
+                              <div style={{ padding: '0.6rem 1.25rem', background: posColor, color: '#000', fontWeight: 700, fontSize: '0.85rem', textAlign: 'center', minWidth: '90px', letterSpacing: '0.05em', flexShrink: 0, alignSelf: 'center' }}>{posLabel}</div>
                             </div>
                           </div>
-                        );
-                      }
-
-                      return (
-                        <div style={{ display: 'grid', gap: '1rem' }}>
-                          {filteredVotes.map((vote, idx) => (
-                            <div
-                              key={idx}
-                              style={{
-                                padding: '1.5rem',
-                                background: 'rgba(255, 255, 255, 0.02)',
-                                border: `1px solid ${getVoteColor(vote.votePosition)}`,
-                                borderLeft: `4px solid ${getVoteColor(vote.votePosition)}`,
-                                fontFamily: 'JetBrains Mono, monospace',
-                              }}
-                            >
-                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', gap: '1rem', marginBottom: '1rem' }}>
-                                <div style={{ flex: 1 }}>
-                                  <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                                    {vote.billNumber || 'PROCEDURAL VOTE'}
-                                  </div>
-                                  <div style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-text)' }}>
-                                    {vote.billTitle}
-                                  </div>
-                                  {/* Show bill description (what the bill is about) */}
-                                  {vote.billDescription && (
-                                    <div style={{ fontSize: '0.875rem', color: '#fff', marginBottom: '0.75rem', lineHeight: 1.6 }}>
-                                      {vote.billDescription}
-                                    </div>
-                                  )}
-                                  <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)' }}>
-                                    {new Date(vote.voteDate).toLocaleDateString('en-US', { 
-                                      month: 'short', 
-                                      day: 'numeric',
-                                      year: 'numeric'
-                                    })} • Result: {vote.result}
-                                  </div>
-                                </div>
-                                <div style={{ 
-                                  padding: '0.75rem 1.5rem',
-                                  background: getVoteColor(vote.votePosition),
-                                  color: '#000',
-                                  fontWeight: 700,
-                                  fontSize: '1rem',
-                                  textAlign: 'center',
-                                  minWidth: '100px',
-                                  letterSpacing: '0.05em',
-                                }}>
-                                  {normalizePosition(vote.votePosition)}
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      );
+                        ); })}
+                      </div>);
                     })()}
                   </div>
-
-                  {/* JFK-VOTING: Data Source Info */}
-                  <div style={{ 
-                    padding: '1rem',
-                    background: 'rgba(16, 185, 129, 0.1)',
-                    border: '1px solid #10b981',
-                    fontFamily: 'JetBrains Mono, monospace',
-                    fontSize: '0.75rem',
-                  }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <span style={{ color: '#10b981', fontWeight: 700 }}>✓ LIVE DATA</span>
-                      <span style={{ color: 'var(--terminal-text-dim)' }}>
-                        • Powered by Congress.gov API • Bioguide ID: {politician.source_ids?.bioguide_id}
-                      </span>
-                    </div>
+                  <div style={{ padding: '0.75rem 1rem', background: 'rgba(16, 185, 129, 0.08)', border: '1px solid rgba(16, 185, 129, 0.3)', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                    <span style={{ color: '#10b981', fontWeight: 700 }}>DATA SOURCE</span>
+                    <span style={{ color: 'var(--terminal-text-dim)' }}>{isFederal ? `Congress.gov / Supabase | Bioguide: ${politician.source_ids?.bioguide_id}` : `LegiScan | State: ${politician.jurisdiction || 'FL'}`}{` | ${votingRecords.length} records loaded`}</span>
                   </div>
                 </div>
               )}
@@ -1329,7 +1175,7 @@ export default function PoliticianPage() {
           )}
 
           {/* Other tabs show Phase 2 placeholder */}
-          {activeTab !== 'overview' && activeTab !== 'funding' && activeTab !== 'votes' && (
+          {activeTab !== 'overview' && activeTab !== 'funding' && activeTab !== 'votes' && activeTab !== 'score' && (
             <div className="terminal-card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
               <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🔒</div>
               <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem' }}>

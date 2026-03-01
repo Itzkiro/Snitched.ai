@@ -24,77 +24,86 @@ Terminal-style fuzzy search bar in TerminalHeader. Searches name, office, party,
 
 ---
 
-## IN PROGRESS (Phase 2)
+## DONE (Phase 2)
 
-### [TICK-001] LegiScan API — FL State Voting Records
-**Assignee:** `agent:data` | **Priority:** P1 | **Status:** In Progress
-- Integrate LegiScan API for Florida state legislature voting records
-- Fetch bills, votes, and roll calls for FL state politicians
-- Store results and wire into politician detail pages
-- API Key: `LEGISCAN_API_KEY` in `.env`
-- Docs: https://api.legiscan.com/dl/
+### [DONE-005] LegiScan API — FL State Voting Records
+**Assignee:** `agent:data` | **Priority:** P1
+`/api/legiscan` proxy route + `data-ingestion/fetch-legiscan-data.ts` ingestion script.
 
-### [TICK-002] Congress.gov API Route
-**Assignee:** `agent:backend` | **Priority:** P1 | **Status:** In Progress
-- Build `/api/congress/*` proxy routes for Congress.gov API
-- Endpoints needed: member lookup, bill search, vote records
-- Use `CONGRESS_API_KEY` from `.env`
-- Replace any client-side Congress.gov calls with server proxy
-- Docs: https://api.congress.gov/
+### [DONE-006] Congress.gov API Routes
+**Assignee:** `agent:backend` | **Priority:** P1
+`/api/congress/members` and `/api/congress/bills` proxy routes with member lookup, bill search.
 
-### [TICK-003] FEC API Route (Enhanced)
-**Assignee:** `agent:backend` | **Priority:** P1 | **Status:** In Progress
-- Build `/api/fec/*` proxy routes for FEC API
-- Endpoints: candidate lookup, committee contributions, filing search
-- Use `FEC_API_KEY` from `.env`
-- Enhance existing FEC data with live API calls
-- Docs: https://api.open.fec.gov/developers/
+### [DONE-007] FEC API Routes (Enhanced)
+**Assignee:** `agent:backend` | **Priority:** P1
+`/api/fec/candidates`, `/api/fec/contributions`, `/api/fec/filings` proxy routes with pagination handling.
 
-### [TICK-004] LDA Lobbying Data Integration
-**Assignee:** `agent:data` | **Priority:** P2 | **Status:** In Progress
-- Integrate LDA (Lobbying Disclosure Act) data
-- Fetch lobbying registrations and activity reports
-- Link lobbying data to politicians
-- Use `LDA_API_KEY` from `.env`
+### [DONE-008] LDA Lobbying Data Integration
+**Assignee:** `agent:data` | **Priority:** P2
+`/api/lobbying` proxy route for LDA lobbying disclosure data.
 
-### [TICK-005] Corruption Score v1 Algorithm
-**Assignee:** `agent:data` + `agent:backend` | **Priority:** P1 | **Status:** In Progress
-- Design scoring algorithm using real data inputs:
-  - FEC contribution amounts and sources (especially PAC/AIPAC)
-  - Voting alignment with donor interests
-  - Lobbying connections (LDA data)
-  - Public financial disclosures
-- Normalize scores 0-100
-- Wire into politician cards and detail pages
+### [DONE-009] Corruption Score v1 Algorithm
+**Assignee:** `agent:data` + `agent:backend` | **Priority:** P1
+5-factor weighted algorithm (0-100): PAC ratio (30%), Lobbying (20%), Voting alignment (25%), Transparency (10%), Red flags (15%). Letter grades A-F. Confidence levels. Full breakdown on Juicebox + politician detail.
 
-### [TICK-006] Cron Jobs for Data Sync
-**Assignee:** `agent:devops` | **Priority:** P2 | **Status:** Queued
-- Set up Vercel cron or external scheduler
-- Periodic FEC data refresh
-- Congress.gov vote sync
-- LegiScan bill tracking updates
+### [DONE-010] Cron Jobs for Data Sync
+**Assignee:** `agent:devops` | **Priority:** P2
+`/api/cron/sync-congress`, `/api/cron/sync-fec`, `/api/cron/sync-legiscan` + `vercel.json` schedules + `lib/cron-auth.ts`.
+
+---
+
+## NEXT UP (Phase 3 — Data Enrichment)
+
+### [TICK-011] Link Lobbying Data to Politicians
+**Assignee:** `agent:data` | **Priority:** P1 | **Status:** Queued
+- Match LDA lobbying records to politicians by name/state
+- Light up the Lobbying Connections factor (20% of corruption score)
+- Currently placeholder — real data will significantly improve score accuracy
+
+### [TICK-012] Voting Alignment Analysis
+**Assignee:** `agent:data` | **Priority:** P1 | **Status:** Queued
+- Categorize bills by industry/interest area
+- Map donor interests to bill categories
+- Determine if votes align with donor interests
+- Light up the Voting Alignment factor (25% of corruption score)
+
+### [TICK-013] FEC Complaint Data
+**Assignee:** `agent:data` | **Priority:** P2 | **Status:** Queued
+- Pull actual FEC complaints/enforcement actions
+- Integrate into Campaign Finance Red Flags factor
+- Improve red flags signal beyond pattern detection
+
+### [TICK-014] Score Backtesting & Calibration
+**Assignee:** `agent:data` | **Priority:** P2 | **Status:** Queued
+- Run algorithm against known corruption cases
+- Calibrate weights and thresholds
+- Validate scoring accuracy
 
 ---
 
 ## BACKLOG
 
-### [TICK-007] Supabase Database Seeding
+### [TICK-015] Score History Tracking
+**Assignee:** `agent:backend` | **Priority:** P2
+Store score snapshots over time, show trend on politician detail pages.
+
+### [TICK-016] Supabase Database Seeding
 **Assignee:** `agent:data` | **Priority:** P2
 Seed Supabase with all 188 FL politicians from florida_politicians.json + FEC data.
 
-### [TICK-008] Politician Detail Page — Voting Tab Enhancement
+### [TICK-017] Politician Detail Page — Voting Tab Enhancement
 **Assignee:** `agent:frontend` | **Priority:** P2
 Show real voting records from Congress.gov and LegiScan on politician detail pages.
 
-### [TICK-009] Mobile Optimization
+### [TICK-018] Mobile Optimization
 **Assignee:** `agent:ui` | **Priority:** P3
 Responsive layout improvements per MOBILE-OPTIMIZATION-PLAN.md.
 
-### [TICK-010] Real-time Social Media Monitoring
+### [TICK-019] Real-time Social Media Monitoring
 **Assignee:** `agent:data` | **Priority:** P3
 Wire up social media scrapers for live politician activity tracking.
 
-### [TICK-011] Court Case Data Integration
+### [TICK-020] Court Case Data Integration
 **Assignee:** `agent:data` | **Priority:** P3
 Legal records integration — scaffolding exists, needs data source.
 
