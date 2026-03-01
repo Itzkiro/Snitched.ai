@@ -108,6 +108,7 @@ export interface Politician {
   courtCases?: CourtCase[];
   votes?: Vote[];
   socialPosts?: SocialPost[];
+  lobbyingRecords?: LobbyingRecord[];
 }
 
 export interface Contribution {
@@ -159,4 +160,331 @@ export interface Jurisdiction {
   type: JurisdictionType;
   parentId?: string;
   politicianCount: number;
+}
+
+// ---------------------------------------------------------------------------
+// LegiScan API Types — FL State Voting Records
+// ---------------------------------------------------------------------------
+
+export interface LegiScanSession {
+  session_id: number;
+  state_id: number;
+  state_abbr: string;
+  year_start: number;
+  year_end: number;
+  special: number;
+  session_tag: string;
+  session_title: string;
+  session_name: string;
+}
+
+export interface LegiScanBillSummary {
+  bill_id: number;
+  number: string;
+  change_hash: string;
+  url: string;
+  status_date: string;
+  status: number;
+  last_action_date: string;
+  last_action: string;
+  title: string;
+  description: string;
+}
+
+export interface LegiScanRollCallMeta {
+  roll_call_id: number;
+  date: string;
+  desc: string;
+  yea: number;
+  nay: number;
+  nv: number;
+  absent: number;
+  total: number;
+  passed: number;
+  chamber: string;
+  chamber_id: number;
+  url: string;
+  state_link: string;
+}
+
+export interface LegiScanSponsor {
+  people_id: number;
+  party: string;
+  role: string;
+  name: string;
+  first_name: string;
+  last_name: string;
+  district: string;
+  votesmart_id: number;
+  sponsor_type_id: number;
+  sponsor_order: number;
+}
+
+export interface LegiScanBillDetail {
+  bill_id: number;
+  bill_number: string;
+  bill_type: string;
+  title: string;
+  description: string;
+  state: string;
+  session_id: number;
+  status: number;
+  status_desc: string;
+  url: string;
+  state_link: string;
+  sponsors: LegiScanSponsor[];
+  votes: LegiScanRollCallMeta[];
+}
+
+export interface LegiScanIndividualVote {
+  people_id: number;
+  vote_id: number;        // 1=Yea, 2=Nay, 3=NV, 4=Absent
+  vote_text: string;      // "Yea", "Nay", "NV", "Absent"
+}
+
+export interface LegiScanRollCallDetail {
+  roll_call_id: number;
+  bill_id: number;
+  date: string;
+  desc: string;
+  yea: number;
+  nay: number;
+  nv: number;
+  absent: number;
+  total: number;
+  passed: number;
+  chamber: string;
+  chamber_id: number;
+  votes: LegiScanIndividualVote[];
+}
+
+/** Processed state vote record, ready for display in the politician detail page */
+export interface StateVoteRecord {
+  id: string;
+  politicianId: string;
+  billNumber: string;
+  billTitle: string;
+  billDescription: string;
+  billUrl: string;
+  voteDate: string;
+  votePosition: 'Yea' | 'Nay' | 'NV' | 'Absent';
+  rollCallDesc: string;
+  chamber: 'H' | 'S';
+  passed: boolean;
+  yea: number;
+  nay: number;
+  nv: number;
+  absent: number;
+  sessionTitle: string;
+  source: 'legiscan';
+}
+
+/** People ID mapping for matching LegiScan people_id to our politician IDs */
+export interface LegiScanPeopleMapping {
+  people_id: number;
+  politician_id: string;
+  name: string;
+  district: string;
+  party: string;
+  role: string;
+  votesmart_id?: number;
+}
+
+// ---------------------------------------------------------------------------
+// LDA Lobbying Disclosure Act Types — Federal Lobbying Data
+// ---------------------------------------------------------------------------
+
+/** A lobbyist individual as returned by the LDA API */
+export interface LDALobbyist {
+  id: number;
+  prefix: string | null;
+  first_name: string;
+  nickname: string | null;
+  middle_name: string | null;
+  last_name: string;
+  suffix: string | null;
+  covered_position: string | null;
+  new: boolean;
+}
+
+/** A lobbying activity entry (issue area + description + lobbyists) */
+export interface LDALobbyingActivity {
+  general_issue_code: string;
+  general_issue_code_display: string;
+  description: string;
+  foreign_entity_issues: string | null;
+  lobbyists: Array<{
+    lobbyist: Omit<LDALobbyist, 'covered_position' | 'new'>;
+    covered_position: string | null;
+    new: boolean;
+  }>;
+  government_entities: Array<{
+    id: number;
+    name: string;
+  }>;
+}
+
+/** An LDA registrant (the lobbying firm or self-employed lobbyist) */
+export interface LDARegistrant {
+  id: number;
+  url: string;
+  house_registrant_id: number | null;
+  name: string;
+  description: string | null;
+  address_1: string;
+  address_2: string | null;
+  city: string;
+  state: string;
+  state_display: string;
+  zip: string;
+  country: string;
+  country_display: string;
+  ppb_country: string;
+  ppb_country_display: string;
+  contact_name: string;
+  contact_telephone: string;
+  dt_updated: string;
+}
+
+/** An LDA client (who hired the lobbying firm) */
+export interface LDAClient {
+  id: number;
+  url: string;
+  client_id: number;
+  name: string;
+  general_description: string | null;
+  client_government_entity: boolean | null;
+  client_self_select: boolean | null;
+  state: string;
+  state_display: string;
+  country: string;
+  country_display: string;
+  ppb_state: string;
+  ppb_state_display: string;
+  ppb_country: string;
+  ppb_country_display: string;
+  effective_date: string;
+}
+
+/** A full LDA filing (LD-1 registration or LD-2 quarterly activity report) */
+export interface LDAFiling {
+  url: string;
+  filing_uuid: string;
+  filing_type: string;
+  filing_type_display: string;
+  filing_year: number;
+  filing_period: string;
+  filing_period_display: string;
+  filing_document_url: string;
+  filing_document_content_type: string;
+  income: string | null;
+  expenses: string | null;
+  expenses_method: string | null;
+  expenses_method_display: string | null;
+  posted_by_name: string;
+  dt_posted: string;
+  termination_date: string | null;
+  registrant_country: string;
+  registrant_ppb_country: string | null;
+  registrant: LDARegistrant;
+  client: LDAClient;
+  lobbying_activities: LDALobbyingActivity[];
+  conviction_disclosures: unknown[];
+  foreign_entities: unknown[];
+  affiliated_organizations: unknown[];
+}
+
+/** LD-203 contribution item (lobbyist contributions to federal candidates/PACs) */
+export interface LDAContributionItem {
+  contribution_type: string;
+  contribution_type_display: string;
+  contributor_name: string;
+  payee_name: string;
+  honoree_name: string;
+  amount: string;
+  date: string;
+}
+
+/** An LDA contribution report (LD-203) */
+export interface LDAContributionReport {
+  url: string;
+  filing_uuid: string;
+  filing_type: string;
+  filing_type_display: string;
+  filing_year: number;
+  filing_period: string;
+  filing_period_display: string;
+  filing_document_url: string;
+  filer_type: string;
+  filer_type_display: string;
+  dt_posted: string;
+  registrant: LDARegistrant;
+  lobbyist: Omit<LDALobbyist, 'covered_position' | 'new'>;
+  no_contributions: boolean;
+  pacs: unknown[];
+  contribution_items: LDAContributionItem[];
+}
+
+/** Paginated response envelope from the LDA API */
+export interface LDAPaginatedResponse<T> {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: T[];
+}
+
+/** Processed lobbying record for display in the app, linked to a politician */
+export interface LobbyingRecord {
+  id: string;
+  filingUuid: string;
+  filingType: string;
+  filingTypeDisplay: string;
+  filingYear: number;
+  filingPeriod: string;
+  registrantName: string;
+  registrantId: number;
+  clientName: string;
+  clientDescription: string | null;
+  clientState: string;
+  income: number | null;
+  expenses: number | null;
+  lobbyists: Array<{
+    name: string;
+    coveredPosition: string | null;
+  }>;
+  issueAreas: Array<{
+    code: string;
+    display: string;
+    description: string;
+  }>;
+  governmentEntities: string[];
+  postedDate: string;
+  documentUrl: string;
+  hasForeignEntities: boolean;
+  /** Politician ID from our system if we matched this filing to a politician */
+  matchedPoliticianId?: string;
+  matchReason?: string;
+}
+
+/** Summary of lobbying activity for a single politician */
+export interface PoliticianLobbyingSummary {
+  politicianId: string;
+  politicianName: string;
+  totalFilings: number;
+  totalIncome: number;
+  totalExpenses: number;
+  uniqueClients: number;
+  uniqueRegistrants: number;
+  topClients: Array<{
+    name: string;
+    totalIncome: number;
+    filingCount: number;
+  }>;
+  topIssueAreas: Array<{
+    code: string;
+    display: string;
+    count: number;
+  }>;
+  filings: LobbyingRecord[];
+  lastUpdated: string;
 }
