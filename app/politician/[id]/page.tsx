@@ -1,46 +1,36 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import type { Politician } from '@/lib/types';
 
-// JFK-VOTING: Congress API configuration
-const JFK_CONGRESS_API_KEY = process.env.NEXT_PUBLIC_CONGRESS_API_KEY || '';
-const JFK_CONGRESS_API_BASE = 'https://api.congress.gov/v3';
-
-// JFK-VOTING: Types for vote data
-interface JFKVoteRecord {
-  date: string;
-  question: string;
-  description?: string;
-  result: string;
-  voteNumber?: string;
-  member?: {
-    votePosition: string;
-  };
-  bill?: {
-    number: string;
-    title: string;
-    description?: string;
-    type: string;
-  };
-  amendment?: {
-    number: string;
-  };
-  nomination?: {
-    number: string;
-  };
+// ---------------------------------------------------------------------------
+// Voting Record Types — unified shape for both federal and state votes
+// ---------------------------------------------------------------------------
+interface VotingRecord {
+  id: string;
+  billNumber: string;
+  billTitle: string;
+  billDescription?: string;
+  voteDate: string;
+  votePosition: 'Yea' | 'Nay' | 'NV' | 'Absent' | 'Yes' | 'No' | 'Not Voting' | string;
+  category?: string;
+  result?: string;
+  chamber?: string;
+  passed?: boolean;
+  source: 'congress' | 'legiscan' | 'supabase';
+  billUrl?: string;
 }
 
-interface JFKVoteBreakdown {
-  yes: number;
-  no: number;
+interface VoteBreakdown {
+  yea: number;
+  nay: number;
   abstain: number;
   absent: number;
 }
 
-type JFKBillFilter = 'all' | 'israel' | 'defense' | 'domestic' | 'foreign' | 'anti-america-first';
+type VoteCategoryFilter = 'all' | 'israel' | 'defense' | 'domestic' | 'foreign' | 'anti-america-first';
 
 export default function PoliticianPage() {
   const params = useParams();
@@ -48,11 +38,13 @@ export default function PoliticianPage() {
   const [politician, setPolitician] = useState<Politician | null>(null);
   const [politicianLoading, setPoliticianLoading] = useState(true);
 
-  // JFK-VOTING: State for votes data
-  const [jfkVotes, setJfkVotes] = useState<JFKVoteRecord[]>([]);
-  const [jfkVotesLoading, setJfkVotesLoading] = useState(false);
-  const [jfkVotesError, setJfkVotesError] = useState<string | null>(null);
-  const [jfkBillFilter, setJfkBillFilter] = useState<JFKBillFilter>('all');
+  // Voting tab state
+  const [votingRecords, setVotingRecords] = useState<VotingRecord[]>([]);
+  const [votesLoading, setVotesLoading] = useState(false);
+  const [votesError, setVotesError] = useState<string | null>(null);
+  const [voteCategoryFilter, setVoteCategoryFilter] = useState<VoteCategoryFilter>('all');
+  const [voteSearchQuery, setVoteSearchQuery] = useState<string>('');
+  const [votesFetched, setVotesFetched] = useState(false);
 
   // Load politician data from API route
   useEffect(() => {
@@ -73,239 +65,212 @@ export default function PoliticianPage() {
     loadPolitician();
   }, [params.id]);
 
-  // JFK-VOTING: Fetch votes when votes tab is active
-  useEffect(() => {
-    const bioguideId = politician?.source_ids?.bioguide_id;
-    if (activeTab === 'votes' && bioguideId && jfkVotes.length === 0 && !jfkVotesLoading) {
-      jfkFetchVotingRecords(bioguideId);
-    }
-  }, [activeTab, politician]);
+  // ---------------------------------------------------------------------------
+  // Determine whether this is a federal or state politician
+  // ---------------------------------------------------------------------------
+  const isFederal = !!(politician?.source_ids?.bioguide_id);
+  const isStateLeg = !isFederal && !!(
+    politician?.officeLevel === 'State Senator' ||
+    politician?.officeLevel === 'State Representative' ||
+    politician?.officeLevel === 'Governor'
+  );
 
-  // JFK-VOTING: Fetch voting records from Congress API
-  const jfkFetchVotingRecords = async (bioguideId: string) => {
-    setJfkVotesLoading(true);
-    setJfkVotesError(null);
+  // ---------------------------------------------------------------------------
+  // Fetch voting records when the Votes tab becomes active
+  // ---------------------------------------------------------------------------
+  const fetchVotingRecords = useCallback(async () => {
+    if (!politician || votesFetched || votesLoading) return;
+
+    setVotesLoading(true);
+    setVotesError(null);
 
     try {
-      const response = await fetch(
-        `${JFK_CONGRESS_API_BASE}/house-vote/119/1?limit=50&sort=updateDate+desc&api_key=${JFK_CONGRESS_API_KEY}`
-      );
+      let records: VotingRecord[] = [];
 
-      if (!response.ok) {
-        throw new Error(`Congress API error: ${response.status}`);
-      }
+      if (isFederal) {
+        // --- Federal path: try Supabase first, then Congress.gov sponsored bills ---
+        const bioguideId = politician.source_ids!.bioguide_id!;
 
-      const data = await response.json();
-      const houseVotes = data.houseRollCallVotes ?? data.houseVotes ?? data.votes ?? [];
-
-      if (!Array.isArray(houseVotes) || houseVotes.length === 0) {
-        setJfkVotes([]);
-        return;
-      }
-
-      const memberVotePromises = houseVotes.map(async (vote: any): Promise<JFKVoteRecord | null> => {
-        const voteNumber = vote.rollCallNumber || vote.rollNumber || vote.voteNumber;
-        if (!voteNumber) return null;
-
-        try {
-          // JFK-VOTING: Fetch vote details, member votes, AND bill summary
-          const [voteDetailResponse, membersResponse] = await Promise.all([
-            fetch(`${JFK_CONGRESS_API_BASE}/house-vote/119/1/${voteNumber}?api_key=${JFK_CONGRESS_API_KEY}`),
-            fetch(`${JFK_CONGRESS_API_BASE}/house-vote/119/1/${voteNumber}/members?api_key=${JFK_CONGRESS_API_KEY}`)
-          ]);
-
-          // Get vote details (contains voteQuestion)
-          let voteQuestion = '';
-          let voteDetail: any = {};
-          if (voteDetailResponse.ok) {
-            voteDetail = await voteDetailResponse.json();
-            const voteData = voteDetail.houseRollCallVote || voteDetail;
-            voteQuestion = voteData.voteQuestion || '';
+        // 1. Try the Supabase-backed votes endpoint
+        const supaRes = await fetch(`/api/politicians/votes?bioguideId=${encodeURIComponent(bioguideId)}`);
+        if (supaRes.ok) {
+          const supaData = await supaRes.json();
+          if (Array.isArray(supaData) && supaData.length > 0) {
+            records = supaData.map((row: Record<string, unknown>, idx: number) => {
+              const votes = row.votes as Record<string, unknown> | undefined;
+              const bills = votes?.bills as Record<string, unknown> | undefined;
+              const pv = (row.politician_votes ?? [row]) as Array<Record<string, unknown>>;
+              const position = (pv[0]?.position as string) || 'NV';
+              return {
+                id: `supa-${idx}`,
+                billNumber: (bills?.bill_number as string) || (votes?.vote_number as string) || '',
+                billTitle: (bills?.title as string) || (votes?.description as string) || '',
+                billDescription: (bills?.summary as string) || '',
+                voteDate: (votes?.vote_date as string) || '',
+                votePosition: position,
+                category: (bills?.ai_primary_category as string) || '',
+                result: (votes?.result as string) || '',
+                chamber: (votes?.chamber as string) || '',
+                source: 'supabase' as const,
+              };
+            });
           }
+        }
 
-          // JFK-VOTING: Fetch bill summary if bill number exists
-          let billSummary = '';
-          let billTitle = '';
-          if (vote.legislationType && vote.legislationNumber) {
-            try {
-              const billResponse = await fetch(
-                `${JFK_CONGRESS_API_BASE}/bill/119/${vote.legislationType.toLowerCase()}/${vote.legislationNumber}/summaries?api_key=${JFK_CONGRESS_API_KEY}`
-              );
-              if (billResponse.ok) {
-                const billData = await billResponse.json();
-                const summaries = billData.summaries || [];
-                if (summaries.length > 0) {
-                  // Strip HTML tags from summary text
-                  const rawText = summaries[0].text || '';
-                  billSummary = rawText.replace(/<[^>]*>/g, '').substring(0, 300) + (rawText.length > 300 ? '...' : '');
-                }
-              }
-              // Also fetch bill title
-              const billDetailResponse = await fetch(
-                `${JFK_CONGRESS_API_BASE}/bill/119/${vote.legislationType.toLowerCase()}/${vote.legislationNumber}?api_key=${JFK_CONGRESS_API_KEY}`
-              );
-              if (billDetailResponse.ok) {
-                const billDetail = await billDetailResponse.json();
-                billTitle = billDetail.bill?.title || '';
-              }
-            } catch (e) {
-              // Bill fetch failed, continue without summary
-              console.log('Bill fetch failed:', e);
-            }
+        // 2. If Supabase had nothing, fall back to Congress.gov sponsored legislation
+        if (records.length === 0) {
+          const congressRes = await fetch(
+            `/api/congress/bills?sponsor=${encodeURIComponent(bioguideId)}&limit=50`
+          );
+          if (congressRes.ok) {
+            const congressData = await congressRes.json();
+            const bills = congressData.bills || [];
+            records = bills.map((bill: Record<string, unknown>, idx: number) => ({
+              id: `cong-${idx}`,
+              billNumber: `${bill.type || ''} ${bill.number || ''}`.trim(),
+              billTitle: (bill.title as string) || '',
+              billDescription: '',
+              voteDate: ((bill.latestAction as Record<string, unknown>)?.date as string) || (bill.updateDate as string) || '',
+              votePosition: 'Sponsor',
+              category: (bill.policyArea as string) || '',
+              result: ((bill.latestAction as Record<string, unknown>)?.text as string) || '',
+              chamber: (bill.originChamber as string) || '',
+              source: 'congress' as const,
+            }));
           }
+        }
+      } else if (isStateLeg) {
+        // --- State path: LegiScan sponsored list or search ---
+        // Try search by politician name
+        const nameQuery = politician.name.split(' ').slice(-1)[0]; // last name
+        const state = politician.jurisdiction?.length === 2
+          ? politician.jurisdiction
+          : 'FL'; // default to FL
 
-          // Get member position
-          if (!membersResponse.ok) return null;
+        const searchRes = await fetch(
+          `/api/legiscan?op=getSearch&state=${encodeURIComponent(state)}&query=${encodeURIComponent(nameQuery)}`
+        );
+        if (searchRes.ok) {
+          const searchData = await searchRes.json();
+          const results = searchData?.searchresult || {};
+          // LegiScan returns results as numbered keys + a summary key
+          const billEntries = Object.entries(results).filter(
+            ([key]) => key !== 'summary' && !isNaN(Number(key))
+          );
 
-          const membersData = await membersResponse.json();
-          const voteData = membersData.houseRollCallVoteMemberVotes || membersData;
-          const members = voteData.results ?? voteData.members ?? [];
-          if (!Array.isArray(members)) return null;
-
-          const matchedMember = members.find((member: any) => {
-            const memberBioguide = member.bioguideID || member.bioguideId || member.member?.bioguideId;
-            return memberBioguide === bioguideId;
+          records = billEntries.slice(0, 50).map(([, val], idx) => {
+            const bill = val as Record<string, unknown>;
+            return {
+              id: `ls-${idx}`,
+              billNumber: (bill.bill_number as string) || '',
+              billTitle: (bill.title as string) || '',
+              billDescription: (bill.description as string) || '',
+              voteDate: (bill.last_action_date as string) || (bill.status_date as string) || '',
+              votePosition: 'N/A',
+              category: '',
+              result: (bill.last_action as string) || '',
+              source: 'legiscan' as const,
+              billUrl: (bill.url as string) || '',
+            };
           });
-
-          if (!matchedMember) return null;
-
-          const votePosition =
-            matchedMember.voteCast || matchedMember.partyVote || matchedMember.votePosition || matchedMember.position;
-
-          return {
-            date: vote.updateDate || vote.startDate || vote.actionDate || vote.date || new Date().toISOString(),
-            question: voteQuestion || `${vote.legislationType || 'HR'} ${vote.legislationNumber || voteNumber}`,
-            result: vote.result || vote.voteResult || 'Unknown',
-            voteNumber: String(voteNumber),
-            member: {
-              votePosition: votePosition || 'Not Voting',
-            },
-            bill: vote.legislationUrl
-              ? {
-                  number: `${vote.legislationType} ${vote.legislationNumber}`,
-                  title: billTitle || voteQuestion || `${vote.legislationType} ${vote.legislationNumber}`,
-                  description: billSummary || voteQuestion || undefined,
-                  type: vote.legislationType || '',
-                }
-              : undefined,
-          };
-        } catch {
-          // keep partial results if one vote-member request fails
-          return null;
         }
-      });
-
-      const votesWithMember = (await Promise.all(memberVotePromises))
-        .filter((vote): vote is JFKVoteRecord => Boolean(vote))
-        .slice(0, 20);
-
-      setJfkVotes(votesWithMember);
-    } catch (error) {
-      console.error('JFK-VOTING: Error fetching votes:', error);
-      setJfkVotesError(error instanceof Error ? error.message : 'Failed to load voting records');
-    } finally {
-      setJfkVotesLoading(false);
-    }
-  };
-
-  // JFK-VOTING: Calculate vote breakdown statistics
-  const jfkCalculateVoteBreakdown = (votes: JFKVoteRecord[]): JFKVoteBreakdown => {
-    return votes.reduce(
-      (acc, vote) => {
-        // JFK-VOTING: Handle missing member data
-        if (!vote.member?.votePosition) {
-          acc.absent++;
-          return acc;
-        }
-        
-        const position = vote.member.votePosition.toLowerCase();
-        if (position === 'yes' || position === 'yea' || position === 'aye') {
-          acc.yes++;
-        } else if (position === 'no' || position === 'nay') {
-          acc.no++;
-        } else if (position === 'present' || position === 'not voting') {
-          acc.abstain++;
-        } else {
-          acc.absent++;
-        }
-        return acc;
-      },
-      { yes: 0, no: 0, abstain: 0, absent: 0 }
-    );
-  };
-
-  // JFK-VOTING: Filter votes by bill type
-  const jfkFilterVotes = (votes: JFKVoteRecord[], filter: JFKBillFilter): JFKVoteRecord[] => {
-    if (filter === 'all') return votes;
-
-    return votes.filter(vote => {
-      const title = (vote.bill?.title || vote.question || '').toLowerCase();
-      const description = (vote.bill?.description || '').toLowerCase();
-      const fullText = title + ' ' + description;
-      
-      if (filter === 'israel') {
-        return title.includes('israel') || title.includes('gaza') || title.includes('palestine') || title.includes('middle east');
-      } else if (filter === 'defense') {
-        return title.includes('defense') || title.includes('military') || title.includes('armed forces') || title.includes('national security') || title.includes('weapon') || title.includes('armed services');
-      } else if (filter === 'domestic') {
-        return !title.includes('foreign') && !title.includes('international') && !title.includes('immigration');
-      } else if (filter === 'foreign') {
-        // Foreign Affairs - broad foreign policy votes
-        return fullText.includes('foreign') || 
-               fullText.includes('international') ||
-               fullText.includes('state department') ||
-               fullText.includes('embassy') ||
-               fullText.includes('diplomatic') ||
-               fullText.includes('treaty') ||
-               fullText.includes('alliance') ||
-               fullText.includes('united nations') ||
-               fullText.includes('nato') ||
-               fullText.includes('trade agreement') ||
-               fullText.includes('sanctions') ||
-               fullText.includes('humanitarian aid') ||
-               title.includes('ukraine') ||
-               title.includes('russia') ||
-               title.includes('china');
-      } else if (filter === 'anti-america-first') {
-        // Anti-America First - globalist/internationalist policies
-        return fullText.includes('united nations') ||
-               fullText.includes('un funding') ||
-               fullText.includes('who funding') ||
-               fullText.includes('paris agreement') ||
-               fullText.includes('global climate') ||
-               fullText.includes('international court') ||
-               fullText.includes('global tax') ||
-               fullText.includes('foreign aid') && !fullText.includes('israel') ||
-               fullText.includes('multilateral') ||
-               fullText.includes('world bank') ||
-               fullText.includes('imf') ||
-               fullText.includes('refugee admission') ||
-               fullText.includes('migration compact') ||
-               fullText.includes('open border');
       }
-      
-      return true;
-    });
+
+      setVotingRecords(records);
+      setVotesFetched(true);
+    } catch (error) {
+      console.error('Error fetching voting records:', error);
+      setVotesError(error instanceof Error ? error.message : 'Failed to load voting records');
+    } finally {
+      setVotesLoading(false);
+    }
+  }, [politician, votesFetched, votesLoading, isFederal, isStateLeg]);
+
+  useEffect(() => {
+    if (activeTab === 'votes' && politician && !votesFetched && !votesLoading) {
+      fetchVotingRecords();
+    }
+  }, [activeTab, politician, votesFetched, votesLoading, fetchVotingRecords]);
+
+  // ---------------------------------------------------------------------------
+  // Vote display helpers
+  // ---------------------------------------------------------------------------
+
+  /** Normalize any vote position string to a canonical form */
+  const normalizePosition = (pos: string): string => {
+    const p = pos.toLowerCase().trim();
+    if (['yes', 'yea', 'aye'].includes(p)) return 'YEA';
+    if (['no', 'nay'].includes(p)) return 'NAY';
+    if (['nv', 'not voting', 'present', 'abstain'].includes(p)) return 'ABSTAIN';
+    if (['absent'].includes(p)) return 'ABSENT';
+    if (p === 'sponsor') return 'SPONSOR';
+    if (p === 'n/a') return 'N/A';
+    return pos.toUpperCase();
   };
 
-  // JFK-VOTING: Format vote position with color
-  const jfkGetVoteColor = (position?: string) => {
-    if (!position) return 'var(--terminal-text-dim)';
-    const pos = position.toLowerCase();
-    if (pos === 'yes' || pos === 'yea' || pos === 'aye') return 'var(--terminal-green)';
-    if (pos === 'no' || pos === 'nay') return 'var(--terminal-red)';
-    if (pos === 'present' || pos === 'not voting') return 'var(--terminal-amber)';
+  /** Color for a vote position badge */
+  const getVoteColor = (position: string): string => {
+    const norm = normalizePosition(position);
+    if (norm === 'YEA' || norm === 'SPONSOR') return 'var(--terminal-green)';
+    if (norm === 'NAY') return 'var(--terminal-red)';
+    if (norm === 'ABSTAIN') return 'var(--terminal-amber)';
     return 'var(--terminal-text-dim)';
   };
 
-  // JFK-VOTING: Format vote position label
-  const jfkFormatVotePosition = (position?: string) => {
-    if (!position) return 'UNKNOWN';
-    const pos = position.toLowerCase();
-    if (pos === 'yea' || pos === 'aye') return 'YES';
-    if (pos === 'nay') return 'NO';
-    if (pos === 'not voting') return 'ABSENT';
-    return position.toUpperCase();
+  /** Calculate aggregate vote breakdown */
+  const calculateBreakdown = (records: VotingRecord[]): VoteBreakdown => {
+    return records.reduce(
+      (acc, r) => {
+        const norm = normalizePosition(r.votePosition);
+        if (norm === 'YEA' || norm === 'SPONSOR') acc.yea++;
+        else if (norm === 'NAY') acc.nay++;
+        else if (norm === 'ABSTAIN') acc.abstain++;
+        else acc.absent++;
+        return acc;
+      },
+      { yea: 0, nay: 0, abstain: 0, absent: 0 }
+    );
+  };
+
+  /** Filter records by category keyword preset */
+  const filterByCategory = (records: VotingRecord[], filter: VoteCategoryFilter): VotingRecord[] => {
+    if (filter === 'all') return records;
+
+    return records.filter(r => {
+      const text = `${r.billTitle} ${r.billDescription || ''} ${r.category || ''}`.toLowerCase();
+
+      switch (filter) {
+        case 'israel':
+          return /israel|gaza|palestin|middle east|zion/.test(text);
+        case 'defense':
+          return /defense|military|armed forces|national security|weapon|armed services/.test(text);
+        case 'foreign':
+          return /foreign|international|state department|embassy|diplomatic|treaty|alliance|united nations|nato|trade agreement|sanctions|humanitarian aid|ukraine|russia|china/.test(text);
+        case 'anti-america-first':
+          return /united nations|un funding|who funding|paris agreement|global climate|international court|global tax|multilateral|world bank|imf|refugee admission|migration compact|open border/.test(text);
+        case 'domestic':
+          return !/foreign|international|immigration/.test(text);
+        default:
+          return true;
+      }
+    });
+  };
+
+  /** Filter records by free-text search */
+  const filterBySearch = (records: VotingRecord[], query: string): VotingRecord[] => {
+    if (!query.trim()) return records;
+    const q = query.toLowerCase().trim();
+    return records.filter(r => {
+      const text = `${r.billNumber} ${r.billTitle} ${r.billDescription || ''} ${r.category || ''}`.toLowerCase();
+      return text.includes(q);
+    });
+  };
+
+  /** Apply both category and keyword filters */
+  const getFilteredRecords = (): VotingRecord[] => {
+    let filtered = filterByCategory(votingRecords, voteCategoryFilter);
+    filtered = filterBySearch(filtered, voteSearchQuery);
+    return filtered;
   };
 
   if (politicianLoading) {
@@ -360,8 +325,29 @@ export default function PoliticianPage() {
     return 'CLEAN';
   };
 
+  const getGradeColor = (grade: string) => {
+    switch (grade) {
+      case 'A': return '#10b981';
+      case 'B': return '#22c55e';
+      case 'C': return '#f59e0b';
+      case 'D': return '#ef4444';
+      case 'F': return '#dc2626';
+      default: return '#6b7280';
+    }
+  };
+
+  const getConfidenceColor = (confidence: string) => {
+    switch (confidence) {
+      case 'high': return '#10b981';
+      case 'medium': return '#f59e0b';
+      case 'low': return '#6b7280';
+      default: return '#6b7280';
+    }
+  };
+
   const tabs = [
     { id: 'overview', label: 'OVERVIEW', icon: '📋' },
+    { id: 'score', label: 'CORRUPTION SCORE', icon: '🎯' },
     { id: 'funding', label: 'FUNDING & FINANCIAL', icon: '💰' },
     { id: 'legal', label: 'LEGAL & COURT RECORDS', icon: '⚖️' },
     { id: 'votes', label: 'VOTING & POLICY', icon: '🗳️' },
@@ -388,16 +374,21 @@ export default function PoliticianPage() {
             {politician.corruptionScore >= 60 ? '🚨' : politician.corruptionScore >= 40 ? '⚠️' : '✓'}
           </span>
           <span>
-            CORRUPTION RISK: {politician.corruptionScore}/100 - {
-              politician.corruptionScore < 40 ? 'LOW' : 
-              politician.corruptionScore < 60 ? 'MEDIUM' : 
-              'HIGH'
+            CORRUPTION SCORE: {politician.corruptionScore}/100 — GRADE {politician.corruptionScoreDetails?.grade ?? '--'} — {
+              politician.corruptionScore <= 20 ? 'LOW RISK' :
+              politician.corruptionScore <= 40 ? 'MODERATE' :
+              politician.corruptionScore <= 60 ? 'ELEVATED' :
+              politician.corruptionScore <= 80 ? 'HIGH RISK' :
+              'SEVERE'
             }
           </span>
           <span style={{ fontSize: '0.875rem', color: 'var(--terminal-text-dim)', marginLeft: '1rem' }}>
-            {politician.juiceBoxTier !== 'none' 
-              ? `${getJuiceBoxLabel(politician.juiceBoxTier)} - $${(politician.aipacFunding / 1000).toFixed(0)}K AIPAC`
-              : 'NO FOREIGN LOBBY FUNDING DETECTED'}
+            {politician.corruptionScoreDetails?.confidence
+              ? `${politician.corruptionScoreDetails.confidence.toUpperCase()} CONFIDENCE (${politician.corruptionScoreDetails.dataCompleteness}% data)`
+              : ''}
+            {politician.juiceBoxTier !== 'none'
+              ? ` | ${getJuiceBoxLabel(politician.juiceBoxTier)} - $${(politician.aipacFunding / 1000).toFixed(0)}K AIPAC`
+              : ''}
           </span>
         </div>
       </div>
@@ -490,11 +481,35 @@ export default function PoliticianPage() {
                 }}>
                   <div>
                     <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                      Corruption Risk
+                      Corruption Score
                     </div>
-                    <div style={{ fontSize: '2rem', fontWeight: 700, color: getScoreColor(politician.corruptionScore), fontFamily: 'Bebas Neue, sans-serif' }}>
-                      {politician.corruptionScore}/100
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
+                      <span style={{ fontSize: '2rem', fontWeight: 700, color: getScoreColor(politician.corruptionScore), fontFamily: 'Bebas Neue, sans-serif' }}>
+                        {politician.corruptionScore}/100
+                      </span>
+                      {politician.corruptionScoreDetails?.grade && (
+                        <span style={{
+                          fontSize: '1.5rem',
+                          fontWeight: 700,
+                          color: getGradeColor(politician.corruptionScoreDetails.grade),
+                          fontFamily: 'Bebas Neue, sans-serif',
+                        }}>
+                          {politician.corruptionScoreDetails.grade}
+                        </span>
+                      )}
                     </div>
+                    {politician.corruptionScoreDetails?.confidence && (
+                      <div style={{
+                        fontSize: '0.6rem',
+                        color: getConfidenceColor(politician.corruptionScoreDetails.confidence),
+                        marginTop: '0.25rem',
+                        fontWeight: 600,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em',
+                      }}>
+                        {politician.corruptionScoreDetails.confidence} confidence
+                      </div>
+                    )}
                   </div>
                   <div>
                     <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
@@ -685,6 +700,213 @@ export default function PoliticianPage() {
             </div>
           )}
 
+          {/* Corruption Score Breakdown Tab */}
+          {activeTab === 'score' && (
+            <div>
+              {/* Score Summary Card */}
+              <div className="terminal-card" style={{ marginBottom: '2rem' }}>
+                <div style={{ display: 'flex', gap: '2rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                  {/* Big Score Circle */}
+                  <div style={{
+                    width: '120px',
+                    height: '120px',
+                    borderRadius: '50%',
+                    border: `4px solid ${getScoreColor(politician.corruptionScore)}`,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                  }}>
+                    <span style={{
+                      fontSize: '2.5rem',
+                      fontWeight: 700,
+                      color: getScoreColor(politician.corruptionScore),
+                      fontFamily: 'Bebas Neue, sans-serif',
+                      lineHeight: 1,
+                    }}>
+                      {politician.corruptionScore}
+                    </span>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)' }}>/100</span>
+                  </div>
+
+                  {/* Grade + Confidence */}
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem' }}>
+                      {politician.corruptionScoreDetails?.grade && (
+                        <span style={{
+                          fontSize: '3rem',
+                          fontWeight: 700,
+                          color: getGradeColor(politician.corruptionScoreDetails.grade),
+                          fontFamily: 'Bebas Neue, sans-serif',
+                          lineHeight: 1,
+                        }}>
+                          {politician.corruptionScoreDetails.grade}
+                        </span>
+                      )}
+                      <div>
+                        <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--terminal-text)' }}>
+                          {politician.corruptionScore <= 20 ? 'LOW RISK' :
+                           politician.corruptionScore <= 40 ? 'MODERATE RISK' :
+                           politician.corruptionScore <= 60 ? 'ELEVATED RISK' :
+                           politician.corruptionScore <= 80 ? 'HIGH RISK' :
+                           'SEVERE RISK'}
+                        </div>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginTop: '0.25rem' }}>
+                          Score computed from 5 weighted factors using available data
+                        </div>
+                      </div>
+                    </div>
+                    {politician.corruptionScoreDetails?.confidence && (
+                      <div style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                        padding: '0.4rem 0.8rem',
+                        background: `${getConfidenceColor(politician.corruptionScoreDetails.confidence)}15`,
+                        border: `1px solid ${getConfidenceColor(politician.corruptionScoreDetails.confidence)}`,
+                      }}>
+                        <span style={{
+                          width: '8px', height: '8px', borderRadius: '50%',
+                          background: getConfidenceColor(politician.corruptionScoreDetails.confidence),
+                        }} />
+                        <span style={{
+                          fontSize: '0.7rem',
+                          fontWeight: 700,
+                          color: getConfidenceColor(politician.corruptionScoreDetails.confidence),
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.05em',
+                        }}>
+                          {politician.corruptionScoreDetails.confidence} confidence — {politician.corruptionScoreDetails.dataCompleteness}% data coverage
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Factor Breakdown */}
+              <div className="terminal-card" style={{ marginBottom: '2rem' }}>
+                <h3 style={{
+                  fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.5rem',
+                  color: 'var(--terminal-amber)',
+                  fontFamily: 'JetBrains Mono, monospace',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em',
+                }}>
+                  SCORE FACTOR BREAKDOWN
+                </h3>
+
+                {politician.corruptionScoreDetails?.factors ? (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                    {[...politician.corruptionScoreDetails.factors]
+                      .sort((a, b) => b.weightedScore - a.weightedScore)
+                      .map((factor) => (
+                      <div key={factor.key} style={{
+                        padding: '1.25rem',
+                        background: 'rgba(255, 255, 255, 0.02)',
+                        border: '1px solid var(--terminal-border)',
+                      }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                            <span style={{
+                              fontSize: '0.875rem', fontWeight: 700,
+                              color: 'var(--terminal-text)',
+                              fontFamily: 'JetBrains Mono, monospace',
+                            }}>
+                              {factor.label}
+                            </span>
+                            <span style={{
+                              fontSize: '0.6rem',
+                              padding: '0.15rem 0.4rem',
+                              background: factor.dataAvailable ? 'rgba(16, 185, 129, 0.15)' : 'rgba(107, 114, 128, 0.15)',
+                              color: factor.dataAvailable ? '#10b981' : '#6b7280',
+                              border: `1px solid ${factor.dataAvailable ? '#10b981' : '#6b7280'}`,
+                              fontWeight: 700,
+                              textTransform: 'uppercase',
+                            }}>
+                              {factor.dataAvailable ? 'REAL DATA' : 'PLACEHOLDER'}
+                            </span>
+                          </div>
+                          <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
+                            <span style={{
+                              fontSize: '1.5rem', fontWeight: 700,
+                              color: getScoreColor(factor.rawScore),
+                              fontFamily: 'Bebas Neue, sans-serif',
+                            }}>
+                              {factor.rawScore}
+                            </span>
+                            <span style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)' }}>
+                              /100 x{(factor.weight * 100).toFixed(0)}% = {factor.weightedScore.toFixed(1)}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Progress bar */}
+                        <div style={{
+                          width: '100%', height: '6px',
+                          background: 'rgba(255, 255, 255, 0.05)',
+                          marginBottom: '0.5rem',
+                        }}>
+                          <div style={{
+                            width: `${factor.rawScore}%`, height: '100%',
+                            background: getScoreColor(factor.rawScore),
+                            transition: 'width 0.3s ease',
+                          }} />
+                        </div>
+
+                        <div style={{
+                          fontSize: '0.7rem',
+                          color: 'var(--terminal-text-dim)',
+                          fontFamily: 'JetBrains Mono, monospace',
+                          lineHeight: 1.5,
+                        }}>
+                          {factor.explanation}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--terminal-text-dim)' }}>
+                    Score breakdown not available for this politician.
+                  </div>
+                )}
+              </div>
+
+              {/* Methodology Note */}
+              <div className="terminal-card" style={{
+                background: 'rgba(245, 158, 11, 0.05)',
+                border: '1px solid rgba(245, 158, 11, 0.2)',
+              }}>
+                <h3 style={{
+                  fontSize: '0.875rem', fontWeight: 700, marginBottom: '0.75rem',
+                  color: 'var(--terminal-amber)',
+                  fontFamily: 'JetBrains Mono, monospace',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em',
+                }}>
+                  METHODOLOGY — v1 ALGORITHM
+                </h3>
+                <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', lineHeight: 1.7, fontFamily: 'JetBrains Mono, monospace' }}>
+                  <p style={{ marginBottom: '0.5rem' }}>
+                    The corruption score is a composite of 5 weighted factors: PAC/Lobby Funding Ratio (30%),
+                    Lobbying Connections (20%), Voting Alignment with Donors (25%), Transparency &amp; Disclosure (10%),
+                    and Campaign Finance Red Flags (15%).
+                  </p>
+                  <p style={{ marginBottom: '0.5rem' }}>
+                    Factors marked &quot;PLACEHOLDER&quot; use a neutral baseline score of 30 because the required data
+                    has not yet been linked. As more data sources come online (lobbying disclosures, voting records,
+                    FEC complaints), these factors will switch to real data and accuracy will improve.
+                  </p>
+                  <p>
+                    Confidence level reflects how many factors use real data. HIGH = 4-5 factors with data,
+                    MEDIUM = 2-3 factors, LOW = 0-1 factors.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Funding & Financial Tab */}
           {activeTab === 'funding' && (
             <div>
@@ -695,8 +917,8 @@ export default function PoliticianPage() {
                     <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--terminal-amber)' }}>
                       💰 TOTAL FUNDS RAISED
                     </h3>
-                    <div style={{ 
-                      fontSize: '4rem', 
+                    <div style={{
+                      fontSize: '4rem',
                       fontWeight: 700, 
                       marginBottom: '0.5rem',
                       color: 'var(--terminal-amber)',
@@ -851,13 +1073,13 @@ export default function PoliticianPage() {
             </div>
           )}
 
-          {/* JFK-VOTING: Voting & Policy Tab */}
+          {/* Voting & Policy Tab */}
           {activeTab === 'votes' && (
             <div>
-              {!politician.source_ids?.bioguide_id ? (
-                // JFK-VOTING: No bioguide ID available
+              {/* Error state */}
+              {votesError ? (
                 <div className="terminal-card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
-                  <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>ℹ️</div>
+                  <div style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--terminal-red)' }}>!</div>
                   <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-text)' }}>
                     CONGRESS API DATA AVAILABLE FOR FEDERAL OFFICIALS ONLY
                   </div>
@@ -866,7 +1088,7 @@ export default function PoliticianPage() {
                     This politician is {politician.office.toLowerCase()} and may not have federal voting records.
                   </div>
                 </div>
-              ) : jfkVotesError ? (
+              ) : votesError ? (
                 // JFK-VOTING: Error state
                 <div className="terminal-card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
                   <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>⚠️</div>
@@ -874,10 +1096,10 @@ export default function PoliticianPage() {
                     ERROR LOADING VOTING RECORDS
                   </div>
                   <div style={{ color: 'var(--terminal-text-dim)', marginTop: '1rem', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.875rem' }}>
-                    {jfkVotesError}
+                    {votesError}
                   </div>
                   <button
-                    onClick={() => politician.source_ids?.bioguide_id && jfkFetchVotingRecords(politician.source_ids.bioguide_id)}
+                    onClick={() => fetchVotingRecords()}
                     style={{
                       marginTop: '2rem',
                       padding: '1rem 2rem',
@@ -895,7 +1117,7 @@ export default function PoliticianPage() {
                     🔄 RETRY
                   </button>
                 </div>
-              ) : jfkVotesLoading ? (
+              ) : votesLoading ? (
                 // JFK-VOTING: Loading state
                 <div className="terminal-card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
                   <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>⏳</div>
@@ -912,7 +1134,7 @@ export default function PoliticianPage() {
                   {/* JFK-VOTING: Vote Breakdown Statistics */}
                   <div className="terminal-card">
                     <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--terminal-amber)', fontFamily: 'JetBrains Mono, monospace' }}>
-                      📊 VOTE BREAKDOWN (LAST {jfkVotes.length} VOTES)
+                      📊 VOTE BREAKDOWN (LAST {votingRecords.length} VOTES)
                     </h3>
                     <div style={{ 
                       display: 'grid', 
@@ -920,7 +1142,7 @@ export default function PoliticianPage() {
                       gap: '1.5rem',
                     }}>
                       {(() => {
-                        const breakdown = jfkCalculateVoteBreakdown(jfkVotes);
+                        const breakdown = calculateBreakdown(votingRecords);
                         return (
                           <>
                             <div>
@@ -928,7 +1150,7 @@ export default function PoliticianPage() {
                                 YES
                               </div>
                               <div style={{ fontSize: '3rem', fontWeight: 700, color: 'var(--terminal-green)', fontFamily: 'JetBrains Mono, monospace' }}>
-                                {breakdown.yes}
+                                {breakdown.yea}
                               </div>
                             </div>
                             <div>
@@ -936,7 +1158,7 @@ export default function PoliticianPage() {
                                 NO
                               </div>
                               <div style={{ fontSize: '3rem', fontWeight: 700, color: 'var(--terminal-red)', fontFamily: 'JetBrains Mono, monospace' }}>
-                                {breakdown.no}
+                                {breakdown.nay}
                               </div>
                             </div>
                             <div>
@@ -982,15 +1204,15 @@ export default function PoliticianPage() {
                     }}>
                       FILTER:
                     </div>
-                    {(['all', 'israel', 'defense', 'foreign', 'anti-america-first', 'domestic'] as JFKBillFilter[]).map((filter) => (
+                    {(['all', 'israel', 'defense', 'foreign', 'anti-america-first', 'domestic'] as VoteCategoryFilter[]).map((filter) => (
                       <button
                         key={filter}
-                        onClick={() => setJfkBillFilter(filter)}
+                        onClick={() => setVoteCategoryFilter(filter)}
                         style={{
                           padding: '0.5rem 1rem',
-                          background: jfkBillFilter === filter ? 'var(--terminal-amber)' : 'transparent',
-                          border: `1px solid ${jfkBillFilter === filter ? 'var(--terminal-amber)' : 'var(--terminal-border)'}`,
-                          color: jfkBillFilter === filter ? '#000' : 'var(--terminal-text)',
+                          background: voteCategoryFilter === filter ? 'var(--terminal-amber)' : 'transparent',
+                          border: `1px solid ${voteCategoryFilter === filter ? 'var(--terminal-amber)' : 'var(--terminal-border)'}`,
+                          color: voteCategoryFilter === filter ? '#000' : 'var(--terminal-text)',
                           fontSize: '0.75rem',
                           fontFamily: 'JetBrains Mono, monospace',
                           fontWeight: 700,
@@ -1007,7 +1229,7 @@ export default function PoliticianPage() {
                         {filter === 'domestic' && '🏛️ '}
                         {filter === 'all' && '📋 '}
                         {filter.toUpperCase()}
-                        {filter !== 'all' && ` (${jfkFilterVotes(jfkVotes, filter).length})`}
+                        {filter !== 'all' && ` (${filterByCategory(votingRecords, filter).length})`}
                       </button>
                     ))}
                   </div>
@@ -1018,14 +1240,14 @@ export default function PoliticianPage() {
                       🗳️ RECENT VOTES
                     </h3>
                     {(() => {
-                      const filteredVotes = jfkFilterVotes(jfkVotes, jfkBillFilter);
+                      const filteredVotes = filterByCategory(votingRecords, voteCategoryFilter);
                       
                       if (filteredVotes.length === 0) {
                         return (
                           <div style={{ textAlign: 'center', padding: '3rem 2rem', color: 'var(--terminal-text-dim)' }}>
                             <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🔍</div>
                             <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.875rem' }}>
-                              No votes found for filter: {jfkBillFilter.toUpperCase()}
+                              No votes found for filter: {voteCategoryFilter.toUpperCase()}
                             </div>
                           </div>
                         );
@@ -1039,33 +1261,27 @@ export default function PoliticianPage() {
                               style={{
                                 padding: '1.5rem',
                                 background: 'rgba(255, 255, 255, 0.02)',
-                                border: `1px solid ${jfkGetVoteColor(vote.member?.votePosition)}`,
-                                borderLeft: `4px solid ${jfkGetVoteColor(vote.member?.votePosition)}`,
+                                border: `1px solid ${getVoteColor(vote.votePosition)}`,
+                                borderLeft: `4px solid ${getVoteColor(vote.votePosition)}`,
                                 fontFamily: 'JetBrains Mono, monospace',
                               }}
                             >
                               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', gap: '1rem', marginBottom: '1rem' }}>
                                 <div style={{ flex: 1 }}>
                                   <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                                    {vote.bill?.number || vote.amendment?.number || vote.nomination?.number || 'PROCEDURAL VOTE'}
+                                    {vote.billNumber || 'PROCEDURAL VOTE'}
                                   </div>
                                   <div style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-text)' }}>
-                                    {vote.bill?.title || vote.question}
+                                    {vote.billTitle}
                                   </div>
                                   {/* Show bill description (what the bill is about) */}
-                                  {vote.bill?.description && (
+                                  {vote.billDescription && (
                                     <div style={{ fontSize: '0.875rem', color: '#fff', marginBottom: '0.75rem', lineHeight: 1.6 }}>
-                                      {vote.bill.description}
-                                    </div>
-                                  )}
-                                  {/* Show procedural question in dimmer text */}
-                                  {vote.question && (
-                                    <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.5rem', fontStyle: 'italic' }}>
-                                      Vote: {vote.question}
+                                      {vote.billDescription}
                                     </div>
                                   )}
                                   <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)' }}>
-                                    {new Date(vote.date).toLocaleDateString('en-US', { 
+                                    {new Date(vote.voteDate).toLocaleDateString('en-US', { 
                                       month: 'short', 
                                       day: 'numeric',
                                       year: 'numeric'
@@ -1074,7 +1290,7 @@ export default function PoliticianPage() {
                                 </div>
                                 <div style={{ 
                                   padding: '0.75rem 1.5rem',
-                                  background: jfkGetVoteColor(vote.member?.votePosition),
+                                  background: getVoteColor(vote.votePosition),
                                   color: '#000',
                                   fontWeight: 700,
                                   fontSize: '1rem',
@@ -1082,7 +1298,7 @@ export default function PoliticianPage() {
                                   minWidth: '100px',
                                   letterSpacing: '0.05em',
                                 }}>
-                                  {jfkFormatVotePosition(vote.member?.votePosition)}
+                                  {normalizePosition(vote.votePosition)}
                                 </div>
                               </div>
                             </div>

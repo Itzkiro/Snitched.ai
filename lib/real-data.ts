@@ -11,6 +11,7 @@
  */
 
 import type { Politician } from './types';
+import { computeCorruptionScore } from './corruption-score';
 
 // Import JFK-Intel Phase 1 data (real politician bios from congress-legislators)
 import floridaPoliticiansRaw from '../data-ingestion/phase1/processed/florida_politicians.json';
@@ -381,12 +382,8 @@ function convertToPolitician(raw: RawPolitician): Politician {
     dataSource = raw.data_source;
   }
 
-  // Corruption score based on real Israel lobby funding percentage
-  const corruptionScore = fundingData.totalFundsRaised > 0
-    ? Math.min(100, Math.round((fundingData.israelLobbyTotal / fundingData.totalFundsRaised) * 100))
-    : 0;
-
-  return {
+  // Build the politician object first (with temporary score of 0)
+  const politician: Politician = {
     id: raw.politician_id,
     name: raw.name,
     office: raw.office,
@@ -396,7 +393,7 @@ function convertToPolitician(raw: RawPolitician): Politician {
     jurisdiction: raw.jurisdiction,
     jurisdictionType,
     photoUrl: raw.photo_url || `/politicians/${raw.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}.jpg`,
-    corruptionScore,
+    corruptionScore: 0, // Temporary — computed below
     aipacFunding: fundingData.aipacFunding,
     juiceBoxTier: fundingData.juiceBoxTier,
     totalFundsRaised: fundingData.totalFundsRaised,
@@ -452,6 +449,13 @@ function convertToPolitician(raw: RawPolitician): Politician {
     dataSource,
     lastUpdated: fecResults.timestamp || raw.last_scraped,
   };
+
+  // Compute the corruption score using the v1 algorithm
+  const scoreResult = computeCorruptionScore(politician);
+  politician.corruptionScore = scoreResult.score;
+  politician.corruptionScoreDetails = scoreResult;
+
+  return politician;
 }
 
 // ---------------------------------------------------------------------------
@@ -469,24 +473,31 @@ export function getAllPoliticians(): Politician[] {
     .map(convertToPolitician);
 
   // Add Volusia County officials (no FEC data - local level)
+  // Compute corruption scores for county officials too
   const volusiaWithStatus = volusiaCountyOfficials
     .filter(p => p && p.name && p.office)
-    .map(p => ({
-      ...p,
-      totalFundsRaised: 0,
-      top3Donors: [] as Array<{ name: string; amount: number; type: 'PAC' | 'Individual' | 'Corporate' | 'Israel-PAC' }>,
-      top5Donors: [] as Array<{ name: string; amount: number; type: 'PAC' | 'Individual' | 'Corporate' | 'Israel-PAC' }>,
-      topDonor: undefined,
-      contributionBreakdown: { aipac: 0, otherPACs: 0, individuals: 0, corporate: 0 },
-      aipacFunding: 0,
-      israelLobbyTotal: 0,
-      israelLobbyBreakdown: { total: 0, pacs: 0, ie: 0, bundlers: 0 },
-      juiceBoxTier: 'none' as const,
-      corruptionScore: 0,
-      dataStatus: 'live' as const,
-      dataSource: 'jfk-intel-manual (local officials - no FEC data)',
-      lastUpdated: '2026-02-22T08:20:00',
-    }));
+    .map(p => {
+      const volusiaPol: Politician = {
+        ...p,
+        totalFundsRaised: 0,
+        top3Donors: [] as Array<{ name: string; amount: number; type: 'PAC' | 'Individual' | 'Corporate' | 'Israel-PAC' }>,
+        top5Donors: [] as Array<{ name: string; amount: number; type: 'PAC' | 'Individual' | 'Corporate' | 'Israel-PAC' }>,
+        topDonor: undefined,
+        contributionBreakdown: { aipac: 0, otherPACs: 0, individuals: 0, corporate: 0 },
+        aipacFunding: 0,
+        israelLobbyTotal: 0,
+        israelLobbyBreakdown: { total: 0, pacs: 0, ie: 0, bundlers: 0 },
+        juiceBoxTier: 'none' as const,
+        corruptionScore: 0,
+        dataStatus: 'live' as const,
+        dataSource: 'jfk-intel-manual (local officials - no FEC data)',
+        lastUpdated: '2026-02-22T08:20:00',
+      };
+      const scoreResult = computeCorruptionScore(volusiaPol);
+      volusiaPol.corruptionScore = scoreResult.score;
+      volusiaPol.corruptionScoreDetails = scoreResult;
+      return volusiaPol;
+    });
 
   return [...livePoliticians, ...volusiaWithStatus].filter(p =>
     p && p.name && p.office && p.party && p.officeLevel

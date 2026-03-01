@@ -46,6 +46,7 @@ export interface Politician {
   jurisdictionType: JurisdictionType;
   photoUrl?: string;
   corruptionScore: number; // 0-100
+  corruptionScoreDetails?: CorruptionScoreResult;
   juiceBoxTier: JuiceBoxTier;
   aipacFunding: number;
   topDonor?: {
@@ -160,6 +161,47 @@ export interface Jurisdiction {
   type: JurisdictionType;
   parentId?: string;
   politicianCount: number;
+}
+
+// ---------------------------------------------------------------------------
+// Corruption Score Algorithm Types
+// ---------------------------------------------------------------------------
+
+export type CorruptionGrade = 'A' | 'B' | 'C' | 'D' | 'F';
+export type CorruptionConfidence = 'high' | 'medium' | 'low';
+
+/** Breakdown of an individual scoring factor */
+export interface CorruptionFactor {
+  /** Machine-readable key */
+  key: string;
+  /** Human-readable label */
+  label: string;
+  /** Raw score for this factor (0-100) before weighting */
+  rawScore: number;
+  /** Weight applied (0-1, all weights sum to 1) */
+  weight: number;
+  /** Weighted contribution to the final score */
+  weightedScore: number;
+  /** Whether this factor used real data or a placeholder */
+  dataAvailable: boolean;
+  /** Short explanation of how this factor was scored */
+  explanation: string;
+}
+
+/** Full corruption score result for a politician */
+export interface CorruptionScoreResult {
+  /** Overall score 0-100 (0 = clean, 100 = maximally corrupt/influenced) */
+  score: number;
+  /** Letter grade: A (0-20), B (21-40), C (41-60), D (61-80), F (81-100) */
+  grade: CorruptionGrade;
+  /** Confidence level based on data completeness */
+  confidence: CorruptionConfidence;
+  /** Percentage of scoring factors that had real data (0-100) */
+  dataCompleteness: number;
+  /** Breakdown of each scoring factor */
+  factors: CorruptionFactor[];
+  /** When the score was computed */
+  computedAt: string;
 }
 
 // ---------------------------------------------------------------------------
