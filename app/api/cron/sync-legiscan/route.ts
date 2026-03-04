@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server';
 import { verifyCronAuth, cronResponse } from '@/lib/cron-auth';
-import { getServerSupabase } from '@/lib/supabase-server';
+import { getServiceRoleSupabase } from '@/lib/supabase-server';
 
 /**
  * GET /api/cron/sync-legiscan
@@ -55,7 +55,7 @@ export async function GET(request: NextRequest) {
     });
   }
 
-  const supabase = getServerSupabase();
+  const supabase = getServiceRoleSupabase();
   const hasDatabaseAccess = !!supabase;
   log.push(`Database access: ${hasDatabaseAccess ? 'yes' : 'no (dry run)'}`);
 

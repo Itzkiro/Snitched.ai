@@ -1,13 +1,13 @@
 import { NextRequest } from 'next/server';
 import { verifyCronAuth, cronResponse } from '@/lib/cron-auth';
 import { fecFetch, isIsraelLobbyDonor, ISRAEL_LOBBY_COMMITTEE_IDS } from '@/lib/fec-client';
-import { getServerSupabase } from '@/lib/supabase-server';
+import { getServiceRoleSupabase } from '@/lib/supabase-server';
 
 /**
  * GET /api/cron/sync-fec
  *
- * Weekly cron job that refreshes FEC contribution data for tracked politicians.
- * Schedule: Every Sunday at 3:00 AM UTC (0 3 * * 0)
+ * Daily cron job that refreshes FEC contribution data for tracked politicians.
+ * Schedule: Every day at 3:00 AM UTC (0 3 * * *)
  *
  * What it does:
  *   1. Fetches all politicians from the database that have an FEC candidate ID
@@ -40,7 +40,7 @@ export async function GET(request: NextRequest) {
   const errors: Array<{ candidateId: string; error: string }> = [];
 
   try {
-    const supabase = getServerSupabase();
+    const supabase = getServiceRoleSupabase();
 
     // If no database, we can still run but only log the FEC data
     const hasDatabaseAccess = !!supabase;

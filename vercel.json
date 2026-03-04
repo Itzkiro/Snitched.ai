@@ -2,7 +2,7 @@
   "crons": [
     {
       "path": "/api/cron/sync-fec",
-      "schedule": "0 3 * * 0"
+      "schedule": "0 3 * * *"
     },
     {
       "path": "/api/cron/sync-congress",
