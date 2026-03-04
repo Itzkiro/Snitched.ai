@@ -24,6 +24,9 @@ textblob>=0.17.1
 # OpenPlanter (OSINT framework)
 # Note: Install separately via pip install -e ./OpenPlanter
 
+# Web Scraping (main engine)
+scrapling>=0.4.1
+
 # Utilities
 tqdm>=4.66.1
 pytz>=2023.3

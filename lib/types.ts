@@ -1,4 +1,4 @@
-export type Party = 'Democrat' | 'Republican' | 'Independent' | 'Other';
+export type Party = 'Democrat' | 'Republican' | 'Independent' | 'Nonpartisan' | 'Other';
 
 export type JurisdictionType = 
   | 'federal' 
@@ -24,7 +24,12 @@ export type OfficeLevel =
   | 'Mayor'
   | 'City Council'
   | 'School Board'
-  | 'Judge';
+  | 'Judge'
+  | 'City Commissioner'
+  | 'State Attorney'
+  | 'Public Defender'
+  | 'Soil & Water'
+  | 'Superintendent';
 
 export type JuiceBoxTier = 'none' | 'compromised' | 'bought' | 'owned';
 
@@ -77,9 +82,9 @@ export interface Politician {
     ie: number; // Independent Expenditures
     bundlers: number;
   };
-  termStart: string;
+  termStart?: string;
   termEnd?: string;
-  yearsInOffice: number;
+  yearsInOffice?: number;
   isActive: boolean;
   tags: Tag[];
   bio?: string;
