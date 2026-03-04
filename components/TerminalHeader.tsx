@@ -102,9 +102,22 @@ export default function TerminalHeader() {
         >
           💰 JUICE BOX LEADERBOARD
         </Link>
-        <Link 
+        <Link
+          href="/social"
+          style={{
+            color: pathname === '/social' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
+            textDecoration: 'none',
+            fontSize: '11px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+            fontWeight: 600
+          }}
+        >
+          📡 SOCIAL INTEL
+        </Link>
+        <Link
           href="/browse"
-          style={{ 
+          style={{
             color: pathname === '/browse' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
             textDecoration: 'none',
             fontSize: '11px',

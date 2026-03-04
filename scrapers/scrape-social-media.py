@@ -141,7 +141,7 @@ def scrapling_get(url: str, timeout: int = 30, retries: int = 2) -> Any:
 # ---------------------------------------------------------------------------
 
 
-def supabase_get_politicians(limit: int = 1000) -> List[Dict[str, Any]]:
+def supabase_get_politicians(limit: int = 1000, offset: int = 0) -> List[Dict[str, Any]]:
     """Fetch politicians with social media handles from Supabase."""
     url = (
         f"{SUPABASE_URL}/rest/v1/politicians"
@@ -149,11 +149,12 @@ def supabase_get_politicians(limit: int = 1000) -> List[Dict[str, Any]]:
         f"&social_media=not.eq.{{}}"
         f"&order=name"
         f"&limit={limit}"
+        f"&offset={offset}"
     )
     resp = requests.get(url, headers=SUPABASE_HEADERS, timeout=30)
     resp.raise_for_status()
     politicians = resp.json()
-    logger.info(f"Fetched {len(politicians)} politicians with social media data")
+    logger.info(f"Fetched {len(politicians)} politicians with social media data (offset={offset})")
     return politicians
 
 
@@ -1190,6 +1191,7 @@ Examples:
         help="Comma-separated platforms (default: twitter,facebook,instagram)",
     )
     parser.add_argument("--max-posts", type=int, default=20, help="Max posts per platform per politician")
+    parser.add_argument("--offset", type=int, default=0, help="Skip first N politicians (for rotation)")
     parser.add_argument("--output", help="Override output file path")
 
     args = parser.parse_args()
@@ -1204,7 +1206,7 @@ Examples:
         parser.error("Specify --batch, --politician, or --dry-run")
 
     # Fetch politicians
-    politicians = supabase_get_politicians(limit=args.limit)
+    politicians = supabase_get_politicians(limit=args.limit, offset=args.offset)
 
     if args.politician:
         # Filter to specific politician

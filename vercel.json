@@ -11,6 +11,10 @@
     {
       "path": "/api/cron/sync-legiscan",
       "schedule": "0 5 * * *"
+    },
+    {
+      "path": "/api/cron/sync-social-media",
+      "schedule": "0 */6 * * *"
     }
   ]
 }

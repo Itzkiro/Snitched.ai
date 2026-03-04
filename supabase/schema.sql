@@ -87,3 +87,79 @@ CREATE TRIGGER set_updated_at
   BEFORE UPDATE ON politicians
   FOR EACH ROW
   EXECUTE FUNCTION update_updated_at();
+
+-- ==========================================================================
+-- 4. Social Posts table — stores scraped social media posts
+-- ==========================================================================
+CREATE TABLE IF NOT EXISTS social_posts (
+  id              TEXT PRIMARY KEY,
+  politician_id   TEXT REFERENCES politicians(bioguide_id),
+  politician_name TEXT,
+  platform        TEXT NOT NULL,
+  handle          TEXT,
+  content         TEXT,
+  post_url        TEXT,
+  posted_at       TIMESTAMPTZ,
+  likes_count     INTEGER DEFAULT 0,
+  shares_count    INTEGER DEFAULT 0,
+  comments_count  INTEGER DEFAULT 0,
+  views_count     INTEGER DEFAULT 0,
+  sentiment_score NUMERIC,
+  is_deleted      BOOLEAN DEFAULT false,
+  scraped_at      TIMESTAMPTZ DEFAULT NOW(),
+  note            TEXT,
+  created_at      TIMESTAMPTZ DEFAULT NOW(),
+  updated_at      TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_social_posts_politician ON social_posts(politician_id);
+CREATE INDEX IF NOT EXISTS idx_social_posts_platform ON social_posts(platform);
+CREATE INDEX IF NOT EXISTS idx_social_posts_posted_at ON social_posts(posted_at DESC);
+CREATE INDEX IF NOT EXISTS idx_social_posts_scraped_at ON social_posts(scraped_at DESC);
+
+-- RLS for social_posts
+ALTER TABLE social_posts ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Public read access" ON social_posts
+  FOR SELECT USING (true);
+
+CREATE POLICY "Service insert access" ON social_posts
+  FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Service update access" ON social_posts
+  FOR UPDATE USING (true);
+
+CREATE TRIGGER set_social_posts_updated_at
+  BEFORE UPDATE ON social_posts
+  FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at();
+
+-- ==========================================================================
+-- 5. Scrape runs table — tracks daemon scrape cycles for monitoring
+-- ==========================================================================
+CREATE TABLE IF NOT EXISTS scrape_runs (
+  id          SERIAL PRIMARY KEY,
+  run_type    TEXT NOT NULL DEFAULT 'social_media',
+  started_at  TIMESTAMPTZ DEFAULT NOW(),
+  completed_at TIMESTAMPTZ,
+  status      TEXT DEFAULT 'running',
+  posts_found INTEGER DEFAULT 0,
+  posts_new   INTEGER DEFAULT 0,
+  errors      INTEGER DEFAULT 0,
+  log         JSONB DEFAULT '[]'::jsonb,
+  metadata    JSONB DEFAULT '{}'::jsonb
+);
+
+CREATE INDEX IF NOT EXISTS idx_scrape_runs_type ON scrape_runs(run_type);
+CREATE INDEX IF NOT EXISTS idx_scrape_runs_started ON scrape_runs(started_at DESC);
+
+ALTER TABLE scrape_runs ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Public read access" ON scrape_runs
+  FOR SELECT USING (true);
+
+CREATE POLICY "Service insert access" ON scrape_runs
+  FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Service update access" ON scrape_runs
+  FOR UPDATE USING (true);
