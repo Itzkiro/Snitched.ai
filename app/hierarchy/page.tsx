@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import type { Politician } from '@/lib/types';
 
@@ -12,9 +12,147 @@ interface HierarchyNode {
   politicians?: Politician[];
 }
 
+/**
+ * Helper: create a leaf node from a filtered politician list.
+ * Returns undefined when the list is empty so callers can filter out blanks.
+ */
+function leafNode(id: string, name: string, list: Politician[]): HierarchyNode | undefined {
+  if (list.length === 0) return undefined;
+  return { id, name, count: list.length, politicians: list };
+}
+
+/**
+ * Helper: create a branch node whose count is the sum of its children.
+ * Empty children are filtered out automatically.
+ */
+function branchNode(id: string, name: string, children: (HierarchyNode | undefined)[]): HierarchyNode | undefined {
+  const valid = children.filter((c): c is HierarchyNode => c != null && c.count > 0);
+  if (valid.length === 0) return undefined;
+  return { id, name, count: valid.reduce((s, c) => s + c.count, 0), children: valid };
+}
+
+/**
+ * Build the full hierarchy tree from the flat politician list returned by the API.
+ * Every count is derived from the actual data -- nothing is hardcoded.
+ */
+function buildHierarchy(all: Politician[]): HierarchyNode {
+  // ── helpers to filter ──
+  const byOffice = (level: Politician['officeLevel']) => all.filter(p => p.officeLevel === level);
+  const byJurisdiction = (j: string) => all.filter(p => p.jurisdiction === j);
+
+  // ── Federal ──
+  const senators = byOffice('US Senator');
+  const representatives = byOffice('US Representative');
+  const federal = branchNode('federal', 'Federal Delegation', [
+    leafNode('us-senate', 'U.S. Senate', senators),
+    leafNode('us-house', 'U.S. House', representatives),
+  ]);
+
+  // ── State Executive ──
+  const governors = byOffice('Governor');
+  const stateExec = leafNode('state-exec', 'State Executive', governors);
+
+  // ── State Legislature ──
+  const stateSenators = byOffice('State Senator');
+  const stateReps = byOffice('State Representative');
+  const stateLeg = branchNode('state-leg', 'State Legislature', [
+    leafNode('state-senate', 'State Senate', stateSenators),
+    leafNode('state-house', 'State House', stateReps),
+  ]);
+
+  // ── Volusia County breakdown ──
+  const volusia = byJurisdiction('Volusia County');
+
+  // County Council (County Commissioner)
+  const countyCouncil = volusia.filter(p => p.officeLevel === 'County Commissioner');
+
+  // Constitutional Officers
+  const constitutionalOfficeLevels: Politician['officeLevel'][] = [
+    'Sheriff', 'Clerk of Court', 'Property Appraiser', 'Tax Collector', 'Supervisor of Elections',
+  ];
+  const constitutionalOfficers = volusia.filter(p => constitutionalOfficeLevels.includes(p.officeLevel));
+
+  // School Board (includes Superintendent who is tagged School Board in the data)
+  const schoolBoard = volusia.filter(p => p.officeLevel === 'School Board');
+
+  // Judiciary
+  const judges = volusia.filter(p => p.officeLevel === 'Judge');
+
+  // State Attorney & Public Defender
+  const stateAttorneys = volusia.filter(p => p.officeLevel === 'State Attorney');
+  const publicDefenders = volusia.filter(p => p.officeLevel === 'Public Defender');
+  const legalOfficers = [...stateAttorneys, ...publicDefenders];
+
+  // Soil & Water Conservation
+  const soilWater = volusia.filter(p => p.officeLevel === 'Soil & Water');
+
+  // Municipal officials in Volusia
+  const mayors = volusia.filter(p => p.officeLevel === 'Mayor');
+  const cityCommissioners = volusia.filter(p => p.officeLevel === 'City Commissioner');
+
+  const volusiaCountyGov = branchNode('volusia-county-gov', 'County Government', [
+    leafNode('county-council', 'County Council', countyCouncil),
+    leafNode('constitutional-officers', 'Constitutional Officers', constitutionalOfficers),
+  ]);
+
+  const volusiaEducation = leafNode('volusia-education', 'School Board & Superintendent', schoolBoard);
+
+  const volusiaJudiciary = branchNode('volusia-judiciary', 'Judiciary (7th Circuit)', [
+    leafNode('judges', 'Circuit & County Judges', judges),
+    leafNode('legal-officers', 'State Attorney & Public Defender', legalOfficers),
+  ]);
+
+  const volusiaMunicipal = branchNode('volusia-municipal', 'Municipal Officials', [
+    leafNode('mayors', 'Mayors', mayors),
+    leafNode('city-commissioners', 'City Commissioners', cityCommissioners),
+  ]);
+
+  const volusiaSpecial = leafNode('volusia-soil-water', 'Soil & Water Conservation', soilWater);
+
+  const volusiaNode = branchNode('volusia', 'Volusia County', [
+    volusiaCountyGov,
+    volusiaEducation,
+    volusiaJudiciary,
+    volusiaMunicipal,
+    volusiaSpecial,
+  ]);
+
+  // ── Top-level tree ──
+  const topChildren: (HierarchyNode | undefined)[] = [
+    federal,
+    stateExec,
+    stateLeg,
+    volusiaNode,
+  ];
+  const validTop = topChildren.filter((c): c is HierarchyNode => c != null && c.count > 0);
+
+  return {
+    id: 'florida',
+    name: 'Florida',
+    count: validTop.reduce((s, c) => s + c.count, 0),
+    children: validTop,
+  };
+}
+
+/**
+ * Recursively sum AIPAC funding across the entire sub-tree rooted at `node`.
+ */
+function sumAipacFunding(node: HierarchyNode): number {
+  let total = 0;
+  if (node.politicians) {
+    total += node.politicians.reduce((s, p) => s + p.aipacFunding, 0);
+  }
+  if (node.children) {
+    for (const child of node.children) {
+      total += sumAipacFunding(child);
+    }
+  }
+  return total;
+}
+
 export default function HierarchyPage() {
   const [path, setPath] = useState<string[]>(['florida']);
-  const [hierarchyData, setHierarchyData] = useState<HierarchyNode | null>(null);
+  const [allPoliticians, setAllPoliticians] = useState<Politician[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -23,99 +161,11 @@ export default function HierarchyPage() {
       try {
         const res = await fetch('/api/politicians');
         if (!res.ok) throw new Error(`API error: ${res.status}`);
-        const allPoliticians: Politician[] = await res.json();
-
-        const data: HierarchyNode = {
-        id: 'florida',
-        name: 'Florida',
-        count: 8, // Will be 8000+ in production
-        children: [
-          {
-            id: 'federal',
-            name: 'Federal Delegation',
-            count: 30,
-            children: [
-              {
-                id: 'us-senate',
-                name: 'U.S. Senate',
-                count: 2,
-                politicians: allPoliticians.filter(p => p.officeLevel === 'US Senator'),
-              },
-              {
-                id: 'us-house',
-                name: 'U.S. House',
-                count: 28,
-                politicians: allPoliticians.filter(p => p.officeLevel === 'US Representative'),
-              },
-            ],
-          },
-          {
-            id: 'state-exec',
-            name: 'State Executive',
-            count: 7,
-            politicians: allPoliticians.filter(p => p.officeLevel === 'Governor'),
-          },
-          {
-            id: 'state-leg',
-            name: 'State Legislature',
-            count: 160,
-            children: [
-              { id: 'state-senate', name: 'State Senate', count: 40, politicians: [] },
-              { id: 'state-house', name: 'State House', count: 120, politicians: [] },
-            ],
-          },
-          { 
-            id: 'county-municipal', 
-            name: 'County & Municipal', 
-            count: 478, // 67 counties + 411 municipalities
-            children: [
-              {
-                id: 'counties',
-                name: 'Counties',
-                count: 67,
-                children: [
-                  {
-                    id: 'volusia',
-                    name: 'Volusia County',
-                    count: 24, // 12 county officials + 12 city officials (will add cities)
-                    children: [
-                      {
-                        id: 'county-officials',
-                        name: 'County Officials',
-                        count: 12,
-                        politicians: allPoliticians.filter(p => p.jurisdiction === 'Volusia County' && p.officeLevel !== 'Mayor' && p.officeLevel !== 'City Council'),
-                      },
-                      {
-                        id: 'volusia-cities',
-                        name: 'Cities & Municipalities',
-                        count: 12, // Daytona Beach, DeLand, Ormond Beach, etc.
-                        children: [
-                          // Will add Daytona Beach, DeLand, etc.
-                        ],
-                      },
-                    ],
-                  },
-                  // Other 66 counties
-                ],
-              },
-              {
-                id: 'municipalities',
-                name: 'All Municipalities',
-                count: 411,
-                children: [
-                  // Will add all 411 FL cities
-                ],
-              },
-            ],
-          },
-          { id: 'school-boards', name: 'School Boards', count: 67, politicians: [] },
-        ],
-      };
-      
-        setHierarchyData(data);
-      } catch (error) {
-        console.error('Error loading:', error);
-        setError(error instanceof Error ? error.message : 'Failed to load data');
+        const data: Politician[] = await res.json();
+        setAllPoliticians(data);
+      } catch (err) {
+        console.error('Error loading:', err);
+        setError(err instanceof Error ? err.message : 'Failed to load data');
       } finally {
         setLoading(false);
       }
@@ -123,8 +173,17 @@ export default function HierarchyPage() {
     loadData();
   }, []);
 
+  const hierarchyData = useMemo(() => {
+    if (allPoliticians.length === 0) return null;
+    return buildHierarchy(allPoliticians);
+  }, [allPoliticians]);
+
   if (loading || !hierarchyData) {
     return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>;
+  }
+
+  if (error) {
+    return <div style={{ padding: '2rem', textAlign: 'center', color: '#ef4444' }}>Error: {error}</div>;
   }
 
   const getCurrentNode = (): HierarchyNode => {
@@ -138,8 +197,7 @@ export default function HierarchyPage() {
   };
 
   const navigateTo = (nodeId: string) => {
-    const newPath = [...path, nodeId];
-    setPath(newPath);
+    setPath([...path, nodeId]);
   };
 
   const navigateUp = (index: number) => {
@@ -156,12 +214,14 @@ export default function HierarchyPage() {
     return { id, name: node.name };
   });
 
+  const aipacTotal = sumAipacFunding(currentNode);
+
   return (
     <div style={{ minHeight: '100vh', background: 'var(--terminal-bg)', color: 'var(--terminal-text)' }}>
       {/* Terminal Title */}
       <div className="terminal-title">
         <div>
-          <h1>📊 HIERARCHY - FLORIDA GOVERNMENT STRUCTURE</h1>
+          <h1>HIERARCHY - FLORIDA GOVERNMENT STRUCTURE</h1>
           <div className="terminal-subtitle">
             DOGE.gov-Style Drill-Down | Navigate {currentNode.count} Officials
           </div>
@@ -171,7 +231,7 @@ export default function HierarchyPage() {
       {/* Alert */}
       <div style={{ padding: '2rem', borderBottom: '1px solid var(--terminal-border)' }}>
         <div className="alert-level">
-          <span className="alert-icon">🗂️</span>
+          <span className="alert-icon">&#128451;</span>
           <span>CURRENT LEVEL: {currentNode.name.toUpperCase()}</span>
           <span style={{ fontSize: '0.875rem', color: 'var(--terminal-text-dim)', marginLeft: '1rem' }}>
             {currentNode.count} OFFICIALS
@@ -180,15 +240,15 @@ export default function HierarchyPage() {
       </div>
 
       {/* Breadcrumb Navigation */}
-      <div style={{ 
-        textAlign: 'center', 
+      <div style={{
+        textAlign: 'center',
         padding: '3rem 2rem 2rem',
-        borderBottom: '1px solid var(--terminal-border)' 
+        borderBottom: '1px solid var(--terminal-border)'
       }}>
         <div style={{ fontSize: '1.5rem', fontWeight: 400, marginBottom: '2rem', color: 'var(--terminal-text-dim)' }}>
           Trace every politician through the hierarchy.
         </div>
-        
+
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
           {breadcrumbs.map((crumb, idx) => (
             <div key={crumb.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -222,11 +282,11 @@ export default function HierarchyPage() {
                 {crumb.name}
               </button>
               {idx < breadcrumbs.length - 1 && (
-                <div style={{ 
-                  width: '1px', 
-                  height: '30px', 
+                <div style={{
+                  width: '1px',
+                  height: '30px',
                   background: '#333',
-                  margin: '0.5rem 0' 
+                  margin: '0.5rem 0'
                 }} />
               )}
             </div>
@@ -235,10 +295,10 @@ export default function HierarchyPage() {
       </div>
 
       {/* Current Level Stats */}
-      <div style={{ 
-        maxWidth: '1200px', 
-        margin: '4rem auto', 
-        padding: '0 2rem' 
+      <div style={{
+        maxWidth: '1200px',
+        margin: '4rem auto',
+        padding: '0 2rem'
       }}>
         <div style={{
           background: '#0a0a0a',
@@ -266,10 +326,7 @@ export default function HierarchyPage() {
             </div>
             <div>
               <div style={{ fontSize: '4rem', fontWeight: 700, color: '#f59e0b', marginBottom: '0.5rem' }}>
-                $
-                {currentNode.politicians
-                  ? (currentNode.politicians.reduce((sum, p) => sum + p.aipacFunding, 0) / 1000000).toFixed(1)
-                  : '0.0'}M
+                ${(aipacTotal / 1000000).toFixed(1)}M
               </div>
               <div style={{ fontSize: '0.875rem', color: '#888', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                 Total AIPAC Funding
@@ -284,10 +341,10 @@ export default function HierarchyPage() {
             <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '2rem', color: '#fff' }}>
               Drill Down
             </h2>
-            <div style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', 
-              gap: '1.5rem' 
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+              gap: '1.5rem'
             }}>
               {currentNode.children.map((child) => (
                 <button
@@ -314,16 +371,16 @@ export default function HierarchyPage() {
                   <div style={{ fontSize: '1.25rem', fontWeight: 600, color: '#fff', marginBottom: '0.5rem' }}>
                     {child.name}
                   </div>
-                  <div style={{ 
-                    fontSize: '2rem', 
-                    fontWeight: 700, 
+                  <div style={{
+                    fontSize: '2rem',
+                    fontWeight: 700,
                     color: '#ef4444',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '0.5rem',
                   }}>
                     {child.count}
-                    <span style={{ fontSize: '1rem', color: '#666' }}>→</span>
+                    <span style={{ fontSize: '1rem', color: '#666' }}>{'\u2192'}</span>
                   </div>
                 </button>
               ))}
@@ -337,10 +394,10 @@ export default function HierarchyPage() {
             <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '2rem', color: '#fff' }}>
               Officials
             </h2>
-            <div style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', 
-              gap: '1.5rem' 
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
+              gap: '1.5rem'
             }}>
               {currentNode.politicians.map((politician) => (
                 <Link
@@ -370,37 +427,37 @@ export default function HierarchyPage() {
                         {politician.name}
                       </div>
                       <div style={{ fontSize: '0.875rem', color: '#888' }}>
-                        {politician.office} • {politician.district}
+                        {politician.office}{politician.district ? ` \u2022 ${politician.district}` : ''}
                       </div>
                     </div>
-                    <div style={{ 
-                      fontSize: '1.5rem', 
-                      fontWeight: 700, 
-                      color: politician.corruptionScore < 40 ? '#10b981' : politician.corruptionScore < 60 ? '#f59e0b' : '#ef4444' 
+                    <div style={{
+                      fontSize: '1.5rem',
+                      fontWeight: 700,
+                      color: politician.corruptionScore < 40 ? '#10b981' : politician.corruptionScore < 60 ? '#f59e0b' : '#ef4444'
                     }}>
                       {politician.corruptionScore}
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                    <span style={{ 
-                      fontSize: '0.75rem', 
-                      padding: '0.4rem 0.75rem', 
+                    <span style={{
+                      fontSize: '0.75rem',
+                      padding: '0.4rem 0.75rem',
                       background: politician.party === 'Republican' ? '#dc2626' : politician.party === 'Democrat' ? '#2563eb' : '#6b7280',
                       color: '#fff',
                       borderRadius: '12px',
                       fontWeight: 600,
                     }}>
-                      {politician.party === 'Republican' ? '🐘 R' : politician.party === 'Democrat' ? '🫏 D' : politician.party.charAt(0)}
+                      {politician.party === 'Republican' ? 'R' : politician.party === 'Democrat' ? 'D' : politician.party.charAt(0)}
                     </span>
                     {politician.juiceBoxTier !== 'none' && (
-                      <span style={{ 
-                        fontSize: '0.75rem', 
-                        padding: '0.25rem 0.5rem', 
+                      <span style={{
+                        fontSize: '0.75rem',
+                        padding: '0.25rem 0.5rem',
                         background: '#78350f',
                         color: '#f59e0b',
                         borderRadius: '3px',
                       }}>
-                        {politician.juiceBoxTier === 'owned' ? '👑' : politician.juiceBoxTier === 'bought' ? '💰' : '💸'} ${(politician.aipacFunding / 1000).toFixed(0)}K
+                        {politician.juiceBoxTier === 'owned' ? 'OWNED' : politician.juiceBoxTier === 'bought' ? 'BOUGHT' : 'COMPROMISED'} ${(politician.aipacFunding / 1000).toFixed(0)}K
                       </span>
                     )}
                   </div>
@@ -411,10 +468,10 @@ export default function HierarchyPage() {
         )}
 
         {/* Empty State */}
-        {(!currentNode.children || currentNode.children.length === 0) && 
+        {(!currentNode.children || currentNode.children.length === 0) &&
          (!currentNode.politicians || currentNode.politicians.length === 0) && (
-          <div style={{ 
-            textAlign: 'center', 
+          <div style={{
+            textAlign: 'center',
             padding: '4rem 2rem',
             color: 'var(--terminal-text-dim)',
           }}>
