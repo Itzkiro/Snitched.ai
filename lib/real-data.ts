@@ -19,8 +19,14 @@ import floridaPoliticiansRaw from '../data-ingestion/phase1/processed/florida_po
 // Import real FEC scrape results (from Python scraper run on 2026-02-22)
 import fecResultsRaw from '../data-ingestion/jfk-fec-results/jfk-fec-full-results.json';
 
-// Import Volusia County data
+// Import county-level data
 import { volusiaCountyOfficials } from './volusia-county-data';
+import { flaglerCountyOfficials } from './flagler-county-data';
+import { putnamCountyOfficials } from './putnam-county-data';
+import { lakeCountyOfficials } from './lake-county-data';
+import { seminoleCountyOfficials } from './seminole-county-data';
+import { orangeCountyOfficials } from './orange-county-data';
+import { brevardCountyOfficials } from './brevard-county-data';
 
 // ---------------------------------------------------------------------------
 // Types for raw imported data
@@ -463,7 +469,7 @@ function convertToPolitician(raw: RawPolitician): Politician {
 // ---------------------------------------------------------------------------
 
 /**
- * Get all politicians (JFK-Intel Phase 1 + Volusia County)
+ * Get all politicians (JFK-Intel Phase 1 + all county data)
  * Federal politicians use REAL FEC data when available.
  */
 export function getAllPoliticians(): Politician[] {
@@ -472,12 +478,22 @@ export function getAllPoliticians(): Politician[] {
     .filter(raw => raw && raw.name && raw.office)
     .map(convertToPolitician);
 
-  // Add Volusia County officials (no FEC data - local level)
-  // Compute corruption scores for county officials too
-  const volusiaWithStatus = volusiaCountyOfficials
+  // Combine all county officials (no FEC data - local level)
+  const allCountyOfficials = [
+    ...volusiaCountyOfficials,
+    ...flaglerCountyOfficials,
+    ...putnamCountyOfficials,
+    ...lakeCountyOfficials,
+    ...seminoleCountyOfficials,
+    ...orangeCountyOfficials,
+    ...brevardCountyOfficials,
+  ];
+
+  // Compute corruption scores for county officials
+  const countyWithStatus = allCountyOfficials
     .filter(p => p && p.name && p.office)
     .map(p => {
-      const volusiaPol: Politician = {
+      const countyPol: Politician = {
         ...p,
         totalFundsRaised: 0,
         top3Donors: [] as Array<{ name: string; amount: number; type: 'PAC' | 'Individual' | 'Corporate' | 'Israel-PAC' }>,
@@ -491,15 +507,15 @@ export function getAllPoliticians(): Politician[] {
         corruptionScore: 0,
         dataStatus: 'live' as const,
         dataSource: 'jfk-intel-manual (local officials - no FEC data)',
-        lastUpdated: '2026-02-22T08:20:00',
+        lastUpdated: '2026-03-04T00:00:00',
       };
-      const scoreResult = computeCorruptionScore(volusiaPol);
-      volusiaPol.corruptionScore = scoreResult.score;
-      volusiaPol.corruptionScoreDetails = scoreResult;
-      return volusiaPol;
+      const scoreResult = computeCorruptionScore(countyPol);
+      countyPol.corruptionScore = scoreResult.score;
+      countyPol.corruptionScoreDetails = scoreResult;
+      return countyPol;
     });
 
-  return [...livePoliticians, ...volusiaWithStatus].filter(p =>
+  return [...livePoliticians, ...countyWithStatus].filter(p =>
     p && p.name && p.office && p.party && p.officeLevel
   );
 }
@@ -511,7 +527,9 @@ export function getDataStats() {
   const all = getAllPoliticians();
   const federal = all.filter(p => p.officeLevel === 'US Senator' || p.officeLevel === 'US Representative');
   const state = all.filter(p => p.officeLevel === 'State Senator' || p.officeLevel === 'State Representative' || p.officeLevel === 'Governor');
-  const county = all.filter(p => p.jurisdiction === 'Volusia County');
+  const county = all.filter(p =>
+    p.jurisdictionType === 'county' || p.jurisdictionType === 'municipal'
+  );
   const withDetailedFec = all.filter(p => p.dataSource?.includes('FEC API (api.open.fec.gov)'));
   const withPartialFec = all.filter(p => p.dataSource?.includes('total raised only'));
   const withAnyFec = all.filter(p => p.dataSource?.includes('FEC API') && (p.totalFundsRaised ?? 0) > 0);
