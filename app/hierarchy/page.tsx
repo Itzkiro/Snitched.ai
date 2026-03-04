@@ -31,98 +31,120 @@ function branchNode(id: string, name: string, children: (HierarchyNode | undefin
   return { id, name, count: valid.reduce((s, c) => s + c.count, 0), children: valid };
 }
 
+/** Map municipality jurisdictions to their parent county */
+const MUNICIPALITY_TO_COUNTY: Record<string, string> = {
+  'Palm Coast': 'Flagler County',
+  'Flagler Beach': 'Flagler County',
+  'Bunnell': 'Flagler County',
+  'Palatka': 'Putnam County',
+  'Crescent City': 'Putnam County',
+};
+
+/** Known county names — used to discover counties dynamically from data */
+const COUNTY_NAMES = [
+  'Volusia County', 'Flagler County', 'Putnam County',
+  'Lake County', 'Seminole County', 'Orange County', 'Brevard County',
+];
+
+const CONSTITUTIONAL_OFFICES: Politician['officeLevel'][] = [
+  'Sheriff', 'Clerk of Court', 'Property Appraiser', 'Tax Collector', 'Supervisor of Elections',
+];
+
+/**
+ * Build a sub-tree for a single county from all politicians that belong to it
+ * (including municipal officials from cities within the county).
+ */
+function buildCountyNode(slug: string, countyName: string, pols: Politician[]): HierarchyNode | undefined {
+  if (pols.length === 0) return undefined;
+
+  const commissioners = pols.filter(p => p.officeLevel === 'County Commissioner');
+  const constitutional = pols.filter(p => CONSTITUTIONAL_OFFICES.includes(p.officeLevel));
+  const schoolBoard = pols.filter(p => p.officeLevel === 'School Board');
+  const judges = pols.filter(p => p.officeLevel === 'Judge');
+  const stateAttorneys = pols.filter(p => p.officeLevel === 'State Attorney');
+  const publicDefenders = pols.filter(p => p.officeLevel === 'Public Defender');
+  const legalOfficers = [...stateAttorneys, ...publicDefenders];
+  const soilWater = pols.filter(p => p.officeLevel === 'Soil & Water');
+  const mayors = pols.filter(p => p.officeLevel === 'Mayor');
+  const cityCommissioners = pols.filter(p => p.officeLevel === 'City Commissioner');
+
+  const countyGov = branchNode(`${slug}-gov`, 'County Government', [
+    leafNode(`${slug}-commissioners`, 'County Commissioners', commissioners),
+    leafNode(`${slug}-constitutional`, 'Constitutional Officers', constitutional),
+  ]);
+
+  const education = leafNode(`${slug}-education`, 'School Board', schoolBoard);
+
+  const judiciary = branchNode(`${slug}-judiciary`, 'Judiciary', [
+    leafNode(`${slug}-judges`, 'Judges', judges),
+    leafNode(`${slug}-legal`, 'State Attorney & Public Defender', legalOfficers),
+  ]);
+
+  const municipal = branchNode(`${slug}-municipal`, 'Municipal Officials', [
+    leafNode(`${slug}-mayors`, 'Mayors', mayors),
+    leafNode(`${slug}-city-comm`, 'City Commissioners', cityCommissioners),
+  ]);
+
+  const special = leafNode(`${slug}-soil-water`, 'Soil & Water Conservation', soilWater);
+
+  return branchNode(slug, countyName, [
+    countyGov,
+    education,
+    judiciary,
+    municipal,
+    special,
+  ]);
+}
+
 /**
  * Build the full hierarchy tree from the flat politician list returned by the API.
  * Every count is derived from the actual data -- nothing is hardcoded.
  */
 function buildHierarchy(all: Politician[]): HierarchyNode {
-  // ── helpers to filter ──
   const byOffice = (level: Politician['officeLevel']) => all.filter(p => p.officeLevel === level);
-  const byJurisdiction = (j: string) => all.filter(p => p.jurisdiction === j);
 
   // ── Federal ──
-  const senators = byOffice('US Senator');
-  const representatives = byOffice('US Representative');
   const federal = branchNode('federal', 'Federal Delegation', [
-    leafNode('us-senate', 'U.S. Senate', senators),
-    leafNode('us-house', 'U.S. House', representatives),
+    leafNode('us-senate', 'U.S. Senate', byOffice('US Senator')),
+    leafNode('us-house', 'U.S. House', byOffice('US Representative')),
   ]);
 
   // ── State Executive ──
-  const governors = byOffice('Governor');
-  const stateExec = leafNode('state-exec', 'State Executive', governors);
+  const stateExec = leafNode('state-exec', 'State Executive', byOffice('Governor'));
 
   // ── State Legislature ──
-  const stateSenators = byOffice('State Senator');
-  const stateReps = byOffice('State Representative');
   const stateLeg = branchNode('state-leg', 'State Legislature', [
-    leafNode('state-senate', 'State Senate', stateSenators),
-    leafNode('state-house', 'State House', stateReps),
+    leafNode('state-senate', 'State Senate', byOffice('State Senator')),
+    leafNode('state-house', 'State House', byOffice('State Representative')),
   ]);
 
-  // ── Volusia County breakdown ──
-  const volusia = byJurisdiction('Volusia County');
+  // ── Counties ──
+  // Group all county/municipal politicians by their parent county
+  const countyGroups: Record<string, Politician[]> = {};
+  for (const name of COUNTY_NAMES) countyGroups[name] = [];
 
-  // County Council (County Commissioner)
-  const countyCouncil = volusia.filter(p => p.officeLevel === 'County Commissioner');
+  for (const p of all) {
+    if (p.jurisdictionType !== 'county' && p.jurisdictionType !== 'municipal') continue;
+    const parentCounty = MUNICIPALITY_TO_COUNTY[p.jurisdiction] || p.jurisdiction;
+    if (!countyGroups[parentCounty]) countyGroups[parentCounty] = [];
+    countyGroups[parentCounty].push(p);
+  }
 
-  // Constitutional Officers
-  const constitutionalOfficeLevels: Politician['officeLevel'][] = [
-    'Sheriff', 'Clerk of Court', 'Property Appraiser', 'Tax Collector', 'Supervisor of Elections',
-  ];
-  const constitutionalOfficers = volusia.filter(p => constitutionalOfficeLevels.includes(p.officeLevel));
+  const countyNodes: (HierarchyNode | undefined)[] = Object.entries(countyGroups)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([name, pols]) => {
+      const slug = name.toLowerCase().replace(/\s+/g, '-');
+      return buildCountyNode(slug, name, pols);
+    });
 
-  // School Board (includes Superintendent who is tagged School Board in the data)
-  const schoolBoard = volusia.filter(p => p.officeLevel === 'School Board');
-
-  // Judiciary
-  const judges = volusia.filter(p => p.officeLevel === 'Judge');
-
-  // State Attorney & Public Defender
-  const stateAttorneys = volusia.filter(p => p.officeLevel === 'State Attorney');
-  const publicDefenders = volusia.filter(p => p.officeLevel === 'Public Defender');
-  const legalOfficers = [...stateAttorneys, ...publicDefenders];
-
-  // Soil & Water Conservation
-  const soilWater = volusia.filter(p => p.officeLevel === 'Soil & Water');
-
-  // Municipal officials in Volusia
-  const mayors = volusia.filter(p => p.officeLevel === 'Mayor');
-  const cityCommissioners = volusia.filter(p => p.officeLevel === 'City Commissioner');
-
-  const volusiaCountyGov = branchNode('volusia-county-gov', 'County Government', [
-    leafNode('county-council', 'County Council', countyCouncil),
-    leafNode('constitutional-officers', 'Constitutional Officers', constitutionalOfficers),
-  ]);
-
-  const volusiaEducation = leafNode('volusia-education', 'School Board & Superintendent', schoolBoard);
-
-  const volusiaJudiciary = branchNode('volusia-judiciary', 'Judiciary (7th Circuit)', [
-    leafNode('judges', 'Circuit & County Judges', judges),
-    leafNode('legal-officers', 'State Attorney & Public Defender', legalOfficers),
-  ]);
-
-  const volusiaMunicipal = branchNode('volusia-municipal', 'Municipal Officials', [
-    leafNode('mayors', 'Mayors', mayors),
-    leafNode('city-commissioners', 'City Commissioners', cityCommissioners),
-  ]);
-
-  const volusiaSpecial = leafNode('volusia-soil-water', 'Soil & Water Conservation', soilWater);
-
-  const volusiaNode = branchNode('volusia', 'Volusia County', [
-    volusiaCountyGov,
-    volusiaEducation,
-    volusiaJudiciary,
-    volusiaMunicipal,
-    volusiaSpecial,
-  ]);
+  const countiesNode = branchNode('counties', 'Counties', countyNodes);
 
   // ── Top-level tree ──
   const topChildren: (HierarchyNode | undefined)[] = [
     federal,
     stateExec,
     stateLeg,
-    volusiaNode,
+    countiesNode,
   ];
   const validTop = topChildren.filter((c): c is HierarchyNode => c != null && c.count > 0);
 
