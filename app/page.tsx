@@ -50,7 +50,7 @@ export default function TerminalHome() {
   // Calculate stats from loaded politicians (don't call getAllPoliticians again)
   const federal = politicians.filter(p => p.officeLevel === 'US Senator' || p.officeLevel === 'US Representative');
   const state = politicians.filter(p => p.officeLevel === 'State Senator' || p.officeLevel === 'State Representative' || p.officeLevel === 'Governor');
-  const county = politicians.filter(p => p.jurisdiction === 'Volusia County');
+  const county = politicians.filter(p => p.jurisdictionType === 'county' || p.jurisdictionType === 'municipal');
   const stats = {
     total: politicians.length,
     federal: federal.length,
