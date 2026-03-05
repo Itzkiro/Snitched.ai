@@ -143,6 +143,78 @@ function normalizeForMatch(name: string): string {
     .trim();
 }
 
+/** Common nickname → formal name mappings */
+const NICKNAME_MAP: Record<string, string[]> = {
+  rick: ['richard'],
+  richard: ['rick'],
+  bill: ['william'],
+  william: ['bill', 'will', 'billy'],
+  bob: ['robert'],
+  robert: ['bob', 'rob', 'bobby'],
+  jim: ['james'],
+  james: ['jim', 'jimmy'],
+  jimmy: ['james'],
+  mike: ['michael'],
+  michael: ['mike'],
+  joe: ['joseph'],
+  joseph: ['joe'],
+  tom: ['thomas'],
+  thomas: ['tom', 'tommy'],
+  tommy: ['thomas'],
+  dan: ['daniel'],
+  daniel: ['dan', 'danny'],
+  danny: ['daniel'],
+  ed: ['edward', 'edwin'],
+  edward: ['ed', 'ted'],
+  ted: ['edward', 'theodore'],
+  steve: ['stephen', 'steven'],
+  stephen: ['steve'],
+  steven: ['steve'],
+  greg: ['gregory'],
+  gregory: ['greg'],
+  pat: ['patricia', 'patrick'],
+  chris: ['christopher', 'christine', 'christina'],
+  christopher: ['chris'],
+  matt: ['matthew'],
+  matthew: ['matt'],
+  tony: ['anthony'],
+  anthony: ['tony'],
+  vern: ['vernon'],
+  vernon: ['vern'],
+  chuck: ['charles'],
+  charles: ['chuck', 'charlie'],
+  charlie: ['charles'],
+  dick: ['richard'],
+  don: ['donald'],
+  donald: ['don'],
+  doug: ['douglas'],
+  douglas: ['doug'],
+  fred: ['frederick', 'frederic'],
+  frederick: ['fred'],
+  gus: ['gustavo', 'august', 'augustus'],
+  larry: ['lawrence'],
+  lawrence: ['larry'],
+  liz: ['elizabeth'],
+  elizabeth: ['liz', 'beth'],
+  kate: ['katherine', 'catherine'],
+  katherine: ['kate', 'kathy'],
+  kathy: ['katherine', 'kathleen'],
+  kathleen: ['kathy'],
+  debbie: ['deborah', 'debra'],
+  deborah: ['debbie'],
+  debra: ['debbie'],
+};
+
+function firstNamesMatch(a: string, b: string): boolean {
+  if (a === b) return true;
+  if (a.startsWith(b) || b.startsWith(a)) return true;
+  // Check nickname mapping
+  const aAliases = NICKNAME_MAP[a] ?? [];
+  const bAliases = NICKNAME_MAP[b] ?? [];
+  if (aAliases.includes(b) || bAliases.includes(a)) return true;
+  return false;
+}
+
 function matchPoliticianToLegiScan(
   dbPoliticians: any[],
   legiScanPeople: LegiScanPerson[],
@@ -166,8 +238,8 @@ function matchPoliticianToLegiScan(
       const dbFirst = dbParts[0];
       const dbLast = dbParts[dbParts.length - 1];
 
-      // Exact last name + first name starts with match
-      if (dbLast === lsLast && (dbFirst === lsFirst || dbFirst.startsWith(lsFirst) || lsFirst.startsWith(dbFirst))) {
+      // Exact last name + first name match (including nickname aliases)
+      if (dbLast === lsLast && firstNamesMatch(dbFirst, lsFirst)) {
         const score = dbFirst === lsFirst ? 100 : 90;
         if (score > bestScore) {
           bestScore = score;

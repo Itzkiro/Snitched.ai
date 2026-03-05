@@ -621,7 +621,7 @@ async function main() {
   const limit = limitIdx >= 0 ? parseInt(args[limitIdx + 1]) : Infinity;
   const cycles = cycleIdx >= 0
     ? [parseInt(args[cycleIdx + 1])]
-    : [2024, 2022]; // Most recent cycles
+    : [2026, 2024, 2022]; // Most recent cycles (2026 needed for new members)
 
   console.log('='.repeat(70));
   console.log('  Snitched.ai - FEC Campaign Finance Data Sync');
