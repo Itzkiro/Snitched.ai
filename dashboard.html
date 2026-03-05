@@ -196,19 +196,23 @@
   <div class="stats">
     <div class="stat-card">
       <div class="stat-label">Total Commits</div>
-      <div class="stat-value green">13</div>
+      <div class="stat-value green">16</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Files Changed</div>
-      <div class="stat-value blue">66</div>
+      <div class="stat-value blue">73</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Lines Added</div>
-      <div class="stat-value cyan">+31,506</div>
+      <div class="stat-value cyan">+35,267</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Politicians Tracked</div>
-      <div class="stat-value amber">271</div>
+      <div class="stat-value amber">423</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Counties Covered</div>
+      <div class="stat-value amber">7</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">API Endpoints</div>
@@ -228,7 +232,7 @@
     <div class="ticket-grid">
       <!-- DONE -->
       <div class="ticket-column">
-        <div class="column-header col-done">Completed (18)</div>
+        <div class="column-header col-done">Completed (22)</div>
 
         <div class="ticket done">
           <div class="ticket-title">Get app building & deployable on Vercel</div>
@@ -302,21 +306,32 @@
           <div class="ticket-title">Daemon health monitoring API + Vercel cron fallback</div>
           <div class="ticket-meta">f62050d // Mar 4</div>
         </div>
+        <div class="ticket done">
+          <div class="ticket-title">Add 152 officials from 6 neighboring counties</div>
+          <div class="ticket-meta">d73bc4a // Mar 4 — Flagler (30), Putnam (24), Lake (24), Seminole (22), Orange (28), Brevard (24)</div>
+        </div>
+        <div class="ticket done">
+          <div class="ticket-title">Seed all 423 politicians to both Supabase instances</div>
+          <div class="ticket-meta">d73bc4a // Mar 4 — Local + Vercel production databases</div>
+        </div>
+        <div class="ticket done">
+          <div class="ticket-title">Fix homepage county stat to count all counties</div>
+          <div class="ticket-meta">9a9e9dc // Mar 4</div>
+        </div>
+        <div class="ticket done">
+          <div class="ticket-title">Hierarchy page: drillable county nodes for all 7 counties</div>
+          <div class="ticket-meta">a5a658e // Mar 4 — Florida > Counties > [7 counties] > sub-categories</div>
+        </div>
       </div>
 
       <!-- IN PROGRESS -->
       <div class="ticket-column">
-        <div class="column-header col-progress">In Progress (1)</div>
-
-        <div class="ticket progress">
-          <div class="ticket-title">Add neighboring county officials (Flagler, Putnam, Lake, Seminole, Orange, Brevard)</div>
-          <div class="ticket-meta">Estimated ~250 new politicians from 6 counties</div>
-        </div>
+        <div class="column-header col-progress">In Progress (0)</div>
       </div>
 
       <!-- TODO -->
       <div class="ticket-column">
-        <div class="column-header col-todo">Upcoming (6)</div>
+        <div class="column-header col-todo">Upcoming (4)</div>
 
         <div class="ticket todo">
           <div class="ticket-title">Create social_posts + scrape_runs tables in Supabase</div>
@@ -327,20 +342,12 @@
           <div class="ticket-meta">./scripts/start-social-daemon.sh</div>
         </div>
         <div class="ticket todo">
-          <div class="ticket-title">Install Python scraping dependencies</div>
-          <div class="ticket-meta">pip install -r scrapers/requirements.txt</div>
-        </div>
-        <div class="ticket todo">
           <div class="ticket-title">Connect real county-level funding data</div>
           <div class="ticket-meta">County officials currently have zero FEC data</div>
         </div>
         <div class="ticket todo">
           <div class="ticket-title">Corruption Score v2 with real data</div>
           <div class="ticket-meta">Enhance algorithm beyond placeholders</div>
-        </div>
-        <div class="ticket todo">
-          <div class="ticket-title">Push to production on Vercel</div>
-          <div class="ticket-meta">git push origin main</div>
         </div>
       </div>
     </div>
@@ -355,7 +362,7 @@
       <div class="system-card">
         <div class="system-name"><span class="status-dot dot-green"></span>Supabase Database</div>
         <div class="system-detail">URL: <span>uqjfxhpyitleeleazzow.supabase.co</span></div>
-        <div class="system-detail">Tables: <span>politicians (271 rows)</span></div>
+        <div class="system-detail">Tables: <span>politicians (423 rows)</span></div>
         <div class="system-detail">Pending: <span>social_posts, scrape_runs</span></div>
         <div class="system-detail">RLS: <span>Enabled, public read</span></div>
       </div>
@@ -389,6 +396,21 @@
       <div class="section-title">Commit Timeline</div>
     </div>
     <div class="timeline">
+      <div class="commit">
+        <div><span class="commit-tag tag-feat">FEAT</span><span class="commit-hash">a5a658e</span></div>
+        <div class="commit-msg">Hierarchy page: drillable county nodes for all 7 counties</div>
+        <div class="commit-date">Mar 4, 2026 — Florida > Counties > [Brevard, Flagler, Lake, Orange, Putnam, Seminole, Volusia] > sub-categories</div>
+      </div>
+      <div class="commit">
+        <div><span class="commit-tag tag-fix">FIX</span><span class="commit-hash">9a9e9dc</span></div>
+        <div class="commit-msg">Homepage county stat now counts all counties, not just Volusia</div>
+        <div class="commit-date">Mar 4, 2026 — Fixed jurisdictionType filter for county/municipal</div>
+      </div>
+      <div class="commit">
+        <div><span class="commit-tag tag-feat">FEAT</span><span class="commit-hash">d73bc4a</span></div>
+        <div class="commit-msg">Add 152 officials from 6 neighboring counties + monitoring dashboard</div>
+        <div class="commit-date">Mar 4, 2026 — Flagler (30), Putnam (24), Lake (24), Seminole (22), Orange (28), Brevard (24). Total: 423</div>
+      </div>
       <div class="commit">
         <div><span class="commit-tag tag-feat">FEAT</span><span class="commit-hash">f62050d</span></div>
         <div class="commit-msg">Real-time social media monitoring daemon + social intel page</div>
@@ -448,7 +470,7 @@
       <div class="section-title">API Routes (16 endpoints)</div>
     </div>
     <div class="file-list">
-      <div class="file-item"><span>/api/politicians</span><span class="additions">Main data — 271 politicians</span></div>
+      <div class="file-item"><span>/api/politicians</span><span class="additions">Main data — 423 politicians (7 counties)</span></div>
       <div class="file-item"><span>/api/politicians/votes</span><span class="additions">Voting records</span></div>
       <div class="file-item"><span>/api/social-posts</span><span class="additions">Social media posts</span></div>
       <div class="file-item"><span>/api/daemon-status</span><span class="additions">Daemon health check</span></div>

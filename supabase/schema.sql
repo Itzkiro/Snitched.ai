@@ -44,6 +44,10 @@ CREATE TABLE IF NOT EXISTS politicians (
   -- Data provenance
   data_source     TEXT,
 
+  -- Lobbying & Voting records (populated by sync scripts)
+  lobbying_records JSONB DEFAULT NULL,
+  voting_records   JSONB DEFAULT NULL,
+
   -- Timestamps
   created_at      TIMESTAMPTZ DEFAULT NOW(),
   updated_at      TIMESTAMPTZ DEFAULT NOW()

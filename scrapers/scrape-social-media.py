@@ -1,27 +1,33 @@
 #!/usr/bin/env python3
 """
-Social Media Scraper for Snitched.ai
-=====================================
-Scrapes politician social media posts for sentiment analysis and archiving.
+Social Media & Press Scraper for Snitched.ai
+=============================================
+Collects politician public statements, press releases, news mentions,
+and real social media posts from Twitter/X, Facebook, and Instagram.
 
 Engines:
-  - Scrapling (primary) -- for Twitter/X via Nitter, Instagram public profiles,
-    TikTok public profiles, YouTube channel pages
-  - facebook-scraper   -- for Facebook page posts
+  - Official .gov RSS feeds (press releases, blog posts)
+  - Official website press release page scraping (requests + BeautifulSoup)
+  - Google News RSS (recent news mentions of politicians)
+  - YouTube RSS feeds (public, no API key needed)
+  - Twitter/X via Twikit (guest mode, no API key)
+  - Facebook via facebook-scraper (public pages, no API key)
+  - Instagram via Instaloader (public profiles, no API key)
 
 Data flow:
-  1. Read politician social handles from Supabase REST API
-  2. For each politician, scrape recent posts from available platforms
+  1. Read politician records from Supabase REST API
+  2. For each politician, fetch content from enabled source types
   3. Run sentiment analysis on post text
   4. Save results to data-ingestion/social-media-posts.json
-  5. Optionally push results back to Supabase
+  5. Push results to Supabase social_posts table (upsert)
 
 Usage:
-    python scrape-social-media.py --dry-run          # Validate pipeline, no scraping
-    python scrape-social-media.py --batch --limit 5   # Scrape 5 politicians
-    python scrape-social-media.py --batch             # Scrape all politicians
+    python scrape-social-media.py --dry-run              # Validate pipeline, no scraping
+    python scrape-social-media.py --batch --limit 5       # Scrape 5 politicians
+    python scrape-social-media.py --batch                 # Scrape all politicians
     python scrape-social-media.py --politician "Rick Scott"
-    python scrape-social-media.py --platforms twitter,facebook --limit 10
+    python scrape-social-media.py --platforms twitter,facebook,instagram --limit 10
+    python scrape-social-media.py --platforms rss,news,press,twitter,facebook,instagram
 """
 
 import os
@@ -30,12 +36,51 @@ import json
 import logging
 import argparse
 import hashlib
-from datetime import datetime, timedelta
-from typing import List, Dict, Any, Optional
+import re
+import xml.etree.ElementTree as ET
+from datetime import datetime, timedelta, timezone
+from typing import List, Dict, Any, Optional, Tuple
 import time
 from pathlib import Path
+from email.utils import parsedate_to_datetime
+from urllib.parse import quote_plus, urljoin, urlparse
 
 import requests
+
+# ---------------------------------------------------------------------------
+# Optional: BeautifulSoup (for press release page scraping)
+# ---------------------------------------------------------------------------
+
+try:
+    from bs4 import BeautifulSoup
+
+    HAS_BS4 = True
+except ImportError:
+    HAS_BS4 = False
+
+# Twitter/X: We use the syndication API (no library needed, just requests + BS4)
+
+# ---------------------------------------------------------------------------
+# Optional: facebook-scraper
+# ---------------------------------------------------------------------------
+
+try:
+    import facebook_scraper as fb_scraper
+
+    HAS_FB_SCRAPER = True
+except ImportError:
+    HAS_FB_SCRAPER = False
+
+# ---------------------------------------------------------------------------
+# Optional: Instaloader (Instagram public profiles)
+# ---------------------------------------------------------------------------
+
+try:
+    import instaloader
+
+    HAS_INSTALOADER = True
+except ImportError:
+    HAS_INSTALOADER = False
 
 # ---------------------------------------------------------------------------
 # Paths
@@ -85,55 +130,46 @@ SUPABASE_HEADERS = {
 }
 
 # ---------------------------------------------------------------------------
-# Nitter mirrors for Twitter/X scraping (public, no auth needed)
+# HTTP session with retries and polite headers
 # ---------------------------------------------------------------------------
 
-NITTER_INSTANCES = [
-    "https://nitter.privacydev.net",
-    "https://nitter.poast.org",
-    "https://nitter.woodland.cafe",
-    "https://nitter.net",
-    "https://nitter.cz",
-]
-
-# ---------------------------------------------------------------------------
-# Scrapling engine (lazy-loaded)
-# ---------------------------------------------------------------------------
-
-_scrapling_fetcher = None
-
-
-def get_fetcher():
-    """Lazy-load Scrapling Fetcher."""
-    global _scrapling_fetcher
-    if _scrapling_fetcher is None:
-        try:
-            from scrapling import Fetcher
-            _scrapling_fetcher = Fetcher(auto_match=False)
-            logger.info("Scrapling Fetcher initialized")
-        except ImportError:
-            logger.error(
-                "Scrapling not installed. Install with: pip install scrapling>=0.4.1"
-            )
-            raise
-    return _scrapling_fetcher
+SESSION = requests.Session()
+SESSION.headers.update(
+    {
+        "User-Agent": (
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/122.0.0.0 Safari/537.36"
+        ),
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
+    }
+)
 
 
-def scrapling_get(url: str, timeout: int = 30, retries: int = 2) -> Any:
-    """Fetch a page via Scrapling with retries."""
-    fetcher = get_fetcher()
+def fetch_url(url: str, timeout: int = 20, retries: int = 2) -> Optional[requests.Response]:
+    """Fetch a URL with retries and polite delays."""
     last_error = None
     for attempt in range(retries + 1):
         try:
-            page = fetcher.get(url, timeout=timeout)
-            return page
-        except Exception as e:
+            resp = SESSION.get(url, timeout=timeout, allow_redirects=True)
+            if resp.status_code == 200:
+                return resp
+            elif resp.status_code == 429:
+                wait = min(30, 5 * (attempt + 1))
+                logger.debug(f"Rate limited on {url}, waiting {wait}s")
+                time.sleep(wait)
+            else:
+                logger.debug(f"HTTP {resp.status_code} for {url}")
+                return resp  # Return non-200 so caller can inspect
+        except requests.RequestException as e:
             last_error = e
             if attempt < retries:
                 wait = 2 * (attempt + 1)
                 logger.debug(f"Retry {attempt + 1} for {url} in {wait}s: {e}")
                 time.sleep(wait)
-    raise last_error
+    logger.debug(f"All retries exhausted for {url}: {last_error}")
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -141,12 +177,14 @@ def scrapling_get(url: str, timeout: int = 30, retries: int = 2) -> Any:
 # ---------------------------------------------------------------------------
 
 
-def supabase_get_politicians(limit: int = 1000, offset: int = 0) -> List[Dict[str, Any]]:
-    """Fetch politicians with social media handles from Supabase."""
+def supabase_get_politicians(
+    limit: int = 1000, offset: int = 0
+) -> List[Dict[str, Any]]:
+    """Fetch politicians from Supabase. Does NOT filter by social_media anymore
+    since we can scrape .gov sites and Google News for any politician."""
     url = (
         f"{SUPABASE_URL}/rest/v1/politicians"
         f"?select=bioguide_id,name,office,office_level,party,social_media"
-        f"&social_media=not.eq.{{}}"
         f"&order=name"
         f"&limit={limit}"
         f"&offset={offset}"
@@ -154,8 +192,204 @@ def supabase_get_politicians(limit: int = 1000, offset: int = 0) -> List[Dict[st
     resp = requests.get(url, headers=SUPABASE_HEADERS, timeout=30)
     resp.raise_for_status()
     politicians = resp.json()
-    logger.info(f"Fetched {len(politicians)} politicians with social media data (offset={offset})")
+    logger.info(
+        f"Fetched {len(politicians)} politicians (offset={offset})"
+    )
     return politicians
+
+
+def supabase_upsert_posts(posts: List[Dict[str, Any]]) -> int:
+    """Upsert posts to the social_posts table. Returns count of rows affected."""
+    if not posts:
+        return 0
+
+    # Supabase REST API upsert via POST with Prefer: resolution=merge-duplicates
+    url = f"{SUPABASE_URL}/rest/v1/social_posts"
+    headers = {
+        **SUPABASE_HEADERS,
+        "Prefer": "return=representation,resolution=merge-duplicates",
+    }
+
+    # Send in batches of 100
+    total = 0
+    for i in range(0, len(posts), 100):
+        batch = posts[i : i + 100]
+        # Clean up fields for Supabase
+        clean_batch = []
+        for post in batch:
+            row = {
+                "id": post["id"],
+                "politician_id": post.get("politician_id"),
+                "politician_name": post.get("politician_name"),
+                "platform": post["platform"],
+                "handle": post.get("handle"),
+                "content": post.get("content", "")[:5000],
+                "post_url": post.get("post_url"),
+                "posted_at": post.get("posted_at"),
+                "likes_count": post.get("likes_count", 0),
+                "shares_count": post.get("shares_count", 0),
+                "comments_count": post.get("comments_count", 0),
+                "views_count": post.get("views_count", 0),
+                "sentiment_score": post.get("sentiment_score"),
+                "is_deleted": post.get("is_deleted", False),
+                "scraped_at": post.get("scraped_at", datetime.now().isoformat()),
+                "note": post.get("note"),
+            }
+            clean_batch.append(row)
+
+        try:
+            resp = requests.post(url, headers=headers, json=clean_batch, timeout=30)
+            if resp.status_code in (200, 201):
+                total += len(clean_batch)
+            else:
+                logger.error(
+                    f"Supabase upsert batch failed ({resp.status_code}): {resp.text[:300]}"
+                )
+        except Exception as e:
+            logger.error(f"Supabase upsert error: {e}")
+
+    return total
+
+
+# ---------------------------------------------------------------------------
+# Helper: Build official website URLs from office info
+# ---------------------------------------------------------------------------
+
+# Known URL patterns for Florida delegation and common .gov sites
+# These are deterministic and reliably reachable.
+
+def _slug_from_name(name: str) -> str:
+    """Convert 'Rick Scott' -> 'rickscott' or 'rick-scott' style slugs."""
+    # Handle "LastName, FirstName" format
+    if "," in name:
+        parts = [p.strip() for p in name.split(",", 1)]
+        name = f"{parts[1]} {parts[0]}"
+
+    # Remove suffixes like Jr., III, etc.
+    name = re.sub(r"\b(Jr\.?|Sr\.?|III|II|IV)\b", "", name, flags=re.IGNORECASE)
+
+    clean = re.sub(r"[^a-zA-Z\s]", "", name).strip().lower()
+    return clean
+
+
+def guess_official_urls(politician: Dict) -> List[str]:
+    """Guess likely official website URLs for a politician based on their office."""
+    urls = []
+    name = politician.get("name", "")
+    office = politician.get("office", "")
+    office_level = politician.get("office_level", "")
+
+    slug = _slug_from_name(name)
+    parts = slug.split()
+
+    if not parts:
+        return urls
+
+    last_name = parts[-1]
+    first_name = parts[0] if parts else ""
+
+    if "Senator" in office_level or "Senator" in office:
+        # US Senators: https://www.lastname.senate.gov
+        urls.append(f"https://www.{last_name}.senate.gov")
+        urls.append(f"https://www.{last_name}.senate.gov/news/press-releases")
+        urls.append(f"https://www.{last_name}.senate.gov/newsroom/press-releases")
+        urls.append(f"https://www.{last_name}.senate.gov/newsroom")
+
+    if "Representative" in office_level or "Representative" in office:
+        # US Reps: https://lastname.house.gov
+        urls.append(f"https://{last_name}.house.gov")
+        urls.append(f"https://{last_name}.house.gov/media/press-releases")
+        urls.append(f"https://{last_name}.house.gov/news")
+        urls.append(f"https://{last_name}.house.gov/media")
+        # Some use first initial + last name
+        if first_name:
+            urls.append(f"https://{first_name}{last_name}.house.gov")
+
+    return urls
+
+
+def guess_rss_feeds(politician: Dict) -> List[str]:
+    """Guess likely RSS feed URLs for a politician."""
+    feeds = []
+    name = politician.get("name", "")
+    office_level = politician.get("office_level", "")
+
+    slug = _slug_from_name(name)
+    parts = slug.split()
+    if not parts:
+        return feeds
+
+    last_name = parts[-1]
+
+    if "Senator" in office_level:
+        feeds.append(f"https://www.{last_name}.senate.gov/rss/feeds/?type=press")
+        feeds.append(f"https://www.{last_name}.senate.gov/rss/feeds/press")
+        feeds.append(f"https://www.{last_name}.senate.gov/feed")
+
+    if "Representative" in office_level:
+        feeds.append(f"https://{last_name}.house.gov/rss.xml")
+        feeds.append(f"https://{last_name}.house.gov/news/rss.xml")
+        feeds.append(f"https://{last_name}.house.gov/rss/press-releases.xml")
+
+    return feeds
+
+
+# ---------------------------------------------------------------------------
+# Date parsing helpers
+# ---------------------------------------------------------------------------
+
+
+def parse_rss_date(date_str: str) -> Optional[str]:
+    """Parse an RSS date string into ISO format. Handles RFC 2822 and common formats."""
+    if not date_str:
+        return None
+
+    # Try RFC 2822 (standard RSS)
+    try:
+        dt = parsedate_to_datetime(date_str)
+        return dt.isoformat()
+    except Exception:
+        pass
+
+    # Try ISO 8601
+    try:
+        dt = datetime.fromisoformat(date_str.replace("Z", "+00:00"))
+        return dt.isoformat()
+    except Exception:
+        pass
+
+    # Try common formats
+    for fmt in [
+        "%Y-%m-%dT%H:%M:%S",
+        "%Y-%m-%d %H:%M:%S",
+        "%B %d, %Y",
+        "%b %d, %Y",
+        "%m/%d/%Y",
+        "%Y-%m-%d",
+    ]:
+        try:
+            dt = datetime.strptime(date_str.strip(), fmt)
+            return dt.isoformat()
+        except ValueError:
+            continue
+
+    return None
+
+
+def is_recent(date_str: Optional[str], days: int = 90) -> bool:
+    """Check if a date string represents a date within the last N days."""
+    if not date_str:
+        return True  # If we cannot parse the date, include it anyway
+
+    try:
+        dt = datetime.fromisoformat(date_str)
+        if dt.tzinfo:
+            cutoff = datetime.now(timezone.utc) - timedelta(days=days)
+        else:
+            cutoff = datetime.now() - timedelta(days=days)
+        return dt >= cutoff
+    except Exception:
+        return True
 
 
 # ---------------------------------------------------------------------------
@@ -163,628 +397,1122 @@ def supabase_get_politicians(limit: int = 1000, offset: int = 0) -> List[Dict[st
 # ---------------------------------------------------------------------------
 
 
-class TwitterScraper:
-    """Scrape Twitter/X posts via Nitter mirrors using Scrapling."""
-
-    def __init__(self):
-        self.working_instance: Optional[str] = None
-
-    def _find_working_instance(self) -> Optional[str]:
-        """Probe Nitter mirrors to find one that works."""
-        if self.working_instance:
-            return self.working_instance
-
-        for instance in NITTER_INSTANCES:
-            try:
-                page = scrapling_get(f"{instance}/jack", timeout=15, retries=0)
-                # Check if we got a real page (not a captcha/error)
-                if page and hasattr(page, "css"):
-                    tweets = page.css(".timeline-item")
-                    if tweets:
-                        self.working_instance = instance
-                        logger.info(f"Found working Nitter instance: {instance}")
-                        return instance
-            except Exception as e:
-                logger.debug(f"Nitter instance {instance} failed: {e}")
-                continue
-
-        logger.warning("No working Nitter instances found")
-        return None
+class RSSFeedScraper:
+    """Scrape official RSS/Atom feeds from .gov websites."""
 
     def scrape(
-        self, handle: str, politician_id: str, politician_name: str, max_posts: int = 20
+        self,
+        politician: Dict,
+        max_posts: int = 20,
     ) -> List[Dict[str, Any]]:
-        """Scrape recent tweets for a handle via Nitter."""
+        """Try to find and parse RSS feeds for a politician."""
+        pid = politician["bioguide_id"]
+        name = politician["name"]
         posts = []
-        instance = self._find_working_instance()
 
-        if not instance:
-            logger.warning(
-                f"Twitter: No Nitter instance available for @{handle}, "
-                f"falling back to direct X.com profile scrape"
-            )
-            return self._scrape_x_direct(handle, politician_id, politician_name, max_posts)
+        feed_urls = guess_rss_feeds(politician)
 
-        try:
-            url = f"{instance}/{handle}"
-            logger.info(f"Twitter: Scraping {url}")
-            page = scrapling_get(url, timeout=20)
+        # Also check social_media field for any explicit RSS/website URLs
+        sm = politician.get("social_media") or {}
+        if sm.get("website"):
+            base = sm["website"].rstrip("/")
+            feed_urls.extend([
+                f"{base}/feed",
+                f"{base}/rss",
+                f"{base}/rss.xml",
+                f"{base}/feed.xml",
+            ])
 
-            if not page:
-                return posts
+        for feed_url in feed_urls:
+            try:
+                resp = fetch_url(feed_url, timeout=15, retries=1)
+                if resp is None or resp.status_code != 200:
+                    continue
 
-            # Parse Nitter timeline items
-            items = page.css(".timeline-item")
-            for item in items[:max_posts]:
-                try:
-                    # Extract tweet content
-                    content_el = item.css(".tweet-content")
-                    content = ""
-                    if content_el:
-                        content = (content_el[0].text or "").strip()
+                content_type = resp.headers.get("Content-Type", "")
+                text = resp.text
+
+                # Quick check: does it look like XML/RSS?
+                if not any(
+                    marker in text[:500]
+                    for marker in ["<rss", "<feed", "<channel", "<?xml", "<atom"]
+                ):
+                    continue
+
+                items = self._parse_feed(text)
+                if not items:
+                    continue
+
+                logger.info(f"RSS: Found {len(items)} items at {feed_url}")
+
+                for item in items[:max_posts]:
+                    title = item.get("title", "").strip()
+                    desc = item.get("description", "").strip()
+                    link = item.get("link", "").strip()
+                    pub_date = item.get("pubDate", "")
+
+                    content = title
+                    if desc:
+                        # Strip HTML tags from description
+                        if HAS_BS4:
+                            desc_clean = BeautifulSoup(desc, "html.parser").get_text(
+                                separator=" ", strip=True
+                            )
+                        else:
+                            desc_clean = re.sub(r"<[^>]+>", " ", desc)
+                            desc_clean = re.sub(r"\s+", " ", desc_clean).strip()
+                        if desc_clean and desc_clean != title:
+                            content = f"{title}\n\n{desc_clean}"
 
                     if not content:
                         continue
 
-                    # Extract date
-                    date_el = item.css(".tweet-date a")
-                    posted_at = datetime.now().isoformat()
-                    post_path = ""
-                    if date_el:
-                        post_path = date_el[0].attrib.get("href", "")
-                        title = date_el[0].attrib.get("title", "")
-                        if title:
-                            try:
-                                posted_at = datetime.strptime(
-                                    title, "%b %d, %Y · %I:%M %p %Z"
-                                ).isoformat()
-                            except ValueError:
-                                pass
+                    posted_at = parse_rss_date(pub_date) or datetime.now().isoformat()
 
-                    # Extract stats
-                    stats = {"likes": 0, "retweets": 0, "replies": 0}
-                    stat_items = item.css(".tweet-stat")
-                    for stat in stat_items:
-                        text = (stat.text or "").strip().lower()
-                        icon_el = stat.css(".icon-container")
-                        if not icon_el:
-                            continue
-                        icon_classes = icon_el[0].attrib.get("class", "")
-                        # Try to extract number
-                        num_el = stat.css(".tweet-stat-num")
-                        num = 0
-                        if num_el:
-                            try:
-                                raw = (num_el[0].text or "").strip().replace(",", "")
-                                if raw:
-                                    num = int(raw)
-                            except ValueError:
-                                pass
+                    if not is_recent(posted_at, days=90):
+                        continue
 
-                        if "comment" in icon_classes or "reply" in icon_classes:
-                            stats["replies"] = num
-                        elif "retweet" in icon_classes:
-                            stats["retweets"] = num
-                        elif "heart" in icon_classes or "like" in icon_classes:
-                            stats["likes"] = num
-
-                    # Build post URL
-                    post_url = f"https://x.com{post_path}" if post_path else f"https://x.com/{handle}"
-
-                    # Generate stable ID for deduplication
                     post_hash = hashlib.md5(
-                        f"{handle}:{content[:100]}:{posted_at}".encode()
+                        f"rss:{pid}:{link or title[:80]}".encode()
                     ).hexdigest()[:12]
 
                     posts.append(
                         {
-                            "id": f"tw-{post_hash}",
-                            "politician_id": politician_id,
-                            "politician_name": politician_name,
-                            "platform": "twitter",
-                            "handle": f"@{handle}",
+                            "id": f"rss-{post_hash}",
+                            "politician_id": pid,
+                            "politician_name": name,
+                            "platform": "rss",
+                            "handle": feed_url,
                             "content": content[:5000],
-                            "post_url": post_url,
+                            "post_url": link or feed_url,
                             "posted_at": posted_at,
-                            "likes_count": stats["likes"],
-                            "shares_count": stats["retweets"],
-                            "comments_count": stats["replies"],
+                            "likes_count": 0,
+                            "shares_count": 0,
+                            "comments_count": 0,
                             "is_deleted": False,
                             "scraped_at": datetime.now().isoformat(),
+                            "note": f"Official RSS feed: {feed_url}",
                         }
                     )
 
-                except Exception as e:
-                    logger.debug(f"Error parsing tweet item: {e}")
-                    continue
+                # If we found posts from one feed, don't try other feed URLs
+                if posts:
+                    break
 
-            logger.info(f"Twitter: Scraped {len(posts)} posts from @{handle}")
+            except Exception as e:
+                logger.debug(f"RSS: Error fetching {feed_url}: {e}")
+                continue
 
-        except Exception as e:
-            logger.error(f"Twitter: Error scraping @{handle}: {e}")
+        if posts:
+            logger.info(f"RSS: Collected {len(posts)} posts for {name}")
+        else:
+            logger.debug(f"RSS: No feeds found for {name}")
 
         return posts
 
-    def _scrape_x_direct(
-        self, handle: str, politician_id: str, politician_name: str, max_posts: int = 20
-    ) -> List[Dict[str, Any]]:
-        """
-        Fallback: attempt to scrape x.com directly.
-        X.com is heavily JS-rendered so this will likely get limited data,
-        but we try to extract what we can from the initial HTML.
-        """
-        posts = []
+    def _parse_feed(self, xml_text: str) -> List[Dict[str, str]]:
+        """Parse RSS or Atom XML into a list of item dicts."""
+        items = []
         try:
-            url = f"https://x.com/{handle}"
-            logger.info(f"Twitter: Attempting direct scrape of {url}")
-            page = scrapling_get(url, timeout=20)
+            # Fix common XML issues
+            xml_text = xml_text.strip()
+            if xml_text.startswith("\ufeff"):
+                xml_text = xml_text[1:]
 
-            if page:
-                # X.com loads tweets via JS, so HTML scraping is limited.
-                # We extract the page title and meta description at minimum.
-                meta_desc = page.css('meta[name="description"]')
-                if meta_desc:
-                    desc = meta_desc[0].attrib.get("content", "")
-                    if desc:
-                        post_hash = hashlib.md5(
-                            f"{handle}:bio:{desc[:50]}".encode()
-                        ).hexdigest()[:12]
-                        posts.append(
-                            {
-                                "id": f"tw-{post_hash}",
-                                "politician_id": politician_id,
-                                "politician_name": politician_name,
-                                "platform": "twitter",
-                                "handle": f"@{handle}",
-                                "content": f"[Profile bio] {desc[:5000]}",
-                                "post_url": url,
-                                "posted_at": datetime.now().isoformat(),
-                                "likes_count": 0,
-                                "shares_count": 0,
-                                "comments_count": 0,
-                                "is_deleted": False,
-                                "scraped_at": datetime.now().isoformat(),
-                                "note": "Bio only - X.com requires JS for full tweets",
-                            }
-                        )
-                logger.info(
-                    f"Twitter: Direct scrape got {len(posts)} items from @{handle}"
-                )
-        except Exception as e:
-            logger.error(f"Twitter: Direct scrape failed for @{handle}: {e}")
+            root = ET.fromstring(xml_text)
+        except ET.ParseError:
+            return items
 
-        return posts
+        # Determine namespace
+        ns = ""
+        if root.tag.startswith("{"):
+            ns = root.tag.split("}")[0] + "}"
+
+        # RSS 2.0: <rss><channel><item>
+        channel = root.find(f"{ns}channel")
+        if channel is not None:
+            for item in channel.findall(f"{ns}item"):
+                entry = {}
+                for field in ["title", "link", "description", "pubDate", "dc:date"]:
+                    el = item.find(f"{ns}{field}")
+                    if el is None and ":" in field:
+                        # Try with dc namespace
+                        for dc_ns in [
+                            "{http://purl.org/dc/elements/1.1/}",
+                            "{http://purl.org/dc/terms/}",
+                        ]:
+                            el = item.find(f"{dc_ns}{field.split(':')[1]}")
+                            if el is not None:
+                                break
+                    if el is not None and el.text:
+                        key = "pubDate" if "date" in field.lower() else field
+                        entry[key] = el.text
+                if entry:
+                    items.append(entry)
+            return items
+
+        # Atom: <feed><entry>
+        atom_ns = "{http://www.w3.org/2005/Atom}"
+        for entry_el in root.findall(f"{atom_ns}entry"):
+            entry = {}
+            title_el = entry_el.find(f"{atom_ns}title")
+            if title_el is not None and title_el.text:
+                entry["title"] = title_el.text
+
+            # Atom link: <link href="..." />
+            for link_el in entry_el.findall(f"{atom_ns}link"):
+                href = link_el.get("href", "")
+                rel = link_el.get("rel", "alternate")
+                if rel == "alternate" and href:
+                    entry["link"] = href
+                    break
+            if "link" not in entry:
+                link_el = entry_el.find(f"{atom_ns}link")
+                if link_el is not None:
+                    entry["link"] = link_el.get("href", "")
+
+            # Content or summary
+            content_el = entry_el.find(f"{atom_ns}content")
+            summary_el = entry_el.find(f"{atom_ns}summary")
+            if content_el is not None and content_el.text:
+                entry["description"] = content_el.text
+            elif summary_el is not None and summary_el.text:
+                entry["description"] = summary_el.text
+
+            # Date
+            updated_el = entry_el.find(f"{atom_ns}updated")
+            published_el = entry_el.find(f"{atom_ns}published")
+            date_el = published_el if published_el is not None else updated_el
+            if date_el is not None and date_el.text:
+                entry["pubDate"] = date_el.text
+
+            if entry:
+                items.append(entry)
+
+        return items
 
 
-class FacebookScraper:
-    """Scrape Facebook page posts using facebook-scraper library."""
+class GoogleNewsScraper:
+    """Fetch recent news mentions via Google News RSS (no API key needed)."""
+
+    GOOGLE_NEWS_RSS = "https://news.google.com/rss/search"
 
     def scrape(
         self,
-        page_id: str,
-        politician_id: str,
-        politician_name: str,
-        page_url: Optional[str] = None,
-        max_posts: int = 20,
+        politician: Dict,
+        max_posts: int = 10,
     ) -> List[Dict[str, Any]]:
-        """Scrape recent Facebook posts."""
+        """Fetch Google News RSS for a politician."""
+        pid = politician["bioguide_id"]
+        name = politician["name"]
+        office_level = politician.get("office_level", "")
+        party = politician.get("party", "")
         posts = []
 
+        # Build a targeted search query
+        # Use quotes around the full name and add context
+        state_hint = "Florida"
+        query_parts = [f'"{name}"']
+
+        if "Senator" in office_level:
+            query_parts.append("Senator")
+        elif "Representative" in office_level:
+            query_parts.append("Representative")
+
+        query_parts.append(state_hint)
+        query = " ".join(query_parts)
+
+        # Google News RSS endpoint
+        url = f"{self.GOOGLE_NEWS_RSS}?q={quote_plus(query)}&hl=en-US&gl=US&ceid=US:en"
+
         try:
-            from facebook_scraper import get_posts
+            resp = fetch_url(url, timeout=15, retries=1)
+            if resp is None or resp.status_code != 200:
+                logger.debug(f"News: Google News returned {resp.status_code if resp else 'None'} for {name}")
+                return posts
 
-            logger.info(f"Facebook: Scraping page '{page_id}'")
+            # Parse the RSS feed
+            items = self._parse_google_rss(resp.text)
+            logger.info(f"News: Found {len(items)} news items for {name}")
 
-            for post in get_posts(page_id, pages=3, timeout=30):
-                if not post.get("text"):
+            for item in items[:max_posts]:
+                title = item.get("title", "").strip()
+                link = item.get("link", "").strip()
+                pub_date = item.get("pubDate", "")
+                source = item.get("source", "")
+
+                if not title:
                     continue
 
-                post_time = post.get("time")
-                if isinstance(post_time, datetime):
-                    posted_at = post_time.isoformat()
-                else:
-                    posted_at = datetime.now().isoformat()
+                posted_at = parse_rss_date(pub_date) or datetime.now().isoformat()
 
-                content = (post.get("text") or "")[:5000]
-                post_url = post.get(
-                    "post_url", f"https://facebook.com/{page_id}"
-                )
+                if not is_recent(posted_at, days=30):
+                    continue
+
+                content = title
+                if source:
+                    content = f"{title} (via {source})"
 
                 post_hash = hashlib.md5(
-                    f"{page_id}:{content[:100]}:{posted_at}".encode()
+                    f"news:{pid}:{link or title[:80]}".encode()
                 ).hexdigest()[:12]
 
                 posts.append(
                     {
-                        "id": f"fb-{post_hash}",
-                        "politician_id": politician_id,
-                        "politician_name": politician_name,
-                        "platform": "facebook",
-                        "handle": page_id,
-                        "content": content,
-                        "post_url": post_url,
+                        "id": f"news-{post_hash}",
+                        "politician_id": pid,
+                        "politician_name": name,
+                        "platform": "news",
+                        "handle": source or "Google News",
+                        "content": content[:5000],
+                        "post_url": link,
                         "posted_at": posted_at,
-                        "likes_count": post.get("likes", 0) or 0,
-                        "shares_count": post.get("shares", 0) or 0,
-                        "comments_count": post.get("comments", 0) or 0,
+                        "likes_count": 0,
+                        "shares_count": 0,
+                        "comments_count": 0,
                         "is_deleted": False,
                         "scraped_at": datetime.now().isoformat(),
+                        "note": f"Google News search: {query}",
                     }
                 )
 
-                if len(posts) >= max_posts:
-                    break
-
-            logger.info(f"Facebook: Scraped {len(posts)} posts from {page_id}")
-
-        except ImportError:
-            logger.warning(
-                "facebook-scraper not installed. Install with: pip install facebook-scraper"
-            )
         except Exception as e:
-            logger.error(f"Facebook: Error scraping {page_id}: {e}")
+            logger.error(f"News: Error fetching news for {name}: {e}")
 
-            # Fall back to Scrapling direct scrape of Facebook page
-            if page_url:
-                posts = self._scrape_direct(
-                    page_url, page_id, politician_id, politician_name
-                )
+        if posts:
+            logger.info(f"News: Collected {len(posts)} news items for {name}")
 
         return posts
 
-    def _scrape_direct(
-        self,
-        page_url: str,
-        page_id: str,
-        politician_id: str,
-        politician_name: str,
-    ) -> List[Dict[str, Any]]:
-        """Fallback: scrape Facebook page via Scrapling (limited data)."""
-        posts = []
+    def _parse_google_rss(self, xml_text: str) -> List[Dict[str, str]]:
+        """Parse Google News RSS feed."""
+        items = []
         try:
-            logger.info(f"Facebook: Attempting direct Scrapling scrape of {page_url}")
-            page = scrapling_get(page_url, timeout=20)
-            if page:
-                # Facebook pages return limited data without JS
-                meta_desc = page.css('meta[name="description"]')
-                if meta_desc:
-                    desc = meta_desc[0].attrib.get("content", "")
-                    if desc:
+            root = ET.fromstring(xml_text)
+        except ET.ParseError as e:
+            logger.debug(f"News: XML parse error: {e}")
+            return items
+
+        channel = root.find("channel")
+        if channel is None:
+            return items
+
+        for item in channel.findall("item"):
+            entry = {}
+            title_el = item.find("title")
+            link_el = item.find("link")
+            pub_el = item.find("pubDate")
+            source_el = item.find("source")
+
+            if title_el is not None and title_el.text:
+                entry["title"] = title_el.text
+            if link_el is not None and link_el.text:
+                entry["link"] = link_el.text
+            if pub_el is not None and pub_el.text:
+                entry["pubDate"] = pub_el.text
+            if source_el is not None and source_el.text:
+                entry["source"] = source_el.text
+
+            if entry.get("title"):
+                items.append(entry)
+
+        return items
+
+
+class PressReleaseScraper:
+    """Scrape press release pages from official .gov websites using requests + BS4."""
+
+    def scrape(
+        self,
+        politician: Dict,
+        max_posts: int = 15,
+    ) -> List[Dict[str, Any]]:
+        """Scrape press releases from official government websites."""
+        if not HAS_BS4:
+            logger.warning(
+                "Press: beautifulsoup4 not installed. "
+                "Install with: pip install beautifulsoup4"
+            )
+            return []
+
+        pid = politician["bioguide_id"]
+        name = politician["name"]
+        posts = []
+
+        page_urls = guess_official_urls(politician)
+
+        for page_url in page_urls:
+            try:
+                resp = fetch_url(page_url, timeout=15, retries=1)
+                if resp is None or resp.status_code != 200:
+                    continue
+
+                # Check that we got HTML
+                ct = resp.headers.get("Content-Type", "")
+                if "html" not in ct and "text" not in ct:
+                    continue
+
+                soup = BeautifulSoup(resp.text, "html.parser")
+
+                # Strategy 1: Look for press release list items
+                items = self._extract_press_releases(soup, page_url)
+
+                if items:
+                    logger.info(
+                        f"Press: Found {len(items)} press releases at {page_url}"
+                    )
+                    for item in items[:max_posts]:
+                        title = item.get("title", "").strip()
+                        link = item.get("link", "").strip()
+                        date_str = item.get("date", "")
+                        snippet = item.get("snippet", "")
+
+                        if not title:
+                            continue
+
+                        posted_at = (
+                            parse_rss_date(date_str) or datetime.now().isoformat()
+                        )
+
+                        if not is_recent(posted_at, days=90):
+                            continue
+
+                        content = title
+                        if snippet:
+                            content = f"{title}\n\n{snippet}"
+
                         post_hash = hashlib.md5(
-                            f"{page_id}:meta:{desc[:50]}".encode()
+                            f"press:{pid}:{link or title[:80]}".encode()
                         ).hexdigest()[:12]
+
                         posts.append(
                             {
-                                "id": f"fb-{post_hash}",
-                                "politician_id": politician_id,
-                                "politician_name": politician_name,
-                                "platform": "facebook",
-                                "handle": page_id,
-                                "content": f"[Page description] {desc[:5000]}",
-                                "post_url": page_url,
-                                "posted_at": datetime.now().isoformat(),
+                                "id": f"press-{post_hash}",
+                                "politician_id": pid,
+                                "politician_name": name,
+                                "platform": "press",
+                                "handle": urlparse(page_url).hostname or page_url,
+                                "content": content[:5000],
+                                "post_url": link or page_url,
+                                "posted_at": posted_at,
                                 "likes_count": 0,
                                 "shares_count": 0,
                                 "comments_count": 0,
                                 "is_deleted": False,
                                 "scraped_at": datetime.now().isoformat(),
-                                "note": "Metadata only - Facebook requires JS for full posts",
+                                "note": f"Official press release: {page_url}",
                             }
                         )
-        except Exception as e:
-            logger.error(f"Facebook: Direct scrape failed for {page_url}: {e}")
+
+                    if posts:
+                        break  # Got results from one URL, stop trying others
+
+            except Exception as e:
+                logger.debug(f"Press: Error scraping {page_url}: {e}")
+                continue
+
+        if posts:
+            logger.info(f"Press: Collected {len(posts)} releases for {name}")
+
         return posts
 
+    def _extract_press_releases(
+        self, soup: BeautifulSoup, base_url: str
+    ) -> List[Dict[str, str]]:
+        """Extract press release entries from a .gov HTML page.
 
-class InstagramScraper:
-    """Scrape Instagram public profiles using Scrapling."""
+        Senate and House websites use varying HTML structures, so we try
+        multiple common patterns.
+        """
+        items = []
 
-    def scrape(
-        self, handle: str, politician_id: str, politician_name: str, max_posts: int = 20
-    ) -> List[Dict[str, Any]]:
-        """Scrape public Instagram profile for recent posts."""
-        posts = []
+        # Pattern 1: Senate-style table rows or list items with date + title
+        # e.g. <tr><td class="date">...</td><td><a href="...">Title</a></td></tr>
+        for row in soup.select(
+            "table.table tr, .list-item, .press-release, "
+            ".views-row, .element, article, .media-body, "
+            ".record, .views-field, .node--type-press-release"
+        ):
+            title_el = row.find("a")
+            if not title_el:
+                continue
 
-        try:
-            url = f"https://www.instagram.com/{handle}/"
-            logger.info(f"Instagram: Scraping {url}")
-            page = scrapling_get(url, timeout=20)
+            title = title_el.get_text(strip=True)
+            if not title or len(title) < 10:
+                continue
 
-            if not page:
-                return posts
+            href = title_el.get("href", "")
+            if href and not href.startswith("http"):
+                href = urljoin(base_url, href)
 
-            # Instagram embeds JSON-LD data in meta tags for public profiles
-            # Try og:description for bio/follower info
-            meta_desc = page.css('meta[property="og:description"]')
-            if meta_desc:
-                desc = meta_desc[0].attrib.get("content", "")
-                if desc:
-                    post_hash = hashlib.md5(
-                        f"ig:{handle}:{desc[:50]}".encode()
-                    ).hexdigest()[:12]
-                    posts.append(
-                        {
-                            "id": f"ig-{post_hash}",
-                            "politician_id": politician_id,
-                            "politician_name": politician_name,
-                            "platform": "instagram",
-                            "handle": f"@{handle}",
-                            "content": f"[Profile] {desc[:5000]}",
-                            "post_url": url,
-                            "posted_at": datetime.now().isoformat(),
-                            "likes_count": 0,
-                            "shares_count": 0,
-                            "comments_count": 0,
-                            "is_deleted": False,
-                            "scraped_at": datetime.now().isoformat(),
-                            "note": "Profile metadata - Instagram requires auth for full post scraping",
-                        }
+            # Look for date in the row
+            date_str = ""
+            date_el = row.find(class_=re.compile(r"date|time|pubdate", re.I))
+            if date_el:
+                date_str = date_el.get_text(strip=True)
+            else:
+                time_el = row.find("time")
+                if time_el:
+                    date_str = time_el.get("datetime", "") or time_el.get_text(
+                        strip=True
                     )
 
-            # Try to find embedded JSON data (shared_data or additional_data)
-            scripts = page.css("script[type='application/ld+json']")
-            for script in scripts:
-                try:
-                    data = json.loads(script.text or "{}")
-                    if isinstance(data, dict) and data.get("@type") == "ProfilePage":
-                        # Extract any available post data from structured data
-                        main_entity = data.get("mainEntity", {})
-                        if main_entity.get("interactionStatistic"):
-                            for stat in main_entity["interactionStatistic"]:
-                                logger.debug(f"Instagram stat: {stat}")
-                except (json.JSONDecodeError, TypeError):
-                    continue
+            # Look for snippet/teaser
+            snippet = ""
+            snippet_el = row.find(
+                class_=re.compile(r"teaser|summary|excerpt|desc|body", re.I)
+            )
+            if snippet_el:
+                snippet = snippet_el.get_text(strip=True)[:500]
 
-            logger.info(f"Instagram: Scraped {len(posts)} items from @{handle}")
+            items.append(
+                {
+                    "title": title,
+                    "link": href,
+                    "date": date_str,
+                    "snippet": snippet,
+                }
+            )
 
-        except Exception as e:
-            logger.error(f"Instagram: Error scraping @{handle}: {e}")
+        if items:
+            return items
 
-        return posts
+        # Pattern 2: Generic -- find all <a> tags inside elements that look
+        # like press release listings
+        headings = soup.find_all(["h2", "h3", "h4"])
+        for h in headings:
+            a_tag = h.find("a")
+            if not a_tag:
+                continue
 
+            title = a_tag.get_text(strip=True)
+            if not title or len(title) < 15:
+                continue
 
-class TikTokScraper:
-    """Scrape TikTok public profiles using Scrapling."""
+            href = a_tag.get("href", "")
+            if href and not href.startswith("http"):
+                href = urljoin(base_url, href)
 
-    def scrape(
-        self, handle: str, politician_id: str, politician_name: str, max_posts: int = 20
-    ) -> List[Dict[str, Any]]:
-        """Scrape public TikTok profile."""
-        posts = []
+            # Look for an adjacent date
+            date_str = ""
+            parent = h.parent
+            if parent:
+                date_el = parent.find(class_=re.compile(r"date|time", re.I))
+                if date_el:
+                    date_str = date_el.get_text(strip=True)
+                # Also check siblings
+                sibling = h.find_next_sibling()
+                if sibling:
+                    time_el = sibling.find("time")
+                    if time_el:
+                        date_str = time_el.get("datetime", "") or time_el.get_text(
+                            strip=True
+                        )
 
-        try:
-            url = f"https://www.tiktok.com/@{handle}"
-            logger.info(f"TikTok: Scraping {url}")
-            page = scrapling_get(url, timeout=20)
+            # Skip navigation links, breadcrumbs, etc.
+            if any(
+                skip in title.lower()
+                for skip in [
+                    "home",
+                    "menu",
+                    "search",
+                    "contact",
+                    "about",
+                    "skip to",
+                    "back to",
+                ]
+            ):
+                continue
 
-            if not page:
-                return posts
+            items.append(
+                {
+                    "title": title,
+                    "link": href,
+                    "date": date_str,
+                    "snippet": "",
+                }
+            )
 
-            # TikTok public profiles include some metadata in HTML
-            meta_desc = page.css('meta[name="description"]')
-            if meta_desc:
-                desc = meta_desc[0].attrib.get("content", "")
-                if desc:
-                    post_hash = hashlib.md5(
-                        f"tt:{handle}:{desc[:50]}".encode()
-                    ).hexdigest()[:12]
-                    posts.append(
-                        {
-                            "id": f"tt-{post_hash}",
-                            "politician_id": politician_id,
-                            "politician_name": politician_name,
-                            "platform": "tiktok",
-                            "handle": f"@{handle}",
-                            "content": f"[Profile] {desc[:5000]}",
-                            "post_url": url,
-                            "posted_at": datetime.now().isoformat(),
-                            "likes_count": 0,
-                            "shares_count": 0,
-                            "comments_count": 0,
-                            "is_deleted": False,
-                            "scraped_at": datetime.now().isoformat(),
-                            "note": "Profile metadata - TikTok requires JS for full video scraping",
-                        }
-                    )
-
-            # Try to extract SIGI_STATE JSON (TikTok embeds video data here)
-            scripts = page.css("script#SIGI_STATE, script#__UNIVERSAL_DATA_FOR_REHYDRATION__")
-            for script in scripts:
-                try:
-                    data = json.loads(script.text or "{}")
-                    # Parse TikTok's internal data structure for video items
-                    items_module = data.get("ItemModule", {})
-                    if isinstance(items_module, dict):
-                        for video_id, video_data in list(items_module.items())[:max_posts]:
-                            content = video_data.get("desc", "")
-                            if not content:
-                                continue
-
-                            stats = video_data.get("stats", {})
-                            create_time = video_data.get("createTime", "")
-                            if create_time:
-                                try:
-                                    posted_at = datetime.fromtimestamp(
-                                        int(create_time)
-                                    ).isoformat()
-                                except (ValueError, OSError):
-                                    posted_at = datetime.now().isoformat()
-                            else:
-                                posted_at = datetime.now().isoformat()
-
-                            v_hash = hashlib.md5(
-                                f"tt:{handle}:{video_id}".encode()
-                            ).hexdigest()[:12]
-
-                            posts.append(
-                                {
-                                    "id": f"tt-{v_hash}",
-                                    "politician_id": politician_id,
-                                    "politician_name": politician_name,
-                                    "platform": "tiktok",
-                                    "handle": f"@{handle}",
-                                    "content": content[:5000],
-                                    "post_url": f"https://www.tiktok.com/@{handle}/video/{video_id}",
-                                    "posted_at": posted_at,
-                                    "likes_count": stats.get("diggCount", 0),
-                                    "shares_count": stats.get("shareCount", 0),
-                                    "comments_count": stats.get("commentCount", 0),
-                                    "views_count": stats.get("playCount", 0),
-                                    "is_deleted": False,
-                                    "scraped_at": datetime.now().isoformat(),
-                                }
-                            )
-                except (json.JSONDecodeError, TypeError):
-                    continue
-
-            logger.info(f"TikTok: Scraped {len(posts)} items from @{handle}")
-
-        except Exception as e:
-            logger.error(f"TikTok: Error scraping @{handle}: {e}")
-
-        return posts
+        return items
 
 
-class YouTubeScraper:
-    """Scrape YouTube channel metadata using Scrapling."""
+class YouTubeRSSScraper:
+    """Fetch YouTube channel videos via the public RSS feed (no API key)."""
 
     def scrape(
         self,
-        channel_id: str,
-        politician_id: str,
-        politician_name: str,
+        politician: Dict,
+        max_posts: int = 10,
+    ) -> List[Dict[str, Any]]:
+        """Fetch YouTube RSS feed for a politician's channel."""
+        pid = politician["bioguide_id"]
+        name = politician["name"]
+        sm = politician.get("social_media") or {}
+        channel_id = sm.get("youtubeChannelId")
+        posts = []
+
+        if not channel_id:
+            return posts
+
+        # YouTube public RSS feed -- works without API key
+        feed_url = (
+            f"https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}"
+        )
+
+        try:
+            resp = fetch_url(feed_url, timeout=15, retries=1)
+            if resp is None or resp.status_code != 200:
+                logger.debug(
+                    f"YouTube: Feed not available for channel {channel_id}"
+                )
+                return posts
+
+            items = self._parse_youtube_feed(resp.text)
+            logger.info(f"YouTube: Found {len(items)} videos for {name}")
+
+            for item in items[:max_posts]:
+                title = item.get("title", "").strip()
+                link = item.get("link", "").strip()
+                pub_date = item.get("pubDate", "")
+
+                if not title:
+                    continue
+
+                posted_at = parse_rss_date(pub_date) or datetime.now().isoformat()
+
+                if not is_recent(posted_at, days=90):
+                    continue
+
+                post_hash = hashlib.md5(
+                    f"yt:{channel_id}:{link or title[:80]}".encode()
+                ).hexdigest()[:12]
+
+                posts.append(
+                    {
+                        "id": f"yt-{post_hash}",
+                        "politician_id": pid,
+                        "politician_name": name,
+                        "platform": "youtube",
+                        "handle": channel_id,
+                        "content": title[:5000],
+                        "post_url": link,
+                        "posted_at": posted_at,
+                        "likes_count": 0,
+                        "shares_count": 0,
+                        "comments_count": 0,
+                        "is_deleted": False,
+                        "scraped_at": datetime.now().isoformat(),
+                        "note": f"YouTube RSS feed: {feed_url}",
+                    }
+                )
+
+        except Exception as e:
+            logger.error(f"YouTube: Error fetching feed for {name}: {e}")
+
+        if posts:
+            logger.info(f"YouTube: Collected {len(posts)} videos for {name}")
+
+        return posts
+
+    def _parse_youtube_feed(self, xml_text: str) -> List[Dict[str, str]]:
+        """Parse YouTube Atom feed."""
+        items = []
+        try:
+            root = ET.fromstring(xml_text)
+        except ET.ParseError:
+            return items
+
+        atom_ns = "{http://www.w3.org/2005/Atom}"
+        yt_ns = "{http://www.youtube.com/xml/schemas/2015}"
+        media_ns = "{http://search.yahoo.com/mrss/}"
+
+        for entry in root.findall(f"{atom_ns}entry"):
+            item = {}
+
+            title_el = entry.find(f"{atom_ns}title")
+            if title_el is not None and title_el.text:
+                item["title"] = title_el.text
+
+            # Video ID
+            video_id_el = entry.find(f"{yt_ns}videoId")
+            if video_id_el is not None and video_id_el.text:
+                item["link"] = (
+                    f"https://www.youtube.com/watch?v={video_id_el.text}"
+                )
+
+            # Fallback: link element
+            if "link" not in item:
+                link_el = entry.find(f"{atom_ns}link")
+                if link_el is not None:
+                    item["link"] = link_el.get("href", "")
+
+            # Published date
+            pub_el = entry.find(f"{atom_ns}published")
+            if pub_el is not None and pub_el.text:
+                item["pubDate"] = pub_el.text
+
+            # Description from media:group/media:description
+            media_group = entry.find(f"{media_ns}group")
+            if media_group is not None:
+                desc_el = media_group.find(f"{media_ns}description")
+                if desc_el is not None and desc_el.text:
+                    item["description"] = desc_el.text[:500]
+
+            if item.get("title"):
+                items.append(item)
+
+        return items
+
+
+# ---------------------------------------------------------------------------
+# Twitter/X Scraper via Twikit (guest mode -- no API key needed)
+# ---------------------------------------------------------------------------
+
+
+class TwitterXScraper:
+    """Scrape recent tweets from a politician's Twitter/X account.
+
+    Uses the Twitter syndication API (public embed endpoint).
+    No API key, no login, no third-party library needed -- just requests + BS4.
+    Returns up to 20 recent tweets per profile.
+    """
+
+    SYNDICATION_URL = "https://syndication.twitter.com/srv/timeline-profile/screen-name/{handle}"
+
+    def scrape(
+        self,
+        politician: Dict,
         max_posts: int = 20,
     ) -> List[Dict[str, Any]]:
-        """Scrape recent YouTube channel videos."""
+        """Scrape tweets via the Twitter syndication embed API."""
+        pid = politician["bioguide_id"]
+        name = politician["name"]
+        sm = politician.get("social_media") or {}
+        handle = sm.get("twitterHandle", "").lstrip("@").strip()
+
+        if not handle:
+            return []
+
         posts = []
 
         try:
-            url = f"https://www.youtube.com/channel/{channel_id}/videos"
-            logger.info(f"YouTube: Scraping {url}")
-            page = scrapling_get(url, timeout=20)
+            url = self.SYNDICATION_URL.format(handle=handle)
+            headers = {
+                "User-Agent": (
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) "
+                    "Chrome/122.0.0.0 Safari/537.36"
+                ),
+                "Referer": "https://platform.twitter.com/",
+                "Accept": "text/html,application/xhtml+xml",
+            }
 
-            if not page:
+            resp = requests.get(url, headers=headers, timeout=20)
+            if resp.status_code != 200:
+                logger.debug(f"Twitter: Syndication returned {resp.status_code} for @{handle}")
                 return posts
 
-            # YouTube provides some metadata in meta tags
-            meta_desc = page.css('meta[name="description"]')
-            channel_name_el = page.css('meta[property="og:title"]')
-            channel_name = ""
-            if channel_name_el:
-                channel_name = channel_name_el[0].attrib.get("content", "")
+            if not HAS_BS4:
+                logger.debug("Twitter: BeautifulSoup required for syndication parsing")
+                return posts
 
-            if meta_desc:
-                desc = meta_desc[0].attrib.get("content", "")
-                if desc:
-                    ch_hash = hashlib.md5(
-                        f"yt:{channel_id}:{desc[:50]}".encode()
+            soup = BeautifulSoup(resp.text, "html.parser")
+            next_data_script = soup.find("script", id="__NEXT_DATA__")
+
+            if not next_data_script or not next_data_script.string:
+                logger.debug(f"Twitter: No __NEXT_DATA__ in syndication page for @{handle}")
+                return posts
+
+            data = json.loads(next_data_script.string)
+            entries = (
+                data.get("props", {})
+                .get("pageProps", {})
+                .get("timeline", {})
+                .get("entries", [])
+            )
+
+            if not entries:
+                logger.debug(f"Twitter: No entries found for @{handle}")
+                return posts
+
+            for entry in entries[:max_posts]:
+                try:
+                    content = entry.get("content", {})
+                    tweet = content.get("tweet", {})
+
+                    text = tweet.get("text", "").strip()
+                    if not text:
+                        continue
+
+                    # Parse Twitter date format: "Wed Mar 04 02:37:52 +0000 2026"
+                    created_at = tweet.get("created_at", "")
+                    posted_at = datetime.now().isoformat()
+                    if created_at:
+                        try:
+                            posted_at = datetime.strptime(
+                                created_at, "%a %b %d %H:%M:%S %z %Y"
+                            ).isoformat()
+                        except ValueError:
+                            try:
+                                posted_at = parsedate_to_datetime(created_at).isoformat()
+                            except Exception:
+                                pass
+
+                    if not is_recent(posted_at, days=90):
+                        continue
+
+                    tweet_id = tweet.get("id_str") or tweet.get("id") or hashlib.md5(
+                        f"tw:{handle}:{text[:80]}".encode()
                     ).hexdigest()[:12]
+
+                    screen_name = (
+                        tweet.get("user", {}).get("screen_name", handle)
+                    )
+                    tweet_url = f"https://x.com/{screen_name}/status/{tweet_id}"
+
                     posts.append(
                         {
-                            "id": f"yt-{ch_hash}",
-                            "politician_id": politician_id,
-                            "politician_name": politician_name,
-                            "platform": "youtube",
-                            "handle": channel_name or channel_id,
-                            "content": f"[Channel description] {desc[:5000]}",
-                            "post_url": f"https://www.youtube.com/channel/{channel_id}",
-                            "posted_at": datetime.now().isoformat(),
-                            "likes_count": 0,
-                            "shares_count": 0,
-                            "comments_count": 0,
+                            "id": f"tw-{tweet_id}",
+                            "politician_id": pid,
+                            "politician_name": name,
+                            "platform": "twitter",
+                            "handle": f"@{handle}",
+                            "content": text[:5000],
+                            "post_url": tweet_url,
+                            "posted_at": posted_at,
+                            "likes_count": tweet.get("favorite_count", 0) or 0,
+                            "shares_count": tweet.get("retweet_count", 0) or 0,
+                            "comments_count": tweet.get("reply_count", 0) or 0,
                             "is_deleted": False,
                             "scraped_at": datetime.now().isoformat(),
-                            "note": "Channel metadata - YouTube requires JS for full video listings",
+                            "note": f"Twitter/X post from @{handle}",
                         }
                     )
 
-            # Try to extract ytInitialData from script tags
-            for script in page.css("script"):
-                text = script.text or ""
-                if "ytInitialData" in text:
-                    try:
-                        # Extract JSON from: var ytInitialData = {...};
-                        start = text.index("{", text.index("ytInitialData"))
-                        # Find the matching closing brace
-                        depth = 0
-                        end = start
-                        for i in range(start, min(start + 500000, len(text))):
-                            if text[i] == "{":
-                                depth += 1
-                            elif text[i] == "}":
-                                depth -= 1
-                                if depth == 0:
-                                    end = i + 1
-                                    break
+                except Exception as e:
+                    logger.debug(f"Twitter: Error parsing tweet entry: {e}")
+                    continue
 
-                        if end > start:
-                            yt_data = json.loads(text[start:end])
-                            # Navigate YouTube's data structure to find videos
-                            tabs = (
-                                yt_data.get("contents", {})
-                                .get("twoColumnBrowseResultsRenderer", {})
-                                .get("tabs", [])
-                            )
-                            for tab in tabs:
-                                tab_renderer = tab.get("tabRenderer", {})
-                                if tab_renderer.get("title") == "Videos":
-                                    items = (
-                                        tab_renderer.get("content", {})
-                                        .get("richGridRenderer", {})
-                                        .get("contents", [])
-                                    )
-                                    for item in items[:max_posts]:
-                                        video = (
-                                            item.get("richItemRenderer", {})
-                                            .get("content", {})
-                                            .get("videoRenderer", {})
-                                        )
-                                        if not video:
-                                            continue
+        except json.JSONDecodeError as e:
+            logger.warning(f"Twitter: JSON parse error for @{handle}: {e}")
+        except Exception as e:
+            logger.warning(f"Twitter: Error scraping @{handle} for {name}: {e}")
 
-                                        video_id = video.get("videoId", "")
-                                        title = ""
-                                        title_runs = video.get("title", {}).get("runs", [])
-                                        if title_runs:
-                                            title = title_runs[0].get("text", "")
+        if posts:
+            logger.info(f"Twitter: Collected {len(posts)} tweets for @{handle}")
 
-                                        if not title:
-                                            continue
+        return posts
 
-                                        view_text = (
-                                            video.get("viewCountText", {}).get("simpleText", "0")
-                                        )
 
-                                        v_hash = hashlib.md5(
-                                            f"yt:{channel_id}:{video_id}".encode()
-                                        ).hexdigest()[:12]
+# ---------------------------------------------------------------------------
+# Facebook Scraper via facebook-scraper library
+# ---------------------------------------------------------------------------
 
-                                        posts.append(
-                                            {
-                                                "id": f"yt-{v_hash}",
-                                                "politician_id": politician_id,
-                                                "politician_name": politician_name,
-                                                "platform": "youtube",
-                                                "handle": channel_name or channel_id,
-                                                "content": title[:5000],
-                                                "post_url": f"https://www.youtube.com/watch?v={video_id}",
-                                                "posted_at": datetime.now().isoformat(),
-                                                "likes_count": 0,
-                                                "shares_count": 0,
-                                                "comments_count": 0,
-                                                "is_deleted": False,
-                                                "scraped_at": datetime.now().isoformat(),
-                                            }
-                                        )
 
-                    except (ValueError, json.JSONDecodeError, TypeError):
-                        continue
-                    break  # Only process the first ytInitialData block
+class FacebookPageScraper:
+    """Scrape public Facebook page posts.
 
-            logger.info(f"YouTube: Scraped {len(posts)} items from {channel_id}")
+    Uses facebook-scraper library if available. Facebook heavily rate-limits
+    anonymous scraping, so this will often return 0 posts. For reliable
+    Facebook data, configure FB_ACCESS_TOKEN env var with a Graph API token.
+
+    Requires politician to have facebookPageId or facebookPageUrl in social_media.
+    """
+
+    def scrape(
+        self,
+        politician: Dict,
+        max_posts: int = 10,
+    ) -> List[Dict[str, Any]]:
+        """Scrape public posts from a politician's Facebook page."""
+        pid = politician["bioguide_id"]
+        name = politician["name"]
+        sm = politician.get("social_media") or {}
+
+        # Determine the Facebook page ID or URL
+        page_id = sm.get("facebookPageId", "").strip()
+        page_url = sm.get("facebookPageUrl", "").strip()
+
+        if not page_id and page_url:
+            parsed = urlparse(page_url)
+            path = parsed.path.strip("/").split("/")[0]
+            if path and path != "profile.php":
+                page_id = path
+
+        if not page_id:
+            return []
+
+        posts = []
+
+        # Method 1: Try Graph API with access token (most reliable)
+        access_token = os.getenv("FB_ACCESS_TOKEN", "").strip()
+        if access_token:
+            posts = self._scrape_graph_api(pid, name, page_id, access_token, max_posts)
+            if posts:
+                return posts
+
+        # Method 2: Try facebook-scraper library
+        if HAS_FB_SCRAPER:
+            posts = self._scrape_library(pid, name, page_id, max_posts)
+
+        if not posts:
+            logger.debug(
+                f"Facebook: No posts for {name} ({page_id}). "
+                f"Set FB_ACCESS_TOKEN env var for reliable scraping."
+            )
+
+        return posts
+
+    def _scrape_graph_api(
+        self, pid: str, name: str, page_id: str, token: str, max_posts: int
+    ) -> List[Dict[str, Any]]:
+        """Use Facebook Graph API (requires access token)."""
+        posts = []
+        try:
+            url = (
+                f"https://graph.facebook.com/v18.0/{page_id}/posts"
+                f"?fields=message,created_time,permalink_url"
+                f"&limit={max_posts}"
+                f"&access_token={token}"
+            )
+            resp = requests.get(url, timeout=15)
+            if resp.status_code != 200:
+                logger.debug(f"Facebook Graph API returned {resp.status_code}")
+                return posts
+
+            data = resp.json()
+            for item in data.get("data", [])[:max_posts]:
+                text = item.get("message", "").strip()
+                if not text:
+                    continue
+
+                created = item.get("created_time", "")
+                posted_at = created if created else datetime.now().isoformat()
+
+                if not is_recent(posted_at, days=90):
+                    continue
+
+                post_id = item.get("id", hashlib.md5(
+                    f"fb:{page_id}:{text[:80]}".encode()
+                ).hexdigest()[:12])
+
+                posts.append({
+                    "id": f"fb-{post_id}",
+                    "politician_id": pid,
+                    "politician_name": name,
+                    "platform": "facebook",
+                    "handle": page_id,
+                    "content": text[:5000],
+                    "post_url": item.get("permalink_url", f"https://www.facebook.com/{page_id}"),
+                    "posted_at": posted_at,
+                    "likes_count": 0,
+                    "shares_count": 0,
+                    "comments_count": 0,
+                    "is_deleted": False,
+                    "scraped_at": datetime.now().isoformat(),
+                    "note": f"Facebook Graph API post from {page_id}",
+                })
 
         except Exception as e:
-            logger.error(f"YouTube: Error scraping {channel_id}: {e}")
+            logger.debug(f"Facebook Graph API error for {page_id}: {e}")
+
+        if posts:
+            logger.info(f"Facebook: Collected {len(posts)} posts via Graph API for {name}")
+        return posts
+
+    def _scrape_library(
+        self, pid: str, name: str, page_id: str, max_posts: int
+    ) -> List[Dict[str, Any]]:
+        """Use facebook-scraper library (often blocked)."""
+        posts = []
+        try:
+            fb_posts = fb_scraper.get_posts(
+                page_id,
+                pages=max(3, max_posts // 5),
+                options={"allow_extra_requests": False},
+            )
+
+            count = 0
+            for fb_post in fb_posts:
+                if count >= max_posts:
+                    break
+                text = fb_post.get("text") or fb_post.get("post_text") or ""
+                if not text.strip():
+                    continue
+
+                post_time = fb_post.get("time")
+                posted_at = (
+                    post_time.isoformat() if post_time and hasattr(post_time, "isoformat")
+                    else datetime.now().isoformat()
+                )
+
+                if not is_recent(posted_at, days=90):
+                    continue
+
+                post_id = fb_post.get("post_id") or hashlib.md5(
+                    f"fb:{page_id}:{text[:80]}".encode()
+                ).hexdigest()[:12]
+
+                posts.append({
+                    "id": f"fb-{post_id}",
+                    "politician_id": pid,
+                    "politician_name": name,
+                    "platform": "facebook",
+                    "handle": page_id,
+                    "content": text[:5000],
+                    "post_url": fb_post.get("post_url", f"https://www.facebook.com/{page_id}"),
+                    "posted_at": posted_at,
+                    "likes_count": fb_post.get("likes", 0) or 0,
+                    "shares_count": fb_post.get("shares", 0) or 0,
+                    "comments_count": fb_post.get("comments", 0) or 0,
+                    "is_deleted": False,
+                    "scraped_at": datetime.now().isoformat(),
+                    "note": f"Facebook page post from {page_id}",
+                })
+                count += 1
+
+        except Exception as e:
+            logger.debug(f"Facebook: facebook-scraper error for {page_id}: {e}")
+
+        if posts:
+            logger.info(f"Facebook: Collected {len(posts)} posts for {name} ({page_id})")
+        return posts
+
+
+# ---------------------------------------------------------------------------
+# Instagram Scraper via Instaloader (public profiles, no login)
+# ---------------------------------------------------------------------------
+
+
+class InstagramProfileScraper:
+    """Scrape public Instagram profile posts using Instaloader.
+
+    Instagram now requires authentication for most scraping. Set env vars:
+      IG_USERNAME - Instagram username for login
+      IG_PASSWORD - Instagram password for login
+
+    Without credentials, will attempt anonymous access (usually blocked).
+    Requires politician to have instagramHandle in social_media.
+    """
+
+    _loader = None
+    _login_attempted = False
+
+    @classmethod
+    def _get_loader(cls):
+        """Lazily create an Instaloader instance with optional login."""
+        if cls._loader is None:
+            L = instaloader.Instaloader(
+                download_pictures=False,
+                download_videos=False,
+                download_video_thumbnails=False,
+                download_geotags=False,
+                download_comments=False,
+                save_metadata=False,
+                compress_json=False,
+                quiet=True,
+            )
+
+            # Try to login if credentials are available
+            if not cls._login_attempted:
+                cls._login_attempted = True
+                ig_user = os.getenv("IG_USERNAME", "").strip()
+                ig_pass = os.getenv("IG_PASSWORD", "").strip()
+                if ig_user and ig_pass:
+                    try:
+                        L.login(ig_user, ig_pass)
+                        logger.info(f"Instagram: Logged in as {ig_user}")
+                    except Exception as e:
+                        logger.warning(f"Instagram: Login failed for {ig_user}: {e}")
+                else:
+                    logger.debug(
+                        "Instagram: No IG_USERNAME/IG_PASSWORD set. "
+                        "Anonymous scraping may be blocked."
+                    )
+
+            cls._loader = L
+        return cls._loader
+
+    def scrape(
+        self,
+        politician: Dict,
+        max_posts: int = 10,
+    ) -> List[Dict[str, Any]]:
+        """Scrape recent public posts from a politician's Instagram profile."""
+        if not HAS_INSTALOADER:
+            logger.debug("Instagram: instaloader not installed, skipping")
+            return []
+
+        pid = politician["bioguide_id"]
+        name = politician["name"]
+        sm = politician.get("social_media") or {}
+        handle = sm.get("instagramHandle", "").lstrip("@").strip()
+
+        if not handle:
+            return []
+
+        posts = []
+        try:
+            L = self._get_loader()
+            profile = instaloader.Profile.from_username(L.context, handle)
+
+            count = 0
+            for post in profile.get_posts():
+                if count >= max_posts:
+                    break
+
+                try:
+                    text = post.caption or ""
+                    if not text.strip():
+                        text = getattr(post, "accessibility_caption", "") or ""
+                    if not text.strip():
+                        continue
+
+                    posted_at = post.date_utc.isoformat() if post.date_utc else datetime.now().isoformat()
+
+                    if not is_recent(posted_at, days=90):
+                        break
+
+                    shortcode = post.shortcode or hashlib.md5(
+                        f"ig:{handle}:{text[:80]}".encode()
+                    ).hexdigest()[:12]
+
+                    post_url = f"https://www.instagram.com/p/{shortcode}/"
+
+                    posts.append({
+                        "id": f"ig-{shortcode}",
+                        "politician_id": pid,
+                        "politician_name": name,
+                        "platform": "instagram",
+                        "handle": f"@{handle}",
+                        "content": text[:5000],
+                        "post_url": post_url,
+                        "posted_at": posted_at,
+                        "likes_count": post.likes or 0,
+                        "shares_count": 0,
+                        "comments_count": post.comments or 0,
+                        "is_deleted": False,
+                        "scraped_at": datetime.now().isoformat(),
+                        "note": f"Instagram post from @{handle}",
+                    })
+                    count += 1
+
+                except Exception as e:
+                    logger.debug(f"Instagram: Error parsing post from @{handle}: {e}")
+                    continue
+
+        except Exception as e:
+            err_msg = str(e)
+            if "401" in err_msg or "404" in err_msg or "login" in err_msg.lower():
+                logger.debug(
+                    f"Instagram: Auth required for @{handle}. "
+                    f"Set IG_USERNAME/IG_PASSWORD env vars."
+                )
+            else:
+                logger.debug(f"Instagram: Error scraping @{handle} for {name}: {e}")
+
+        if posts:
+            logger.info(f"Instagram: Collected {len(posts)} posts for {name} (@{handle})")
 
         return posts
 
@@ -820,136 +1548,90 @@ def analyze_sentiment(text: str) -> float:
 
 
 class SocialMediaPipeline:
-    """Orchestrates scraping across all platforms for all politicians."""
+    """Orchestrates scraping across all source types for all politicians."""
 
-    PLATFORM_MAP = {
-        "twitter": "twitterHandle",
-        "facebook": "facebookPageId",
-        "instagram": "instagramHandle",
-        "tiktok": "tiktokHandle",
-        "youtube": "youtubeChannelId",
-    }
+    VALID_PLATFORMS = {"rss", "news", "press", "youtube", "twitter", "facebook", "instagram"}
 
     def __init__(self, platforms: List[str], max_posts_per_platform: int = 20):
-        self.platforms = platforms
+        self.platforms = [p for p in platforms if p in self.VALID_PLATFORMS]
+        if not self.platforms:
+            logger.warning(
+                f"No valid platforms specified. "
+                f"Valid options: {', '.join(sorted(self.VALID_PLATFORMS))}. "
+                f"Defaulting to: rss,news,press,twitter,facebook,instagram"
+            )
+            self.platforms = ["rss", "news", "press", "twitter", "facebook", "instagram"]
+
         self.max_posts = max_posts_per_platform
-        self.twitter_scraper = TwitterScraper()
-        self.facebook_scraper = FacebookScraper()
-        self.instagram_scraper = InstagramScraper()
-        self.tiktok_scraper = TikTokScraper()
-        self.youtube_scraper = YouTubeScraper()
+        self.rss_scraper = RSSFeedScraper()
+        self.news_scraper = GoogleNewsScraper()
+        self.press_scraper = PressReleaseScraper()
+        self.youtube_scraper = YouTubeRSSScraper()
+        self.twitter_scraper = TwitterXScraper()
+        self.facebook_scraper = FacebookPageScraper()
+        self.instagram_scraper = InstagramProfileScraper()
         self.all_posts: List[Dict[str, Any]] = []
         self.stats = {
             "total_politicians": 0,
-            "politicians_with_social": 0,
+            "politicians_with_results": 0,
             "politicians_scraped": 0,
             "total_posts": 0,
             "by_platform": {},
             "errors": [],
         }
 
-    def _extract_handles(self, politician: Dict) -> Dict[str, Optional[str]]:
-        """Extract social media handles from the politician's social_media JSONB."""
-        sm = politician.get("social_media") or {}
-        return {
-            "twitter": sm.get("twitterHandle"),
-            "facebook": sm.get("facebookPageId"),
-            "facebook_url": sm.get("facebookPageUrl"),
-            "instagram": sm.get("instagramHandle"),
-            "tiktok": sm.get("tiktokHandle"),
-            "youtube": sm.get("youtubeChannelId"),
-        }
-
     def scrape_politician(self, politician: Dict) -> List[Dict[str, Any]]:
-        """Scrape all enabled platforms for a single politician."""
+        """Scrape all enabled source types for a single politician."""
         pid = politician["bioguide_id"]
         name = politician["name"]
-        handles = self._extract_handles(politician)
         posts: List[Dict[str, Any]] = []
 
-        has_any = any(
-            handles.get(p) for p in self.platforms
-        )
-        if not has_any:
-            logger.debug(f"  {name}: No social handles for enabled platforms")
-            return posts
-
-        self.stats["politicians_with_social"] += 1
-
-        # Twitter
-        if "twitter" in self.platforms and handles.get("twitter"):
+        # RSS feeds
+        if "rss" in self.platforms:
             try:
-                tw_posts = self.twitter_scraper.scrape(
-                    handles["twitter"], pid, name, self.max_posts
-                )
-                posts.extend(tw_posts)
-                self.stats["by_platform"]["twitter"] = (
-                    self.stats["by_platform"].get("twitter", 0) + len(tw_posts)
+                rss_posts = self.rss_scraper.scrape(politician, self.max_posts)
+                posts.extend(rss_posts)
+                self.stats["by_platform"]["rss"] = (
+                    self.stats["by_platform"].get("rss", 0) + len(rss_posts)
                 )
             except Exception as e:
                 self.stats["errors"].append(
-                    {"politician": name, "platform": "twitter", "error": str(e)}
+                    {"politician": name, "platform": "rss", "error": str(e)}
                 )
-            time.sleep(2)
+            time.sleep(1)  # Polite delay
 
-        # Facebook
-        if "facebook" in self.platforms and handles.get("facebook"):
+        # Google News
+        if "news" in self.platforms:
             try:
-                fb_posts = self.facebook_scraper.scrape(
-                    handles["facebook"],
-                    pid,
-                    name,
-                    page_url=handles.get("facebook_url"),
-                    max_posts=self.max_posts,
-                )
-                posts.extend(fb_posts)
-                self.stats["by_platform"]["facebook"] = (
-                    self.stats["by_platform"].get("facebook", 0) + len(fb_posts)
+                news_posts = self.news_scraper.scrape(politician, self.max_posts)
+                posts.extend(news_posts)
+                self.stats["by_platform"]["news"] = (
+                    self.stats["by_platform"].get("news", 0) + len(news_posts)
                 )
             except Exception as e:
                 self.stats["errors"].append(
-                    {"politician": name, "platform": "facebook", "error": str(e)}
+                    {"politician": name, "platform": "news", "error": str(e)}
                 )
-            time.sleep(2)
+            time.sleep(1.5)  # Slightly longer delay for Google
 
-        # Instagram
-        if "instagram" in self.platforms and handles.get("instagram"):
+        # Press releases (official website scraping)
+        if "press" in self.platforms:
             try:
-                ig_posts = self.instagram_scraper.scrape(
-                    handles["instagram"], pid, name, self.max_posts
-                )
-                posts.extend(ig_posts)
-                self.stats["by_platform"]["instagram"] = (
-                    self.stats["by_platform"].get("instagram", 0) + len(ig_posts)
+                press_posts = self.press_scraper.scrape(politician, self.max_posts)
+                posts.extend(press_posts)
+                self.stats["by_platform"]["press"] = (
+                    self.stats["by_platform"].get("press", 0) + len(press_posts)
                 )
             except Exception as e:
                 self.stats["errors"].append(
-                    {"politician": name, "platform": "instagram", "error": str(e)}
+                    {"politician": name, "platform": "press", "error": str(e)}
                 )
-            time.sleep(2)
+            time.sleep(1)
 
-        # TikTok
-        if "tiktok" in self.platforms and handles.get("tiktok"):
+        # YouTube RSS
+        if "youtube" in self.platforms:
             try:
-                tt_posts = self.tiktok_scraper.scrape(
-                    handles["tiktok"], pid, name, self.max_posts
-                )
-                posts.extend(tt_posts)
-                self.stats["by_platform"]["tiktok"] = (
-                    self.stats["by_platform"].get("tiktok", 0) + len(tt_posts)
-                )
-            except Exception as e:
-                self.stats["errors"].append(
-                    {"politician": name, "platform": "tiktok", "error": str(e)}
-                )
-            time.sleep(2)
-
-        # YouTube
-        if "youtube" in self.platforms and handles.get("youtube"):
-            try:
-                yt_posts = self.youtube_scraper.scrape(
-                    handles["youtube"], pid, name, self.max_posts
-                )
+                yt_posts = self.youtube_scraper.scrape(politician, self.max_posts)
                 posts.extend(yt_posts)
                 self.stats["by_platform"]["youtube"] = (
                     self.stats["by_platform"].get("youtube", 0) + len(yt_posts)
@@ -958,7 +1640,49 @@ class SocialMediaPipeline:
                 self.stats["errors"].append(
                     {"politician": name, "platform": "youtube", "error": str(e)}
                 )
-            time.sleep(2)
+            time.sleep(0.5)
+
+        # Twitter/X (via Twikit guest mode)
+        if "twitter" in self.platforms:
+            try:
+                tw_posts = self.twitter_scraper.scrape(politician, self.max_posts)
+                posts.extend(tw_posts)
+                self.stats["by_platform"]["twitter"] = (
+                    self.stats["by_platform"].get("twitter", 0) + len(tw_posts)
+                )
+            except Exception as e:
+                self.stats["errors"].append(
+                    {"politician": name, "platform": "twitter", "error": str(e)}
+                )
+            time.sleep(2)  # Be polite with Twitter
+
+        # Facebook (via facebook-scraper)
+        if "facebook" in self.platforms:
+            try:
+                fb_posts = self.facebook_scraper.scrape(politician, self.max_posts)
+                posts.extend(fb_posts)
+                self.stats["by_platform"]["facebook"] = (
+                    self.stats["by_platform"].get("facebook", 0) + len(fb_posts)
+                )
+            except Exception as e:
+                self.stats["errors"].append(
+                    {"politician": name, "platform": "facebook", "error": str(e)}
+                )
+            time.sleep(2)  # Be polite with Facebook
+
+        # Instagram (via Instaloader)
+        if "instagram" in self.platforms:
+            try:
+                ig_posts = self.instagram_scraper.scrape(politician, self.max_posts)
+                posts.extend(ig_posts)
+                self.stats["by_platform"]["instagram"] = (
+                    self.stats["by_platform"].get("instagram", 0) + len(ig_posts)
+                )
+            except Exception as e:
+                self.stats["errors"].append(
+                    {"politician": name, "platform": "instagram", "error": str(e)}
+                )
+            time.sleep(2)  # Be polite with Instagram
 
         # Sentiment analysis
         for post in posts:
@@ -967,6 +1691,7 @@ class SocialMediaPipeline:
                 post["sentiment_score"] = analyze_sentiment(content)
 
         if posts:
+            self.stats["politicians_with_results"] += 1
             self.stats["politicians_scraped"] += 1
 
         return posts
@@ -975,18 +1700,20 @@ class SocialMediaPipeline:
         self,
         politicians: List[Dict],
         output_path: Path = OUTPUT_FILE,
+        push_to_supabase: bool = True,
     ) -> Dict[str, Any]:
         """Run the full scraping pipeline."""
         start_time = datetime.now()
         self.stats["total_politicians"] = len(politicians)
 
         logger.info("=" * 70)
-        logger.info("  Snitched.ai - Social Media Scraper")
+        logger.info("  Snitched.ai - Public Records & News Scraper")
         logger.info("=" * 70)
         logger.info(f"  Politicians:  {len(politicians)}")
-        logger.info(f"  Platforms:    {', '.join(self.platforms)}")
-        logger.info(f"  Max posts:    {self.max_posts} per platform")
+        logger.info(f"  Sources:      {', '.join(self.platforms)}")
+        logger.info(f"  Max posts:    {self.max_posts} per source")
         logger.info(f"  Output:       {output_path}")
+        logger.info(f"  BS4 avail:    {HAS_BS4}")
         logger.info("")
 
         for i, politician in enumerate(politicians, 1):
@@ -1005,12 +1732,12 @@ class SocialMediaPipeline:
 
         self.stats["total_posts"] = len(self.all_posts)
 
-        # Save output
+        # Save output to JSON file
         output_data = {
             "metadata": {
                 "scraper": "snitched-social-media-scraper",
-                "version": "2.0.0",
-                "engine": "scrapling + facebook-scraper",
+                "version": "3.0.0",
+                "engine": "requests + beautifulsoup4 + xml.etree",
                 "platforms": self.platforms,
                 "started_at": start_time.isoformat(),
                 "completed_at": datetime.now().isoformat(),
@@ -1027,6 +1754,12 @@ class SocialMediaPipeline:
             json.dump(output_data, f, indent=2, default=str, ensure_ascii=False)
         logger.info(f"\nSaved {len(self.all_posts)} posts to {output_path}")
 
+        # Push to Supabase
+        if push_to_supabase and self.all_posts:
+            logger.info(f"Pushing {len(self.all_posts)} posts to Supabase...")
+            upserted = supabase_upsert_posts(self.all_posts)
+            logger.info(f"Supabase: Upserted {upserted} rows to social_posts")
+
         # Print summary
         duration = (datetime.now() - start_time).total_seconds()
         logger.info("")
@@ -1034,15 +1767,14 @@ class SocialMediaPipeline:
         logger.info("  SCRAPE SUMMARY")
         logger.info("=" * 70)
         logger.info(f"  Total politicians:     {self.stats['total_politicians']}")
-        logger.info(f"  With social handles:   {self.stats['politicians_with_social']}")
-        logger.info(f"  Successfully scraped:  {self.stats['politicians_scraped']}")
+        logger.info(f"  With results:          {self.stats['politicians_with_results']}")
         logger.info(f"  Total posts collected: {self.stats['total_posts']}")
         logger.info(f"  Errors:                {len(self.stats['errors'])}")
         logger.info(f"  Duration:              {duration:.1f}s")
 
         if self.stats["by_platform"]:
             logger.info("")
-            logger.info("  By platform:")
+            logger.info("  By source:")
             for platform, count in sorted(self.stats["by_platform"].items()):
                 logger.info(f"    {platform:12s}  {count} posts")
 
@@ -1070,21 +1802,21 @@ def run_dry_run(platforms: List[str], limit: int) -> Dict[str, Any]:
     logger.info("  DRY RUN MODE -- Validating pipeline structure")
     logger.info("=" * 70)
 
-    # 1. Check Scrapling import
-    logger.info("\n[1/5] Checking Scrapling installation...")
-    try:
-        from scrapling import Fetcher
-        logger.info("  OK: Scrapling is available")
-    except ImportError as e:
-        logger.error(f"  FAIL: Scrapling not installed: {e}")
+    # 1. Check requests
+    logger.info("\n[1/5] Checking requests library...")
+    logger.info(f"  OK: requests {requests.__version__}")
 
-    # 2. Check facebook-scraper import
-    logger.info("\n[2/5] Checking facebook-scraper installation...")
-    try:
-        from facebook_scraper import get_posts  # noqa: F401
-        logger.info("  OK: facebook-scraper is available")
-    except ImportError as e:
-        logger.warning(f"  WARN: facebook-scraper not installed: {e}")
+    # 2. Check BeautifulSoup
+    logger.info("\n[2/5] Checking BeautifulSoup (press release scraping)...")
+    if HAS_BS4:
+        import bs4
+        logger.info(f"  OK: beautifulsoup4 {bs4.__version__}")
+    else:
+        logger.warning(
+            "  WARN: beautifulsoup4 not installed. "
+            "Install with: pip install beautifulsoup4\n"
+            "  Press release scraping will be disabled."
+        )
 
     # 3. Check TextBlob
     logger.info("\n[3/5] Checking TextBlob (sentiment analysis)...")
@@ -1098,51 +1830,83 @@ def run_dry_run(platforms: List[str], limit: int) -> Dict[str, Any]:
     logger.info("\n[4/5] Fetching politicians from Supabase...")
     try:
         politicians = supabase_get_politicians(limit=limit)
-        logger.info(f"  OK: Found {len(politicians)} politicians with social media data")
+        logger.info(
+            f"  OK: Found {len(politicians)} politicians"
+        )
 
-        # Count handles by platform
-        counts = {"twitter": 0, "facebook": 0, "instagram": 0, "tiktok": 0, "youtube": 0}
+        # Count who has useful data for each source type
+        has_rss = 0
+        has_youtube = 0
+        senators = 0
+        representatives = 0
+
         for p in politicians:
+            ol = p.get("office_level", "")
             sm = p.get("social_media") or {}
-            if sm.get("twitterHandle"):
-                counts["twitter"] += 1
-            if sm.get("facebookPageId"):
-                counts["facebook"] += 1
-            if sm.get("instagramHandle"):
-                counts["instagram"] += 1
-            if sm.get("tiktokHandle"):
-                counts["tiktok"] += 1
+            if "Senator" in ol:
+                senators += 1
+                has_rss += 1  # Senators almost always have RSS
+            if "Representative" in ol:
+                representatives += 1
+                has_rss += 1  # Reps almost always have RSS
             if sm.get("youtubeChannelId"):
-                counts["youtube"] += 1
+                has_youtube += 1
 
-        logger.info(f"  Twitter handles:   {counts['twitter']}")
-        logger.info(f"  Facebook pages:    {counts['facebook']}")
-        logger.info(f"  Instagram handles: {counts['instagram']}")
-        logger.info(f"  TikTok handles:    {counts['tiktok']}")
-        logger.info(f"  YouTube channels:  {counts['youtube']}")
+        logger.info(f"  US Senators:         {senators}")
+        logger.info(f"  US Representatives:  {representatives}")
+        logger.info(f"  With RSS (est.):     {has_rss}")
+        logger.info(f"  With YouTube:        {has_youtube}")
+        logger.info(f"  All can use News:    {len(politicians)} (Google News works for everyone)")
 
-        # Show a few sample politicians
+        # Show sample politicians
         logger.info("\n  Sample politicians:")
         for p in politicians[:5]:
-            sm = p.get("social_media") or {}
-            handles = []
-            if sm.get("twitterHandle"):
-                handles.append(f"@{sm['twitterHandle']}")
-            if sm.get("facebookPageId"):
-                handles.append(f"FB:{sm['facebookPageId']}")
-            if sm.get("instagramHandle"):
-                handles.append(f"IG:@{sm['instagramHandle']}")
             logger.info(
-                f"    {p['name']:30s} {p.get('office_level', ''):20s} {', '.join(handles)}"
+                f"    {p['name']:30s} {p.get('office_level', ''):20s}"
             )
 
     except Exception as e:
         logger.error(f"  FAIL: Could not fetch from Supabase: {e}")
         politicians = []
 
-    # 5. Verify output directory
-    logger.info(f"\n[5/5] Checking output path...")
-    logger.info(f"  Output file: {OUTPUT_FILE}")
+    # 5. Test connectivity to key sources
+    logger.info(f"\n[5/5] Testing connectivity...")
+
+    # Test Google News RSS
+    test_url = "https://news.google.com/rss/search?q=Florida+Senator&hl=en-US&gl=US&ceid=US:en"
+    try:
+        resp = fetch_url(test_url, timeout=10, retries=0)
+        if resp and resp.status_code == 200:
+            logger.info(f"  OK: Google News RSS reachable")
+        else:
+            logger.warning(f"  WARN: Google News RSS returned {resp.status_code if resp else 'None'}")
+    except Exception as e:
+        logger.warning(f"  WARN: Google News RSS unreachable: {e}")
+
+    # Test a Senate RSS feed
+    test_rss = "https://www.rubio.senate.gov/rss/feeds/?type=press"
+    try:
+        resp = fetch_url(test_rss, timeout=10, retries=0)
+        if resp and resp.status_code == 200:
+            logger.info(f"  OK: Senate RSS feeds reachable (tested rubio.senate.gov)")
+        else:
+            logger.info(f"  INFO: rubio.senate.gov RSS returned {resp.status_code if resp else 'None'} (some feeds use different paths)")
+    except Exception as e:
+        logger.info(f"  INFO: rubio.senate.gov test: {e}")
+
+    # Test YouTube RSS
+    test_yt = "https://www.youtube.com/feeds/videos.xml?channel_id=UCnJ4fVEJujmFnRBRODSkzOQ"
+    try:
+        resp = fetch_url(test_yt, timeout=10, retries=0)
+        if resp and resp.status_code == 200:
+            logger.info(f"  OK: YouTube RSS feeds reachable")
+        else:
+            logger.info(f"  INFO: YouTube RSS returned {resp.status_code if resp else 'None'}")
+    except Exception as e:
+        logger.info(f"  INFO: YouTube RSS test: {e}")
+
+    # Verify output directory
+    logger.info(f"\n  Output file: {OUTPUT_FILE}")
     logger.info(f"  Directory exists: {OUTPUT_FILE.parent.exists()}")
     logger.info(f"  Writable: {os.access(OUTPUT_FILE.parent, os.W_OK)}")
 
@@ -1150,9 +1914,9 @@ def run_dry_run(platforms: List[str], limit: int) -> Dict[str, Any]:
     logger.info("\n" + "=" * 70)
     logger.info("  DRY RUN COMPLETE")
     logger.info("=" * 70)
-    logger.info(f"  Platforms to scrape: {', '.join(platforms)}")
-    logger.info(f"  Politicians ready:   {len(politicians)}")
-    logger.info(f"  Pipeline status:     READY")
+    logger.info(f"  Sources to scrape: {', '.join(platforms)}")
+    logger.info(f"  Politicians ready: {len(politicians)}")
+    logger.info(f"  Pipeline status:   READY")
     logger.info("=" * 70)
 
     return {
@@ -1171,28 +1935,68 @@ def run_dry_run(platforms: List[str], limit: int) -> Dict[str, Any]:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Snitched.ai Social Media Scraper",
+        description="Snitched.ai Public Records & News Scraper",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
+Sources (use with --platforms):
+  rss        Official .gov RSS/Atom feeds (press releases, news)
+  news       Google News RSS (recent news mentions)
+  press      Official website press release pages (requires beautifulsoup4)
+  youtube    YouTube channel RSS feeds
+  twitter    Twitter/X posts via Twikit (guest mode, no API key)
+  facebook   Facebook page posts via facebook-scraper (no API key)
+  instagram  Instagram profile posts via Instaloader (no API key)
+
 Examples:
   python scrape-social-media.py --dry-run
   python scrape-social-media.py --batch --limit 5
-  python scrape-social-media.py --batch --platforms twitter,facebook
-  python scrape-social-media.py --politician "Rick Scott"
+  python scrape-social-media.py --batch --platforms twitter,facebook,instagram
+  python scrape-social-media.py --politician "Rick Scott" --platforms twitter
+  python scrape-social-media.py --batch --platforms rss,news,press,twitter,facebook,instagram --limit 20
         """,
     )
-    parser.add_argument("--dry-run", action="store_true", help="Validate pipeline without scraping")
-    parser.add_argument("--batch", action="store_true", help="Scrape all politicians (or up to --limit)")
-    parser.add_argument("--politician", help="Scrape a specific politician by name")
-    parser.add_argument("--limit", type=int, default=100, help="Max politicians to process (default: 100)")
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Validate pipeline without scraping",
+    )
+    parser.add_argument(
+        "--batch",
+        action="store_true",
+        help="Scrape all politicians (or up to --limit)",
+    )
+    parser.add_argument(
+        "--politician", help="Scrape a specific politician by name"
+    )
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=100,
+        help="Max politicians to process (default: 100)",
+    )
     parser.add_argument(
         "--platforms",
-        default="twitter,facebook,instagram",
-        help="Comma-separated platforms (default: twitter,facebook,instagram)",
+        default="rss,news,press,twitter,facebook,instagram",
+        help="Comma-separated sources: rss,news,press,youtube,twitter,facebook,instagram",
     )
-    parser.add_argument("--max-posts", type=int, default=20, help="Max posts per platform per politician")
-    parser.add_argument("--offset", type=int, default=0, help="Skip first N politicians (for rotation)")
+    parser.add_argument(
+        "--max-posts",
+        type=int,
+        default=20,
+        help="Max posts per source per politician (default: 20)",
+    )
+    parser.add_argument(
+        "--offset",
+        type=int,
+        default=0,
+        help="Skip first N politicians (for rotation)",
+    )
     parser.add_argument("--output", help="Override output file path")
+    parser.add_argument(
+        "--no-supabase",
+        action="store_true",
+        help="Skip pushing results to Supabase",
+    )
 
     args = parser.parse_args()
     platforms = [p.strip().lower() for p in args.platforms.split(",")]
@@ -1212,19 +2016,25 @@ Examples:
         # Filter to specific politician
         name_lower = args.politician.lower()
         politicians = [
-            p
-            for p in politicians
-            if name_lower in p["name"].lower()
+            p for p in politicians if name_lower in p["name"].lower()
         ]
         if not politicians:
             logger.error(f"No politician found matching '{args.politician}'")
             sys.exit(1)
-        logger.info(f"Found {len(politicians)} politician(s) matching '{args.politician}'")
+        logger.info(
+            f"Found {len(politicians)} politician(s) matching '{args.politician}'"
+        )
 
     # Run pipeline
     output_path = Path(args.output) if args.output else OUTPUT_FILE
-    pipeline = SocialMediaPipeline(platforms=platforms, max_posts_per_platform=args.max_posts)
-    result = pipeline.run(politicians, output_path=output_path)
+    pipeline = SocialMediaPipeline(
+        platforms=platforms, max_posts_per_platform=args.max_posts
+    )
+    result = pipeline.run(
+        politicians,
+        output_path=output_path,
+        push_to_supabase=not args.no_supabase,
+    )
 
     # Print final JSON summary to stdout
     summary = {

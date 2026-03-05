@@ -31,7 +31,7 @@ case "${1:-start}" in
     nohup npx tsx scripts/social-media-daemon.ts \
       --interval "${DAEMON_INTERVAL:-15}" \
       --batch-size "${DAEMON_BATCH_SIZE:-10}" \
-      --platforms "${DAEMON_PLATFORMS:-twitter,facebook}" \
+      --platforms "${DAEMON_PLATFORMS:-twitter,rss,news,press}" \
       >> "$LOG_FILE" 2>&1 &
 
     echo $! > "$PID_FILE"

@@ -59,7 +59,7 @@ function getArg(name: string, defaultVal: string): string {
 
 const POLL_INTERVAL_MIN = parseInt(getArg('interval', '15'), 10);
 const BATCH_SIZE = parseInt(getArg('batch-size', '10'), 10);
-const PLATFORMS = getArg('platforms', 'twitter,facebook');
+const PLATFORMS = getArg('platforms', 'twitter,rss,news,press');
 const MAX_POSTS_PER_POLITICIAN = parseInt(getArg('max-posts', '20'), 10);
 
 // ---------------------------------------------------------------------------
