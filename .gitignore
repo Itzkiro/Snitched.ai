@@ -17,6 +17,9 @@ dist/
 .env.production
 .env.development
 
+# typescript
+*.tsbuildinfo
+
 # debug
 npm-debug.log*
 
