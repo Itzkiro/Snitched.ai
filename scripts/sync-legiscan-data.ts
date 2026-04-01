@@ -28,17 +28,19 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 // Configuration
 // ---------------------------------------------------------------------------
 
-const LEGISCAN_API_KEY = process.env.LEGISCAN_API_KEY || 'fbc52a91193b50dd0330a1521d8b155d';
+const LEGISCAN_API_KEY = process.env.LEGISCAN_API_KEY;
 const LEGISCAN_BASE = 'https://api.legiscan.com/';
 const STATE = 'FL';
 
-const SUPABASE_URL = process.env.SUPABASE_URL
-  || process.env.NEXT_PUBLIC_SUPABASE_URL
-  || 'https://uqjfxhpyitleeleazzow.supabase.co';
+const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
   || process.env.SUPABASE_ANON_KEY
-  || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVxamZ4aHB5aXRsZWVsZWF6em93Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MTc2NzQzOCwiZXhwIjoyMDg3MzQzNDM4fQ.abK_AJ-qataXyYn59I2w2rTxP4dIyl1UjCAMkw_6JPw';
+  || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+if (!LEGISCAN_API_KEY || !SUPABASE_URL || !SUPABASE_KEY) {
+  console.error('Missing required environment variables: LEGISCAN_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY');
+  process.exit(1);
+}
 
 // CLI args
 const args = process.argv.slice(2);

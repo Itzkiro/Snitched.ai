@@ -27,11 +27,16 @@ import { createClient } from '@supabase/supabase-js';
 // Configuration
 // ---------------------------------------------------------------------------
 
-const LEGISCAN_API_KEY = 'fbc52a91193b50dd0330a1521d8b155d';
+const LEGISCAN_API_KEY = process.env.LEGISCAN_API_KEY;
 const LEGISCAN_BASE_URL = 'https://api.legiscan.com/';
 
-const SUPABASE_URL = 'https://uqjfxhpyitleeleazzow.supabase.co';
-const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVxamZ4aHB5aXRsZWVsZWF6em93Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MTc2NzQzOCwiZXhwIjoyMDg3MzQzNDM4fQ.abK_AJ-qataXyYn59I2w2rTxP4dIyl1UjCAMkw_6JPw';
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
+
+if (!LEGISCAN_API_KEY || !SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
+  console.error('Missing required environment variables: LEGISCAN_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_KEY');
+  process.exit(1);
+}
 
 const RATE_LIMIT_MS = 250; // LegiScan doesn't enforce per-second, but be polite
 

@@ -26,7 +26,11 @@ import 'dotenv/config';
 // Configuration
 // ---------------------------------------------------------------------------
 
-const LEGISCAN_API_KEY = process.env.LEGISCAN_API_KEY || '';
+const LEGISCAN_API_KEY = process.env.LEGISCAN_API_KEY;
+if (!LEGISCAN_API_KEY) {
+  console.error('Missing required environment variable: LEGISCAN_API_KEY');
+  process.exit(1);
+}
 const LEGISCAN_BASE = 'https://api.legiscan.com/';
 const RATE_LIMIT_MS = 350; // ms between requests (stay well under limits)
 const STATE = 'FL';

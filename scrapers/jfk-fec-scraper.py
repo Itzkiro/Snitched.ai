@@ -20,7 +20,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('/Users/jaketad/.openclaw/workspace/snitched-ai/scrapers/logs/jfk-fec-data.log'),
+        logging.FileHandler(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logs', 'jfk-fec-data.log')),
         logging.StreamHandler()
     ]
 )
@@ -347,14 +347,19 @@ class JFKFECScraper:
 def main():
     """Main entry point."""
     # Get API key
-    api_key = os.getenv('FEC_API_KEY', '3acNZC9zPgX8xu4UrqNAjVyDxnMb56aPffExbS9t')
+    api_key = os.environ.get('FEC_API_KEY')
+    if not api_key:
+        print("Missing required environment variable: FEC_API_KEY")
+        sys.exit(1)
     
     # Ensure directories exist
-    os.makedirs('/Users/jaketad/.openclaw/workspace/snitched-ai/scrapers/logs', exist_ok=True)
-    os.makedirs('/Users/jaketad/.openclaw/workspace/snitched-ai/data-ingestion/jfk-fec-results', exist_ok=True)
-    
+    SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+    PROJECT_DIR = os.path.dirname(SCRIPT_DIR)
+    os.makedirs(os.path.join(SCRIPT_DIR, 'logs'), exist_ok=True)
+    os.makedirs(os.path.join(PROJECT_DIR, 'data-ingestion', 'jfk-fec-results'), exist_ok=True)
+
     # Load politicians data
-    politicians_file = '/Users/jaketad/.openclaw/workspace/snitched-ai/data-ingestion/phase1/processed/florida_politicians.json'
+    politicians_file = os.path.join(PROJECT_DIR, 'data-ingestion', 'phase1', 'processed', 'florida_politicians.json')
     logger.info(f"Loading politicians from {politicians_file}")
     
     with open(politicians_file, 'r') as f:
@@ -376,13 +381,13 @@ def main():
     summary = scraper.run_full_scrape(politicians)
     
     # Save detailed results
-    output_file = '/Users/jaketad/.openclaw/workspace/snitched-ai/data-ingestion/jfk-fec-results/jfk-fec-full-results.json'
+    output_file = os.path.join(PROJECT_DIR, 'data-ingestion', 'jfk-fec-results', 'jfk-fec-full-results.json')
     logger.info(f"Saving results to {output_file}")
     with open(output_file, 'w') as f:
         json.dump(summary, f, indent=2, default=str)
     
     # Save summary only
-    summary_file = '/Users/jaketad/.openclaw/workspace/snitched-ai/data-ingestion/jfk-fec-results/jfk-fec-summary.json'
+    summary_file = os.path.join(PROJECT_DIR, 'data-ingestion', 'jfk-fec-results', 'jfk-fec-summary.json')
     summary_only = {k: v for k, v in summary.items() if k != 'politicians'}
     
     # Add top AIPAC recipients

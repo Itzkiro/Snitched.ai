@@ -28,7 +28,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('/Users/jaketad/.openclaw/workspace/snitched-ai/scrapers/logs/fec-data.log'),
+        logging.FileHandler(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logs', 'fec-data.log')),
         logging.StreamHandler()
     ]
 )
@@ -305,7 +305,7 @@ def main():
         sys.exit(1)
     
     # Ensure log directory exists
-    os.makedirs('/Users/jaketad/.openclaw/workspace/snitched-ai/scrapers/logs', exist_ok=True)
+    os.makedirs(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logs'), exist_ok=True)
     
     # Initialize
     db = DatabaseHelper()

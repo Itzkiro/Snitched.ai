@@ -22,15 +22,17 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('/Users/jaketad/.openclaw/workspace/snitched-ai/scrapers/logs/jfk-social-scraper.log'),
+        logging.FileHandler(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logs', 'jfk-social-scraper.log')),
         logging.StreamHandler()
     ]
 )
 logger = logging.getLogger(__name__)
 
 # Paths
-DATA_DIR = Path('/Users/jaketad/.openclaw/workspace/snitched-ai/data-ingestion/phase1/processed')
-OUTPUT_DIR = Path('/Users/jaketad/.openclaw/workspace/snitched-ai/data-ingestion/jfk-social-results')
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = SCRIPT_DIR.parent
+DATA_DIR = PROJECT_DIR / 'data-ingestion' / 'phase1' / 'processed'
+OUTPUT_DIR = PROJECT_DIR / 'data-ingestion' / 'jfk-social-results'
 POLITICIANS_FILE = DATA_DIR / 'florida_politicians.json'
 
 # Ensure output directory exists
@@ -404,7 +406,7 @@ class JFKSocialScraper:
 def main():
     """Main entry point."""
     # Ensure log directory exists
-    os.makedirs('/Users/jaketad/.openclaw/workspace/snitched-ai/scrapers/logs', exist_ok=True)
+    os.makedirs(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logs'), exist_ok=True)
     
     # Run scraper
     scraper = JFKSocialScraper()

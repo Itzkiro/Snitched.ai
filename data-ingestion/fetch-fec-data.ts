@@ -25,7 +25,11 @@ import * as path from 'path';
 // Configuration
 // ---------------------------------------------------------------------------
 
-const FEC_API_KEY = process.env.FEC_API_KEY || 'DEMO_KEY';
+const FEC_API_KEY = process.env.FEC_API_KEY;
+if (!FEC_API_KEY) {
+  console.error('Missing required environment variable: FEC_API_KEY');
+  process.exit(1);
+}
 const FEC_BASE_URL = 'https://api.open.fec.gov/v1';
 const RATE_LIMIT_MS = 500; // ms between requests (FEC rate limit: 1000/hr for DEMO_KEY)
 
@@ -593,7 +597,7 @@ async function main() {
   console.log('='.repeat(60));
   console.log('Snitched.ai FEC Data Ingestion');
   console.log('='.repeat(60));
-  console.log(`API Key: ${FEC_API_KEY === 'DEMO_KEY' ? 'DEMO_KEY (rate limited)' : 'Custom key'}`);
+  console.log(`API Key: [set]`);
   console.log(`Cycles: ${cycles.join(', ')}`);
   console.log(`Limit: ${limit === Infinity ? 'All' : limit}`);
   console.log('');
@@ -725,7 +729,7 @@ function saveOutput(
   const output: FECOutput = {
     metadata: {
       generated_at: new Date().toISOString(),
-      fec_api_key_type: FEC_API_KEY === 'DEMO_KEY' ? 'DEMO_KEY' : 'custom',
+      fec_api_key_type: 'custom',
       cycles,
       total_politicians: totalPoliticians,
       with_fec_data: withData,
