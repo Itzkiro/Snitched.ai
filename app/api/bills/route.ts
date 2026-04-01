@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
   const ids = searchParams.get('ids');
   const category = searchParams.get('category');
   const needsAnalysis = searchParams.get('needsAnalysis');
-  const limit = parseInt(searchParams.get('limit') || '50', 10);
+  const limit = Math.max(1, Math.min(parseInt(searchParams.get('limit') || '50', 10), 200));
 
   const client = getServerSupabase();
   if (!client) {

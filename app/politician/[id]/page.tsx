@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import type { Politician } from '@/lib/types';
+import { getScoreColor, getGradeColor } from '@/lib/format-helpers';
 
 // ---------------------------------------------------------------------------
 // Voting Record Types — unified shape for both federal and state votes
@@ -50,11 +51,14 @@ export default function PoliticianPage() {
   useEffect(() => {
     async function loadPolitician() {
       try {
-        const res = await fetch('/api/politicians');
+        const res = await fetch(`/api/politicians/${params.id}`);
+        if (res.status === 404) {
+          setPolitician(null);
+          return;
+        }
         if (!res.ok) throw new Error(`API error: ${res.status}`);
-        const allPoliticians: Politician[] = await res.json();
-        const found = allPoliticians.find(p => p.id === params.id);
-        setPolitician(found || null);
+        const found: Politician = await res.json();
+        setPolitician(found);
       } catch (error) {
         console.error('Error loading politician:', error);
         setPolitician(null);
@@ -89,7 +93,12 @@ export default function PoliticianPage() {
 
       if (isFederal) {
         // --- Federal path: try Supabase first, then Congress.gov sponsored bills ---
-        const bioguideId = politician.source_ids!.bioguide_id!;
+        const bioguideId = politician.source_ids?.bioguide_id;
+        if (!bioguideId) {
+          setVotesError('No bioguide ID available for this politician');
+          setVotesLoading(false);
+          return;
+        }
 
         // 1. Try the Supabase-backed votes endpoint
         const supaRes = await fetch(`/api/politicians/votes?bioguideId=${encodeURIComponent(bioguideId)}`);
@@ -312,28 +321,11 @@ export default function PoliticianPage() {
     );
   }
 
-  const getScoreColor = (score: number) => {
-    if (score < 40) return 'var(--terminal-green)';
-    if (score < 60) return 'var(--terminal-amber)';
-    return 'var(--terminal-red)';
-  };
-
   const getJuiceBoxLabel = (tier: string) => {
     if (tier === 'owned') return '👑 FULLY OWNED';
     if (tier === 'bought') return '💰 BOUGHT & PAID FOR';
     if (tier === 'compromised') return '💸 COMPROMISED';
     return 'CLEAN';
-  };
-
-  const getGradeColor = (grade: string) => {
-    switch (grade) {
-      case 'A': return '#10b981';
-      case 'B': return '#22c55e';
-      case 'C': return '#f59e0b';
-      case 'D': return '#ef4444';
-      case 'F': return '#dc2626';
-      default: return '#6b7280';
-    }
   };
 
   const getConfidenceColor = (confidence: string) => {
@@ -384,10 +376,10 @@ export default function PoliticianPage() {
           </span>
           <span style={{ fontSize: '0.875rem', color: 'var(--terminal-text-dim)', marginLeft: '1rem' }}>
             {politician.corruptionScoreDetails?.confidence
-              ? `${politician.corruptionScoreDetails.confidence.toUpperCase()} CONFIDENCE (${politician.corruptionScoreDetails.dataCompleteness}% data)`
+              ? `${politician.corruptionScoreDetails.confidence.toUpperCase()} CONFIDENCE (${politician.corruptionScoreDetails.dataCompleteness ?? 0}% data)`
               : ''}
             {politician.juiceBoxTier !== 'none'
-              ? ` | ${getJuiceBoxLabel(politician.juiceBoxTier)} - $${(politician.aipacFunding / 1000).toFixed(0)}K AIPAC`
+              ? ` | ${getJuiceBoxLabel(politician.juiceBoxTier)} - $${((politician.aipacFunding ?? 0) / 1000).toFixed(0)}K AIPAC`
               : ''}
           </span>
         </div>
@@ -515,8 +507,8 @@ export default function PoliticianPage() {
                     <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                       AIPAC Funding
                     </div>
-                    <div style={{ fontSize: '2rem', fontWeight: 700, color: politician.aipacFunding > 0 ? 'var(--terminal-red)' : 'var(--terminal-green)', fontFamily: 'Bebas Neue, sans-serif' }}>
-                      ${(politician.aipacFunding / 1000).toFixed(0)}K
+                    <div style={{ fontSize: '2rem', fontWeight: 700, color: (politician.aipacFunding ?? 0) > 0 ? 'var(--terminal-red)' : 'var(--terminal-green)', fontFamily: 'Bebas Neue, sans-serif' }}>
+                      ${((politician.aipacFunding ?? 0) / 1000).toFixed(0)}K
                     </div>
                   </div>
                   <div>

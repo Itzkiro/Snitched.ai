@@ -120,8 +120,8 @@ export async function GET(request: NextRequest) {
   const sort = searchParams.get('sort') || 'updateDate+desc';
   const fromDateTime = searchParams.get('fromDateTime');
   const toDateTime = searchParams.get('toDateTime');
-  const limit = Math.min(parseInt(searchParams.get('limit') || '20', 10), 250);
-  const offset = parseInt(searchParams.get('offset') || '0', 10);
+  const limit = Math.max(1, Math.min(parseInt(searchParams.get('limit') || '20', 10), 250));
+  const offset = Math.max(0, parseInt(searchParams.get('offset') || '0', 10));
 
   try {
     // --- Specific bill by congress/type/number ---

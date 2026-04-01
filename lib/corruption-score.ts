@@ -102,12 +102,11 @@ function deriveBreakdownFromDonors(p: Politician): {
 
   // Assume remainder is proportionally similar to top 5 distribution
   if (top5Total > 0 && remainder > 0) {
-    const scale = remainder / top5Total;
-    individuals += individuals * scale;
-    corporate += corporate * scale;
-    pacs += pacs * scale;
-    aipac += aipac * scale;
-    other += other * scale;
+    individuals += (individuals / top5Total) * remainder;
+    corporate += (corporate / top5Total) * remainder;
+    pacs += (pacs / top5Total) * remainder;
+    aipac += (aipac / top5Total) * remainder;
+    other += (other / top5Total) * remainder;
   }
 
   return { individuals, corporate, pacs, aipac, other };

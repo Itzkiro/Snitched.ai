@@ -158,7 +158,7 @@ export async function GET(request: NextRequest) {
             pacTotal += amount;
           }
 
-          // Track top donors
+          // Track top 5 donors (contributions are pre-sorted by amount desc)
           if (topDonors.length < 5) {
             let donorType = 'Unknown';
             if (isIsrael) donorType = 'Israel-PAC';
@@ -172,6 +172,8 @@ export async function GET(request: NextRequest) {
               type: donorType,
               is_israel_lobby: isIsrael,
             });
+
+            if (topDonors.length >= 5) break;
           }
         }
 
