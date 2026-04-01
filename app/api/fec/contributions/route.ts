@@ -56,7 +56,7 @@ export async function GET(request: NextRequest) {
     const minAmount = searchParams.get('min_amount') || undefined;
     const maxAmount = searchParams.get('max_amount') || undefined;
     const sort = searchParams.get('sort') || '-contribution_receipt_date';
-    const perPage = Math.min(Number(searchParams.get('per_page') || '30'), 100);
+    const perPage = Math.max(1, Math.min(Number(searchParams.get('per_page') || '30'), 100));
     const lastIndex = searchParams.get('last_index') || undefined;
     const lastDate = searchParams.get('last_contribution_receipt_date') || undefined;
 

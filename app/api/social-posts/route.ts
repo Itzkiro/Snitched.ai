@@ -28,8 +28,8 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const politicianId = searchParams.get('politician_id');
     const platform = searchParams.get('platform');
-    const limit = Math.min(parseInt(searchParams.get('limit') || '50', 10), 200);
-    const offset = parseInt(searchParams.get('offset') || '0', 10);
+    const limit = Math.max(1, Math.min(parseInt(searchParams.get('limit') || '50', 10), 200));
+    const offset = Math.max(0, parseInt(searchParams.get('offset') || '0', 10));
     const since = searchParams.get('since');
     const sort = searchParams.get('sort') || 'posted_at';
     const order = searchParams.get('order') === 'asc' ? true : false; // ascending if 'asc'

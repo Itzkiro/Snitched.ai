@@ -336,8 +336,9 @@ async function syncBillVotes(
         `  Bill ${billType.toUpperCase()} ${billNumber}: ${voteActions.length} roll-call votes synced`,
       );
     }
-  } catch {
+  } catch (err) {
     // Vote sync is best-effort; don't fail the entire run
+    console.error(`Vote sync error for ${billType.toUpperCase()} ${billNumber}:`, err instanceof Error ? err.message : err);
   }
 }
 

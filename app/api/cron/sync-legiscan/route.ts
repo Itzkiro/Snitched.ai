@@ -342,8 +342,9 @@ export async function GET(request: NextRequest) {
               }
 
               syncedVotes++;
-            } catch {
+            } catch (err) {
               // Roll call sync is best-effort
+              console.error(`Roll call sync error for ${rc.roll_call_id}:`, err instanceof Error ? err.message : err);
             }
           }
         }

@@ -40,8 +40,8 @@ export async function GET(request: NextRequest) {
     const cycle = searchParams.get('cycle') || undefined;
     const isActive = searchParams.get('is_active') || undefined;
     const sort = searchParams.get('sort') || 'name';
-    const page = searchParams.get('page') || '1';
-    const perPage = Math.min(Number(searchParams.get('per_page') || '20'), 100);
+    const page = String(Math.max(1, parseInt(searchParams.get('page') || '1', 10)));
+    const perPage = Math.max(1, Math.min(Number(searchParams.get('per_page') || '20'), 100));
 
     // Build FEC API params
     const params: Record<string, string | number | undefined> = {

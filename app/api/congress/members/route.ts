@@ -99,8 +99,8 @@ export async function GET(request: NextRequest) {
   const bioguideId = searchParams.get('bioguideId');
   const state = searchParams.get('state');
   const currentMember = searchParams.get('currentMember') !== 'false'; // default true
-  const limit = Math.min(parseInt(searchParams.get('limit') || '20', 10), 250);
-  const offset = parseInt(searchParams.get('offset') || '0', 10);
+  const limit = Math.max(1, Math.min(parseInt(searchParams.get('limit') || '20', 10), 250));
+  const offset = Math.max(0, parseInt(searchParams.get('offset') || '0', 10));
 
   try {
     // --- Single member by bioguideId ---

@@ -68,8 +68,8 @@ export async function GET(request: NextRequest) {
 
     // Build the LDA API URL based on the endpoint
     const ldaParams = new URLSearchParams();
-    ldaParams.set('page', page);
-    ldaParams.set('page_size', Math.min(parseInt(pageSize, 10), 25).toString());
+    ldaParams.set('page', String(Math.max(1, parseInt(page, 10))));
+    ldaParams.set('page_size', String(Math.max(1, Math.min(parseInt(pageSize, 10), 25))));
 
     if (year) ldaParams.set('filing_year', year);
 
