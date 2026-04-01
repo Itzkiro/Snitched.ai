@@ -190,7 +190,7 @@ export async function GET(request: NextRequest) {
     const lookbackStr = lookbackDate.toISOString().split('T')[0]; // YYYY-MM-DD
 
     const recentBills = allBills
-      .filter((b) => b.last_action_date >= lookbackStr)
+      .filter((b) => new Date(b.last_action_date) >= lookbackDate)
       .slice(0, MAX_BILLS_PER_RUN);
 
     log.push(

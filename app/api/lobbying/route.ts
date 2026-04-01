@@ -98,13 +98,21 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Require at least one filter param (LDA API requirement for pagination)
-    const hasFilter = year || registrant || client || clientState || lobbyist ||
+    // Require at least one filter param (LDA API requirement for pagination).
+    // Year alone is not sufficient — require year + at least one other filter,
+    // or at least one non-year filter.
+    const hasNonYearFilter = registrant || client || clientState || lobbyist ||
       type || quarter || issues || minAmount || maxAmount ||
       contributionPayee || contributionHonoree || contributionType;
-    if (!hasFilter) {
+    if (!year && !hasNonYearFilter) {
       return NextResponse.json(
         { error: 'At least one filter parameter is required (e.g. year, client, registrant, clientState).' },
+        { status: 400 }
+      );
+    }
+    if (year && !hasNonYearFilter) {
+      return NextResponse.json(
+        { error: 'Year alone is not sufficient. Please provide at least one additional filter (e.g. client, registrant, clientState, quarter).' },
         { status: 400 }
       );
     }

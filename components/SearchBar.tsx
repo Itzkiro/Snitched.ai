@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import type { Politician } from '@/lib/types';
 
@@ -107,20 +108,23 @@ export default function SearchBar() {
   const [politicians, setPoliticians] = useState<Politician[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   // Load politicians once on mount via API route
   useEffect(() => {
-    async function loadData() {
-      try {
-        const res = await fetch('/api/politicians');
+    const controller = new AbortController();
+    fetch('/api/politicians', { signal: controller.signal })
+      .then(res => {
         if (!res.ok) throw new Error(`API error: ${res.status}`);
-        const data: Politician[] = await res.json();
+        return res.json();
+      })
+      .then((data: Politician[]) => {
         setPoliticians(data.filter(p => p && p.name && p.office && p.isActive));
-      } catch (err) {
-        console.error('SearchBar: failed to load politicians', err);
-      }
-    }
-    loadData();
+      })
+      .catch(err => {
+        if (err.name !== 'AbortError') console.error('SearchBar: failed to load politicians', err);
+      });
+    return () => controller.abort();
   }, []);
 
   // Search when query changes
@@ -177,7 +181,7 @@ export default function SearchBar() {
         e.preventDefault();
         if (selectedIndex >= 0 && selectedIndex < results.length) {
           const selected = results[selectedIndex];
-          window.location.href = `/politician/${selected.id}`;
+          router.push(`/politician/${selected.id}`);
           setQuery('');
           setIsOpen(false);
         }
