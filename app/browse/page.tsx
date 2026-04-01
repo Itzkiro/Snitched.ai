@@ -31,13 +31,15 @@ export default function BrowsePage() {
     loadData();
   }, []);
 
-  const filteredPoliticians = politicians.filter(p => {
-    if (!p || !p.isActive) return false;
-    if (filterLevel !== 'all' && p.officeLevel !== filterLevel) return false;
-    if (filterParty !== 'all' && p.party !== filterParty) return false;
-    if (searchQuery && p.name && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
-    return true;
-  });
+  const filteredPoliticians = useMemo(() => {
+    return politicians.filter(p => {
+      if (!p || !p.isActive) return false;
+      if (filterLevel !== 'all' && p.officeLevel !== filterLevel) return false;
+      if (filterParty !== 'all' && p.party !== filterParty) return false;
+      if (searchQuery && p.name && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+      return true;
+    });
+  }, [politicians, filterLevel, filterParty, searchQuery]);
 
   const officeLevels = [
     { value: 'all', label: 'All Offices' },
