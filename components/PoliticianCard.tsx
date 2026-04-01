@@ -6,24 +6,24 @@ interface Props {
   politician: Politician;
 }
 
+function getScoreClass(score: number) {
+  if (score < 40) return 'score-low';
+  if (score < 60) return 'score-medium';
+  return 'score-high';
+}
+
+function getJuiceBoxLabel(tier: string) {
+  if (tier === 'owned') return '👑 FULLY OWNED';
+  if (tier === 'bought') return '💰 BOUGHT & PAID FOR';
+  if (tier === 'compromised') return '💸 COMPROMISED';
+  return null;
+}
+
 export default function PoliticianCard({ politician }: Props) {
   // Safety check for required fields
   if (!politician || !politician.name || !politician.office) {
     return null;
   }
-
-  const getScoreClass = (score: number) => {
-    if (score < 40) return 'score-low';
-    if (score < 60) return 'score-medium';
-    return 'score-high';
-  };
-
-  const getJuiceBoxLabel = (tier: string) => {
-    if (tier === 'owned') return '👑 FULLY OWNED';
-    if (tier === 'bought') return '💰 BOUGHT & PAID FOR';
-    if (tier === 'compromised') return '💸 COMPROMISED';
-    return null;
-  };
 
   const isDangerous = politician.corruptionScore >= 60 || politician.juiceBoxTier === 'owned';
 
