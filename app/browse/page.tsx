@@ -1,13 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import PoliticianCard from '@/components/PoliticianCard';
+import type { Politician } from '@/lib/types';
 
 export default function BrowsePage() {
   const [filterLevel, setFilterLevel] = useState<string>('all');
   const [filterParty, setFilterParty] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [politicians, setPoliticians] = useState<any[]>([]);
+  const [politicians, setPoliticians] = useState<Politician[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

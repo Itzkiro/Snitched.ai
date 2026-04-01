@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import type { Politician } from '@/lib/types';
 
@@ -141,28 +141,38 @@ export default function TerminalHome() {
     return <div style={{ padding: '2rem', textAlign: 'center', color: 'yellow' }}>No politicians data loaded. Please refresh.</div>;
   }
 
-  const activePoliticians = politicians.filter(p => p.isActive);
-  const compromisedCount = activePoliticians.filter(p => p.juiceBoxTier !== 'none').length;
-  const totalFunding = activePoliticians.reduce((sum, p) => sum + p.aipacFunding, 0);
-  const avgCorruption = activePoliticians.length > 0 
-    ? Math.round(activePoliticians.reduce((sum, p) => sum + p.corruptionScore, 0) / activePoliticians.length)
-    : 0;
-  
-  // Calculate stats from loaded politicians (don't call getAllPoliticians again)
-  const federal = politicians.filter(p => p.officeLevel === 'US Senator' || p.officeLevel === 'US Representative');
-  const state = politicians.filter(p => p.officeLevel === 'State Senator' || p.officeLevel === 'State Representative' || p.officeLevel === 'Governor');
-  const county = politicians.filter(p => p.jurisdictionType === 'county' || p.jurisdictionType === 'municipal');
-  const stats = {
-    total: politicians.length,
-    federal: federal.length,
-    state: state.length,
-    county: county.length,
-  };
+  const stats = useMemo(() => {
+    const activePols = politicians.filter(p => p.isActive);
+    const compromised = activePols.filter(p => p.juiceBoxTier !== 'none').length;
+    const funding = activePols.reduce((sum, p) => sum + p.aipacFunding, 0);
+    const avg = activePols.length > 0
+      ? Math.round(activePols.reduce((sum, p) => sum + p.corruptionScore, 0) / activePols.length)
+      : 0;
 
-  // Get top 6 most corrupted for grid display
-  const topCorrupted = [...activePoliticians]
-    .sort((a, b) => b.corruptionScore - a.corruptionScore)
-    .slice(0, 6);
+    const federal = politicians.filter(p => p.officeLevel === 'US Senator' || p.officeLevel === 'US Representative');
+    const state = politicians.filter(p => p.officeLevel === 'State Senator' || p.officeLevel === 'State Representative' || p.officeLevel === 'Governor');
+    const county = politicians.filter(p => p.jurisdictionType === 'county' || p.jurisdictionType === 'municipal');
+
+    const topCorrupted = [...activePols]
+      .sort((a, b) => b.corruptionScore - a.corruptionScore)
+      .slice(0, 6);
+
+    return {
+      activePoliticians: activePols,
+      compromisedCount: compromised,
+      totalFunding: funding,
+      avgCorruption: avg,
+      total: politicians.length,
+      federal: federal.length,
+      state: state.length,
+      county: county.length,
+      topCorrupted,
+    };
+  }, [politicians]);
+
+  const { activePoliticians, compromisedCount, totalFunding, avgCorruption, topCorrupted } = stats;
+
+  const tickerItems = useMemo(() => generateTickerItems(politicians), [politicians]);
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--terminal-bg)', color: 'var(--terminal-text)' }}>
@@ -192,7 +202,7 @@ export default function TerminalHome() {
         <div className="ticker-content">
           {[...Array(2)].map((_, i) => (
             <div key={i} style={{ display: 'flex', gap: '3rem' }}>
-              {generateTickerItems(politicians).map((item, j) => (
+              {tickerItems.map((item, j) => (
                 <div key={`${i}-${j}`} className="ticker-item">
                   <span className="ticker-label">{item.label}</span>
                   <span>{item.text}</span>

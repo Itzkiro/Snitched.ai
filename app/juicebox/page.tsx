@@ -1,18 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import type { Politician, CorruptionScoreResult, CorruptionGrade, CorruptionConfidence } from '@/lib/types';
-
-function getGradeColor(grade: CorruptionGrade): string {
-  switch (grade) {
-    case 'A': return '#10b981';
-    case 'B': return '#22c55e';
-    case 'C': return '#f59e0b';
-    case 'D': return '#ef4444';
-    case 'F': return '#dc2626';
-  }
-}
+import { getScoreColor, getGradeColor } from '@/lib/format-helpers';
 
 function getConfidenceColor(confidence: CorruptionConfidence): string {
   switch (confidence) {
@@ -20,14 +11,6 @@ function getConfidenceColor(confidence: CorruptionConfidence): string {
     case 'medium': return '#f59e0b';
     case 'low': return '#6b7280';
   }
-}
-
-function getScoreColor(score: number): string {
-  if (score <= 20) return '#10b981';
-  if (score <= 40) return '#22c55e';
-  if (score <= 60) return '#f59e0b';
-  if (score <= 80) return '#ef4444';
-  return '#dc2626';
 }
 
 export default function JuiceBoxPage() {
@@ -78,13 +61,17 @@ export default function JuiceBoxPage() {
   const totalIsraelLobby = juiceBoxPoliticians.reduce((sum, p) => sum + (p.israelLobbyTotal || 0), 0);
 
   // Score distribution
-  const gradeDistribution = {
-    F: corruptionRanked.filter(p => p.corruptionScore > 80).length,
-    D: corruptionRanked.filter(p => p.corruptionScore > 60 && p.corruptionScore <= 80).length,
-    C: corruptionRanked.filter(p => p.corruptionScore > 40 && p.corruptionScore <= 60).length,
-    B: corruptionRanked.filter(p => p.corruptionScore > 20 && p.corruptionScore <= 40).length,
-    A: corruptionRanked.filter(p => p.corruptionScore <= 20).length,
-  };
+  const gradeDistribution = useMemo(() => {
+    return corruptionRanked.reduce((acc, p) => {
+      const grade = p.corruptionScore > 80 ? 'F'
+        : p.corruptionScore > 60 ? 'D'
+        : p.corruptionScore > 40 ? 'C'
+        : p.corruptionScore > 20 ? 'B'
+        : 'A';
+      acc[grade] = (acc[grade] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+  }, [corruptionRanked]);
 
   const avgScore = corruptionRanked.length > 0
     ? Math.round(corruptionRanked.reduce((sum, p) => sum + p.corruptionScore, 0) / corruptionRanked.length)

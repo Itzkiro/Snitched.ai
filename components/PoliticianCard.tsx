@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Politician } from '@/lib/types';
+import { getScoreColor } from '@/lib/format-helpers';
 
 interface Props {
   politician: Politician;
@@ -10,12 +11,6 @@ export default function PoliticianCard({ politician }: Props) {
   if (!politician || !politician.name || !politician.office) {
     return null;
   }
-
-  const getScoreColor = (score: number) => {
-    if (score < 40) return 'var(--gray-light)';
-    if (score < 60) return 'var(--red-blood)';
-    return 'var(--red-bright)';
-  };
 
   const getScoreClass = (score: number) => {
     if (score < 40) return 'score-low';
@@ -82,7 +77,7 @@ export default function PoliticianCard({ politician }: Props) {
               fontFamily: 'Bebas Neue, sans-serif',
             }}
           >
-            {politician.name.charAt(0)}
+            {politician.name?.[0] ?? '?'}
           </div>
           <div style={{ flex: 1, minWidth: 0 }}>
             <h3 
@@ -143,7 +138,7 @@ export default function PoliticianCard({ politician }: Props) {
           >
             {getJuiceBoxLabel(politician.juiceBoxTier)}
             <span style={{ marginLeft: '0.75rem', fontWeight: 700 }}>
-              ${(politician.aipacFunding / 1000).toFixed(0)}K
+              ${((politician.aipacFunding ?? 0) / 1000).toFixed(0)}K
             </span>
           </div>
         )}

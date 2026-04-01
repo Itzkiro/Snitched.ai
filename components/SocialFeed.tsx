@@ -86,8 +86,8 @@ export default function SocialFeed({
         const data = await res.json();
         setPosts(data.posts || []);
       }
-    } catch {
-      // silently fail — UI shows empty state
+    } catch (err) {
+      console.error('Failed to fetch social posts:', err);
     } finally {
       setLoading(false);
     }

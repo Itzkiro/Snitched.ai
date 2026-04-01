@@ -135,9 +135,9 @@ export default function CandidatesPage() {
                     </div>
                   )}
 
-                  {pol.termEnd && pol.termStart && (
+                  {pol.termStart && pol.termEnd && (
                     <div style={{ marginTop: '1rem', fontSize: '11px', color: 'var(--terminal-text-dim)' }}>
-                      Previously served: {new Date(pol.termStart).getFullYear()} - {new Date(pol.termEnd).getFullYear()}
+                      Previously served: {pol.termStart ? new Date(pol.termStart).getFullYear() : 'N/A'} - {pol.termEnd ? new Date(pol.termEnd).getFullYear() : 'N/A'}
                     </div>
                   )}
                 </div>
