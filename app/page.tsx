@@ -87,8 +87,8 @@ function generateTickerItems(politicians: Politician[]): { label: string; text: 
   const compromised = politicians.filter(p => p.juiceBoxTier !== 'none').length;
   items.push({ label: 'TRACKING', text: `${compromised} Florida politicians flagged for foreign lobby ties` });
 
-  const totalFunding = politicians.reduce((s, p) => s + p.aipacFunding, 0);
-  items.push({ label: 'DATA', text: `$${(totalFunding / 1000000).toFixed(2)}M total tracked pro-Israel lobby funding in Florida` });
+  const totalFunding = politicians.reduce((s, p) => s + (p.israelLobbyTotal || p.aipacFunding || 0), 0);
+  items.push({ label: 'DATA', text: `$${(totalFunding / 1000000).toFixed(2)}M total tracked Israel lobby funding in Florida` });
 
   return items;
 }
@@ -143,7 +143,7 @@ export default function TerminalHome() {
 
   const activePoliticians = politicians.filter(p => p.isActive);
   const compromisedCount = activePoliticians.filter(p => p.juiceBoxTier !== 'none').length;
-  const totalFunding = activePoliticians.reduce((sum, p) => sum + p.aipacFunding, 0);
+  const totalFunding = activePoliticians.reduce((sum, p) => sum + (p.israelLobbyTotal || p.aipacFunding || 0), 0);
   const avgCorruption = activePoliticians.length > 0 
     ? Math.round(activePoliticians.reduce((sum, p) => sum + p.corruptionScore, 0) / activePoliticians.length)
     : 0;
@@ -215,7 +215,7 @@ export default function TerminalHome() {
           }}>
             <div className="terminal-card">
               <div className="stat-value danger">${(totalFunding / 1000000).toFixed(2)}M</div>
-              <div className="stat-label">TOTAL AIPAC FUNDING</div>
+              <div className="stat-label">TOTAL ISRAEL LOBBY FUNDING</div>
             </div>
             <div className="terminal-card">
               <div className="stat-value warning">{compromisedCount}</div>
