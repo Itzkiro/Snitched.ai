@@ -1062,6 +1062,61 @@ export default function PoliticianPage() {
                     )}
                   </div>
 
+                  {/* Contribution Breakdown Card */}
+                  {politician.contributionBreakdown && (
+                    <div className="terminal-card">
+                      <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--terminal-amber)' }}>
+                        📊 FUNDING BREAKDOWN
+                      </h3>
+                      {(() => {
+                        const b = politician.contributionBreakdown;
+                        const total = (b.individuals || 0) + (b.otherPACs || 0) + (b.corporate || 0) + (b.aipac || 0);
+                        if (total === 0) return null;
+                        const segments = [
+                          { label: 'Individuals', amount: b.individuals || 0, color: 'var(--terminal-green)' },
+                          { label: 'PACs', amount: b.otherPACs || 0, color: 'var(--terminal-amber)' },
+                          { label: 'Corporate', amount: b.corporate || 0, color: '#60a5fa' },
+                          ...(b.aipac > 0 ? [{ label: 'Israel Lobby', amount: b.aipac, color: '#ef4444' }] : []),
+                        ].filter(s => s.amount > 0).sort((a, b) => b.amount - a.amount);
+                        return (
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            {/* Stacked bar */}
+                            <div style={{ display: 'flex', height: '24px', borderRadius: '2px', overflow: 'hidden' }}>
+                              {segments.map((s, i) => (
+                                <div key={i} style={{
+                                  width: `${(s.amount / total) * 100}%`,
+                                  background: s.color,
+                                  minWidth: s.amount > 0 ? '4px' : '0',
+                                }} title={`${s.label}: $${s.amount.toLocaleString()}`} />
+                              ))}
+                            </div>
+                            {/* Legend */}
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                              {segments.map((s, i) => (
+                                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <div style={{ width: '12px', height: '12px', background: s.color, borderRadius: '2px' }} />
+                                    <span style={{ fontSize: '0.875rem', color: 'var(--terminal-text)' }}>{s.label}</span>
+                                    <span style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)' }}>
+                                      ({((s.amount / total) * 100).toFixed(1)}%)
+                                    </span>
+                                  </div>
+                                  <span style={{ fontWeight: 700, fontFamily: 'Bebas Neue, sans-serif', color: s.color, fontSize: '1.1rem' }}>
+                                    ${s.amount >= 1000000
+                                      ? `${(s.amount / 1000000).toFixed(1)}M`
+                                      : s.amount >= 10000
+                                        ? `${(s.amount / 1000).toFixed(0)}K`
+                                        : s.amount.toLocaleString()}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        );
+                      })()}
+                    </div>
+                  )}
+
                   {/* Independent Expenditures Card */}
                   <div className="terminal-card">
                     <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--terminal-amber)' }}>
@@ -1164,13 +1219,28 @@ export default function PoliticianPage() {
                 </div>
               ) : (
                 <div className="terminal-card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
-                  <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>✓</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-green)' }}>
-                    NO CONTRIBUTIONS FOUND
-                  </div>
-                  <div style={{ color: 'var(--terminal-text-dim)' }}>
-                    No foreign lobby funding or major PAC contributions detected for this politician.
-                  </div>
+                  {['US Senator', 'US Representative', 'State Senator', 'State Representative'].includes(politician.officeLevel) ? (
+                    <>
+                      <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>✓</div>
+                      <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-green)' }}>
+                        NO CONTRIBUTIONS FOUND
+                      </div>
+                      <div style={{ color: 'var(--terminal-text-dim)' }}>
+                        No foreign lobby funding or major PAC contributions detected for this politician.
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>📋</div>
+                      <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-text-dim)' }}>
+                        CAMPAIGN FINANCE DATA PENDING
+                      </div>
+                      <div style={{ color: 'var(--terminal-text-dim)' }}>
+                        County and local campaign finance records are not yet available.
+                        Data is sourced from the FL Division of Elections as it becomes available.
+                      </div>
+                    </>
+                  )}
                 </div>
               )}
             </div>
