@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSupabase } from '@/lib/supabase-server';
 
+// Revalidate every 10 minutes
+export const revalidate = 600;
+
 /**
  * GET /api/politicians/votes?bioguideId=<id>&category=<category>
  */

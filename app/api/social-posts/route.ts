@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSupabase } from '@/lib/supabase-server';
 
+// Revalidate every 5 minutes
+export const revalidate = 300;
+
 /**
  * GET /api/social-posts
  *

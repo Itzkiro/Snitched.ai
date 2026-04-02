@@ -19,14 +19,8 @@ import floridaPoliticiansRaw from '../data-ingestion/phase1/processed/florida_po
 // Import real FEC scrape results (from Python scraper run on 2026-02-22)
 import fecResultsRaw from '../data-ingestion/jfk-fec-results/jfk-fec-full-results.json';
 
-// Import county-level data
-import { volusiaCountyOfficials } from './volusia-county-data';
-import { flaglerCountyOfficials } from './flagler-county-data';
-import { putnamCountyOfficials } from './putnam-county-data';
-import { lakeCountyOfficials } from './lake-county-data';
-import { seminoleCountyOfficials } from './seminole-county-data';
-import { orangeCountyOfficials } from './orange-county-data';
-import { brevardCountyOfficials } from './brevard-county-data';
+// County data is lazy-loaded inside getAllPoliticians() to avoid bundling
+// ~176KB of static data on every cold start.
 
 // ---------------------------------------------------------------------------
 // Types for raw imported data
@@ -477,6 +471,16 @@ export function getAllPoliticians(): Politician[] {
   const livePoliticians = (floridaPoliticiansRaw as RawPolitician[])
     .filter(raw => raw && raw.name && raw.office)
     .map(convertToPolitician);
+
+  // Lazy-load county data to reduce bundle size on cold starts
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { volusiaCountyOfficials } = require('./volusia-county-data');
+  const { flaglerCountyOfficials } = require('./flagler-county-data');
+  const { putnamCountyOfficials } = require('./putnam-county-data');
+  const { lakeCountyOfficials } = require('./lake-county-data');
+  const { seminoleCountyOfficials } = require('./seminole-county-data');
+  const { orangeCountyOfficials } = require('./orange-county-data');
+  const { brevardCountyOfficials } = require('./brevard-county-data');
 
   // Combine all county officials (no FEC data - local level)
   const allCountyOfficials = [

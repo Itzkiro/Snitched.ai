@@ -1,15 +1,26 @@
 import { NextResponse } from 'next/server';
 import { getServerSupabase } from '@/lib/supabase-server';
-import { getAllPoliticians as getJsonPoliticians } from '@/lib/real-data';
 import type { Politician } from '@/lib/types';
+
+// Revalidate every 5 minutes — politician data changes at most once/day via cron
+export const revalidate = 300;
+
+function cachedResponse(data: unknown) {
+  return NextResponse.json(data, {
+    headers: {
+      'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
+    },
+  });
+}
 
 export async function GET() {
   try {
     const client = getServerSupabase();
     if (!client) {
       // Supabase not configured -- fall back to local JSON data
+      const { getAllPoliticians: getJsonPoliticians } = await import('@/lib/real-data');
       const politicians = getJsonPoliticians();
-      return NextResponse.json(politicians);
+      return cachedResponse(politicians);
     }
 
     const { data, error } = await client
@@ -19,13 +30,15 @@ export async function GET() {
 
     if (error) {
       console.error('Supabase error:', error);
+      const { getAllPoliticians: getJsonPoliticians } = await import('@/lib/real-data');
       const politicians = getJsonPoliticians();
-      return NextResponse.json(politicians);
+      return cachedResponse(politicians);
     }
 
     if (!data || data.length === 0) {
+      const { getAllPoliticians: getJsonPoliticians } = await import('@/lib/real-data');
       const politicians = getJsonPoliticians();
-      return NextResponse.json(politicians);
+      return cachedResponse(politicians);
     }
 
     // Map Supabase rows to Politician type
@@ -81,11 +94,12 @@ export async function GET() {
       };
     });
 
-    return NextResponse.json(politicians);
+    return cachedResponse(politicians);
   } catch (error) {
     console.error('Failed to fetch politicians:', error);
     // Fall back to JSON data on any error
+    const { getAllPoliticians: getJsonPoliticians } = await import('@/lib/real-data');
     const politicians = getJsonPoliticians();
-    return NextResponse.json(politicians);
+    return cachedResponse(politicians);
   }
 }

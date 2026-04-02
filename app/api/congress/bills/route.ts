@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// Revalidate every 30 minutes
+export const revalidate = 1800;
+
 const CONGRESS_API_BASE = 'https://api.congress.gov/v3';
 
 interface CongressBillListItem {

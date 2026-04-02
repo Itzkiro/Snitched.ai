@@ -1,41 +1,47 @@
-'use client';
-
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { getServerSupabase } from '@/lib/supabase-server';
 import type { Politician } from '@/lib/types';
 
-export default function OfficialsPage() {
-  const [politicians, setPoliticians] = useState<Politician[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+// ISR: revalidate every 5 minutes
+export const revalidate = 300;
 
-  useEffect(() => {
-    async function loadData() {
-      try {
-        const res = await fetch('/api/politicians');
-        if (!res.ok) throw new Error(`API error: ${res.status}`);
-        const data: Politician[] = await res.json();
-        setPoliticians(data);
-      } catch (error) {
-        console.error('Error loading:', error);
-        setError(error instanceof Error ? error.message : 'Failed to load data');
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadData();
-  }, []);
-
-  if (loading) {
-    return <div style={{ padding: '2rem', textAlign: 'center', color: 'white' }}>Loading...</div>;
+async function getOfficials(): Promise<Politician[]> {
+  const client = getServerSupabase();
+  if (!client) {
+    const { getAllPoliticians } = await import('@/lib/real-data');
+    return getAllPoliticians().filter(p => p.isActive);
   }
 
-  if (error) {
-    return <div style={{ padding: '2rem', textAlign: 'center', color: 'red' }}>Error: {error}</div>;
+  const { data, error } = await client
+    .from('politicians')
+    .select('bioguide_id, name, office, office_level, party, district, jurisdiction, jurisdiction_type, corruption_score, aipac_funding, juice_box_tier, is_active, total_funds')
+    .eq('is_active', true)
+    .order('name');
+
+  if (error || !data || data.length === 0) {
+    const { getAllPoliticians } = await import('@/lib/real-data');
+    return getAllPoliticians().filter(p => p.isActive);
   }
 
-  // Filter for currently seated officials (isActive = true)
-  const seatedOfficials = politicians.filter(p => p.isActive);
+  return data.map((row: Record<string, unknown>) => ({
+    id: row.bioguide_id as string,
+    name: row.name as string,
+    office: row.office as string,
+    officeLevel: row.office_level as Politician['officeLevel'],
+    party: row.party as Politician['party'],
+    district: row.district as string | undefined,
+    jurisdiction: row.jurisdiction as string,
+    jurisdictionType: row.jurisdiction_type as Politician['jurisdictionType'],
+    corruptionScore: Number(row.corruption_score) || 0,
+    aipacFunding: Number(row.aipac_funding) || 0,
+    juiceBoxTier: (row.juice_box_tier as Politician['juiceBoxTier']) || 'none',
+    isActive: row.is_active as boolean,
+    totalFundsRaised: Number(row.total_funds) || 0,
+  })) as Politician[];
+}
+
+export default async function OfficialsPage() {
+  const seatedOfficials = await getOfficials();
 
   const byLevel = {
     federal: seatedOfficials.filter(p => p.officeLevel === 'US Senator' || p.officeLevel === 'US Representative'),
@@ -56,9 +62,9 @@ export default function OfficialsPage() {
       </div>
 
       {/* Stats */}
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(4, 1fr)', 
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, 1fr)',
         gap: '1.5rem',
         padding: '2rem',
         borderBottom: '1px solid var(--terminal-border)'
@@ -83,9 +89,9 @@ export default function OfficialsPage() {
 
       {/* Federal Officials */}
       <div style={{ padding: '2rem' }}>
-        <h2 style={{ 
-          fontSize: '1.25rem', 
-          fontWeight: 600, 
+        <h2 style={{
+          fontSize: '1.25rem',
+          fontWeight: 600,
           marginBottom: '1.5rem',
           color: 'var(--terminal-blue)',
           textTransform: 'uppercase',
@@ -97,8 +103,8 @@ export default function OfficialsPage() {
           {byLevel.federal
             .filter(pol => pol && pol.id && pol.name && pol.office && pol.party)
             .map((pol) => (
-            <Link 
-              key={pol.id} 
+            <Link
+              key={pol.id}
               href={`/politician/${pol.id}`}
               style={{ textDecoration: 'none', color: 'inherit' }}
             >
@@ -108,9 +114,9 @@ export default function OfficialsPage() {
                     <div className="card-title">{pol.name}</div>
                     <div style={{ fontSize: '11px', color: 'var(--terminal-text-dim)', marginTop: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                       <span>{pol.office}</span>
-                      <span style={{ 
-                        fontSize: '10px', 
-                        padding: '0.3rem 0.6rem', 
+                      <span style={{
+                        fontSize: '10px',
+                        padding: '0.3rem 0.6rem',
                         background: pol.party === 'Republican' ? '#dc2626' : pol.party === 'Democrat' ? '#2563eb' : '#6b7280',
                         color: '#fff',
                         borderRadius: '10px',
@@ -128,10 +134,10 @@ export default function OfficialsPage() {
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem' }}>
                   <div>
                     <div style={{ fontSize: '10px', color: 'var(--terminal-text-dim)' }}>CORRUPTION SCORE</div>
-                    <div style={{ 
-                      fontSize: '1.5rem', 
+                    <div style={{
+                      fontSize: '1.5rem',
                       fontWeight: 700,
-                      color: pol.corruptionScore >= 60 ? 'var(--terminal-red)' : 
+                      color: pol.corruptionScore >= 60 ? 'var(--terminal-red)' :
                              pol.corruptionScore >= 40 ? 'var(--terminal-amber)' : 'var(--terminal-green)'
                     }}>
                       {pol.corruptionScore}/100
@@ -154,9 +160,9 @@ export default function OfficialsPage() {
 
       {/* State Officials */}
       <div style={{ padding: '2rem', borderTop: '1px solid var(--terminal-border)' }}>
-        <h2 style={{ 
-          fontSize: '1.25rem', 
-          fontWeight: 600, 
+        <h2 style={{
+          fontSize: '1.25rem',
+          fontWeight: 600,
           marginBottom: '1.5rem',
           color: 'var(--terminal-blue)',
           textTransform: 'uppercase',
@@ -169,8 +175,8 @@ export default function OfficialsPage() {
             .filter(pol => pol && pol.id && pol.name && pol.office && pol.party)
             .slice(0, 12)
             .map((pol) => (
-            <Link 
-              key={pol.id} 
+            <Link
+              key={pol.id}
               href={`/politician/${pol.id}`}
               style={{ textDecoration: 'none', color: 'inherit' }}
             >
@@ -180,9 +186,9 @@ export default function OfficialsPage() {
                     <div className="card-title">{pol.name}</div>
                     <div style={{ fontSize: '11px', color: 'var(--terminal-text-dim)', marginTop: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                       <span>{pol.office}</span>
-                      <span style={{ 
-                        fontSize: '10px', 
-                        padding: '0.3rem 0.6rem', 
+                      <span style={{
+                        fontSize: '10px',
+                        padding: '0.3rem 0.6rem',
                         background: pol.party === 'Republican' ? '#dc2626' : pol.party === 'Democrat' ? '#2563eb' : '#6b7280',
                         color: '#fff',
                         borderRadius: '10px',
@@ -213,9 +219,9 @@ export default function OfficialsPage() {
 
       {/* County Officials */}
       <div style={{ padding: '2rem', borderTop: '1px solid var(--terminal-border)' }}>
-        <h2 style={{ 
-          fontSize: '1.25rem', 
-          fontWeight: 600, 
+        <h2 style={{
+          fontSize: '1.25rem',
+          fontWeight: 600,
           marginBottom: '1.5rem',
           color: 'var(--terminal-blue)',
           textTransform: 'uppercase',
@@ -227,8 +233,8 @@ export default function OfficialsPage() {
           {byLevel.county
             .filter(pol => pol && pol.id && pol.name && pol.office && pol.party)
             .map((pol) => (
-            <Link 
-              key={pol.id} 
+            <Link
+              key={pol.id}
               href={`/politician/${pol.id}`}
               style={{ textDecoration: 'none', color: 'inherit' }}
             >

@@ -1,41 +1,48 @@
-'use client';
-
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { getServerSupabase } from '@/lib/supabase-server';
 import type { Politician } from '@/lib/types';
 
-export default function CandidatesPage() {
-  const [politicians, setPoliticians] = useState<Politician[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+// ISR: revalidate every 5 minutes
+export const revalidate = 300;
 
-  useEffect(() => {
-    async function loadData() {
-      try {
-        const res = await fetch('/api/politicians');
-        if (!res.ok) throw new Error(`API error: ${res.status}`);
-        const data: Politician[] = await res.json();
-        setPoliticians(data);
-      } catch (error) {
-        console.error('Error loading:', error);
-        setError(error instanceof Error ? error.message : 'Failed to load data');
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadData();
-  }, []);
-
-  if (loading) {
-    return <div style={{ padding: '2rem', textAlign: 'center', color: 'white' }}>Loading...</div>;
+async function getPoliticians(): Promise<Politician[]> {
+  const client = getServerSupabase();
+  if (!client) {
+    const { getAllPoliticians } = await import('@/lib/real-data');
+    return getAllPoliticians();
   }
 
-  if (error) {
-    return <div style={{ padding: '2rem', textAlign: 'center', color: 'red' }}>Error: {error}</div>;
+  const { data, error } = await client
+    .from('politicians')
+    .select('bioguide_id, name, office, office_level, party, district, jurisdiction, jurisdiction_type, corruption_score, aipac_funding, is_active, term_start, term_end, total_funds')
+    .eq('is_active', false)
+    .order('name');
+
+  if (error || !data || data.length === 0) {
+    const { getAllPoliticians } = await import('@/lib/real-data');
+    return getAllPoliticians().filter(p => !p.isActive);
   }
 
-  // Filter for candidates (not currently active = running for office)
-  const candidates = politicians.filter(p => !p.isActive);
+  return data.map((row: Record<string, unknown>) => ({
+    id: row.bioguide_id as string,
+    name: row.name as string,
+    office: row.office as string,
+    officeLevel: row.office_level as Politician['officeLevel'],
+    party: row.party as Politician['party'],
+    district: row.district as string | undefined,
+    jurisdiction: row.jurisdiction as string,
+    jurisdictionType: row.jurisdiction_type as Politician['jurisdictionType'],
+    corruptionScore: Number(row.corruption_score) || 0,
+    aipacFunding: Number(row.aipac_funding) || 0,
+    isActive: row.is_active as boolean,
+    termStart: row.term_start as string,
+    termEnd: row.term_end as string | undefined,
+    totalFundsRaised: Number(row.total_funds) || 0,
+  })) as Politician[];
+}
+
+export default async function CandidatesPage() {
+  const candidates = await getPoliticians();
 
   return (
     <div style={{ minHeight: '100vh', paddingBottom: '4rem' }}>
@@ -51,9 +58,9 @@ export default function CandidatesPage() {
 
       {/* Alert */}
       <div style={{ padding: '2rem', background: 'rgba(0, 191, 255, 0.05)', borderBottom: '1px solid var(--terminal-border)' }}>
-        <div style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
           gap: '1rem',
           padding: '1rem',
           background: 'var(--terminal-card)',
@@ -77,8 +84,8 @@ export default function CandidatesPage() {
             {candidates
               .filter(pol => pol && pol.id && pol.name && pol.office && pol.party)
               .map((pol) => (
-              <Link 
-                key={pol.id} 
+              <Link
+                key={pol.id}
                 href={`/politician/${pol.id}`}
                 style={{ textDecoration: 'none', color: 'inherit' }}
               >
@@ -88,9 +95,9 @@ export default function CandidatesPage() {
                       <div className="card-title">{pol.name}</div>
                       <div style={{ fontSize: '11px', color: 'var(--terminal-text-dim)', marginTop: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                         <span>Running for: {pol.office}</span>
-                        <span style={{ 
-                          fontSize: '10px', 
-                          padding: '0.3rem 0.6rem', 
+                        <span style={{
+                          fontSize: '10px',
+                          padding: '0.3rem 0.6rem',
                           background: pol.party === 'Republican' ? '#dc2626' : pol.party === 'Democrat' ? '#2563eb' : '#6b7280',
                           color: '#fff',
                           borderRadius: '10px',
@@ -109,10 +116,10 @@ export default function CandidatesPage() {
                     <div style={{ fontSize: '10px', color: 'var(--terminal-text-dim)', marginBottom: '0.5rem' }}>
                       BACKGROUND CHECK
                     </div>
-                    <div style={{ 
-                      fontSize: '1.5rem', 
+                    <div style={{
+                      fontSize: '1.5rem',
                       fontWeight: 700,
-                      color: pol.corruptionScore >= 60 ? 'var(--terminal-red)' : 
+                      color: pol.corruptionScore >= 60 ? 'var(--terminal-red)' :
                              pol.corruptionScore >= 40 ? 'var(--terminal-amber)' : 'var(--terminal-green)'
                     }}>
                       SCORE: {pol.corruptionScore}/100
@@ -120,7 +127,7 @@ export default function CandidatesPage() {
                   </div>
 
                   {pol.aipacFunding > 0 && (
-                    <div style={{ 
+                    <div style={{
                       padding: '0.75rem',
                       background: 'rgba(255, 8, 68, 0.1)',
                       border: '1px solid var(--terminal-red)',
@@ -146,8 +153,8 @@ export default function CandidatesPage() {
           </div>
         </div>
       ) : (
-        <div style={{ 
-          padding: '4rem 2rem', 
+        <div style={{
+          padding: '4rem 2rem',
           textAlign: 'center',
           color: 'var(--terminal-text-dim)'
         }}>
@@ -156,7 +163,7 @@ export default function CandidatesPage() {
             NO ACTIVE CANDIDATES DETECTED
           </div>
           <div style={{ fontSize: '0.875rem', maxWidth: '600px', margin: '0 auto', lineHeight: 1.6 }}>
-            Candidate monitoring is active. New filings with Florida Division of Elections and FEC will be automatically detected and indexed. 
+            Candidate monitoring is active. New filings with Florida Division of Elections and FEC will be automatically detected and indexed.
             System will alert when 2026 primary filing period opens.
           </div>
           <div style={{ marginTop: '2rem' }}>
@@ -172,9 +179,9 @@ export default function CandidatesPage() {
       {/* Filing information */}
       <div style={{ padding: '2rem', background: 'var(--terminal-surface)', borderTop: '1px solid var(--terminal-border)' }}>
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <h3 style={{ 
-            fontSize: '1rem', 
-            fontWeight: 700, 
+          <h3 style={{
+            fontSize: '1rem',
+            fontWeight: 700,
             color: 'var(--terminal-blue)',
             marginBottom: '1rem',
             textTransform: 'uppercase',
@@ -182,9 +189,9 @@ export default function CandidatesPage() {
           }}>
             📋 2026 FILING CALENDAR
           </h3>
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(2, 1fr)', 
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 1fr)',
             gap: '1rem',
             fontSize: '11px'
           }}>

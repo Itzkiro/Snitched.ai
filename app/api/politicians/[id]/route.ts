@@ -1,7 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSupabase } from '@/lib/supabase-server';
-import { getAllPoliticians as getJsonPoliticians } from '@/lib/real-data';
 import type { Politician } from '@/lib/types';
+
+// Revalidate every 5 minutes
+export const revalidate = 300;
+
+async function getJsonPoliticians() {
+  const { getAllPoliticians } = await import('@/lib/real-data');
+  return getAllPoliticians();
+}
+
+function cachedResponse(data: unknown, status = 200) {
+  return NextResponse.json(data, {
+    status,
+    headers: {
+      'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
+    },
+  });
+}
 
 /**
  * GET /api/politicians/[id]
@@ -19,11 +35,12 @@ export async function GET(
     const client = getServerSupabase();
 
     if (!client) {
-      const politician = getJsonPoliticians().find((p) => p.id === id);
+      const all = await getJsonPoliticians();
+      const politician = all.find((p) => p.id === id);
       if (!politician) {
-        return NextResponse.json({ error: 'Politician not found' }, { status: 404 });
+        return cachedResponse({ error: 'Politician not found' }, 404);
       }
-      return NextResponse.json(politician);
+      return cachedResponse(politician);
     }
 
     const { data: row, error } = await client
@@ -34,11 +51,12 @@ export async function GET(
 
     if (error || !row) {
       // Try JSON fallback before returning 404
-      const politician = getJsonPoliticians().find((p) => p.id === id);
+      const all = await getJsonPoliticians();
+      const politician = all.find((p) => p.id === id);
       if (politician) {
-        return NextResponse.json(politician);
+        return cachedResponse(politician);
       }
-      return NextResponse.json({ error: 'Politician not found' }, { status: 404 });
+      return cachedResponse({ error: 'Politician not found' }, 404);
     }
 
     const top5 = (row.top5_donors as Politician['top5Donors']) || [];
@@ -91,13 +109,14 @@ export async function GET(
       lastUpdated: (row.updated_at as string) || (row.created_at as string),
     };
 
-    return NextResponse.json(politician);
+    return cachedResponse(politician);
   } catch (error) {
     console.error('Failed to fetch politician:', error);
-    const politician = getJsonPoliticians().find((p) => p.id === id);
+    const all = await getJsonPoliticians();
+    const politician = all.find((p) => p.id === id);
     if (politician) {
-      return NextResponse.json(politician);
+      return cachedResponse(politician);
     }
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return cachedResponse({ error: 'Internal server error' }, 500);
   }
 }
