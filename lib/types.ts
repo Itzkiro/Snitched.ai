@@ -81,6 +81,13 @@ export interface Politician {
     pacs: number;
     ie: number; // Independent Expenditures
     bundlers: number;
+    ie_details?: Array<{
+      committee_name: string;
+      committee_id: string;
+      amount: number;
+      support_oppose: string;
+      is_israel_lobby: boolean;
+    }>;
   };
   termStart?: string;
   termEnd?: string;

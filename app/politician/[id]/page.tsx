@@ -1006,13 +1006,13 @@ export default function PoliticianPage() {
                     {politician.top5Donors && politician.top5Donors.length > 0 ? (
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                         {politician.top5Donors.map((donor, index) => (
-                          <div key={index} style={{ 
+                          <div key={index} style={{
                             padding: '1.5rem',
                             background: index === 0 ? 'rgba(245, 158, 11, 0.1)' : donor.type === 'Israel-PAC' ? 'rgba(239, 68, 68, 0.1)' : 'rgba(156, 163, 175, 0.05)',
                             border: index === 0 ? '2px solid var(--terminal-amber)' : donor.type === 'Israel-PAC' ? '1px solid #ef4444' : '1px solid var(--terminal-border)',
                             position: 'relative',
                           }}>
-                            <div style={{ 
+                            <div style={{
                               position: 'absolute',
                               top: '-12px',
                               left: '1rem',
@@ -1025,10 +1025,10 @@ export default function PoliticianPage() {
                             }}>
                               #{index + 1}
                             </div>
-                            <div style={{ 
-                              fontSize: index === 0 ? '1.25rem' : '1rem', 
-                              fontWeight: 700, 
-                              marginBottom: '0.5rem', 
+                            <div style={{
+                              fontSize: index === 0 ? '1.25rem' : '1rem',
+                              fontWeight: 700,
+                              marginBottom: '0.5rem',
                               color: index === 0 ? 'var(--terminal-amber)' : donor.type === 'Israel-PAC' ? '#ef4444' : 'var(--terminal-text)',
                             }}>
                               {donor.name}
@@ -1038,13 +1038,13 @@ export default function PoliticianPage() {
                                 </span>
                               )}
                             </div>
-                            <div style={{ 
-                              fontSize: index === 0 ? '2rem' : '1.5rem', 
-                              fontWeight: 700, 
-                              color: index === 0 ? 'var(--terminal-amber)' : donor.type === 'Israel-PAC' ? '#ef4444' : 'var(--terminal-text)', 
+                            <div style={{
+                              fontSize: index === 0 ? '2rem' : '1.5rem',
+                              fontWeight: 700,
+                              color: index === 0 ? 'var(--terminal-amber)' : donor.type === 'Israel-PAC' ? '#ef4444' : 'var(--terminal-text)',
                               fontFamily: 'Bebas Neue, sans-serif',
                             }}>
-                              ${donor.amount >= 1000000 
+                              ${donor.amount >= 1000000
                                 ? `${(donor.amount / 1000000).toFixed(0)}M`
                                 : `${(donor.amount / 1000).toFixed(0)}K`}
                             </div>
@@ -1058,6 +1058,105 @@ export default function PoliticianPage() {
                       <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--terminal-text-dim)' }}>
                         <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>📊</div>
                         <div>No donor data available</div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Independent Expenditures Card */}
+                  <div className="terminal-card">
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--terminal-amber)' }}>
+                      📡 INDEPENDENT EXPENDITURES
+                    </h3>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '1.5rem' }}>
+                      Third-party spending for or against this politician (FEC Schedule E)
+                    </div>
+                    {politician.israelLobbyBreakdown?.ie_details && politician.israelLobbyBreakdown.ie_details.length > 0 ? (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                        {politician.israelLobbyBreakdown.ie_details
+                          .sort((a, b) => b.amount - a.amount)
+                          .map((ie, index) => (
+                          <div key={index} style={{
+                            padding: '1.25rem',
+                            background: ie.is_israel_lobby ? 'rgba(239, 68, 68, 0.08)' : 'rgba(156, 163, 175, 0.05)',
+                            border: ie.is_israel_lobby ? '1px solid rgba(239, 68, 68, 0.3)' : '1px solid var(--terminal-border)',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            gap: '1rem',
+                          }}>
+                            <div style={{ flex: 1, minWidth: 0 }}>
+                              <div style={{
+                                fontWeight: 700,
+                                fontSize: '0.9rem',
+                                color: ie.is_israel_lobby ? '#ef4444' : 'var(--terminal-text)',
+                                marginBottom: '0.25rem',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap',
+                              }}>
+                                {ie.committee_name}
+                                {ie.is_israel_lobby && (
+                                  <span style={{ marginLeft: '0.5rem', fontSize: '0.7rem', color: '#ef4444' }}>
+                                    🇮🇱
+                                  </span>
+                                )}
+                              </div>
+                              <div style={{ display: 'flex', gap: '0.75rem', fontSize: '0.75rem' }}>
+                                <span style={{
+                                  color: ie.support_oppose === 'support' ? 'var(--terminal-green)' : '#ef4444',
+                                  fontWeight: 700,
+                                  textTransform: 'uppercase',
+                                }}>
+                                  {ie.support_oppose === 'support' ? '+ SUPPORT' : '- OPPOSE'}
+                                </span>
+                                <span style={{ color: 'var(--terminal-text-dim)' }}>
+                                  {ie.committee_id}
+                                </span>
+                              </div>
+                            </div>
+                            <div style={{
+                              fontSize: '1.5rem',
+                              fontWeight: 700,
+                              fontFamily: 'Bebas Neue, sans-serif',
+                              color: ie.is_israel_lobby ? '#ef4444' : 'var(--terminal-amber)',
+                              whiteSpace: 'nowrap',
+                            }}>
+                              ${ie.amount >= 1000000
+                                ? `${(ie.amount / 1000000).toFixed(1)}M`
+                                : ie.amount >= 1000
+                                  ? `${(ie.amount / 1000).toFixed(0)}K`
+                                  : ie.amount.toLocaleString()}
+                            </div>
+                          </div>
+                        ))}
+                        {/* IE Total Summary */}
+                        <div style={{
+                          borderTop: '2px solid var(--terminal-border)',
+                          paddingTop: '1rem',
+                          marginTop: '0.5rem',
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                        }}>
+                          <span style={{ fontWeight: 700, color: 'var(--terminal-text-dim)', textTransform: 'uppercase', fontSize: '0.85rem' }}>
+                            Total IE Spending
+                          </span>
+                          <span style={{
+                            fontSize: '1.5rem',
+                            fontWeight: 700,
+                            fontFamily: 'Bebas Neue, sans-serif',
+                            color: 'var(--terminal-amber)',
+                          }}>
+                            ${politician.israelLobbyBreakdown.ie_details
+                              .reduce((sum, ie) => sum + ie.amount, 0)
+                              .toLocaleString()}
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--terminal-text-dim)' }}>
+                        <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>📭</div>
+                        <div>No independent expenditures on record</div>
                       </div>
                     )}
                   </div>
