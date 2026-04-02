@@ -28,7 +28,12 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 // Configuration
 // ---------------------------------------------------------------------------
 
-const LEGISCAN_API_KEY = process.env.LEGISCAN_API_KEY || 'fbc52a91193b50dd0330a1521d8b155d';
+const LEGISCAN_API_KEY = process.env.LEGISCAN_API_KEY || '';
+
+if (!LEGISCAN_API_KEY) {
+  console.error('ERROR: LEGISCAN_API_KEY environment variable is required');
+  process.exit(1);
+}
 const LEGISCAN_BASE = 'https://api.legiscan.com/';
 const STATE = 'FL';
 
