@@ -279,16 +279,25 @@ function scoreVotingAlignment(p: Politician): CorruptionFactor {
     defenseKeywords.some(kw => v.billTitle.toLowerCase().includes(kw) || v.billSummary.toLowerCase().includes(kw))
   );
 
-  let rawScore = PLACEHOLDER_SCORE;
+  let rawScore = 0;
 
   if (israelFundingRatio > 0.05 && israelVotes.length > 0) {
     const yesVotes = israelVotes.filter(v => v.voteValue === 'Yes').length;
     const alignmentRate = yesVotes / israelVotes.length;
     rawScore = Math.round(alignmentRate * 60 + israelFundingRatio * 200);
     rawScore = Math.min(100, rawScore);
-  } else if (defenseVotes.length > 0) {
-    rawScore = Math.round(PLACEHOLDER_SCORE + defenseVotes.length * 2);
+  } else if (israelFundingRatio > 0.01 && defenseVotes.length > 0) {
+    // Some Israel funding + defense votes — moderate signal
+    const yesDefense = defenseVotes.filter(v => v.voteValue === 'Yes').length;
+    const defenseAlignment = defenseVotes.length > 0 ? yesDefense / defenseVotes.length : 0;
+    rawScore = Math.round(defenseAlignment * 40 + israelFundingRatio * 100);
     rawScore = Math.min(70, rawScore);
+  } else if (defenseVotes.length > 0) {
+    // No Israel funding but has defense votes — low baseline
+    rawScore = Math.round(Math.min(40, defenseVotes.length * 3));
+  } else {
+    // Has vote data but no Israel/defense votes — low score (good)
+    rawScore = Math.round(Math.min(20, votes.length > 10 ? 10 : 15));
   }
 
   return {

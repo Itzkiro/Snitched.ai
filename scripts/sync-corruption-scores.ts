@@ -95,6 +95,7 @@ async function main() {
       topDonor: top5?.[0] ? { name: top5[0].name, amount: top5[0].amount } : undefined,
       israelLobbyTotal: Number(row.israel_lobby_total) || 0,
       israelLobbyBreakdown: row.israel_lobby_breakdown,
+      contributionBreakdown: row.contribution_breakdown ?? undefined,
       isActive: row.is_active,
       yearsInOffice: Number(row.years_in_office) || 0,
       tags: [],
