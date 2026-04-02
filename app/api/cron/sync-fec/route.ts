@@ -260,32 +260,53 @@ async function fetchIndependentExpenditures(
   > = {};
 
   for (const cycle of cycles) {
+    let lastIndex: string | undefined;
+    let fetched = 0;
+    const MAX_IE = 500;
+
     try {
-      const data = await fecFetch('/schedules/schedule_e/', {
-        candidate_id: candidateId,
-        cycle,
-        per_page: 100,
-        sort: '-expenditure_amount',
-      });
-      await sleep(DELAY_MS);
+      while (fetched < MAX_IE) {
+        const params: Record<string, string | number | undefined> = {
+          candidate_id: candidateId,
+          cycle,
+          per_page: 100,
+          sort: '-expenditure_amount',
+          last_index: lastIndex,
+        };
 
-      for (const exp of data.results || []) {
-        const cid = (exp.committee_id as string) || '';
-        const cname =
-          (exp.committee as Record<string, string> | undefined)?.name ||
-          (exp.payee_name as string) ||
-          'UNKNOWN';
+        const data = await fecFetch('/schedules/schedule_e/', params);
+        await sleep(DELAY_MS);
 
-        if (!byCommittee[cid]) {
-          byCommittee[cid] = {
-            name: cname,
-            total: 0,
-            support_oppose: exp.support_oppose_indicator === 'S' ? 'support' : 'oppose',
-            is_israel_lobby:
-              isIsraelLobbyDonor(cname, cid) || !!ISRAEL_LOBBY_COMMITTEE_IDS[cid],
-          };
+        const results = data.results || [];
+        if (results.length === 0) break;
+
+        for (const exp of results) {
+          const cid = (exp.committee_id as string) || '';
+          const cname =
+            (exp.committee as Record<string, string> | undefined)?.name ||
+            (exp.payee_name as string) ||
+            'UNKNOWN';
+
+          if (!byCommittee[cid]) {
+            byCommittee[cid] = {
+              name: cname,
+              total: 0,
+              support_oppose: exp.support_oppose_indicator === 'S' ? 'support' : 'oppose',
+              is_israel_lobby:
+                isIsraelLobbyDonor(cname, cid) || !!ISRAEL_LOBBY_COMMITTEE_IDS[cid],
+            };
+          }
+          byCommittee[cid].total += Number(exp.expenditure_amount || 0);
+          fetched++;
         }
-        byCommittee[cid].total += Number(exp.expenditure_amount || 0);
+
+        // Pagination cursor
+        const pagination = data.pagination as Record<string, unknown> | undefined;
+        const newLastIndex = pagination?.last_indexes
+          ? (pagination.last_indexes as Record<string, string>).last_index
+          : undefined;
+        if (!newLastIndex || newLastIndex === lastIndex) break;
+        lastIndex = newLastIndex;
       }
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e);
@@ -400,6 +421,7 @@ export async function GET(request: NextRequest) {
       .from('politicians')
       .select('bioguide_id, name, office, office_level, source_ids')
       .eq('is_active', true)
+      .eq('office_level', 'federal')
       .not('source_ids->fec_candidate_id', 'is', null)
       .limit(MAX_POLITICIANS_PER_RUN);
 
@@ -423,6 +445,7 @@ export async function GET(request: NextRequest) {
         .from('politicians')
         .select('bioguide_id, name, office, office_level, source_ids')
         .eq('is_active', true)
+        .eq('office_level', 'federal')
         .or('source_ids->fec_candidate_id.is.null,source_ids.is.null')
         .limit(remaining);
 
@@ -504,15 +527,20 @@ export async function GET(request: NextRequest) {
         log.push(`  ${candidateName}: found ${committeeIds.length} committee(s)`);
 
         // --- 2d. Contributions from up to MAX_COMMITTEES committees ---
+        // Try primary cycle first; fall back to older cycles if nothing found
         let allContributions: Contribution[] = [];
 
         for (const committeeId of committeeIds.slice(0, MAX_COMMITTEES)) {
-          const contribs = await fetchContributions(
-            committeeId,
-            primaryCycle,
-            MAX_CONTRIBUTIONS_PER_COMMITTEE,
-            log,
-          );
+          let contribs: Contribution[] = [];
+          for (const cycle of SYNC_CYCLES) {
+            contribs = await fetchContributions(
+              committeeId,
+              cycle,
+              MAX_CONTRIBUTIONS_PER_COMMITTEE,
+              log,
+            );
+            if (contribs.length > 0) break;
+          }
           allContributions = allContributions.concat(contribs);
           log.push(
             `  ${candidateName}: ${contribs.length} contributions from committee ${committeeId}`,
@@ -552,7 +580,7 @@ export async function GET(request: NextRequest) {
           }))
           .sort((a, b) => b.amount - a.amount)
           .slice(0, 5)
-          .map((d) => ({ name: d.name, amount: d.amount, type: d.type }));
+          .map((d) => ({ name: d.name, amount: d.amount, type: d.type, is_israel_lobby: d.is_israel_lobby }));
 
         // --- 2f. Independent Expenditures (Schedule E) ---
         const independentExpenditures = await fetchIndependentExpenditures(

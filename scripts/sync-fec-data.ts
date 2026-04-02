@@ -522,6 +522,7 @@ async function processPolitician(
             name: d.name,
             amount: Math.round(d.amount),
             type: d.type,
+            is_israel_lobby: d.is_israel_lobby ?? false,
           })),
           aipac_funding: Math.round(result.aipac_funding),
           israel_lobby_total: Math.round(result.israel_lobby_total),
