@@ -27,9 +27,13 @@ const SCRAPERS_DIR = join(PROJECT_DIR, 'scrapers');
 const PYTHON_SCRIPT = join(SCRAPERS_DIR, 'scrape-social-media.py');
 const OUTPUT_FILE = join(PROJECT_DIR, 'data-ingestion', 'social-media-posts.json');
 
-const SUPABASE_URL = 'https://uqjfxhpyitleeleazzow.supabase.co';
-const SUPABASE_SERVICE_KEY =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVxamZ4aHB5aXRsZWVsZWF6em93Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MTc2NzQzOCwiZXhwIjoyMDg3MzQzNDM4fQ.abK_AJ-qataXyYn59I2w2rTxP4dIyl1UjCAMkw_6JPw';
+const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+
+if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
+  console.error('ERROR: SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY environment variables are required');
+  process.exit(1);
+}
 
 // ---------------------------------------------------------------------------
 // Types

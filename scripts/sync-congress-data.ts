@@ -19,15 +19,17 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 // Configuration
 // ---------------------------------------------------------------------------
 
-const CONGRESS_API_KEY =
-  process.env.CONGRESS_API_KEY || 'PO9bVTF8mjV0tGvugG7HAT3TcZUf4P09iPOnjUym';
+const CONGRESS_API_KEY = process.env.CONGRESS_API_KEY || '';
 const CONGRESS_API_BASE = 'https://api.congress.gov/v3';
 
 const SUPABASE_URL =
-  process.env.SUPABASE_URL || 'https://uqjfxhpyitleeleazzow.supabase.co';
-const SUPABASE_KEY =
-  process.env.SUPABASE_SERVICE_ROLE_KEY ||
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVxamZ4aHB5aXRsZWVsZWF6em93Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MTc2NzQzOCwiZXhwIjoyMDg3MzQzNDM4fQ.abK_AJ-qataXyYn59I2w2rTxP4dIyl1UjCAMkw_6JPw';
+  process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+
+if (!SUPABASE_URL || !SUPABASE_KEY) {
+  console.error('ERROR: SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY environment variables are required');
+  process.exit(1);
+}
 
 // Rate-limit delay between API requests (ms)
 const DELAY_MS = 250;

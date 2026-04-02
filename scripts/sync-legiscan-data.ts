@@ -34,11 +34,16 @@ const STATE = 'FL';
 
 const SUPABASE_URL = process.env.SUPABASE_URL
   || process.env.NEXT_PUBLIC_SUPABASE_URL
-  || 'https://uqjfxhpyitleeleazzow.supabase.co';
+  || '';
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
   || process.env.SUPABASE_ANON_KEY
   || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVxamZ4aHB5aXRsZWVsZWF6em93Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MTc2NzQzOCwiZXhwIjoyMDg3MzQzNDM4fQ.abK_AJ-qataXyYn59I2w2rTxP4dIyl1UjCAMkw_6JPw';
+  || '';
+
+if (!SUPABASE_URL || !SUPABASE_KEY) {
+  console.error('ERROR: SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY environment variables are required');
+  process.exit(1);
+}
 
 // CLI args
 const args = process.argv.slice(2);

@@ -1,4 +1,5 @@
 #!/usr/bin/env npx tsx
+import 'dotenv/config';
 /**
  * Sync FEC Campaign Finance Data to Supabase
  *
@@ -24,12 +25,21 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 // Configuration
 // ---------------------------------------------------------------------------
 
-const FEC_API_KEY = '3acNZC9zPgX8xu4UrqNAjVyDxnMb56aPffExbS9t';
+const FEC_API_KEY = process.env.FEC_API_KEY || '';
 const FEC_BASE_URL = 'https://api.open.fec.gov/v1';
 const RATE_LIMIT_MS = 600; // ms between requests to stay under FEC limits
 
-const SUPABASE_URL = 'https://uqjfxhpyitleeleazzow.supabase.co';
-const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVxamZ4aHB5aXRsZWVsZWF6em93Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MTc2NzQzOCwiZXhwIjoyMDg3MzQzNDM4fQ.abK_AJ-qataXyYn59I2w2rTxP4dIyl1UjCAMkw_6JPw';
+const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+
+if (!FEC_API_KEY) {
+  console.error('ERROR: FEC_API_KEY environment variable is required');
+  process.exit(1);
+}
+if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
+  console.error('ERROR: SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY environment variables are required');
+  process.exit(1);
+}
 
 // Federal office levels we care about
 const FEDERAL_OFFICES = ['US Senator', 'US Representative'];
