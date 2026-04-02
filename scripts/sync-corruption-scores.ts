@@ -12,6 +12,7 @@
  *   npx tsx scripts/sync-corruption-scores.ts --verbose      # Show factor breakdowns
  */
 
+import 'dotenv/config';
 import { createClient } from '@supabase/supabase-js';
 import { computeCorruptionScore } from '../lib/corruption-score';
 import type { Politician } from '../lib/types';
