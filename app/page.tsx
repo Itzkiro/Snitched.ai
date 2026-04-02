@@ -88,7 +88,7 @@ function generateTickerItems(politicians: Politician[]): { label: string; text: 
   items.push({ label: 'TRACKING', text: `${compromised} Florida politicians flagged for foreign lobby ties` });
 
   const totalFunding = politicians.reduce((s, p) => s + (p.israelLobbyTotal || p.aipacFunding || 0), 0);
-  items.push({ label: 'DATA', text: `$${(totalFunding / 1000000).toFixed(2)}M total tracked Israel lobby funding in Florida` });
+  items.push({ label: 'DATA', text: `$${(totalFunding / 1000000).toFixed(2)}M+ tracked Israel lobby funding (federal only — state data pending)` });
 
   return items;
 }
@@ -214,8 +214,8 @@ export default function TerminalHome() {
             marginBottom: '2rem'
           }}>
             <div className="terminal-card">
-              <div className="stat-value danger">${(totalFunding / 1000000).toFixed(2)}M</div>
-              <div className="stat-label">TOTAL ISRAEL LOBBY FUNDING</div>
+              <div className="stat-value danger">${(totalFunding / 1000000).toFixed(2)}M+</div>
+              <div className="stat-label">ISRAEL LOBBY FUNDING (FEDERAL ONLY)</div>
             </div>
             <div className="terminal-card">
               <div className="stat-value warning">{compromisedCount}</div>
