@@ -265,11 +265,7 @@ export default function SocialFeed({
             border: '1px dashed var(--terminal-border)',
           }}
         >
-          NO POSTS YET — START THE DAEMON TO BEGIN MONITORING
-          <br />
-          <code style={{ fontSize: '10px', color: 'var(--terminal-cyan)' }}>
-            ./scripts/start-social-daemon.sh
-          </code>
+          No social media activity recorded yet.
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>

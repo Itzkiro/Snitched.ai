@@ -1347,17 +1347,17 @@ export default function PoliticianPage() {
             </div>
           )}
 
-          {/* Other tabs show Phase 2 placeholder */}
+          {/* Tabs not yet available */}
           {activeTab !== 'overview' && activeTab !== 'funding' && activeTab !== 'votes' && activeTab !== 'score' && (
             <div className="terminal-card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
-              <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🔒</div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem' }}>
-                PHASE 2 COMING SOON
+              <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>📋</div>
+              <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-text-dim)' }}>
+                NOT YET AVAILABLE
               </div>
               <div style={{ color: 'var(--terminal-text-dim)' }}>
-                {activeTab === 'legal' && 'Court cases, ethics complaints, and legal records'}
-                {activeTab === 'social' && 'Social media posts, deleted content, and engagement analytics'}
-                {activeTab === 'network' && 'Donor networks, PAC connections, and relationship graphs'}
+                {activeTab === 'legal' && 'Court cases, ethics complaints, and legal records will appear here when data sources are integrated.'}
+                {activeTab === 'social' && 'Social media monitoring for this politician is not yet active.'}
+                {activeTab === 'network' && 'Donor network and PAC connection mapping is under development.'}
               </div>
             </div>
           )}

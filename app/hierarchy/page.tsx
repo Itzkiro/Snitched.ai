@@ -498,10 +498,10 @@ export default function HierarchyPage() {
             color: 'var(--terminal-text-dim)',
           }}>
             <div style={{ fontSize: '1.25rem', marginBottom: '1rem', color: 'var(--terminal-text)' }}>
-              Phase 2 Coming Soon
+              No Data Available
             </div>
             <div style={{ fontSize: '0.875rem' }}>
-              {currentNode.name} data will be added after federal and state politicians are fully indexed.
+              {currentNode.name} officials are not yet indexed in the database.
             </div>
           </div>
         )}
