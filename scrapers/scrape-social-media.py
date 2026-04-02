@@ -114,13 +114,13 @@ logger = logging.getLogger("snitched.social-scraper")
 # Supabase config (REST API -- no psycopg2 needed)
 # ---------------------------------------------------------------------------
 
-SUPABASE_URL = os.getenv(
-    "SUPABASE_URL", "https://uqjfxhpyitleeleazzow.supabase.co"
-)
-SUPABASE_SERVICE_KEY = os.getenv(
-    "SUPABASE_SERVICE_KEY",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVxamZ4aHB5aXRsZWVsZWF6em93Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MTc2NzQzOCwiZXhwIjoyMDg3MzQzNDM4fQ.abK_AJ-qataXyYn59I2w2rTxP4dIyl1UjCAMkw_6JPw",
-)
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+if not SUPABASE_URL:
+    raise RuntimeError("SUPABASE_URL environment variable is required")
+
+SUPABASE_SERVICE_KEY = os.getenv("SUPABASE_SERVICE_KEY")
+if not SUPABASE_SERVICE_KEY:
+    raise RuntimeError("SUPABASE_SERVICE_KEY environment variable is required")
 
 SUPABASE_HEADERS = {
     "apikey": SUPABASE_SERVICE_KEY,

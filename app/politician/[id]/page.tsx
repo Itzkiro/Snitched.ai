@@ -50,11 +50,15 @@ export default function PoliticianPage() {
   useEffect(() => {
     async function loadPolitician() {
       try {
-        const res = await fetch('/api/politicians');
+        const politicianId = typeof params.id === 'string' ? params.id : params.id?.[0] ?? '';
+        const res = await fetch(`/api/politicians/${encodeURIComponent(politicianId)}`);
+        if (res.status === 404) {
+          setPolitician(null);
+          return;
+        }
         if (!res.ok) throw new Error(`API error: ${res.status}`);
-        const allPoliticians: Politician[] = await res.json();
-        const found = allPoliticians.find(p => p.id === params.id);
-        setPolitician(found || null);
+        const found: Politician = await res.json();
+        setPolitician(found);
       } catch (error) {
         console.error('Error loading politician:', error);
         setPolitician(null);

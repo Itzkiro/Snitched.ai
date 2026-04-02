@@ -347,7 +347,9 @@ class JFKFECScraper:
 def main():
     """Main entry point."""
     # Get API key
-    api_key = os.getenv('FEC_API_KEY', '3acNZC9zPgX8xu4UrqNAjVyDxnMb56aPffExbS9t')
+    api_key = os.getenv('FEC_API_KEY')
+    if not api_key:
+        raise RuntimeError("FEC_API_KEY environment variable is required")
     
     # Ensure directories exist
     os.makedirs('/Users/jaketad/.openclaw/workspace/snitched-ai/scrapers/logs', exist_ok=True)
