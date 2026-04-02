@@ -550,6 +550,10 @@ export async function GET(request: NextRequest) {
         // --- 2e. Analyze contributions ---
         let israelLobbyPacTotal = 0;
         let aipacDirect = 0;
+        let breakdownAipac = 0;
+        let breakdownOtherPACs = 0;
+        let breakdownIndividuals = 0;
+        let breakdownCorporate = 0;
 
         const donorAgg: Record<
           string,
@@ -563,6 +567,17 @@ export async function GET(request: NextRequest) {
 
           if (isIsrael) israelLobbyPacTotal += c.amount;
           if (isAipac) aipacDirect += c.amount;
+
+          // Accumulate breakdown by category
+          if (donorType === 'Israel-PAC') {
+            breakdownAipac += c.amount;
+          } else if (donorType === 'PAC') {
+            breakdownOtherPACs += c.amount;
+          } else if (donorType === 'Corporate') {
+            breakdownCorporate += c.amount;
+          } else {
+            breakdownIndividuals += c.amount;
+          }
 
           const key = c.donor_name;
           if (!donorAgg[key]) {
@@ -621,6 +636,13 @@ export async function GET(request: NextRequest) {
           bundlers: 0,
         };
 
+        const contributionBreakdown = {
+          aipac: Math.round(breakdownAipac),
+          otherPACs: Math.round(breakdownOtherPACs),
+          individuals: Math.round(breakdownIndividuals),
+          corporate: Math.round(breakdownCorporate),
+        };
+
         // --- 2h. Upsert to Supabase ---
         const { error: updateError } = await supabase
           .from('politicians')
@@ -629,6 +651,7 @@ export async function GET(request: NextRequest) {
             aipac_funding: aipacFunding,
             israel_lobby_total: israelLobbyTotal,
             israel_lobby_breakdown: israelLobbyBreakdown,
+            contribution_breakdown: contributionBreakdown,
             top5_donors: top5Donors,
             data_source: 'fec_api',
             updated_at: new Date().toISOString(),
@@ -646,10 +669,11 @@ export async function GET(request: NextRequest) {
         log.push(
           `  ${candidateName}: synced — ` +
             `$${totalFunds.toLocaleString()} total funds, ` +
-            `$${israelLobbyTotal.toLocaleString()} Israel lobby ` +
-            `(PAC: $${Math.round(israelLobbyPacTotal).toLocaleString()}, ` +
-            `IE: $${Math.round(israelLobbyIeTotal).toLocaleString()}), ` +
-            `$${aipacFunding.toLocaleString()} AIPAC, ` +
+            `breakdown: ind=$${contributionBreakdown.individuals.toLocaleString()} ` +
+            `pac=$${contributionBreakdown.otherPACs.toLocaleString()} ` +
+            `corp=$${contributionBreakdown.corporate.toLocaleString()} ` +
+            `aipac=$${contributionBreakdown.aipac.toLocaleString()}, ` +
+            `$${israelLobbyTotal.toLocaleString()} Israel lobby, ` +
             `${allContributions.length} contributions`,
         );
       } catch (err) {

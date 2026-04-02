@@ -445,6 +445,10 @@ async function processPolitician(
     // 3. Analyze contributions
     let israelLobbyPacTotal = 0;
     let aipacDirect = 0;
+    let breakdownAipac = 0;
+    let breakdownOtherPACs = 0;
+    let breakdownIndividuals = 0;
+    let breakdownCorporate = 0;
     const donorAggregation: Record<string, {
       amount: number;
       type: string;
@@ -459,6 +463,17 @@ async function processPolitician(
 
       if (isIsrael) israelLobbyPacTotal += c.amount;
       if (isAipac) aipacDirect += c.amount;
+
+      // Accumulate breakdown by category
+      if (donorType === 'Israel-PAC') {
+        breakdownAipac += c.amount;
+      } else if (donorType === 'PAC') {
+        breakdownOtherPACs += c.amount;
+      } else if (donorType === 'Corporate') {
+        breakdownCorporate += c.amount;
+      } else {
+        breakdownIndividuals += c.amount;
+      }
 
       // Aggregate by donor name
       const key = c.donor_name;
@@ -531,6 +546,12 @@ async function processPolitician(
             pacs: Math.round(result.israel_lobby_breakdown.pacs),
             ie: Math.round(result.israel_lobby_breakdown.ie),
             bundlers: 0,
+          },
+          contribution_breakdown: {
+            aipac: Math.round(breakdownAipac),
+            otherPACs: Math.round(breakdownOtherPACs),
+            individuals: Math.round(breakdownIndividuals),
+            corporate: Math.round(breakdownCorporate),
           },
           data_source: 'fec_api',
           updated_at: new Date().toISOString(),

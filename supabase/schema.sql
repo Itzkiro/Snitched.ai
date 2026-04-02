@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS politicians (
   top5_donors             JSONB DEFAULT '[]'::jsonb,
   israel_lobby_total      NUMERIC DEFAULT 0,
   israel_lobby_breakdown  JSONB,
+  contribution_breakdown  JSONB DEFAULT NULL, -- {aipac, otherPACs, individuals, corporate}
 
   -- Status
   is_active       BOOLEAN DEFAULT true,
