@@ -60,22 +60,22 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FED-01 | — | Pending |
-| FED-02 | — | Pending |
-| FED-03 | — | Pending |
-| FED-04 | — | Pending |
-| SLD-01 | — | Pending |
-| SLD-02 | — | Pending |
-| UI-01 | — | Pending |
-| UI-02 | — | Pending |
-| UI-03 | — | Pending |
-| UI-04 | — | Pending |
+| FED-01 | Phase 2: Federal Data Verification & Cleanup | Mapped |
+| FED-02 | Phase 3: Financial Breakdown Accuracy | Mapped |
+| FED-03 | Phase 4: Independent Expenditures Display | Mapped |
+| FED-04 | Phase 5: Corruption Score — Real Data | Mapped |
+| SLD-01 | Phase 6: FL State Legislators Pipeline | Mapped |
+| SLD-02 | Phase 7: County Officials Pipeline | Mapped |
+| UI-01 | Phase 8: Politician Detail Page — Financial Tab | Mapped |
+| UI-02 | Phase 9: Placeholder Cleanup & OSINT Feed | Mapped |
+| UI-03 | Phase 9: Placeholder Cleanup & OSINT Feed | Mapped |
+| UI-04 | Phase 10: Mobile Responsive Layout | Mapped |
 
 **Coverage:**
 - v1 requirements: 10 total
-- Mapped to phases: 0
-- Unmapped: 10
+- Mapped to phases: 10
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-04-02*
-*Last updated: 2026-04-02 after initial definition*
+*Last updated: 2026-04-02 after roadmap creation — traceability fully mapped*
