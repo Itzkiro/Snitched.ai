@@ -1,7 +1,7 @@
 {
-  "scraped_at": "2026-04-02T15:57:33.803853",
+  "scraped_at": "2026-04-02T18:44:43.325598",
   "total_legislators": 156,
-  "with_data": 116,
+  "with_data": 122,
   "results": [
     {
       "total_funds": 418935,
@@ -297,13 +297,44 @@
       "raw_contribution_count": 0
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 1909749,
+      "top5_donors": [
+        {
+          "name": "FLORIDA REPUBLICAN SENATORIAL CAMPAIGN C PO BOX 471",
+          "amount": 553556,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA REPUBLICAN SENTORIAL CAMPAIGN CO PO BOX 471",
+          "amount": 43240,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FRSCC",
+          "amount": 34605,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA REPUBLICAN SENATORIAL CAMPAIGN C 2610 A MITCHAM DRIVE",
+          "amount": 27650,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA REPUBLICAN SENATORIAL COMMITTEE",
+          "amount": 14190,
+          "type": "PAC",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 212440,
+        "individuals": 1331529,
+        "corporate": 365780
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -313,11 +344,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 1627,
       "bioguide_id": "2b58cf48-2f66-4e97-8815-19714aeffc55",
       "name": "Ana Maria Rodriguez",
       "office_level": "State Senator",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 1627
     },
     {
       "total_funds": 0,
@@ -844,13 +875,44 @@
       "raw_contribution_count": 681
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 445859,
+      "top5_donors": [
+        {
+          "name": "BRYAN AVILA CAMPAIGN",
+          "amount": 342430,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA REPUBLICAN",
+          "amount": 4630,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "AKERMAN LLP",
+          "amount": 2000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "COMCAST CORPORATION",
+          "amount": 2000,
+          "type": "Corporate",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA ACRE",
+          "amount": 2000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 26000,
+        "individuals": 400559,
+        "corporate": 19300
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -860,11 +922,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 108,
       "bioguide_id": "00339797-acdf-4fcc-b073-846563d623e3",
       "name": "Bryan \u00c1vila",
       "office_level": "State Senator",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 108
     },
     {
       "total_funds": 0,
@@ -2146,13 +2208,44 @@
       "raw_contribution_count": 443
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 864124,
+      "top5_donors": [
+        {
+          "name": "BASABE FABIAN",
+          "amount": 518272,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA HOUSE REPUBLICAN CAMPAIGN COMMIT 1103 HAYS STREET",
+          "amount": 116811,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA HOUSE REPUBLICAN CAMPAIGN COMMIT 527 EAST PARK AVENUE",
+          "amount": 68329,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "REPUBLICAN PARTY OF FLORIDA",
+          "amount": 23192,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA POLICE BENEVOLENT ASSOCIATION IN 300 EAST BREVARD STREET",
+          "amount": 6000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 17500,
+        "individuals": 815374,
+        "corporate": 31250
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -2162,11 +2255,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 297,
       "bioguide_id": "c1c1b979-f4c5-4a0b-846d-90bdb7bc38ec",
       "name": "Fabi\u00e1n Basabe",
       "office_level": "State Representative",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 297
     },
     {
       "total_funds": 162383,
@@ -3017,13 +3110,44 @@
       "raw_contribution_count": 1204
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 495310,
+      "top5_donors": [
+        {
+          "name": "COMCAST CORPORATION",
+          "amount": 3000,
+          "type": "Corporate",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA ACRE",
+          "amount": 3000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FPF FIRE PC",
+          "amount": 3000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "HARRELL JACK",
+          "amount": 3000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "HCA WEST FLORIDA DIVISION AND GOOD GOVER 101 N MONROE ST STE 801",
+          "amount": 3000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 48500,
+        "individuals": 328360,
+        "corporate": 118450
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -3033,11 +3157,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 714,
       "bioguide_id": "3e2236e3-a787-40f0-ab0b-b07780ddd736",
       "name": "Jennifer Kincart Jonsson",
       "office_level": "State Representative",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 714
     },
     {
       "total_funds": 654372,
@@ -3225,13 +3349,44 @@
       "raw_contribution_count": 1862
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 142979,
+      "top5_donors": [
+        {
+          "name": "JOHANNA LOPEZ FOR FLORIDA",
+          "amount": 11306,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "REALTORS POLITICAL ADVOCACY COMMITTEE",
+          "amount": 3000,
+          "type": "PAC",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "BOOK RONALD",
+          "amount": 2500,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "JOHANNA LOPEZ FOR FL",
+          "amount": 2359,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "1199 SEIU FLORIDA POLITICAL COMMITTEE",
+          "amount": 2000,
+          "type": "PAC",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 18750,
+        "individuals": 113229,
+        "corporate": 11000
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -3241,11 +3396,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 367,
       "bioguide_id": "dcfc0bf1-8338-4ac2-8d85-8f753e1c5525",
       "name": "Johanna L\u00f3pez",
       "office_level": "State Representative",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 367
     },
     {
       "total_funds": 760189,
@@ -6255,13 +6410,44 @@
       "raw_contribution_count": 568
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 320981,
+      "top5_donors": [
+        {
+          "name": "SUSAN VALDES CAMPAIGN",
+          "amount": 20000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "SUSAN VALDES FOR STATE REP DISTRICT 62",
+          "amount": 20000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "AMGEN INC. STATE POLITICAL CONTRIBUTIONS 5845 RICHMOND HIGHWAY, SUITE 820",
+          "amount": 4000,
+          "type": "Corporate",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "COMCAST CORPORATION",
+          "amount": 4000,
+          "type": "Corporate",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA JUSTICE PC",
+          "amount": 4000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 41850,
+        "individuals": 210331,
+        "corporate": 68800
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -6271,11 +6457,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 490,
       "bioguide_id": "841a28c3-2eaa-42ca-8a7f-86ffd51b2ef8",
       "name": "Susan Vald\u00e9s",
       "office_level": "State Representative",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 490
     },
     {
       "total_funds": 0,

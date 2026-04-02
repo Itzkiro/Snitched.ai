@@ -98,16 +98,39 @@ def _fetch_legislators_via_rest() -> list[dict]:
 # Name parsing
 # ---------------------------------------------------------------------------
 
+def strip_accents(text: str) -> str:
+    """Remove accented characters for search compatibility."""
+    import unicodedata
+    nfkd = unicodedata.normalize("NFKD", text)
+    return "".join(c for c in nfkd if not unicodedata.combining(c))
+
+
 def parse_name_for_search(full_name: str) -> tuple[str, str]:
     """
     Split a politician's name into (last, first) for FL DOE search.
+    Uses last word as last name (FL DOE uses "Starts With" matching).
+
     "Marco Rubio" -> ("Rubio", "Marco")
-    "Debbie Wasserman Schultz" -> ("Wasserman Schultz", "Debbie")
+    "Ana Maria Rodriguez" -> ("Rodriguez", "Ana")
+    "J.J. Grow" -> ("Grow", "")
+    "Jennifer Kincart Jonsson" -> ("Jonsson", "Jennifer")
+
+    Strips accents (e.g. "Ávila" -> "Avila") since FL DOE doesn't support Unicode.
+    Drops middle name / initials with periods for cleaner search.
     """
-    parts = full_name.strip().split()
+    name = strip_accents(full_name.strip())
+    parts = name.split()
     if len(parts) <= 1:
-        return (full_name, "")
-    return (" ".join(parts[1:]), parts[0])
+        return (name, "")
+
+    last_name = parts[-1]
+    # Use only first name (skip middle names) for cleaner matching
+    first_name = parts[0]
+    # If first name has periods (J.J.) it may confuse the search — try without
+    if "." in first_name and len(parts) > 2:
+        first_name = ""  # Search by last name only
+
+    return (last_name, first_name)
 
 
 def map_office_level_to_doe_code(office_level: str) -> str:
@@ -127,42 +150,96 @@ def scrape_contributions_playwright(
     page: Page,
     name: str,
     office_code: str,
+    max_retries: int = 2,
 ) -> list[dict]:
     """
     Scrape FL DOE for contributions using Playwright form submission.
     Navigates to the form, fills it, submits, and parses the results.
+    Retries on failure or empty results (Cloudflare may intermittently block).
     """
     last_name, first_name = parse_name_for_search(name)
 
-    try:
-        # Navigate to the contributions form
-        page.goto(FL_DOE_CONTRIBUTIONS_URL, timeout=30000)
-        page.wait_for_load_state("networkidle", timeout=15000)
+    for attempt in range(max_retries + 1):
+        try:
+            # Navigate to the contributions form
+            page.goto(FL_DOE_CONTRIBUTIONS_URL, timeout=30000)
+            page.wait_for_load_state("networkidle", timeout=15000)
 
-        # Set election to "All" via JS (Playwright select_option doesn't work for "All")
-        page.evaluate('document.querySelector("select[name=election]").value = "All"')
+            # Set election to "All" via JS and dispatch change event
+            page.evaluate('''() => {
+                const el = document.querySelector("select[name=election]");
+                el.value = "All";
+                el.dispatchEvent(new Event("change", { bubbles: true }));
+            }''')
 
-        # Fill candidate name
-        page.fill('input[name="CanLName"]', last_name)
-        page.fill('input[name="CanFName"]', first_name)
+            # Fill candidate name
+            page.fill('input[name="CanLName"]', last_name)
+            page.fill('input[name="CanFName"]', first_name)
 
-        # Set office filter via JS
-        page.evaluate(f'document.querySelector("select[name=office]").value = "{office_code}"')
+            # Set office filter via JS with change event
+            page.evaluate(f'''() => {{
+                const el = document.querySelector("select[name=office]");
+                el.value = "{office_code}";
+                el.dispatchEvent(new Event("change", {{ bubbles: true }}));
+            }}''')
 
-        # Max rows
-        page.fill('input[name="rowlimit"]', '2000')
+            # Max rows
+            page.fill('input[name="rowlimit"]', '2000')
 
-        # Submit
-        page.click('input[name="Submit"]')
-        page.wait_for_load_state("networkidle", timeout=30000)
+            # Verify election is set correctly before submitting
+            actual_election = page.evaluate('document.querySelector("select[name=election]").value')
+            if actual_election != "All":
+                print(f"    WARNING: Election reset to {actual_election}, re-setting...")
+                page.evaluate('document.querySelector("select[name=election]").value = "All"')
 
-        # Parse the text results
-        text = page.inner_text("body")
-        return parse_text_results(text, name)
+            # Submit
+            page.click('input[name="Submit"]')
+            page.wait_for_load_state("networkidle", timeout=30000)
 
-    except Exception as e:
-        print(f"    ERROR: {e}")
-        return []
+            # Check for Cloudflare challenge
+            text = page.inner_text("body")
+            if "Just a moment" in text or "challenge-platform" in text:
+                print(f"    Cloudflare challenge (attempt {attempt + 1}), retrying...")
+                time.sleep(3)
+                continue
+
+            # Check if the page actually has contribution results
+            if "Contribution(s) Selected" not in text:
+                if attempt == max_retries:
+                    print(f"    No results page (body len={len(text)}, url={page.url})")
+                    # Dump first 200 chars for debugging
+                    print(f"    Body preview: {text[:200]}")
+                else:
+                    print(f"    No results page (attempt {attempt + 1}), retrying...")
+                time.sleep(3)
+                continue
+
+            # Check for 0 contributions (genuine empty result)
+            if "0 Contribution(s) Selected" in text:
+                # Show search criteria for debugging
+                for line in text.split("\n"):
+                    line_s = line.strip()
+                    if any(x in line_s for x in ["Election Year:", "Office:", "Last Name", "First Name"]):
+                        print(f"    {line_s}")
+                return []
+
+            results = parse_text_results(text, name)
+            if results:
+                return results
+
+            # Page has contributions but parser failed — shouldn't happen
+            if attempt < max_retries:
+                print(f"    Parse failed (attempt {attempt + 1}), retrying...")
+                time.sleep(2)
+
+        except Exception as e:
+            if attempt < max_retries:
+                print(f"    Error (attempt {attempt + 1}): {e}, retrying...")
+                time.sleep(3)
+            else:
+                print(f"    ERROR: {e}")
+
+    return []
 
 
 def parse_text_results(text: str, expected_name: str = "") -> list[dict]:
@@ -379,6 +456,7 @@ def main() -> None:
     parser.add_argument("--dry-run", action="store_true", help="Don't save output")
     parser.add_argument("--office", choices=["SEN", "REP", "ALL"], default="ALL", help="Filter by office")
     parser.add_argument("--output", default=DEFAULT_OUTPUT, help="Output JSON path")
+    parser.add_argument("--retry-missing", action="store_true", help="Re-scrape only legislators with 0 data from previous run")
     args = parser.parse_args()
 
     print("=" * 60)
@@ -399,6 +477,19 @@ def main() -> None:
         office_map = {"SEN": "State Senator", "REP": "State Representative"}
         legislators = [l for l in legislators if l["office_level"] == office_map[args.office]]
 
+    # Load previous results for retry mode
+    previous_results: dict[str, dict] = {}
+    if args.retry_missing:
+        prev_path = Path(args.output)
+        if prev_path.exists():
+            prev_data = json.loads(prev_path.read_text())
+            for r in prev_data.get("results", []):
+                previous_results[r["bioguide_id"]] = r
+            # Filter to only legislators with 0 data
+            missing_ids = {bid for bid, r in previous_results.items() if r["total_funds"] == 0}
+            legislators = [l for l in legislators if l["bioguide_id"] in missing_ids]
+            print(f"  Retry mode: {len(legislators)} legislators with missing data")
+
     if args.limit:
         legislators = legislators[:args.limit]
 
@@ -414,16 +505,16 @@ def main() -> None:
     error_count = 0
     start_time = time.time()
 
+    # Use fresh browser context per request to avoid Cloudflare throttling.
+    # Reusing contexts causes CF to start blocking after ~30-40 requests.
+
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        ctx = browser.new_context(
-            user_agent=(
-                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                "AppleWebKit/537.36 (KHTML, like Gecko) "
-                "Chrome/131.0.0.0 Safari/537.36"
-            )
+        ua = (
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/131.0.0.0 Safari/537.36"
         )
-        page = ctx.new_page()
 
         for i, leg in enumerate(legislators):
             name = leg["name"]
@@ -433,11 +524,17 @@ def main() -> None:
 
             print(f"\n[{i+1}/{len(legislators)}] {name} ({office_level}, District {district})")
 
+            ctx = browser.new_context(user_agent=ua)
+            page = ctx.new_page()
+
             contributions = scrape_contributions_playwright(
                 page=page,
                 name=name,
                 office_code=office_code,
             )
+
+            page.close()
+            ctx.close()
 
             summary = process_contributions(contributions, name)
             summary["bioguide_id"] = leg["bioguide_id"]
@@ -473,12 +570,20 @@ def main() -> None:
     print(f"  No data:          {error_count}")
     print(f"  Duration:         {elapsed:.1f}s")
 
+    # Merge with previous results if retrying
+    if args.retry_missing and previous_results:
+        merged = dict(previous_results)
+        for r in results:
+            merged[r["bioguide_id"]] = r
+        results = list(merged.values())
+        success_count = sum(1 for r in results if r["total_funds"] > 0)
+
     if not args.dry_run:
         output_path = Path(args.output)
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text(json.dumps({
             "scraped_at": datetime.now().isoformat(),
-            "total_legislators": len(legislators),
+            "total_legislators": len(results),
             "with_data": success_count,
             "results": results,
         }, indent=2))
