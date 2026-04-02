@@ -23,9 +23,11 @@ export async function GET() {
       return cachedResponse(politicians);
     }
 
+    // Select only list-view columns — exclude voting_records, lobbying_records
+    // which bloat the response to 20MB+ and exceed Vercel ISR limits
     const { data, error } = await client
       .from('politicians')
-      .select('*')
+      .select('bioguide_id, name, office, office_level, party, district, jurisdiction, jurisdiction_type, photo_url, corruption_score, aipac_funding, juice_box_tier, total_funds, top5_donors, israel_lobby_total, israel_lobby_breakdown, contribution_breakdown, is_active, years_in_office, bio, term_start, term_end, social_media, source_ids, data_source, updated_at, created_at')
       .order('name');
 
     if (error) {
@@ -74,19 +76,10 @@ export async function GET() {
         termEnd: row.term_end as string | undefined,
         socialMedia: (row.social_media as Politician['socialMedia']) || {},
         source_ids: (row.source_ids as Politician['source_ids']) || {},
-        lobbyingRecords: (row.lobbying_records as Politician['lobbyingRecords']) || [],
+        lobbyingRecords: [],
         contributions: [],
         courtCases: [],
-        votes: ((row.voting_records as any[]) || []).map((v: any) => ({
-          id: String(v.roll_call_id ?? ''),
-          politicianId: row.bioguide_id as string,
-          billNumber: v.bill_number ?? '',
-          billTitle: v.title ?? '',
-          voteValue: v.vote === 'Yea' ? 'Yes' : v.vote === 'Nay' ? 'No' : v.vote === 'NV' ? 'Abstain' : 'Absent',
-          date: v.vote_date ?? '',
-          billSummary: v.description ?? '',
-          category: '',
-        })),
+        votes: [],
         socialPosts: [],
         dataStatus: 'live' as const,
         dataSource: (row.data_source as string) || 'supabase',
