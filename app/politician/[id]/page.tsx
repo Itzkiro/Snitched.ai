@@ -399,23 +399,39 @@ export default function PoliticianPage() {
 
       <div style={{ padding: '1rem' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          {/* Back Button */}
-          <Link 
-            href="/browse" 
-            style={{ 
-              display: 'inline-block',
-              marginBottom: '2rem',
-              color: 'var(--terminal-amber)',
-              textDecoration: 'none',
-              fontSize: '0.875rem',
-              fontFamily: 'JetBrains Mono, monospace',
-              fontWeight: 700,
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em',
-            }}
-          >
-            ← BACK TO DATABASE
-          </Link>
+          {/* Navigation */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
+            <Link
+              href="/browse"
+              style={{
+                color: 'var(--terminal-amber)',
+                textDecoration: 'none',
+                fontSize: '0.875rem',
+                fontFamily: 'JetBrains Mono, monospace',
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+              }}
+            >
+              ← BACK TO DATABASE
+            </Link>
+            <button
+              onClick={() => {
+                const url = window.location.href;
+                const text = `${politician.name} — ${politician.office} | Corruption Score: ${politician.corruptionScore}/100`;
+                if (navigator.share) {
+                  navigator.share({ title: text, url });
+                } else {
+                  navigator.clipboard.writeText(url);
+                  alert('Link copied to clipboard');
+                }
+              }}
+              className="terminal-btn"
+              style={{ padding: '0.5rem 1rem', fontSize: '0.75rem' }}
+            >
+              SHARE DOSSIER
+            </button>
+          </div>
 
           {/* Profile Header Card */}
           <div className="terminal-card" style={{ marginBottom: '2rem' }}>
