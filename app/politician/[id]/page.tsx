@@ -1347,8 +1347,118 @@ export default function PoliticianPage() {
             </div>
           )}
 
-          {/* Tabs not yet available */}
-          {activeTab !== 'overview' && activeTab !== 'funding' && activeTab !== 'votes' && activeTab !== 'score' && (
+          {/* Network / Lobbying Tab */}
+          {activeTab === 'network' && (
+            <div>
+              {politician.lobbyingRecords && politician.lobbyingRecords.length > 0 ? (
+                <div style={{ display: 'grid', gap: '2rem' }}>
+                  {/* Lobbying Summary */}
+                  <div className="terminal-card">
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--terminal-amber)' }}>
+                      🏛️ LOBBYING CONNECTIONS
+                    </h3>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '1.5rem' }}>
+                      Lobbyist contributions and revolving door connections (LDA Senate filings)
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+                      <div className="terminal-card" style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--terminal-amber)', fontFamily: 'Bebas Neue, sans-serif' }}>
+                          {politician.lobbyingRecords.length}
+                        </div>
+                        <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase' }}>Lobbying Records</div>
+                      </div>
+                      <div className="terminal-card" style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--terminal-amber)', fontFamily: 'Bebas Neue, sans-serif' }}>
+                          ${(() => {
+                            const total = politician.lobbyingRecords.reduce((sum: number, r: any) => sum + (r.income || 0), 0);
+                            return total >= 1_000_000 ? `${(total / 1_000_000).toFixed(1)}M` : total >= 1_000 ? `${(total / 1_000).toFixed(0)}K` : total.toString();
+                          })()}
+                        </div>
+                        <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase' }}>Total Lobbying $</div>
+                      </div>
+                      <div className="terminal-card" style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--terminal-amber)', fontFamily: 'Bebas Neue, sans-serif' }}>
+                          {new Set(politician.lobbyingRecords.map((r: any) => r.registrantName)).size}
+                        </div>
+                        <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase' }}>Unique Firms</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Individual Records */}
+                  <div className="terminal-card">
+                    <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--terminal-text)' }}>
+                      LOBBYING FILINGS
+                    </h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                      {[...politician.lobbyingRecords]
+                        .sort((a: any, b: any) => (b.income || 0) - (a.income || 0))
+                        .slice(0, 20)
+                        .map((record: any, index: number) => (
+                        <div key={index} style={{
+                          padding: '1rem',
+                          background: 'rgba(156, 163, 175, 0.05)',
+                          border: '1px solid var(--terminal-border)',
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          gap: '1rem',
+                          flexWrap: 'wrap',
+                        }}>
+                          <div style={{ flex: 1, minWidth: '200px' }}>
+                            <div style={{ fontWeight: 700, fontSize: '0.85rem', marginBottom: '0.25rem' }}>
+                              {record.registrantName || record.clientName}
+                            </div>
+                            {record.clientName && record.clientName !== record.registrantName && (
+                              <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)' }}>
+                                Client: {record.clientName}
+                              </div>
+                            )}
+                            <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)', marginTop: '0.25rem' }}>
+                              {record.issueAreas?.join(' | ') || ''} {record.filingYear ? `(${record.filingYear})` : ''}
+                            </div>
+                          </div>
+                          <div style={{
+                            fontSize: '1.25rem',
+                            fontWeight: 700,
+                            fontFamily: 'Bebas Neue, sans-serif',
+                            color: 'var(--terminal-amber)',
+                            whiteSpace: 'nowrap',
+                          }}>
+                            {record.income ? `$${record.income >= 1_000_000
+                              ? `${(record.income / 1_000_000).toFixed(1)}M`
+                              : record.income >= 1_000
+                                ? `${(record.income / 1_000).toFixed(0)}K`
+                                : record.income.toLocaleString()}` : ''}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    {politician.lobbyingRecords.length > 20 && (
+                      <div style={{ textAlign: 'center', padding: '1rem', color: 'var(--terminal-text-dim)', fontSize: '0.75rem' }}>
+                        Showing top 20 of {politician.lobbyingRecords.length} records
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div className="terminal-card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
+                  <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>📋</div>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-text-dim)' }}>
+                    NO LOBBYING DATA
+                  </div>
+                  <div style={{ color: 'var(--terminal-text-dim)' }}>
+                    {['US Senator', 'US Representative'].includes(politician.officeLevel)
+                      ? 'No lobbying disclosure filings found for this politician.'
+                      : 'Lobbying disclosure data is only available for federal politicians.'}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Other tabs not yet available */}
+          {activeTab !== 'overview' && activeTab !== 'funding' && activeTab !== 'votes' && activeTab !== 'score' && activeTab !== 'network' && (
             <div className="terminal-card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
               <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>📋</div>
               <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-text-dim)' }}>
@@ -1357,7 +1467,6 @@ export default function PoliticianPage() {
               <div style={{ color: 'var(--terminal-text-dim)' }}>
                 {activeTab === 'legal' && 'Court cases, ethics complaints, and legal records will appear here when data sources are integrated.'}
                 {activeTab === 'social' && 'Social media monitoring for this politician is not yet active.'}
-                {activeTab === 'network' && 'Donor network and PAC connection mapping is under development.'}
               </div>
             </div>
           )}
