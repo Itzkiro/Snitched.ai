@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SNITCHED.AI // CANDIDATES_QUERY</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#007139",
+                        "surface-variant": "#323539",
+                        "secondary-fixed-dim": "#c5c6cb",
+                        "inverse-surface": "#e1e2e7",
+                        "primary-fixed": "#60ff99",
+                        "surface-container": "#1d2023",
+                        "outline": "#849585",
+                        "on-primary-fixed": "#00210c",
+                        "primary-container": "#00ff88",
+                        "outline-variant": "#3b4b3d",
+                        "on-tertiary-container": "#c50039",
+                        "surface-container-highest": "#323539",
+                        "on-primary-fixed-variant": "#005228",
+                        "surface-container-low": "#191c1f",
+                        "on-tertiary-fixed-variant": "#920028",
+                        "on-tertiary": "#68001a",
+                        "on-error-container": "#ffdad6",
+                        "on-primary": "#003919",
+                        "error": "#ffb4ab",
+                        "surface-dim": "#111417",
+                        "tertiary-container": "#ffd4d5",
+                        "secondary-container": "#44474b",
+                        "primary": "#f1ffef",
+                        "on-secondary-fixed-variant": "#44474b",
+                        "surface-container-lowest": "#0c0e12",
+                        "primary-fixed-dim": "#00e479",
+                        "on-surface": "#e1e2e7",
+                        "tertiary-fixed-dim": "#ffb3b6",
+                        "surface-bright": "#37393d",
+                        "on-secondary": "#2e3134",
+                        "surface-tint": "#00e479",
+                        "surface-container-high": "#282a2e",
+                        "surface": "#111417",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#40000c",
+                        "inverse-primary": "#006d37",
+                        "secondary-fixed": "#e1e2e7",
+                        "on-surface-variant": "#b9cbb9",
+                        "on-secondary-fixed": "#191c1f",
+                        "inverse-on-surface": "#2e3134",
+                        "error-container": "#93000a",
+                        "tertiary-fixed": "#ffdada",
+                        "secondary": "#c5c6cb",
+                        "background": "#111417",
+                        "on-background": "#e1e2e7",
+                        "tertiary": "#fffaf9",
+                        "on-secondary-container": "#b3b5ba"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Space Grotesk"],
+                        "mono": ["IBM Plex Mono"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .scanline {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.03) 50%);
+            background-size: 100% 2px;
+            pointer-events: none;
+        }
+        .phosphor-glow-sm {
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+        }
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface-dim text-on-surface font-body overflow-x-hidden selection:bg-primary-container selection:text-on-primary-fixed">
+<div class="fixed inset-0 scanline z-50 pointer-events-none"></div>
+<!-- TopNavBar -->
+<header class="flex flex-col w-full px-0 sticky top-0 z-40 bg-[#0c0e12] dark:bg-[#0c0e12] border-b border-[#00ff88]/30">
+<div class="flex justify-between items-center px-6 py-2">
+<div class="text-xl font-bold tracking-tighter text-[#00ff88] font-headline uppercase">SNITCHED.AI</div>
+<div class="hidden md:block font-mono text-[10px] text-[#00ff88]/60 tracking-widest uppercase">
+                SYSTEM_STATUS: NOMINAL // 2023-10-27 14:02:11 UTC
+            </div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#00ff88] text-xs font-mono">&gt;_</span>
+<input class="bg-transparent border-b border-[#00ff88]/30 text-[#00ff88] font-mono text-xs focus:ring-0 focus:border-[#00ff88] pl-8 py-1 placeholder:text-[#00ff88]/30" placeholder="QUERY_DB" type="text"/>
+</div>
+</div>
+</div>
+<nav class="flex overflow-x-auto scrollbar-hide border-t border-[#00ff88]/10 bg-[#1d2023]/30">
+<a class="px-6 py-3 text-[#00ff88]/60 font-mono border border-[#00ff88]/20 hover:bg-[#00ff88]/10 hover:text-[#00ff88] transition-none text-xs" href="#">DASHBOARD</a>
+<a class="px-6 py-3 text-[#00ff88]/60 font-mono border border-[#00ff88]/20 hover:bg-[#00ff88]/10 hover:text-[#00ff88] transition-none text-xs" href="#">OFFICIALS</a>
+<a class="px-6 py-3 bg-[#00ff88] text-[#0c0e12] font-bold border-none shadow-[0_0_15px_rgba(0,255,136,0.4)] transition-none text-xs" href="#">CANDIDATES</a>
+<a class="px-6 py-3 text-[#00ff88]/60 font-mono border border-[#00ff88]/20 hover:bg-[#00ff88]/10 hover:text-[#00ff88] transition-none text-xs" href="#">HIERARCHY</a>
+<a class="px-6 py-3 text-[#00ff88]/60 font-mono border border-[#00ff88]/20 hover:bg-[#00ff88]/10 hover:text-[#00ff88] transition-none text-xs" href="#">JUICE_BOX</a>
+<a class="px-6 py-3 text-[#00ff88]/60 font-mono border border-[#00ff88]/20 hover:bg-[#00ff88]/10 hover:text-[#00ff88] transition-none text-xs" href="#">CONNECTIONS</a>
+</nav>
+</header>
+<main class="max-w-[1440px] mx-auto px-6 py-12">
+<!-- Terminal Header -->
+<div class="mb-12 border-l-4 border-primary-container pl-6 py-2">
+<h1 class="font-headline text-5xl font-extrabold tracking-tight text-on-surface flex items-center gap-4">
+                &gt; QUERY CANDIDATES_ <span class="block w-6 h-12 bg-primary-container cursor-blink"></span>
+</h1>
+<p class="font-mono text-sm text-[#00ff88]/50 mt-2 uppercase tracking-widest">SUB_DIRECTORY: /ROOT/ELECTORAL_VETTING/2024_CYCLE</p>
+</div>
+<!-- Dashboard Stats -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-px bg-outline-variant/30 border border-outline-variant/30 mb-12">
+<div class="bg-surface-container p-4">
+<div class="text-[10px] font-mono text-outline uppercase tracking-tighter">Total_Scanned</div>
+<div class="text-2xl font-mono text-primary-container">1,402</div>
+</div>
+<div class="bg-surface-container p-4">
+<div class="text-[10px] font-mono text-outline uppercase tracking-tighter">High_Risk_Flags</div>
+<div class="text-2xl font-mono text-on-tertiary-container">84</div>
+</div>
+<div class="bg-surface-container p-4">
+<div class="text-[10px] font-mono text-outline uppercase tracking-tighter">Dark_Money_Flow</div>
+<div class="text-2xl font-mono text-primary-container">$842.1M</div>
+</div>
+<div class="bg-surface-container p-4">
+<div class="text-[10px] font-mono text-outline uppercase tracking-tighter">Sync_Latency</div>
+<div class="text-2xl font-mono text-outline">12MS</div>
+</div>
+</div>
+<!-- Candidate Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Candidate Card 1 -->
+<div class="bg-surface-container border border-outline-variant p-0 group hover:border-primary-container transition-none relative overflow-hidden">
+<div class="h-48 w-full bg-surface-container-highest relative grayscale hover:grayscale-0 transition-all duration-300">
+<img class="w-full h-full object-cover opacity-60" data-alt="professional portrait of a middle-aged male politician in a navy suit against a dark grey corporate background dramatic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNqtvY43l1mxJc59ny8BmY3UGg-oOrEc_zswx7HlzowPEm_8JOmnPEaSwZvsZR22ZG7bI9hJeK-Hk7IYZ0u5q7IzSjVbReImBWt2u7lgLFqsJW6QiuzwNCldqz1DRAAvbh7sTCvoiHSjG4aAfc5uL8el5_vkh96zEUMdQDAcvstntWpipIZjPGBlqHHmJvBbc49CirwEcseLegjCPujBWofWM0BZJQXJsFmgJsAweHFaO2NzYzdeZBJAzj7wVVRImJz2jyiOiK40Ta"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+<div class="absolute top-4 right-4 bg-primary-container text-on-primary-fixed font-mono text-[10px] px-2 py-0.5 font-bold">
+                        [NEW_ENTRY]
+                    </div>
+</div>
+<div class="p-6">
+<div class="mb-4">
+<div class="text-[10px] font-mono text-primary-container/70 mb-1 tracking-widest uppercase">US SENATE - 2024</div>
+<h3 class="font-headline text-2xl font-bold text-on-surface uppercase leading-none">VANCE, STERLING</h3>
+</div>
+<div class="space-y-4 mb-6">
+<div class="flex justify-between items-end border-b border-outline-variant pb-2">
+<span class="text-[10px] font-mono text-outline uppercase">Fundraising</span>
+<span class="text-lg font-mono text-primary-container">$12.4M</span>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-[10px] font-mono text-outline uppercase">
+<span>Corruption_Potential</span>
+<span class="text-on-tertiary-container font-bold">84%</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest">
+<div class="h-full bg-on-tertiary-container shadow-[0_0_10px_rgba(197,0,57,0.5)]" style="width: 84%"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-mono bg-on-tertiary-container/10 text-on-tertiary-container border border-on-tertiary-container/30 px-2 py-0.5">[DARK_MONEY_RISK]</span>
+<span class="text-[10px] font-mono bg-primary-container/10 text-primary-container border border-primary-container/30 px-2 py-0.5">[PAC-BACKED]</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-outline-variant group-hover:bg-primary-container transition-none"></div>
+</div>
+<!-- Candidate Card 2 -->
+<div class="bg-surface-container border border-outline-variant p-0 group hover:border-primary-container transition-none relative overflow-hidden">
+<div class="h-48 w-full bg-surface-container-highest relative grayscale hover:grayscale-0 transition-all duration-300">
+<img class="w-full h-full object-cover opacity-60" data-alt="portrait of a confident woman in business attire looking forward sharp focus dark minimalist studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwCdEMnTU5pMiTc7Tue8ngA1fBDXGWdD07GeUmg4V-O5kfIEAE4pZrhUfAAR8F1UTQvVYDgz2XZDhUmX4rns6stCztBdapCZaonCO7NlhaXBLTDKh6H2OyxiSVydRTJk5v7l__pu8jzcRjlioZUrPPrIKHktQ1k2xn-MS8B6vNtIO5FE5p5xtUCfiu_FcUAnL7aIeDJskFTS0EMz3kRnMSN1MK11g_ewEErfOvXRnobOy-kwrxHh3hZzNU2Z4aWbTS_ohHpFQLg6zG"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+<div class="absolute top-4 right-4 bg-outline-variant text-on-surface font-mono text-[10px] px-2 py-0.5">
+                        [VETTED]
+                    </div>
+</div>
+<div class="p-6">
+<div class="mb-4">
+<div class="text-[10px] font-mono text-primary-container/70 mb-1 tracking-widest uppercase">HOUSE DISTRICT 12</div>
+<h3 class="font-headline text-2xl font-bold text-on-surface uppercase leading-none">CHEN, MAYA</h3>
+</div>
+<div class="space-y-4 mb-6">
+<div class="flex justify-between items-end border-b border-outline-variant pb-2">
+<span class="text-[10px] font-mono text-outline uppercase">Fundraising</span>
+<span class="text-lg font-mono text-primary-container">$2.1M</span>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-[10px] font-mono text-outline uppercase">
+<span>Corruption_Potential</span>
+<span class="text-primary-container font-bold">12%</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest">
+<div class="h-full bg-primary-container shadow-[0_0_10px_rgba(0,255,136,0.5)]" style="width: 12%"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-mono bg-primary-container/10 text-primary-container border border-primary-container/30 px-2 py-0.5">[INDIVIDUAL_DONORS]</span>
+<span class="text-[10px] font-mono bg-outline-variant text-on-surface/60 border border-outline-variant px-2 py-0.5">[CLEAN_HISTORY]</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-outline-variant group-hover:bg-primary-container transition-none"></div>
+</div>
+<!-- Candidate Card 3 -->
+<div class="bg-surface-container border border-outline-variant p-0 group hover:border-primary-container transition-none relative overflow-hidden">
+<div class="h-48 w-full bg-surface-container-highest relative grayscale hover:grayscale-0 transition-all duration-300">
+<img class="w-full h-full object-cover opacity-60" data-alt="close up profile of a woman with glasses in a dimly lit office environment digital screens blurred in background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtCxtT9rK1GIZ9DwkFMjYq1DHaIfUftYh_Z-D5MHl_pmAplAp4sacotsaNfsuwISPpdjYb__JOuGefai1SmS42h4vn4H2DcFTxauLxAP_jcn0SP_sS-9g5RW2Vu67hK5pu3RUZOq1wX0KJIyoqlsUBzfH3H9JBKtZFGFqHNskS1GhLYvmxSSzahxakvGt_fufLMSNgDL7VFVipYfJ1G3LOt81iorTF1E9Fcuq88c_LikfOS-WHejiM1siRK56t61Iol5Dnv4xy90kT"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+<div class="absolute top-4 right-4 bg-primary-container text-on-primary-fixed font-mono text-[10px] px-2 py-0.5 font-bold">
+                        [ALERT]
+                    </div>
+</div>
+<div class="p-6">
+<div class="mb-4">
+<div class="text-[10px] font-mono text-primary-container/70 mb-1 tracking-widest uppercase">STATE GOVERNOR</div>
+<h3 class="font-headline text-2xl font-bold text-on-surface uppercase leading-none">RODRIGUEZ, ELIAS</h3>
+</div>
+<div class="space-y-4 mb-6">
+<div class="flex justify-between items-end border-b border-outline-variant pb-2">
+<span class="text-[10px] font-mono text-outline uppercase">Fundraising</span>
+<span class="text-lg font-mono text-primary-container">$45.8M</span>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-[10px] font-mono text-outline uppercase">
+<span>Corruption_Potential</span>
+<span class="text-on-tertiary-container font-bold">91%</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest">
+<div class="h-full bg-on-tertiary-container shadow-[0_0_10px_rgba(197,0,57,0.5)]" style="width: 91%"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-mono bg-on-tertiary-container/10 text-on-tertiary-container border border-on-tertiary-container/30 px-2 py-0.5">[DARK_MONEY_RISK]</span>
+<span class="text-[10px] font-mono bg-on-tertiary-container/10 text-on-tertiary-container border border-on-tertiary-container/30 px-2 py-0.5">[LOBBYIST_TIED]</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-outline-variant group-hover:bg-primary-container transition-none"></div>
+</div>
+<!-- More Candidates Placeholder Grid (Reduced opacity) -->
+<div class="bg-surface-container/50 border border-outline-variant/30 p-8 flex flex-col items-center justify-center space-y-4 opacity-50">
+<span class="material-symbols-outlined text-4xl text-[#00ff88]/30">encrypted</span>
+<div class="text-center">
+<p class="font-mono text-xs uppercase tracking-widest">Encrypted_Record</p>
+<p class="font-mono text-[10px] text-outline mt-1">LVL_4_CLEARANCE_REQUIRED</p>
+</div>
+</div>
+<!-- Repeat layout for more cards... -->
+<!-- Card 4 -->
+<div class="bg-surface-container border border-outline-variant p-0 group hover:border-primary-container transition-none relative overflow-hidden">
+<div class="h-48 w-full bg-surface-container-highest relative grayscale hover:grayscale-0 transition-all duration-300">
+<img class="w-full h-full object-cover opacity-60" data-alt="man in business attire standing by a large window with city lights at night blurred bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkUWvwx9_P6vsWXH1I8Ej2FR3kEd5UQQveNTW25-MWYUOYUOCLm8tdWHNEt8dNikkkzoycMNrvKeiMJnQc3tc5EPcuzap_KYLRPgB_1DHSaKl4tZQjed33VAcPjHXy67MaE4I54hS5RrpRRW3-YJLkDUg-SoFTK3p3uw_ixbyE1oT1dE__e19m_Y_t9esHPUh4cP6Y95jPt4_2Gwrk2z6o72dgP2Q87v12xONUK4BZwg28DkEahT4FuY0_yLQ-VN1uOJ8pV-ViirvY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+</div>
+<div class="p-6">
+<div class="mb-4">
+<div class="text-[10px] font-mono text-primary-container/70 mb-1 tracking-widest uppercase">US SENATE - 2024</div>
+<h3 class="font-headline text-2xl font-bold text-on-surface uppercase leading-none">MORGAN, JULIAN</h3>
+</div>
+<div class="space-y-4 mb-6">
+<div class="flex justify-between items-end border-b border-outline-variant pb-2">
+<span class="text-[10px] font-mono text-outline uppercase">Fundraising</span>
+<span class="text-lg font-mono text-primary-container">$8.9M</span>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-[10px] font-mono text-outline uppercase">
+<span>Corruption_Potential</span>
+<span class="text-on-tertiary-container font-bold">67%</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest">
+<div class="h-full bg-on-tertiary-container shadow-[0_0_10px_rgba(197,0,57,0.5)]" style="width: 67%"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-mono bg-primary-container/10 text-primary-container border border-primary-container/30 px-2 py-0.5">[PAC-BACKED]</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-outline-variant group-hover:bg-primary-container transition-none"></div>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface-container border border-outline-variant p-0 group hover:border-primary-container transition-none relative overflow-hidden">
+<div class="h-48 w-full bg-surface-container-highest relative grayscale hover:grayscale-0 transition-all duration-300">
+<img class="w-full h-full object-cover opacity-60" data-alt="headshot of man with serious expression in high contrast black and white photography sharp details" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEqeoaS7K0mM-sEoX_OEhxcWzSQ4oVBD1sqrBkpAezOfd4UZiyoIQtQCXNpyNMfc8LZHHF_tF8aWqDOLSYwP-dodICA-1uWdy00sjRP3RDAn6yv4IHIpIdzMw0uJrGmh0Jb5V10FLeHAEtK-IWAPE7TAK-sjw-MEs9hDCQaJC6EmS6jTN3kr0O_Lz0SlBfJLXiScRZFIsX57Kevh7FzNv6Y_bRc8yjf2Hq8KZadqpLT-PEJAnLELkb1Si70ANjlWvlJJFTMd4pZL60"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+</div>
+<div class="p-6">
+<div class="mb-4">
+<div class="text-[10px] font-mono text-primary-container/70 mb-1 tracking-widest uppercase">MAYORAL_OFFICE</div>
+<h3 class="font-headline text-2xl font-bold text-on-surface uppercase leading-none">GATES, MARCUS</h3>
+</div>
+<div class="space-y-4 mb-6">
+<div class="flex justify-between items-end border-b border-outline-variant pb-2">
+<span class="text-[10px] font-mono text-outline uppercase">Fundraising</span>
+<span class="text-lg font-mono text-primary-container">$0.8M</span>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-[10px] font-mono text-outline uppercase">
+<span>Corruption_Potential</span>
+<span class="text-primary-container font-bold">04%</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest">
+<div class="h-full bg-primary-container shadow-[0_0_10px_rgba(0,255,136,0.5)]" style="width: 4%"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-mono bg-primary-container/10 text-primary-container border border-primary-container/30 px-2 py-0.5">[NEW_ENTRY]</span>
+<span class="text-[10px] font-mono bg-outline-variant text-on-surface/60 border border-outline-variant px-2 py-0.5">[COMMUNITY_FUNDED]</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-outline-variant group-hover:bg-primary-container transition-none"></div>
+</div>
+</div>
+<!-- System Pagination -->
+<div class="mt-16 flex justify-between items-center border-t border-outline-variant pt-8">
+<div class="font-mono text-[10px] text-outline uppercase">SHOWING 5 OF 1,402 NODES</div>
+<div class="flex gap-2">
+<button class="bg-surface-container border border-outline-variant px-4 py-2 font-mono text-xs hover:border-primary-container hover:text-primary-container transition-none">PREV_PAGE</button>
+<button class="bg-primary-container text-on-primary-fixed px-4 py-2 font-mono text-xs font-bold transition-none">NEXT_PAGE</button>
+</div>
+</div>
+</main>
+<!-- Juice Box Side Widget (Optional Accessory) -->
+<div class="fixed right-6 bottom-20 w-64 bg-surface-container border border-primary-fixed p-4 hidden xl:block phosphor-glow-sm">
+<div class="text-[10px] font-mono text-primary-container uppercase mb-2 flex justify-between">
+<span>Juice_Box_Telemetry</span>
+<span class="animate-pulse">● LIVE</span>
+</div>
+<div class="h-24 flex items-end gap-1 mb-4">
+<div class="bg-primary-container/40 w-full" style="height: 40%"></div>
+<div class="bg-primary-container/60 w-full" style="height: 60%"></div>
+<div class="bg-primary-container/80 w-full" style="height: 35%"></div>
+<div class="bg-primary-container w-full" style="height: 90%"></div>
+<div class="bg-primary-container/50 w-full" style="height: 55%"></div>
+<div class="bg-primary-container/70 w-full" style="height: 75%"></div>
+<div class="bg-primary-container/30 w-full" style="height: 25%"></div>
+</div>
+<p class="text-[10px] font-mono text-on-surface/60 uppercase">Aggregating real-time super-PAC injections across all active dossiers.</p>
+</div>
+<!-- Footer -->
+<footer class="fixed bottom-0 w-full flex justify-between items-center px-6 py-1 z-50 bg-[#0c0e12] border-t border-[#00ff88]/20">
+<div class="font-['IBM_Plex_Mono'] text-[10px] uppercase tracking-widest text-[#00ff88]">
+            SYSTEM_READY // NODE_SYNC: 100% // LATENCY: 12ms
+        </div>
+<div class="flex gap-6 font-['IBM_Plex_Mono'] text-[10px] uppercase tracking-widest">
+<a class="text-[#00ff88]/40 hover:text-[#00ff88] hover:bg-[#00ff88]/5 transition-none" href="#">ENCRYPTION_KEYS</a>
+<a class="text-[#00ff88]/40 hover:text-[#00ff88] hover:bg-[#00ff88]/5 transition-none" href="#">REBOOT_CORE</a>
+<a class="text-[#00ff88]/40 hover:text-[#00ff88] hover:bg-[#00ff88]/5 transition-none" href="#">TERMINAL_LOGS</a>
+</div>
+</footer>
+</body></html>
