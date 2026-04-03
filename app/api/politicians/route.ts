@@ -23,11 +23,11 @@ export async function GET() {
       return cachedResponse(politicians);
     }
 
-    // Select only list-view columns — exclude voting_records, lobbying_records
-    // which bloat the response to 20MB+ and exceed Vercel ISR limits
+    // Select only list-view columns — exclude voting_records, lobbying_records,
+    // bio, social_media, source_ids which bloat the response beyond Vercel limits
     const { data, error } = await client
       .from('politicians')
-      .select('bioguide_id, name, office, office_level, party, district, jurisdiction, jurisdiction_type, photo_url, corruption_score, aipac_funding, juice_box_tier, total_funds, top5_donors, israel_lobby_total, israel_lobby_breakdown, contribution_breakdown, is_active, years_in_office, bio, term_start, term_end, social_media, source_ids, data_source, updated_at, created_at')
+      .select('bioguide_id, name, office, office_level, party, district, jurisdiction, jurisdiction_type, photo_url, corruption_score, aipac_funding, juice_box_tier, total_funds, top5_donors, israel_lobby_total, contribution_breakdown, is_active, years_in_office, term_start, term_end, data_source, updated_at, created_at')
       .order('name');
 
     if (error) {
@@ -66,16 +66,14 @@ export async function GET() {
           ? { name: top5[0].name, amount: top5[0].amount }
           : undefined,
         israelLobbyTotal: Number(row.israel_lobby_total) || 0,
-        israelLobbyBreakdown: row.israel_lobby_breakdown as Politician['israelLobbyBreakdown'],
         contributionBreakdown: row.contribution_breakdown as Politician['contributionBreakdown'],
         isActive: row.is_active as boolean,
         yearsInOffice: Number(row.years_in_office) || 0,
         tags: [],
-        bio: row.bio as string | undefined,
         termStart: row.term_start as string,
         termEnd: row.term_end as string | undefined,
-        socialMedia: (row.social_media as Politician['socialMedia']) || {},
-        source_ids: (row.source_ids as Politician['source_ids']) || {},
+        socialMedia: {},
+        source_ids: {},
         lobbyingRecords: [],
         contributions: [],
         courtCases: [],

@@ -1811,6 +1811,63 @@ function ConnectionsTree({ politician }: { politician: Politician }) {
           ))}
         </div>
       </div>
+
+      {/* Glossary */}
+      <div className="terminal-card" style={{ marginTop: '1.5rem' }}>
+        <h3 style={{ fontSize: '0.9rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--terminal-amber)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+          📖 GLOSSARY
+        </h3>
+        <div style={{ display: 'grid', gap: '0.75rem', fontSize: '0.8rem' }}>
+          <div>
+            <span style={{ fontWeight: 700, color: '#a78bfa' }}>🔄 Revolving Door</span>
+            <span style={{ color: 'var(--terminal-text-dim)', marginLeft: '0.5rem' }}>
+              — A lobbyist who previously worked for the politician (or their office) and now lobbies them on behalf of private clients. This creates a direct personal connection between the lobbying firm and the politician&apos;s inner circle.
+            </span>
+          </div>
+          <div>
+            <span style={{ fontWeight: 700, color: 'var(--terminal-amber)' }}>🏛️ PAC (Political Action Committee)</span>
+            <span style={{ color: 'var(--terminal-text-dim)', marginLeft: '0.5rem' }}>
+              — An organization that pools campaign contributions from members and donates to campaigns. Super PACs can raise unlimited funds for independent expenditures but cannot coordinate directly with candidates.
+            </span>
+          </div>
+          <div>
+            <span style={{ fontWeight: 700, color: 'var(--terminal-cyan)' }}>📡 Independent Expenditure (IE)</span>
+            <span style={{ color: 'var(--terminal-text-dim)', marginLeft: '0.5rem' }}>
+              — Money spent by outside groups to support or oppose a candidate without coordinating with their campaign. Often used by Super PACs and dark money groups to influence elections.
+            </span>
+          </div>
+          <div>
+            <span style={{ fontWeight: 700, color: '#ef4444' }}>🇮🇱 Israel Lobby</span>
+            <span style={{ color: 'var(--terminal-text-dim)', marginLeft: '0.5rem' }}>
+              — PACs, Super PACs, and organizations affiliated with pro-Israel advocacy groups (e.g., AIPAC, United Democracy Project, Democratic Majority for Israel). Tracked separately due to significant influence on US foreign policy.
+            </span>
+          </div>
+          <div>
+            <span style={{ fontWeight: 700, color: '#a78bfa' }}>🏛️ Lobbying Firm / Registrant</span>
+            <span style={{ color: 'var(--terminal-text-dim)', marginLeft: '0.5rem' }}>
+              — A company or individual registered under the Lobbying Disclosure Act (LDA) to influence government decisions on behalf of paying clients. They must file quarterly reports disclosing their activities.
+            </span>
+          </div>
+          <div>
+            <span style={{ fontWeight: 700, color: '#a78bfa' }}>CLIENT</span>
+            <span style={{ color: 'var(--terminal-text-dim)', marginLeft: '0.5rem' }}>
+              — The corporation, trade association, or entity that hired the lobbying firm to advocate on their behalf. The client pays the firm; the firm contacts the politician.
+            </span>
+          </div>
+          <div>
+            <span style={{ fontWeight: 700, color: 'var(--terminal-green)' }}>👤 Individual Donor</span>
+            <span style={{ color: 'var(--terminal-text-dim)', marginLeft: '0.5rem' }}>
+              — A person who contributed directly to the politician&apos;s campaign. Federal law limits individual contributions to $3,300 per election cycle.
+            </span>
+          </div>
+          <div>
+            <span style={{ fontWeight: 700, color: '#60a5fa' }}>🏢 Corporate Donor</span>
+            <span style={{ color: 'var(--terminal-text-dim)', marginLeft: '0.5rem' }}>
+              — Contributions from corporations, LLCs, or business entities. At the federal level, direct corporate contributions are banned — they flow through PACs instead. Florida state elections allow direct corporate contributions.
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
