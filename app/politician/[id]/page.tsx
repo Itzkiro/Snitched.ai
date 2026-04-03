@@ -1457,16 +1457,20 @@ export default function PoliticianPage() {
             </div>
           )}
 
-          {/* Other tabs not yet available */}
-          {activeTab !== 'overview' && activeTab !== 'funding' && activeTab !== 'votes' && activeTab !== 'score' && activeTab !== 'network' && (
+          {/* Social / News Tab */}
+          {activeTab === 'social' && (
+            <SocialTab politicianId={politician.id} politicianName={politician.name} />
+          )}
+
+          {/* Legal tab not yet available */}
+          {activeTab === 'legal' && (
             <div className="terminal-card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
               <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>📋</div>
               <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-text-dim)' }}>
                 NOT YET AVAILABLE
               </div>
               <div style={{ color: 'var(--terminal-text-dim)' }}>
-                {activeTab === 'legal' && 'Court cases, ethics complaints, and legal records will appear here when data sources are integrated.'}
-                {activeTab === 'social' && 'Social media monitoring for this politician is not yet active.'}
+                Court cases, ethics complaints, and legal records will appear here when data sources are integrated.
               </div>
             </div>
           )}
@@ -1476,6 +1480,114 @@ export default function PoliticianPage() {
       {/* Footer */}
       <div className="classified-footer">
         ALL DATA ACQUIRED VIA OSINT // PUBLIC RECORDS: FEC, SOCIAL MEDIA, NEWS OUTLETS // POLITICIAN DOSSIER DIVISION
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Social Tab Component — fetches posts for this politician
+// ---------------------------------------------------------------------------
+
+function SocialTab({ politicianId, politicianName }: { politicianId: string; politicianName: string }) {
+  const [posts, setPosts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`/api/social-posts?politician_id=${encodeURIComponent(politicianId)}&limit=50&order=desc`)
+      .then(res => res.ok ? res.json() : { posts: [] })
+      .then(data => setPosts(data.posts || []))
+      .catch(() => setPosts([]))
+      .finally(() => setLoading(false));
+  }, [politicianId]);
+
+  if (loading) {
+    return (
+      <div className="terminal-card" style={{ textAlign: 'center', padding: '3rem' }}>
+        <div style={{ color: 'var(--terminal-text-dim)' }}>Loading social intelligence...</div>
+      </div>
+    );
+  }
+
+  if (posts.length === 0) {
+    return (
+      <div className="terminal-card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
+        <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>📡</div>
+        <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-text-dim)' }}>
+          NO SOCIAL INTELLIGENCE
+        </div>
+        <div style={{ color: 'var(--terminal-text-dim)' }}>
+          No news mentions, press releases, or social media posts found for {politicianName}.
+        </div>
+      </div>
+    );
+  }
+
+  const platformIcon = (p: string) => {
+    switch (p) {
+      case 'news': return '📰';
+      case 'press': return '🏛️';
+      case 'rss': return '📡';
+      case 'twitter': return '𝕏';
+      default: return '📄';
+    }
+  };
+
+  const platformLabel = (p: string) => {
+    switch (p) {
+      case 'news': return 'NEWS';
+      case 'press': return 'PRESS RELEASE';
+      case 'rss': return 'RSS';
+      case 'twitter': return 'TWITTER/X';
+      default: return p.toUpperCase();
+    }
+  };
+
+  return (
+    <div style={{ display: 'grid', gap: '1.5rem' }}>
+      <div className="terminal-card">
+        <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-amber)' }}>
+          📡 SOCIAL INTELLIGENCE
+        </h3>
+        <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '1.5rem' }}>
+          {posts.length} items from news mentions, press releases, and public statements
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          {posts.map((post, i) => (
+            <div key={post.id || i} style={{
+              padding: '1rem',
+              background: 'rgba(156, 163, 175, 0.05)',
+              border: '1px solid var(--terminal-border)',
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                <span style={{ fontSize: '0.7rem', color: 'var(--terminal-cyan)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                  {platformIcon(post.platform)} {platformLabel(post.platform)}
+                </span>
+                {post.posted_at && (
+                  <span style={{ fontSize: '0.65rem', color: 'var(--terminal-text-dim)' }}>
+                    {new Date(post.posted_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                  </span>
+                )}
+              </div>
+              <div style={{ fontSize: '0.85rem', lineHeight: 1.5, color: 'var(--terminal-text)' }}>
+                {(post.content || '').substring(0, 300)}
+                {(post.content || '').length > 300 ? '...' : ''}
+              </div>
+              {post.post_url && (
+                <a href={post.post_url} target="_blank" rel="noopener noreferrer" style={{
+                  display: 'inline-block',
+                  marginTop: '0.5rem',
+                  fontSize: '0.7rem',
+                  color: 'var(--terminal-blue)',
+                  textDecoration: 'none',
+                }}>
+                  VIEW SOURCE →
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
