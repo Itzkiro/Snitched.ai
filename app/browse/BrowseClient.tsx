@@ -12,6 +12,7 @@ export default function BrowseClient({ politicians }: BrowseClientProps) {
   const [filterLevel, setFilterLevel] = useState<string>('all');
   const [filterParty, setFilterParty] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState<string>('name');
 
   const filteredPoliticians = politicians.filter(p => {
     if (!p || !p.isActive) return false;
@@ -19,6 +20,13 @@ export default function BrowseClient({ politicians }: BrowseClientProps) {
     if (filterParty !== 'all' && p.party !== filterParty) return false;
     if (searchQuery && p.name && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
     return true;
+  }).sort((a, b) => {
+    switch (sortBy) {
+      case 'score': return (b.corruptionScore || 0) - (a.corruptionScore || 0);
+      case 'funding': return (b.totalFundsRaised || 0) - (a.totalFundsRaised || 0);
+      case 'israel': return (b.israelLobbyTotal || 0) - (a.israelLobbyTotal || 0);
+      default: return (a.name || '').localeCompare(b.name || '');
+    }
   });
 
   const officeLevels = [
@@ -28,6 +36,11 @@ export default function BrowseClient({ politicians }: BrowseClientProps) {
     { value: 'Governor', label: 'Governor' },
     { value: 'State Senator', label: 'State Senate' },
     { value: 'State Representative', label: 'State House' },
+    { value: 'County Commissioner', label: 'County Commissioner' },
+    { value: 'Mayor', label: 'Mayor' },
+    { value: 'Sheriff', label: 'Sheriff' },
+    { value: 'Judge', label: 'Judge' },
+    { value: 'School Board', label: 'School Board' },
   ];
 
   const parties = [
@@ -132,6 +145,31 @@ export default function BrowseClient({ politicians }: BrowseClientProps) {
                   {parties.map(party => (
                     <option key={party.value} value={party.value}>{party.label}</option>
                   ))}
+                </select>
+              </div>
+
+              {/* Sort */}
+              <div>
+                <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--terminal-amber)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                  📊 SORT BY
+                </label>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '0.75rem',
+                    background: 'var(--terminal-bg)',
+                    border: '2px solid var(--terminal-border)',
+                    color: 'var(--terminal-text)',
+                    fontSize: '0.875rem',
+                    fontFamily: 'JetBrains Mono, monospace',
+                  }}
+                >
+                  <option value="name">Name (A-Z)</option>
+                  <option value="score">Corruption Score (High → Low)</option>
+                  <option value="funding">Total Funding (High → Low)</option>
+                  <option value="israel">Israel Lobby (High → Low)</option>
                 </select>
               </div>
             </div>
