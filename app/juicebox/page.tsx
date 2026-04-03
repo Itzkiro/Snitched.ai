@@ -70,11 +70,11 @@ export default function JuiceBoxPage() {
     .filter(p => p.isActive && p.israelLobbyTotal && p.israelLobbyTotal > 0)
     .sort((a, b) => (b.israelLobbyTotal || 0) - (a.israelLobbyTotal || 0));
 
-  const fecFundedPoliticians = politicians
-    .filter(p => p.isActive && (p.totalFundsRaised ?? 0) > 0 && p.dataSource?.includes('FEC'))
+  const fundedPoliticians = politicians
+    .filter(p => p.isActive && (p.totalFundsRaised ?? 0) > 0)
     .sort((a, b) => (b.totalFundsRaised || 0) - (a.totalFundsRaised || 0));
 
-  const totalFECTracked = fecFundedPoliticians.reduce((sum, p) => sum + (p.totalFundsRaised || 0), 0);
+  const totalFundsTracked = fundedPoliticians.reduce((sum, p) => sum + (p.totalFundsRaised || 0), 0);
   const totalIsraelLobby = juiceBoxPoliticians.reduce((sum, p) => sum + (p.israelLobbyTotal || 0), 0);
 
   // Score distribution
@@ -144,7 +144,7 @@ export default function JuiceBoxPage() {
             {corruptionRanked.length} officials scored | {highConfidenceCount} high confidence
           </span>
           <span style={{ fontSize: '0.875rem', color: 'var(--terminal-text-dim)', marginLeft: '1rem' }}>
-            | FEC TRACKED: ${(totalFECTracked / 1000000).toFixed(1)}M
+            | FEC TRACKED: ${(totalFundsTracked / 1000000).toFixed(1)}M
           </span>
         </div>
       </div>
@@ -224,7 +224,7 @@ export default function JuiceBoxPage() {
           }}>
             {[
               { key: 'corruption' as const, label: 'CORRUPTION SCORES', count: corruptionRanked.length },
-              { key: 'fundraisers' as const, label: 'TOP FUNDRAISERS', count: fecFundedPoliticians.length },
+              { key: 'fundraisers' as const, label: 'TOP FUNDRAISERS', count: fundedPoliticians.length },
               { key: 'israel' as const, label: 'ISRAEL LOBBY', count: juiceBoxPoliticians.length },
             ].map(tab => (
               <button
@@ -453,7 +453,7 @@ export default function JuiceBoxPage() {
           )}
 
           {/* TOP FUNDRAISERS (existing) */}
-          {activeView === 'fundraisers' && fecFundedPoliticians.length > 0 && (
+          {activeView === 'fundraisers' && fundedPoliticians.length > 0 && (
             <div className="terminal-card" style={{ padding: 0, overflow: 'hidden', marginBottom: '2rem' }}>
               <div style={{
                 padding: '1.5rem 2rem',
@@ -471,7 +471,7 @@ export default function JuiceBoxPage() {
                   TOP FUNDRAISERS (REAL FEC DATA)
                 </h2>
                 <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginTop: '0.5rem', fontFamily: 'JetBrains Mono, monospace' }}>
-                  {fecFundedPoliticians.length} politicians with verified FEC filing data | Source: api.open.fec.gov
+                  {fundedPoliticians.length} politicians with verified campaign finance data | Sources: FEC, FL Division of Elections
                 </div>
               </div>
 
@@ -499,7 +499,7 @@ export default function JuiceBoxPage() {
               </div>
 
               {/* Table Rows */}
-              {fecFundedPoliticians.map((politician, index) => {
+              {fundedPoliticians.map((politician, index) => {
                 const rank = index + 1;
                 const isTopThree = rank <= 3;
                 const hasDetailedData = politician.tags?.some(t => t.label === 'FEC VERIFIED');
@@ -855,7 +855,7 @@ export default function JuiceBoxPage() {
                   color: '#10b981',
                   fontFamily: 'Bebas Neue, sans-serif',
                 }}>
-                  ${(totalFECTracked / 1000000).toFixed(1)}M
+                  ${(totalFundsTracked / 1000000).toFixed(1)}M
                 </div>
                 <div style={{ fontSize: '0.625rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                   TOTAL FEC FUNDS TRACKED
