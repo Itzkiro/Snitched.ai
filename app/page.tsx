@@ -426,18 +426,12 @@ export default function TerminalHome() {
                 <span style={{ color: 'var(--terminal-cyan)' }}>{activePoliticians.length}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>OSINT Sources:</span>
-                <span style={{ color: 'var(--terminal-cyan)' }}>{
-                  [
-                    'FEC',
-                    'Congress.gov',
-                    socialPosts.length > 0 ? 'Social Media' : null,
-                  ].filter(Boolean).length + 2
-                } Active</span>
+                <span>Data Sources:</span>
+                <span style={{ color: 'var(--terminal-cyan)' }}>5 Active</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>Politicians w/ FEC:</span>
-                <span style={{ color: 'var(--terminal-green)' }}>{politicians.filter(p => p.aipacFunding > 0).length}</span>
+                <span>With Funding Data:</span>
+                <span style={{ color: 'var(--terminal-green)' }}>{stats.funded}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>Database:</span>
@@ -450,7 +444,7 @@ export default function TerminalHome() {
 
       {/* Data source footer */}
       <div className="classified-footer">
-        ALL DATA ACQUIRED VIA OSINT // PUBLIC RECORDS: FEC, SOCIAL MEDIA, NEWS OUTLETS // POLITICAL TRANSPARENCY DIVISION
+        PUBLIC RECORDS: FEC // FL DIVISION OF ELECTIONS // LDA SENATE // LEGISCAN // GOOGLE NEWS
       </div>
     </div>
   );

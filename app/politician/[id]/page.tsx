@@ -1495,7 +1495,10 @@ export default function PoliticianPage() {
 
       {/* Footer */}
       <div className="classified-footer">
-        ALL DATA ACQUIRED VIA OSINT // PUBLIC RECORDS: FEC, SOCIAL MEDIA, NEWS OUTLETS // POLITICIAN DOSSIER DIVISION
+        ALL DATA ACQUIRED VIA OSINT // PUBLIC RECORDS: FEC, FL DOE, LDA, LEGISCAN
+        {politician.lastUpdated && (
+          <span> // LAST UPDATED: {new Date(politician.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+        )}
       </div>
     </div>
   );
