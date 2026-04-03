@@ -172,6 +172,53 @@ function sumAipacFunding(node: HierarchyNode): number {
   return total;
 }
 
+/** Return a risk color class based on corruption score */
+function riskColor(score: number): string {
+  if (score < 40) return 'text-primary-container';
+  if (score < 60) return 'text-[#FFD166]';
+  return 'text-error';
+}
+
+/** Return a border color class based on corruption score */
+function riskBorderColor(score: number): string {
+  if (score < 40) return 'border-primary-container/50';
+  if (score < 60) return 'border-[#FFD166]/50';
+  return 'border-error/50';
+}
+
+/** Return a risk label */
+function riskLabel(score: number): string {
+  if (score < 40) return 'SECURE';
+  if (score < 60) return 'MEDIUM_RISK';
+  return 'HIGH_RISK';
+}
+
+/** Return a risk badge bg */
+function riskBadgeBg(score: number): string {
+  if (score < 40) return 'bg-primary-container text-[#080A0D]';
+  if (score < 60) return 'bg-[#FFD166] text-[#080A0D]';
+  return 'bg-error text-[#080A0D]';
+}
+
+/** Compute average corruption score for a node */
+function avgCorruptionScore(node: HierarchyNode): number {
+  const allPols = collectPoliticians(node);
+  if (allPols.length === 0) return 0;
+  return Math.round(allPols.reduce((s, p) => s + p.corruptionScore, 0) / allPols.length);
+}
+
+/** Collect all politicians recursively from a node */
+function collectPoliticians(node: HierarchyNode): Politician[] {
+  const result: Politician[] = [];
+  if (node.politicians) result.push(...node.politicians);
+  if (node.children) {
+    for (const child of node.children) {
+      result.push(...collectPoliticians(child));
+    }
+  }
+  return result;
+}
+
 export default function HierarchyPage() {
   const [path, setPath] = useState<string[]>(['florida']);
   const [allPoliticians, setAllPoliticians] = useState<Politician[]>([]);
@@ -201,11 +248,24 @@ export default function HierarchyPage() {
   }, [allPoliticians]);
 
   if (loading || !hierarchyData) {
-    return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>;
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="font-mono text-primary-container text-sm tracking-widest uppercase animate-pulse">
+          LOADING_HIERARCHY_DATA...
+        </div>
+      </div>
+    );
   }
 
   if (error) {
-    return <div style={{ padding: '2rem', textAlign: 'center', color: '#ef4444' }}>Error: {error}</div>;
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="bg-surface-container border border-error/30 p-6">
+          <div className="font-mono text-error text-sm uppercase tracking-widest">SYSTEM_ERROR</div>
+          <div className="font-mono text-[#C8D8E8] text-xs mt-2">{error}</div>
+        </div>
+      </div>
+    );
   }
 
   const getCurrentNode = (): HierarchyNode => {
@@ -237,254 +297,231 @@ export default function HierarchyPage() {
   });
 
   const aipacTotal = sumAipacFunding(currentNode);
+  const currentScore = avgCorruptionScore(currentNode);
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--terminal-bg)', color: 'var(--terminal-text)' }}>
-      {/* Terminal Title */}
-      <div className="terminal-title">
-        <div>
-          <h1>HIERARCHY - FLORIDA GOVERNMENT STRUCTURE</h1>
-          <div className="terminal-subtitle">
-            DOGE.gov-Style Drill-Down | Navigate {currentNode.count} Officials
+    <div className="min-h-screen bg-background text-on-background font-body relative">
+      {/* Header */}
+      <header className="mb-10 px-6 pt-8">
+        <h1 className="font-mono text-xl md:text-2xl text-[#00FF88] tracking-tighter flex items-center">
+          <span className="mr-3">&gt; ORG_HIERARCHY_MAP_V1.2</span>
+          <span className="w-3 h-8 bg-[#00FF88] terminal-cursor" />
+        </h1>
+        <p className="font-mono text-[0.7rem] text-[#C8D8E8]/40 mt-2 tracking-widest uppercase">
+          ACCESS_LEVEL: ALPHA_SENTINEL // DATA_SOURCE: FEC_REALTIME_STREAM
+        </p>
+      </header>
+
+      {/* Hierarchy Visualization */}
+      <div className="relative min-h-[600px] flex flex-col items-center px-6">
+
+        {/* Breadcrumb Trail — Vertical Stack */}
+        {breadcrumbs.length > 1 && (
+          <div className="mb-12 flex flex-col items-center">
+            {breadcrumbs.map((crumb, idx) => {
+              const isLast = idx === breadcrumbs.length - 1;
+              return (
+                <div key={crumb.id} className="flex flex-col items-center">
+                  <button
+                    onClick={() => navigateUp(idx)}
+                    disabled={isLast}
+                    className={`
+                      font-mono text-xs uppercase tracking-widest px-4 py-2 border transition-all
+                      ${isLast
+                        ? 'bg-surface-container border-primary-container text-[#00FF88] cursor-default'
+                        : 'bg-surface-container-lowest border-outline-variant text-[#C8D8E8]/60 hover:border-primary-container hover:text-[#00FF88] cursor-pointer'
+                      }
+                    `}
+                  >
+                    {crumb.name.toUpperCase().replace(/\s+/g, '_')}
+                  </button>
+                  {!isLast && (
+                    <div className="h-6 w-[2px] bg-primary-container/20" />
+                  )}
+                </div>
+              );
+            })}
           </div>
-        </div>
-      </div>
+        )}
 
-      {/* Alert */}
-      <div style={{ padding: '2rem', borderBottom: '1px solid var(--terminal-border)' }}>
-        <div className="alert-level">
-          <span className="alert-icon">&#128451;</span>
-          <span>CURRENT LEVEL: {currentNode.name.toUpperCase()}</span>
-          <span style={{ fontSize: '0.875rem', color: 'var(--terminal-text-dim)', marginLeft: '1rem' }}>
-            {currentNode.count} OFFICIALS
-          </span>
-        </div>
-      </div>
+        {/* Current Level Node — Primary box */}
+        <div className="relative mb-16 flex flex-col items-center group">
+          <div className="bg-surface-container border-2 border-primary-container px-8 py-4 shadow-[0_0_20px_rgba(0,255,136,0.15)] flex items-center space-x-4">
+            <span className="material-symbols-outlined text-primary-container text-2xl">
+              {path.length <= 1 ? 'public' : path.length <= 2 ? 'account_balance' : 'domain'}
+            </span>
+            <div>
+              <div className="font-mono text-[0.65rem] text-primary-container font-bold opacity-70 uppercase tracking-widest">
+                LVL_{String(path.length).padStart(2, '0')}: {currentNode.name.toUpperCase().replace(/\s+/g, '_')}
+              </div>
+              <div className="font-headline font-bold text-lg tracking-tight uppercase text-[#C8D8E8]">
+                {currentNode.name}
+              </div>
+            </div>
+            <div className={`ml-6 flex items-center px-3 py-1 border ${currentScore >= 60 ? 'bg-error-container/20 border-error/30' : currentScore >= 40 ? 'bg-[#FFD166]/10 border-[#FFD166]/30' : 'bg-primary-container/10 border-primary-container/30'}`}>
+              <span className={`font-mono text-sm font-bold ${riskColor(currentScore)}`}>
+                {currentScore}
+              </span>
+            </div>
+          </div>
 
-      {/* Breadcrumb Navigation */}
-      <div style={{
-        textAlign: 'center',
-        padding: '3rem 2rem 2rem',
-        borderBottom: '1px solid var(--terminal-border)'
-      }}>
-        <div style={{ fontSize: '1.5rem', fontWeight: 400, marginBottom: '2rem', color: 'var(--terminal-text-dim)' }}>
-          Trace every politician through the hierarchy.
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-          {breadcrumbs.map((crumb, idx) => (
-            <div key={crumb.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <button
-                onClick={() => navigateUp(idx)}
-                style={{
-                  background: idx === breadcrumbs.length - 1 ? 'transparent' : '#1a1a1a',
-                  border: idx === breadcrumbs.length - 1 ? '1px solid #ef4444' : '1px solid #333',
-                  color: idx === breadcrumbs.length - 1 ? '#fff' : '#888',
-                  padding: '1rem 2rem',
-                  fontSize: '1.5rem',
-                  fontWeight: 600,
-                  cursor: idx === breadcrumbs.length - 1 ? 'default' : 'pointer',
-                  borderRadius: '4px',
-                  transition: 'all 0.2s',
-                  minWidth: '300px',
-                }}
-                onMouseEnter={(e) => {
-                  if (idx !== breadcrumbs.length - 1) {
-                    e.currentTarget.style.borderColor = '#ef4444';
-                    e.currentTarget.style.color = '#fff';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (idx !== breadcrumbs.length - 1) {
-                    e.currentTarget.style.borderColor = '#333';
-                    e.currentTarget.style.color = '#888';
-                  }
-                }}
-              >
-                {crumb.name}
-              </button>
-              {idx < breadcrumbs.length - 1 && (
-                <div style={{
-                  width: '1px',
-                  height: '30px',
-                  background: '#333',
-                  margin: '0.5rem 0'
-                }} />
+          {/* Connector Line down from current level */}
+          {(currentNode.children && currentNode.children.length > 0) && (
+            <>
+              <div className="h-12 w-[2px] bg-primary-container/20" />
+              {currentNode.children.length > 1 && (
+                <div className="w-full max-w-4xl flex justify-center">
+                  <div className="h-[2px] w-[80%] bg-primary-container/20 relative">
+                    {currentNode.children.map((_, i) => {
+                      const count = currentNode.children!.length;
+                      const pct = count === 1 ? 50 : (i / (count - 1)) * 100;
+                      return (
+                        <div
+                          key={i}
+                          className="absolute h-8 w-[2px] bg-primary-container/20"
+                          style={{ left: `${pct}%` }}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
               )}
-            </div>
-          ))}
+            </>
+          )}
         </div>
-      </div>
 
-      {/* Current Level Stats */}
-      <div style={{
-        maxWidth: '1200px',
-        margin: '4rem auto',
-        padding: '0 2rem'
-      }}>
-        <div style={{
-          background: '#0a0a0a',
-          border: '1px solid #2a2a2a',
-          borderRadius: '8px',
-          padding: '3rem',
-          marginBottom: '3rem',
-        }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '3rem' }}>
-            <div>
-              <div style={{ fontSize: '4rem', fontWeight: 700, color: '#fff', marginBottom: '0.5rem' }}>
-                {currentNode.count.toLocaleString()}
-              </div>
-              <div style={{ fontSize: '0.875rem', color: '#888', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                Headcount
-              </div>
+        {/* Stats Row */}
+        <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
+          <div className="bg-surface-container-low p-4 border-l-2 border-primary-container/30">
+            <div className="font-mono text-[0.6rem] text-[#C8D8E8]/40 mb-1 uppercase tracking-widest">Total Entities</div>
+            <div className="font-headline text-2xl font-bold text-[#C8D8E8]">{currentNode.count.toLocaleString()}</div>
+          </div>
+          <div className="bg-surface-container-low p-4 border-l-2 border-error/30">
+            <div className="font-mono text-[0.6rem] text-[#C8D8E8]/40 mb-1 uppercase tracking-widest">
+              {currentNode.children ? 'Sub-Divisions' : 'Officials'}
             </div>
-            <div>
-              <div style={{ fontSize: '4rem', fontWeight: 700, color: '#ef4444', marginBottom: '0.5rem' }}>
-                {currentNode.children?.length || (currentNode.politicians?.length || 0)}
-              </div>
-              <div style={{ fontSize: '0.875rem', color: '#888', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                {currentNode.children ? 'Subordinate Offices' : 'Officials'}
-              </div>
+            <div className="font-headline text-2xl font-bold text-error">
+              {currentNode.children?.length || (currentNode.politicians?.length || 0)}
             </div>
-            <div>
-              <div style={{ fontSize: '4rem', fontWeight: 700, color: '#f59e0b', marginBottom: '0.5rem' }}>
-                ${(aipacTotal / 1000000).toFixed(1)}M
-              </div>
-              <div style={{ fontSize: '0.875rem', color: '#888', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                Total AIPAC Funding
-              </div>
+          </div>
+          <div className="bg-surface-container-low p-4 border-l-2 border-[#FFD166]/30">
+            <div className="font-mono text-[0.6rem] text-[#C8D8E8]/40 mb-1 uppercase tracking-widest">AIPAC Funding</div>
+            <div className="font-headline text-2xl font-bold text-[#FFD166]">
+              ${(aipacTotal / 1000000).toFixed(1)}M
+            </div>
+          </div>
+          <div className="bg-surface-container-low p-4 border-l-2 border-primary-container/30">
+            <div className="font-mono text-[0.6rem] text-[#C8D8E8]/40 mb-1 uppercase tracking-widest">Avg Corruption</div>
+            <div className={`font-headline text-2xl font-bold ${riskColor(currentScore)}`}>
+              {currentScore}
             </div>
           </div>
         </div>
 
-        {/* Child Nodes or Politicians */}
+        {/* Child Nodes — Drill Down Cards */}
         {currentNode.children && currentNode.children.length > 0 && (
-          <div>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '2rem', color: '#fff' }}>
-              Drill Down
-            </h2>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-              gap: '1.5rem'
-            }}>
-              {currentNode.children.map((child) => (
-                <button
-                  key={child.id}
-                  onClick={() => navigateTo(child.id)}
-                  style={{
-                    background: '#0a0a0a',
-                    border: '1px solid #2a2a2a',
-                    borderRadius: '4px',
-                    padding: '2rem',
-                    textAlign: 'left',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = '#ef4444';
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = '#2a2a2a';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                  }}
-                >
-                  <div style={{ fontSize: '1.25rem', fontWeight: 600, color: '#fff', marginBottom: '0.5rem' }}>
-                    {child.name}
-                  </div>
-                  <div style={{
-                    fontSize: '2rem',
-                    fontWeight: 700,
-                    color: '#ef4444',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                  }}>
-                    {child.count}
-                    <span style={{ fontSize: '1rem', color: '#666' }}>{'\u2192'}</span>
-                  </div>
-                </button>
-              ))}
+          <div className="w-full max-w-6xl mb-12">
+            <div className="flex items-center space-x-2 mb-6">
+              <div className="w-2 h-2 bg-primary-container animate-pulse" />
+              <span className="font-mono text-[0.65rem] text-primary-container font-bold uppercase tracking-widest">
+                Drill Down // {currentNode.children.length} Nodes
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {currentNode.children.map((child) => {
+                const childScore = avgCorruptionScore(child);
+                return (
+                  <button
+                    key={child.id}
+                    onClick={() => navigateTo(child.id)}
+                    className="bg-surface-container-low border border-outline-variant hover:border-primary-container transition-all p-1 w-full text-left group"
+                  >
+                    <div className="p-4 flex flex-col">
+                      <div className="flex justify-between items-start mb-4">
+                        <div className={`${riskBadgeBg(childScore)} px-2 py-0.5 font-mono text-[0.6rem] font-bold`}>
+                          {riskLabel(childScore)}
+                        </div>
+                        <span className={`material-symbols-outlined ${riskColor(childScore)}`}>
+                          expand_more
+                        </span>
+                      </div>
+                      <div className="font-headline font-bold text-md text-[#C8D8E8] mb-1 uppercase">
+                        {child.name.replace(/\s+/g, '_')}
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="font-mono text-[0.65rem] text-[#C8D8E8]/40">
+                          ENTITIES: {child.count}
+                        </span>
+                        <span className={`font-mono text-lg font-bold ${riskColor(childScore)}`}>
+                          {childScore}
+                        </span>
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </div>
         )}
 
         {/* Individual Politicians */}
         {currentNode.politicians && currentNode.politicians.length > 0 && (
-          <div>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '2rem', color: '#fff' }}>
-              Officials
-            </h2>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
-              gap: '1.5rem'
-            }}>
-              {currentNode.politicians.map((politician) => (
-                <Link
-                  key={politician.id}
-                  href={`/politician/${politician.id}`}
-                  style={{
-                    background: '#0a0a0a',
-                    border: '1px solid #2a2a2a',
-                    borderRadius: '4px',
-                    padding: '1.5rem',
-                    textDecoration: 'none',
-                    display: 'block',
-                    transition: 'all 0.2s',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = '#ef4444';
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = '#2a2a2a';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                  }}
-                >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1rem' }}>
-                    <div>
-                      <div style={{ fontSize: '1.25rem', fontWeight: 600, color: '#fff', marginBottom: '0.25rem' }}>
-                        {politician.name}
+          <div className="w-full max-w-6xl mb-12">
+            <div className="flex items-center space-x-2 mb-6">
+              <div className="w-2 h-2 bg-error animate-pulse" />
+              <span className="font-mono text-[0.65rem] text-error font-bold uppercase tracking-widest">
+                Entity Dossiers // {currentNode.politicians.length} Officials
+              </span>
+            </div>
+
+            <div className="space-y-3">
+              {currentNode.politicians.map((politician) => {
+                const score = politician.corruptionScore;
+                return (
+                  <Link
+                    key={politician.id}
+                    href={`/politician/${politician.id}`}
+                    className={`
+                      block bg-surface-container-lowest border-l-4 ${riskBorderColor(score)}
+                      p-4 hover:bg-surface-container-low transition-colors group
+                    `}
+                  >
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-1">
+                          <span className="font-headline font-bold text-sm text-[#C8D8E8] uppercase tracking-tight">
+                            {politician.name}
+                          </span>
+                          <span className={`
+                            font-mono text-[0.6rem] font-bold px-2 py-0.5
+                            ${politician.party === 'Republican'
+                              ? 'bg-error-container/30 text-error border border-error/20'
+                              : politician.party === 'Democrat'
+                                ? 'bg-secondary-container/30 text-secondary border border-secondary/20'
+                                : 'bg-surface-container-high text-[#C8D8E8]/60 border border-outline-variant'
+                            }
+                          `}>
+                            {politician.party === 'Republican' ? 'GOP' : politician.party === 'Democrat' ? 'DEM' : politician.party.substring(0, 3).toUpperCase()}
+                          </span>
+                          {politician.juiceBoxTier !== 'none' && (
+                            <span className="font-mono text-[0.6rem] font-bold px-2 py-0.5 bg-[#FFD166]/10 text-[#FFD166] border border-[#FFD166]/20">
+                              {politician.juiceBoxTier === 'owned' ? 'OWNED' : politician.juiceBoxTier === 'bought' ? 'BOUGHT' : 'COMPROMISED'}
+                              {' '}${(politician.aipacFunding / 1000).toFixed(0)}K
+                            </span>
+                          )}
+                        </div>
+                        <div className="font-mono text-[0.65rem] text-[#C8D8E8]/40">
+                          {politician.office}{politician.district ? ` // ${politician.district}` : ''}
+                        </div>
                       </div>
-                      <div style={{ fontSize: '0.875rem', color: '#888' }}>
-                        {politician.office}{politician.district ? ` \u2022 ${politician.district}` : ''}
+                      <div className={`font-mono text-lg font-bold ${riskColor(score)}`}>
+                        {score}
                       </div>
                     </div>
-                    <div style={{
-                      fontSize: '1.5rem',
-                      fontWeight: 700,
-                      color: politician.corruptionScore < 40 ? '#10b981' : politician.corruptionScore < 60 ? '#f59e0b' : '#ef4444'
-                    }}>
-                      {politician.corruptionScore}
-                    </div>
-                  </div>
-                  <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                    <span style={{
-                      fontSize: '0.75rem',
-                      padding: '0.4rem 0.75rem',
-                      background: politician.party === 'Republican' ? '#dc2626' : politician.party === 'Democrat' ? '#2563eb' : '#6b7280',
-                      color: '#fff',
-                      borderRadius: '12px',
-                      fontWeight: 600,
-                    }}>
-                      {politician.party === 'Republican' ? 'R' : politician.party === 'Democrat' ? 'D' : politician.party.charAt(0)}
-                    </span>
-                    {politician.juiceBoxTier !== 'none' && (
-                      <span style={{
-                        fontSize: '0.75rem',
-                        padding: '0.25rem 0.5rem',
-                        background: '#78350f',
-                        color: '#f59e0b',
-                        borderRadius: '3px',
-                      }}>
-                        {politician.juiceBoxTier === 'owned' ? 'OWNED' : politician.juiceBoxTier === 'bought' ? 'BOUGHT' : 'COMPROMISED'} ${(politician.aipacFunding / 1000).toFixed(0)}K
-                      </span>
-                    )}
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         )}
@@ -492,15 +529,12 @@ export default function HierarchyPage() {
         {/* Empty State */}
         {(!currentNode.children || currentNode.children.length === 0) &&
          (!currentNode.politicians || currentNode.politicians.length === 0) && (
-          <div style={{
-            textAlign: 'center',
-            padding: '4rem 2rem',
-            color: 'var(--terminal-text-dim)',
-          }}>
-            <div style={{ fontSize: '1.25rem', marginBottom: '1rem', color: 'var(--terminal-text)' }}>
+          <div className="w-full max-w-6xl py-16 flex flex-col items-center">
+            <span className="material-symbols-outlined text-outline text-4xl mb-4">search_off</span>
+            <div className="font-mono text-sm text-[#C8D8E8] uppercase tracking-widest mb-2">
               No Data Available
             </div>
-            <div style={{ fontSize: '0.875rem' }}>
+            <div className="font-mono text-xs text-[#C8D8E8]/40">
               {currentNode.name} officials are not yet indexed in the database.
             </div>
           </div>
@@ -508,7 +542,7 @@ export default function HierarchyPage() {
       </div>
 
       {/* Footer */}
-      <div className="classified-footer">
+      <div className="classified-footer mt-12">
         ALL DATA ACQUIRED VIA OSINT // PUBLIC RECORDS: FEC, SOCIAL MEDIA, NEWS OUTLETS // HIERARCHY NAVIGATION DIVISION
       </div>
     </div>
