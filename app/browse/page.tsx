@@ -1,6 +1,12 @@
+import type { Metadata } from 'next';
 import { getServerSupabase } from '@/lib/supabase-server';
 import type { Politician } from '@/lib/types';
 import BrowseClient from './BrowseClient';
+
+export const metadata: Metadata = {
+  title: 'Database Search | SNITCHED.AI',
+  description: 'Search 400+ Florida politicians by name, party, office, or district. Real campaign finance data from FEC and FL Division of Elections.',
+};
 
 // ISR: revalidate every 5 minutes
 export const revalidate = 300;

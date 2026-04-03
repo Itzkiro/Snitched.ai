@@ -1,4 +1,10 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Seated Officials | SNITCHED.AI',
+  description: 'Florida seated officials — US Senators, Representatives, State Legislators, and County Officials. Corruption scores, campaign finance, and voting records.',
+};
 import { getServerSupabase } from '@/lib/supabase-server';
 import type { Politician } from '@/lib/types';
 
