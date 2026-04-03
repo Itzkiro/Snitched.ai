@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SNITCHED.AI | INTELLIGENCE DATABASE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error": "#ffb4ab",
+              "inverse-on-surface": "#2f3034",
+              "on-primary-fixed-variant": "#005228",
+              "on-surface": "#e2e2e6",
+              "surface-container-lowest": "#0c0e11",
+              "on-secondary-container": "#002b4e",
+              "surface-bright": "#37393d",
+              "tertiary-fixed-dim": "#ffb3b6",
+              "secondary-fixed": "#d2e4ff",
+              "on-error-container": "#ffdad6",
+              "surface-tint": "#00e479",
+              "inverse-primary": "#006d37",
+              "surface-variant": "#333538",
+              "primary-fixed-dim": "#00e479",
+              "primary": "#f1ffef",
+              "on-secondary": "#003259",
+              "primary-container": "#00ff88",
+              "outline-variant": "#3b4b3d",
+              "on-primary-container": "#007139",
+              "inverse-surface": "#e2e2e6",
+              "on-tertiary-fixed-variant": "#920028",
+              "surface-container-high": "#282a2d",
+              "on-tertiary-fixed": "#40000c",
+              "surface-container": "#1e2023",
+              "primary-fixed": "#60ff99",
+              "background": "#111317",
+              "secondary-container": "#3694ec",
+              "surface-container-low": "#1a1c1f",
+              "on-background": "#e2e2e6",
+              "tertiary-container": "#ffd4d5",
+              "secondary-fixed-dim": "#a0caff",
+              "outline": "#849585",
+              "on-tertiary-container": "#c50039",
+              "tertiary-fixed": "#ffdada",
+              "tertiary": "#fffaf9",
+              "on-error": "#690005",
+              "on-surface-variant": "#b9cbb9",
+              "error-container": "#93000a",
+              "on-primary": "#003919",
+              "on-tertiary": "#68001a",
+              "on-primary-fixed": "#00210c",
+              "surface-container-highest": "#333538",
+              "surface": "#111317",
+              "on-secondary-fixed-variant": "#00497e",
+              "surface-dim": "#111317",
+              "secondary": "#a0caff",
+              "on-secondary-fixed": "#001c37"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Space Grotesk"],
+              "mono": ["IBM Plex Mono"]
+            },
+            borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .scanline-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 255, 136, 0.03) 50%);
+            background-size: 100% 4px;
+            z-index: 100;
+            pointer-events: none;
+        }
+        .grid-bg {
+            background-image: 
+                linear-gradient(to right, rgba(0, 255, 136, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 255, 136, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 1.2em;
+            background-color: #00FF88;
+            vertical-align: middle;
+            margin-left: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #080A0D;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #00FF88;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-[#080A0D] text-on-surface font-body overflow-x-hidden">
+<div class="scanline-overlay"></div>
+<div class="grid-bg fixed inset-0 pointer-events-none"></div>
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-14 bg-[#080A0D]/90 backdrop-blur-md rect-0 border-b border-[#00FF88]/20 shadow-[0_0_15px_rgba(0,255,136,0.1)]">
+<div class="flex items-center gap-8">
+<span class="font-['Space_Grotesk'] font-bold text-[#00FF88] tracking-tighter text-lg">SNITCHED.AI v2.0</span>
+<nav class="hidden md:flex gap-6">
+<a class="font-['IBM_Plex_Mono'] uppercase tracking-widest text-[0.75rem] text-[#00FF88] border-b-2 border-[#00FF88] pb-1" href="#">NETWORK</a>
+<a class="font-['IBM_Plex_Mono'] uppercase tracking-widest text-[0.75rem] text-[#C8D8E8]/60 hover:text-[#00FF88] transition-colors" href="#">DOSSIERS</a>
+<a class="font-['IBM_Plex_Mono'] uppercase tracking-widest text-[0.75rem] text-[#C8D8E8]/60 hover:text-[#00FF88] transition-colors" href="#">LEAKS</a>
+<a class="font-['IBM_Plex_Mono'] uppercase tracking-widest text-[0.75rem] text-[#C8D8E8]/60 hover:text-[#00FF88] transition-colors" href="#">WATCHLIST</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#00FF88] cursor-pointer hover:bg-[#00FF88]/10 p-1">sensors</span>
+<span class="material-symbols-outlined text-[#00FF88] cursor-pointer hover:bg-[#00FF88]/10 p-1">schedule</span>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-14 bottom-0 w-64 hidden lg:flex flex-col bg-[#111317] rect-0 border-r border-[#00FF88]/10 z-40">
+<div class="p-6 border-b border-[#00FF88]/10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-[#00FF88]">encrypted</span>
+</div>
+<div>
+<h3 class="font-['IBM_Plex_Mono'] text-[0.7rem] uppercase text-[#00FF88] font-bold">OPERATOR_01</h3>
+<p class="font-['IBM_Plex_Mono'] text-[0.6rem] uppercase text-[#C8D8E8]/40">FL_TRANSIT_SECURED</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 py-4">
+<a class="flex items-center gap-3 px-6 py-3 bg-[#00FF88] text-[#080A0D] font-bold font-['IBM_Plex_Mono'] text-[0.7rem] uppercase" href="#">
+<span class="material-symbols-outlined">radar</span>
+<span>THREAT_FEED</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#C8D8E8]/40 hover:bg-[#1A1C1F] hover:text-[#00FF88] transition-all font-['IBM_Plex_Mono'] text-[0.7rem] uppercase" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span>ENTITIES</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#C8D8E8]/40 hover:bg-[#1A1C1F] hover:text-[#00FF88] transition-all font-['IBM_Plex_Mono'] text-[0.7rem] uppercase" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span>MONEY_TRAIL</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#C8D8E8]/40 hover:bg-[#1A1C1F] hover:text-[#00FF88] transition-all font-['IBM_Plex_Mono'] text-[0.7rem] uppercase" href="#">
+<span class="material-symbols-outlined">warning</span>
+<span>POLITICAL_RISK</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#C8D8E8]/40 hover:bg-[#1A1C1F] hover:text-[#00FF88] transition-all font-['IBM_Plex_Mono'] text-[0.7rem] uppercase" href="#">
+<span class="material-symbols-outlined">terminal</span>
+<span>SYSTEM_LOGS</span>
+</a>
+</nav>
+<div class="p-6 bg-surface-container-low text-[0.6rem] font-mono text-[#00FF88]/40">
+<p>ACTIVE_SESSION: 44.12.01</p>
+<p>UI_REV: A-01-DELTA</p>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="lg:ml-64 pt-14 pb-12 min-h-screen relative">
+<!-- Dashboard Header -->
+<div class="px-8 py-10 border-b border-[#00FF88]/10 bg-surface-container-low/50">
+<h1 class="font-headline text-3xl md:text-5xl font-bold tracking-tighter text-[#C8D8E8] mb-4">
+                &gt; QUERY DATABASE_<span class="terminal-cursor"></span>
+</h1>
+<p class="font-mono text-xs text-[#00FF88] opacity-60 uppercase tracking-widest">REAL-TIME ACCESS PROTOCOL ENABLED // SEC_LEVEL: TOP_SECRET</p>
+</div>
+<!-- Terminal Search & Filters -->
+<div class="px-8 py-6 sticky top-14 z-30 bg-[#080A0D]/80 backdrop-blur-md border-b border-[#00FF88]/10">
+<div class="flex flex-col gap-6">
+<!-- Search Prompt -->
+<div class="flex items-center gap-4 bg-surface-container-low px-4 py-3 border-b border-[#00FF88]">
+<span class="font-mono text-[#00FF88] text-sm">[SEARCH]:</span>
+<input class="bg-transparent border-none focus:ring-0 w-full font-mono text-sm text-[#C8D8E8] placeholder:text-[#C8D8E8]/20" placeholder="ENTER ENTITY NAME OR IDENTIFIER..." type="text"/>
+</div>
+<!-- Filters -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Party Filter -->
+<div class="flex flex-col gap-2">
+<label class="font-mono text-[0.65rem] text-[#00FF88] uppercase opacity-60">PARTY_AFFILIATION</label>
+<div class="flex">
+<button class="flex-1 font-mono text-[0.7rem] py-2 bg-[#00FF88] text-[#080A0D] font-bold">ALL</button>
+<button class="flex-1 font-mono text-[0.7rem] py-2 border border-[#00FF88]/20 text-[#C8D8E8]/60 hover:bg-[#00FF88]/10 transition-colors">R</button>
+<button class="flex-1 font-mono text-[0.7rem] py-2 border border-[#00FF88]/20 text-[#C8D8E8]/60 hover:bg-[#00FF88]/10 transition-colors">D</button>
+<button class="flex-1 font-mono text-[0.7rem] py-2 border border-[#00FF88]/20 text-[#C8D8E8]/60 hover:bg-[#00FF88]/10 transition-colors">I</button>
+</div>
+</div>
+<!-- Level Filter -->
+<div class="flex flex-col gap-2">
+<label class="font-mono text-[0.65rem] text-[#00FF88] uppercase opacity-60">GOVERNANCE_LEVEL</label>
+<div class="flex">
+<button class="flex-1 font-mono text-[0.7rem] py-2 border border-[#00FF88]/20 text-[#C8D8E8]/60 hover:bg-[#00FF88]/10 transition-colors">FEDERAL</button>
+<button class="flex-1 font-mono text-[0.7rem] py-2 bg-[#00FF88]/10 text-[#00FF88] font-bold border border-[#00FF88]/20">STATE</button>
+<button class="flex-1 font-mono text-[0.7rem] py-2 border border-[#00FF88]/20 text-[#C8D8E8]/60 hover:bg-[#00FF88]/10 transition-colors">COUNTY</button>
+</div>
+</div>
+<!-- Grade Filter -->
+<div class="flex flex-col gap-2">
+<label class="font-mono text-[0.65rem] text-[#00FF88] uppercase opacity-60">CORRUPTION_GRADE</label>
+<div class="flex">
+<button class="flex-1 font-mono text-[0.7rem] py-2 border border-[#00FF88]/20 text-[#C8D8E8]/60 hover:bg-[#00FF88]/10 transition-colors">A-C</button>
+<button class="flex-1 font-mono text-[0.7rem] py-2 border border-[#00FF88]/20 text-[#C8D8E8]/60 hover:bg-[#00FF88]/10 transition-colors">D</button>
+<button class="flex-1 font-mono text-[0.7rem] py-2 border border-error/50 text-error bg-error/10 font-bold">F</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Intelligence Grid -->
+<div class="px-8 py-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- PoliticianCard 01 -->
+<div class="bg-surface-container-low border-l-4 border-[#00FF88] relative overflow-hidden group">
+<div class="p-6">
+<div class="flex justify-between items-start mb-4">
+<div class="w-16 h-16 bg-surface-container-high border border-[#00FF88]/10 overflow-hidden">
+<img alt="Dossier" class="w-full h-full object-cover grayscale brightness-75 contrast-125" data-alt="High contrast professional portrait of a politician in a dark suit with moody lighting and subtle digital scanlines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGXnqbnMEOorRToJLBe9RHvvigOUFP2JpPzSuoi0uX23rer90X7u3UtfF5-bGUbWhrrCubf2Njw83U7_MWe-kMVCnx8QYDCIpPCZzIOQeq3fHGCWuEbidpvMSUXsDeLlMGPtCgscR0VsQAYrKzecS7vc9SY4rBt0wlwmIiiGO29UHInmfAUJ5Gw10yTspDiNv0EXmMowJfBUSENnMJSh_-hCY1-SYV_GAbpwjMvjdCc66IXP2nr4XI_52_FakQf47M17RYtQSYJC17"/>
+</div>
+<span class="font-mono text-[0.6rem] px-2 py-1 bg-[#FF3B5C]/10 text-[#FF3B5C] border border-[#FF3B5C]/40">REP - FLORIDA</span>
+</div>
+<h2 class="font-mono font-bold text-lg text-[#C8D8E8] mb-1">RONALD V. DESANTIS</h2>
+<p class="font-mono text-[0.65rem] text-[#00FF88] uppercase tracking-tighter mb-4 opacity-70">GOVERNOR // TERM: 2019-PRESENT</p>
+<!-- CorruptionMeter -->
+<div class="mb-6">
+<div class="flex justify-between mb-1">
+<span class="font-mono text-[0.6rem] text-[#C8D8E8]/60">CORRUPTION_INDEX</span>
+<span class="font-mono text-[0.6rem] text-[#FF3B5C]">84.2%</span>
+</div>
+<div class="h-2 bg-surface-container-high flex">
+<div class="h-full bg-[#FF3B5C] shadow-[0_0_10px_rgba(255,59,92,0.4)]" style="width: 84%;"></div>
+</div>
+</div>
+<!-- TagBadges -->
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="font-mono text-[0.55rem] px-1.5 py-0.5 bg-[#FFD166]/10 text-[#FFD166] border border-[#FFD166]/30">[PAC-HEAVY]</span>
+<span class="font-mono text-[0.55rem] px-1.5 py-0.5 bg-[#FF3B5C]/10 text-[#FF3B5C] border border-[#FF3B5C]/30">[VOTED-ANTI-TRANSPARENCY]</span>
+<span class="font-mono text-[0.55rem] px-1.5 py-0.5 bg-[#00FF88]/10 text-[#00FF88] border border-[#00FF88]/30">[VETERAN-STATUS]</span>
+</div>
+<a class="block text-center font-mono text-[0.7rem] font-bold py-3 bg-[#00FF88]/10 text-[#00FF88] hover:bg-[#00FF88] hover:text-[#080A0D] transition-all group-hover:shadow-[0_0_20px_rgba(0,255,136,0.2)]" href="#">
+                        &gt; VIEW DOSSIER →
+                    </a>
+</div>
+</div>
+<!-- PoliticianCard 02 -->
+<div class="bg-surface-container-low border-l-4 border-[#00FF88] relative overflow-hidden group">
+<div class="p-6">
+<div class="flex justify-between items-start mb-4">
+<div class="w-16 h-16 bg-surface-container-high border border-[#00FF88]/10 overflow-hidden">
+<img alt="Dossier" class="w-full h-full object-cover grayscale brightness-75 contrast-125" data-alt="Corporate portrait of a female official with stark lighting and high contrast professional attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAMXAIuC3SCW-oZJKcMy7V3ztGczh5C9p_5qBQioZa12LCZjKFs8wGDybZqaBkLWlr4iVD1wAnPxgz2ivLNxadNEWPlwtvXAzM1LQTFqaaKnMbHp5jrv1QUTMV6uH9LdfMovxwrQ3NZZ8hfh5_RsMsNJSbATDfdau8sMO4fiHF2SMb8kWcl398BvogBYoKKGRdPXEmBAJU4whKN_bVxkiGqxdkiIDqAiTM9IPf1TmLpmqDig4eqJZylQF86_2NAaYtermGVpSXe51f"/>
+</div>
+<span class="font-mono text-[0.6rem] px-2 py-1 bg-[#4DA6FF]/10 text-[#4DA6FF] border border-[#4DA6FF]/40">DEM - NEW YORK</span>
+</div>
+<h2 class="font-mono font-bold text-lg text-[#C8D8E8] mb-1">ALEXA P. SILVERMAN</h2>
+<p class="font-mono text-[0.65rem] text-[#00FF88] uppercase tracking-tighter mb-4 opacity-70">SENATOR // TERM: 2021-PRESENT</p>
+<!-- CorruptionMeter -->
+<div class="mb-6">
+<div class="flex justify-between mb-1">
+<span class="font-mono text-[0.6rem] text-[#C8D8E8]/60">CORRUPTION_INDEX</span>
+<span class="font-mono text-[0.6rem] text-[#FFD166]">42.7%</span>
+</div>
+<div class="h-2 bg-surface-container-high flex">
+<div class="h-full bg-[#FFD166] shadow-[0_0_10px_rgba(255,209,102,0.4)]" style="width: 42%;"></div>
+</div>
+</div>
+<!-- TagBadges -->
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="font-mono text-[0.55rem] px-1.5 py-0.5 bg-[#FFD166]/10 text-[#FFD166] border border-[#FFD166]/30">[AIPAC-FUNDED]</span>
+<span class="font-mono text-[0.55rem] px-1.5 py-0.5 bg-[#00FF88]/10 text-[#00FF88] border border-[#00FF88]/30">[CLEAN-ENERGY-ADVOCATE]</span>
+</div>
+<a class="block text-center font-mono text-[0.7rem] font-bold py-3 bg-[#00FF88]/10 text-[#00FF88] hover:bg-[#00FF88] hover:text-[#080A0D] transition-all group-hover:shadow-[0_0_20px_rgba(0,255,136,0.2)]" href="#">
+                        &gt; VIEW DOSSIER →
+                    </a>
+</div>
+</div>
+<!-- PoliticianCard 03 -->
+<div class="bg-surface-container-low border-l-4 border-[#00FF88] relative overflow-hidden group">
+<div class="p-6">
+<div class="flex justify-between items-start mb-4">
+<div class="w-16 h-16 bg-surface-container-high border border-[#00FF88]/10 overflow-hidden">
+<img alt="Dossier" class="w-full h-full object-cover grayscale brightness-75 contrast-125" data-alt="Official headshot of a government official in a sharp suit with cold blue lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX5Vf_-srJiA7ISNFShNYtxL1gqRJXIplNFyTAmwWOk6dqd06Ml-Ka50nbmQWBz0WZqGDwBHJ8weyBfKCQqG1CKxbxXEdFIJP_sjI5COpGr4Xsewp457ecbAsJzb28nOesTMrohUOymUesS9CH_sTTkDC6e2PcYIXIIfkJmD2Ft7jWmKHLixpvKaDDATQzZgDtV4ttkxhO0lYsoknnFolkaWvVIbaanRk_JuxZ5IksRx3ZjIo5c6RgpQQUsFw_vaezeiVw9GM4wtyi"/>
+</div>
+<span class="font-mono text-[0.6rem] px-2 py-1 bg-[#e2e2e6]/10 text-[#e2e2e6] border border-[#e2e2e6]/40">IND - VERMONT</span>
+</div>
+<h2 class="font-mono font-bold text-lg text-[#C8D8E8] mb-1">MARCUS J. THORNE</h2>
+<p class="font-mono text-[0.65rem] text-[#00FF88] uppercase tracking-tighter mb-4 opacity-70">REPRESENTATIVE // TERM: 2017-PRESENT</p>
+<!-- CorruptionMeter -->
+<div class="mb-6">
+<div class="flex justify-between mb-1">
+<span class="font-mono text-[0.6rem] text-[#C8D8E8]/60">CORRUPTION_INDEX</span>
+<span class="font-mono text-[0.6rem] text-[#00FF88]">12.9%</span>
+</div>
+<div class="h-2 bg-surface-container-high flex">
+<div class="h-full bg-[#00FF88] shadow-[0_0_10px_rgba(0,255,136,0.4)]" style="width: 12%;"></div>
+</div>
+</div>
+<!-- TagBadges -->
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="font-mono text-[0.55rem] px-1.5 py-0.5 bg-[#00FF88]/10 text-[#00FF88] border border-[#00FF88]/30">[VOTED-YES-CEASEFIRE]</span>
+<span class="font-mono text-[0.55rem] px-1.5 py-0.5 bg-[#00FF88]/10 text-[#00FF88] border border-[#00FF88]/30">[GRASSROOTS-ONLY]</span>
+</div>
+<a class="block text-center font-mono text-[0.7rem] font-bold py-3 bg-[#00FF88]/10 text-[#00FF88] hover:bg-[#00FF88] hover:text-[#080A0D] transition-all group-hover:shadow-[0_0_20px_rgba(0,255,136,0.2)]" href="#">
+                        &gt; VIEW DOSSIER →
+                    </a>
+</div>
+</div>
+<!-- PoliticianCard 04 -->
+<div class="bg-surface-container-low border-l-4 border-[#00FF88] relative overflow-hidden group">
+<div class="p-6">
+<div class="flex justify-between items-start mb-4">
+<div class="w-16 h-16 bg-surface-container-high border border-[#00FF88]/10 overflow-hidden">
+<img alt="Dossier" class="w-full h-full object-cover grayscale brightness-75 contrast-125" data-alt="Stern looking male politician in a dark office environment with sharp dramatic rim light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0KT-uRouY7WjSe-doPE3EJ4Vd7Ry6HFQ1AMyoQN-pWuxdYLE6NJOsY_37M1Mdvwk-8xfdQd6kdpSo96Hid8f5vpGyxBHQ6yJNColHUVhEHIFqKUqPoXbppxr_yny9S21TbQbvycaWL_2gHrO4pOIKkOgNZ4sydxJWR-afMPy3hQNAvu2t4AKhuEqU1PLJYrFcGDcUKQwNYfK_JXzfNLe3Aq2NVNwAF1iwyVDpviv09FJ8EkuOr2hP6y8vo8O2Ynp-5FnDgfyk_NAH"/>
+</div>
+<span class="font-mono text-[0.6rem] px-2 py-1 bg-[#FF3B5C]/10 text-[#FF3B5C] border border-[#FF3B5C]/40">REP - TEXAS</span>
+</div>
+<h2 class="font-mono font-bold text-lg text-[#C8D8E8] mb-1">GREGORY S. ABBOT</h2>
+<p class="font-mono text-[0.65rem] text-[#00FF88] uppercase tracking-tighter mb-4 opacity-70">SENATOR // TERM: 2015-PRESENT</p>
+<!-- CorruptionMeter -->
+<div class="mb-6">
+<div class="flex justify-between mb-1">
+<span class="font-mono text-[0.6rem] text-[#C8D8E8]/60">CORRUPTION_INDEX</span>
+<span class="font-mono text-[0.6rem] text-[#FF3B5C]">91.5%</span>
+</div>
+<div class="h-2 bg-surface-container-high flex">
+<div class="h-full bg-[#FF3B5C] shadow-[0_0_10px_rgba(255,59,92,0.4)]" style="width: 91%;"></div>
+</div>
+</div>
+<!-- TagBadges -->
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="font-mono text-[0.55rem] px-1.5 py-0.5 bg-[#FF3B5C]/10 text-[#FF3B5C] border border-[#FF3B5C]/30">[VOTED-NO-CEASEFIRE]</span>
+<span class="font-mono text-[0.55rem] px-1.5 py-0.5 bg-[#FFD166]/10 text-[#FFD166] border border-[#FFD166]/30">[PAC-BACKED]</span>
+</div>
+<a class="block text-center font-mono text-[0.7rem] font-bold py-3 bg-[#00FF88]/10 text-[#00FF88] hover:bg-[#00FF88] hover:text-[#080A0D] transition-all group-hover:shadow-[0_0_20px_rgba(0,255,136,0.2)]" href="#">
+                        &gt; VIEW DOSSIER →
+                    </a>
+</div>
+</div>
+<!-- More Cards could follow the same pattern -->
+<div class="bg-surface-container-low border-l-4 border-[#00FF88]/20 border-dashed relative group opacity-50 flex flex-col items-center justify-center min-h-[350px]">
+<span class="material-symbols-outlined text-4xl mb-4 text-[#00FF88]/20">lock</span>
+<p class="font-mono text-[0.7rem] text-[#00FF88]/40">DATA_REDACTED_BY_FED_COURT</p>
+<p class="font-mono text-[0.5rem] mt-2">ID: [HIDDEN]</p>
+</div>
+<div class="bg-surface-container-low border-l-4 border-[#00FF88]/20 border-dashed relative group opacity-50 flex flex-col items-center justify-center min-h-[350px]">
+<span class="material-symbols-outlined text-4xl mb-4 text-[#00FF88]/20">lock</span>
+<p class="font-mono text-[0.7rem] text-[#00FF88]/40">DATA_REDACTED_BY_FED_COURT</p>
+<p class="font-mono text-[0.5rem] mt-2">ID: [HIDDEN]</p>
+</div>
+</div>
+<!-- Terminal Status Bar (Floating) -->
+<div class="fixed bottom-12 left-1/2 -translate-x-1/2 w-full max-w-2xl px-6 z-40 md:block hidden">
+<div class="bg-[#111317]/90 backdrop-blur-xl border border-[#00FF88]/20 p-2 flex items-center justify-between shadow-2xl">
+<div class="flex items-center gap-4">
+<div class="w-2 h-2 bg-[#00FF88] animate-pulse"></div>
+<span class="font-mono text-[0.6rem] text-[#00FF88]">DB_STATUS: LIVE_STREAMING</span>
+</div>
+<div class="flex gap-4">
+<span class="font-mono text-[0.6rem] text-[#C8D8E8]/40">LATENCY: 12ms</span>
+<span class="font-mono text-[0.6rem] text-[#C8D8E8]/40">QUERIES/SEC: 844</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="fixed bottom-0 w-full z-40 py-2 px-6 flex justify-between items-center bg-[#080A0D] border-t border-[#00FF88]/5 bg-black/80">
+<div class="font-['IBM_Plex_Mono'] text-[0.65rem] opacity-50 text-[#00FF88]">DATA SYNC: REAL-TIME // FEC SOURCE CITATIONS ENABLED</div>
+<div class="flex gap-6">
+<a class="font-['IBM_Plex_Mono'] text-[0.65rem] opacity-50 text-[#00FF88] hover:opacity-100 transition-opacity underline" href="#">API_RESOURCES</a>
+<a class="font-['IBM_Plex_Mono'] text-[0.65rem] opacity-50 text-[#00FF88] hover:opacity-100 transition-opacity" href="#">REDACTION_POLICY</a>
+<a class="font-['IBM_Plex_Mono'] text-[0.65rem] opacity-50 text-[#00FF88] hover:opacity-100 transition-opacity" href="#">VULNERABILITY_REPORT</a>
+</div>
+</footer>
+</body></html>
