@@ -217,6 +217,22 @@ export default function TerminalHome() {
             TOTAL TRANSPARENCY THROUGH MACHINE INTELLIGENCE
           </p>
 
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap gap-4 mb-8 justify-center">
+            <Link
+              href="/browse"
+              className="bg-emerald-400 text-slate-950 font-label font-bold px-8 py-4 uppercase tracking-widest text-sm hover:bg-emerald-300 transition-none flex items-center gap-2"
+            >
+              INITIATE INVESTIGATION <span className="material-symbols-outlined text-sm">arrow_forward</span>
+            </Link>
+            <Link
+              href="/juicebox"
+              className="border border-emerald-400/40 text-emerald-400 font-label font-bold px-8 py-4 uppercase tracking-widest text-sm hover:bg-emerald-400/10 transition-none"
+            >
+              VIEW_METHODOLOGY
+            </Link>
+          </div>
+
           {/* Wireframe Visualization Area */}
           <div className="w-full max-w-5xl h-64 relative border border-outline-variant/20 bg-black/40">
             {/* Mesh network visualization placeholder */}

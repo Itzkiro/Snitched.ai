@@ -4,6 +4,21 @@
 @import "tailwindcss";
 
 @theme {
+  /* Emerald scale — used extensively in V3 Panopticon UI */
+  --color-emerald-200: #a7f3d0;
+  --color-emerald-300: #6ee7b7;
+  --color-emerald-400: #00ff88;
+  --color-emerald-500: #00e479;
+  --color-emerald-600: #059669;
+  --color-emerald-700: #047857;
+  --color-emerald-800: #065f46;
+  --color-emerald-900: #1a3a2a;
+  --color-emerald-950: #0d1f17;
+
+  /* Slate scale — used for backgrounds */
+  --color-slate-950: #05070a;
+  --color-slate-900: #0c0e12;
+
   /* Foundation colors */
   --color-surface: #111417;
   --color-surface-dim: #111417;
