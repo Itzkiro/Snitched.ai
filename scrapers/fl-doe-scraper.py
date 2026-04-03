@@ -165,39 +165,32 @@ def scrape_contributions_playwright(
             page.goto(FL_DOE_CONTRIBUTIONS_URL, timeout=30000)
             page.wait_for_load_state("networkidle", timeout=15000)
 
-            # Set election to "All" via JS and dispatch change event
-            page.evaluate('''() => {
-                const el = document.querySelector("select[name=election]");
-                el.value = "All";
-                el.dispatchEvent(new Event("change", { bubbles: true }));
-            }''')
+            # Set election to "All" via JS (no dispatchEvent — it can trigger a reset)
+            page.evaluate('document.querySelector("select[name=election]").value = "All"')
 
             # Fill candidate name
             page.fill('input[name="CanLName"]', last_name)
             page.fill('input[name="CanFName"]', first_name)
 
-            # Set office filter via JS with change event
-            page.evaluate(f'''() => {{
-                const el = document.querySelector("select[name=office]");
-                el.value = "{office_code}";
-                el.dispatchEvent(new Event("change", {{ bubbles: true }}));
-            }}''')
+            # Set office filter via JS
+            page.evaluate(f'document.querySelector("select[name=office]").value = "{office_code}"')
 
             # Max rows
             page.fill('input[name="rowlimit"]', '2000')
-
-            # Verify election is set correctly before submitting
-            actual_election = page.evaluate('document.querySelector("select[name=election]").value')
-            if actual_election != "All":
-                print(f"    WARNING: Election reset to {actual_election}, re-setting...")
-                page.evaluate('document.querySelector("select[name=election]").value = "All"')
 
             # Submit
             page.click('input[name="Submit"]')
             page.wait_for_load_state("networkidle", timeout=30000)
 
-            # Check for Cloudflare challenge
+            # Get page text
             text = page.inner_text("body")
+            # Debug: show contribution count from page
+            for dbg_line in text.split("\n"):
+                if "Contribution(s)" in dbg_line:
+                    print(f"    [debug] {dbg_line.strip()}")
+                    break
+
+            # Check for Cloudflare challenge
             if "Just a moment" in text or "challenge-platform" in text:
                 print(f"    Cloudflare challenge (attempt {attempt + 1}), retrying...")
                 time.sleep(3)
@@ -215,7 +208,8 @@ def scrape_contributions_playwright(
                 continue
 
             # Check for 0 contributions (genuine empty result)
-            if "0 Contribution(s) Selected" in text:
+            # Use regex to match exactly "0 Contribution(s)" — not "2000", "10", etc.
+            if re.search(r'\b0 Contribution\(s\) Selected', text):
                 # Show search criteria for debugging
                 for line in text.split("\n"):
                     line_s = line.strip()
@@ -227,9 +221,14 @@ def scrape_contributions_playwright(
             if results:
                 return results
 
-            # Page has contributions but parser failed — shouldn't happen
+            # Page has contributions but parser failed — debug
+            date_lines = [l for l in text.split("\n") if re.search(r'\d{2}/\d{2}/\d{4}', l)]
+            print(f"    Parse returned 0 (text lines={len(text.split(chr(10)))}, date_lines={len(date_lines)})")
+            if date_lines:
+                print(f"    Sample line: [{date_lines[0].strip()[:120]}]")
+
             if attempt < max_retries:
-                print(f"    Parse failed (attempt {attempt + 1}), retrying...")
+                print(f"    Retrying (attempt {attempt + 1})...")
                 time.sleep(2)
 
         except Exception as e:
@@ -261,7 +260,7 @@ def parse_text_results(text: str, expected_name: str = "") -> list[dict]:
         if "Contribution(s) Selected" in line:
             count_line = line.strip()
 
-    if "0 Contribution(s)" in count_line:
+    if re.match(r'^0 Contribution\(s\)', count_line):
         return []
 
     # Parse data lines — they contain candidate name followed by date and amount

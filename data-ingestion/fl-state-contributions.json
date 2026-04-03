@@ -1,7 +1,7 @@
 {
-  "scraped_at": "2026-04-02T18:44:43.325598",
+  "scraped_at": "2026-04-02T20:42:33.046588",
   "total_legislators": 156,
-  "with_data": 122,
+  "with_data": 148,
   "results": [
     {
       "total_funds": 418935,
@@ -274,13 +274,44 @@
       "raw_contribution_count": 705
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 855080,
+      "top5_donors": [
+        {
+          "name": "FLORIDA HOUSE DEMOCRATIC CAMPAIGN COMMIT PO BOX 1701",
+          "amount": 64028,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA DEMOCRATIC PARTY",
+          "amount": 28889,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "ALLISON TANT FOR RE-ELECTION",
+          "amount": 19041,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "ALLISON TANT CAMPAIGN",
+          "amount": 14706,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA POLICE BENEVOLENT ASSOCIATION IN 300 E BREVARD ST",
+          "amount": 8000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 99800,
+        "individuals": 673808,
+        "corporate": 81472
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -290,11 +321,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 1988,
       "bioguide_id": "9cf901b2-0097-4b0f-b672-23d107527562",
       "name": "Allison Tant",
       "office_level": "State Representative",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 1988
     },
     {
       "total_funds": 1909749,
@@ -351,13 +382,44 @@
       "raw_contribution_count": 1627
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 143539,
+      "top5_donors": [
+        {
+          "name": "BRAKKEN ERIC",
+          "amount": 3900,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "COWART JENNIFER",
+          "amount": 3633,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "DELEGAL JULIE",
+          "amount": 2225,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "AFSCME COUNCIL 79 POLITICAL COMMITTEE",
+          "amount": 2000,
+          "type": "PAC",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "BETTER JACKSONVILLE",
+          "amount": 2000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 8005,
+        "individuals": 132512,
+        "corporate": 3022
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -367,20 +429,51 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 2000,
       "bioguide_id": "6880e7c5-77cf-45f7-88e4-59fe05b19102",
       "name": "Angie Nixon",
       "office_level": "State Representative",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 2000
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 192928,
+      "top5_donors": [
+        {
+          "name": "1199 SEIU FLORIDA POLITICAL COMMITTEE",
+          "amount": 7000,
+          "type": "PAC",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "ANDERSON JENNIFER P.",
+          "amount": 5100,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "BEHRENS CHARLES CONRAD",
+          "amount": 4100,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "BAILL CORI",
+          "amount": 3771,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "AULISIO LEANDER FRANCIS",
+          "amount": 3350,
+          "type": "Individual",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 10286,
+        "individuals": 179817,
+        "corporate": 2825
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -390,11 +483,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 1993,
       "bioguide_id": "7de00334-d9d6-424d-ae14-bce27569c303",
       "name": "Anna Eskamani",
       "office_level": "State Representative",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 1993
     },
     {
       "total_funds": 343402,
@@ -613,13 +706,44 @@
       "raw_contribution_count": 1082
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 641887,
+      "top5_donors": [
+        {
+          "name": "BERNY JACQUES CAMPAIGN",
+          "amount": 11971,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA HOUSE REPUBLICAN CAMPAIGN COMMIT 1103 HAYS STREET",
+          "amount": 10089,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "HOLTON JAMES",
+          "amount": 4500,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "ANDERSON PAUL",
+          "amount": 4050,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "COMCAST CORPORATION",
+          "amount": 4000,
+          "type": "Corporate",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 68060,
+        "individuals": 476025,
+        "corporate": 97801
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -629,11 +753,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 1996,
       "bioguide_id": "555506fa-1d7a-4a54-b9de-72eed7dc2faa",
       "name": "Berny Jacques",
       "office_level": "State Representative",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 1996
     },
     {
       "total_funds": 0,
@@ -929,13 +1053,44 @@
       "raw_contribution_count": 108
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 154260,
+      "top5_donors": [
+        {
+          "name": "CARLOS G SMITH 2024 SENATE CAMPAIGN",
+          "amount": 20000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "CASTELLOES KAREN",
+          "amount": 1500,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "ARKIN ADRIAN",
+          "amount": 1250,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "APFELBECK ANTHONY",
+          "amount": 1100,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "3 ROSES + 1 LLC",
+          "amount": 1000,
+          "type": "Corporate",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 2750,
+        "individuals": 149442,
+        "corporate": 2068
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -945,11 +1100,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 1993,
       "bioguide_id": "76480b86-57ea-4a55-a0e9-1cd30e260b16",
       "name": "Carlos Smith",
       "office_level": "State Senator",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 1993
     },
     {
       "total_funds": 319083,
@@ -1060,13 +1215,44 @@
       "raw_contribution_count": 782
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 1288203,
+      "top5_donors": [
+        {
+          "name": "FLORIDA HOUSE REPUBLICAN CAMPAIGN COMMIT 1103 HAYS ST",
+          "amount": 61684,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA HOUSE REPUBLICAN CAMPAIGN COMMIT 1103 HAYS STREET",
+          "amount": 44933,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "CHIP LAMARCA CAMPAIGN ACCOUNT",
+          "amount": 41308,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "COMCAST CORPORATION",
+          "amount": 7000,
+          "type": "Corporate",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "AKERMAN LLP",
+          "amount": 6000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 94750,
+        "individuals": 873761,
+        "corporate": 319692
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -1076,11 +1262,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 1988,
       "bioguide_id": "eafd5940-4618-4c75-a231-721aa598209a",
       "name": "Chip LaMarca",
       "office_level": "State Representative",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 1988
     },
     {
       "total_funds": 472350,
@@ -1700,13 +1886,44 @@
       "raw_contribution_count": 1168
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 265707,
+      "top5_donors": [
+        {
+          "name": "DARYL CAMPBELL FOR HD94",
+          "amount": 3095,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "AT&T SOUTH FLORIDA PAC",
+          "amount": 3000,
+          "type": "PAC",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "DOSAL TOBACCO CORPORATION",
+          "amount": 3000,
+          "type": "Corporate",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "GILLIS INVESTMENTS #2 LTD",
+          "amount": 3000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "AT&T FLORIDA PAC",
+          "amount": 2000,
+          "type": "PAC",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 23750,
+        "individuals": 196382,
+        "corporate": 45575
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -1716,11 +1933,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 890,
       "bioguide_id": "9b2686ff-e16c-4dbc-9b0c-05f8072e4778",
       "name": "Daryl Campbell",
       "office_level": "State Representative",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 890
     },
     {
       "total_funds": 11007,
@@ -1777,13 +1994,44 @@
       "raw_contribution_count": 124
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 752880,
+      "top5_donors": [
+        {
+          "name": "REPUBLICAN PARTY OF FLORIDA-STATE",
+          "amount": 54333,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "REPUBLICAN PARTY OF FLORIDA",
+          "amount": 49850,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "THE REPUBLICAN PARTY OF FLORIDA",
+          "amount": 23807,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "DAVID BORRERO CAMPAIGN",
+          "amount": 19000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "REPUBLICAN PARTY OF MIAMI DADE COUNTY",
+          "amount": 10000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 86250,
+        "individuals": 447980,
+        "corporate": 218650
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -1793,11 +2041,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 909,
       "bioguide_id": "f28abbac-127f-4427-9fed-f7d0ebcb1efa",
       "name": "David Borrero",
       "office_level": "State Representative",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 909
     },
     {
       "total_funds": 502077,
@@ -1854,13 +2102,44 @@
       "raw_contribution_count": 498
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 1775621,
+      "top5_donors": [
+        {
+          "name": "MAYFIELD DEBBIE",
+          "amount": 504217,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "DEBBIE MAYFIELD CAMPAIGN",
+          "amount": 10025,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA ACRE",
+          "amount": 6000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLA. REPUBLICAN SENATORIAL CAMPAIGN COMM P. O. BOX 471",
+          "amount": 5521,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "DM PAC",
+          "amount": 5000,
+          "type": "PAC",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 211522,
+        "individuals": 1260331,
+        "corporate": 303768
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -1870,11 +2149,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 1995,
       "bioguide_id": "d7a605b5-9094-46bd-b389-de18bb065577",
       "name": "Debbie Mayfield",
       "office_level": "State Senator",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 1995
     },
     {
       "total_funds": 121743,
@@ -1931,13 +2210,44 @@
       "raw_contribution_count": 551
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 340451,
+      "top5_donors": [
+        {
+          "name": "THE FLORIDA HOUSE REPUBLICAN CAMPAIGN CO 1103 HAYS STREET",
+          "amount": 46770,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "THE REPUBLICAN PARTY OF FLORIDA",
+          "amount": 21167,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "DEMI BUSATTA 2024 CAMPAIGN",
+          "amount": 19000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "REPUBLICAN PARTY OF FLORIDA",
+          "amount": 10194,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "THE FLORIDA HOUSE REPUBLICAN CAMPAIGN",
+          "amount": 4125,
+          "type": "Individual",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 48000,
+        "individuals": 232701,
+        "corporate": 59750
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -1947,11 +2257,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 269,
       "bioguide_id": "cd3d699b-3fdc-4721-b45d-455df9bb8ecf",
       "name": "Demi Busatta",
       "office_level": "State Representative",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 269
     },
     {
       "total_funds": 0,
@@ -1977,13 +2287,44 @@
       "raw_contribution_count": 0
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 903176,
+      "top5_donors": [
+        {
+          "name": "DON GAETZ CAMPAIGN",
+          "amount": 19000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA CUPAC",
+          "amount": 3250,
+          "type": "PAC",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "AMERICAS EXPORT CORPORATION",
+          "amount": 3000,
+          "type": "Corporate",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "BOOK PATRICIA",
+          "amount": 3000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "BOOK RONALD L.",
+          "amount": 3000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 107400,
+        "individuals": 574308,
+        "corporate": 221468
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -1993,20 +2334,51 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 1997,
       "bioguide_id": "8a891d51-ad38-458e-b115-5599db7b46c1",
       "name": "Don Gaetz",
       "office_level": "State Senator",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 1997
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 399359,
+      "top5_donors": [
+        {
+          "name": "DOTIE JOSEPH CAMPAIGN 2020",
+          "amount": 5150,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "GUNSTER",
+          "amount": 3500,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "JOSEPH DOTIE",
+          "amount": 3500,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "MARITIME LEADERSHIP COMMITTEE",
+          "amount": 3000,
+          "type": "PAC",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "GASSANT PEDRO",
+          "amount": 2419,
+          "type": "Individual",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 28275,
+        "individuals": 324172,
+        "corporate": 46912
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -2016,11 +2388,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 1990,
       "bioguide_id": "94ae8455-404e-4215-944c-457ec050c50e",
       "name": "Dotie Joseph",
       "office_level": "State Representative",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 1990
     },
     {
       "total_funds": 510887,
@@ -2077,13 +2449,44 @@
       "raw_contribution_count": 551
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 1626760,
+      "top5_donors": [
+        {
+          "name": "FLORIDA REPUBLICAN SENATORIAL CAMPAIGN C PO BOX 471",
+          "amount": 318625,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA REPUBLICAN SENATORIAL CAMPAIGN C 2640A MITCHAM DR",
+          "amount": 8000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "COMCAST CORPORATION",
+          "amount": 6000,
+          "type": "Corporate",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA ACRE",
+          "amount": 5000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA OUTDOOR ADVERTISING PAC",
+          "amount": 5000,
+          "type": "PAC",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 231725,
+        "individuals": 1039667,
+        "corporate": 355368
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -2093,11 +2496,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 1988,
       "bioguide_id": "c1b32b5c-8495-458e-a8a7-fce86fd634a5",
       "name": "Ed Hooper",
       "office_level": "State Senator",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 1988
     },
     {
       "total_funds": 949139,
@@ -2316,13 +2719,44 @@
       "raw_contribution_count": 710
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 575235,
+      "top5_donors": [
+        {
+          "name": "FLORIDA DEMOCRATIC PARTY",
+          "amount": 119380,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FENTRICE DRISKELL FOR STATE REPRESENTATI PO BOX 17154",
+          "amount": 20000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FENTRICE DRISKELL CAMPAIGN",
+          "amount": 14078,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "DRISKELL TERRY",
+          "amount": 5055,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "ALTENBERND CHRIS",
+          "amount": 4250,
+          "type": "Individual",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 48700,
+        "individuals": 477519,
+        "corporate": 49016
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -2332,11 +2766,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 1971,
       "bioguide_id": "36677b89-218b-4a29-9f30-94a86b2be670",
       "name": "Fentrice Driskell",
       "office_level": "State Representative",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 1971
     },
     {
       "total_funds": 1269070,
@@ -2447,13 +2881,44 @@
       "raw_contribution_count": 739
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 1303011,
+      "top5_donors": [
+        {
+          "name": "FLORIDA REPUBLICAN SENATORIAL CAMPAIGN C PO BOX 471",
+          "amount": 160194,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "HARRELL GAYLE",
+          "amount": 100000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "GAYLE HARRELL CAMPAIGN",
+          "amount": 20000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "GAYLE HARRELL CAMPAIGN ACCOUNT",
+          "amount": 20000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "GAYLE HARRELL CAMPAIGN 2020",
+          "amount": 17250,
+          "type": "Individual",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 138450,
+        "individuals": 991676,
+        "corporate": 172885
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -2463,11 +2928,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 1984,
       "bioguide_id": "b8bd4d5c-aff7-49bc-87ba-6d18665c81fe",
       "name": "Gayle Harrell",
       "office_level": "State Senator",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 1984
     },
     {
       "total_funds": 492757,
@@ -2632,13 +3097,44 @@
       "raw_contribution_count": 869
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 414439,
+      "top5_donors": [
+        {
+          "name": "GROW JEFFERY RAY",
+          "amount": 117313,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "JJ GROW CAMPAIGN",
+          "amount": 20000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA ACRE",
+          "amount": 3000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "ALLSTATE INSURANCE COMPANY",
+          "amount": 2000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "BAYER US LLC EMPLOYEE POLITICAL ACTION C 800 N LINDBERGH BLVD.",
+          "amount": 2000,
+          "type": "Corporate",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 32750,
+        "individuals": 306814,
+        "corporate": 74875
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -2648,11 +3144,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 586,
       "bioguide_id": "87bbf632-b806-4378-9c40-4b81d5e081b3",
       "name": "J.J. Grow",
       "office_level": "State Representative",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 586
     },
     {
       "total_funds": 1177079,
@@ -2709,13 +3205,44 @@
       "raw_contribution_count": 1327
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 2425102,
+      "top5_donors": [
+        {
+          "name": "FLORIDA REPUBLICAN SENATORIAL CAMPAIGN C POST OFFICE BOX 471",
+          "amount": 1193230,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "JASON BRODEUR CAMPAIGN",
+          "amount": 40000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA OSTEOPATHIC MEDICAL ASSOCIATION",
+          "amount": 5500,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "COMCAST CORPORATION",
+          "amount": 5000,
+          "type": "Corporate",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "COMMITTEE OF AUTOMOTIVE RETAILERS POLITI 400 NORTH MERIDIAN STREET",
+          "amount": 5000,
+          "type": "PAC",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 158697,
+        "individuals": 2004105,
+        "corporate": 262300
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -2725,11 +3252,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 1995,
       "bioguide_id": "b9374d28-fbd3-4b66-a49d-22bc1e3618d1",
       "name": "Jason Brodeur",
       "office_level": "State Senator",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 1995
     },
     {
       "total_funds": 1624253,
@@ -3835,13 +4362,44 @@
       "raw_contribution_count": 987
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 1136802,
+      "top5_donors": [
+        {
+          "name": "PASSIDOMO KATHLEEN",
+          "amount": 114049,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "KATHLEEN PASSIDOMO CAMPAIGN",
+          "amount": 20000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "CARPAC",
+          "amount": 5000,
+          "type": "PAC",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "LYKES BROS. INC.",
+          "amount": 5000,
+          "type": "Corporate",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA REPUBLICAN SENATORIAL CAMPAIGN C 2640A MITCHAM DR",
+          "amount": 4630,
+          "type": "Individual",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 144156,
+        "individuals": 762876,
+        "corporate": 229770
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -3851,11 +4409,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 1991,
       "bioguide_id": "ec93d46a-25bc-49ee-b6bb-a1f015893de2",
       "name": "Kathleen Passidomo",
       "office_level": "State Senator",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 1991
     },
     {
       "total_funds": 585130,
@@ -3912,13 +4470,44 @@
       "raw_contribution_count": 958
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 612711,
+      "top5_donors": [
+        {
+          "name": "FLORIDA REPUBLICAN SENATORIAL CAMPAIGN C 2640-A MITCHAM DRIVE",
+          "amount": 64099,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "KEITH TRUENOW CAMPAIGN ACCOUNT",
+          "amount": 19500,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "KEITH TRUENOW CAMPAIGN",
+          "amount": 9526,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "COMMITTEE OF FLORIDA AGENTS",
+          "amount": 3000,
+          "type": "PAC",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "AGENTS FOR A BETTER FLORIDA",
+          "amount": 2000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 81500,
+        "individuals": 370786,
+        "corporate": 160425
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -3928,11 +4517,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 699,
       "bioguide_id": "71930b7f-b377-450f-9bba-e359e62fe1d9",
       "name": "Keith Truenow",
       "office_level": "State Senator",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 699
     },
     {
       "total_funds": 622170,
@@ -4097,13 +4686,44 @@
       "raw_contribution_count": 420
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 927559,
+      "top5_donors": [
+        {
+          "name": "REPUBLICAN PARTY OF FLORIDA",
+          "amount": 57691,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "KIMBERLY BERFIELD CAMPAIGN",
+          "amount": 40000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA HOUSE REPUBLICAN CAMPAIGN COMMIT 1103 HAYS STREET",
+          "amount": 25500,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "BERFIELD KIM",
+          "amount": 10053,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "RADIOLOGY POLITICAL ACTION COMMITTEE",
+          "amount": 5000,
+          "type": "PAC",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 202248,
+        "individuals": 566694,
+        "corporate": 158617
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -4113,11 +4733,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 1999,
       "bioguide_id": "8a33c4ab-15fd-4e07-be03-e14c1ab588f8",
       "name": "Kim Berfield",
       "office_level": "State Representative",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 1999
     },
     {
       "total_funds": 480922,
@@ -4498,13 +5118,44 @@
       "raw_contribution_count": 1145
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 349976,
+      "top5_donors": [
+        {
+          "name": "FLORIDA HOUSE DEMOCRATIC CAMAPIGN COMMIT PO BOX 1701",
+          "amount": 190715,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "SPENCER LEONARD",
+          "amount": 18353,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA DEMOCRATIC PARTY",
+          "amount": 12530,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "MEYERS JARED",
+          "amount": 3000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "ANDERSON JENNIFER",
+          "amount": 2000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 10144,
+        "individuals": 333182,
+        "corporate": 6650
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -4514,11 +5165,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 715,
       "bioguide_id": "64e91aee-2ea5-4225-a5c0-f23d9cdca89c",
       "name": "Leonard Spencer",
       "office_level": "State Representative",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 715
     },
     {
       "total_funds": 874359,
@@ -4575,13 +5226,44 @@
       "raw_contribution_count": 940
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 563122,
+      "top5_donors": [
+        {
+          "name": "FLORIDA DEMOCRATIC PARTY",
+          "amount": 99488,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA HOUSE DEMOCRACTIC CAMPAIGN COMMI PO BOX 1701",
+          "amount": 32500,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "BROSHEARS ANNA",
+          "amount": 4100,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "CARR NICOLE",
+          "amount": 4000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "ARAJ ELIE",
+          "amount": 3500,
+          "type": "Individual",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 33410,
+        "individuals": 502637,
+        "corporate": 27075
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -4591,11 +5273,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 1992,
       "bioguide_id": "4b308a91-8c4b-4df5-8354-e9249edd0ded",
       "name": "Lindsay Cross",
       "office_level": "State Representative",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 1992
     },
     {
       "total_funds": 64207,
@@ -4706,13 +5388,44 @@
       "raw_contribution_count": 912
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 280612,
+      "top5_donors": [
+        {
+          "name": "AT&T SOUTH FLORIDA PAC",
+          "amount": 1500,
+          "type": "PAC",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "PALM BEACH KENNEL CLUB",
+          "amount": 1500,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "SOUTHERN GARDENS CITRUS HOLDING CORP.",
+          "amount": 1500,
+          "type": "Corporate",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "STOFIN CO., INC.",
+          "amount": 1500,
+          "type": "Corporate",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "VANDERGRIFT - WILLIAMS FARMS",
+          "amount": 1500,
+          "type": "Individual",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 28500,
+        "individuals": 171462,
+        "corporate": 80650
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -4722,11 +5435,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 568,
       "bioguide_id": "86a55265-9ff2-451b-92bb-865dbb1c4ff3",
       "name": "Mack Bernard",
       "office_level": "State Senator",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 568
     },
     {
       "total_funds": 449057,
@@ -4837,13 +5550,44 @@
       "raw_contribution_count": 840
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 725493,
+      "top5_donors": [
+        {
+          "name": "REPUBLICAN PARTY OF FLORIDA",
+          "amount": 108400,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "OWEN MICHAEL",
+          "amount": 86700,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "MICHAEL OWEN",
+          "amount": 6250,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "MICHAEL OWEN CAMPAIGN (FLHD70)",
+          "amount": 5534,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "RPPTL-PAC",
+          "amount": 4500,
+          "type": "PAC",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 89400,
+        "individuals": 503618,
+        "corporate": 132476
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -4853,11 +5597,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 825,
       "bioguide_id": "169e8526-3924-46e5-9dc6-2c532254caef",
       "name": "Michael Owen",
       "office_level": "State Representative",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 825
     },
     {
       "total_funds": 343469,
@@ -6279,13 +7023,44 @@
       "raw_contribution_count": 1223
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 519977,
+      "top5_donors": [
+        {
+          "name": "FLORIDA DEMOCRATIC LEGISLATIVE CAMPAIGN",
+          "amount": 52619,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "CEOMC FLORIDA, INC.",
+          "amount": 3000,
+          "type": "Corporate",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA CPA POLITICAL ACTION COMMITTEE,",
+          "amount": 3000,
+          "type": "PAC",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "MIRZA KHALID",
+          "amount": 3000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "ABBOTT LABORATORIES",
+          "amount": 2000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 59552,
+        "individuals": 362168,
+        "corporate": 98257
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -6295,11 +7070,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 1988,
       "bioguide_id": "4fc261d9-c76d-4b3b-855a-58e000cc334c",
       "name": "Shev Jones",
       "office_level": "State Senator",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 1988
     },
     {
       "total_funds": 215459,
@@ -7135,13 +7910,44 @@
       "raw_contribution_count": 182
     },
     {
-      "total_funds": 0,
-      "top5_donors": [],
+      "total_funds": 753300,
+      "top5_donors": [
+        {
+          "name": "REPUBLICAN PARTY OF FLORIDA",
+          "amount": 102117,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FLORIDA HOUSE REPUBLICAN CAMPAIGN COMMIT 1103 HAYS STREET",
+          "amount": 25113,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "DUKE ENERGY CORPORATION FLORIDA PAC",
+          "amount": 5000,
+          "type": "PAC",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "FPF FIRE PC",
+          "amount": 5000,
+          "type": "Individual",
+          "is_israel_lobby": false
+        },
+        {
+          "name": "LINDSAY PLUMBING INC",
+          "amount": 5000,
+          "type": "Corporate",
+          "is_israel_lobby": false
+        }
+      ],
       "contribution_breakdown": {
         "aipac": 0,
-        "otherPACs": 0,
-        "individuals": 0,
-        "corporate": 0
+        "otherPACs": 64226,
+        "individuals": 512902,
+        "corporate": 176172
       },
       "aipac_funding": 0,
       "israel_lobby_total": 0,
@@ -7151,11 +7957,11 @@
         "ie": 0,
         "bundlers": 0
       },
-      "contribution_count": 0,
+      "contribution_count": 1274,
       "bioguide_id": "5587ad82-5b33-4707-b17b-4820fc24475b",
       "name": "Webster Barnaby",
       "office_level": "State Representative",
-      "raw_contribution_count": 0
+      "raw_contribution_count": 1274
     },
     {
       "total_funds": 1063272,
