@@ -1,4 +1,5 @@
 #!/usr/bin/env npx tsx
+import 'dotenv/config';
 /**
  * Sync Voting Records from LegiScan API
  *
