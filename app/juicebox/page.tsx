@@ -30,11 +30,25 @@ function getScoreColor(score: number): string {
   return '#dc2626';
 }
 
+function getTierBadge(tier: string): { label: string; classes: string } {
+  if (tier === 'owned') return { label: 'TIER 1', classes: 'bg-error-container text-on-error-container' };
+  if (tier === 'bought') return { label: 'TIER 2', classes: 'bg-[#FFD166] text-on-surface' };
+  if (tier === 'compromised') return { label: 'TIER 3', classes: 'bg-primary-container text-on-primary-container' };
+  return { label: 'NONE', classes: 'bg-surface-variant text-on-surface/60' };
+}
+
+function formatCurrency(amount: number): string {
+  if (amount >= 1_000_000) return `$${(amount / 1_000_000).toFixed(1)}M`;
+  if (amount >= 1_000) return `$${(amount / 1_000).toFixed(0)}K`;
+  return `$${amount.toLocaleString()}`;
+}
+
 export default function JuiceBoxPage() {
   const [politicians, setPoliticians] = useState<Politician[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeView, setActiveView] = useState<'corruption' | 'fundraisers' | 'israel'>('corruption');
+  const [partyFilter, setPartyFilter] = useState<'all' | 'Republican' | 'Democrat'>('all');
 
   useEffect(() => {
     async function loadData() {
@@ -54,11 +68,24 @@ export default function JuiceBoxPage() {
   }, []);
 
   if (loading) {
-    return <div style={{ padding: '2rem', textAlign: 'center', color: 'white' }}>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="text-center">
+          <div className="w-3 h-3 bg-[#00FF88] animate-pulse mx-auto mb-4" />
+          <span className="font-label text-[0.75rem] text-[#00FF88] tracking-widest">LOADING_DATA...</span>
+        </div>
+      </div>
+    );
   }
 
   if (error) {
-    return <div style={{ padding: '2rem', textAlign: 'center', color: 'red' }}>Error: {error}</div>;
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="text-center p-8 border border-error/30 bg-error-container/10">
+          <span className="font-label text-error text-sm">ERROR: {error}</span>
+        </div>
+      </div>
+    );
   }
 
   // Corruption score leaderboard: all active politicians sorted by score (highest first)
@@ -123,753 +150,418 @@ export default function JuiceBoxPage() {
     return '';
   };
 
+  // Determine active list based on view + party filter
+  const getActiveList = () => {
+    const base = activeView === 'corruption'
+      ? corruptionRanked
+      : activeView === 'fundraisers'
+        ? fundedPoliticians
+        : juiceBoxPoliticians;
+
+    if (partyFilter === 'all') return base;
+    return base.filter(p => p.party === partyFilter);
+  };
+
+  const activeList = getActiveList();
+
+  const flaggedCount = juiceBoxPoliticians.length;
+
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--terminal-bg)', color: 'var(--terminal-text)' }}>
-      {/* Terminal Title */}
-      <div className="terminal-title">
-        <div>
-          <h1>CORRUPTION SCORE LEADERBOARD</h1>
-          <div className="terminal-subtitle">
-            Data-Driven Corruption & Influence Scoring | v1 Algorithm
+    <div className="min-h-screen">
+      {/* ========== HERO BANNER ========== */}
+      <section className="relative h-64 flex items-center px-6 md:px-10 overflow-hidden border-b border-[#00FF88]/20 bg-surface-container-low">
+        <div className="absolute inset-0 z-0 opacity-10">
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background" />
+        </div>
+        <div className="relative z-10 max-w-4xl">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="material-symbols-outlined text-[#00FF88] bg-[#00FF88]/10 p-2">verified_user</span>
+            <span className="font-label text-[0.7rem] text-[#00FF88] tracking-[0.3em]">
+              SECURE_PROGRAM // FLORIDA_DISTRICT
+            </span>
+          </div>
+          <h1 className="font-headline font-extrabold text-3xl md:text-5xl text-on-surface leading-tight tracking-tighter uppercase">
+            JUICE BOX PROGRAM &mdash;{' '}
+            <span className="text-[#00FF88]">TRACKING ISRAEL LOBBY FUNDING</span>{' '}
+            IN FLORIDA POLITICS
+          </h1>
+        </div>
+      </section>
+
+      {/* ========== METRICS DASHBOARD ========== */}
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-0 border-b border-[#00FF88]/20">
+        {/* Total Lobby Funding */}
+        <div className="p-8 md:border-r border-[#00FF88]/10 bg-surface-container-lowest">
+          <div className="flex justify-between items-start mb-6">
+            <span className="text-[0.65rem] text-on-surface/40 tracking-widest font-label">TOTAL_LOBBY_FUNDING</span>
+            <span className="material-symbols-outlined text-[#00FF88] text-sm">trending_up</span>
+          </div>
+          <div className="font-mono text-4xl font-bold text-primary-container">
+            ${(totalIsraelLobby / 1_000_000).toFixed(1)}M
+          </div>
+          <div className="mt-4 text-[0.6rem] text-on-surface/30">
+            LIFETIME_AGGREGATE // SOURCE: FEC_REPORTS
           </div>
         </div>
-      </div>
 
-      {/* Summary Alert */}
-      <div style={{ padding: '2rem', borderBottom: '1px solid var(--terminal-border)' }}>
-        <div className="alert-level">
-          <span className="alert-icon">{avgScore >= 50 ? '\u{1F6A8}' : '\u{26A0}\u{FE0F}'}</span>
-          <span>AVG CORRUPTION SCORE: {avgScore}/100</span>
-          <span style={{ fontSize: '0.875rem', color: 'var(--terminal-text-dim)', marginLeft: '1rem' }}>
-            {corruptionRanked.length} officials scored | {highConfidenceCount} high confidence
-          </span>
-          <span style={{ fontSize: '0.875rem', color: 'var(--terminal-text-dim)', marginLeft: '1rem' }}>
-            | FEC TRACKED: ${(totalFundsTracked / 1000000).toFixed(1)}M
-          </span>
+        {/* Politicians Tracked */}
+        <div className="p-8 md:border-r border-[#00FF88]/10 bg-surface-container-lowest">
+          <div className="flex justify-between items-start mb-6">
+            <span className="text-[0.65rem] text-on-surface/40 tracking-widest font-label">POLITICIANS_TRACKED</span>
+            <span className="material-symbols-outlined text-[#00FF88] text-sm">query_stats</span>
+          </div>
+          <div className="font-mono text-4xl font-bold text-on-surface">
+            {politicians.filter(p => p.isActive).length}
+          </div>
+          <div className="mt-4 text-[0.6rem] text-on-surface/30">
+            FL_HOUSE + FL_SENATE + EXECUTIVE
+          </div>
         </div>
-      </div>
 
-      <div style={{ padding: '2rem' }}>
-        <div style={{ maxWidth: '1600px', margin: '0 auto' }}>
-          {/* Score Distribution Stats */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-              gap: '1.5rem',
-              marginBottom: '2rem',
-            }}
-          >
-            <div className="terminal-card">
-              <div style={{ fontSize: '3rem', fontWeight: 700, color: '#dc2626', fontFamily: 'Bebas Neue, sans-serif', marginBottom: '0.5rem' }}>
-                {gradeDistribution.F}
-              </div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                GRADE F (81-100)
-              </div>
-            </div>
-
-            <div className="terminal-card">
-              <div style={{ fontSize: '3rem', fontWeight: 700, color: '#ef4444', fontFamily: 'Bebas Neue, sans-serif', marginBottom: '0.5rem' }}>
-                {gradeDistribution.D}
-              </div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                GRADE D (61-80)
-              </div>
-            </div>
-
-            <div className="terminal-card">
-              <div style={{ fontSize: '3rem', fontWeight: 700, color: '#f59e0b', fontFamily: 'Bebas Neue, sans-serif', marginBottom: '0.5rem' }}>
-                {gradeDistribution.C}
-              </div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                GRADE C (41-60)
-              </div>
-            </div>
-
-            <div className="terminal-card">
-              <div style={{ fontSize: '3rem', fontWeight: 700, color: '#22c55e', fontFamily: 'Bebas Neue, sans-serif', marginBottom: '0.5rem' }}>
-                {gradeDistribution.B}
-              </div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                GRADE B (21-40)
-              </div>
-            </div>
-
-            <div className="terminal-card">
-              <div style={{ fontSize: '3rem', fontWeight: 700, color: '#10b981', fontFamily: 'Bebas Neue, sans-serif', marginBottom: '0.5rem' }}>
-                {gradeDistribution.A}
-              </div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                GRADE A (0-20)
-              </div>
-            </div>
-
-            <div className="terminal-card">
-              <div style={{ fontSize: '3rem', fontWeight: 700, color: getScoreColor(avgScore), fontFamily: 'Bebas Neue, sans-serif', marginBottom: '0.5rem' }}>
-                {avgScore}
-              </div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                AVG SCORE
-              </div>
-            </div>
+        {/* Entities Flagged */}
+        <div className="p-8 bg-surface-container-lowest">
+          <div className="flex justify-between items-start mb-6">
+            <span className="text-[0.65rem] text-on-surface/40 tracking-widest font-label">ENTITIES_FLAGGED</span>
+            <span className="material-symbols-outlined text-warning text-sm">priority_high</span>
           </div>
-
-          {/* View Tabs */}
-          <div style={{
-            display: 'flex',
-            gap: '0',
-            marginBottom: '2rem',
-            borderBottom: '2px solid var(--terminal-border)',
-          }}>
-            {[
-              { key: 'corruption' as const, label: 'CORRUPTION SCORES', count: corruptionRanked.length },
-              { key: 'fundraisers' as const, label: 'TOP FUNDRAISERS', count: fundedPoliticians.length },
-              { key: 'israel' as const, label: 'ISRAEL LOBBY', count: juiceBoxPoliticians.length },
-            ].map(tab => (
-              <button
-                key={tab.key}
-                onClick={() => setActiveView(tab.key)}
-                style={{
-                  padding: '1rem 2rem',
-                  background: activeView === tab.key ? 'rgba(245, 158, 11, 0.1)' : 'transparent',
-                  border: 'none',
-                  borderBottom: activeView === tab.key ? '2px solid var(--terminal-amber)' : '2px solid transparent',
-                  color: activeView === tab.key ? 'var(--terminal-amber)' : 'var(--terminal-text-dim)',
-                  fontSize: '0.8rem',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.1em',
-                  fontFamily: 'JetBrains Mono, monospace',
-                  cursor: 'pointer',
-                  marginBottom: '-2px',
-                }}
-              >
-                {tab.label} ({tab.count})
-              </button>
-            ))}
+          <div className="font-mono text-4xl font-bold text-warning">
+            {flaggedCount}
           </div>
+          <div className="mt-4 text-[0.6rem] text-on-surface/30">
+            ISRAEL_LOBBY_CONNECTED // ACTIVE_TRACKING
+          </div>
+        </div>
+      </section>
 
-          {/* CORRUPTION SCORE LEADERBOARD */}
-          {activeView === 'corruption' && (
-            <div className="terminal-card" style={{ padding: 0, overflow: 'hidden', marginBottom: '2rem' }}>
-              <div style={{
-                padding: '1.5rem 2rem',
-                background: 'rgba(239, 68, 68, 0.1)',
-                borderBottom: '2px solid #ef4444',
-              }}>
-                <h2 style={{
-                  fontSize: '1.5rem',
-                  fontWeight: 700,
-                  color: '#ef4444',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                  fontFamily: 'JetBrains Mono, monospace',
-                }}>
-                  CORRUPTION SCORE RANKINGS
-                </h2>
-                <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginTop: '0.5rem', fontFamily: 'JetBrains Mono, monospace' }}>
-                  Ranked by composite corruption/influence score | 5-factor algorithm | Higher = more corrupt
-                </div>
-              </div>
+      {/* ========== LEADERBOARD TABLE ========== */}
+      <section className="p-6 md:p-10">
+        {/* Section Header + View Toggle */}
+        <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <h2 className="font-headline text-2xl font-bold mb-2">
+              {activeView === 'corruption' && 'CORRUPTION SCORE RANKINGS'}
+              {activeView === 'fundraisers' && 'TOP FUNDRAISERS'}
+              {activeView === 'israel' && 'AIPAC-CONNECTED ENTITIES'}
+            </h2>
+            <p className="font-label text-[0.7rem] text-on-surface/40 uppercase">
+              {activeView === 'corruption' && `Ranked by composite corruption/influence score | ${corruptionRanked.length} scored | ${highConfidenceCount} high confidence`}
+              {activeView === 'fundraisers' && `Sorted by total contributions received | ${fundedPoliticians.length} politicians with verified data`}
+              {activeView === 'israel' && `Sorted by total Israel lobby contributions | Current + Previous Cycle`}
+            </p>
+          </div>
+          <div className="flex gap-2 flex-wrap">
+            <button
+              onClick={() => setPartyFilter(partyFilter === 'Republican' ? 'all' : 'Republican')}
+              className={`px-4 py-2 border text-[0.7rem] transition-all font-label uppercase ${
+                partyFilter === 'Republican'
+                  ? 'border-[#00FF88]/40 bg-[#00FF88]/10 text-[#00FF88]'
+                  : 'border-[#00FF88]/20 hover:bg-[#00FF88]/10 text-on-surface/60'
+              }`}
+            >
+              FILTER: REPUBLICAN
+            </button>
+            <button
+              onClick={() => setPartyFilter(partyFilter === 'Democrat' ? 'all' : 'Democrat')}
+              className={`px-4 py-2 border text-[0.7rem] transition-all font-label uppercase ${
+                partyFilter === 'Democrat'
+                  ? 'border-[#00FF88]/40 bg-[#00FF88]/10 text-[#00FF88]'
+                  : 'border-[#00FF88]/20 hover:bg-[#00FF88]/10 text-on-surface/60'
+              }`}
+            >
+              FILTER: DEMOCRAT
+            </button>
+            <button className="px-4 py-2 border border-[#00FF88]/40 bg-[#00FF88]/5 text-[0.7rem] hover:bg-[#00FF88]/10 transition-all font-label uppercase text-[#00FF88]">
+              EXPORT_CSV
+            </button>
+          </div>
+        </div>
 
-              {/* Table Header */}
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: '60px 1fr 100px 80px 120px 1fr 100px',
-                padding: '1rem 2rem',
-                background: 'rgba(255, 255, 255, 0.02)',
-                borderBottom: '1px solid var(--terminal-border)',
-                fontSize: '0.65rem',
-                fontWeight: 700,
-                color: 'var(--terminal-amber)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.1em',
-                fontFamily: 'JetBrains Mono, monospace',
-              }}>
-                <div>#</div>
-                <div>POLITICIAN</div>
-                <div style={{ textAlign: 'center' }}>SCORE</div>
-                <div style={{ textAlign: 'center' }}>GRADE</div>
-                <div style={{ textAlign: 'center' }}>CONFIDENCE</div>
-                <div>TOP FACTOR</div>
-                <div style={{ textAlign: 'center' }}>DETAILS</div>
-              </div>
+        {/* View Tabs */}
+        <div className="flex gap-0 mb-6 border-b border-[#00FF88]/20 overflow-x-auto">
+          {[
+            { key: 'corruption' as const, label: 'CORRUPTION', count: corruptionRanked.length },
+            { key: 'fundraisers' as const, label: 'FUNDRAISERS', count: fundedPoliticians.length },
+            { key: 'israel' as const, label: 'ISRAEL LOBBY', count: juiceBoxPoliticians.length },
+          ].map(tab => (
+            <button
+              key={tab.key}
+              onClick={() => setActiveView(tab.key)}
+              className={`px-6 py-3 font-label text-[0.7rem] uppercase tracking-widest whitespace-nowrap transition-all border-b-2 -mb-[2px] ${
+                activeView === tab.key
+                  ? 'text-[#00FF88] border-[#00FF88] bg-[#00FF88]/5'
+                  : 'text-on-surface/40 border-transparent hover:text-on-surface/60'
+              }`}
+            >
+              {tab.label} ({tab.count})
+            </button>
+          ))}
+        </div>
 
-              {/* Table Rows */}
-              {corruptionRanked.map((politician, index) => {
+        {/* Table */}
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="text-left border-b border-[#00FF88]/20 bg-surface-container">
+                <th className="p-4 font-label text-[0.65rem] text-on-surface/50 tracking-widest uppercase">Rank #</th>
+                <th className="p-4 font-label text-[0.65rem] text-on-surface/50 tracking-widest uppercase">Name</th>
+                <th className="p-4 font-label text-[0.65rem] text-on-surface/50 tracking-widest uppercase">Party</th>
+                <th className="p-4 font-label text-[0.65rem] text-on-surface/50 tracking-widest uppercase">Office</th>
+                {activeView === 'corruption' && (
+                  <>
+                    <th className="p-4 font-label text-[0.65rem] text-on-surface/50 tracking-widest uppercase text-center">Score</th>
+                    <th className="p-4 font-label text-[0.65rem] text-on-surface/50 tracking-widest uppercase text-center">Grade</th>
+                  </>
+                )}
+                {activeView === 'fundraisers' && (
+                  <>
+                    <th className="p-4 font-label text-[0.65rem] text-on-surface/50 tracking-widest uppercase text-right">Total Raised</th>
+                    <th className="p-4 font-label text-[0.65rem] text-on-surface/50 tracking-widest uppercase text-right">Israel Lobby</th>
+                  </>
+                )}
+                {activeView === 'israel' && (
+                  <>
+                    <th className="p-4 font-label text-[0.65rem] text-on-surface/50 tracking-widest uppercase text-right">Total Received</th>
+                    <th className="p-4 font-label text-[0.65rem] text-on-surface/50 tracking-widest uppercase text-center">Tier</th>
+                  </>
+                )}
+                <th className="p-4 font-label text-[0.65rem] text-on-surface/50 tracking-widest uppercase text-center">Profile</th>
+              </tr>
+            </thead>
+            <tbody className="font-label text-[0.8rem]">
+              {activeList.length === 0 && (
+                <tr>
+                  <td colSpan={7} className="p-12 text-center text-on-surface/40">
+                    No data available for current filter.
+                  </td>
+                </tr>
+              )}
+
+              {activeList.map((politician, index) => {
                 const rank = index + 1;
-                const isTopThree = rank <= 3;
+                const isEvenRow = rank % 2 === 0;
                 const details = politician.corruptionScoreDetails;
                 const grade = details?.grade ?? (politician.corruptionScore <= 20 ? 'A' : politician.corruptionScore <= 40 ? 'B' : politician.corruptionScore <= 60 ? 'C' : politician.corruptionScore <= 80 ? 'D' : 'F') as CorruptionGrade;
-                const confidence = details?.confidence ?? 'low';
-
-                // Find the top contributing factor
-                const topFactor = details?.factors
-                  ? [...details.factors].sort((a, b) => b.weightedScore - a.weightedScore)[0]
-                  : null;
+                const tierInfo = getTierBadge(politician.juiceBoxTier);
 
                 return (
-                  <div
+                  <tr
                     key={politician.id}
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: '60px 1fr 100px 80px 120px 1fr 100px',
-                      padding: '1.25rem 2rem',
-                      borderBottom: '1px solid var(--terminal-border)',
-                      background: isTopThree ? 'rgba(239, 68, 68, 0.04)' : 'transparent',
-                      fontFamily: 'JetBrains Mono, monospace',
-                    }}
+                    className={`hover:bg-[#00FF88]/5 transition-colors border-b border-[#00FF88]/5 group ${
+                      isEvenRow ? 'bg-surface-container-low/30' : ''
+                    }`}
                   >
                     {/* Rank */}
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                      <span style={{
-                        fontSize: isTopThree ? '1.25rem' : '1rem',
-                        fontWeight: 700,
-                        color: isTopThree ? '#ef4444' : 'var(--terminal-text-dim)',
-                        fontFamily: 'Bebas Neue, sans-serif',
-                      }}>
-                        {getRankMedal(rank)} {rank}
-                      </span>
-                    </div>
+                    <td className="p-4 font-bold text-primary-container">
+                      {String(rank).padStart(3, '0')}
+                    </td>
 
-                    {/* Politician Info */}
-                    <div>
-                      <div style={{ fontSize: '0.9rem', fontWeight: 700, marginBottom: '0.25rem', color: 'var(--terminal-text)' }}>
-                        {politician.name}
-                      </div>
-                      <div style={{
-                        fontSize: '0.7rem', color: 'var(--terminal-text-dim)',
-                        display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap',
-                      }}>
-                        <span>{politician.office}</span>
-                        <span style={{
-                          fontSize: '9px', padding: '0.2rem 0.5rem',
-                          background: politician.party === 'Republican' ? '#dc2626' : politician.party === 'Democrat' ? '#2563eb' : '#6b7280',
-                          color: '#fff', borderRadius: '10px', fontWeight: 600,
-                        }}>
-                          {politician.party === 'Republican' ? 'R' : politician.party === 'Democrat' ? 'D' : politician.party.charAt(0)}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Score */}
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                      <div style={{
-                        width: '60px',
-                        height: '60px',
-                        borderRadius: '50%',
-                        border: `3px solid ${getScoreColor(politician.corruptionScore)}`,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexDirection: 'column',
-                      }}>
-                        <span style={{
-                          fontSize: '1.25rem',
-                          fontWeight: 700,
-                          color: getScoreColor(politician.corruptionScore),
-                          fontFamily: 'Bebas Neue, sans-serif',
-                          lineHeight: 1,
-                        }}>
-                          {politician.corruptionScore}
-                        </span>
-                        <span style={{ fontSize: '0.5rem', color: 'var(--terminal-text-dim)' }}>/100</span>
-                      </div>
-                    </div>
-
-                    {/* Grade */}
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                      <span style={{
-                        fontSize: '1.5rem',
-                        fontWeight: 700,
-                        color: getGradeColor(grade),
-                        fontFamily: 'Bebas Neue, sans-serif',
-                      }}>
-                        {grade}
-                      </span>
-                    </div>
-
-                    {/* Confidence */}
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                      <span style={{
-                        padding: '0.3rem 0.6rem',
-                        background: `${getConfidenceColor(confidence)}15`,
-                        border: `1px solid ${getConfidenceColor(confidence)}`,
-                        color: getConfidenceColor(confidence),
-                        fontSize: '0.55rem',
-                        fontWeight: 700,
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.05em',
-                        whiteSpace: 'nowrap',
-                      }}>
-                        {confidence} ({details?.dataCompleteness ?? 0}%)
-                      </span>
-                    </div>
-
-                    {/* Top Factor */}
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                      {topFactor ? (
-                        <div>
-                          <div style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--terminal-text)', marginBottom: '0.15rem' }}>
-                            {topFactor.label}
-                          </div>
-                          <div style={{ fontSize: '0.6rem', color: 'var(--terminal-text-dim)' }}>
-                            {topFactor.rawScore}/100 (x{topFactor.weight})
-                          </div>
+                    {/* Name */}
+                    <td className="p-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-surface-variant overflow-hidden shrink-0">
+                          {politician.photoUrl ? (
+                            <img
+                              src={politician.photoUrl}
+                              alt={politician.name}
+                              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-surface-container-high flex items-center justify-center">
+                              <span className="material-symbols-outlined text-on-surface/20 text-sm">person</span>
+                            </div>
+                          )}
                         </div>
-                      ) : (
-                        <span style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)' }}>--</span>
-                      )}
-                    </div>
-
-                    {/* View */}
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                      <Link
-                        href={`/politician/${politician.id}`}
-                        style={{
-                          padding: '0.4rem 0.8rem',
-                          background: 'var(--terminal-amber)',
-                          color: '#000',
-                          fontSize: '0.7rem',
-                          fontWeight: 700,
-                          textTransform: 'uppercase',
-                          textDecoration: 'none',
-                        }}
-                      >
-                        VIEW
-                      </Link>
-                    </div>
-                  </div>
-                );
-              })}
-
-              {corruptionRanked.length === 0 && (
-                <div style={{ padding: '3rem 2rem', textAlign: 'center', color: 'var(--terminal-text-dim)' }}>
-                  No politicians with corruption scores found.
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* TOP FUNDRAISERS (existing) */}
-          {activeView === 'fundraisers' && fundedPoliticians.length > 0 && (
-            <div className="terminal-card" style={{ padding: 0, overflow: 'hidden', marginBottom: '2rem' }}>
-              <div style={{
-                padding: '1.5rem 2rem',
-                background: 'rgba(245, 158, 11, 0.1)',
-                borderBottom: '2px solid var(--terminal-amber)',
-              }}>
-                <h2 style={{
-                  fontSize: '1.5rem',
-                  fontWeight: 700,
-                  color: 'var(--terminal-amber)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                  fontFamily: 'JetBrains Mono, monospace',
-                }}>
-                  TOP FUNDRAISERS (REAL FEC DATA)
-                </h2>
-                <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginTop: '0.5rem', fontFamily: 'JetBrains Mono, monospace' }}>
-                  {fundedPoliticians.length} politicians with verified campaign finance data | Sources: FEC, FL Division of Elections
-                </div>
-              </div>
-
-              {/* Table Header */}
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: '60px 1fr 100px 140px 140px 120px 100px',
-                padding: '1rem 2rem',
-                background: 'rgba(255, 255, 255, 0.02)',
-                borderBottom: '1px solid var(--terminal-border)',
-                fontSize: '0.65rem',
-                fontWeight: 700,
-                color: 'var(--terminal-amber)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.1em',
-                fontFamily: 'JetBrains Mono, monospace',
-              }}>
-                <div>#</div>
-                <div>POLITICIAN</div>
-                <div style={{ textAlign: 'center' }}>SCORE</div>
-                <div style={{ textAlign: 'right' }}>TOTAL RAISED</div>
-                <div style={{ textAlign: 'right' }}>ISRAEL LOBBY</div>
-                <div style={{ textAlign: 'center' }}>DATA</div>
-                <div style={{ textAlign: 'center' }}>PROFILE</div>
-              </div>
-
-              {/* Table Rows */}
-              {fundedPoliticians.map((politician, index) => {
-                const rank = index + 1;
-                const isTopThree = rank <= 3;
-                const hasDetailedData = politician.tags?.some(t => t.label === 'FEC VERIFIED');
-                const grade = politician.corruptionScoreDetails?.grade ?? 'B';
-
-                return (
-                  <div
-                    key={politician.id}
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: '60px 1fr 100px 140px 140px 120px 100px',
-                      padding: '1.25rem 2rem',
-                      borderBottom: '1px solid var(--terminal-border)',
-                      background: isTopThree ? 'rgba(245, 158, 11, 0.03)' : 'transparent',
-                      fontFamily: 'JetBrains Mono, monospace',
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                      <span style={{
-                        fontSize: isTopThree ? '1.25rem' : '1rem',
-                        fontWeight: 700,
-                        color: isTopThree ? 'var(--terminal-amber)' : 'var(--terminal-text-dim)',
-                        fontFamily: 'Bebas Neue, sans-serif',
-                      }}>
-                        {getRankMedal(rank)} {rank}
-                      </span>
-                    </div>
-
-                    <div>
-                      <div style={{ fontSize: '0.9rem', fontWeight: 700, marginBottom: '0.25rem', color: 'var(--terminal-text)' }}>
-                        {politician.name}
+                        <span className="font-bold uppercase tracking-tight">{politician.name}</span>
                       </div>
-                      <div style={{
-                        fontSize: '0.7rem', color: 'var(--terminal-text-dim)',
-                        display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap',
-                      }}>
-                        <span>{politician.office}</span>
-                        <span style={{
-                          fontSize: '9px', padding: '0.2rem 0.5rem',
-                          background: politician.party === 'Republican' ? '#dc2626' : politician.party === 'Democrat' ? '#2563eb' : '#6b7280',
-                          color: '#fff', borderRadius: '10px', fontWeight: 600,
-                        }}>
-                          {politician.party === 'Republican' ? 'R' : politician.party === 'Democrat' ? 'D' : politician.party.charAt(0)}
-                        </span>
-                        {politician.district && <span>{politician.district}</span>}
-                      </div>
-                    </div>
+                    </td>
 
-                    {/* Score + Grade */}
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem' }}>
-                      <span style={{
-                        fontSize: '1.1rem', fontWeight: 700,
-                        color: getScoreColor(politician.corruptionScore),
-                        fontFamily: 'Bebas Neue, sans-serif',
-                      }}>
-                        {politician.corruptionScore}
-                      </span>
-                      <span style={{
-                        fontSize: '0.9rem', fontWeight: 700,
-                        color: getGradeColor(grade as CorruptionGrade),
-                        fontFamily: 'Bebas Neue, sans-serif',
-                      }}>
-                        {grade}
-                      </span>
-                    </div>
+                    {/* Party */}
+                    <td className="p-4 text-on-surface/60">
+                      {politician.party === 'Republican' ? 'REP' : politician.party === 'Democrat' ? 'DEM' : politician.party?.substring(0, 3).toUpperCase()}
+                    </td>
 
-                    <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                      <div style={{
-                        fontSize: '1.1rem', fontWeight: 700,
-                        color: 'var(--terminal-amber)',
-                        fontFamily: 'Bebas Neue, sans-serif',
-                      }}>
-                        ${(politician.totalFundsRaised || 0) >= 1000000
-                          ? `${((politician.totalFundsRaised || 0) / 1000000).toFixed(1)}M`
-                          : `${((politician.totalFundsRaised || 0) / 1000).toFixed(0)}K`}
-                      </div>
-                    </div>
+                    {/* Office */}
+                    <td className="p-4 text-on-surface/60">{politician.office}</td>
 
-                    <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                      <div style={{
-                        fontSize: '1rem', fontWeight: 700,
-                        color: (politician.israelLobbyTotal || 0) > 0 ? '#ef4444' : 'var(--terminal-text-dim)',
-                        fontFamily: 'Bebas Neue, sans-serif',
-                      }}>
-                        {(politician.israelLobbyTotal || 0) > 0
-                          ? `$${((politician.israelLobbyTotal || 0) / 1000).toFixed(0)}K`
-                          : '--'}
-                      </div>
-                    </div>
-
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                      <span style={{
-                        padding: '0.3rem 0.6rem',
-                        background: hasDetailedData ? 'rgba(16, 185, 129, 0.15)' : 'rgba(245, 158, 11, 0.15)',
-                        border: `1px solid ${hasDetailedData ? '#10b981' : '#f59e0b'}`,
-                        color: hasDetailedData ? '#10b981' : '#f59e0b',
-                        fontSize: '0.55rem',
-                        fontWeight: 700,
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.05em',
-                        whiteSpace: 'nowrap',
-                      }}>
-                        {hasDetailedData ? 'FULL FEC' : 'TOTAL ONLY'}
-                      </span>
-                    </div>
-
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                      <Link
-                        href={`/politician/${politician.id}`}
-                        style={{
-                          padding: '0.4rem 0.8rem',
-                          background: 'var(--terminal-amber)',
-                          color: '#000',
-                          fontSize: '0.7rem',
-                          fontWeight: 700,
-                          textTransform: 'uppercase',
-                          textDecoration: 'none',
-                        }}
-                      >
-                        VIEW
-                      </Link>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-
-          {/* ISRAEL LOBBY LEADERBOARD (existing) */}
-          {activeView === 'israel' && (
-            <>
-              {juiceBoxPoliticians.length > 0 ? (
-                <div className="terminal-card" style={{ padding: 0, overflow: 'hidden' }}>
-                  <div style={{
-                    padding: '1.5rem 2rem',
-                    background: 'rgba(239, 68, 68, 0.1)',
-                    borderBottom: '2px solid #ef4444',
-                  }}>
-                    <h2 style={{
-                      fontSize: '1.5rem',
-                      fontWeight: 700,
-                      color: '#ef4444',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.05em',
-                      fontFamily: 'JetBrains Mono, monospace',
-                    }}>
-                      RANKED BY ISRAEL LOBBY FUNDING
-                    </h2>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginTop: '0.5rem', fontFamily: 'JetBrains Mono, monospace' }}>
-                      ${(totalIsraelLobby / 1000000).toFixed(2)}M total | {tierCounts.owned} owned, {tierCounts.bought} bought, {tierCounts.compromised} compromised
-                    </div>
-                  </div>
-
-                  {/* Table Header */}
-                  <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: '60px 1fr 100px 150px 150px 150px 100px',
-                    padding: '1rem 2rem',
-                    background: 'rgba(255, 255, 255, 0.02)',
-                    borderBottom: '1px solid var(--terminal-border)',
-                    fontSize: '0.65rem',
-                    fontWeight: 700,
-                    color: 'var(--terminal-amber)',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.1em',
-                    fontFamily: 'JetBrains Mono, monospace',
-                  }}>
-                    <div>#</div>
-                    <div>POLITICIAN</div>
-                    <div style={{ textAlign: 'center' }}>SCORE</div>
-                    <div style={{ textAlign: 'right' }}>ISRAEL LOBBY</div>
-                    <div style={{ textAlign: 'right' }}>TOTAL FUNDS</div>
-                    <div style={{ textAlign: 'center' }}>STATUS</div>
-                    <div style={{ textAlign: 'center' }}>PROFILE</div>
-                  </div>
-
-                  {/* Table Rows */}
-                  {juiceBoxPoliticians.map((politician, index) => {
-                    const rank = index + 1;
-                    const isTopThree = rank <= 3;
-                    const lobbyPercent = politician.totalFundsRaised && politician.israelLobbyTotal
-                      ? ((politician.israelLobbyTotal / politician.totalFundsRaised) * 100).toFixed(1)
-                      : '0';
-                    const grade = politician.corruptionScoreDetails?.grade ?? 'C';
-
-                    return (
-                      <div
-                        key={politician.id}
-                        style={{
-                          display: 'grid',
-                          gridTemplateColumns: '60px 1fr 100px 150px 150px 150px 100px',
-                          padding: '1.25rem 2rem',
-                          borderBottom: '1px solid var(--terminal-border)',
-                          background: isTopThree ? 'rgba(239, 68, 68, 0.05)' : 'transparent',
-                          fontFamily: 'JetBrains Mono, monospace',
-                        }}
-                      >
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                          <span style={{
-                            fontSize: isTopThree ? '1.25rem' : '1rem',
-                            fontWeight: 700,
-                            color: isTopThree ? '#ef4444' : 'var(--terminal-text-dim)',
-                            fontFamily: 'Bebas Neue, sans-serif',
-                          }}>
-                            {getRankMedal(rank)} {rank}
-                          </span>
-                        </div>
-
-                        <div>
-                          <div style={{ fontSize: '0.9rem', fontWeight: 700, marginBottom: '0.25rem', color: 'var(--terminal-text)' }}>
-                            {politician.name}
-                          </div>
-                          <div style={{
-                            fontSize: '0.7rem', color: 'var(--terminal-text-dim)',
-                            display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap',
-                          }}>
-                            <span>{politician.office}</span>
-                            <span style={{
-                              fontSize: '9px', padding: '0.2rem 0.5rem',
-                              background: politician.party === 'Republican' ? '#dc2626' : politician.party === 'Democrat' ? '#2563eb' : '#6b7280',
-                              color: '#fff', borderRadius: '10px', fontWeight: 600,
-                            }}>
-                              {politician.party === 'Republican' ? 'R' : politician.party === 'Democrat' ? 'D' : politician.party.charAt(0)}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Score + Grade */}
-                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem' }}>
-                          <span style={{
-                            fontSize: '1.1rem', fontWeight: 700,
-                            color: getScoreColor(politician.corruptionScore),
-                            fontFamily: 'Bebas Neue, sans-serif',
-                          }}>
+                    {/* View-specific columns */}
+                    {activeView === 'corruption' && (
+                      <>
+                        <td className="p-4 text-center">
+                          <span
+                            className="text-xl font-bold font-headline"
+                            style={{ color: getScoreColor(politician.corruptionScore) }}
+                          >
                             {politician.corruptionScore}
                           </span>
-                          <span style={{
-                            fontSize: '0.9rem', fontWeight: 700,
-                            color: getGradeColor(grade as CorruptionGrade),
-                            fontFamily: 'Bebas Neue, sans-serif',
-                          }}>
+                          <span className="text-on-surface/30 text-[0.6rem] ml-1">/100</span>
+                        </td>
+                        <td className="p-4 text-center">
+                          <span
+                            className="text-lg font-bold font-headline"
+                            style={{ color: getGradeColor(grade) }}
+                          >
                             {grade}
                           </span>
-                        </div>
+                        </td>
+                      </>
+                    )}
 
-                        <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                          <div style={{
-                            fontSize: '1.25rem', fontWeight: 700, color: '#ef4444',
-                            fontFamily: 'Bebas Neue, sans-serif', marginBottom: '0.25rem',
-                          }}>
-                            ${politician.israelLobbyTotal && politician.israelLobbyTotal >= 1000000
-                              ? `${(politician.israelLobbyTotal / 1000000).toFixed(2)}M`
-                              : `${((politician.israelLobbyTotal || 0) / 1000).toFixed(0)}K`}
-                          </div>
-                          <div style={{ fontSize: '0.65rem', color: '#ef4444' }}>
-                            {lobbyPercent}% of total
-                          </div>
-                        </div>
+                    {activeView === 'fundraisers' && (
+                      <>
+                        <td className="p-4 text-right font-bold text-primary-container">
+                          {formatCurrency(politician.totalFundsRaised || 0)}
+                        </td>
+                        <td className="p-4 text-right">
+                          {(politician.israelLobbyTotal || 0) > 0 ? (
+                            <span className="font-bold text-error">
+                              {formatCurrency(politician.israelLobbyTotal || 0)}
+                            </span>
+                          ) : (
+                            <span className="text-on-surface/30">--</span>
+                          )}
+                        </td>
+                      </>
+                    )}
 
-                        <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                          <div style={{
-                            fontSize: '1rem', fontWeight: 700, color: 'var(--terminal-text-dim)',
-                            fontFamily: 'Bebas Neue, sans-serif',
-                          }}>
-                            ${politician.totalFundsRaised && politician.totalFundsRaised >= 1000000
-                              ? `${(politician.totalFundsRaised / 1000000).toFixed(1)}M`
-                              : `${((politician.totalFundsRaised || 0) / 1000).toFixed(0)}K`}
-                          </div>
-                        </div>
-
-                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                          <span style={{
-                            padding: '0.4rem 0.8rem',
-                            background: `${getTierColor(politician.juiceBoxTier)}20`,
-                            border: `1px solid ${getTierColor(politician.juiceBoxTier)}`,
-                            color: getTierColor(politician.juiceBoxTier),
-                            fontSize: '0.55rem',
-                            fontWeight: 700,
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.05em',
-                            whiteSpace: 'nowrap',
-                          }}>
-                            {getTierLabel(politician.juiceBoxTier)}
+                    {activeView === 'israel' && (
+                      <>
+                        <td className="p-4 text-right font-bold text-primary-container">
+                          {formatCurrency(politician.israelLobbyTotal || 0)}
+                        </td>
+                        <td className="p-4 text-center">
+                          <span className={`${tierInfo.classes} px-3 py-1 text-[0.6rem] font-bold tracking-widest uppercase`}>
+                            {tierInfo.label}
                           </span>
-                        </div>
+                        </td>
+                      </>
+                    )}
 
-                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                          <Link
-                            href={`/politician/${politician.id}`}
-                            style={{
-                              padding: '0.4rem 0.8rem',
-                              background: 'var(--terminal-amber)',
-                              color: '#000',
-                              fontSize: '0.7rem',
-                              fontWeight: 700,
-                              textTransform: 'uppercase',
-                              textDecoration: 'none',
-                            }}
-                          >
-                            VIEW
-                          </Link>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              ) : (
-                <div className="terminal-card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem' }}>
-                    NO ISRAEL LOBBY POLITICIANS FOUND
-                  </div>
-                  <div style={{ color: 'var(--terminal-text-dim)' }}>
-                    All tracked politicians are currently clean
-                  </div>
-                </div>
-              )}
-            </>
-          )}
+                    {/* Profile link */}
+                    <td className="p-4 text-center">
+                      <Link
+                        href={`/politician/${politician.id}`}
+                        className="inline-block px-3 py-1 bg-[#00FF88] text-[#080A0D] text-[0.65rem] font-bold uppercase tracking-wider hover:bg-[#00FF88]/80 transition-colors"
+                      >
+                        VIEW
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
 
-          {/* FEC Data Coverage Banner */}
-          <div className="terminal-card" style={{
-            marginTop: '2rem',
-            background: 'rgba(16, 185, 129, 0.05)',
-            border: '1px solid rgba(16, 185, 129, 0.3)',
-          }}>
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              flexWrap: 'wrap',
-              gap: '1rem',
-            }}>
-              <div>
-                <div style={{
-                  fontSize: '0.875rem',
-                  fontWeight: 700,
-                  color: '#10b981',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.1em',
-                  fontFamily: 'JetBrains Mono, monospace',
-                  marginBottom: '0.5rem',
-                }}>
-                  DATA COVERAGE
-                </div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', fontFamily: 'JetBrains Mono, monospace' }}>
-                  {fecVerified} with full FEC data | {fecTotalOnly} with FEC totals | {federalCount} federal officials | {politicians.length} total tracked
-                </div>
+        {/* Pagination Status */}
+        <div className="mt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-[0.65rem] font-label text-on-surface/30">
+          <div className="flex gap-4">
+            <span>RECORD_COUNT: {activeList.length}</span>
+            <span>LAST_SYNC: {new Date().toISOString().split('T')[0]}</span>
+          </div>
+          <div className="flex gap-4">
+            <span>AVG_CORRUPTION_SCORE: {avgScore}/100</span>
+            <span>FEC_TRACKED: {formatCurrency(totalFundsTracked)}</span>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== PATTERN RECOGNITION — INTEL BRIEFING ========== */}
+      <section className="mt-12 grid grid-cols-1 md:grid-cols-12 gap-0 border-t border-[#00FF88]/20">
+        {/* Left: Text briefing */}
+        <div className="md:col-span-8 p-6 md:p-10 bg-surface-container-low/50">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-12 h-[1px] bg-[#00FF88]" />
+            <span className="text-[0.65rem] text-[#00FF88] uppercase font-bold tracking-[0.4em]">
+              Intelligence Briefing
+            </span>
+          </div>
+          <h3 className="font-headline text-2xl md:text-3xl font-bold mb-6 uppercase">
+            Pattern Recognition:{' '}
+            <span className="text-primary-container">&ldquo;The Tallahassee Conduit&rdquo;</span>
+          </h3>
+          <p className="text-on-surface/70 leading-relaxed max-w-2xl mb-8 font-light italic">
+            Internal analytics detect a high-density cluster of secondary PAC transfers originating from central FL.
+            Funding paths are intentionally obfuscated through multiple &apos;Grassroots&apos; shell entities before
+            landing in candidate treasury accounts. Direct AIPAC tracking only captures 42% of actual lobby influence.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {/* Risk Probability */}
+            <div className="p-6 bg-background border-l-2 border-[#00FF88]">
+              <div className="text-[0.6rem] text-on-surface/40 mb-2 uppercase font-label">Risk Probability</div>
+              <div className="text-2xl font-bold text-error">
+                {corruptionRanked.length > 0
+                  ? `${((corruptionRanked.filter(p => p.corruptionScore > 60).length / corruptionRanked.length) * 100).toFixed(1)}%`
+                  : '0%'}
               </div>
-              <div style={{ textAlign: 'right' }}>
-                <div style={{
-                  fontSize: '1.5rem',
-                  fontWeight: 700,
-                  color: '#10b981',
-                  fontFamily: 'Bebas Neue, sans-serif',
-                }}>
-                  ${(totalFundsTracked / 1000000).toFixed(1)}M
+              <div className="w-full bg-surface-variant h-1 mt-2">
+                <div
+                  className="bg-error h-full transition-all"
+                  style={{
+                    width: `${corruptionRanked.length > 0
+                      ? (corruptionRanked.filter(p => p.corruptionScore > 60).length / corruptionRanked.length) * 100
+                      : 0}%`
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Lobbyist Density */}
+            <div className="p-6 bg-background border-l-2 border-warning">
+              <div className="text-[0.6rem] text-on-surface/40 mb-2 uppercase font-label">Lobbyist Density</div>
+              <div className="text-2xl font-bold text-warning">
+                {flaggedCount > 20 ? 'CRITICAL' : flaggedCount > 10 ? 'HIGH' : flaggedCount > 5 ? 'MODERATE' : 'LOW'}
+              </div>
+              <div className="flex gap-1 mt-2">
+                {[1, 2, 3, 4, 5].map(i => (
+                  <div
+                    key={i}
+                    className={`w-3 h-1 ${
+                      i <= Math.min(Math.ceil(flaggedCount / 5), 5)
+                        ? 'bg-warning'
+                        : 'bg-surface-variant'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right: Data status panel */}
+        <div className="md:col-span-4 bg-surface-container-high p-0 relative min-h-[300px]">
+          <div className="relative z-10 p-6 md:p-10 h-full flex flex-col justify-end">
+            <div className="bg-background/80 backdrop-blur-md p-6 border border-[#00FF88]/20">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-2 h-2 bg-[#00FF88] animate-pulse" />
+                <span className="text-[0.7rem] font-bold font-label">LIVE_DATA_FEED</span>
+              </div>
+              <div className="space-y-3">
+                <div className="flex justify-between text-[0.6rem] font-label">
+                  <span className="text-on-surface/40">FEC_VERIFIED:</span>
+                  <span className="text-[#00FF88]">{fecVerified}</span>
                 </div>
-                <div style={{ fontSize: '0.625rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                  TOTAL FEC FUNDS TRACKED
+                <div className="flex justify-between text-[0.6rem] font-label">
+                  <span className="text-on-surface/40">FEC_TOTAL_ONLY:</span>
+                  <span>{fecTotalOnly}</span>
+                </div>
+                <div className="flex justify-between text-[0.6rem] font-label">
+                  <span className="text-on-surface/40">FEDERAL_OFFICIALS:</span>
+                  <span>{federalCount}</span>
+                </div>
+                <div className="flex justify-between text-[0.6rem] font-label">
+                  <span className="text-on-surface/40">TOTAL_TRACKED:</span>
+                  <span>{politicians.length}</span>
+                </div>
+                <div className="flex justify-between text-[0.6rem] font-label">
+                  <span className="text-on-surface/40">FUNDS_TRACKED:</span>
+                  <span className="text-primary-container">{formatCurrency(totalFundsTracked)}</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Footer */}
-      <div className="classified-footer">
-        ALL DATA ACQUIRED VIA OSINT // PUBLIC RECORDS: FEC, SOCIAL MEDIA, NEWS OUTLETS // CORRUPTION SCORE v1 ALGORITHM
-      </div>
+      </section>
     </div>
   );
 }

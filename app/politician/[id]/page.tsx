@@ -278,398 +278,361 @@ export default function PoliticianPage() {
   };
 
   if (politicianLoading) {
-    return <div style={{ padding: '2rem', textAlign: 'center', color: 'white' }}>Loading...</div>;
+    return (
+      <main className="min-h-screen bg-background text-on-surface flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="w-12 h-12 border-2 border-outline-variant border-t-primary-container mx-auto animate-spin" />
+          <div className="font-label text-[0.75rem] text-primary-container/60 tracking-widest uppercase">LOADING_DOSSIER...</div>
+        </div>
+      </main>
+    );
   }
 
   if (!politician) {
     return (
-      <div style={{ minHeight: '100vh', background: 'var(--terminal-bg)', color: 'var(--terminal-text)' }}>
-        <div className="terminal-title">
-          <div>
-            <h1>🔍 POLITICIAN NOT FOUND</h1>
-            <div className="terminal-subtitle">
-              Record Does Not Exist in Database
-            </div>
+      <main className="min-h-screen bg-background text-on-surface">
+        <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6">
+          <div className="w-20 h-20 bg-surface-container-low border border-outline-variant/10 flex items-center justify-center">
+            <span className="font-headline text-4xl text-error">?</span>
           </div>
-        </div>
-        <div style={{ padding: '4rem 2rem', textAlign: 'center' }}>
-          <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>⚠️</div>
-          <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem' }}>
-            RECORD NOT FOUND
+          <div className="text-center space-y-2">
+            <h1 className="font-headline font-bold text-2xl text-on-surface uppercase tracking-tight">ENTITY NOT FOUND</h1>
+            <p className="font-label text-[0.7rem] text-on-surface-variant tracking-widest uppercase">Record does not exist in database</p>
           </div>
-          <Link href="/" style={{ 
-            display: 'inline-block',
-            padding: '1rem 2rem',
-            background: 'var(--terminal-amber)',
-            color: '#000',
-            textDecoration: 'none',
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            letterSpacing: '0.05em',
-            fontSize: '0.875rem',
-            fontFamily: 'JetBrains Mono, monospace',
-          }}>
-            ← RETURN TO DATABASE
+          <Link href="/" className="bg-primary-container px-6 py-3 font-label text-[0.7rem] font-bold text-on-primary tracking-widest uppercase hover:bg-primary-fixed-dim transition-none">
+            RETURN TO DATABASE
           </Link>
         </div>
-      </div>
+      </main>
     );
   }
 
   const getScoreColor = (score: number) => {
-    if (score < 40) return 'var(--terminal-green)';
-    if (score < 60) return 'var(--terminal-amber)';
-    return 'var(--terminal-red)';
+    if (score < 40) return '#00FF88';
+    if (score < 60) return '#FFD166';
+    return '#FF3B5C';
   };
 
   const getJuiceBoxLabel = (tier: string) => {
-    if (tier === 'owned') return '👑 FULLY OWNED';
-    if (tier === 'bought') return '💰 BOUGHT & PAID FOR';
-    if (tier === 'compromised') return '💸 COMPROMISED';
+    if (tier === 'owned') return 'FULLY OWNED';
+    if (tier === 'bought') return 'BOUGHT & PAID FOR';
+    if (tier === 'compromised') return 'COMPROMISED';
     return 'CLEAN';
+  };
+
+  const getJuiceBoxTierNum = (tier: string) => {
+    if (tier === 'owned') return '1';
+    if (tier === 'bought') return '2';
+    if (tier === 'compromised') return '3';
+    return '0';
   };
 
   const getGradeColor = (grade: string) => {
     switch (grade) {
-      case 'A': return '#10b981';
-      case 'B': return '#22c55e';
-      case 'C': return '#f59e0b';
-      case 'D': return '#ef4444';
-      case 'F': return '#dc2626';
-      default: return '#6b7280';
+      case 'A': return '#00FF88';
+      case 'B': return '#00E479';
+      case 'C': return '#FFD166';
+      case 'D': return '#FF3B5C';
+      case 'F': return '#FF3B5C';
+      default: return '#849585';
     }
   };
 
   const getConfidenceColor = (confidence: string) => {
     switch (confidence) {
-      case 'high': return '#10b981';
-      case 'medium': return '#f59e0b';
-      case 'low': return '#6b7280';
-      default: return '#6b7280';
+      case 'high': return '#00FF88';
+      case 'medium': return '#FFD166';
+      case 'low': return '#849585';
+      default: return '#849585';
     }
   };
 
+  const getRiskLabel = (score: number) => {
+    if (score <= 20) return 'LOW RISK';
+    if (score <= 40) return 'MODERATE';
+    if (score <= 60) return 'ELEVATED';
+    if (score <= 80) return 'HIGH RISK';
+    return 'CRITICAL VOLATILITY';
+  };
+
   const tabs = [
-    { id: 'overview', label: 'OVERVIEW', icon: '📋' },
-    { id: 'score', label: 'CORRUPTION SCORE', icon: '🎯' },
-    { id: 'funding', label: 'FUNDING & FINANCIAL', icon: '💰' },
-    { id: 'legal', label: 'LEGAL & COURT RECORDS', icon: '⚖️' },
-    { id: 'votes', label: 'VOTING & POLICY', icon: '🗳️' },
-    { id: 'social', label: 'SOCIAL MEDIA', icon: '📱' },
-    { id: 'network', label: 'CONNECTIONS', icon: '🔗' },
+    { id: 'overview', label: 'OVERVIEW' },
+    { id: 'score', label: 'RISK_SCORE' },
+    { id: 'funding', label: 'FUNDING' },
+    { id: 'votes', label: 'VOTES' },
+    { id: 'social', label: 'SOCIAL' },
+    { id: 'network', label: 'CONNECTIONS' },
+    { id: 'legal', label: 'LEGAL' },
   ];
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--terminal-bg)', color: 'var(--terminal-text)' }}>
-      {/* Terminal Title */}
-      <div className="terminal-title">
-        <div>
-          <h1>🎯 DOSSIER: {politician.name.toUpperCase()}</h1>
-          <div className="terminal-subtitle">
-            {politician.office} • {politician.party === 'Republican' ? '🐘 Republican' : politician.party === 'Democrat' ? '🫏 Democrat' : politician.party} • {politician.district || politician.jurisdiction}
-          </div>
-        </div>
-      </div>
+    <main className="min-h-screen bg-background text-on-surface grid-bg relative">
+      {/* Dossier Header */}
+      <div className="border-b border-outline-variant/20 pb-8 mb-0">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-6 p-6">
+          <div className="flex flex-col md:flex-row gap-6 items-start">
+            {/* Photo / Initial */}
+            <div className="relative w-36 h-36 md:w-40 md:h-40 bg-surface-container-low border-2 border-primary-container/20 flex-shrink-0">
+              <div className="w-full h-full flex items-center justify-center bg-surface-container">
+                <span className="font-headline font-bold text-7xl text-primary-container/30">{politician.name.charAt(0)}</span>
+              </div>
+              <div className="absolute inset-0 border border-primary-container/40 pointer-events-none" />
+              <div className="absolute bottom-2 left-2 bg-black/80 px-2 py-0.5 font-label text-[0.6rem] text-primary-container">
+                ENTITY_ID: {politician.id?.substring(0, 12).toUpperCase()}
+              </div>
+            </div>
 
-      {/* Alert */}
-      <div style={{ padding: '2rem', borderBottom: '1px solid var(--terminal-border)' }}>
-        <div className="alert-level">
-          <span className="alert-icon">
-            {politician.corruptionScore >= 60 ? '🚨' : politician.corruptionScore >= 40 ? '⚠️' : '✓'}
-          </span>
-          <span>
-            CORRUPTION SCORE: {politician.corruptionScore}/100 — GRADE {politician.corruptionScoreDetails?.grade ?? '--'} — {
-              politician.corruptionScore <= 20 ? 'LOW RISK' :
-              politician.corruptionScore <= 40 ? 'MODERATE' :
-              politician.corruptionScore <= 60 ? 'ELEVATED' :
-              politician.corruptionScore <= 80 ? 'HIGH RISK' :
-              'SEVERE'
-            }
-          </span>
-          <span style={{ fontSize: '0.875rem', color: 'var(--terminal-text-dim)', marginLeft: '1rem' }}>
-            {politician.corruptionScoreDetails?.confidence
-              ? `${politician.corruptionScoreDetails.confidence.toUpperCase()} CONFIDENCE (${politician.corruptionScoreDetails.dataCompleteness}% data)`
-              : ''}
-            {politician.juiceBoxTier !== 'none'
-              ? ` | ${getJuiceBoxLabel(politician.juiceBoxTier)} - $${(politician.aipacFunding / 1000).toFixed(0)}K AIPAC`
-              : ''}
-          </span>
-        </div>
-      </div>
-
-      <div style={{ padding: '1rem' }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          {/* Navigation */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
-            <Link
-              href="/browse"
-              style={{
-                color: 'var(--terminal-amber)',
-                textDecoration: 'none',
-                fontSize: '0.875rem',
-                fontFamily: 'JetBrains Mono, monospace',
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                letterSpacing: '0.05em',
-              }}
-            >
-              ← BACK TO DATABASE
-            </Link>
-            <button
-              onClick={() => {
-                const url = window.location.href;
-                const text = `${politician.name} — ${politician.office} | Corruption Score: ${politician.corruptionScore}/100`;
-                if (navigator.share) {
-                  navigator.share({ title: text, url });
-                } else {
-                  navigator.clipboard.writeText(url);
-                  alert('Link copied to clipboard');
-                }
-              }}
-              className="terminal-btn"
-              style={{ padding: '0.5rem 1rem', fontSize: '0.75rem' }}
-            >
-              SHARE DOSSIER
-            </button>
-          </div>
-
-          {/* Profile Header Card */}
-          <div className="terminal-card" style={{ marginBottom: '2rem' }}>
-            <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'start', flexWrap: 'wrap' }}>
-              {/* Initial/Photo */}
-              <div
-                style={{
-                  width: '80px',
-                  height: '80px',
-                  border: `3px solid ${getScoreColor(politician.corruptionScore)}`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '4rem',
-                  fontWeight: 700,
-                  color: getScoreColor(politician.corruptionScore),
-                  flexShrink: 0,
-                  fontFamily: 'Bebas Neue, sans-serif',
-                }}
-              >
-                {politician.name.charAt(0)}
+            {/* Name and badges */}
+            <div className="space-y-2">
+              <div className="flex items-center gap-3 flex-wrap">
+                <span className="bg-primary-container/10 text-primary-container border border-primary-container/30 px-2 py-0.5 font-label text-[0.65rem] tracking-wider uppercase">
+                  {politician.isActive ? 'ACTIVE DOSSIER' : 'INACTIVE DOSSIER'}
+                </span>
+                {politician.dataStatus && (
+                  <span className={`font-label text-[0.65rem] px-2 py-0.5 border ${
+                    politician.dataStatus === 'live'
+                      ? 'bg-primary-container/10 text-primary-container border-primary-container/30'
+                      : 'bg-[#FFD166]/10 text-[#FFD166] border-[#FFD166]/30'
+                  }`}>
+                    {politician.dataStatus === 'live' ? 'LIVE_DATA' : 'MOCK_DATA'}
+                  </span>
+                )}
               </div>
 
-              {/* Details */}
-              <div style={{ flex: 1 }}>
-                <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
-                  <span style={{
-                    fontSize: '0.875rem',
-                    padding: '0.5rem 1rem',
-                    background: politician.party === 'Republican' ? '#dc2626' : politician.party === 'Democrat' ? '#2563eb' : '#6b7280',
-                    color: '#fff',
-                    borderRadius: '12px',
-                    fontWeight: 600,
-                  }}>
-                    {politician.party === 'Republican' ? '🐘 Republican' : politician.party === 'Democrat' ? '🫏 Democrat' : politician.party}
-                  </span>
-                  {politician.juiceBoxTier !== 'none' && (
-                    <span className={`tag tag-${politician.juiceBoxTier.replace('_', '-')}`}>
-                      {getJuiceBoxLabel(politician.juiceBoxTier)}
-                    </span>
-                  )}
-                  {politician.tags.map((tag, idx) => (
-                    <span 
-                      key={idx}
-                      style={{
-                        fontSize: '0.625rem',
-                        padding: '0.25rem 0.5rem',
-                        background: `${tag.color}20`,
-                        color: tag.color,
-                        border: `1px solid ${tag.color}`,
-                        fontWeight: 700,
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.05em',
-                      }}
-                    >
-                      {tag.label}
-                    </span>
-                  ))}
-                </div>
+              <h1 className="font-headline font-bold text-4xl md:text-5xl lg:text-6xl text-white tracking-tighter uppercase">
+                {politician.name}
+              </h1>
 
-                {/* Stats Grid */}
-                <div style={{ 
-                  display: 'grid', 
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-                  gap: '1rem',
-                  marginTop: '1.5rem',
-                }}>
-                  <div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                      Corruption Score
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
-                      <span style={{ fontSize: '2rem', fontWeight: 700, color: getScoreColor(politician.corruptionScore), fontFamily: 'Bebas Neue, sans-serif' }}>
-                        {politician.corruptionScore}/100
-                      </span>
-                      {politician.corruptionScoreDetails?.grade && (
-                        <span style={{
-                          fontSize: '1.5rem',
-                          fontWeight: 700,
-                          color: getGradeColor(politician.corruptionScoreDetails.grade),
-                          fontFamily: 'Bebas Neue, sans-serif',
-                        }}>
-                          {politician.corruptionScoreDetails.grade}
-                        </span>
-                      )}
-                    </div>
-                    {politician.corruptionScoreDetails?.confidence && (
-                      <div style={{
-                        fontSize: '0.6rem',
-                        color: getConfidenceColor(politician.corruptionScoreDetails.confidence),
-                        marginTop: '0.25rem',
-                        fontWeight: 600,
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.05em',
-                      }}>
-                        {politician.corruptionScoreDetails.confidence} confidence
-                      </div>
-                    )}
-                  </div>
-                  <div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                      AIPAC Funding
-                    </div>
-                    <div style={{ fontSize: '2rem', fontWeight: 700, color: politician.aipacFunding > 0 ? 'var(--terminal-red)' : 'var(--terminal-green)', fontFamily: 'Bebas Neue, sans-serif' }}>
-                      ${(politician.aipacFunding / 1000).toFixed(0)}K
-                    </div>
-                  </div>
-                  <div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                      Years in Office
-                    </div>
-                    <div style={{ fontSize: '2rem', fontWeight: 700, fontFamily: 'Bebas Neue, sans-serif' }}>
-                      {politician.yearsInOffice}
-                    </div>
-                  </div>
-                  <div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                      Status
-                    </div>
-                    <div style={{ fontSize: '1.25rem', fontWeight: 700, color: politician.isActive ? 'var(--terminal-green)' : 'var(--terminal-text-dim)' }}>
-                      {politician.isActive ? '● ACTIVE' : '○ INACTIVE'}
-                    </div>
-                  </div>
+              <div className="flex flex-wrap items-center gap-4 font-label text-[0.8rem]">
+                <div className="flex items-center gap-2">
+                  <span className="text-primary-container/40 uppercase">OFFICE:</span>
+                  <span className="text-on-surface">{politician.office.toUpperCase()}</span>
                 </div>
+                <div className="w-[1px] h-3 bg-outline-variant/30" />
+                <div className="flex items-center gap-2">
+                  <span className="text-primary-container/40 uppercase">PARTY:</span>
+                  <span className="text-on-surface">{politician.party.toUpperCase()} ({politician.party === 'Republican' ? 'R' : politician.party === 'Democrat' ? 'D' : 'I'})</span>
+                </div>
+                <div className="w-[1px] h-3 bg-outline-variant/30" />
+                <div className="flex items-center gap-2">
+                  <span className="text-primary-container/40 uppercase">STATE:</span>
+                  <span className="text-on-surface">{(politician.district || politician.jurisdiction || '').toUpperCase()}</span>
+                </div>
+              </div>
 
-                {/* Data Source Badge */}
-                {politician.dataStatus && (
-                  <div style={{ 
-                    marginTop: '1.5rem',
-                    padding: '0.75rem',
-                    background: politician.dataStatus === 'live' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(245, 158, 11, 0.1)',
-                    border: `1px solid ${politician.dataStatus === 'live' ? '#10b981' : '#f59e0b'}`,
-                  }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{
-                        fontSize: '0.625rem',
-                        color: politician.dataStatus === 'live' ? '#10b981' : '#f59e0b',
-                        fontWeight: 700,
-                        letterSpacing: '0.1em',
-                        textTransform: 'uppercase',
-                      }}>
-                          {politician.dataStatus === 'live' ? '✓ LIVE DATA' : '⚠ MOCK DATA'}
-                        {politician.dataSource && (
-                          <span style={{ marginLeft: '0.5rem', fontWeight: 400, fontSize: '0.6rem', color: 'var(--terminal-text-dim)' }}>
-                            — {politician.dataSource}
-                          </span>
-                        )}
-                      </span>
-                      {politician.lastUpdated && (
-                        <span style={{
-                          fontSize: '0.625rem',
-                          color: 'var(--terminal-text-dim)',
-                          textTransform: 'uppercase',
-                        }}>
-                          Last Updated: {new Date(politician.lastUpdated).toLocaleDateString('en-US', { 
-                            month: 'short', 
-                            day: 'numeric',
-                            year: 'numeric',
-                            hour: '2-digit',
-                            minute: '2-digit'
-                          })}
-                        </span>
-                      )}
-                    </div>
+              <div className="pt-4 flex flex-wrap gap-3">
+                {politician.juiceBoxTier !== 'none' && (
+                  <div className="bg-[#FFD166]/10 border border-[#FFD166]/40 text-[#FFD166] px-4 py-2 flex items-center gap-2">
+                    <span className="font-label text-[0.7rem] font-bold tracking-widest uppercase">
+                      JUICE BOX -- TIER {getJuiceBoxTierNum(politician.juiceBoxTier)}
+                    </span>
                   </div>
                 )}
+                {politician.tags.map((tag, idx) => (
+                  <span
+                    key={idx}
+                    className="font-label text-[0.65rem] font-bold tracking-wider uppercase px-3 py-1.5 border"
+                    style={{
+                      background: `${tag.color}15`,
+                      color: tag.color,
+                      borderColor: `${tag.color}40`,
+                    }}
+                  >
+                    {tag.label}
+                  </span>
+                ))}
+                <button
+                  onClick={() => {
+                    const url = window.location.href;
+                    const text = `${politician.name} — ${politician.office} | Corruption Score: ${politician.corruptionScore}/100`;
+                    if (navigator.share) {
+                      navigator.share({ title: text, url });
+                    } else {
+                      navigator.clipboard.writeText(url);
+                      alert('Link copied to clipboard');
+                    }
+                  }}
+                  className="bg-primary-container px-4 py-2 font-label text-[0.7rem] font-bold text-on-primary hover:bg-primary-fixed-dim transition-none flex items-center gap-2"
+                >
+                  SHARE_DOSSIER
+                </button>
               </div>
             </div>
           </div>
 
+          {/* Score Hex */}
+          <div className="flex-shrink-0 flex flex-col items-center gap-2">
+            <div className="relative w-28 h-28 md:w-32 md:h-32 flex items-center justify-center">
+              <div className="absolute inset-0 border-2 flex items-center justify-center" style={{ borderColor: getScoreColor(politician.corruptionScore), background: `${getScoreColor(politician.corruptionScore)}10` }}>
+                <div className="flex flex-col items-center">
+                  <span className="font-headline font-bold text-4xl" style={{ color: getScoreColor(politician.corruptionScore) }}>
+                    {politician.corruptionScore}
+                  </span>
+                  <span className="font-label text-[0.55rem] tracking-widest" style={{ color: `${getScoreColor(politician.corruptionScore)}99` }}>RISK_SCORE</span>
+                </div>
+              </div>
+            </div>
+            <span className="font-label text-[0.6rem] uppercase tracking-tighter" style={{ color: getScoreColor(politician.corruptionScore) }}>
+              {getRiskLabel(politician.corruptionScore)}
+            </span>
+            {politician.corruptionScoreDetails?.grade && (
+              <span className="font-headline font-bold text-lg" style={{ color: getGradeColor(politician.corruptionScoreDetails.grade) }}>
+                GRADE {politician.corruptionScoreDetails.grade}
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* Back nav */}
+        <div className="px-6 mt-2">
+          <Link href="/browse" className="font-label text-[0.7rem] text-primary-container/60 hover:text-primary-container tracking-widest uppercase transition-none">
+            &lt; BACK_TO_DATABASE
+          </Link>
+        </div>
+      </div>
+
+      {/* Bento Layout: Left sidebar + Right tabbed content */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 pb-20">
+        {/* Left Column: RISK_MATRIX */}
+        <div className="lg:col-span-4 space-y-6">
+          <div className="bg-surface-container-low p-6 border border-outline-variant/10">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="font-label text-[0.8rem] font-bold text-primary-container tracking-widest uppercase">RISK_MATRIX</h3>
+            </div>
+            <div className="space-y-5">
+              {politician.corruptionScoreDetails?.factors ? (
+                [...politician.corruptionScoreDetails.factors]
+                  .sort((a, b) => b.rawScore - a.rawScore)
+                  .map((factor) => (
+                    <div key={factor.key} className="space-y-2">
+                      <div className="flex justify-between font-label text-[0.6rem]">
+                        <span className="text-on-surface/60 uppercase">{factor.label}</span>
+                        <span className="text-primary-container">{factor.rawScore}%</span>
+                      </div>
+                      <div className="h-1 bg-surface-container-highest w-full">
+                        <div className="h-full bg-primary-container" style={{ width: `${factor.rawScore}%` }} />
+                      </div>
+                    </div>
+                  ))
+              ) : (
+                <>
+                  {[
+                    { label: 'Funding Risk', value: Math.min(100, Math.round((politician.aipacFunding / 10000) * 100) || 30) },
+                    { label: 'Legal Record', value: 30 },
+                    { label: 'Voting Pattern', value: 30 },
+                    { label: 'Social Media', value: 30 },
+                    { label: 'Forensic Connections', value: Math.min(100, politician.corruptionScore || 30) },
+                  ].map((item) => (
+                    <div key={item.label} className="space-y-2">
+                      <div className="flex justify-between font-label text-[0.6rem]">
+                        <span className="text-on-surface/60 uppercase">{item.label}</span>
+                        <span className="text-primary-container">{item.value}%</span>
+                      </div>
+                      <div className="h-1 bg-surface-container-highest w-full">
+                        <div className="h-full bg-primary-container" style={{ width: `${item.value}%` }} />
+                      </div>
+                    </div>
+                  ))}
+                </>
+              )}
+            </div>
+
+            {/* Analysis text block */}
+            <div className="mt-8 p-4 bg-background border border-primary-container/10">
+              <p className="font-label text-[0.65rem] text-primary-container/70 leading-relaxed">
+                <span className="text-primary-container font-bold">ANALYSIS:</span>{' '}
+                {politician.corruptionScore >= 60
+                  ? `High-risk profile detected. Corruption score of ${politician.corruptionScore}/100 indicates significant financial influence patterns. ${politician.aipacFunding > 0 ? `Israel lobby funding of $${(politician.aipacFunding / 1000).toFixed(0)}K flagged.` : ''} Surveillance status maintained.`
+                  : politician.corruptionScore >= 40
+                    ? `Elevated risk indicators present. Score of ${politician.corruptionScore}/100 warrants continued monitoring. Data coverage at ${politician.corruptionScoreDetails?.dataCompleteness || '--'}%.`
+                    : `Risk profile within acceptable parameters. Score of ${politician.corruptionScore}/100. Continued passive monitoring recommended.`
+                }
+              </p>
+            </div>
+          </div>
+
+          {/* Quick Stats */}
+          <div className="bg-surface-container-low p-6 border border-outline-variant/10 space-y-4">
+            <h3 className="font-label text-[0.8rem] font-bold text-primary-container tracking-widest uppercase mb-4">ENTITY_STATS</h3>
+            <div className="space-y-4">
+              <div className="flex justify-between items-baseline">
+                <span className="font-label text-[0.65rem] text-on-surface/40 uppercase">AIPAC Funding</span>
+                <span className="font-label text-[0.9rem] font-bold" style={{ color: politician.aipacFunding > 0 ? '#FF3B5C' : '#00FF88' }}>
+                  ${(politician.aipacFunding / 1000).toFixed(0)}K
+                </span>
+              </div>
+              <div className="flex justify-between items-baseline">
+                <span className="font-label text-[0.65rem] text-on-surface/40 uppercase">Years in Office</span>
+                <span className="font-label text-[0.9rem] font-bold text-on-surface">{politician.yearsInOffice}</span>
+              </div>
+              <div className="flex justify-between items-baseline">
+                <span className="font-label text-[0.65rem] text-on-surface/40 uppercase">Status</span>
+                <span className={`font-label text-[0.75rem] font-bold ${politician.isActive ? 'text-primary-container' : 'text-on-surface/40'}`}>
+                  {politician.isActive ? 'ACTIVE' : 'INACTIVE'}
+                </span>
+              </div>
+              {politician.corruptionScoreDetails?.confidence && (
+                <div className="flex justify-between items-baseline">
+                  <span className="font-label text-[0.65rem] text-on-surface/40 uppercase">Confidence</span>
+                  <span className="font-label text-[0.75rem] font-bold" style={{ color: getConfidenceColor(politician.corruptionScoreDetails.confidence) }}>
+                    {politician.corruptionScoreDetails.confidence.toUpperCase()} ({politician.corruptionScoreDetails.dataCompleteness}%)
+                  </span>
+                </div>
+              )}
+              {politician.lastUpdated && (
+                <div className="pt-3 border-t border-outline-variant/10">
+                  <span className="font-label text-[0.55rem] text-primary-container/30 uppercase block">LAST_SYNC_TS</span>
+                  <span className="font-label text-[0.65rem] text-primary-container/60">
+                    {new Date(politician.lastUpdated).toISOString().replace('T', ' ').substring(0, 19)} UTC
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Tabs and Content */}
+        <div className="lg:col-span-8 space-y-6">
           {/* Tab Navigation */}
-          <div style={{ 
-            display: 'flex', 
-            gap: '0.5rem', 
-            marginBottom: '2rem',
-            overflowX: 'auto',
-            borderBottom: '2px solid var(--terminal-border)',
-          }}>
+          <div className="flex border-b border-outline-variant/20 overflow-x-auto">
             {tabs.map(tab => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                style={{
-                  padding: '1rem 1.5rem',
-                  background: activeTab === tab.id ? 'var(--terminal-amber)' : 'transparent',
-                  border: 'none',
-                  borderBottom: activeTab === tab.id ? '2px solid var(--terminal-amber)' : '2px solid transparent',
-                  color: activeTab === tab.id ? '#000' : 'var(--terminal-text)',
-                  fontSize: '0.875rem',
-                  fontFamily: 'JetBrains Mono, monospace',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s',
-                  whiteSpace: 'nowrap',
-                }}
-                onMouseEnter={(e) => {
-                  if (activeTab !== tab.id) {
-                    e.currentTarget.style.background = 'var(--terminal-bg)';
-                    e.currentTarget.style.color = 'var(--terminal-amber)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (activeTab !== tab.id) {
-                    e.currentTarget.style.background = 'transparent';
-                    e.currentTarget.style.color = 'var(--terminal-text)';
-                  }
-                }}
+                className={`px-6 py-4 font-label text-[0.75rem] tracking-widest transition-none border-b-2 whitespace-nowrap ${
+                  activeTab === tab.id
+                    ? 'font-bold text-primary-container border-primary-container bg-primary-container/5'
+                    : 'text-on-surface/40 hover:text-primary-container border-transparent'
+                }`}
               >
-                {tab.icon} {tab.label}
+                {tab.label}
               </button>
             ))}
           </div>
 
           {/* Tab Content */}
           {activeTab === 'overview' && (
-            <div>
-              <div className="terminal-card" style={{ marginBottom: '2rem' }}>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--terminal-amber)' }}>
-                  📋 BIOGRAPHICAL INFORMATION
+            <div className="space-y-6">
+              <div className="bg-surface-container-low p-6 border border-outline-variant/10">
+                <h3 className="font-label text-[0.8rem] font-bold text-primary-container tracking-widest uppercase mb-4">
+                  BIOGRAPHICAL_DATA
                 </h3>
-                <p style={{ lineHeight: 1.7, color: 'var(--terminal-text)', marginBottom: '1rem' }}>
+                <p className="font-body text-[0.85rem] leading-relaxed text-on-surface/80 mb-4">
                   {politician.bio || `${politician.name} serves as ${politician.office} representing ${politician.district || politician.jurisdiction}.`}
                 </p>
-                <div style={{ display: 'grid', gridTemplateColumns: '150px 1fr', gap: '0.75rem', fontSize: '0.875rem' }}>
-                  <div style={{ color: 'var(--terminal-text-dim)' }}>Office:</div>
-                  <div>{politician.office}</div>
-                  <div style={{ color: 'var(--terminal-text-dim)' }}>Jurisdiction:</div>
-                  <div>{politician.district || politician.jurisdiction}</div>
-                  <div style={{ color: 'var(--terminal-text-dim)' }}>Party:</div>
-                  <div>{politician.party}</div>
-                  <div style={{ color: 'var(--terminal-text-dim)' }}>Term Start:</div>
-                  <div>{politician.termStart}</div>
+                <div className="grid grid-cols-[140px_1fr] gap-3 font-label text-[0.75rem]">
+                  <div className="text-on-surface/40 uppercase">Office:</div>
+                  <div className="text-on-surface">{politician.office}</div>
+                  <div className="text-on-surface/40 uppercase">Jurisdiction:</div>
+                  <div className="text-on-surface">{politician.district || politician.jurisdiction}</div>
+                  <div className="text-on-surface/40 uppercase">Party:</div>
+                  <div className="text-on-surface">{politician.party}</div>
+                  <div className="text-on-surface/40 uppercase">Term Start:</div>
+                  <div className="text-on-surface">{politician.termStart}</div>
                   {politician.termEnd && (
                     <>
-                      <div style={{ color: 'var(--terminal-text-dim)' }}>Term End:</div>
-                      <div>{politician.termEnd}</div>
+                      <div className="text-on-surface/40 uppercase">Term End:</div>
+                      <div className="text-on-surface">{politician.termEnd}</div>
                     </>
                   )}
                 </div>
@@ -677,39 +640,39 @@ export default function PoliticianPage() {
 
               {/* Social Media */}
               {politician.socialMedia && Object.keys(politician.socialMedia).length > 0 && (
-                <div className="terminal-card">
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--terminal-amber)' }}>
-                    📱 SOCIAL MEDIA ACCOUNTS
+                <div className="bg-surface-container-low p-6 border border-outline-variant/10">
+                  <h3 className="font-label text-[0.8rem] font-bold text-primary-container tracking-widest uppercase mb-4">
+                    SOCIAL_ACCOUNTS
                   </h3>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.875rem' }}>
+                  <div className="flex flex-col gap-3 font-label text-[0.75rem]">
                     {politician.socialMedia.twitterHandle && (
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                        <span style={{ color: 'var(--terminal-text-dim)', width: '100px' }}>Twitter:</span>
-                        <a href={`https://twitter.com/${politician.socialMedia.twitterHandle}`} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--terminal-amber)', textDecoration: 'none' }}>
+                      <div className="flex items-center gap-4">
+                        <span className="text-on-surface/40 uppercase w-[100px]">Twitter:</span>
+                        <a href={`https://twitter.com/${politician.socialMedia.twitterHandle}`} target="_blank" rel="noopener noreferrer" className="text-primary-container hover:text-primary-fixed-dim transition-none">
                           @{politician.socialMedia.twitterHandle}
                         </a>
                       </div>
                     )}
                     {politician.socialMedia.facebookPageUrl && (
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                        <span style={{ color: 'var(--terminal-text-dim)', width: '100px' }}>Facebook:</span>
-                        <a href={politician.socialMedia.facebookPageUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--terminal-amber)', textDecoration: 'none' }}>
+                      <div className="flex items-center gap-4">
+                        <span className="text-on-surface/40 uppercase w-[100px]">Facebook:</span>
+                        <a href={politician.socialMedia.facebookPageUrl} target="_blank" rel="noopener noreferrer" className="text-primary-container hover:text-primary-fixed-dim transition-none">
                           Page
                         </a>
                       </div>
                     )}
                     {politician.socialMedia.instagramHandle && (
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                        <span style={{ color: 'var(--terminal-text-dim)', width: '100px' }}>Instagram:</span>
-                        <a href={`https://instagram.com/${politician.socialMedia.instagramHandle}`} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--terminal-amber)', textDecoration: 'none' }}>
+                      <div className="flex items-center gap-4">
+                        <span className="text-on-surface/40 uppercase w-[100px]">Instagram:</span>
+                        <a href={`https://instagram.com/${politician.socialMedia.instagramHandle}`} target="_blank" rel="noopener noreferrer" className="text-primary-container hover:text-primary-fixed-dim transition-none">
                           @{politician.socialMedia.instagramHandle}
                         </a>
                       </div>
                     )}
                     {politician.socialMedia.youtubeChannelId && (
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                        <span style={{ color: 'var(--terminal-text-dim)', width: '100px' }}>YouTube:</span>
-                        <a href={`https://youtube.com/channel/${politician.socialMedia.youtubeChannelId}`} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--terminal-amber)', textDecoration: 'none' }}>
+                      <div className="flex items-center gap-4">
+                        <span className="text-on-surface/40 uppercase w-[100px]">YouTube:</span>
+                        <a href={`https://youtube.com/channel/${politician.socialMedia.youtubeChannelId}`} target="_blank" rel="noopener noreferrer" className="text-primary-container hover:text-primary-fixed-dim transition-none">
                           Channel
                         </a>
                       </div>
@@ -722,82 +685,43 @@ export default function PoliticianPage() {
 
           {/* Corruption Score Breakdown Tab */}
           {activeTab === 'score' && (
-            <div>
+            <div className="space-y-6">
               {/* Score Summary Card */}
-              <div className="terminal-card" style={{ marginBottom: '2rem' }}>
-                <div style={{ display: 'flex', gap: '2rem', alignItems: 'center', flexWrap: 'wrap' }}>
-                  {/* Big Score Circle */}
-                  <div style={{
-                    width: '120px',
-                    height: '120px',
-                    borderRadius: '50%',
-                    border: `4px solid ${getScoreColor(politician.corruptionScore)}`,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                  }}>
-                    <span style={{
-                      fontSize: '2.5rem',
-                      fontWeight: 700,
-                      color: getScoreColor(politician.corruptionScore),
-                      fontFamily: 'Bebas Neue, sans-serif',
-                      lineHeight: 1,
-                    }}>
+              <div className="bg-surface-container-low p-6 border border-outline-variant/10">
+                <div className="flex gap-8 items-center flex-wrap">
+                  {/* Big Score Box */}
+                  <div className="w-[120px] h-[120px] border-2 flex flex-col items-center justify-center flex-shrink-0"
+                    style={{ borderColor: getScoreColor(politician.corruptionScore), background: `${getScoreColor(politician.corruptionScore)}10` }}>
+                    <span className="font-headline font-bold text-5xl leading-none" style={{ color: getScoreColor(politician.corruptionScore) }}>
                       {politician.corruptionScore}
                     </span>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)' }}>/100</span>
+                    <span className="font-label text-[0.6rem] text-on-surface/40">/100</span>
                   </div>
 
                   {/* Grade + Confidence */}
-                  <div style={{ flex: 1 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem' }}>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-4 mb-3">
                       {politician.corruptionScoreDetails?.grade && (
-                        <span style={{
-                          fontSize: '3rem',
-                          fontWeight: 700,
-                          color: getGradeColor(politician.corruptionScoreDetails.grade),
-                          fontFamily: 'Bebas Neue, sans-serif',
-                          lineHeight: 1,
-                        }}>
+                        <span className="font-headline font-bold text-5xl leading-none" style={{ color: getGradeColor(politician.corruptionScoreDetails.grade) }}>
                           {politician.corruptionScoreDetails.grade}
                         </span>
                       )}
                       <div>
-                        <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--terminal-text)' }}>
-                          {politician.corruptionScore <= 20 ? 'LOW RISK' :
-                           politician.corruptionScore <= 40 ? 'MODERATE RISK' :
-                           politician.corruptionScore <= 60 ? 'ELEVATED RISK' :
-                           politician.corruptionScore <= 80 ? 'HIGH RISK' :
-                           'SEVERE RISK'}
+                        <div className="font-headline font-bold text-xl text-white uppercase">
+                          {getRiskLabel(politician.corruptionScore)}
                         </div>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginTop: '0.25rem' }}>
+                        <div className="font-label text-[0.65rem] text-on-surface/40 mt-1">
                           Score computed from 5 weighted factors using available data
                         </div>
                       </div>
                     </div>
                     {politician.corruptionScoreDetails?.confidence && (
-                      <div style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        padding: '0.4rem 0.8rem',
-                        background: `${getConfidenceColor(politician.corruptionScoreDetails.confidence)}15`,
-                        border: `1px solid ${getConfidenceColor(politician.corruptionScoreDetails.confidence)}`,
-                      }}>
-                        <span style={{
-                          width: '8px', height: '8px', borderRadius: '50%',
-                          background: getConfidenceColor(politician.corruptionScoreDetails.confidence),
-                        }} />
-                        <span style={{
-                          fontSize: '0.7rem',
-                          fontWeight: 700,
-                          color: getConfidenceColor(politician.corruptionScoreDetails.confidence),
-                          textTransform: 'uppercase',
-                          letterSpacing: '0.05em',
-                        }}>
-                          {politician.corruptionScoreDetails.confidence} confidence — {politician.corruptionScoreDetails.dataCompleteness}% data coverage
+                      <div className="inline-flex items-center gap-2 px-3 py-1.5 border"
+                        style={{ background: `${getConfidenceColor(politician.corruptionScoreDetails.confidence)}15`, borderColor: getConfidenceColor(politician.corruptionScoreDetails.confidence) }}>
+                        <span className="w-2 h-2" style={{ background: getConfidenceColor(politician.corruptionScoreDetails.confidence) }} />
+                        <span className="font-label text-[0.65rem] font-bold uppercase tracking-wider"
+                          style={{ color: getConfidenceColor(politician.corruptionScoreDetails.confidence) }}>
+                          {politician.corruptionScoreDetails.confidence} confidence -- {politician.corruptionScoreDetails.dataCompleteness}% data coverage
                         </span>
                       </div>
                     )}
@@ -806,114 +730,70 @@ export default function PoliticianPage() {
               </div>
 
               {/* Factor Breakdown */}
-              <div className="terminal-card" style={{ marginBottom: '2rem' }}>
-                <h3 style={{
-                  fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.5rem',
-                  color: 'var(--terminal-amber)',
-                  fontFamily: 'JetBrains Mono, monospace',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                }}>
-                  SCORE FACTOR BREAKDOWN
+              <div className="bg-surface-container-low p-6 border border-outline-variant/10">
+                <h3 className="font-label text-[0.8rem] font-bold text-primary-container tracking-widest uppercase mb-6">
+                  SCORE_FACTOR_BREAKDOWN
                 </h3>
 
                 {politician.corruptionScoreDetails?.factors ? (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                  <div className="flex flex-col gap-5">
                     {[...politician.corruptionScoreDetails.factors]
                       .sort((a, b) => b.weightedScore - a.weightedScore)
                       .map((factor) => (
-                      <div key={factor.key} style={{
-                        padding: '1.25rem',
-                        background: 'rgba(255, 255, 255, 0.02)',
-                        border: '1px solid var(--terminal-border)',
-                      }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                            <span style={{
-                              fontSize: '0.875rem', fontWeight: 700,
-                              color: 'var(--terminal-text)',
-                              fontFamily: 'JetBrains Mono, monospace',
-                            }}>
+                      <div key={factor.key} className="p-5 bg-surface-container border border-outline-variant/10">
+                        <div className="flex justify-between items-center mb-3">
+                          <div className="flex items-center gap-3">
+                            <span className="font-label text-[0.8rem] font-bold text-on-surface">
                               {factor.label}
                             </span>
-                            <span style={{
-                              fontSize: '0.6rem',
-                              padding: '0.15rem 0.4rem',
-                              background: factor.dataAvailable ? 'rgba(16, 185, 129, 0.15)' : 'rgba(107, 114, 128, 0.15)',
-                              color: factor.dataAvailable ? '#10b981' : '#6b7280',
-                              border: `1px solid ${factor.dataAvailable ? '#10b981' : '#6b7280'}`,
-                              fontWeight: 700,
-                              textTransform: 'uppercase',
-                            }}>
+                            <span className={`font-label text-[0.55rem] px-1.5 py-0.5 border font-bold uppercase ${
+                              factor.dataAvailable
+                                ? 'bg-primary-container/15 text-primary-container border-primary-container/30'
+                                : 'bg-outline/15 text-outline border-outline/30'
+                            }`}>
                               {factor.dataAvailable ? 'REAL DATA' : 'PLACEHOLDER'}
                             </span>
                           </div>
-                          <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
-                            <span style={{
-                              fontSize: '1.5rem', fontWeight: 700,
-                              color: getScoreColor(factor.rawScore),
-                              fontFamily: 'Bebas Neue, sans-serif',
-                            }}>
+                          <div className="flex items-baseline gap-2">
+                            <span className="font-headline font-bold text-2xl" style={{ color: getScoreColor(factor.rawScore) }}>
                               {factor.rawScore}
                             </span>
-                            <span style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)' }}>
+                            <span className="font-label text-[0.6rem] text-on-surface/40">
                               /100 x{(factor.weight * 100).toFixed(0)}% = {factor.weightedScore.toFixed(1)}
                             </span>
                           </div>
                         </div>
 
                         {/* Progress bar */}
-                        <div style={{
-                          width: '100%', height: '6px',
-                          background: 'rgba(255, 255, 255, 0.05)',
-                          marginBottom: '0.5rem',
-                        }}>
-                          <div style={{
-                            width: `${factor.rawScore}%`, height: '100%',
-                            background: getScoreColor(factor.rawScore),
-                            transition: 'width 0.3s ease',
-                          }} />
+                        <div className="w-full h-1 bg-surface-container-highest mb-3">
+                          <div className="h-full transition-none" style={{ width: `${factor.rawScore}%`, background: getScoreColor(factor.rawScore) }} />
                         </div>
 
-                        <div style={{
-                          fontSize: '0.7rem',
-                          color: 'var(--terminal-text-dim)',
-                          fontFamily: 'JetBrains Mono, monospace',
-                          lineHeight: 1.5,
-                        }}>
+                        <div className="font-label text-[0.65rem] text-on-surface/50 leading-relaxed">
                           {factor.explanation}
                         </div>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--terminal-text-dim)' }}>
+                  <div className="p-8 text-center text-on-surface/40 font-label text-[0.75rem]">
                     Score breakdown not available for this politician.
                   </div>
                 )}
               </div>
 
               {/* Methodology Note */}
-              <div className="terminal-card" style={{
-                background: 'rgba(245, 158, 11, 0.05)',
-                border: '1px solid rgba(245, 158, 11, 0.2)',
-              }}>
-                <h3 style={{
-                  fontSize: '0.875rem', fontWeight: 700, marginBottom: '0.75rem',
-                  color: 'var(--terminal-amber)',
-                  fontFamily: 'JetBrains Mono, monospace',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                }}>
-                  METHODOLOGY — v1 ALGORITHM
+              <div className="bg-[#FFD166]/5 p-6 border border-[#FFD166]/20">
+                <h3 className="font-label text-[0.75rem] font-bold text-[#FFD166] tracking-widest uppercase mb-3">
+                  METHODOLOGY -- V1_ALGORITHM
                 </h3>
-                <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', lineHeight: 1.7, fontFamily: 'JetBrains Mono, monospace' }}>
-                  <p style={{ marginBottom: '0.5rem' }}>
+                <div className="font-label text-[0.65rem] text-on-surface/50 leading-relaxed space-y-2">
+                  <p>
                     The corruption score is a composite of 5 weighted factors: PAC/Lobby Funding Ratio (30%),
                     Lobbying Connections (20%), Voting Alignment with Donors (25%), Transparency &amp; Disclosure (10%),
                     and Campaign Finance Red Flags (15%).
                   </p>
-                  <p style={{ marginBottom: '0.5rem' }}>
+                  <p>
                     Factors marked &quot;PLACEHOLDER&quot; use a neutral baseline score of 30 because the required data
                     has not yet been linked. As more data sources come online (lobbying disclosures, voting records,
                     FEC complaints), these factors will switch to real data and accuracy will improve.
@@ -931,82 +811,70 @@ export default function PoliticianPage() {
           {activeTab === 'funding' && (
             <div>
               {politician.totalFundsRaised ? (
-                <div style={{ display: 'grid', gap: '2rem' }}>
+                <div className="space-y-6">
                   {/* Total Funds Collected Card */}
-                  <div className="terminal-card">
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--terminal-amber)' }}>
-                      💰 TOTAL FUNDS RAISED
-                    </h3>
-                    <div style={{
-                      fontSize: '4rem',
-                      fontWeight: 700, 
-                      marginBottom: '0.5rem',
-                      color: 'var(--terminal-amber)',
-                      fontFamily: 'Bebas Neue, sans-serif',
-                    }}>
-                      ${politician.totalFundsRaised >= 1000000 
-                        ? `${(politician.totalFundsRaised / 1000000).toFixed(0)}M`
-                        : `${(politician.totalFundsRaised / 1000).toFixed(0)}K`}
-                    </div>
-                    <div style={{ fontSize: '0.875rem', color: 'var(--terminal-text-dim)', marginBottom: '2rem' }}>
-                      Total Campaign Contributions
-                    </div>
-                    {/* Israel Lobby Total - RED HIGHLIGHT */}
-                    {politician.israelLobbyTotal && politician.israelLobbyTotal > 0 && (
-                      <div style={{ 
-                        borderTop: '2px solid var(--terminal-red)',
-                        paddingTop: '1.5rem',
-                        marginTop: '1rem',
-                      }}>
-                        <div style={{ fontSize: '0.875rem', color: 'var(--terminal-red)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700 }}>
-                          🇮🇱 ISRAEL LOBBY TOTAL
+                  <div className="bg-surface-container-low border border-outline-variant/10 overflow-hidden">
+                    <div className="p-6 flex justify-between items-end border-b border-outline-variant/10">
+                      <div>
+                        <h2 className="font-label text-[0.65rem] text-primary-container/50 uppercase tracking-[0.2em] mb-1">AGGREGATE_CAPITAL_FLOW</h2>
+                        <div className="font-headline font-bold text-4xl text-white tracking-tight">
+                          ${politician.totalFundsRaised >= 1000000
+                            ? `${(politician.totalFundsRaised / 1000000).toFixed(2)}M`
+                            : `${(politician.totalFundsRaised / 1000).toFixed(0)}K`}
                         </div>
-                        <div style={{ 
-                          fontSize: '3rem', 
-                          fontWeight: 700, 
-                          color: '#ef4444',
-                          fontFamily: 'Bebas Neue, sans-serif',
-                          marginBottom: '1.5rem',
-                        }}>
-                          ${politician.israelLobbyTotal >= 1000000 
-                            ? `${(politician.israelLobbyTotal / 1000000).toFixed(0)}M`
+                      </div>
+                      {politician.lastUpdated && (
+                        <div className="text-right">
+                          <span className="font-label text-[0.6rem] text-primary-container/50 uppercase block">LAST_SYNC_TS</span>
+                          <span className="font-label text-[0.7rem] text-primary-container">
+                            {new Date(politician.lastUpdated).toISOString().replace('T', ' ').substring(0, 19)} UTC
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Israel Lobby Total - WARNING HIGHLIGHT */}
+                    {politician.israelLobbyTotal && politician.israelLobbyTotal > 0 && (
+                      <div className="p-6 bg-[#FFD166]/5 border-b border-[#FFD166]/20">
+                        <div className="font-label text-[0.7rem] text-[#FFD166] mb-2 uppercase tracking-widest font-bold">
+                          ISRAEL_LOBBY_TOTAL
+                        </div>
+                        <div className="font-headline font-bold text-3xl text-[#FFD166] tracking-tight mb-4">
+                          ${politician.israelLobbyTotal >= 1000000
+                            ? `${(politician.israelLobbyTotal / 1000000).toFixed(2)}M`
                             : `${(politician.israelLobbyTotal / 1000).toFixed(0)}K`}
                         </div>
-                        
+
                         {/* Breakdown */}
-                        <div style={{ 
-                          display: 'grid', 
-                          gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', 
-                          gap: '1rem',
-                        }}>
-                          <div style={{ padding: '1rem', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem' }}>PACs</div>
-                            <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ef4444', fontFamily: 'Bebas Neue, sans-serif' }}>
-                              ${politician.israelLobbyBreakdown?.pacs 
-                                ? (politician.israelLobbyBreakdown.pacs >= 1000000 
+                        <div className="grid grid-cols-3 gap-3">
+                          <div className="p-3 bg-[#FF3B5C]/10 border border-[#FF3B5C]/20">
+                            <div className="font-label text-[0.6rem] text-on-surface/40 mb-1 uppercase">PACs</div>
+                            <div className="font-label text-[1rem] font-bold text-[#FF3B5C]">
+                              ${politician.israelLobbyBreakdown?.pacs
+                                ? (politician.israelLobbyBreakdown.pacs >= 1000000
                                   ? `${(politician.israelLobbyBreakdown.pacs / 1000000).toFixed(0)}M`
                                   : `${(politician.israelLobbyBreakdown.pacs / 1000).toFixed(0)}K`)
-                                : '$0'}
+                                : '0'}
                             </div>
                           </div>
-                          <div style={{ padding: '1rem', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem' }}>IE</div>
-                            <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ef4444', fontFamily: 'Bebas Neue, sans-serif' }}>
-                              ${politician.israelLobbyBreakdown?.ie 
-                                ? (politician.israelLobbyBreakdown.ie >= 1000000 
+                          <div className="p-3 bg-[#FF3B5C]/10 border border-[#FF3B5C]/20">
+                            <div className="font-label text-[0.6rem] text-on-surface/40 mb-1 uppercase">IE</div>
+                            <div className="font-label text-[1rem] font-bold text-[#FF3B5C]">
+                              ${politician.israelLobbyBreakdown?.ie
+                                ? (politician.israelLobbyBreakdown.ie >= 1000000
                                   ? `${(politician.israelLobbyBreakdown.ie / 1000000).toFixed(0)}M`
                                   : `${(politician.israelLobbyBreakdown.ie / 1000).toFixed(0)}K`)
-                                : '$0'}
+                                : '0'}
                             </div>
                           </div>
-                          <div style={{ padding: '1rem', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem' }}>Bundlers</div>
-                            <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ef4444', fontFamily: 'Bebas Neue, sans-serif' }}>
-                              ${politician.israelLobbyBreakdown?.bundlers 
-                                ? (politician.israelLobbyBreakdown.bundlers >= 1000000 
+                          <div className="p-3 bg-[#FF3B5C]/10 border border-[#FF3B5C]/20">
+                            <div className="font-label text-[0.6rem] text-on-surface/40 mb-1 uppercase">Bundlers</div>
+                            <div className="font-label text-[1rem] font-bold text-[#FF3B5C]">
+                              ${politician.israelLobbyBreakdown?.bundlers
+                                ? (politician.israelLobbyBreakdown.bundlers >= 1000000
                                   ? `${(politician.israelLobbyBreakdown.bundlers / 1000000).toFixed(0)}M`
                                   : `${(politician.israelLobbyBreakdown.bundlers / 1000).toFixed(0)}K`)
-                                : '$0'}
+                                : '0'}
                             </div>
                           </div>
                         </div>
@@ -1015,74 +883,46 @@ export default function PoliticianPage() {
                   </div>
 
                   {/* Top 5 Donors Card */}
-                  <div className="terminal-card">
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--terminal-amber)' }}>
-                      🏆 TOP 5 DONORS
+                  <div className="bg-surface-container-low p-6 border border-outline-variant/10">
+                    <h3 className="font-label text-[0.8rem] font-bold text-primary-container tracking-widest uppercase mb-6">
+                      TOP_5_DONORS
                     </h3>
                     {politician.top5Donors && politician.top5Donors.length > 0 ? (
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        {politician.top5Donors.map((donor, index) => (
-                          <div key={index} style={{
-                            padding: '1.5rem',
-                            background: index === 0 ? 'rgba(245, 158, 11, 0.1)' : donor.type === 'Israel-PAC' ? 'rgba(239, 68, 68, 0.1)' : 'rgba(156, 163, 175, 0.05)',
-                            border: index === 0 ? '2px solid var(--terminal-amber)' : donor.type === 'Israel-PAC' ? '1px solid #ef4444' : '1px solid var(--terminal-border)',
-                            position: 'relative',
-                          }}>
-                            <div style={{
-                              position: 'absolute',
-                              top: '-12px',
-                              left: '1rem',
-                              background: 'var(--terminal-bg)',
-                              padding: '0 0.5rem',
-                              fontSize: '0.75rem',
-                              color: index === 0 ? 'var(--terminal-amber)' : donor.type === 'Israel-PAC' ? '#ef4444' : 'var(--terminal-text-dim)',
-                              fontWeight: 700,
-                              letterSpacing: '0.1em',
-                            }}>
-                              #{index + 1}
+                      <div className="divide-y divide-outline-variant/10">
+                        {politician.top5Donors.map((donor, index) => {
+                          const isIsrael = donor.type === 'Israel-PAC';
+                          return (
+                            <div key={index} className={`p-4 flex items-center justify-between gap-4 hover:bg-primary-container/5 transition-none ${isIsrael ? 'bg-[#FFD166]/5 border-y border-[#FFD166]/20' : ''}`}>
+                              <div className="flex-1 min-w-0">
+                                <div className={`font-label text-[0.8rem] font-bold uppercase tracking-tight ${isIsrael ? 'text-[#FFD166]' : 'text-on-surface'}`}>
+                                  {donor.name}
+                                  {isIsrael && (
+                                    <span className="ml-2 font-label text-[0.55rem] text-[#FFD166] border border-[#FFD166]/40 px-1.5 py-0.5 bg-[#FFD166]/20">FLAGGED</span>
+                                  )}
+                                </div>
+                                <div className="font-label text-[0.6rem] text-on-surface/40 uppercase mt-1">{donor.type}</div>
+                              </div>
+                              <div className={`font-label text-[0.9rem] font-bold text-right ${isIsrael ? 'text-[#FFD166]' : 'text-primary-container'}`}>
+                                ${donor.amount >= 1000000
+                                  ? `${(donor.amount / 1000000).toFixed(2)}M`
+                                  : `${(donor.amount / 1000).toFixed(0)}K`}
+                              </div>
                             </div>
-                            <div style={{
-                              fontSize: index === 0 ? '1.25rem' : '1rem',
-                              fontWeight: 700,
-                              marginBottom: '0.5rem',
-                              color: index === 0 ? 'var(--terminal-amber)' : donor.type === 'Israel-PAC' ? '#ef4444' : 'var(--terminal-text)',
-                            }}>
-                              {donor.name}
-                              {donor.type === 'Israel-PAC' && (
-                                <span style={{ marginLeft: '0.5rem', fontSize: '0.75rem', color: '#ef4444', fontWeight: 700 }}>
-                                  🇮🇱 ISRAEL-PAC
-                                </span>
-                              )}
-                            </div>
-                            <div style={{
-                              fontSize: index === 0 ? '2rem' : '1.5rem',
-                              fontWeight: 700,
-                              color: index === 0 ? 'var(--terminal-amber)' : donor.type === 'Israel-PAC' ? '#ef4444' : 'var(--terminal-text)',
-                              fontFamily: 'Bebas Neue, sans-serif',
-                            }}>
-                              ${donor.amount >= 1000000
-                                ? `${(donor.amount / 1000000).toFixed(0)}M`
-                                : `${(donor.amount / 1000).toFixed(0)}K`}
-                            </div>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginTop: '0.5rem', textTransform: 'uppercase' }}>
-                              {donor.type}
-                            </div>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     ) : (
-                      <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--terminal-text-dim)' }}>
-                        <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>📊</div>
-                        <div>No donor data available</div>
+                      <div className="p-8 text-center text-on-surface/40 font-label text-[0.75rem]">
+                        No donor data available
                       </div>
                     )}
                   </div>
 
                   {/* Contribution Breakdown Card */}
                   {politician.contributionBreakdown && (
-                    <div className="terminal-card">
-                      <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--terminal-amber)' }}>
-                        📊 FUNDING BREAKDOWN
+                    <div className="bg-surface-container-low p-6 border border-outline-variant/10">
+                      <h3 className="font-label text-[0.8rem] font-bold text-primary-container tracking-widest uppercase mb-6">
+                        FUNDING_BREAKDOWN
                       </h3>
                       {(() => {
                         const b = politician.contributionBreakdown;
@@ -1395,7 +1235,7 @@ export default function PoliticianPage() {
           <span> // LAST UPDATED: {new Date(politician.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
         )}
       </div>
-    </div>
+    </main>
   );
 }
 
