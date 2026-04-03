@@ -1,4 +1,5 @@
 #!/usr/bin/env npx tsx
+import 'dotenv/config';
 /**
  * Sync LegiScan FL State Voting Records to Snitched.ai
  *

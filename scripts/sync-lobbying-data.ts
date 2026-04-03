@@ -1,4 +1,5 @@
 #!/usr/bin/env npx tsx
+import 'dotenv/config';
 /**
  * Sync Lobbying Disclosure Data to Supabase
  *
@@ -23,7 +24,7 @@ import { createClient } from '@supabase/supabase-js';
 // ---------------------------------------------------------------------------
 
 const LDA_API_KEY = process.env.LDA_API_KEY || '';
-const LDA_BASE_URL = 'https://lda.gov/api/v1';
+const LDA_BASE_URL = 'https://lda.senate.gov/api/v1';
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
@@ -103,12 +104,11 @@ async function ldaFetch(endpoint: string, params: Record<string, string>): Promi
     url.searchParams.set(k, v);
   }
 
-  const resp = await fetch(url.toString(), {
-    headers: {
-      'Authorization': `Token ${LDA_API_KEY}`,
-      'Accept': 'application/json',
-    },
-  });
+  const headers: Record<string, string> = { 'Accept': 'application/json' };
+  if (LDA_API_KEY) {
+    headers['Authorization'] = `Token ${LDA_API_KEY}`;
+  }
+  const resp = await fetch(url.toString(), { headers });
 
   if (resp.status === 429) {
     const retryAfter = parseInt(resp.headers.get('Retry-After') ?? '5');
