@@ -231,13 +231,34 @@ export default function PoliticianCard({ politician }: Props) {
           </div>
         </div>
 
+        {/* Funding summary */}
+        {(politician.totalFundsRaised ?? 0) > 0 && (
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '0.5rem 0.75rem',
+            background: 'rgba(0, 191, 255, 0.05)',
+            border: '1px solid var(--terminal-border)',
+            marginBottom: '0.75rem',
+            fontSize: '0.7rem',
+          }}>
+            <span style={{ color: 'var(--terminal-text-dim)' }}>FUNDS RAISED</span>
+            <span style={{ fontWeight: 700, color: 'var(--terminal-amber)', fontFamily: 'Bebas Neue, sans-serif', fontSize: '0.9rem' }}>
+              ${(politician.totalFundsRaised ?? 0) >= 1_000_000
+                ? `${((politician.totalFundsRaised ?? 0) / 1_000_000).toFixed(1)}M`
+                : `${((politician.totalFundsRaised ?? 0) / 1_000).toFixed(0)}K`}
+            </span>
+          </div>
+        )}
+
         {/* Footer */}
-        <div 
+        <div
           style={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            paddingTop: '1rem',
+            paddingTop: '0.75rem',
             borderTop: '2px solid var(--border-color)',
             fontSize: '0.75rem',
             color: 'var(--text-muted)',
