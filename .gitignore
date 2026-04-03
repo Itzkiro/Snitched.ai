@@ -46,5 +46,8 @@ congress-members.json
 data-ingestion/phase1/raw/
 data-ingestion/jfk-social-results/
 
+# Large scraped data files (synced to Supabase, not needed in git)
+data-ingestion/legiscan-votes.json
+
 # Keep FEC results tracked (imported by lib/real-data.ts at build time)
 # data-ingestion/jfk-fec-results/ -- DO NOT IGNORE
