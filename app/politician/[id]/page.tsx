@@ -1363,114 +1363,9 @@ export default function PoliticianPage() {
             </div>
           )}
 
-          {/* Network / Lobbying Tab */}
+          {/* Network / Connections Tab */}
           {activeTab === 'network' && (
-            <div>
-              {politician.lobbyingRecords && politician.lobbyingRecords.length > 0 ? (
-                <div style={{ display: 'grid', gap: '2rem' }}>
-                  {/* Lobbying Summary */}
-                  <div className="terminal-card">
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--terminal-amber)' }}>
-                      🏛️ LOBBYING CONNECTIONS
-                    </h3>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '1.5rem' }}>
-                      Lobbyist contributions and revolving door connections (LDA Senate filings)
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
-                      <div className="terminal-card" style={{ textAlign: 'center' }}>
-                        <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--terminal-amber)', fontFamily: 'Bebas Neue, sans-serif' }}>
-                          {politician.lobbyingRecords.length}
-                        </div>
-                        <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase' }}>Lobbying Records</div>
-                      </div>
-                      <div className="terminal-card" style={{ textAlign: 'center' }}>
-                        <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--terminal-amber)', fontFamily: 'Bebas Neue, sans-serif' }}>
-                          ${(() => {
-                            const total = politician.lobbyingRecords.reduce((sum: number, r: any) => sum + (r.income || 0), 0);
-                            return total >= 1_000_000 ? `${(total / 1_000_000).toFixed(1)}M` : total >= 1_000 ? `${(total / 1_000).toFixed(0)}K` : total.toString();
-                          })()}
-                        </div>
-                        <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase' }}>Total Lobbying $</div>
-                      </div>
-                      <div className="terminal-card" style={{ textAlign: 'center' }}>
-                        <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--terminal-amber)', fontFamily: 'Bebas Neue, sans-serif' }}>
-                          {new Set(politician.lobbyingRecords.map((r: any) => r.registrantName)).size}
-                        </div>
-                        <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase' }}>Unique Firms</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Individual Records */}
-                  <div className="terminal-card">
-                    <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--terminal-text)' }}>
-                      LOBBYING FILINGS
-                    </h3>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                      {[...politician.lobbyingRecords]
-                        .sort((a: any, b: any) => (b.income || 0) - (a.income || 0))
-                        .slice(0, 20)
-                        .map((record: any, index: number) => (
-                        <div key={index} style={{
-                          padding: '1rem',
-                          background: 'rgba(156, 163, 175, 0.05)',
-                          border: '1px solid var(--terminal-border)',
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                          gap: '1rem',
-                          flexWrap: 'wrap',
-                        }}>
-                          <div style={{ flex: 1, minWidth: '200px' }}>
-                            <div style={{ fontWeight: 700, fontSize: '0.85rem', marginBottom: '0.25rem' }}>
-                              {record.registrantName || record.clientName}
-                            </div>
-                            {record.clientName && record.clientName !== record.registrantName && (
-                              <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)' }}>
-                                Client: {record.clientName}
-                              </div>
-                            )}
-                            <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)', marginTop: '0.25rem' }}>
-                              {record.issueAreas?.join(' | ') || ''} {record.filingYear ? `(${record.filingYear})` : ''}
-                            </div>
-                          </div>
-                          <div style={{
-                            fontSize: '1.25rem',
-                            fontWeight: 700,
-                            fontFamily: 'Bebas Neue, sans-serif',
-                            color: 'var(--terminal-amber)',
-                            whiteSpace: 'nowrap',
-                          }}>
-                            {record.income ? `$${record.income >= 1_000_000
-                              ? `${(record.income / 1_000_000).toFixed(1)}M`
-                              : record.income >= 1_000
-                                ? `${(record.income / 1_000).toFixed(0)}K`
-                                : record.income.toLocaleString()}` : ''}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                    {politician.lobbyingRecords.length > 20 && (
-                      <div style={{ textAlign: 'center', padding: '1rem', color: 'var(--terminal-text-dim)', fontSize: '0.75rem' }}>
-                        Showing top 20 of {politician.lobbyingRecords.length} records
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ) : (
-                <div className="terminal-card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
-                  <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>📋</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-text-dim)' }}>
-                    NO LOBBYING DATA
-                  </div>
-                  <div style={{ color: 'var(--terminal-text-dim)' }}>
-                    {['US Senator', 'US Representative'].includes(politician.officeLevel)
-                      ? 'No lobbying disclosure filings found for this politician.'
-                      : 'Lobbying disclosure data is only available for federal politicians.'}
-                  </div>
-                </div>
-              )}
-            </div>
+            <ConnectionsTree politician={politician} />
           )}
 
           {/* Social / News Tab */}
@@ -1608,6 +1503,433 @@ function SocialTab({ politicianId, politicianName }: { politicianId: string; pol
           ))}
         </div>
       </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Connections Tree — Interactive network visualization
+// ---------------------------------------------------------------------------
+
+interface TreeNode {
+  id: string;
+  label: string;
+  sublabel?: string;
+  amount?: number;
+  color: string;
+  icon: string;
+  children?: TreeNode[];
+  tag?: string;
+}
+
+function formatAmount(n: number): string {
+  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`;
+  if (n >= 1_000) return `$${(n / 1_000).toFixed(0)}K`;
+  return `$${n.toLocaleString()}`;
+}
+
+function ConnectionsTree({ politician }: { politician: Politician }) {
+  const [expanded, setExpanded] = useState<Set<string>>(new Set(['root', 'funding', 'lobbying']));
+
+  const toggle = (id: string) => {
+    setExpanded(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
+  };
+
+  const expandAll = () => {
+    const allIds: string[] = ['root'];
+    const collect = (nodes: TreeNode[]) => {
+      for (const n of nodes) {
+        allIds.push(n.id);
+        if (n.children) collect(n.children);
+      }
+    };
+    collect(tree);
+    setExpanded(new Set(allIds));
+  };
+
+  const collapseAll = () => setExpanded(new Set(['root']));
+
+  // Build the tree from politician data
+  const tree: TreeNode[] = [];
+
+  // --- FUNDING SOURCES ---
+  const donors = politician.top5Donors || [];
+  const breakdown = politician.contributionBreakdown;
+  const fundingChildren: TreeNode[] = [];
+
+  if (breakdown) {
+    if (breakdown.individuals > 0) {
+      const indivDonors = donors.filter(d => d.type === 'Individual');
+      fundingChildren.push({
+        id: 'funding-individuals',
+        label: 'Individual Donors',
+        amount: breakdown.individuals,
+        color: 'var(--terminal-green)',
+        icon: '👤',
+        children: indivDonors.map((d, i) => ({
+          id: `donor-indiv-${i}`,
+          label: d.name,
+          amount: d.amount,
+          color: 'var(--terminal-green)',
+          icon: '·',
+        })),
+      });
+    }
+    if (breakdown.otherPACs > 0) {
+      const pacDonors = donors.filter(d => d.type === 'PAC');
+      fundingChildren.push({
+        id: 'funding-pacs',
+        label: 'Political Action Committees',
+        amount: breakdown.otherPACs,
+        color: 'var(--terminal-amber)',
+        icon: '🏛️',
+        children: pacDonors.map((d, i) => ({
+          id: `donor-pac-${i}`,
+          label: d.name,
+          amount: d.amount,
+          color: 'var(--terminal-amber)',
+          icon: '·',
+        })),
+      });
+    }
+    if (breakdown.corporate > 0) {
+      const corpDonors = donors.filter(d => d.type === 'Corporate');
+      fundingChildren.push({
+        id: 'funding-corporate',
+        label: 'Corporate Donors',
+        amount: breakdown.corporate,
+        color: '#60a5fa',
+        icon: '🏢',
+        children: corpDonors.map((d, i) => ({
+          id: `donor-corp-${i}`,
+          label: d.name,
+          amount: d.amount,
+          color: '#60a5fa',
+          icon: '·',
+        })),
+      });
+    }
+    if (breakdown.aipac > 0 || (politician.israelLobbyTotal || 0) > 0) {
+      const israelDonors = donors.filter(d => d.type === 'Israel-PAC' || (d as any).is_israel_lobby);
+      const ieDetails = politician.israelLobbyBreakdown?.ie_details || [];
+      const israelChildren: TreeNode[] = [
+        ...israelDonors.map((d, i) => ({
+          id: `donor-israel-${i}`,
+          label: d.name,
+          amount: d.amount,
+          color: '#ef4444',
+          icon: '·',
+          tag: 'DIRECT',
+        })),
+        ...ieDetails.map((ie, i) => ({
+          id: `ie-israel-${i}`,
+          label: ie.committee_name,
+          sublabel: ie.support_oppose === 'support' ? 'SUPPORTED' : 'OPPOSED',
+          amount: ie.amount,
+          color: '#ef4444',
+          icon: ie.support_oppose === 'support' ? '+' : '-',
+          tag: 'IE',
+        })),
+      ];
+      fundingChildren.push({
+        id: 'funding-israel',
+        label: 'Israel Lobby',
+        amount: politician.israelLobbyTotal || breakdown.aipac,
+        color: '#ef4444',
+        icon: '🇮🇱',
+        children: israelChildren.length > 0 ? israelChildren : undefined,
+      });
+    }
+  } else if (donors.length > 0) {
+    for (const [i, d] of donors.entries()) {
+      fundingChildren.push({
+        id: `donor-${i}`,
+        label: d.name,
+        amount: d.amount,
+        color: d.type === 'Israel-PAC' ? '#ef4444' : 'var(--terminal-amber)',
+        icon: d.type === 'PAC' ? '🏛️' : d.type === 'Corporate' ? '🏢' : '👤',
+        tag: d.type,
+      });
+    }
+  }
+
+  if (fundingChildren.length > 0) {
+    tree.push({
+      id: 'funding',
+      label: 'CAMPAIGN FUNDING',
+      amount: politician.totalFundsRaised,
+      color: 'var(--terminal-amber)',
+      icon: '💰',
+      children: fundingChildren,
+    });
+  }
+
+  // --- LOBBYING CONNECTIONS ---
+  const lobbyRecords = politician.lobbyingRecords || [];
+  if (lobbyRecords.length > 0) {
+    // Group by registrant (lobbying firm)
+    const byFirm: Record<string, { income: number; clients: Set<string>; revolvingDoor: string[]; years: Set<number> }> = {};
+    for (const r of lobbyRecords as any[]) {
+      const firm = r.registrantName || 'Unknown';
+      if (!byFirm[firm]) byFirm[firm] = { income: 0, clients: new Set(), revolvingDoor: [], years: new Set() };
+      byFirm[firm].income += r.income || 0;
+      if (r.clientName) byFirm[firm].clients.add(r.clientName);
+      if (r.filingYear) byFirm[firm].years.add(r.filingYear);
+      if (r.revolvingDoor) {
+        for (const rd of r.revolvingDoor) {
+          if (!byFirm[firm].revolvingDoor.includes(rd)) byFirm[firm].revolvingDoor.push(rd);
+        }
+      }
+    }
+
+    const firmNodes: TreeNode[] = Object.entries(byFirm)
+      .sort((a, b) => b[1].income - a[1].income)
+      .slice(0, 25)
+      .map(([firm, data], i) => {
+        const children: TreeNode[] = [];
+        // Clients
+        for (const client of [...data.clients].slice(0, 10)) {
+          if (client !== firm) {
+            children.push({ id: `lobby-client-${i}-${children.length}`, label: client, color: '#a78bfa', icon: '·', tag: 'CLIENT' });
+          }
+        }
+        // Revolving door
+        for (const rd of data.revolvingDoor.slice(0, 5)) {
+          children.push({ id: `lobby-rd-${i}-${children.length}`, label: rd.substring(0, 80), color: '#f97316', icon: '🔄', tag: 'REVOLVING DOOR' });
+        }
+        return {
+          id: `lobby-firm-${i}`,
+          label: firm,
+          sublabel: `${data.clients.size} clients | ${[...data.years].sort().join(', ')}`,
+          amount: data.income,
+          color: '#a78bfa',
+          icon: '🏛️',
+          children: children.length > 0 ? children : undefined,
+        };
+      });
+
+    const totalLobbyIncome = Object.values(byFirm).reduce((s, d) => s + d.income, 0);
+    const totalRevDoor = Object.values(byFirm).reduce((s, d) => s + d.revolvingDoor.length, 0);
+
+    tree.push({
+      id: 'lobbying',
+      label: 'LOBBYING CONNECTIONS',
+      sublabel: `${Object.keys(byFirm).length} firms | ${totalRevDoor} revolving door`,
+      amount: totalLobbyIncome,
+      color: '#a78bfa',
+      icon: '🔗',
+      children: firmNodes,
+    });
+  }
+
+  // --- INDEPENDENT EXPENDITURES ---
+  const ieDetails = politician.israelLobbyBreakdown?.ie_details || [];
+  if (ieDetails.length > 0) {
+    const ieNodes: TreeNode[] = ieDetails
+      .sort((a, b) => b.amount - a.amount)
+      .map((ie, i) => ({
+        id: `ie-${i}`,
+        label: ie.committee_name,
+        sublabel: ie.committee_id,
+        amount: ie.amount,
+        color: ie.support_oppose === 'support' ? 'var(--terminal-green)' : '#ef4444',
+        icon: ie.support_oppose === 'support' ? '✓' : '✗',
+        tag: ie.is_israel_lobby ? 'ISRAEL LOBBY' : ie.support_oppose === 'support' ? 'SUPPORT' : 'OPPOSE',
+      }));
+
+    tree.push({
+      id: 'ie',
+      label: 'INDEPENDENT EXPENDITURES',
+      sublabel: 'Third-party spending for/against',
+      amount: ieDetails.reduce((s, ie) => s + ie.amount, 0),
+      color: 'var(--terminal-cyan)',
+      icon: '📡',
+      children: ieNodes,
+    });
+  }
+
+  // No data at all
+  if (tree.length === 0) {
+    return (
+      <div className="terminal-card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
+        <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🔗</div>
+        <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-text-dim)' }}>
+          NO CONNECTIONS DATA
+        </div>
+        <div style={{ color: 'var(--terminal-text-dim)' }}>
+          {['US Senator', 'US Representative'].includes(politician.officeLevel)
+            ? 'Connection data is being processed for this politician.'
+            : 'Connection mapping is available for federal politicians with campaign finance and lobbying data.'}
+        </div>
+      </div>
+    );
+  }
+
+  // Render tree
+  return (
+    <div>
+      {/* Controls */}
+      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+        <button className="terminal-btn" onClick={expandAll} style={{ padding: '0.4rem 0.75rem', fontSize: '0.7rem' }}>EXPAND ALL</button>
+        <button className="terminal-btn" onClick={collapseAll} style={{ padding: '0.4rem 0.75rem', fontSize: '0.7rem' }}>COLLAPSE ALL</button>
+      </div>
+
+      {/* Root node */}
+      <div className="terminal-card" style={{ padding: 0, overflow: 'hidden' }}>
+        {/* Politician header */}
+        <div style={{
+          padding: '1.25rem 1.5rem',
+          background: 'rgba(0, 191, 255, 0.1)',
+          borderBottom: '2px solid var(--terminal-blue)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '1rem',
+        }}>
+          <div style={{
+            width: '40px', height: '40px',
+            border: '2px solid var(--terminal-blue)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: '1.25rem', fontWeight: 700, color: 'var(--terminal-blue)',
+            fontFamily: 'Bebas Neue, sans-serif', flexShrink: 0,
+          }}>
+            {politician.name.charAt(0)}
+          </div>
+          <div>
+            <div style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--terminal-text)' }}>{politician.name}</div>
+            <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)' }}>{politician.office} | {politician.party}</div>
+          </div>
+        </div>
+
+        {/* Tree branches */}
+        <div style={{ padding: '0.5rem 0' }}>
+          {tree.map((branch, bi) => (
+            <TreeBranch key={branch.id} node={branch} depth={0} expanded={expanded} toggle={toggle} isLast={bi === tree.length - 1} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TreeBranch({ node, depth, expanded, toggle, isLast }: {
+  node: TreeNode;
+  depth: number;
+  expanded: Set<string>;
+  toggle: (id: string) => void;
+  isLast: boolean;
+}) {
+  const isOpen = expanded.has(node.id);
+  const hasChildren = node.children && node.children.length > 0;
+  const indent = depth * 24;
+
+  return (
+    <div>
+      <div
+        onClick={() => hasChildren && toggle(node.id)}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          padding: '0.6rem 1rem',
+          paddingLeft: `${indent + 16}px`,
+          cursor: hasChildren ? 'pointer' : 'default',
+          borderLeft: depth > 0 ? `1px solid var(--terminal-border)` : 'none',
+          marginLeft: depth > 0 ? `${(depth - 1) * 24 + 28}px` : 0,
+          transition: 'background 0.15s',
+          ...(hasChildren ? {} : {}),
+        }}
+        onMouseEnter={e => { if (hasChildren) (e.currentTarget as HTMLElement).style.background = 'rgba(0,191,255,0.05)'; }}
+        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
+      >
+        {/* Expand/collapse indicator */}
+        <span style={{ width: '14px', fontSize: '0.7rem', color: 'var(--terminal-text-dim)', textAlign: 'center', flexShrink: 0 }}>
+          {hasChildren ? (isOpen ? '▼' : '▶') : (depth > 0 ? (isLast ? '└' : '├') : '')}
+        </span>
+
+        {/* Icon */}
+        <span style={{ fontSize: depth === 0 ? '1rem' : '0.8rem', flexShrink: 0 }}>{node.icon}</span>
+
+        {/* Label */}
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <span style={{
+            fontWeight: depth === 0 ? 700 : 600,
+            fontSize: depth === 0 ? '0.9rem' : '0.8rem',
+            color: depth === 0 ? node.color : 'var(--terminal-text)',
+            letterSpacing: depth === 0 ? '0.05em' : 'normal',
+          }}>
+            {node.label}
+          </span>
+          {node.sublabel && (
+            <span style={{ fontSize: '0.65rem', color: 'var(--terminal-text-dim)', marginLeft: '0.5rem' }}>
+              {node.sublabel}
+            </span>
+          )}
+          {node.tag && (
+            <span style={{
+              fontSize: '0.55rem',
+              padding: '1px 4px',
+              marginLeft: '0.5rem',
+              background: `${node.color}20`,
+              color: node.color,
+              border: `1px solid ${node.color}40`,
+              fontWeight: 700,
+              letterSpacing: '0.05em',
+              verticalAlign: 'middle',
+            }}>
+              {node.tag}
+            </span>
+          )}
+        </div>
+
+        {/* Amount */}
+        {node.amount != null && node.amount > 0 && (
+          <span style={{
+            fontWeight: 700,
+            fontFamily: 'Bebas Neue, sans-serif',
+            fontSize: depth === 0 ? '1.1rem' : '0.9rem',
+            color: node.color,
+            whiteSpace: 'nowrap',
+            flexShrink: 0,
+          }}>
+            {formatAmount(node.amount)}
+          </span>
+        )}
+
+        {/* Child count badge */}
+        {hasChildren && (
+          <span style={{
+            fontSize: '0.6rem',
+            padding: '1px 5px',
+            background: 'var(--terminal-surface)',
+            border: '1px solid var(--terminal-border)',
+            color: 'var(--terminal-text-dim)',
+            borderRadius: '2px',
+            flexShrink: 0,
+          }}>
+            {node.children!.length}
+          </span>
+        )}
+      </div>
+
+      {/* Children */}
+      {isOpen && hasChildren && (
+        <div>
+          {node.children!.map((child, ci) => (
+            <TreeBranch
+              key={child.id}
+              node={child}
+              depth={depth + 1}
+              expanded={expanded}
+              toggle={toggle}
+              isLast={ci === node.children!.length - 1}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
