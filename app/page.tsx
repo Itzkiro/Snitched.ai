@@ -152,11 +152,14 @@ export default function TerminalHome() {
   const federal = politicians.filter(p => p.officeLevel === 'US Senator' || p.officeLevel === 'US Representative');
   const state = politicians.filter(p => p.officeLevel === 'State Senator' || p.officeLevel === 'State Representative' || p.officeLevel === 'Governor');
   const county = politicians.filter(p => p.jurisdictionType === 'county' || p.jurisdictionType === 'municipal');
+  const withFunding = politicians.filter(p => (p.totalFundsRaised || 0) > 0).length;
+  const withVotes = politicians.filter(p => p.votes && p.votes.length > 0).length;
   const stats = {
     total: politicians.length,
     federal: federal.length,
     state: state.length,
     county: county.length,
+    funded: withFunding,
   };
 
   // Get top 6 most corrupted for grid display
@@ -227,11 +230,11 @@ export default function TerminalHome() {
             </div>
           </div>
 
-          {/* JFK-Intel Data Stats Banner */}
+          {/* Database Status Banner */}
           <div style={{
             padding: '1.5rem',
-            background: 'var(--bg-tertiary)',
-            border: '2px solid var(--border-color)',
+            background: 'var(--terminal-surface)',
+            border: '2px solid var(--terminal-border)',
             marginBottom: '2rem',
             display: 'flex',
             justifyContent: 'space-between',
@@ -240,11 +243,11 @@ export default function TerminalHome() {
             gap: '1rem',
           }}>
             <div>
-              <div style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--red-blood)', marginBottom: '0.5rem', letterSpacing: '0.1em' }}>
-                JFK-INTEL DATABASE STATUS
+              <div style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--terminal-amber)', marginBottom: '0.5rem', letterSpacing: '0.1em' }}>
+                DATABASE STATUS
               </div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                Real Government Data | Live APIs
+              <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)' }}>
+                FEC | FL Division of Elections | LDA | LegiScan
               </div>
             </div>
             <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
