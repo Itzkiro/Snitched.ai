@@ -241,12 +241,18 @@ export default function TerminalHome() {
             marginBottom: '2rem'
           }}>
             <div className="terminal-card">
-              <div className="stat-value danger">${(totalFunding / 1000000).toFixed(2)}M+</div>
-              <div className="stat-label">ISRAEL LOBBY FUNDING (FEDERAL ONLY)</div>
+              <div className="stat-value" style={{ color: 'var(--terminal-cyan)' }}>
+                ${(activePoliticians.reduce((s, p) => s + (p.totalFundsRaised || 0), 0) / 1000000).toFixed(0)}M+
+              </div>
+              <div className="stat-label">TOTAL CAMPAIGN FUNDS TRACKED</div>
             </div>
             <div className="terminal-card">
-              <div className="stat-value warning">{compromisedCount}</div>
-              <div className="stat-label">COMPROMISED OFFICIALS</div>
+              <div className="stat-value danger">${(totalFunding / 1000000).toFixed(1)}M+</div>
+              <div className="stat-label">ISRAEL LOBBY FUNDING</div>
+            </div>
+            <div className="terminal-card">
+              <div className="stat-value warning">{stats.funded}</div>
+              <div className="stat-label">POLITICIANS WITH REAL DATA</div>
             </div>
             <div className="terminal-card">
               <div className="stat-value">{avgCorruption}</div>
