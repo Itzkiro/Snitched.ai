@@ -397,7 +397,7 @@ export default function PoliticianPage() {
         </div>
       </div>
 
-      <div style={{ padding: '2rem' }}>
+      <div style={{ padding: '1rem' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
           {/* Back Button */}
           <Link 
@@ -419,12 +419,12 @@ export default function PoliticianPage() {
 
           {/* Profile Header Card */}
           <div className="terminal-card" style={{ marginBottom: '2rem' }}>
-            <div style={{ display: 'flex', gap: '2rem', alignItems: 'start' }}>
+            <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'start', flexWrap: 'wrap' }}>
               {/* Initial/Photo */}
-              <div 
+              <div
                 style={{
-                  width: '120px',
-                  height: '120px',
+                  width: '80px',
+                  height: '80px',
                   border: `3px solid ${getScoreColor(politician.corruptionScore)}`,
                   display: 'flex',
                   alignItems: 'center',

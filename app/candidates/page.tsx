@@ -191,7 +191,7 @@ export default async function CandidatesPage() {
           </h3>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
             gap: '1rem',
             fontSize: '11px'
           }}>

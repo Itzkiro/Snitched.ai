@@ -203,14 +203,14 @@ export default function TerminalHome() {
         </div>
       </div>
 
-      <div style={{ display: 'flex', padding: '2rem', gap: '2rem' }}>
+      <div style={{ display: 'flex', padding: '2rem', gap: '2rem', flexWrap: 'wrap' }}>
         {/* Main content */}
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: '1 1 400px', minWidth: 0 }}>
           {/* Stats grid */}
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(3, 1fr)', 
-            gap: '1.5rem',
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '1rem',
             marginBottom: '2rem'
           }}>
             <div className="terminal-card">
@@ -236,16 +236,18 @@ export default function TerminalHome() {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '1rem',
           }}>
             <div>
               <div style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--red-blood)', marginBottom: '0.5rem', letterSpacing: '0.1em' }}>
                 JFK-INTEL DATABASE STATUS
               </div>
               <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                Phase 1 Complete | Real Government Data | Live APIs
+                Real Government Data | Live APIs
               </div>
             </div>
-            <div style={{ display: 'flex', gap: '2rem' }}>
+            <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
               <div style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: '2rem', fontWeight: 700, color: '#10b981' }}>{stats.federal}</div>
                 <div style={{ fontSize: '0.625rem', color: '#10b981', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700 }}>
@@ -341,7 +343,7 @@ export default function TerminalHome() {
           </div>
 
           {/* Navigation buttons */}
-          <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
+          <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem', flexWrap: 'wrap' }}>
             <Link href="/hierarchy">
               <button className="terminal-btn">VIEW FULL HIERARCHY</button>
             </Link>
@@ -355,7 +357,7 @@ export default function TerminalHome() {
         </div>
 
         {/* OSINT feed sidebar — real data from politicians + social posts */}
-        <div style={{ width: '300px' }}>
+        <div style={{ flex: '0 0 300px', maxWidth: '100%' }}>
           <div className="osint-feed">
             <div className="feed-header">
               <span className="feed-title">🔴 OSINT FEED</span>

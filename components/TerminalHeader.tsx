@@ -28,7 +28,7 @@ export default function TerminalHeader() {
       </div>
 
       {/* Navigation */}
-      <div style={{
+      <div className="terminal-nav" style={{
         background: 'var(--terminal-surface)',
         borderBottom: '1px solid var(--terminal-border)',
         padding: '0.75rem 2rem',

@@ -64,9 +64,9 @@ export default async function OfficialsPage() {
       {/* Stats */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: '1.5rem',
-        padding: '2rem',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+        gap: '1rem',
+        padding: '1rem',
         borderBottom: '1px solid var(--terminal-border)'
       }}>
         <div className="terminal-card">
