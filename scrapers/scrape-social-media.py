@@ -38,6 +38,16 @@ import argparse
 import hashlib
 import re
 import xml.etree.ElementTree as ET
+
+# Load .env from project root
+from pathlib import Path as _P
+_env = _P(__file__).resolve().parent.parent / ".env"
+if _env.exists():
+    for _line in _env.read_text().splitlines():
+        _line = _line.strip()
+        if _line and not _line.startswith("#") and "=" in _line:
+            _k, _v = _line.split("=", 1)
+            os.environ.setdefault(_k.strip(), _v.strip())
 from datetime import datetime, timedelta, timezone
 from typing import List, Dict, Any, Optional, Tuple
 import time
@@ -118,9 +128,9 @@ SUPABASE_URL = os.getenv("SUPABASE_URL")
 if not SUPABASE_URL:
     raise RuntimeError("SUPABASE_URL environment variable is required")
 
-SUPABASE_SERVICE_KEY = os.getenv("SUPABASE_SERVICE_KEY")
+SUPABASE_SERVICE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY") or os.getenv("SUPABASE_SERVICE_KEY")
 if not SUPABASE_SERVICE_KEY:
-    raise RuntimeError("SUPABASE_SERVICE_KEY environment variable is required")
+    raise RuntimeError("SUPABASE_SERVICE_ROLE_KEY environment variable is required")
 
 SUPABASE_HEADERS = {
     "apikey": SUPABASE_SERVICE_KEY,
@@ -210,10 +220,19 @@ def supabase_upsert_posts(posts: List[Dict[str, Any]]) -> int:
         "Prefer": "return=representation,resolution=merge-duplicates",
     }
 
-    # Send in batches of 100
+    # Deduplicate by id before batching
+    seen_ids: set = set()
+    deduped: List[Dict[str, Any]] = []
+    for post in posts:
+        pid = post.get("id")
+        if pid and pid not in seen_ids:
+            seen_ids.add(pid)
+            deduped.append(post)
+
+    # Send in batches of 50
     total = 0
-    for i in range(0, len(posts), 100):
-        batch = posts[i : i + 100]
+    for i in range(0, len(deduped), 50):
+        batch = deduped[i : i + 50]
         # Clean up fields for Supabase
         clean_batch = []
         for post in batch:
