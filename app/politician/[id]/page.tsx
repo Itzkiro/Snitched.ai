@@ -279,7 +279,7 @@ export default function PoliticianPage() {
 
   if (politicianLoading) {
     return (
-      <main className="min-h-screen bg-background text-on-surface flex items-center justify-center">
+      <main className="pt-[82px] min-h-screen bg-background text-on-surface flex items-center justify-center">
         <div className="text-center space-y-4">
           <div className="w-12 h-12 border-2 border-outline-variant border-t-primary-container mx-auto animate-spin" />
           <div className="font-label text-[0.75rem] text-primary-container/60 tracking-widest uppercase">LOADING_DOSSIER...</div>
@@ -290,7 +290,7 @@ export default function PoliticianPage() {
 
   if (!politician) {
     return (
-      <main className="min-h-screen bg-background text-on-surface">
+      <main className="pt-[82px] min-h-screen bg-background text-on-surface">
         <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6">
           <div className="w-20 h-20 bg-surface-container-low border border-outline-variant/10 flex items-center justify-center">
             <span className="font-headline text-4xl text-error">?</span>
@@ -366,7 +366,7 @@ export default function PoliticianPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-background text-on-surface grid-bg relative">
+    <main className="pt-[82px] min-h-screen bg-background text-on-surface grid-bg relative">
       {/* Dossier Header */}
       <div className="border-b border-outline-variant/20 pb-8">
         <div className="flex flex-col md:flex-row justify-between items-start gap-6 p-6">
