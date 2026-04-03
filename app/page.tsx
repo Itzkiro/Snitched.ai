@@ -130,15 +130,39 @@ export default function TerminalHome() {
   }, []);
 
   if (loading) {
-    return <div style={{ padding: '2rem', textAlign: 'center', color: 'white' }}>Loading...</div>;
+    return (
+      <div style={{ minHeight: '100vh', background: 'var(--terminal-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '2rem', marginBottom: '1rem', animation: 'pulse 2s infinite' }}>SNITCHED.AI</div>
+          <div style={{ color: 'var(--terminal-text-dim)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+            Loading intelligence database...
+          </div>
+        </div>
+      </div>
+    );
   }
 
   if (error) {
-    return <div style={{ padding: '2rem', textAlign: 'center', color: 'red' }}>Error: {error}</div>;
+    return (
+      <div style={{ minHeight: '100vh', background: 'var(--terminal-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="terminal-card" style={{ textAlign: 'center', maxWidth: '500px', padding: '2rem' }}>
+          <div style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--terminal-red)' }}>CONNECTION ERROR</div>
+          <div style={{ color: 'var(--terminal-text-dim)', marginBottom: '1rem' }}>{error}</div>
+          <button className="terminal-btn" onClick={() => window.location.reload()}>RETRY</button>
+        </div>
+      </div>
+    );
   }
 
   if (politicians.length === 0) {
-    return <div style={{ padding: '2rem', textAlign: 'center', color: 'yellow' }}>No politicians data loaded. Please refresh.</div>;
+    return (
+      <div style={{ minHeight: '100vh', background: 'var(--terminal-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="terminal-card" style={{ textAlign: 'center', padding: '2rem' }}>
+          <div style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--terminal-amber)' }}>NO DATA</div>
+          <div style={{ color: 'var(--terminal-text-dim)' }}>Database returned empty. Please refresh.</div>
+        </div>
+      </div>
+    );
   }
 
   const activePoliticians = politicians.filter(p => p.isActive);
