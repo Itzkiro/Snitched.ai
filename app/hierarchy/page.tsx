@@ -40,7 +40,7 @@ const MUNICIPALITY_TO_COUNTY: Record<string, string> = {
   'Crescent City': 'Putnam County',
 };
 
-/** Known county names — used to discover counties dynamically from data */
+/** Known county names -- used to discover counties dynamically from data */
 const COUNTY_NAMES = [
   'Volusia County', 'Flagler County', 'Putnam County',
   'Lake County', 'Seminole County', 'Orange County', 'Brevard County',
@@ -103,23 +103,22 @@ function buildCountyNode(slug: string, countyName: string, pols: Politician[]): 
 function buildHierarchy(all: Politician[]): HierarchyNode {
   const byOffice = (level: Politician['officeLevel']) => all.filter(p => p.officeLevel === level);
 
-  // ── Federal ──
+  // -- Federal --
   const federal = branchNode('federal', 'Federal Delegation', [
     leafNode('us-senate', 'U.S. Senate', byOffice('US Senator')),
     leafNode('us-house', 'U.S. House', byOffice('US Representative')),
   ]);
 
-  // ── State Executive ──
+  // -- State Executive --
   const stateExec = leafNode('state-exec', 'State Executive', byOffice('Governor'));
 
-  // ── State Legislature ──
+  // -- State Legislature --
   const stateLeg = branchNode('state-leg', 'State Legislature', [
     leafNode('state-senate', 'State Senate', byOffice('State Senator')),
     leafNode('state-house', 'State House', byOffice('State Representative')),
   ]);
 
-  // ── Counties ──
-  // Group all county/municipal politicians by their parent county
+  // -- Counties --
   const countyGroups: Record<string, Politician[]> = {};
   for (const name of COUNTY_NAMES) countyGroups[name] = [];
 
@@ -139,7 +138,7 @@ function buildHierarchy(all: Politician[]): HierarchyNode {
 
   const countiesNode = branchNode('counties', 'Counties', countyNodes);
 
-  // ── Top-level tree ──
+  // -- Top-level tree --
   const topChildren: (HierarchyNode | undefined)[] = [
     federal,
     stateExec,
@@ -172,6 +171,39 @@ function sumAipacFunding(node: HierarchyNode): number {
   return total;
 }
 
+/** Compute a risk score 0-100 from the node's corruption scores */
+function computeRiskScore(node: HierarchyNode): number {
+  const pols = collectPoliticians(node);
+  if (pols.length === 0) return 0;
+  const avg = pols.reduce((s, p) => s + p.corruptionScore, 0) / pols.length;
+  return Math.round(avg * 10) / 10;
+}
+
+/** Collect all politicians under a node recursively */
+function collectPoliticians(node: HierarchyNode): Politician[] {
+  const result: Politician[] = [];
+  if (node.politicians) result.push(...node.politicians);
+  if (node.children) {
+    for (const child of node.children) {
+      result.push(...collectPoliticians(child));
+    }
+  }
+  return result;
+}
+
+/** Count critical nodes (score >= 60) */
+function countCritical(node: HierarchyNode): number {
+  const pols = collectPoliticians(node);
+  return pols.filter(p => p.corruptionScore >= 60).length;
+}
+
+/** Get risk label */
+function riskLabel(score: number): { text: string; color: string } {
+  if (score >= 70) return { text: 'STATE_HIGH_RISK', color: 'text-error' };
+  if (score >= 40) return { text: 'STATE_NOMINAL', color: 'text-primary-container' };
+  return { text: 'STATE_STABLE', color: 'text-primary-container' };
+}
+
 export default function HierarchyPage() {
   const [path, setPath] = useState<string[]>(['florida']);
   const [allPoliticians, setAllPoliticians] = useState<Politician[]>([]);
@@ -186,7 +218,6 @@ export default function HierarchyPage() {
         const data: Politician[] = await res.json();
         setAllPoliticians(data);
       } catch (err) {
-        console.error('Error loading:', err);
         setError(err instanceof Error ? err.message : 'Failed to load data');
       } finally {
         setLoading(false);
@@ -201,11 +232,23 @@ export default function HierarchyPage() {
   }, [allPoliticians]);
 
   if (loading || !hierarchyData) {
-    return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>;
+    return (
+      <div className="pt-[82px] min-h-screen bg-surface-container-lowest flex items-center justify-center">
+        <div className="font-label text-xs text-primary-container animate-pulse tracking-widest uppercase">
+          LOADING_HIERARCHY_DATA...
+        </div>
+      </div>
+    );
   }
 
   if (error) {
-    return <div style={{ padding: '2rem', textAlign: 'center', color: '#ef4444' }}>Error: {error}</div>;
+    return (
+      <div className="pt-[82px] min-h-screen bg-surface-container-lowest flex items-center justify-center">
+        <div className="font-label text-xs text-error tracking-widest uppercase">
+          ERROR: {error}
+        </div>
+      </div>
+    );
   }
 
   const getCurrentNode = (): HierarchyNode => {
@@ -237,254 +280,231 @@ export default function HierarchyPage() {
   });
 
   const aipacTotal = sumAipacFunding(currentNode);
+  const riskScore = computeRiskScore(currentNode);
+  const criticalCount = countCritical(currentNode);
+  const childCount = currentNode.children?.length || 0;
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--terminal-bg)', color: 'var(--terminal-text)' }}>
-      {/* Terminal Title */}
-      <div className="terminal-title">
-        <div>
-          <h1>HIERARCHY - FLORIDA GOVERNMENT STRUCTURE</h1>
-          <div className="terminal-subtitle">
-            DOGE.gov-Style Drill-Down | Navigate {currentNode.count} Officials
-          </div>
+    <main className="pt-[82px] pb-20 px-6 min-h-screen bg-surface-container-lowest">
+      {/* Terminal Header */}
+      <header className="mb-12">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-emerald-500 font-label text-xs">$</span>
+          <h1 className="font-label text-lg text-primary-container tracking-tighter uppercase crt-glow">
+            INIT_HIERARCHY_VISUALIZER.SH --NODE={currentNode.name.toUpperCase().replace(/\s+/g, '_')}
+            <span className="inline-block w-2 h-[1.2em] bg-primary-container ml-1 animate-pulse" />
+          </h1>
         </div>
-      </div>
-
-      {/* Alert */}
-      <div style={{ padding: '2rem', borderBottom: '1px solid var(--terminal-border)' }}>
-        <div className="alert-level">
-          <span className="alert-icon">&#128451;</span>
-          <span>CURRENT LEVEL: {currentNode.name.toUpperCase()}</span>
-          <span style={{ fontSize: '0.875rem', color: 'var(--terminal-text-dim)', marginLeft: '1rem' }}>
-            {currentNode.count} OFFICIALS
-          </span>
+        <div className="flex gap-4 font-label text-[10px] text-emerald-900 uppercase tracking-widest">
+          <span>MAP_ID: X-7741</span>
+          <span>ENCRYPTION: RSA-4096</span>
+          <span>SYNC: 100%</span>
         </div>
-      </div>
+      </header>
 
-      {/* Breadcrumb Navigation */}
-      <div style={{
-        textAlign: 'center',
-        padding: '3rem 2rem 2rem',
-        borderBottom: '1px solid var(--terminal-border)'
-      }}>
-        <div style={{ fontSize: '1.5rem', fontWeight: 400, marginBottom: '2rem', color: 'var(--terminal-text-dim)' }}>
-          Trace every politician through the hierarchy.
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+      {/* Breadcrumb Path */}
+      {breadcrumbs.length > 1 && (
+        <div className="flex items-center gap-2 mb-8 font-label text-[10px] text-emerald-900 uppercase tracking-widest">
           {breadcrumbs.map((crumb, idx) => (
-            <div key={crumb.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <span key={crumb.id} className="flex items-center gap-2">
+              {idx > 0 && <span className="text-outline-variant">/</span>}
               <button
                 onClick={() => navigateUp(idx)}
-                style={{
-                  background: idx === breadcrumbs.length - 1 ? 'transparent' : '#1a1a1a',
-                  border: idx === breadcrumbs.length - 1 ? '1px solid #ef4444' : '1px solid #333',
-                  color: idx === breadcrumbs.length - 1 ? '#fff' : '#888',
-                  padding: '1rem 2rem',
-                  fontSize: '1.5rem',
-                  fontWeight: 600,
-                  cursor: idx === breadcrumbs.length - 1 ? 'default' : 'pointer',
-                  borderRadius: '4px',
-                  transition: 'all 0.2s',
-                  minWidth: '300px',
-                }}
-                onMouseEnter={(e) => {
-                  if (idx !== breadcrumbs.length - 1) {
-                    e.currentTarget.style.borderColor = '#ef4444';
-                    e.currentTarget.style.color = '#fff';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (idx !== breadcrumbs.length - 1) {
-                    e.currentTarget.style.borderColor = '#333';
-                    e.currentTarget.style.color = '#888';
-                  }
-                }}
+                className={`hover:text-primary-container transition-none ${
+                  idx === breadcrumbs.length - 1
+                    ? 'text-primary-container font-bold'
+                    : 'text-emerald-900 cursor-pointer'
+                }`}
               >
-                {crumb.name}
+                {crumb.name.toUpperCase().replace(/\s+/g, '_')}
               </button>
-              {idx < breadcrumbs.length - 1 && (
-                <div style={{
-                  width: '1px',
-                  height: '30px',
-                  background: '#333',
-                  margin: '0.5rem 0'
-                }} />
-              )}
-            </div>
+            </span>
           ))}
         </div>
-      </div>
+      )}
 
-      {/* Current Level Stats */}
-      <div style={{
-        maxWidth: '1200px',
-        margin: '4rem auto',
-        padding: '0 2rem'
-      }}>
-        <div style={{
-          background: '#0a0a0a',
-          border: '1px solid #2a2a2a',
-          borderRadius: '8px',
-          padding: '3rem',
-          marginBottom: '3rem',
-        }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '3rem' }}>
-            <div>
-              <div style={{ fontSize: '4rem', fontWeight: 700, color: '#fff', marginBottom: '0.5rem' }}>
-                {currentNode.count.toLocaleString()}
-              </div>
-              <div style={{ fontSize: '0.875rem', color: '#888', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                Headcount
-              </div>
-            </div>
-            <div>
-              <div style={{ fontSize: '4rem', fontWeight: 700, color: '#ef4444', marginBottom: '0.5rem' }}>
-                {currentNode.children?.length || (currentNode.politicians?.length || 0)}
-              </div>
-              <div style={{ fontSize: '0.875rem', color: '#888', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                {currentNode.children ? 'Subordinate Offices' : 'Officials'}
-              </div>
-            </div>
-            <div>
-              <div style={{ fontSize: '4rem', fontWeight: 700, color: '#f59e0b', marginBottom: '0.5rem' }}>
-                ${(aipacTotal / 1000000).toFixed(1)}M
-              </div>
-              <div style={{ fontSize: '0.875rem', color: '#888', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                Total AIPAC Funding
+      {/* Tree Visualization */}
+      <div className="max-w-6xl mx-auto flex flex-col items-center">
+        {/* Root Node */}
+        <div className="relative mb-12 flex flex-col items-center">
+          <div className="bg-surface-container-high border-2 border-primary-container p-1 shadow-[0_0_20px_rgba(0,255,136,0.2)]"
+               style={{ clipPath: 'polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)' }}>
+            <div className="bg-black/80 px-12 py-4 flex flex-col items-center text-center">
+              <span className="font-label text-[10px] text-primary-container/60 mb-1">
+                {path.length === 1 ? '01_ROOT_AUTHORITY' : `LEVEL_${path.length}`}
+              </span>
+              <h2 className="font-headline text-2xl font-black text-white tracking-tighter uppercase mb-2">
+                {currentNode.name}
+              </h2>
+              <div className="flex items-center gap-3">
+                <div className="h-px w-8 bg-primary-container/20" />
+                <span className="font-label text-lg font-black text-primary-container">{riskScore}</span>
+                <div className="h-px w-8 bg-primary-container/20" />
               </div>
             </div>
           </div>
+          {/* Connector down */}
+          {(currentNode.children && currentNode.children.length > 0) && (
+            <>
+              <div className="w-px h-10" style={{ background: 'linear-gradient(to bottom, transparent, #00ff88 50%, transparent)' }} />
+              <div className="w-[80vw] max-w-5xl h-px bg-primary-container/20" />
+            </>
+          )}
         </div>
 
-        {/* Child Nodes or Politicians */}
+        {/* Child Nodes (Level 2) */}
         {currentNode.children && currentNode.children.length > 0 && (
-          <div>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '2rem', color: '#fff' }}>
-              Drill Down
-            </h2>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-              gap: '1.5rem'
-            }}>
-              {currentNode.children.map((child) => (
-                <button
-                  key={child.id}
-                  onClick={() => navigateTo(child.id)}
-                  style={{
-                    background: '#0a0a0a',
-                    border: '1px solid #2a2a2a',
-                    borderRadius: '4px',
-                    padding: '2rem',
-                    textAlign: 'left',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = '#ef4444';
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = '#2a2a2a';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                  }}
-                >
-                  <div style={{ fontSize: '1.25rem', fontWeight: 600, color: '#fff', marginBottom: '0.5rem' }}>
-                    {child.name}
-                  </div>
-                  <div style={{
-                    fontSize: '2rem',
-                    fontWeight: 700,
-                    color: '#ef4444',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                  }}>
-                    {child.count}
-                    <span style={{ fontSize: '1rem', color: '#666' }}>{'\u2192'}</span>
-                  </div>
-                </button>
-              ))}
-            </div>
+          <div className={`grid gap-12 w-full ${
+            currentNode.children.length === 1 ? 'grid-cols-1 max-w-md mx-auto' :
+            currentNode.children.length === 2 ? 'grid-cols-1 md:grid-cols-2' :
+            currentNode.children.length === 3 ? 'grid-cols-1 md:grid-cols-3' :
+            'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+          }`}>
+            {currentNode.children.map((child) => {
+              const childRisk = computeRiskScore(child);
+              const childLabel = riskLabel(childRisk);
+              const isHighRisk = childRisk >= 60;
+              const childSlug = child.id.toUpperCase().replace(/-/g, '_');
+
+              return (
+                <div key={child.id} className="flex flex-col items-center">
+                  {/* Connector vertical */}
+                  <div className="w-px h-8" style={{ background: 'linear-gradient(to bottom, transparent, #00ff88 50%, transparent)' }} />
+
+                  {/* Node card */}
+                  <button
+                    onClick={() => navigateTo(child.id)}
+                    className={`w-full bg-surface-container border p-1 transition-none hover:border-primary-container group cursor-pointer text-left ${
+                      isHighRisk ? 'border-error/50' : 'border-primary-container/30'
+                    }`}
+                    style={{ clipPath: 'polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)' }}
+                  >
+                    <div className="bg-black/60 p-4">
+                      <div className="flex justify-between items-start mb-3">
+                        <span className={`font-label text-[8px] px-1 border ${
+                          isHighRisk
+                            ? 'text-error border-error/30'
+                            : 'text-primary-container border-primary-container/30'
+                        }`}>
+                          {childLabel.text}
+                        </span>
+                        <span className="font-label text-[8px] text-emerald-900">
+                          ID: {child.id.toUpperCase().slice(0, 5)}
+                        </span>
+                      </div>
+                      <h3 className="font-label font-bold text-white text-sm mb-1 uppercase tracking-tighter">
+                        {child.name.toUpperCase().replace(/\s+/g, '_')}
+                      </h3>
+                      <div className="flex justify-between items-center mt-4">
+                        <div className="font-label text-[10px] text-emerald-700">
+                          NODES: {child.count}
+                        </div>
+                        <div className={`font-label text-xl font-black ${
+                          isHighRisk ? 'text-error' : 'text-primary-container'
+                        }`}>
+                          {childRisk}
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+
+                  {/* Sub-children preview (Level 3) */}
+                  {child.children && child.children.length > 0 && (
+                    <>
+                      <div className="w-px h-12" style={{ background: 'linear-gradient(to bottom, transparent, #00ff88 50%, transparent)' }} />
+                      <div className="w-full space-y-4">
+                        {child.children.slice(0, 3).map((sub) => {
+                          const subRisk = computeRiskScore(sub);
+                          const subHighRisk = subRisk >= 60;
+                          return (
+                            <button
+                              key={sub.id}
+                              onClick={() => {
+                                setPath([...path, child.id, sub.id]);
+                              }}
+                              className={`w-full bg-surface-container-lowest border-l-4 p-3 flex justify-between items-center cursor-pointer hover:bg-emerald-900/10 text-left ${
+                                subHighRisk ? 'border-error' : 'border-primary-container'
+                              }`}
+                            >
+                              <div>
+                                <div className="font-label text-[8px] text-emerald-900 uppercase">SUB_NODE</div>
+                                <div className="font-label text-[10px] text-white">
+                                  {sub.name.toUpperCase().replace(/\s+/g, '_')}
+                                </div>
+                              </div>
+                              <span className={`font-label text-sm font-bold ${
+                                subHighRisk ? 'text-error' : 'text-primary-container'
+                              }`}>
+                                {subRisk}
+                              </span>
+                            </button>
+                          );
+                        })}
+                        {child.children.length > 3 && (
+                          <div className="font-label text-[10px] text-emerald-900 text-center">
+                            +{child.children.length - 3} MORE_NODES
+                          </div>
+                        )}
+                      </div>
+                    </>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
 
-        {/* Individual Politicians */}
+        {/* Individual Politicians (leaf level) */}
         {currentNode.politicians && currentNode.politicians.length > 0 && (
-          <div>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '2rem', color: '#fff' }}>
-              Officials
-            </h2>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
-              gap: '1.5rem'
-            }}>
-              {currentNode.politicians.map((politician) => (
-                <Link
-                  key={politician.id}
-                  href={`/politician/${politician.id}`}
-                  style={{
-                    background: '#0a0a0a',
-                    border: '1px solid #2a2a2a',
-                    borderRadius: '4px',
-                    padding: '1.5rem',
-                    textDecoration: 'none',
-                    display: 'block',
-                    transition: 'all 0.2s',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = '#ef4444';
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = '#2a2a2a';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                  }}
-                >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1rem' }}>
-                    <div>
-                      <div style={{ fontSize: '1.25rem', fontWeight: 600, color: '#fff', marginBottom: '0.25rem' }}>
-                        {politician.name}
+          <div className="w-full mt-8">
+            <div className="font-label text-[10px] text-emerald-900 uppercase tracking-widest mb-4 border-b border-outline-variant/30 pb-2">
+              ENTITY_LIST // {currentNode.politicians.length} RECORDS
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {currentNode.politicians.map((politician) => {
+                const isHighRisk = politician.corruptionScore >= 60;
+                return (
+                  <Link
+                    key={politician.id}
+                    href={`/politician/${politician.id}`}
+                    className={`bg-surface-container-lowest border-l-4 p-4 hover:bg-emerald-900/10 transition-none block ${
+                      isHighRisk ? 'border-error' : 'border-primary-container'
+                    }`}
+                  >
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <div className="font-label text-[10px] text-primary-container/60">
+                          {politician.office}
+                        </div>
+                        <div className="font-headline font-bold text-white text-sm uppercase tracking-tighter">
+                          {politician.name}
+                        </div>
                       </div>
-                      <div style={{ fontSize: '0.875rem', color: '#888' }}>
-                        {politician.office}{politician.district ? ` \u2022 ${politician.district}` : ''}
-                      </div>
-                    </div>
-                    <div style={{
-                      fontSize: '1.5rem',
-                      fontWeight: 700,
-                      color: politician.corruptionScore < 40 ? '#10b981' : politician.corruptionScore < 60 ? '#f59e0b' : '#ef4444'
-                    }}>
-                      {politician.corruptionScore}
-                    </div>
-                  </div>
-                  <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                    <span style={{
-                      fontSize: '0.75rem',
-                      padding: '0.4rem 0.75rem',
-                      background: politician.party === 'Republican' ? '#dc2626' : politician.party === 'Democrat' ? '#2563eb' : '#6b7280',
-                      color: '#fff',
-                      borderRadius: '12px',
-                      fontWeight: 600,
-                    }}>
-                      {politician.party === 'Republican' ? 'R' : politician.party === 'Democrat' ? 'D' : politician.party.charAt(0)}
-                    </span>
-                    {politician.juiceBoxTier !== 'none' && (
-                      <span style={{
-                        fontSize: '0.75rem',
-                        padding: '0.25rem 0.5rem',
-                        background: '#78350f',
-                        color: '#f59e0b',
-                        borderRadius: '3px',
-                      }}>
-                        {politician.juiceBoxTier === 'owned' ? 'OWNED' : politician.juiceBoxTier === 'bought' ? 'BOUGHT' : 'COMPROMISED'} ${(politician.aipacFunding / 1000).toFixed(0)}K
+                      <span className={`font-label text-lg font-black ${
+                        isHighRisk ? 'text-error' : politician.corruptionScore >= 40 ? 'text-tertiary-fixed-dim' : 'text-primary-container'
+                      }`}>
+                        {politician.corruptionScore}
                       </span>
-                    )}
-                  </div>
-                </Link>
-              ))}
+                    </div>
+                    <div className="flex items-center gap-2 mt-2">
+                      <span className={`text-[9px] font-label px-1 border ${
+                        politician.party === 'Republican'
+                          ? 'text-error border-error/30 bg-error/10'
+                          : politician.party === 'Democrat'
+                          ? 'text-blue-400 border-blue-400/30 bg-blue-400/10'
+                          : 'text-outline border-outline-variant'
+                      }`}>
+                        {politician.party === 'Republican' ? 'R' : politician.party === 'Democrat' ? 'D' : politician.party.charAt(0)}
+                      </span>
+                      {politician.juiceBoxTier !== 'none' && (
+                        <span className="text-[9px] font-label px-1 bg-on-tertiary-container/10 text-on-tertiary-container border border-on-tertiary-container/30">
+                          ${(politician.aipacFunding / 1000).toFixed(0)}K
+                        </span>
+                      )}
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         )}
@@ -492,25 +512,67 @@ export default function HierarchyPage() {
         {/* Empty State */}
         {(!currentNode.children || currentNode.children.length === 0) &&
          (!currentNode.politicians || currentNode.politicians.length === 0) && (
-          <div style={{
-            textAlign: 'center',
-            padding: '4rem 2rem',
-            color: 'var(--terminal-text-dim)',
-          }}>
-            <div style={{ fontSize: '1.25rem', marginBottom: '1rem', color: 'var(--terminal-text)' }}>
-              No Data Available
+          <div className="text-center py-16">
+            <div className="font-label text-xs text-outline uppercase tracking-widest mb-2">
+              NO_DATA_AVAILABLE
             </div>
-            <div style={{ fontSize: '0.875rem' }}>
+            <div className="font-label text-[10px] text-emerald-900">
               {currentNode.name} officials are not yet indexed in the database.
             </div>
           </div>
         )}
       </div>
 
-      {/* Footer */}
-      <div className="classified-footer">
-        ALL DATA ACQUIRED VIA OSINT // PUBLIC RECORDS: FEC, SOCIAL MEDIA, NEWS OUTLETS // HIERARCHY NAVIGATION DIVISION
+      {/* Right-side Intelligence Overlay (Floating) */}
+      <div className="fixed right-6 top-32 w-72 bg-slate-950/80 border border-emerald-900/50 backdrop-blur-md p-6 hidden xl:block shadow-2xl z-40">
+        <div className="flex items-center gap-2 mb-6 border-b border-emerald-900/30 pb-2">
+          <span className="font-label text-[10px] font-bold text-primary-container tracking-widest">LIVE_TELEMETRY</span>
+        </div>
+        <div className="space-y-6">
+          <div>
+            <div className="flex justify-between mb-1">
+              <span className="font-label text-[9px] text-emerald-900">NETWORK_LOAD</span>
+              <span className="font-label text-[9px] text-primary-container">{Math.min(100, Math.round(currentNode.count / 2))}%</span>
+            </div>
+            <div className="h-1 bg-emerald-900/30">
+              <div
+                className="h-full bg-primary-container shadow-[0_0_10px_#00ff88]"
+                style={{ width: `${Math.min(100, Math.round(currentNode.count / 2))}%` }}
+              />
+            </div>
+          </div>
+          <div className="font-label text-[10px] leading-relaxed text-emerald-600">
+            <span className="text-white">&gt; INFO:</span> CORRUPTION_METRIC_AGGREGATION_ACTIVE.<br />
+            <span className="text-white">&gt; INFO:</span> CROSS-REFERENCING_FEC_REPORTS...<br />
+            <span className="text-white">&gt; INFO:</span> <span className="text-primary-container">READY.</span>
+          </div>
+          <button className="w-full bg-primary-container text-slate-950 font-label font-bold text-[10px] py-3 uppercase tracking-widest hover:bg-white transition-none">
+            DOWNLOAD_REPORT.PDF
+          </button>
+        </div>
       </div>
-    </div>
+
+      {/* Bottom Summary Cards */}
+      <div className="max-w-6xl mx-auto mt-16 grid grid-cols-2 md:grid-cols-4 gap-px bg-outline-variant/30 border border-outline-variant/30">
+        <div className="bg-surface-container p-4">
+          <div className="font-label text-[10px] text-outline uppercase tracking-tighter">Total_Entities</div>
+          <div className="font-headline text-2xl font-bold text-primary-container">{currentNode.count}</div>
+        </div>
+        <div className="bg-surface-container p-4">
+          <div className="font-label text-[10px] text-outline uppercase tracking-tighter">Critical_Failures</div>
+          <div className="font-headline text-2xl font-bold text-on-tertiary-container">{criticalCount}</div>
+        </div>
+        <div className="bg-surface-container p-4">
+          <div className="font-label text-[10px] text-outline uppercase tracking-tighter">Sub_Branches</div>
+          <div className="font-headline text-2xl font-bold text-primary-container">{childCount}</div>
+        </div>
+        <div className="bg-surface-container p-4">
+          <div className="font-label text-[10px] text-outline uppercase tracking-tighter">AIPAC_Funding</div>
+          <div className="font-headline text-2xl font-bold text-on-tertiary-container">
+            ${(aipacTotal / 1000000).toFixed(1)}M
+          </div>
+        </div>
+      </div>
+    </main>
   );
 }

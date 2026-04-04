@@ -56,7 +56,7 @@ export default async function OfficialsPage() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', paddingBottom: '4rem' }}>
+    <div style={{ minHeight: '100vh', paddingBottom: '4rem', paddingTop: '82px' }}>
       {/* Title */}
       <div style={{ padding: '2rem', borderBottom: '1px solid var(--terminal-border)' }}>
         <h1 style={{ fontSize: '2.5rem', fontWeight: 400, letterSpacing: '0.05em', marginBottom: '0.5rem' }}>

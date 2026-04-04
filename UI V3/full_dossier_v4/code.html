@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DOSSIER: SCOTT_R // SNITCHED.AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary": "#003919",
+              "tertiary-container": "#ffd4d5",
+              "on-surface-variant": "#b9cbb9",
+              "tertiary-fixed-dim": "#ffb3b6",
+              "surface-container": "#1d2023",
+              "surface-tint": "#00e479",
+              "on-secondary": "#2e3134",
+              "on-surface": "#e1e2e7",
+              "inverse-primary": "#006d37",
+              "secondary": "#c5c6cb",
+              "inverse-surface": "#e1e2e7",
+              "secondary-fixed": "#e1e2e7",
+              "surface-container-low": "#191c1f",
+              "secondary-container": "#44474b",
+              "on-tertiary-fixed-variant": "#920028",
+              "on-error-container": "#ffdad6",
+              "error": "#ffb4ab",
+              "surface-bright": "#37393d",
+              "outline": "#849585",
+              "primary-fixed-dim": "#00e479",
+              "on-tertiary": "#68001a",
+              "surface-dim": "#111417",
+              "on-primary-container": "#007139",
+              "on-primary-fixed": "#00210c",
+              "surface": "#111417",
+              "on-secondary-fixed-variant": "#44474b",
+              "outline-variant": "#3b4b3d",
+              "on-tertiary-container": "#c50039",
+              "on-error": "#690005",
+              "surface-container-lowest": "#0c0e12",
+              "on-tertiary-fixed": "#40000c",
+              "surface-variant": "#323539",
+              "on-secondary-container": "#b3b5ba",
+              "surface-container-high": "#282a2e",
+              "error-container": "#93000a",
+              "inverse-on-surface": "#2e3134",
+              "tertiary-fixed": "#ffdada",
+              "background": "#111417",
+              "primary-fixed": "#60ff99",
+              "surface-container-highest": "#323539",
+              "on-secondary-fixed": "#191c1f",
+              "on-primary-fixed-variant": "#005228",
+              "on-background": "#e1e2e7",
+              "primary": "#f1ffef",
+              "secondary-fixed-dim": "#c5c6cb",
+              "primary-container": "#00ff88",
+              "tertiary": "#fffaf9"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["IBM Plex Mono"]
+            },
+            borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "0px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #05070a;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 255, 136, 0.03) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.01));
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .crt-glow {
+            text-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
+        }
+        .crt-glow-border {
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+        }
+        .flicker-alert {
+            animation: flicker 0.15s infinite alternate;
+        }
+        @keyframes flicker {
+            0% { opacity: 1; text-shadow: 0 0 10px #c50039; }
+            100% { opacity: 0.7; text-shadow: 0 0 2px #c50039; }
+        }
+        .ghost-bracket-tl::before {
+            content: ""; position: absolute; top: -1px; left: -1px; width: 8px; height: 8px;
+            border-top: 2px solid #00ff88; border-left: 2px solid #00ff88;
+        }
+        .ghost-bracket-tr::after {
+            content: ""; position: absolute; top: -1px; right: -1px; width: 8px; height: 8px;
+            border-top: 2px solid #00ff88; border-right: 2px solid #00ff88;
+        }
+        .ghost-bracket-bl::before {
+            content: ""; position: absolute; bottom: -1px; left: -1px; width: 8px; height: 8px;
+            border-bottom: 2px solid #00ff88; border-left: 2px solid #00ff88;
+        }
+        .ghost-bracket-br::after {
+            content: ""; position: absolute; bottom: -1px; right: -1px; width: 8px; height: 8px;
+            border-bottom: 2px solid #00ff88; border-right: 2px solid #00ff88;
+        }
+        .hex-path {
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 2px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #05070a; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #00ff88; }
+    </style>
+</head>
+<body class="font-body text-on-surface leading-tight selection:bg-primary-container selection:text-on-primary-container custom-scrollbar">
+<!-- Header / TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-950 border-b border-emerald-900/50 flex flex-col">
+<!-- Layer 1: Utility -->
+<div class="flex justify-between items-center px-4 py-2 bg-surface-container-lowest border-b border-outline-variant/30 h-10">
+<div class="flex items-center gap-4">
+<div class="group relative">
+<button class="flex items-center gap-2 text-primary-container font-label text-xs tracking-widest hover:text-white transition-none">
+<span class="material-symbols-outlined text-sm">menu</span>
+                    SYSTEM_CORE
+                </button>
+</div>
+<div class="h-4 w-px bg-outline-variant/30"></div>
+<div class="text-[10px] font-label text-outline uppercase tracking-tighter">NODE: FL_ENCLAVE_TPA_04</div>
+</div>
+<div class="font-label text-xs text-primary-container tracking-[0.2em] crt-glow">
+            2024-05-22 14:32:01 UTC
+        </div>
+<div class="flex items-center gap-4">
+<div class="relative flex items-center bg-surface-container px-2 border-b border-primary-container/50">
+<span class="font-label text-primary-container text-xs mr-2">&gt;_</span>
+<input class="bg-transparent border-none text-xs font-label text-primary-container placeholder:text-emerald-900 focus:ring-0 w-48 p-0 h-6" placeholder="QUERY ENTITY..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-lg hover:text-primary-container cursor-pointer transition-none">settings</span>
+<span class="material-symbols-outlined text-outline text-lg hover:text-primary-container cursor-pointer transition-none">terminal</span>
+</div>
+</div>
+</div>
+<!-- Layer 2: Navigation -->
+<nav class="flex w-full overflow-x-auto no-scrollbar bg-slate-950">
+<div class="flex divide-x divide-emerald-900/30 w-full">
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">DASHBOARD</a>
+<a class="px-6 py-3 bg-emerald-400 text-slate-950 font-label font-bold text-xs tracking-widest shadow-[0_0_15px_rgba(0,255,136,0.5)]" href="#">SEATED_OFFICIALS</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">CANDIDATES</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">HIERARCHY</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">JUICE_BOX</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">SOCIAL_INTEL</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">DATABASE</a>
+</div>
+</nav>
+</header>
+<main class="pt-24 pb-12 px-6 min-h-screen">
+<!-- Dossier Header Section -->
+<section class="relative w-full border border-emerald-900/50 bg-surface-container-lowest overflow-hidden mb-6 p-8 flex flex-col md:flex-row items-center gap-8">
+<div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(circle at center, #00ff88 0%, transparent 70%);"></div>
+<!-- Profile Frame -->
+<div class="relative group">
+<div class="w-48 h-56 border-2 border-primary-container relative overflow-hidden bg-black/40 ghost-bracket-tl ghost-bracket-br">
+<img class="w-full h-full object-cover grayscale brightness-50 contrast-125 filter sepia-[0.2] hue-rotate-[90deg]" data-alt="Rick Scott professional portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC81wp1LmK4wRg0VUByBlQqQPefitGP1LuJj7K7I5mL_PdYTq8xucdNQJ-DYtiQ-_1FQOuEKye2whm2LjjYF3aG9bQztqrcYu4YmBCi_RCobJOxBvax3clwqHoJ_qTOHNG6_eVVOVbX5aKpXaFXrkQZpg_ExgaOgC2SP_TtpnIhoT4_uf3M35nfiv-depcwlSbUJapSWLznZsvoqADLo0Ic8C8Y2ol_uJ3cgVxixEzOGniN40nnpsqFh7at2wODZ_5mkOmqfaLTB_dC"/>
+<div class="absolute inset-0 border border-primary-container/20 mix-blend-overlay"></div>
+</div>
+<div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-slate-950 border border-primary-container px-3 py-1 font-label text-[10px] text-primary-container tracking-widest whitespace-nowrap">
+                ID: SCOTT_R_FL
+            </div>
+</div>
+<!-- Name & Primary Stats -->
+<div class="flex-1 text-center md:text-left space-y-4">
+<div class="space-y-1">
+<div class="flex items-center justify-center md:justify-start gap-2">
+<span class="bg-emerald-400 text-slate-950 font-label font-bold text-[10px] px-2 py-0.5 tracking-tighter uppercase">ACTIVE_DOSSIER</span>
+<span class="text-on-tertiary-container font-label text-[10px] font-bold flicker-alert uppercase">TIER_1_SURVEILLANCE</span>
+</div>
+<h1 class="font-headline text-6xl md:text-7xl font-black tracking-tighter text-primary-container crt-glow uppercase leading-none">RICK SCOTT</h1>
+<div class="flex flex-wrap justify-center md:justify-start gap-6 font-label text-xs text-emerald-600 tracking-widest uppercase py-2 border-y border-emerald-900/30">
+<div><span class="text-emerald-900">OFFICE:</span> US SENATOR</div>
+<div><span class="text-emerald-900">PARTY:</span> REPUBLICAN</div>
+<div><span class="text-emerald-900">STATE:</span> FLORIDA</div>
+</div>
+</div>
+<div class="flex flex-wrap justify-center md:justify-start gap-4">
+<div class="bg-slate-950 border-2 border-primary-container px-6 py-2 flex items-center gap-3">
+<div class="font-label text-xs text-emerald-900">JUICE_BOX</div>
+<div class="font-label text-xl text-primary-container font-bold">TIER 3</div>
+</div>
+<button class="bg-emerald-400 hover:bg-emerald-300 text-slate-950 px-6 py-2 font-label text-xs font-bold tracking-widest transition-none flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">visibility</span>
+                    LIVE_TRACKING_ON
+                </button>
+</div>
+</div>
+<!-- Risk Score Hex -->
+<div class="flex-shrink-0 flex flex-col items-center">
+<div class="relative w-36 h-36 flex items-center justify-center">
+<div class="absolute inset-0 bg-primary-container/10 hex-path shadow-[0_0_25px_rgba(0,255,136,0.2)]"></div>
+<div class="absolute inset-1 border border-primary-container/40 hex-path"></div>
+<div class="flex flex-col items-center z-10">
+<span class="font-headline font-black text-5xl text-primary-container crt-glow">88</span>
+<span class="font-label text-[9px] text-emerald-600 tracking-[0.2em]">RISK_SCORE</span>
+</div>
+</div>
+<span class="font-label text-[10px] text-on-tertiary-container font-bold flicker-alert mt-2 uppercase">CRITICAL VOLATILITY</span>
+</div>
+</section>
+<!-- Detailed Analysis Grid -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Left Analysis Column -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<!-- Risk Matrix -->
+<div class="bg-surface-container border border-emerald-900/30 p-4 relative ghost-bracket-tl ghost-bracket-br">
+<div class="flex justify-between items-center mb-6 border-b border-outline-variant/30 pb-2">
+<h2 class="font-label text-xs font-bold text-primary-container tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">analytics</span>
+                        RISK_MATRIX
+                    </h2>
+<span class="font-label text-[10px] text-emerald-900 uppercase">TELEMETRY_STREAM</span>
+</div>
+<div class="space-y-4 font-label">
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] text-emerald-600">
+<span>FUNDING_RISK</span>
+<span class="text-primary-container">94%</span>
+</div>
+<div class="h-1 bg-emerald-900/50 w-full border border-emerald-900/20">
+<div class="h-full bg-primary-container crt-glow-border" style="width: 94%"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] text-emerald-600">
+<span>LEGAL_RECORD</span>
+<span class="text-primary-container">82%</span>
+</div>
+<div class="h-1 bg-emerald-900/50 w-full border border-emerald-900/20">
+<div class="h-full bg-primary-container" style="width: 82%"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] text-emerald-600">
+<span>VOTING_PATTERN</span>
+<span class="text-primary-container">67%</span>
+</div>
+<div class="h-1 bg-emerald-900/50 w-full border border-emerald-900/20">
+<div class="h-full bg-primary-container" style="width: 67%"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] text-emerald-600">
+<span>FORENSIC_CONN</span>
+<span class="text-primary-container">89%</span>
+</div>
+<div class="h-1 bg-emerald-900/50 w-full border border-emerald-900/20">
+<div class="h-full bg-primary-container" style="width: 89%"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 p-3 bg-slate-950 border border-emerald-900/40 text-[10px] font-label text-emerald-500/80 leading-relaxed italic">
+<span class="text-primary-container font-bold not-italic">ANALYSIS:</span> High correlation detected between private equity contributions and healthcare-related legislative motions. Surveillance status maintained at TIER 1.
+                </div>
+</div>
+<!-- Geo-Location -->
+<div class="bg-surface-container border border-emerald-900/30 p-4 relative ghost-bracket-bl ghost-bracket-tr">
+<h2 class="font-label text-[10px] font-bold text-primary-container tracking-[0.2em] mb-4 uppercase">GEO_INTEL // FLORIDA_HQ</h2>
+<div class="w-full h-48 bg-slate-900 border border-emerald-900/50 relative overflow-hidden grayscale contrast-150 brightness-75">
+<img class="w-full h-full object-cover opacity-50" data-alt="satellite map of florida with grid" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYhjqJa87CIhxTuQS4Ed2j94yABCToLL_MHiaxaVqJq3Yz61zhYa4oIoDV2WFtYZtE1fyy-LPAlqOmn1605GKgQcxY8N9bOJRLVSQPqNohvMmIowBnA7z7364uUN9Rw4hT3AlGBHJqwSbbQ7DE4DwTD6SInOG1kvijxG21_J9HtJFckpxj52fKzfVd1lFDkxYY4seO3rqyt_Qtf0Z-SrZq9lFzwB_sj-IxmgzJI4fw41hbwJon_qQfFM6iGQPW4B2xtCQ6KSJBmW9C"/>
+<div class="absolute inset-0" style="background: repeating-linear-gradient(0deg, rgba(0,255,136,0.05) 0px, rgba(0,255,136,0.05) 1px, transparent 1px, transparent 10px);"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+<div class="w-6 h-6 border-2 border-primary-container rounded-full animate-ping opacity-50"></div>
+<div class="w-2 h-2 bg-primary-container rounded-full absolute top-2 left-2"></div>
+</div>
+</div>
+<div class="mt-3 flex justify-between font-label text-[9px] text-emerald-900 uppercase tracking-widest">
+<span>LAT: 28.6139° N</span>
+<span>LONG: 81.2089° W</span>
+</div>
+</div>
+</div>
+<!-- Right Content Column -->
+<div class="col-span-12 lg:col-span-8 space-y-6">
+<!-- Terminal Tabs -->
+<div class="flex overflow-x-auto no-scrollbar border-b border-emerald-900/30">
+<button class="px-8 py-3 bg-emerald-900/20 text-primary-container font-label text-xs font-bold tracking-[0.2em] border-b-2 border-primary-container whitespace-nowrap">OVERVIEW</button>
+<button class="px-8 py-3 text-emerald-900 hover:text-emerald-300 font-label text-xs tracking-[0.2em] whitespace-nowrap transition-none">FUNDING_LOGS</button>
+<button class="px-8 py-3 text-emerald-900 hover:text-emerald-300 font-label text-xs tracking-[0.2em] whitespace-nowrap transition-none">VOTING_RECORD</button>
+<button class="px-8 py-3 text-emerald-900 hover:text-emerald-300 font-label text-xs tracking-[0.2em] whitespace-nowrap transition-none">SOCIAL_SENTIMENT</button>
+<button class="px-8 py-3 text-emerald-900 hover:text-emerald-300 font-label text-xs tracking-[0.2em] whitespace-nowrap transition-none">LOBBYING_FREQ</button>
+</div>
+<!-- Main Data Table Container -->
+<div class="bg-surface-container-high border border-emerald-900/30 ghost-bracket-tr ghost-bracket-bl overflow-hidden">
+<div class="p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-emerald-900/20 bg-slate-950/40">
+<div>
+<h3 class="font-label text-[10px] text-emerald-800 uppercase tracking-[0.3em] mb-1">AGGREGATE_CAPITAL_FLOW</h3>
+<div class="font-headline font-bold text-5xl text-white crt-glow">$42,109,560.00</div>
+</div>
+<div class="text-right font-label">
+<div class="text-[9px] text-emerald-900 uppercase">SYNC_TIMESTAMP</div>
+<div class="text-xs text-emerald-500">2023-10-24 14:32:01 UTC</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full font-label text-[11px] text-left">
+<thead>
+<tr class="bg-emerald-950/50 text-emerald-700 uppercase tracking-widest text-[9px]">
+<th class="px-6 py-4 font-bold">DONOR_ENTITY</th>
+<th class="px-6 py-4 font-bold text-right">MAGNITUDE</th>
+<th class="px-6 py-4 font-bold">DATE_TS</th>
+<th class="px-6 py-4 font-bold">COMMITTEE_NODE</th>
+<th class="px-6 py-4 font-bold text-center">STATUS</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-emerald-900/10">
+<tr class="hover:bg-emerald-400/5 group border-l-2 border-transparent hover:border-emerald-400">
+<td class="px-6 py-4 text-emerald-200">BLACKSTONE GROUP INC</td>
+<td class="px-6 py-4 text-right text-primary-container font-black">$450,000.00</td>
+<td class="px-6 py-4 text-emerald-800">OCT 12, 2023</td>
+<td class="px-6 py-4 text-emerald-600">REMAINING_VITALITY_PAC</td>
+<td class="px-6 py-4 text-center">
+<span class="border border-primary-container/30 px-2 py-0.5 text-[9px] text-primary-container">VERIFIED</span>
+</td>
+</tr>
+<tr class="bg-on-tertiary-container/5 border-l-2 border-on-tertiary-container">
+<td class="px-6 py-4 text-on-tertiary-container font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-xs flicker-alert">warning</span>
+                                    AIPAC - ISRAEL PUBLIC AFFAIRS
+                                </td>
+<td class="px-6 py-4 text-right text-on-tertiary-container font-black">$225,000.00</td>
+<td class="px-6 py-4 text-emerald-800/60">OCT 08, 2023</td>
+<td class="px-6 py-4 text-emerald-600/80">NRSC_VICTORY_FUND</td>
+<td class="px-6 py-4 text-center">
+<span class="bg-on-tertiary-container/20 border border-on-tertiary-container px-2 py-0.5 text-[9px] text-on-tertiary-container font-black">FLAGGED</span>
+</td>
+</tr>
+<tr class="hover:bg-emerald-400/5 group border-l-2 border-transparent hover:border-emerald-400">
+<td class="px-6 py-4 text-emerald-200">CITADEL SECURITIES LLC</td>
+<td class="px-6 py-4 text-right text-primary-container font-black">$180,000.00</td>
+<td class="px-6 py-4 text-emerald-800">SEP 29, 2023</td>
+<td class="px-6 py-4 text-emerald-600">FL_SENATE_REPUBLICANS</td>
+<td class="px-6 py-4 text-center">
+<span class="border border-primary-container/30 px-2 py-0.5 text-[9px] text-primary-container">VERIFIED</span>
+</td>
+</tr>
+<tr class="hover:bg-emerald-400/5 group border-l-2 border-transparent hover:border-emerald-400">
+<td class="px-6 py-4 text-emerald-200">NEXTERA ENERGY</td>
+<td class="px-6 py-4 text-right text-primary-container font-black">$125,500.00</td>
+<td class="px-6 py-4 text-emerald-800">SEP 15, 2023</td>
+<td class="px-6 py-4 text-emerald-600">SUSTAIN_FL_PAC</td>
+<td class="px-6 py-4 text-center">
+<span class="border border-primary-container/30 px-2 py-0.5 text-[9px] text-primary-container">VERIFIED</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Recent Voting Container -->
+<div class="bg-surface-container border border-emerald-900/30 overflow-hidden">
+<div class="bg-emerald-950/30 px-6 py-3 border-b border-emerald-900/30 flex justify-between items-center">
+<h3 class="font-label text-[10px] font-bold text-primary-container tracking-[0.2em] uppercase">RECENT_VOTING_RECORD</h3>
+<div class="flex gap-4">
+<div class="flex items-center gap-1">
+<div class="w-1.5 h-1.5 bg-primary-container"></div>
+<span class="font-label text-[8px] text-emerald-800 uppercase">YES_CONCUR</span>
+</div>
+<div class="flex items-center gap-1">
+<div class="w-1.5 h-1.5 bg-on-tertiary-container"></div>
+<span class="font-label text-[8px] text-emerald-800 uppercase">NO_DISSENT</span>
+</div>
+</div>
+</div>
+<div class="divide-y divide-emerald-900/20">
+<div class="p-5 flex justify-between items-center hover:bg-emerald-400/5 group transition-none">
+<div>
+<div class="font-label text-sm text-emerald-100 uppercase tracking-tight font-bold">H.R. 4366: Consolidated Appropriations Act</div>
+<div class="flex gap-3 mt-1 font-label text-[10px] text-emerald-700">
+<span>OCT 15, 2023</span>
+<span>//</span>
+<span>CAT: BUDGET_ALLOCATION</span>
+</div>
+</div>
+<div class="bg-emerald-400 text-slate-950 font-label font-black text-xs px-6 py-1 crt-glow-border">YES</div>
+</div>
+<div class="p-5 flex justify-between items-center hover:bg-emerald-400/5 group transition-none">
+<div>
+<div class="font-label text-sm text-emerald-100 uppercase tracking-tight font-bold">S.Res 290: National Security Supplement</div>
+<div class="flex gap-3 mt-1 font-label text-[10px] text-emerald-700">
+<span>OCT 02, 2023</span>
+<span>//</span>
+<span>CAT: DEFENSE_REFORM</span>
+</div>
+</div>
+<div class="bg-on-tertiary-container text-slate-950 font-label font-black text-xs px-6 py-1 flicker-alert">NO</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="fixed bottom-0 w-full bg-slate-950 border-t border-emerald-900/50 flex justify-between items-center px-6 py-1 z-50">
+<div class="font-label text-[10px] tracking-widest text-emerald-900 uppercase">
+        DOSSIER_STATUS: <span class="text-emerald-500">REALTIME_SURVEILLANCE</span> | LATENCY: <span class="text-emerald-500">12MS</span> | SOURCE: <span class="text-emerald-500">FEC_CORE_API</span>
+</div>
+<div class="flex gap-6">
+<a class="font-label text-[10px] tracking-widest text-emerald-900 hover:text-emerald-200 uppercase transition-none" href="#">API_RESOURCES</a>
+<a class="font-label text-[10px] tracking-widest text-emerald-900 hover:text-emerald-200 uppercase transition-none" href="#">REDACTION_POLICY</a>
+<a class="font-label text-[10px] tracking-widest text-emerald-900 hover:text-emerald-200 uppercase transition-none underline" href="#">VULNERABILITY_REPORT</a>
+</div>
+</footer>
+<!-- Decorative Background Grid -->
+<div class="fixed inset-0 pointer-events-none opacity-[0.03] z-[1]" style="background-image: 
+    linear-gradient(to right, #00FF88 1px, transparent 1px),
+    linear-gradient(to bottom, #00FF88 1px, transparent 1px);
+    background-size: 40px 40px;">
+</div>
+</body></html>
