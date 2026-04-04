@@ -132,6 +132,12 @@ body {
   font-size: 13px;
   letter-spacing: 0.02em;
   position: relative;
+  overflow-x: hidden;
+}
+
+/* Prevent horizontal overflow from ghost brackets */
+main, section, .grid {
+  overflow-x: clip;
 }
 
 /* ============================================================

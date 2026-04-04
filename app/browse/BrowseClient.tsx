@@ -367,7 +367,7 @@ export default function BrowseClient({ politicians }: BrowseClientProps) {
       </main>
 
       {/* Footer */}
-      <footer className="fixed bottom-0 w-full bg-slate-950 border-t border-emerald-900/50 flex justify-between items-center px-6 py-1 z-50">
+      <footer className="w-full bg-slate-950 border-t border-emerald-900/50 flex justify-between items-center px-6 py-2 mt-6">
         <div className="font-label text-[10px] tracking-widest text-emerald-900 uppercase">
           SYSTEM_STATUS:{' '}
           <span className="text-emerald-500">OPERATIONAL</span> | LATENCY:{' '}
