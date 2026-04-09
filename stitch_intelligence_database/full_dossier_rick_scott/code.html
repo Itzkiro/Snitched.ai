@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SNITCHED.AI v2.0 | DOSSIER_SCOTT_R</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error": "#ffb4ab",
+              "inverse-on-surface": "#2f3034",
+              "on-primary-fixed-variant": "#005228",
+              "on-surface": "#e2e2e6",
+              "surface-container-lowest": "#0c0e11",
+              "on-secondary-container": "#002b4e",
+              "surface-bright": "#37393d",
+              "tertiary-fixed-dim": "#ffb3b6",
+              "secondary-fixed": "#d2e4ff",
+              "on-error-container": "#ffdad6",
+              "surface-tint": "#00e479",
+              "inverse-primary": "#006d37",
+              "surface-variant": "#333538",
+              "primary-fixed-dim": "#00e479",
+              "primary": "#f1ffef",
+              "on-secondary": "#003259",
+              "primary-container": "#00ff88",
+              "outline-variant": "#3b4b3d",
+              "on-primary-container": "#007139",
+              "inverse-surface": "#e2e2e6",
+              "on-tertiary-fixed-variant": "#920028",
+              "surface-container-high": "#282a2d",
+              "on-tertiary-fixed": "#40000c",
+              "surface-container": "#1e2023",
+              "primary-fixed": "#60ff99",
+              "background": "#111317",
+              "secondary-container": "#3694ec",
+              "surface-container-low": "#1a1c1f",
+              "on-background": "#e2e2e6",
+              "tertiary-container": "#ffd4d5",
+              "secondary-fixed-dim": "#a0caff",
+              "outline": "#849585",
+              "on-tertiary-container": "#c50039",
+              "tertiary-fixed": "#ffdada",
+              "tertiary": "#fffaf9",
+              "on-error": "#690005",
+              "on-surface-variant": "#b9cbb9",
+              "error-container": "#93000a",
+              "on-primary": "#003919",
+              "on-tertiary": "#68001a",
+              "on-primary-fixed": "#00210c",
+              "surface-container-highest": "#333538",
+              "surface": "#111317",
+              "on-secondary-fixed-variant": "#00497e",
+              "surface-dim": "#111317",
+              "secondary": "#a0caff",
+              "on-secondary-fixed": "#001c37"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["IBM Plex Mono"]
+            },
+            borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .scanline {
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, rgba(0, 255, 136, 0.02) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        .grid-bg {
+            background-image: 
+                linear-gradient(to right, rgba(0, 255, 136, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 255, 136, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #080A0D; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #00FF88; }
+        .hex-path {
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container overflow-hidden">
+<div class="scanline"></div>
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-14 bg-[#080A0D]/90 backdrop-blur-md border-b border-[#00FF88]/20 shadow-[0_0_15px_rgba(0,255,136,0.1)]">
+<div class="flex items-center gap-4">
+<span class="font-['Space_Grotesk'] font-bold text-[#00FF88] tracking-tighter text-xl">SNITCHED.AI v2.0</span>
+<div class="h-4 w-[1px] bg-outline-variant/30 ml-2"></div>
+<nav class="hidden md:flex gap-6">
+<a class="font-['IBM_Plex_Mono'] uppercase tracking-widest text-[0.75rem] text-[#C8D8E8]/60 hover:text-[#00FF88] transition-colors" href="#">NETWORK</a>
+<a class="font-['IBM_Plex_Mono'] uppercase tracking-widest text-[0.75rem] text-[#00FF88] border-b-2 border-[#00FF88] pb-1" href="#">DOSSIERS</a>
+<a class="font-['IBM_Plex_Mono'] uppercase tracking-widest text-[0.75rem] text-[#C8D8E8]/60 hover:text-[#00FF88] transition-colors" href="#">LEAKS</a>
+<a class="font-['IBM_Plex_Mono'] uppercase tracking-widest text-[0.75rem] text-[#C8D8E8]/60 hover:text-[#00FF88] transition-colors" href="#">WATCHLIST</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<input class="bg-surface-container-low border-b border-primary/30 text-primary font-label text-[0.7rem] px-3 py-1 focus:outline-none focus:border-primary placeholder:text-primary/30 w-48" placeholder="QUERY ENTITY..." type="text"/>
+</div>
+<button class="text-primary hover:bg-[#00FF88]/10 p-1">
+<span class="material-symbols-outlined text-[1.2rem]">sensors</span>
+</button>
+<button class="text-primary hover:bg-[#00FF88]/10 p-1">
+<span class="material-symbols-outlined text-[1.2rem]">schedule</span>
+</button>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-14 bottom-0 w-64 hidden lg:flex flex-col bg-[#111317] border-r border-[#00FF88]/10">
+<div class="p-6 border-b border-[#00FF88]/10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-high border border-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary/40">person_search</span>
+</div>
+<div>
+<div class="font-['IBM_Plex_Mono'] text-[0.7rem] uppercase text-[#00FF88] font-bold leading-none">OPERATOR_01</div>
+<div class="font-['IBM_Plex_Mono'] text-[0.6rem] uppercase text-primary/40 mt-1">FL_TRANSIT_SECURED</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 py-4">
+<a class="flex items-center gap-3 px-6 py-3 font-['IBM_Plex_Mono'] text-[0.7rem] uppercase text-[#C8D8E8]/40 hover:bg-[#1A1C1F] hover:text-[#00FF88]" href="#">
+<span class="material-symbols-outlined text-[1.1rem]">radar</span> THREAT_FEED
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 font-['IBM_Plex_Mono'] text-[0.7rem] uppercase bg-[#00FF88] text-[#080A0D] font-bold" href="#">
+<span class="material-symbols-outlined text-[1.1rem]">groups</span> ENTITIES
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 font-['IBM_Plex_Mono'] text-[0.7rem] uppercase text-[#C8D8E8]/40 hover:bg-[#1A1C1F] hover:text-[#00FF88]" href="#">
+<span class="material-symbols-outlined text-[1.1rem]">payments</span> MONEY_TRAIL
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 font-['IBM_Plex_Mono'] text-[0.7rem] uppercase text-[#C8D8E8]/40 hover:bg-[#1A1C1F] hover:text-[#00FF88]" href="#">
+<span class="material-symbols-outlined text-[1.1rem]">warning</span> POLITICAL_RISK
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 font-['IBM_Plex_Mono'] text-[0.7rem] uppercase text-[#C8D8E8]/40 hover:bg-[#1A1C1F] hover:text-[#00FF88]" href="#">
+<span class="material-symbols-outlined text-[1.1rem]">terminal</span> SYSTEM_LOGS
+            </a>
+</nav>
+<div class="p-6 text-[0.6rem] font-label text-primary/20 space-y-1">
+<p>ENC_NODE: 492.11.0.X</p>
+<p>LATENCY: 12MS</p>
+<p>UPLINK: ACTIVE</p>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="lg:ml-64 mt-14 p-6 min-h-screen grid-bg relative custom-scrollbar overflow-y-auto">
+<!-- Header Dossier Info -->
+<div class="flex flex-col md:flex-row justify-between items-start mb-8 gap-6 border-b border-outline-variant/20 pb-8">
+<div class="flex flex-col md:flex-row gap-6 items-start">
+<div class="relative w-40 h-40 bg-surface-container-low border-2 border-primary/20 flex-shrink-0">
+<img class="w-full h-full object-cover filter grayscale brightness-75 contrast-125" data-alt="monochrome professional portrait of a senior male politician in a suit, high contrast, dramatic shadows, surveillance aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC81wp1LmK4wRg0VUByBlQqQPefitGP1LuJj7K7I5mL_PdYTq8xucdNQJ-DYtiQ-_1FQOuEKye2whm2LjjYF3aG9bQztqrcYu4YmBCi_RCobJOxBvax3clwqHoJ_qTOHNG6_eVVOVbX5aKpXaFXrkQZpg_ExgaOgC2SP_TtpnIhoT4_uf3M35nfiv-depcwlSbUJapSWLznZsvoqADLo0Ic8C8Y2ol_uJ3cgVxixEzOGniN40nnpsqFh7at2wODZ_5mkOmqfaLTB_dC"/>
+<div class="absolute inset-0 border border-primary/40 pointer-events-none"></div>
+<div class="absolute bottom-2 left-2 bg-black/80 px-2 py-0.5 font-label text-[0.6rem] text-primary">ENTITY_ID: SCOTT_R_FL</div>
+</div>
+<div class="space-y-2">
+<div class="flex items-center gap-3">
+<span class="bg-primary/10 text-primary border border-primary/30 px-2 py-0.5 font-label text-[0.65rem] tracking-wider uppercase">ACTIVE DOSSIER</span>
+<div class="flex items-center gap-1 text-[#FFD166]">
+<span class="material-symbols-outlined text-[0.9rem]" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-label text-[0.65rem]">TIER_1_SURVEILLANCE</span>
+</div>
+</div>
+<h1 class="font-headline font-bold text-5xl md:text-6xl text-white tracking-tighter uppercase">Rick Scott</h1>
+<div class="flex flex-wrap items-center gap-4 font-label text-[0.8rem]">
+<div class="flex items-center gap-2">
+<span class="text-primary/40 uppercase">OFFICE:</span>
+<span class="text-on-surface">US SENATOR</span>
+</div>
+<div class="w-[1px] h-3 bg-outline-variant/30"></div>
+<div class="flex items-center gap-2">
+<span class="text-primary/40 uppercase">PARTY:</span>
+<span class="text-on-surface">REPUBLICAN (R)</span>
+</div>
+<div class="w-[1px] h-3 bg-outline-variant/30"></div>
+<div class="flex items-center gap-2">
+<span class="text-primary/40 uppercase">STATE:</span>
+<span class="text-on-surface">FLORIDA (FL)</span>
+</div>
+</div>
+<div class="pt-4 flex gap-3">
+<div class="bg-warning/10 border border-warning/40 text-warning px-4 py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[1rem]">nutrition</span>
+<span class="font-label text-[0.7rem] font-bold tracking-widest uppercase">JUICE BOX — TIER 3</span>
+</div>
+<button class="bg-primary px-4 py-2 font-label text-[0.7rem] font-bold text-on-primary hover:bg-primary-fixed-dim transition-none flex items-center gap-2">
+<span class="material-symbols-outlined text-[1rem]">monitoring</span>
+                            LIVE_TRACKING
+                        </button>
+</div>
+</div>
+</div>
+<!-- ScoreHex -->
+<div class="flex-shrink-0 flex flex-col items-center gap-2">
+<div class="relative w-32 h-32 flex items-center justify-center">
+<div class="absolute inset-0 bg-primary/10 hex-path shadow-[0_0_30px_rgba(0,255,136,0.15)]"></div>
+<div class="absolute inset-2 border border-primary/30 hex-path"></div>
+<div class="flex flex-col items-center z-10">
+<span class="font-headline font-bold text-4xl text-primary">88</span>
+<span class="font-label text-[0.55rem] text-primary/60 tracking-widest">RISK_SCORE</span>
+</div>
+</div>
+<span class="font-label text-[0.6rem] text-error uppercase tracking-tighter">CRITICAL VOLATILITY</span>
+</div>
+</div>
+<!-- Bento Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pb-20">
+<!-- Left Column: Corruption Breakdown -->
+<div class="lg:col-span-4 space-y-6">
+<div class="bg-surface-container-low p-6 border border-outline-variant/10">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-label text-[0.8rem] font-bold text-primary tracking-widest uppercase">RISK_MATRIX</h3>
+<span class="material-symbols-outlined text-primary/40 text-[1.2rem]">query_stats</span>
+</div>
+<div class="space-y-5">
+<div class="space-y-2">
+<div class="flex justify-between font-label text-[0.6rem]">
+<span class="text-on-surface/60 uppercase">Funding Risk</span>
+<span class="text-primary">94%</span>
+</div>
+<div class="h-1 bg-surface-container-highest w-full">
+<div class="h-full bg-primary" style="width: 94%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between font-label text-[0.6rem]">
+<span class="text-on-surface/60 uppercase">Legal Record</span>
+<span class="text-primary">82%</span>
+</div>
+<div class="h-1 bg-surface-container-highest w-full">
+<div class="h-full bg-primary" style="width: 82%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between font-label text-[0.6rem]">
+<span class="text-on-surface/60 uppercase">Voting Pattern</span>
+<span class="text-primary">67%</span>
+</div>
+<div class="h-1 bg-surface-container-highest w-full">
+<div class="h-full bg-primary" style="width: 67%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between font-label text-[0.6rem]">
+<span class="text-on-surface/60 uppercase">Social Media</span>
+<span class="text-primary">45%</span>
+</div>
+<div class="h-1 bg-surface-container-highest w-full">
+<div class="h-full bg-primary" style="width: 45%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between font-label text-[0.6rem]">
+<span class="text-on-surface/60 uppercase">Forensic Connections</span>
+<span class="text-primary">89%</span>
+</div>
+<div class="h-1 bg-surface-container-highest w-full">
+<div class="h-full bg-primary" style="width: 89%"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 p-4 bg-[#080A0D] border border-primary/10">
+<p class="font-label text-[0.65rem] text-primary/70 leading-relaxed">
+<span class="text-primary font-bold">ANALYSIS:</span> High correlation detected between private equity contributions and healthcare-related legislative motions. Surveillance status maintained at TIER 1.
+                        </p>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 border border-outline-variant/10">
+<h3 class="font-label text-[0.8rem] font-bold text-primary tracking-widest uppercase mb-4">MAP_LOCATION</h3>
+<div class="aspect-square bg-surface-container-highest relative overflow-hidden grayscale contrast-125 brightness-50">
+<img class="w-full h-full object-cover opacity-60" data-alt="abstract satellite topography map of florida with glowing neon grid overlays and data points" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYhjqJa87CIhxTuQS4Ed2j94yABCToLL_MHiaxaVqJq3Yz61zhYa4oIoDV2WFtYZtE1fyy-LPAlqOmn1605GKgQcxY8N9bOJRLVSQPqNohvMmIowBnA7z7364uUN9Rw4hT3AlGBHJqwSbbQ7DE4DwTD6SInOG1kvijxG21_J9HtJFckpxj52fKzfVd1lFDkxYY4seO3rqyt_Qtf0Z-SrZq9lFzwB_sj-IxmgzJI4fw41hbwJon_qQfFM6iGQPW4B2xtCQ6KSJBmW9C"/>
+<div class="absolute inset-0 grid-bg opacity-30"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+<div class="w-4 h-4 bg-primary rounded-full animate-pulse shadow-[0_0_10px_#00FF88]"></div>
+</div>
+</div>
+<div class="mt-3 flex justify-between items-center font-label text-[0.6rem] text-primary/40">
+<span>LAT: 28.6139° N</span>
+<span>LONG: 81.2089° W</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Tabs and Data Tables -->
+<div class="lg:col-span-8 space-y-6">
+<!-- DossierTabs -->
+<div class="flex border-b border-outline-variant/20 overflow-x-auto no-scrollbar">
+<button class="px-6 py-4 font-label text-[0.75rem] font-bold text-primary border-b-2 border-primary tracking-widest transition-none bg-primary/5">OVERVIEW</button>
+<button class="px-6 py-4 font-label text-[0.75rem] text-on-surface/40 hover:text-primary transition-none tracking-widest border-b-2 border-transparent">FUNDING</button>
+<button class="px-6 py-4 font-label text-[0.75rem] text-on-surface/40 hover:text-primary transition-none tracking-widest border-b-2 border-transparent">VOTES</button>
+<button class="px-6 py-4 font-label text-[0.75rem] text-on-surface/40 hover:text-primary transition-none tracking-widest border-b-2 border-transparent">SOCIAL</button>
+<button class="px-6 py-4 font-label text-[0.75rem] text-on-surface/40 hover:text-primary transition-none tracking-widest border-b-2 border-transparent">LOBBYING</button>
+</div>
+<div class="bg-surface-container-low border border-outline-variant/10 overflow-hidden">
+<div class="p-6 flex justify-between items-end border-b border-outline-variant/10">
+<div>
+<h2 class="font-label text-[0.65rem] text-primary/50 uppercase tracking-[0.2em] mb-1">AGGREGATE_CAPITAL_FLOW</h2>
+<div class="font-headline font-bold text-4xl text-white tracking-tight">$42,109,560.00</div>
+</div>
+<div class="text-right">
+<span class="font-label text-[0.6rem] text-primary/50 uppercase block">LAST_SYNC_TS</span>
+<span class="font-label text-[0.7rem] text-primary">2023-10-24 14:32:01 UTC</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse font-label text-[0.7rem]">
+<thead>
+<tr class="bg-surface-container text-primary/40 uppercase text-[0.6rem]">
+<th class="px-6 py-4 font-medium">Donor Name</th>
+<th class="px-6 py-4 font-medium text-right">Amount</th>
+<th class="px-6 py-4 font-medium">Date</th>
+<th class="px-6 py-4 font-medium">Committee</th>
+<th class="px-6 py-4 font-medium text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<tr class="hover:bg-primary/5 transition-none group">
+<td class="px-6 py-4 text-on-surface">Blackstone Group Inc</td>
+<td class="px-6 py-4 text-right text-primary font-bold">$450,000.00</td>
+<td class="px-6 py-4 text-on-surface/60">OCT 12, 2023</td>
+<td class="px-6 py-4 text-on-surface/80">REMAINING_VITALITY_PAC</td>
+<td class="px-6 py-4 text-right">
+<span class="bg-primary/10 text-primary px-2 py-0.5 border border-primary/20">VERIFIED</span>
+</td>
+</tr>
+<tr class="bg-[#FFD166]/5 group border-y border-[#FFD166]/20">
+<td class="px-6 py-4 text-[#FFD166] flex items-center gap-2 font-bold">
+<span class="material-symbols-outlined text-[0.9rem]">priority_high</span>
+                                        AIPAC - American Israel Public Affairs Comm
+                                    </td>
+<td class="px-6 py-4 text-right text-[#FFD166] font-bold">$225,000.00</td>
+<td class="px-6 py-4 text-[#FFD166]/60">OCT 08, 2023</td>
+<td class="px-6 py-4 text-[#FFD166]/80">NRSC_VICTORY_FUND</td>
+<td class="px-6 py-4 text-right">
+<span class="bg-[#FFD166]/20 text-[#FFD166] px-2 py-0.5 border border-[#FFD166]/40">FLAGGED</span>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-none group">
+<td class="px-6 py-4 text-on-surface">Citadel Securities LLC</td>
+<td class="px-6 py-4 text-right text-primary font-bold">$180,000.00</td>
+<td class="px-6 py-4 text-on-surface/60">SEP 29, 2023</td>
+<td class="px-6 py-4 text-on-surface/80">FL_SENATE_REPUBLICANS</td>
+<td class="px-6 py-4 text-right">
+<span class="bg-primary/10 text-primary px-2 py-0.5 border border-primary/20">VERIFIED</span>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-none group">
+<td class="px-6 py-4 text-on-surface">NextEra Energy</td>
+<td class="px-6 py-4 text-right text-primary font-bold">$125,500.00</td>
+<td class="px-6 py-4 text-on-surface/60">SEP 15, 2023</td>
+<td class="px-6 py-4 text-on-surface/80">SUSTAIN_FL_PAC</td>
+<td class="px-6 py-4 text-right">
+<span class="bg-primary/10 text-primary px-2 py-0.5 border border-primary/20">VERIFIED</span>
+</td>
+</tr>
+<tr class="bg-[#FFD166]/5 group border-y border-[#FFD166]/20">
+<td class="px-6 py-4 text-[#FFD166] flex items-center gap-2 font-bold">
+<span class="material-symbols-outlined text-[0.9rem]">priority_high</span>
+                                        AIPAC - American Israel Public Affairs Comm
+                                    </td>
+<td class="px-6 py-4 text-right text-[#FFD166] font-bold">$100,000.00</td>
+<td class="px-6 py-4 text-[#FFD166]/60">AUG 30, 2023</td>
+<td class="px-6 py-4 text-[#FFD166]/80">DIRECT_CONTRIBUTION</td>
+<td class="px-6 py-4 text-right">
+<span class="bg-[#FFD166]/20 text-[#FFD166] px-2 py-0.5 border border-[#FFD166]/40">FLAGGED</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Votes Table -->
+<div class="bg-surface-container-low border border-outline-variant/10 overflow-hidden">
+<div class="p-4 bg-surface-container-high border-b border-outline-variant/10 flex items-center justify-between">
+<h3 class="font-label text-[0.7rem] font-bold text-primary uppercase tracking-widest">RECENT_VOTING_RECORD</h3>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 bg-primary"></div>
+<span class="font-label text-[0.55rem] text-primary/60">YES_CONCUR</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 bg-error"></div>
+<span class="font-label text-[0.55rem] text-error/60">NO_DISSENT</span>
+</div>
+</div>
+</div>
+<div class="divide-y divide-outline-variant/10">
+<div class="p-6 flex items-center justify-between hover:bg-surface-container-high transition-none">
+<div class="space-y-1">
+<div class="text-on-surface font-label text-[0.8rem] font-bold uppercase tracking-tight">H.R. 4366: Consolidated Appropriations Act</div>
+<div class="flex items-center gap-3 font-label text-[0.6rem] text-primary/40">
+<span>OCT 15, 2023</span>
+<span class="w-1 h-1 bg-outline-variant/40 rounded-full"></span>
+<span class="text-primary/60">CATEGORY: BUDGET_ALLOCATION</span>
+</div>
+</div>
+<div class="bg-primary px-4 py-1 text-on-primary font-label font-bold text-[0.7rem]">YES</div>
+</div>
+<div class="p-6 flex items-center justify-between hover:bg-surface-container-high transition-none">
+<div class="space-y-1">
+<div class="text-on-surface font-label text-[0.8rem] font-bold uppercase tracking-tight">S.Res 290: National Security Supplement</div>
+<div class="flex items-center gap-3 font-label text-[0.6rem] text-primary/40">
+<span>OCT 02, 2023</span>
+<span class="w-1 h-1 bg-outline-variant/40 rounded-full"></span>
+<span class="text-primary/60">CATEGORY: DEFENSE_REFORM</span>
+</div>
+</div>
+<div class="bg-error px-4 py-1 text-on-error font-label font-bold text-[0.7rem]">NO</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="fixed bottom-0 w-full z-40 py-2 px-6 flex justify-between items-center bg-black/80 border-t border-[#00FF88]/5">
+<div class="font-['IBM_Plex_Mono'] text-[0.65rem] opacity-50 text-[#00FF88]">
+            DATA SYNC: REAL-TIME // FEC SOURCE CITATIONS ENABLED
+        </div>
+<div class="flex gap-6">
+<a class="font-['IBM_Plex_Mono'] text-[0.65rem] opacity-50 text-[#00FF88] hover:opacity-100 transition-opacity underline" href="#">API_RESOURCES</a>
+<a class="font-['IBM_Plex_Mono'] text-[0.65rem] opacity-50 text-[#00FF88] hover:opacity-100 transition-opacity" href="#">REDACTION_POLICY</a>
+<a class="font-['IBM_Plex_Mono'] text-[0.65rem] opacity-50 text-[#00FF88] hover:opacity-100 transition-opacity" href="#">VULNERABILITY_REPORT</a>
+</div>
+</footer>
+<!-- Global Grid Overlay -->
+<div class="fixed inset-0 pointer-events-none grid-bg opacity-[0.03] z-[1]"></div>
+</body></html>

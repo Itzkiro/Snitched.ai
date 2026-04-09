@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SNITCHED.AI v2.0 | THE SOVEREIGN EYE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error": "#ffb4ab",
+              "inverse-on-surface": "#2f3034",
+              "on-primary-fixed-variant": "#005228",
+              "on-surface": "#e2e2e6",
+              "surface-container-lowest": "#0c0e11",
+              "on-secondary-container": "#002b4e",
+              "surface-bright": "#37393d",
+              "tertiary-fixed-dim": "#ffb3b6",
+              "secondary-fixed": "#d2e4ff",
+              "on-error-container": "#ffdad6",
+              "surface-tint": "#00e479",
+              "inverse-primary": "#006d37",
+              "surface-variant": "#333538",
+              "primary-fixed-dim": "#00e479",
+              "primary": "#f1ffef",
+              "on-secondary": "#003259",
+              "primary-container": "#00ff88",
+              "outline-variant": "#3b4b3d",
+              "on-primary-container": "#007139",
+              "inverse-surface": "#e2e2e6",
+              "on-tertiary-fixed-variant": "#920028",
+              "surface-container-high": "#282a2d",
+              "on-tertiary-fixed": "#40000c",
+              "surface-container": "#1e2023",
+              "primary-fixed": "#60ff99",
+              "background": "#080a0d",
+              "secondary-container": "#3694ec",
+              "surface-container-low": "#1a1c1f",
+              "on-background": "#e2e2e6",
+              "tertiary-container": "#ffd4d5",
+              "secondary-fixed-dim": "#a0caff",
+              "outline": "#849585",
+              "on-tertiary-container": "#c50039",
+              "tertiary-fixed": "#ffdada",
+              "tertiary": "#fffaf9",
+              "on-error": "#690005",
+              "on-surface-variant": "#b9cbb9",
+              "error-container": "#93000a",
+              "on-primary": "#003919",
+              "on-tertiary": "#68001a",
+              "on-primary-fixed": "#00210c",
+              "surface-container-highest": "#333538",
+              "surface": "#111317",
+              "on-secondary-fixed-variant": "#00497e",
+              "surface-dim": "#111317",
+              "secondary": "#a0caff",
+              "on-secondary-fixed": "#001c37"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["IBM Plex Mono"]
+            },
+            borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #080a0d;
+            background-image: 
+                linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+            background-size: 24px 24px;
+            cursor: crosshair;
+        }
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                rgba(18, 16, 16, 0) 50%,
+                rgba(0, 0, 0, 0.1) 50%
+            ), linear-gradient(
+                90deg,
+                rgba(255, 0, 0, 0.02),
+                rgba(0, 255, 0, 0.01),
+                rgba(0, 0, 255, 0.02)
+            );
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+        .primary-glow {
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
+        }
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background: rgba(0, 255, 136, 0.05);
+            border-top: 1px solid rgba(0, 255, 136, 0.1);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+        }
+        .ticker {
+            display: inline-block;
+            white-space: nowrap;
+            padding-right: 100%;
+            animation: ticker 30s linear infinite;
+        }
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<div class="scanlines"></div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-14 bg-[#080A0D]/90 backdrop-blur-md rect-0 border-b border-[#00FF88]/20 shadow-[0_0_15px_rgba(0,255,136,0.1)]">
+<div class="flex items-center gap-8">
+<span class="font-['Space_Grotesk'] font-bold text-[#00FF88] tracking-tighter text-lg">SNITCHED.AI v2.0</span>
+<div class="hidden md:flex gap-6">
+<a class="font-['IBM_Plex_Mono'] uppercase tracking-widest text-[0.75rem] text-[#00FF88] border-b-2 border-[#00FF88] pb-1" href="#">NETWORK</a>
+<a class="font-['IBM_Plex_Mono'] uppercase tracking-widest text-[0.75rem] text-[#C8D8E8]/60 hover:text-[#00FF88] transition-colors" href="#">DOSSIERS</a>
+<a class="font-['IBM_Plex_Mono'] uppercase tracking-widest text-[0.75rem] text-[#C8D8E8]/60 hover:text-[#00FF88] transition-colors" href="#">LEAKS</a>
+<a class="font-['IBM_Plex_Mono'] uppercase tracking-widest text-[0.75rem] text-[#C8D8E8]/60 hover:text-[#00FF88] transition-colors" href="#">WATCHLIST</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1 bg-surface-container-high border border-outline-variant/30">
+<span class="font-label text-[0.65rem] text-primary tracking-widest uppercase">14:02:54 UTC</span>
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00FF88] opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-[#00FF88]"></span>
+</span>
+<span class="font-label text-[0.65rem] text-[#00FF88] tracking-widest uppercase">FEED ACTIVE</span>
+</div>
+<span class="material-symbols-outlined text-[#00FF88] cursor-pointer hover:bg-[#00FF88]/10 p-1" data-icon="sensors">sensors</span>
+<span class="material-symbols-outlined text-[#00FF88] cursor-pointer hover:bg-[#00FF88]/10 p-1" data-icon="schedule">schedule</span>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-14 bottom-0 w-64 hidden lg:flex flex-col bg-[#111317] rect-0 border-r border-[#00FF88]/10 z-40">
+<div class="p-6 border-b border-[#00FF88]/5">
+<p class="font-['IBM_Plex_Mono'] text-[0.7rem] uppercase text-[#00FF88] font-bold">OPERATOR_01</p>
+<p class="font-['IBM_Plex_Mono'] text-[0.6rem] uppercase text-[#C8D8E8]/40">FL_TRANSIT_SECURED</p>
+</div>
+<div class="flex-1 py-4">
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-6 py-3 bg-[#00FF88] text-[#080A0D] font-bold font-['IBM_Plex_Mono'] text-[0.7rem] uppercase" href="#">
+<span class="material-symbols-outlined text-[1.2rem]" data-icon="radar">radar</span>
+                    THREAT_FEED
+                </a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#C8D8E8]/40 hover:bg-[#1A1C1F] hover:text-[#00FF88] font-['IBM_Plex_Mono'] text-[0.7rem] uppercase transition-all" href="#">
+<span class="material-symbols-outlined text-[1.2rem]" data-icon="groups">groups</span>
+                    ENTITIES
+                </a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#C8D8E8]/40 hover:bg-[#1A1C1F] hover:text-[#00FF88] font-['IBM_Plex_Mono'] text-[0.7rem] uppercase transition-all" href="#">
+<span class="material-symbols-outlined text-[1.2rem]" data-icon="payments">payments</span>
+                    MONEY_TRAIL
+                </a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#C8D8E8]/40 hover:bg-[#1A1C1F] hover:text-[#00FF88] font-['IBM_Plex_Mono'] text-[0.7rem] uppercase transition-all" href="#">
+<span class="material-symbols-outlined text-[1.2rem]" data-icon="warning">warning</span>
+                    POLITICAL_RISK
+                </a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#C8D8E8]/40 hover:bg-[#1A1C1F] hover:text-[#00FF88] font-['IBM_Plex_Mono'] text-[0.7rem] uppercase transition-all" href="#">
+<span class="material-symbols-outlined text-[1.2rem]" data-icon="terminal">terminal</span>
+                    SYSTEM_LOGS
+                </a>
+</nav>
+</div>
+<div class="p-4 bg-surface-container-low/50">
+<div class="h-32 w-full bg-black relative border border-outline-variant/10">
+<img alt="Encrypted profile silhouette" class="w-full h-full object-cover opacity-30 grayscale" data-alt="a digital glitched silhouette of a person on a screen with green data stream overlays and technical HUD elements" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzuWFIU1pCWtuhcnDwJ4gltH3ILIsInUbxVqyEdLbRBtF5qREB9tqZI_EXz50g_1KDe3VFVduYhdzEFB0wf_0JcYmCkyqL_-14BMj93qTizTiNeIT6EhaqJ31vkV8vshu4VeFz8SMEm4IYGJOr-CPCFY5yzCJgbr492HHC47-q_rc-xJmsjU6ptzJqEjIUDWmfXvqpf10nghDE-4_MtFYYznL378PRc8jnRf4Fu_29QjmRjJQm71uXxzNm9xBPUnilcqGzrRVjsU4C"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent"></div>
+<div class="absolute bottom-2 left-2">
+<p class="font-label text-[0.5rem] text-[#00FF88]">ENCRYPTION: AES-256</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:pl-64 pt-14 pb-12">
+<!-- Hero Section -->
+<section class="relative min-h-[614px] flex flex-col justify-center px-8 lg:px-16 overflow-hidden border-b border-[#00FF88]/10 bg-surface-container-lowest">
+<div class="absolute top-0 right-0 w-1/2 h-full opacity-20 pointer-events-none">
+<img alt="Code visualization" class="w-full h-full object-cover" data-alt="high contrast technical code on a dark screen with vibrant green highlights and digital artifacts in an OSINT aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsQMf4L5U5kv-I82bd1afZjqOd2nQnEs9Y1SSqNgxhLsmaX2k-WmEpGMj09j8I709JPSTlLgjMR7MIDnpVuBRerZKmYTazeHSEqxTtYN7SLUodxZ7yA2IlHJkcjb1VAObS1D38HenL7rmmVDmJsybnC7HV9vn99wyeFbbkxoQBWxaWqDRc8dtr3TJrdhXqIf94jbwz_niYjYIiHekEfY_tD2YxXgqwLBvUaT4iP-i8fJjzSy0RmCuFsvz40JYrKflH3VmSMIMSDhXp"/>
+</div>
+<div class="relative z-10 max-w-5xl">
+<div class="mb-4 inline-block border border-primary/20 px-3 py-1 bg-primary/5">
+<span class="font-label text-xs text-primary-container tracking-[0.2em]">ACCESSING FLORIDA_CENTRAL_REGISTRY_V2</span>
+</div>
+<h1 class="font-label text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-[#00FF88] primary-glow leading-tight mb-6">
+                    EVERY POLITICIAN.<br/>EVERY DOLLAR.<br/>EVERY LIE.
+                </h1>
+<p class="font-label text-lg md:text-xl text-on-surface-variant max-w-2xl border-l-4 border-[#00FF88] pl-6 py-2">
+                    200+ Florida officials tracked. Real FEC data. Zero opinions. 
+                    <span class="block text-sm mt-2 opacity-60">SOURCE: FEC_FILINGS_SYNC_2024_Q3</span>
+</p>
+<div class="mt-10 flex flex-wrap gap-4">
+<button class="bg-[#00FF88] text-[#080A0D] font-label font-bold px-8 py-4 uppercase tracking-widest hover:bg-primary-fixed-dim transition-none flex items-center gap-2">
+                        INITIATE INVESTIGATION <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="border border-[#00FF88]/40 text-[#00FF88] font-label font-bold px-8 py-4 uppercase tracking-widest hover:bg-[#00FF88]/10 transition-none">
+                        VIEW_METHODOLOGY
+                    </button>
+</div>
+</div>
+</section>
+<!-- Live Ticker -->
+<div class="ticker-wrap h-10 flex items-center">
+<div class="ticker font-label text-[0.7rem] uppercase tracking-widest text-primary-container/80">
+<span class="mx-8"><span class="text-white">● LIVE:</span> Rick Scott - <span class="text-error">88</span></span>
+<span class="mx-8"><span class="text-white">● LIVE:</span> Marco Rubio - <span class="text-error">92</span></span>
+<span class="mx-8"><span class="text-white">● LIVE:</span> Ron DeSantis - <span class="text-warning">74</span></span>
+<span class="mx-8"><span class="text-white">● LIVE:</span> Matt Gaetz - <span class="text-error">95</span></span>
+<span class="mx-8"><span class="text-white">● LIVE:</span> Kathy Castor - <span class="text-primary-container">42</span></span>
+<span class="mx-8"><span class="text-white">● LIVE:</span> Vern Buchanan - <span class="text-warning">68</span></span>
+<!-- Duplicate for seamless loop -->
+<span class="mx-8"><span class="text-white">● LIVE:</span> Rick Scott - <span class="text-error">88</span></span>
+<span class="mx-8"><span class="text-white">● LIVE:</span> Marco Rubio - <span class="text-error">92</span></span>
+</div>
+</div>
+<!-- Dashboard Modules -->
+<section class="p-8 lg:p-12 grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Stat Counters (Asymmetric Layout) -->
+<div class="md:col-span-12 grid grid-cols-1 md:grid-cols-3 gap-1 mb-4">
+<div class="bg-surface-container-low p-8 border border-outline-variant/5">
+<p class="font-label text-[0.65rem] text-on-surface-variant mb-2 tracking-[0.3em] uppercase">OFFICIALS_UNDER_WATCH</p>
+<p class="font-headline text-5xl font-bold text-white">200<span class="text-primary-container">+</span></p>
+<div class="mt-4 w-full bg-black h-1 overflow-hidden">
+<div class="bg-primary-container h-full w-[85%]"></div>
+</div>
+</div>
+<div class="bg-surface-container-low p-8 border border-outline-variant/5">
+<p class="font-label text-[0.65rem] text-on-surface-variant mb-2 tracking-[0.3em] uppercase">DARK_MONEY_HIDDEN</p>
+<p class="font-headline text-5xl font-bold text-white">$0.00</p>
+<p class="font-label text-[0.55rem] text-primary-container mt-4 uppercase">DECRYPTION COMPLETE // 100% VISIBILITY</p>
+</div>
+<div class="bg-surface-container-low p-8 border border-outline-variant/5">
+<p class="font-label text-[0.65rem] text-on-surface-variant mb-2 tracking-[0.3em] uppercase">SYSTEM_LATENCY</p>
+<p class="font-headline text-5xl font-bold text-white">12<span class="text-sm font-label font-normal">ms</span></p>
+<div class="mt-4 flex gap-1">
+<div class="h-2 w-full bg-primary-container/20"></div>
+<div class="h-2 w-full bg-primary-container/20"></div>
+<div class="h-2 w-full bg-primary-container"></div>
+</div>
+</div>
+</div>
+<!-- Main Feed Area -->
+<div class="md:col-span-8 space-y-8">
+<div class="bg-surface-container p-6 border-l-2 border-primary-container">
+<div class="flex justify-between items-center mb-8">
+<h2 class="font-headline text-xl font-bold uppercase tracking-tight flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container" data-icon="terminal">terminal</span>
+                            ACTIVE_INCIDENT_FEED
+                        </h2>
+<span class="font-label text-[0.6rem] text-on-surface-variant">FILTER: HIGH_VOLATILITY</span>
+</div>
+<div class="space-y-4">
+<!-- Incident Item -->
+<div class="group bg-surface-container-low hover:bg-surface-container-high transition-colors p-4 flex gap-6 items-start">
+<div class="font-label text-[0.7rem] text-primary-container pt-1">14:02:11</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<h3 class="font-label text-sm font-bold text-white uppercase tracking-wider">UNUSUAL_PAC_INFLOW</h3>
+<span class="font-label text-[0.6rem] bg-error-container/20 text-error px-2 border border-error/20 uppercase">Critical</span>
+</div>
+<p class="text-on-surface-variant text-xs mt-1 font-mono">Entity [FL-022] received $450,000 from anonymous holding corp "SOLAR_SECURE_LLC". Flagged for coordination.</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-primary-container" data-icon="open_in_new">open_in_new</span>
+</div>
+<!-- Incident Item -->
+<div class="group bg-surface-container-low hover:bg-surface-container-high transition-colors p-4 flex gap-6 items-start">
+<div class="font-label text-[0.7rem] text-primary-container pt-1">13:58:44</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<h3 class="font-label text-sm font-bold text-white uppercase tracking-wider">LEGISLATION_CORRELATION</h3>
+<span class="font-label text-[0.6rem] bg-secondary-container/20 text-secondary px-2 border border-secondary/20 uppercase">Observation</span>
+</div>
+<p class="text-on-surface-variant text-xs mt-1 font-mono">Senate Bill SB-104 matching contribution patterns from Top 5 utility donors. Cross-referencing lobbyist logs.</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-primary-container" data-icon="open_in_new">open_in_new</span>
+</div>
+<!-- Incident Item -->
+<div class="group bg-surface-container-low hover:bg-surface-container-high transition-colors p-4 flex gap-6 items-start">
+<div class="font-label text-[0.7rem] text-primary-container pt-1">13:45:02</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<h3 class="font-label text-sm font-bold text-white uppercase tracking-wider">ASSET_DISCLOSURE_MISMATCH</h3>
+<span class="font-label text-[0.6rem] bg-error-container/20 text-error px-2 border border-error/20 uppercase">Critical</span>
+</div>
+<p class="text-on-surface-variant text-xs mt-1 font-mono">Discrepancy detected in Representative [REDACTED] real estate portfolio vs. local tax filings.</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-primary-container" data-icon="open_in_new">open_in_new</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar Column -->
+<div class="md:col-span-4 space-y-8">
+<!-- Most Corrupt Leaderboard -->
+<div class="bg-surface-container border border-outline-variant/10">
+<div class="p-4 bg-error-container/10 border-b border-error/20 flex items-center justify-between">
+<h3 class="font-headline font-bold text-error text-sm uppercase tracking-tighter">LEADERBOARD_VOLATILITY</h3>
+<span class="font-label text-[0.5rem] text-error opacity-70">UPDATED: REAL-TIME</span>
+</div>
+<div class="divide-y divide-outline-variant/10">
+<div class="p-4 flex items-center justify-between group hover:bg-surface-container-high">
+<div class="flex items-center gap-4">
+<span class="font-label text-lg font-bold text-on-surface-variant/50">01</span>
+<div class="w-10 h-10 bg-black border border-outline-variant/20">
+<img alt="Official portrait" class="w-full h-full object-cover grayscale brightness-75" data-alt="a grainy black and white industrial portrait of a man in a suit with a surveillance camera aesthetic overlay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASQEIEekeEsNhfIlG4O4V4M1Q1GKf9fjfoC_da7kO3pJ5V4WeidcJcBbJAXRlfNsaEcrVUsFrXi_82M5krlGzTi4zEIUkOVB46qK0a6WIi4ifQhc5FymZ5hAyuRNlG_9zrw_2iXyooPwIOTwCVmSodIOqwqkQU_gF8If4h4hj9MzFvBcqnQSBByL5NhaKbsN3IN1kiTqS8LvqbCFyocFyVUmBu5K_03lzyZsN1H4j42IW-Pj0dGK4Ol8q9R8sc9S1TLyG_Uaznhbl9"/>
+</div>
+<div>
+<p class="font-label text-xs font-bold text-white">GAETZ, MATTHEW</p>
+<p class="font-label text-[0.5rem] text-on-surface-variant">HOUSE DISTRICT 1</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label text-sm font-bold text-error">95.4</p>
+<p class="font-label text-[0.5rem] text-error/60">RISK_SCORE</p>
+</div>
+</div>
+<div class="p-4 flex items-center justify-between group hover:bg-surface-container-high">
+<div class="flex items-center gap-4">
+<span class="font-label text-lg font-bold text-on-surface-variant/50">02</span>
+<div class="w-10 h-10 bg-black border border-outline-variant/20">
+<img alt="Official portrait" class="w-full h-full object-cover grayscale brightness-75" data-alt="a grainy dark portrait of a middle aged man in a suit processed with high contrast monitor scanlines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAE0dTbzaNyf7mAbOdETQNRtP5j-Ml0vzxJpWqwG0NwQAB7s9fH6xsqGSL4xh6p0dnTJrFq85Z582CTx6k4K5YVkY_tDCPMPDfEuWzcKlFO5vFYVGT_51yK0mnhR1U6B0tDmKLpCEGqo1VYDKt7L4O85aHiiWS__g8T2S2LxzdCuS6bEmnc6DQbZ-o9SIWHdTaMtrLt_BthpSSWkwWipJVxOrLOyxgQlnl1aXLn8vcVVkEMvojHu2GTXeqhWH7A-_LQrwfIyE5CGX2k"/>
+</div>
+<div>
+<p class="font-label text-xs font-bold text-white">RUBIO, MARCO</p>
+<p class="font-label text-[0.5rem] text-on-surface-variant">SENATE OFFICE</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label text-sm font-bold text-error">92.1</p>
+<p class="font-label text-[0.5rem] text-error/60">RISK_SCORE</p>
+</div>
+</div>
+<div class="p-4 flex items-center justify-between group hover:bg-surface-container-high">
+<div class="flex items-center gap-4">
+<span class="font-label text-lg font-bold text-on-surface-variant/50">03</span>
+<div class="w-10 h-10 bg-black border border-outline-variant/20">
+<img alt="Official portrait" class="w-full h-full object-cover grayscale brightness-75" data-alt="high contrast surveillance footage still of a businessman in profile with technical overlays" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaK3fwO0W6V0Ls2TDFiXXRORoEyxIWgqrTTuSBeMEin8gB5I-aI0HrRt5o2nhqR1EWxZ3RH5ViLY5TDn05cNBDkX7-iQbiheK2F8Z_Z-i_WWRLiJ6uMhNmsddS_H0Bmr4RV0M_FnpCqayKN2OnrpopZB6tYNV9BLjbAavbfZqWz6pvCi3TyBgK4I50VDzJzdRBj_Uf1wqWJXPthJy5WMMQwiL4b4Olu6S4ooO7JLIFqjIG0MGq8Um0M29HRO0tMdLiUG260YAfofRj"/>
+</div>
+<div>
+<p class="font-label text-xs font-bold text-white">SCOTT, RICK</p>
+<p class="font-label text-[0.5rem] text-on-surface-variant">SENATE OFFICE</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label text-sm font-bold text-error">88.8</p>
+<p class="font-label text-[0.5rem] text-error/60">RISK_SCORE</p>
+</div>
+</div>
+<div class="p-4 flex items-center justify-between group hover:bg-surface-container-high">
+<div class="flex items-center gap-4">
+<span class="font-label text-lg font-bold text-on-surface-variant/50">04</span>
+<div class="w-10 h-10 bg-black border border-outline-variant/20">
+<img alt="Official portrait" class="w-full h-full object-cover grayscale brightness-75" data-alt="a dark mood portrait of a male official with green matrix-style digital rain reflecting off glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC75IIhEgBg_GFrCEU7VfuG-2Pq8Ej6L_6V6hJtUgv2hTCRV4UyHAyWZ9YsZvqgC1jeHDJHlmv331FjuYUUYIL_JfaKDLP-YjRzOa3jSbrHjBMAM3vzNi4ZiwnR3R7xkWELokLUgZGlHnnsJWwX54tLbRkWSXmPMdO9jLUpT-JlOKmvf6OoY5X5SrO3AQzQJGJ_l60ctK3xA67oVJHXStwKjwXLwKkemMBvz8NCqWPDSoxnlv1Ljls85hjB13vjEKrMkUPXgPGBS20p"/>
+</div>
+<div>
+<p class="font-label text-xs font-bold text-white">DESANTIS, RON</p>
+<p class="font-label text-[0.5rem] text-on-surface-variant">EXECUTIVE_OFFICE</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label text-sm font-bold text-warning">74.5</p>
+<p class="font-label text-[0.5rem] text-warning/60">RISK_SCORE</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Tactical Map Preview -->
+<div class="bg-surface-container border border-outline-variant/10 p-4">
+<p class="font-label text-[0.6rem] text-primary-container mb-2 tracking-widest uppercase">GEO_INFLUENCE_MAP</p>
+<div class="aspect-video bg-black relative border border-outline-variant/20 overflow-hidden">
+<img alt="Data Map" class="w-full h-full object-cover opacity-40 grayscale hue-rotate-90" data-alt="a tactical satellite map of florida with glowing data nodes and heat map overlays in neon green and red" data-location="Florida" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx5CEdvXbPcrw_3tME2D69oRvsg64uTGylOb37yyERch6pvCTqvw0vtBunfOvLMBt66WyXPllz3j-xIiFptWsgaaRUyg4YxcS8cdeg1qYuwIZKvsWUkq9F7bNmhV64wUCvhfEN3P1p6iEqMJoRMVCk0itN1YkB7sUXrRlGBPykUdMGcI1VEhqlquuMmOhiIHNkYScbCR0pXMtNpjhqKR4Or-hm4nx0QtM6lgGgEcz4RvnKDcA4bEIJYWhGSqH5WsKiJ9M3Vbp-wx3F"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-20 h-20 border border-[#00FF88]/40 animate-pulse flex items-center justify-center">
+<div class="w-2 h-2 bg-[#00FF88]"></div>
+</div>
+</div>
+</div>
+<button class="w-full mt-4 py-2 border border-outline-variant text-[0.6rem] font-label text-on-surface-variant hover:bg-surface-container-high hover:text-white transition-all uppercase">Open Full Vector Map</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="fixed bottom-0 w-full z-40 py-2 px-6 flex justify-between items-center bg-black/80 rect-0 border-t border-[#00FF88]/5">
+<div class="flex items-center gap-6">
+<span class="font-['IBM_Plex_Mono'] text-[0.65rem] opacity-50 text-[#00FF88]">DATA SYNC: REAL-TIME // FEC SOURCE CITATIONS ENABLED</span>
+<div class="hidden md:flex gap-4">
+<a class="font-['IBM_Plex_Mono'] text-[0.65rem] opacity-50 text-[#00FF88] hover:opacity-100 transition-opacity" href="#">API_RESOURCES</a>
+<a class="font-['IBM_Plex_Mono'] text-[0.65rem] opacity-50 text-[#00FF88] hover:opacity-100 transition-opacity" href="#">REDACTION_POLICY</a>
+<a class="font-['IBM_Plex_Mono'] text-[0.65rem] opacity-50 text-[#00FF88] hover:opacity-100 transition-opacity" href="#">VULNERABILITY_REPORT</a>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-['IBM_Plex_Mono'] text-[0.65rem] opacity-50 text-[#00FF88] uppercase">Nodes Connected: 14/14</span>
+<span class="w-2 h-2 bg-primary-container rounded-full shadow-[0_0_5px_#00FF88]"></span>
+</div>
+</footer>
+</body></html>

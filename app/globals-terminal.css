@@ -1,24 +1,108 @@
-/* Snitched.ai - Bloomberg Terminal / Intelligence Dashboard Theme */
+/* Snitched.ai - Obsidian Signal Design System */
+/* "The Sovereign Eye" — Surveillance Apparatus Aesthetic */
+
+@import "tailwindcss";
+
+/* ============================================================
+   TAILWIND THEME CONFIGURATION (Tailwind CSS v4)
+   ============================================================ */
+
+@theme {
+  --color-background: #080A0D;
+  --color-surface: #111317;
+  --color-surface-dim: #111317;
+  --color-surface-bright: #37393D;
+  --color-surface-variant: #333538;
+  --color-surface-container: #1E2023;
+  --color-surface-container-low: #1A1C1F;
+  --color-surface-container-high: #282A2D;
+  --color-surface-container-highest: #333538;
+  --color-surface-container-lowest: #0C0E11;
+  --color-surface-tint: #00E479;
+
+  --color-primary: #F1FFEF;
+  --color-primary-container: #00FF88;
+  --color-primary-fixed: #60FF99;
+  --color-primary-fixed-dim: #00E479;
+  --color-on-primary: #003919;
+  --color-on-primary-container: #007139;
+  --color-on-primary-fixed: #00210C;
+  --color-on-primary-fixed-variant: #005228;
+  --color-inverse-primary: #006D37;
+
+  --color-secondary: #A0CAFF;
+  --color-secondary-container: #3694EC;
+  --color-secondary-fixed: #D2E4FF;
+  --color-secondary-fixed-dim: #A0CAFF;
+  --color-on-secondary: #003259;
+  --color-on-secondary-container: #002B4E;
+  --color-on-secondary-fixed: #001C37;
+  --color-on-secondary-fixed-variant: #00497E;
+
+  --color-tertiary: #FFFAF9;
+  --color-tertiary-container: #FFD4D5;
+  --color-tertiary-fixed: #FFDADA;
+  --color-tertiary-fixed-dim: #FFB3B6;
+  --color-on-tertiary: #68001A;
+  --color-on-tertiary-container: #C50039;
+  --color-on-tertiary-fixed: #40000C;
+  --color-on-tertiary-fixed-variant: #920028;
+
+  --color-error: #FFB4AB;
+  --color-error-container: #93000A;
+  --color-on-error: #690005;
+  --color-on-error-container: #FFDAD6;
+
+  --color-on-surface: #E2E2E6;
+  --color-on-surface-variant: #B9CBB9;
+  --color-on-background: #E2E2E6;
+  --color-inverse-surface: #E2E2E6;
+  --color-inverse-on-surface: #2F3034;
+
+  --color-warning: #FFD166;
+
+  --color-outline: #849585;
+  --color-outline-variant: #3B4B3D;
+
+  --font-family-headline: "Space Grotesk", sans-serif;
+  --font-family-body: "Inter", sans-serif;
+  --font-family-mono: "IBM Plex Mono", monospace;
+  --font-family-label: "IBM Plex Mono", monospace;
+
+  --radius-DEFAULT: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+}
+
+/* ============================================================
+   CSS CUSTOM PROPERTIES (Legacy support + component tokens)
+   ============================================================ */
 
 :root {
-  /* Terminal color palette */
-  --terminal-bg: #0a1628;
-  --terminal-surface: #0f1e3a;
-  --terminal-card: #1a2942;
-  --terminal-border: #2a3f5f;
-  --terminal-blue: #00BFFF;
-  --terminal-cyan: #00D9FF;
-  --terminal-green: #00FF41;
-  --terminal-red: #FF0844;
-  --terminal-amber: #FFB627;
-  --terminal-text: #E0E6ED;
-  --terminal-text-dim: #8B9CB6;
-  --terminal-text-dimmer: #4A5F7F;
-  
+  /* Terminal color palette — remapped to Obsidian Signal */
+  --terminal-bg: #080A0D;
+  --terminal-surface: #111317;
+  --terminal-card: #1A1C1F;
+  --terminal-border: #3B4B3D;
+  --terminal-blue: #00FF88;
+  --terminal-cyan: #4DA6FF;
+  --terminal-green: #00FF88;
+  --terminal-red: #FF3B5C;
+  --terminal-amber: #FFD166;
+  --terminal-text: #C8D8E8;
+  --terminal-text-dim: #B9CBB9;
+  --terminal-text-dimmer: #849585;
+
   /* Typography */
-  --font-terminal: 'JetBrains Mono', 'IBM Plex Mono', 'Courier New', monospace;
-  --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+  --font-terminal: 'IBM Plex Mono', monospace;
+  --font-sans: 'Space Grotesk', -apple-system, system-ui, sans-serif;
 }
+
+/* ============================================================
+   BASE RESET & BODY
+   ============================================================ */
 
 * {
   margin: 0;
@@ -33,18 +117,151 @@ body {
   line-height: 1.6;
   font-size: 13px;
   letter-spacing: 0.02em;
+  overflow-x: hidden;
 }
 
-/* Terminal header */
+/* ============================================================
+   SCANLINE OVERLAY — CRT phosphor simulation
+   ============================================================ */
+
+.scanline-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.1) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.02),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.02)
+  );
+  background-size: 100% 2px, 3px 100%;
+  z-index: 100;
+  pointer-events: none;
+}
+
+/* ============================================================
+   GRID BACKGROUND — Blueprint grid at 5% opacity
+   ============================================================ */
+
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(0, 255, 136, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 255, 136, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ============================================================
+   PRIMARY GLOW — CRT phosphor bloom
+   ============================================================ */
+
+.primary-glow {
+  text-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
+}
+
+/* ============================================================
+   CUSTOM SCROLLBAR
+   ============================================================ */
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #080A0D;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #00FF88;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--terminal-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--terminal-border);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--terminal-green);
+}
+
+/* ============================================================
+   TICKER — Breaking news / data stream
+   ============================================================ */
+
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  background: rgba(0, 255, 136, 0.05);
+  border-top: 1px solid rgba(0, 255, 136, 0.1);
+  border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+}
+
+.ticker {
+  display: inline-block;
+  white-space: nowrap;
+  padding-right: 100%;
+  animation: ticker 30s linear infinite;
+}
+
+@keyframes ticker {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-100%, 0, 0); }
+}
+
+/* ============================================================
+   TERMINAL CURSOR — Blinking insertion point
+   ============================================================ */
+
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.2em;
+  background-color: #00FF88;
+  vertical-align: middle;
+  margin-left: 4px;
+  animation: cursor-blink 1s steps(1) infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ============================================================
+   MATERIAL SYMBOLS
+   ============================================================ */
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ============================================================
+   TERMINAL HEADER — Top status bar
+   ============================================================ */
+
 .terminal-header {
-  background: #000;
-  border-bottom: 2px solid var(--terminal-blue);
+  background: #080A0D;
+  border-bottom: 1px solid rgba(0, 255, 136, 0.2);
   padding: 0.5rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 11px;
   text-transform: uppercase;
+  font-family: var(--font-terminal);
+  letter-spacing: 0.05em;
 }
 
 .terminal-status {
@@ -66,51 +283,63 @@ body {
 
 @keyframes pulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  50% { opacity: 0.4; }
 }
 
-/* Main logo/title */
+/* ============================================================
+   TERMINAL TITLE
+   ============================================================ */
+
 .terminal-title {
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 2rem;
-  border-bottom: 1px solid var(--terminal-border);
+  border-bottom: 1px solid rgba(0, 255, 136, 0.1);
 }
 
 .terminal-title h1 {
   font-size: 2.5rem;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-  color: #fff;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--terminal-text);
+  font-family: var(--font-sans);
 }
 
 .terminal-subtitle {
   font-size: 0.875rem;
-  color: var(--terminal-text-dim);
+  color: var(--terminal-green);
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  font-family: var(--font-terminal);
+  opacity: 0.6;
 }
 
-/* Alert levels */
+/* ============================================================
+   ALERT LEVELS
+   ============================================================ */
+
 .alert-level {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: rgba(0, 191, 255, 0.1);
-  border: 1px solid var(--terminal-blue);
-  border-radius: 2px;
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.4);
   font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: 0.1em;
+  font-family: var(--font-terminal);
 }
 
 .alert-icon {
   font-size: 1.5rem;
 }
 
-/* Breaking news ticker */
+/* ============================================================
+   BREAKING TICKER
+   ============================================================ */
+
 .breaking-ticker {
   background: var(--terminal-surface);
   border-top: 1px solid var(--terminal-red);
@@ -137,6 +366,8 @@ body {
   align-items: center;
   gap: 0.5rem;
   color: var(--terminal-text-dim);
+  font-family: var(--font-terminal);
+  font-size: 11px;
 }
 
 .ticker-label {
@@ -147,17 +378,21 @@ body {
   font-size: 10px;
 }
 
-/* Terminal cards */
+/* ============================================================
+   TERMINAL CARDS — The "No-Line" Rule
+   Surface shifts replace borders for depth hierarchy.
+   ============================================================ */
+
 .terminal-card {
   background: var(--terminal-card);
-  border: 1px solid var(--terminal-border);
   padding: 1.5rem;
-  transition: all 0.2s;
+  transition: all 0.1s linear;
+  border-left: 4px solid var(--terminal-green);
 }
 
 .terminal-card:hover {
-  border-color: var(--terminal-blue);
-  box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
+  background: #282A2D;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.15);
 }
 
 .card-header {
@@ -166,33 +401,37 @@ body {
   align-items: start;
   margin-bottom: 1rem;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--terminal-border);
 }
 
 .card-title {
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--terminal-blue);
+  color: var(--terminal-green);
+  font-family: var(--font-terminal);
 }
 
 .card-status {
   padding: 0.25rem 0.5rem;
-  background: rgba(0, 255, 65, 0.1);
-  border: 1px solid var(--terminal-green);
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.4);
   color: var(--terminal-green);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.1em;
+  font-family: var(--font-terminal);
 }
 
 .card-status.compromised {
-  background: rgba(255, 8, 68, 0.1);
-  border-color: var(--terminal-red);
+  background: rgba(255, 59, 92, 0.1);
+  border-color: rgba(255, 59, 92, 0.4);
   color: var(--terminal-red);
 }
 
-/* Data grid */
+/* ============================================================
+   DATA GRID
+   ============================================================ */
+
 .data-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -200,20 +439,25 @@ body {
   padding: 2rem;
 }
 
-/* Stat display */
+/* ============================================================
+   STAT DISPLAY
+   ============================================================ */
+
 .stat-value {
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--terminal-blue);
+  color: var(--terminal-green);
   line-height: 1;
   margin-bottom: 0.25rem;
+  font-family: var(--font-sans);
 }
 
 .stat-label {
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
   color: var(--terminal-text-dim);
+  font-family: var(--font-terminal);
 }
 
 .stat-value.danger {
@@ -228,10 +472,12 @@ body {
   color: var(--terminal-green);
 }
 
-/* OSINT feed */
+/* ============================================================
+   OSINT FEED
+   ============================================================ */
+
 .osint-feed {
   background: var(--terminal-surface);
-  border: 1px solid var(--terminal-border);
   padding: 1rem;
   max-height: 400px;
   overflow-y: auto;
@@ -242,26 +488,30 @@ body {
   justify-content: space-between;
   align-items: center;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--terminal-border);
   margin-bottom: 1rem;
 }
 
 .feed-title {
-  color: var(--terminal-blue);
+  color: var(--terminal-green);
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  font-family: var(--font-terminal);
 }
 
 .feed-item {
   padding: 0.75rem;
-  border-bottom: 1px solid rgba(74, 95, 127, 0.3);
   font-size: 11px;
   line-height: 1.5;
+  font-family: var(--font-terminal);
+}
+
+.feed-item + .feed-item {
+  background: rgba(26, 28, 31, 0.5);
 }
 
 .feed-item:hover {
-  background: rgba(0, 191, 255, 0.05);
+  background: rgba(0, 255, 136, 0.05);
 }
 
 .feed-time {
@@ -269,7 +519,10 @@ body {
   margin-right: 0.5rem;
 }
 
-/* Classified footer */
+/* ============================================================
+   CLASSIFIED FOOTER
+   ============================================================ */
+
 .classified-footer {
   background: var(--terminal-red);
   color: #fff;
@@ -279,88 +532,73 @@ body {
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  border-top: 2px solid #fff;
+  font-family: var(--font-terminal);
 }
 
-/* Timeline view */
+/* ============================================================
+   TIMELINE NAVIGATION
+   ============================================================ */
+
 .timeline-nav {
   display: flex;
   gap: 0.5rem;
   padding: 1rem;
-  border-bottom: 1px solid var(--terminal-border);
 }
 
 .timeline-btn {
   padding: 0.5rem 1rem;
   background: transparent;
-  border: 1px solid var(--terminal-border);
+  border: 1px solid rgba(0, 255, 136, 0.2);
   color: var(--terminal-text-dim);
   font-family: var(--font-terminal);
   font-size: 11px;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.2s;
 }
 
 .timeline-btn:hover,
 .timeline-btn.active {
-  background: var(--terminal-blue);
-  border-color: var(--terminal-blue);
-  color: #000;
+  background: var(--terminal-green);
+  border-color: var(--terminal-green);
+  color: #080A0D;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
+/* ============================================================
+   LINKS
+   ============================================================ */
 
-::-webkit-scrollbar-track {
-  background: var(--terminal-bg);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--terminal-border);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--terminal-blue);
-}
-
-/* Links */
 a {
-  color: var(--terminal-blue);
+  color: var(--terminal-green);
   text-decoration: none;
-  transition: color 0.2s;
 }
 
 a:hover {
   color: var(--terminal-cyan);
-  text-decoration: underline;
 }
 
-/* Buttons */
+/* ============================================================
+   BUTTONS — 0px radius, instant state changes
+   ============================================================ */
+
 .terminal-btn {
   padding: 0.75rem 1.5rem;
   background: transparent;
-  border: 1px solid var(--terminal-blue);
-  color: var(--terminal-blue);
+  border: 1px solid rgba(0, 255, 136, 0.4);
+  color: var(--terminal-green);
   font-family: var(--font-terminal);
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   cursor: pointer;
-  transition: all 0.2s;
 }
 
 .terminal-btn:hover {
-  background: var(--terminal-blue);
-  color: #000;
+  background: var(--terminal-green);
+  color: #080A0D;
 }
 
 .terminal-btn.danger {
-  border-color: var(--terminal-red);
+  border-color: rgba(255, 59, 92, 0.4);
   color: var(--terminal-red);
 }
 
@@ -370,11 +608,36 @@ a:hover {
 }
 
 /* ============================================================
+   PULSE INDICATOR — 8px live data square
+   ============================================================ */
+
+.pulse-indicator {
+  width: 8px;
+  height: 8px;
+  background: var(--terminal-green);
+  animation: pulse-breathe 2s ease-in-out infinite;
+}
+
+@keyframes pulse-breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ============================================================
+   NAVIGATION ELEMENTS
+   ============================================================ */
+
+.terminal-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* ============================================================
    MOBILE RESPONSIVE STYLES
    ============================================================ */
 
 @media (max-width: 768px) {
-  /* Terminal header — compact on mobile */
   .terminal-header {
     padding: 0.4rem 0.75rem;
     font-size: 9px;
@@ -384,7 +647,6 @@ a:hover {
     gap: 0.75rem;
   }
 
-  /* Navigation — scrollable horizontal strip */
   .terminal-nav {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -394,29 +656,24 @@ a:hover {
   }
   .terminal-nav::-webkit-scrollbar { display: none; }
 
-  /* Cards — less padding */
   .terminal-card {
     padding: 1rem;
   }
 
-  /* Data grid — single column on mobile */
   .data-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
     padding: 1rem;
   }
 
-  /* Stat values — smaller on mobile */
   .stat-value {
     font-size: 1.75rem;
   }
 
-  /* OSINT feed — full width */
   .osint-feed {
     max-height: 300px;
   }
 
-  /* Buttons — full width on mobile */
   .terminal-btn {
     padding: 0.6rem 1rem;
     font-size: 11px;
@@ -424,7 +681,6 @@ a:hover {
     text-align: center;
   }
 
-  /* Title section */
   .terminal-title {
     padding: 1rem;
     flex-direction: column;
@@ -435,7 +691,6 @@ a:hover {
     font-size: 1.5rem;
   }
 
-  /* Timeline navigation — wrap */
   .timeline-nav {
     flex-wrap: wrap;
     padding: 0.75rem;
