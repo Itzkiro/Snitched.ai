@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SNITCHED.AI // CONNECTIONS_MAP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#007139",
+                        "surface-variant": "#323539",
+                        "secondary-fixed-dim": "#c5c6cb",
+                        "inverse-surface": "#e1e2e7",
+                        "primary-fixed": "#60ff99",
+                        "surface-container": "#1d2023",
+                        "outline": "#849585",
+                        "on-primary-fixed": "#00210c",
+                        "primary-container": "#00ff88",
+                        "outline-variant": "#3b4b3d",
+                        "on-tertiary-container": "#c50039",
+                        "surface-container-highest": "#323539",
+                        "on-primary-fixed-variant": "#005228",
+                        "surface-container-low": "#191c1f",
+                        "on-tertiary-fixed-variant": "#920028",
+                        "on-tertiary": "#68001a",
+                        "on-error-container": "#ffdad6",
+                        "on-primary": "#003919",
+                        "error": "#ffb4ab",
+                        "surface-dim": "#111417",
+                        "tertiary-container": "#ffd4d5",
+                        "secondary-container": "#44474b",
+                        "primary": "#f1ffef",
+                        "on-secondary-fixed-variant": "#44474b",
+                        "surface-container-lowest": "#0c0e12",
+                        "primary-fixed-dim": "#00e479",
+                        "on-surface": "#e1e2e7",
+                        "tertiary-fixed-dim": "#ffb3b6",
+                        "surface-bright": "#37393d",
+                        "on-secondary": "#2e3134",
+                        "surface-tint": "#00e479",
+                        "surface-container-high": "#282a2e",
+                        "surface": "#111417",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#40000c",
+                        "inverse-primary": "#006d37",
+                        "secondary-fixed": "#e1e2e7",
+                        "on-surface-variant": "#b9cbb9",
+                        "on-secondary-fixed": "#191c1f",
+                        "inverse-on-surface": "#2e3134",
+                        "error-container": "#93000a",
+                        "tertiary-fixed": "#ffdada",
+                        "secondary": "#c5c6cb",
+                        "background": "#111417",
+                        "on-background": "#e1e2e7",
+                        "tertiary": "#fffaf9",
+                        "on-secondary-container": "#b3b5ba"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["IBM Plex Mono"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scanline-overlay {
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.03),
+                rgba(0, 0, 0, 0.03) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+        }
+        .phosphor-glow-sm {
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+        }
+        .node-glow {
+            filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.5));
+        }
+        .alert-flicker {
+            animation: flicker 0.15s infinite;
+        }
+        @keyframes flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        .cursor-blink {
+            display: inline-block;
+            width: 8px;
+            height: 1.2em;
+            background-color: #00ff88;
+            vertical-align: middle;
+            animation: blink 1s infinite steps(1);
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body selection:bg-primary-container selection:text-on-primary-fixed overflow-hidden">
+<!-- SCANLINE OVERLAY -->
+<div class="fixed inset-0 z-[100] scanline-overlay"></div>
+<!-- TOP NAV BAR -->
+<header class="flex flex-col w-full px-0 bg-[#0c0e12] dark:bg-[#0c0e12] docked full-width top-0 border-b-2 border-b border-[#00ff88]/30 flat no shadows phosphor-glow-sm z-50">
+<div class="flex justify-between items-center px-6 py-2 border-b border-[#00ff88]/10">
+<div class="text-xl font-bold tracking-tighter text-[#00ff88] font-['Space_Grotesk'] uppercase">SNITCHED.AI</div>
+<div class="font-['IBM_Plex_Mono'] text-[10px] text-[#00ff88]/60 tracking-widest hidden md:block">
+                SYSTEM_CLOCK: <span class="text-[#00ff88]">2023-10-27 14:02:11 UTC</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="absolute left-2 top-1/2 -translate-y-1/2 text-[#00ff88] font-mono text-xs">&gt;_</span>
+<input class="bg-surface-container-low border-none border-b border-[#00ff88]/30 focus:ring-0 text-[#00ff88] font-mono text-xs py-1 pl-8 pr-4 w-48" placeholder="COMMAND_SEARCH" type="text"/>
+</div>
+</div>
+</div>
+<nav class="flex overflow-x-auto scrollbar-hide">
+<a class="px-6 py-3 text-[#00ff88]/60 font-mono border border-[#00ff88]/20 hover:bg-[#00ff88]/10 hover:text-[#00ff88] transition-none text-xs" href="#">DASHBOARD</a>
+<a class="px-6 py-3 text-[#00ff88]/60 font-mono border border-[#00ff88]/20 hover:bg-[#00ff88]/10 hover:text-[#00ff88] transition-none text-xs" href="#">OFFICIALS</a>
+<a class="px-6 py-3 text-[#00ff88]/60 font-mono border border-[#00ff88]/20 hover:bg-[#00ff88]/10 hover:text-[#00ff88] transition-none text-xs" href="#">CANDIDATES</a>
+<a class="px-6 py-3 text-[#00ff88]/60 font-mono border border-[#00ff88]/20 hover:bg-[#00ff88]/10 hover:text-[#00ff88] transition-none text-xs" href="#">HIERARCHY</a>
+<a class="px-6 py-3 text-[#00ff88]/60 font-mono border border-[#00ff88]/20 hover:bg-[#00ff88]/10 hover:text-[#00ff88] transition-none text-xs" href="#">JUICE_BOX</a>
+<a class="px-6 py-3 bg-[#00ff88] text-[#0c0e12] font-bold border-none shadow-[0_0_15px_rgba(0,255,136,0.4)] text-xs" href="#">CONNECTIONS</a>
+</nav>
+</header>
+<main class="flex h-[calc(100vh-100px)] pt-0 relative overflow-hidden">
+<!-- SIDEBAR LEFT: CONNECTED_ENTITIES -->
+<aside class="w-64 border-r border-[#00ff88]/20 bg-surface-container-lowest flex flex-col z-20">
+<div class="p-4 border-b border-[#00ff88]/20">
+<h3 class="font-headline text-xs font-bold text-[#00ff88] uppercase tracking-tighter">CONNECTED_ENTITIES</h3>
+</div>
+<div class="flex-1 overflow-y-auto font-label text-[11px] uppercase space-y-px">
+<div class="p-4 hover:bg-surface-container-high cursor-crosshair border-b border-[#00ff88]/5 group">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[#00ff88]/80">RICK SCOTT</span>
+<span class="text-[#00ff88]">[ROOT]</span>
+</div>
+<div class="w-full bg-[#00ff88]/10 h-1 mt-2 overflow-hidden">
+<div class="bg-[#00ff88] h-full w-[85%]"></div>
+</div>
+</div>
+<div class="p-4 hover:bg-surface-container-high cursor-crosshair border-b border-[#00ff88]/5">
+<div class="flex justify-between items-center">
+<span class="text-on-surface/60">PAC-128</span>
+<span class="text-on-tertiary-container alert-flicker">ACTIVE_LINK</span>
+</div>
+<div class="mt-1 text-[9px] text-on-surface/40">TRANS_VAL: $2,400,000</div>
+</div>
+<div class="p-4 hover:bg-surface-container-high cursor-crosshair border-b border-[#00ff88]/5">
+<div class="flex justify-between items-center">
+<span class="text-on-surface/60">CITADEL SECURITIES</span>
+<span class="text-yellow-500">PENDING</span>
+</div>
+<div class="mt-1 text-[9px] text-on-surface/40">TRANS_VAL: $450,000</div>
+</div>
+<div class="p-4 hover:bg-surface-container-high cursor-crosshair border-b border-[#00ff88]/5">
+<div class="flex justify-between items-center">
+<span class="text-on-surface/60">H.R. 4366</span>
+<span class="text-primary-container">LEGISLATION</span>
+</div>
+<div class="mt-1 text-[9px] text-on-surface/40">STATUS: IN_COMMITTEE</div>
+</div>
+<div class="p-4 hover:bg-surface-container-high cursor-crosshair border-b border-[#00ff88]/5">
+<div class="flex justify-between items-center">
+<span class="text-on-surface/60">LOBBYIST_77</span>
+<span class="text-[#00ff88]/40">INTERMEDIARY</span>
+</div>
+<div class="mt-1 text-[9px] text-on-surface/40">RELIABILITY: 88%</div>
+</div>
+</div>
+</aside>
+<!-- CENTER: NETWORK MAP -->
+<section class="flex-1 relative bg-[#0c0e12] overflow-hidden">
+<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle, #00ff88 1px, transparent 1px); background-size: 40px 40px;"></div>
+<svg class="w-full h-full" viewbox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
+<!-- CONNECTIONS (Lines) -->
+<g class="stroke-[#00ff88]/30 stroke-1 fill-none">
+<line x1="500" x2="300" y1="400" y2="250"></line> <!-- Root to PAC-128 -->
+<line x1="500" x2="700" y1="400" y2="250"></line> <!-- Root to Citadel -->
+<line x1="300" x2="200" y1="250" y2="550"></line> <!-- PAC-128 to HR 4366 -->
+<line x1="700" x2="800" y1="250" y2="550"></line> <!-- Citadel to Lobbyist 77 -->
+<line class="stroke-on-tertiary-container/40 stroke-2" stroke-dasharray="8 4" x1="800" x2="200" y1="550" y2="550"></line> <!-- Lobbyist to HR 4366 -->
+</g>
+<!-- NODES -->
+<!-- ROOT: RICK SCOTT -->
+<g class="node-glow cursor-pointer">
+<rect fill="#00ff88" height="60" width="120" x="440" y="370"></rect>
+<text class="uppercase tracking-tighter" fill="#0c0e12" font-family="Space Grotesk" font-size="14" font-weight="bold" text-anchor="middle" x="500" y="405">RICK SCOTT</text>
+<rect fill="none" height="60" stroke="#00ff88" stroke-width="2" width="120" x="440" y="370"></rect>
+</g>
+<!-- PAC-128 -->
+<g class="alert-flicker cursor-pointer">
+<rect fill="#c50039" height="60" width="120" x="240" y="220"></rect>
+<text class="uppercase" fill="white" font-family="IBM Plex Mono" font-size="12" text-anchor="middle" x="300" y="245">PAC-128</text>
+<text fill="white" font-family="IBM Plex Mono" font-size="10" font-weight="bold" text-anchor="middle" x="300" y="265">$2.4M</text>
+</g>
+<!-- CITADEL -->
+<g class="cursor-pointer">
+<rect fill="#eab308" height="60" width="120" x="640" y="220"></rect>
+<text class="uppercase" fill="#0c0e12" font-family="IBM Plex Mono" font-size="11" font-weight="bold" text-anchor="middle" x="700" y="245">CITADEL</text>
+<text fill="#0c0e12" font-family="IBM Plex Mono" font-size="10" text-anchor="middle" x="700" y="265">$450K</text>
+</g>
+<!-- H.R. 4366 -->
+<g class="cursor-pointer">
+<rect fill="#1d2023" height="60" stroke="#00ff88" stroke-width="1" width="120" x="140" y="520"></rect>
+<text class="uppercase" fill="#00ff88" font-family="IBM Plex Mono" font-size="12" text-anchor="middle" x="200" y="555">H.R. 4366</text>
+</g>
+<!-- LOBBYIST_77 -->
+<g class="cursor-pointer">
+<rect fill="#1d2023" height="60" stroke="#00ff88" stroke-width="1" width="120" x="740" y="520"></rect>
+<text class="uppercase" fill="#00ff88" font-family="IBM Plex Mono" font-size="12" text-anchor="middle" x="800" y="555">LOBBYIST_77</text>
+</g>
+</svg>
+<!-- GHOST BRACKETS -->
+<div class="absolute top-4 left-4 w-4 h-4 border-t-2 border-l-2 border-[#00ff88]/40"></div>
+<div class="absolute top-4 right-4 w-4 h-4 border-t-2 border-r-2 border-[#00ff88]/40"></div>
+<div class="absolute bottom-4 left-4 w-4 h-4 border-b-2 border-l-2 border-[#00ff88]/40"></div>
+<div class="absolute bottom-4 right-4 w-4 h-4 border-b-2 border-r-2 border-[#00ff88]/40"></div>
+<div class="absolute bottom-8 left-8 p-4 bg-surface-container-lowest/80 border border-[#00ff88]/20 font-label text-[10px] space-y-1 backdrop-blur-md">
+<div class="text-[#00ff88]">VIEW_MODE: NEURAL_RECON</div>
+<div class="text-on-surface/40">NODES: 05 // LINKS: 04</div>
+<div class="text-on-surface/40">Z_DEPTH: 14.2%</div>
+</div>
+</section>
+<!-- SIDEBAR RIGHT: TELEMETRY PANEL -->
+<aside class="w-80 border-l border-[#00ff88]/20 bg-surface-container-low flex flex-col z-20">
+<div class="p-4 border-b border-[#00ff88]/20 bg-surface-container-lowest">
+<h3 class="font-headline text-xs font-bold text-[#00ff88] uppercase tracking-tighter">TELEMETRY_PANEL</h3>
+</div>
+<div class="p-6 space-y-8 flex-1 overflow-y-auto">
+<!-- PROBABILITY BLOCK -->
+<div>
+<label class="font-label text-[10px] text-on-surface/40 block mb-2 tracking-widest">CORRUPTION_PROBABILITY</label>
+<div class="text-5xl font-headline font-bold text-[#00ff88] phosphor-glow-sm">94.2<span class="text-2xl">%</span></div>
+<div class="w-full bg-[#00ff88]/10 h-2 mt-4">
+<div class="bg-[#00ff88] h-full w-[94.2%]"></div>
+</div>
+</div>
+<!-- INDEX BLOCK -->
+<div class="bg-on-tertiary-container/10 border border-on-tertiary-container/30 p-4">
+<label class="font-label text-[10px] text-on-tertiary-container block mb-1 tracking-widest">INDEX_STATUS</label>
+<div class="text-2xl font-headline font-black text-on-tertiary-container uppercase tracking-tight alert-flicker">CRITICAL</div>
+<p class="font-label text-[9px] text-on-tertiary-container/80 mt-2 leading-relaxed">SYSTEM_NOTICE: STRUCTURAL BREACH DETECTED IN FINANCIAL FLOWS. CONFLICT OF INTEREST PROBABILITY EXCEEDS THRESHOLD.</p>
+</div>
+<!-- JUICE BOX COMPONENT -->
+<div class="border border-primary-fixed p-4 bg-surface-container-high relative">
+<label class="font-label text-[10px] text-primary-fixed block mb-3 uppercase tracking-widest">DATA_FEED_01</label>
+<div class="font-label text-xs space-y-2">
+<div class="flex justify-between">
+<span class="text-on-surface/60">LATENCY:</span>
+<span class="text-primary-fixed">12MS</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface/60">UPLINK:</span>
+<span class="text-primary-fixed">ENCRYPTED</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface/60">SOURCE:</span>
+<span class="text-primary-fixed">FINCEN_DUMP</span>
+</div>
+</div>
+<div class="h-12 w-full mt-4 flex items-end gap-0.5">
+<div class="flex-1 bg-primary-container/20 h-[30%]"></div>
+<div class="flex-1 bg-primary-container h-[60%]"></div>
+<div class="flex-1 bg-primary-container/40 h-[45%]"></div>
+<div class="flex-1 bg-primary-container h-[80%]"></div>
+<div class="flex-1 bg-primary-container/20 h-[50%]"></div>
+<div class="flex-1 bg-primary-container h-[95%]"></div>
+<div class="flex-1 bg-primary-container/10 h-[20%]"></div>
+<div class="flex-1 bg-primary-container h-[70%]"></div>
+<div class="flex-1 bg-primary-container/50 h-[40%]"></div>
+<div class="flex-1 bg-primary-container h-[85%]"></div>
+</div>
+</div>
+<!-- TERMINAL LOG -->
+<div class="bg-surface-container-lowest p-3 border border-[#00ff88]/10 font-label text-[9px] text-on-surface/40 h-32 overflow-hidden relative">
+<div class="absolute top-2 right-2 flex gap-1">
+<div class="w-1 h-1 bg-[#00ff88]"></div>
+<div class="w-1 h-1 bg-[#00ff88]/40"></div>
+</div>
+<p class="text-[#00ff88]">&gt; TRACING PAC-128_ID... DONE</p>
+<p>&gt; FETCHING CITADEL_LIABILITIES... SUCCESS</p>
+<p>&gt; MATCHING H.R._4366_TIMELINE...</p>
+<p>&gt; 4 MATCHES FOUND</p>
+<p>&gt; ANALYZING LOBBYIST_77_COMM... 84%</p>
+<p class="text-[#00ff88]">_ <span class="cursor-blink"></span></p>
+</div>
+</div>
+<div class="p-4 bg-surface-container-lowest border-t border-[#00ff88]/20">
+<button class="w-full py-3 bg-primary-container text-on-primary-fixed font-headline font-bold uppercase tracking-widest text-xs snap-fast transition-none">GENERATE_SUBPOENA</button>
+</div>
+</aside>
+</main>
+<!-- FOOTER -->
+<footer class="fixed bottom-0 w-full flex justify-between items-center px-6 py-1 z-50 bg-[#0c0e12] docked full-width bottom-0 border-t border-[#00ff88]/20 flat">
+<div class="font-['IBM_Plex_Mono'] text-[10px] uppercase tracking-widest text-[#00ff88]">SYSTEM_READY // NODE_SYNC: 100% // LATENCY: 12ms</div>
+<div class="flex gap-6">
+<a class="text-[#00ff88]/40 font-['IBM_Plex_Mono'] text-[10px] uppercase tracking-widest hover:text-[#00ff88] hover:bg-[#00ff88]/5 transition-none" href="#">ENCRYPTION_KEYS</a>
+<a class="text-[#00ff88]/40 font-['IBM_Plex_Mono'] text-[10px] uppercase tracking-widest hover:text-[#00ff88] hover:bg-[#00ff88]/5 transition-none" href="#">REBOOT_CORE</a>
+<a class="text-[#00ff88]/40 font-['IBM_Plex_Mono'] text-[10px] uppercase tracking-widest hover:text-[#00ff88] hover:bg-[#00ff88]/5 transition-none" href="#">TERMINAL_LOGS</a>
+</div>
+</footer>
+</body></html>

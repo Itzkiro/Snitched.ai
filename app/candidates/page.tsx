@@ -47,184 +47,225 @@ async function getPoliticians(): Promise<Politician[]> {
   })) as Politician[];
 }
 
+/** Format currency for display */
+function formatMoney(amount: number): string {
+  if (amount >= 1_000_000) return `$${(amount / 1_000_000).toFixed(1)}M`;
+  if (amount >= 1_000) return `$${(amount / 1_000).toFixed(0)}K`;
+  return `$${amount.toLocaleString()}`;
+}
+
 export default async function CandidatesPage() {
   const candidates = await getPoliticians();
+  const totalFunds = candidates.reduce((s, c) => s + (c.totalFundsRaised || 0), 0);
+  const highRiskCount = candidates.filter(c => c.corruptionScore >= 60).length;
 
   return (
-    <div style={{ minHeight: '100vh', paddingBottom: '4rem' }}>
-      {/* Title */}
-      <div style={{ padding: '2rem', borderBottom: '1px solid var(--terminal-border)' }}>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 400, letterSpacing: '0.05em', marginBottom: '0.5rem' }}>
-          CANDIDATES RUNNING
+    <main className="pt-[82px] min-h-screen bg-surface-container-lowest">
+      {/* Terminal Header */}
+      <div className="px-6 py-8 border-l-4 border-primary-container ml-6">
+        <h1 className="font-headline text-5xl font-extrabold tracking-tight text-on-surface flex items-center gap-4">
+          &gt; QUERY CANDIDATES_
+          <span
+            className="block w-6 h-12 bg-primary-container"
+            style={{ animation: 'blink 1s step-end infinite' }}
+          />
         </h1>
-        <div style={{ color: 'var(--terminal-text-dim)', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-          2026 Election Cycle | Campaign Finance Monitoring Active
+        <p className="font-label text-sm text-primary-container/50 mt-2 uppercase tracking-widest">
+          SUB_DIRECTORY: /ROOT/ELECTORAL_VETTING/2026_CYCLE
+        </p>
+      </div>
+
+      {/* Stats Row */}
+      <div className="mx-6 grid grid-cols-1 md:grid-cols-4 gap-px bg-outline-variant/30 border border-outline-variant/30 mb-12">
+        <div className="bg-surface-container p-4">
+          <div className="text-[10px] font-label text-outline uppercase tracking-tighter">Total_Scanned</div>
+          <div className="text-2xl font-label text-primary-container">{candidates.length.toLocaleString()}</div>
+        </div>
+        <div className="bg-surface-container p-4">
+          <div className="text-[10px] font-label text-outline uppercase tracking-tighter">High_Risk_Flags</div>
+          <div className="text-2xl font-label text-on-tertiary-container">{highRiskCount}</div>
+        </div>
+        <div className="bg-surface-container p-4">
+          <div className="text-[10px] font-label text-outline uppercase tracking-tighter">Sum_Raised</div>
+          <div className="text-2xl font-label text-primary-container">{formatMoney(totalFunds)}</div>
+        </div>
+        <div className="bg-surface-container p-4">
+          <div className="text-[10px] font-label text-outline uppercase tracking-tighter">Sys_Latency</div>
+          <div className="text-2xl font-label text-outline">12MS</div>
         </div>
       </div>
 
-      {/* Alert */}
-      <div style={{ padding: '2rem', background: 'rgba(0, 191, 255, 0.05)', borderBottom: '1px solid var(--terminal-border)' }}>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '1rem',
-          padding: '1rem',
-          background: 'var(--terminal-card)',
-          border: '1px solid var(--terminal-blue)'
-        }}>
-          <span style={{ fontSize: '2rem' }}>📢</span>
-          <div>
-            <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--terminal-blue)', marginBottom: '0.25rem' }}>
-              ELECTION INTELLIGENCE ALERT
-            </div>
-            <div style={{ fontSize: '0.875rem', color: 'var(--terminal-text-dim)' }}>
-              Tracking {candidates.length} candidates | Live FEC data integration | AIPAC funding monitoring enabled
-            </div>
-          </div>
-        </div>
-      </div>
-
+      {/* Candidate Grid */}
       {candidates.length > 0 ? (
-        <div style={{ padding: '2rem' }}>
-          <div className="data-grid" style={{ padding: 0 }}>
+        <div className="px-6 pb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {candidates
               .filter(pol => pol && pol.id && pol.name && pol.office && pol.party)
-              .map((pol) => (
-              <Link
-                key={pol.id}
-                href={`/politician/${pol.id}`}
-                style={{ textDecoration: 'none', color: 'inherit' }}
-              >
-                <div className="terminal-card">
-                  <div className="card-header">
-                    <div>
-                      <div className="card-title">{pol.name}</div>
-                      <div style={{ fontSize: '11px', color: 'var(--terminal-text-dim)', marginTop: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                        <span>Running for: {pol.office}</span>
-                        <span style={{
-                          fontSize: '10px',
-                          padding: '0.3rem 0.6rem',
-                          background: pol.party === 'Republican' ? '#dc2626' : pol.party === 'Democrat' ? '#2563eb' : '#6b7280',
-                          color: '#fff',
-                          borderRadius: '10px',
-                          fontWeight: 600,
-                        }}>
-                          {pol.party === 'Republican' ? '🐘 R' : pol.party === 'Democrat' ? '🫏 D' : pol.party}
+              .map((pol) => {
+                const isHighRisk = pol.corruptionScore >= 60;
+                const isMedRisk = pol.corruptionScore >= 40;
+                return (
+                  <Link
+                    key={pol.id}
+                    href={`/politician/${pol.id}`}
+                    className="bg-surface-container border border-outline-variant p-0 group hover:border-primary-container transition-none relative overflow-hidden block"
+                  >
+                    {/* Photo placeholder */}
+                    <div className="h-48 w-full bg-surface-container-highest relative">
+                      <div className="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent" />
+                      {/* Status badge */}
+                      <div className={`absolute top-4 right-4 font-label text-[10px] px-2 py-0.5 font-bold ${
+                        isHighRisk
+                          ? 'bg-on-tertiary-container text-white'
+                          : 'bg-primary-container text-on-primary-fixed'
+                      }`}>
+                        {isHighRisk ? '[ALERT]' : isMedRisk ? '[VETTED]' : '[NEW_ENTRY]'}
+                      </div>
+                    </div>
+
+                    {/* Card body */}
+                    <div className="p-6">
+                      <div className="mb-4">
+                        <div className="text-[10px] font-label text-primary-container/70 mb-1 tracking-widest uppercase">
+                          {pol.office}
+                        </div>
+                        <h3 className="font-headline text-2xl font-bold text-on-surface uppercase leading-none">
+                          {pol.name.split(' ').reverse().join(', ')}
+                        </h3>
+                      </div>
+
+                      <div className="space-y-4 mb-6">
+                        {/* Fundraising */}
+                        <div className="flex justify-between items-end border-b border-outline-variant pb-2">
+                          <span className="text-[10px] font-label text-outline uppercase">Fundraising</span>
+                          <span className="text-lg font-label text-primary-container">
+                            {formatMoney(pol.totalFundsRaised || pol.aipacFunding || 0)}
+                          </span>
+                        </div>
+
+                        {/* Corruption Meter */}
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center text-[10px] font-label text-outline uppercase">
+                            <span>Corruption_Potential</span>
+                            <span className={`font-bold ${
+                              isHighRisk ? 'text-on-tertiary-container' : 'text-primary-container'
+                            }`}>
+                              {pol.corruptionScore}%
+                            </span>
+                          </div>
+                          <div className="h-2 w-full bg-surface-container-highest">
+                            <div
+                              className={`h-full ${
+                                isHighRisk
+                                  ? 'bg-on-tertiary-container shadow-[0_0_10px_rgba(197,0,57,0.5)]'
+                                  : 'bg-primary-container shadow-[0_0_10px_rgba(0,255,136,0.5)]'
+                              }`}
+                              style={{ width: `${pol.corruptionScore}%` }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2">
+                        <span className={`text-[10px] font-label px-2 py-0.5 border ${
+                          pol.party === 'Republican'
+                            ? 'bg-error/10 text-error border-error/30'
+                            : pol.party === 'Democrat'
+                            ? 'bg-blue-400/10 text-blue-400 border-blue-400/30'
+                            : 'bg-outline-variant text-on-surface/60 border-outline-variant'
+                        }`}>
+                          [{pol.party === 'Republican' ? 'R' : pol.party === 'Democrat' ? 'D' : pol.party.charAt(0)}]
                         </span>
+                        {pol.aipacFunding > 0 && (
+                          <span className="text-[10px] font-label bg-on-tertiary-container/10 text-on-tertiary-container border border-on-tertiary-container/30 px-2 py-0.5">
+                            [DARK_MONEY_RISK]
+                          </span>
+                        )}
+                        {pol.juiceBoxTier && pol.juiceBoxTier !== 'none' && (
+                          <span className="text-[10px] font-label bg-primary-container/10 text-primary-container border border-primary-container/30 px-2 py-0.5">
+                            [PAC-BACKED]
+                          </span>
+                        )}
                       </div>
                     </div>
-                    <div className="card-status">
-                      CANDIDATE
-                    </div>
-                  </div>
 
-                  <div style={{ marginTop: '1rem' }}>
-                    <div style={{ fontSize: '10px', color: 'var(--terminal-text-dim)', marginBottom: '0.5rem' }}>
-                      BACKGROUND CHECK
-                    </div>
-                    <div style={{
-                      fontSize: '1.5rem',
-                      fontWeight: 700,
-                      color: pol.corruptionScore >= 60 ? 'var(--terminal-red)' :
-                             pol.corruptionScore >= 40 ? 'var(--terminal-amber)' : 'var(--terminal-green)'
-                    }}>
-                      SCORE: {pol.corruptionScore}/100
-                    </div>
-                  </div>
+                    {/* Bottom accent bar */}
+                    <div className="absolute bottom-0 left-0 w-full h-1 bg-outline-variant group-hover:bg-primary-container transition-none" />
+                  </Link>
+                );
+              })}
+          </div>
 
-                  {pol.aipacFunding > 0 && (
-                    <div style={{
-                      padding: '0.75rem',
-                      background: 'rgba(255, 8, 68, 0.1)',
-                      border: '1px solid var(--terminal-red)',
-                      marginTop: '1rem'
-                    }}>
-                      <div style={{ fontSize: '10px', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem' }}>
-                        ⚠️ CAMPAIGN FINANCE ALERT
-                      </div>
-                      <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--terminal-red)' }}>
-                        ${(pol.aipacFunding / 1000).toFixed(0)}K AIPAC FUNDING
-                      </div>
-                    </div>
-                  )}
-
-                  {pol.termEnd && pol.termStart && (
-                    <div style={{ marginTop: '1rem', fontSize: '11px', color: 'var(--terminal-text-dim)' }}>
-                      Previously served: {new Date(pol.termStart).getFullYear()} - {new Date(pol.termEnd).getFullYear()}
-                    </div>
-                  )}
-                </div>
-              </Link>
-            ))}
+          {/* Pagination */}
+          <div className="mt-16 flex justify-between items-center border-t border-outline-variant pt-8">
+            <div className="font-label text-[10px] text-outline uppercase">
+              SHOWING {candidates.length} OF {candidates.length} NODES
+            </div>
+            <div className="flex gap-2">
+              <button className="bg-surface-container border border-outline-variant px-4 py-2 font-label text-xs hover:border-primary-container hover:text-primary-container transition-none">
+                PREV_PAGE
+              </button>
+              <button className="bg-primary-container text-on-primary-fixed px-4 py-2 font-label text-xs font-bold transition-none">
+                NEXT_PAGE
+              </button>
+            </div>
           </div>
         </div>
       ) : (
-        <div style={{
-          padding: '4rem 2rem',
-          textAlign: 'center',
-          color: 'var(--terminal-text-dim)'
-        }}>
-          <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>📊</div>
-          <div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--terminal-blue)', marginBottom: '1rem' }}>
-            NO ACTIVE CANDIDATES DETECTED
+        <div className="px-6 py-16 text-center">
+          <div className="font-headline text-xl font-bold text-primary-container mb-4 uppercase">
+            NO_ACTIVE_CANDIDATES_DETECTED
           </div>
-          <div style={{ fontSize: '0.875rem', maxWidth: '600px', margin: '0 auto', lineHeight: 1.6 }}>
-            Candidate monitoring is active. New filings with Florida Division of Elections and FEC will be automatically detected and indexed.
-            System will alert when 2026 primary filing period opens.
+          <div className="font-label text-[11px] text-outline max-w-md mx-auto leading-relaxed">
+            Candidate monitoring is active. New filings with Florida Division of Elections and FEC
+            will be automatically detected and indexed. System will alert when 2026 primary filing period opens.
           </div>
-          <div style={{ marginTop: '2rem' }}>
-            <Link href="/officials">
-              <button className="terminal-btn">
-                VIEW SEATED OFFICIALS →
-              </button>
+          <div className="mt-8">
+            <Link
+              href="/officials"
+              className="bg-primary-container text-on-primary-fixed px-6 py-3 font-label text-xs font-bold uppercase tracking-widest hover:bg-white transition-none inline-block"
+            >
+              VIEW_SEATED_OFFICIALS
             </Link>
           </div>
         </div>
       )}
 
-      {/* Filing information */}
-      <div style={{ padding: '2rem', background: 'var(--terminal-surface)', borderTop: '1px solid var(--terminal-border)' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <h3 style={{
-            fontSize: '1rem',
-            fontWeight: 700,
-            color: 'var(--terminal-blue)',
-            marginBottom: '1rem',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em'
-          }}>
-            📋 2026 FILING CALENDAR
-          </h3>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '1rem',
-            fontSize: '11px'
-          }}>
-            <div className="terminal-card">
-              <div style={{ color: 'var(--terminal-text-dim)', marginBottom: '0.5rem' }}>PRIMARY FILING DEADLINE</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>JUN 14, 2026</div>
+      {/* Filing Calendar */}
+      <div className="px-6 py-8 bg-surface-container border-t border-outline-variant/30">
+        <div className="max-w-4xl mx-auto">
+          <div className="font-label text-[10px] text-primary-container uppercase tracking-widest mb-4 border-b border-outline-variant/30 pb-2">
+            2026_FILING_CALENDAR
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-outline-variant/30">
+            <div className="bg-surface-container-low p-4">
+              <div className="font-label text-[9px] text-outline uppercase mb-1">Primary Filing</div>
+              <div className="font-headline text-lg font-bold text-on-surface">JUN 14, 2026</div>
             </div>
-            <div className="terminal-card">
-              <div style={{ color: 'var(--terminal-text-dim)', marginBottom: '0.5rem' }}>PRIMARY ELECTION</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>AUG 18, 2026</div>
+            <div className="bg-surface-container-low p-4">
+              <div className="font-label text-[9px] text-outline uppercase mb-1">Primary Election</div>
+              <div className="font-headline text-lg font-bold text-on-surface">AUG 18, 2026</div>
             </div>
-            <div className="terminal-card">
-              <div style={{ color: 'var(--terminal-text-dim)', marginBottom: '0.5rem' }}>GENERAL FILING DEADLINE</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>SEP 15, 2026</div>
+            <div className="bg-surface-container-low p-4">
+              <div className="font-label text-[9px] text-outline uppercase mb-1">General Filing</div>
+              <div className="font-headline text-lg font-bold text-on-surface">SEP 15, 2026</div>
             </div>
-            <div className="terminal-card">
-              <div style={{ color: 'var(--terminal-text-dim)', marginBottom: '0.5rem' }}>GENERAL ELECTION</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>NOV 3, 2026</div>
+            <div className="bg-surface-container-low p-4">
+              <div className="font-label text-[9px] text-outline uppercase mb-1">General Election</div>
+              <div className="font-headline text-lg font-bold text-on-surface">NOV 3, 2026</div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Data source footer */}
-      <div className="classified-footer">
-        ALL DATA ACQUIRED VIA OSINT // PUBLIC RECORDS: FEC, SOCIAL MEDIA, NEWS OUTLETS // CAMPAIGN MONITORING DIVISION
-      </div>
-    </div>
+      {/* blink keyframe for cursor */}
+      <style>{`
+        @keyframes blink {
+          from, to { opacity: 1; }
+          50% { opacity: 0; }
+        }
+      `}</style>
+    </main>
   );
 }

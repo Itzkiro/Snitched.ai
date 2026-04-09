@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JUICE_BOX // SNITCHED.AI v2.0</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary": "#003919",
+                        "tertiary-container": "#ffd4d5",
+                        "on-surface-variant": "#b9cbb9",
+                        "tertiary-fixed-dim": "#ffb3b6",
+                        "surface-container": "#1d2023",
+                        "surface-tint": "#00e479",
+                        "on-secondary": "#2e3134",
+                        "on-surface": "#e1e2e7",
+                        "inverse-primary": "#006d37",
+                        "secondary": "#c5c6cb",
+                        "inverse-surface": "#e1e2e7",
+                        "secondary-fixed": "#e1e2e7",
+                        "surface-container-low": "#191c1f",
+                        "secondary-container": "#44474b",
+                        "on-tertiary-fixed-variant": "#920028",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab",
+                        "surface-bright": "#37393d",
+                        "outline": "#849585",
+                        "primary-fixed-dim": "#00e479",
+                        "on-tertiary": "#68001a",
+                        "surface-dim": "#111417",
+                        "on-primary-container": "#007139",
+                        "on-primary-fixed": "#00210c",
+                        "surface": "#111417",
+                        "on-secondary-fixed-variant": "#44474b",
+                        "outline-variant": "#3b4b3d",
+                        "on-tertiary-container": "#c50039",
+                        "on-error": "#690005",
+                        "surface-container-lowest": "#0c0e12",
+                        "on-tertiary-fixed": "#40000c",
+                        "surface-variant": "#323539",
+                        "on-secondary-container": "#b3b5ba",
+                        "surface-container-high": "#282a2e",
+                        "error-container": "#93000a",
+                        "inverse-on-surface": "#2e3134",
+                        "tertiary-fixed": "#ffdada",
+                        "background": "#05070a",
+                        "primary-fixed": "#60ff99",
+                        "surface-container-highest": "#323539",
+                        "on-secondary-fixed": "#191c1f",
+                        "on-primary-fixed-variant": "#005228",
+                        "on-background": "#e1e2e7",
+                        "primary": "#f1ffef",
+                        "secondary-fixed-dim": "#c5c6cb",
+                        "primary-container": "#00ff88",
+                        "tertiary": "#fffaf9"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["IBM Plex Mono"]
+                    },
+                    borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "0px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #05070a;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 255, 136, 0.03) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.01));
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .crt-glow {
+            text-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
+        }
+        .crt-glow-red {
+            text-shadow: 0 0 10px #c50039;
+        }
+        .flicker-alert {
+            animation: flicker 0.15s infinite alternate;
+        }
+        @keyframes flicker {
+            0% { opacity: 1; text-shadow: 0 0 10px #c50039; }
+            100% { opacity: 0.7; text-shadow: 0 0 2px #c50039; }
+        }
+        .ghost-bracket-tl::before {
+            content: ""; position: absolute; top: -1px; left: -1px; width: 8px; height: 8px;
+            border-top: 2px solid #00ff88; border-left: 2px solid #00ff88;
+        }
+        .ghost-bracket-tr::after {
+            content: ""; position: absolute; top: -1px; right: -1px; width: 8px; height: 8px;
+            border-top: 2px solid #00ff88; border-right: 2px solid #00ff88;
+        }
+        .ghost-bracket-br::after {
+            content: ""; position: absolute; bottom: -1px; right: -1px; width: 8px; height: 8px;
+            border-bottom: 2px solid #00ff88; border-right: 2px solid #00ff88;
+        }
+        .ghost-bracket-bl::before {
+            content: ""; position: absolute; bottom: -1px; left: -1px; width: 8px; height: 8px;
+            border-bottom: 2px solid #00ff88; border-left: 2px solid #00ff88;
+        }
+        .terminal-grid {
+            background-image: radial-gradient(rgba(0, 255, 136, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="font-body text-on-surface leading-tight selection:bg-primary-container selection:text-on-primary-container min-h-screen terminal-grid">
+<!-- Header / TopAppBar (from SCREEN_14) -->
+<header class="fixed top-0 w-full z-50 bg-slate-950 border-b border-emerald-900/50 flex flex-col">
+<!-- Layer 1: Utility -->
+<div class="flex justify-between items-center px-4 py-2 bg-surface-container-lowest border-b border-outline-variant/30 h-10">
+<div class="flex items-center gap-4">
+<div class="group relative">
+<button class="flex items-center gap-2 text-primary-container font-label text-xs tracking-widest hover:text-white transition-none">
+<span class="material-symbols-outlined text-sm">menu</span>
+                    SYSTEM_CORE
+                </button>
+</div>
+<div class="h-4 w-px bg-outline-variant/30"></div>
+<div class="text-[10px] font-label text-outline uppercase tracking-tighter">NODE: MIAMI_HUB_04</div>
+</div>
+<div class="font-label text-xs text-primary-container tracking-[0.2em] crt-glow">
+            2024-05-22 14:32:01 UTC
+        </div>
+<div class="flex items-center gap-4">
+<div class="relative flex items-center bg-surface-container px-2 border-b border-primary-container/50">
+<span class="font-label text-primary-container text-xs mr-2">&gt;_</span>
+<input class="bg-transparent border-none text-xs font-label text-primary-container placeholder:text-emerald-900 focus:ring-0 w-48 p-0 h-6 uppercase" placeholder="GLOBAL_SEARCH" type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-lg hover:text-primary-container cursor-pointer transition-none">settings</span>
+<span class="material-symbols-outlined text-outline text-lg hover:text-primary-container cursor-pointer transition-none">terminal</span>
+</div>
+</div>
+</div>
+<!-- Layer 2: Navigation -->
+<nav class="flex w-full overflow-x-auto no-scrollbar bg-slate-950">
+<div class="flex divide-x divide-emerald-900/30 w-full">
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest border-r border-emerald-900/30 hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">DASHBOARD</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest border-r border-emerald-900/30 hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">SEATED_OFFICIALS</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest border-r border-emerald-900/30 hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">CANDIDATES</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest border-r border-emerald-900/30 hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">HIERARCHY</a>
+<a class="px-6 py-3 bg-emerald-400 text-slate-950 font-label font-bold text-xs tracking-widest shadow-[0_0_15px_rgba(0,255,136,0.5)]" href="#">JUICE_BOX</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest border-r border-emerald-900/30 hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">SOCIAL_INTEL</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">DATABASE</a>
+</div>
+</nav>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-12 px-6 min-h-screen">
+<!-- Tactical Banner -->
+<section class="relative h-64 flex items-center px-10 overflow-hidden border border-emerald-900/50 bg-surface-container-lowest mb-6 ghost-bracket-tl ghost-bracket-br">
+<div class="absolute inset-0 z-0 opacity-10">
+<img class="w-full h-full object-cover mix-blend-overlay grayscale contrast-150" data-alt="Gritty low-angle shot of a state capitol building at night with harsh artificial green lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAujluq09__Ky3f26IoVKo95DQCNCMan7l3cIXA615TjbsKgJ3YdydWOUyqNPjgAo4D7bOZEt-vIAmhokopXtv2MvPD_L1Vy_ZXK_LHVFO_tVuKp03nOgkBnhlDfRUFHRFGK1pO36pVuLZziSyNk2gj-0pGuffVWq3TYL02lK3DmdFCvLhqEpDsiffQfJ6AW-1oMABsMn2LO9rHiW54TCDYfF0O06K57jB2rHXFeABrkEgcQjn9HNVE1YAtbGPks75E8Ftc9h3MpVEr"/>
+<div class="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background"></div>
+</div>
+<div class="relative z-10 max-w-4xl">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary-container bg-emerald-950 p-2 border border-emerald-900/50">verified_user</span>
+<span class="font-label text-[0.7rem] text-primary-container tracking-[0.3em] uppercase">SECURE_PROGRAM // FLORIDA_DISTRICT</span>
+</div>
+<h1 class="font-headline font-black text-4xl md:text-5xl text-on-surface leading-tight tracking-tighter uppercase crt-glow">
+                JUICE BOX PROGRAM — <span class="text-primary-container">TRACKING ISRAEL LOBBY FUNDING</span> IN FLORIDA POLITICS
+            </h1>
+</div>
+</section>
+<!-- Metrics Tactical Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+<div class="p-8 border border-emerald-900/30 bg-surface-container-lowest relative ghost-bracket-tl">
+<div class="flex justify-between items-start mb-6">
+<span class="text-[0.65rem] text-primary-container/40 tracking-widest font-label uppercase">TOTAL_LOBBY_FUNDING</span>
+<span class="material-symbols-outlined text-primary-container text-sm">trending_up</span>
+</div>
+<div class="font-label text-4xl font-bold text-primary-container crt-glow">
+                $<span id="counter-funding">14,842,900</span>
+</div>
+<div class="mt-4 text-[0.6rem] text-emerald-900 font-label">LIFETIME_AGGREGATE // SOURCE: FEC_REPORTS</div>
+</div>
+<div class="p-8 border border-emerald-900/30 bg-surface-container-lowest relative">
+<div class="flex justify-between items-start mb-6">
+<span class="text-[0.65rem] text-primary-container/40 tracking-widest font-label uppercase">POLITICIANS_TRACKED</span>
+<span class="material-symbols-outlined text-primary-container text-sm">query_stats</span>
+</div>
+<div class="font-label text-4xl font-bold text-on-surface crt-glow">
+<span id="counter-politicians">142</span>
+</div>
+<div class="mt-4 text-[0.6rem] text-emerald-900 font-label uppercase">FL_HOUSE + FL_SENATE + EXECUTIVE</div>
+</div>
+<div class="p-8 border border-emerald-900/30 bg-surface-container-lowest relative ghost-bracket-tr">
+<div class="flex justify-between items-start mb-6">
+<span class="text-[0.65rem] text-primary-container/40 tracking-widest font-label uppercase">ACTIVE_CAMPAIGNS</span>
+<span class="material-symbols-outlined text-on-tertiary-container text-sm flicker-alert">priority_high</span>
+</div>
+<div class="font-label text-4xl font-bold text-on-tertiary-container flicker-alert">
+<span id="counter-campaigns">89</span>
+</div>
+<div class="mt-4 text-[0.6rem] text-emerald-900 font-label uppercase">CURRENT_ELECTION_CYCLE // VOLATILITY_HIGH</div>
+</div>
+</section>
+<!-- Leaderboard Table: Tactical Panopticon Style -->
+<section class="bg-surface-container border border-emerald-900/30 p-6 md:p-10 relative ghost-bracket-bl ghost-bracket-br">
+<div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-headline text-2xl font-bold mb-2 text-primary-container crt-glow uppercase">AIPAC-CONNECTED ENTITIES</h2>
+<p class="font-label text-[0.7rem] text-emerald-700 uppercase">Sorted by Total Contributions Received (Current + Previous Cycle)</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 border border-emerald-900/50 text-[0.7rem] hover:bg-emerald-400/10 transition-none font-label uppercase text-emerald-400">FILTER: REPUBLICAN</button>
+<button class="px-4 py-2 border border-emerald-900/50 text-[0.7rem] hover:bg-emerald-400/10 transition-none font-label uppercase text-emerald-400">FILTER: DEMOCRAT</button>
+<button class="px-4 py-2 bg-primary-container text-slate-950 font-bold text-[0.7rem] hover:opacity-90 transition-none font-label uppercase">EXPORT_CSV</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full border-collapse">
+<thead>
+<tr class="text-left border-b border-emerald-900/30 bg-surface-container-high">
+<th class="p-4 font-label text-[0.65rem] text-emerald-700 tracking-widest uppercase">Rank #</th>
+<th class="p-4 font-label text-[0.65rem] text-emerald-700 tracking-widest uppercase">Name</th>
+<th class="p-4 font-label text-[0.65rem] text-emerald-700 tracking-widest uppercase">Party</th>
+<th class="p-4 font-label text-[0.65rem] text-emerald-700 tracking-widest uppercase">Office</th>
+<th class="p-4 font-label text-[0.65rem] text-emerald-700 tracking-widest uppercase text-right">Total Received</th>
+<th class="p-4 font-label text-[0.65rem] text-emerald-700 tracking-widest uppercase text-center">Risk Tier</th>
+</tr>
+</thead>
+<tbody class="font-label text-[0.8rem]">
+<!-- Row 1 -->
+<tr class="hover:bg-emerald-400/5 transition-none border-b border-emerald-900/10 group">
+<td class="p-4 text-primary-container font-bold">001</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 border border-emerald-900 overflow-hidden">
+<img class="w-full h-full object-cover grayscale brightness-50 group-hover:brightness-100 transition-none" data-alt="Professional headshot of a middle-aged male politician in a dark suit" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDX_FnKhGVFPcxmRh-oJ8u7x1eF16zFgYjTlwF5Mp9H2YSAmYZ3eWJ7LJybQ4kgTroCwDRcutc5JdAAE-ULjKzwbC5rKjkCN7iDuCHyOO4rjCTQd4x3snqQk5Yd5UJCx2PhhVUdhWMYzd0F9YFtf5ouc9HE3EUGkCmKV-f6CMfoF9khGUMbO3toylXbyDC-3QWHDUCZsCarM28h23vwGzDLET4D3RLXy_whbVCCi81znFmLOLnlJpbVy6roR58-dLw_S7WRQ7s5N1mZ"/>
+</div>
+<span class="font-bold uppercase tracking-tight text-on-surface">Ron DeSantis</span>
+</div>
+</td>
+<td class="p-4 text-emerald-700">REP</td>
+<td class="p-4 text-emerald-700">Governor</td>
+<td class="p-4 text-right font-bold text-primary-container crt-glow">$2,840,000</td>
+<td class="p-4 text-center">
+<span class="border border-on-tertiary-container text-on-tertiary-container px-3 py-1 text-[0.6rem] font-black tracking-widest uppercase flicker-alert">TIER 1</span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-emerald-400/5 transition-none border-b border-emerald-900/10 bg-surface-container-low/30 group">
+<td class="p-4 text-primary-container/80 font-bold">002</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 border border-emerald-900 overflow-hidden">
+<img class="w-full h-full object-cover grayscale brightness-50 group-hover:brightness-100 transition-none" data-alt="Professional headshot of a female politician" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC44hQzmbFbuEZgOkytmY1ITk8FlvTZxw8C-IZoH585SkZAHxj3Sc_VkkBzKUGqqlx0K9UOi-qeNF2dyuCcRr5O1jWh_bn59X8E4XR39RkEA_yjYM7DdmvgwPSbJWZNqi7omSMjP4NqrBVkYc6q86LS7yQ_hwGJ76gEqdUY6btfPj9ZAfG1rfvqjIE4vbBNf0LT9UNuvO0mR1aYESp3Z7aJCrriHI2MyPI9ztLq5fjpULDATr8ewmjZVOybJtYT-EUGW6xRNgALJ7_V"/>
+</div>
+<span class="font-bold uppercase tracking-tight text-on-surface">Ashley Moody</span>
+</div>
+</td>
+<td class="p-4 text-emerald-700">REP</td>
+<td class="p-4 text-emerald-700">Attorney General</td>
+<td class="p-4 text-right font-bold text-primary-container crt-glow">$1,420,000</td>
+<td class="p-4 text-center">
+<span class="border border-on-tertiary-container text-on-tertiary-container px-3 py-1 text-[0.6rem] font-black tracking-widest uppercase flicker-alert">TIER 1</span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-emerald-400/5 transition-none border-b border-emerald-900/10 group">
+<td class="p-4 text-emerald-900 font-bold">003</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 border border-emerald-900 overflow-hidden">
+<img class="w-full h-full object-cover grayscale brightness-50 group-hover:brightness-100 transition-none" data-alt="Portrait of a male official" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0byPCyODxxwgp6wTV-caiLQM7_j7O_vQzLzOIay3OLcrfyYe_mWWbx8FgKIEP2c6Pw2QXsvK3lkirzUSOv5tZVfV-ENbpsHa5m1p5_cJI1T3RAlPCOlvXijb1wmK--yKXWRZtSpz-iNYsK0mVLEpxAlZozw0qhILhkLQMWQv-KQJ9SnnuQiR2XzFxFcq-BmftotD3qn5niq1eFxG9JroLyTcaUdufHgU2ghjqF_B0Kw3nTQ7cgRq3ckeg2ox5aafVpazGtFty5Cab"/>
+</div>
+<span class="font-bold uppercase tracking-tight text-on-surface">Marco Rubio</span>
+</div>
+</td>
+<td class="p-4 text-emerald-700">REP</td>
+<td class="p-4 text-emerald-700">US Senate</td>
+<td class="p-4 text-right font-bold text-primary-container crt-glow">$1,105,500</td>
+<td class="p-4 text-center">
+<span class="border border-emerald-400 text-emerald-400 px-3 py-1 text-[0.6rem] font-bold tracking-widest uppercase">TIER 2</span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-emerald-400/5 transition-none border-b border-emerald-900/10 bg-surface-container-low/30 group">
+<td class="p-4 text-emerald-900 font-bold">004</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 border border-emerald-900 overflow-hidden">
+<img class="w-full h-full object-cover grayscale brightness-50 group-hover:brightness-100 transition-none" data-alt="Close up portrait of a female politician" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjdRIgeCSfZDPoH7o4gVQpwh0MYtlQUPvK2Ii4AhMS9DLiReuyC4HoQXFsEJGfBSXxrapgTu_QuraBv79XuuN9mhP_x8XqsWA4kMv_gmapTf7AEER9snxkOYA-uQlXnc3T94XrijtwP4PvCrK8ropbOd5qciRpPaXwt--eQU_Ot_rhINtp68gPlHTzE_Bh52A6TxrSgipqJkIPuauI6C96lEsr2Ox-RsFxLbxmM-YQTRLTrgV6UDqiCDRP3BXyJQtwkr7uxuNAXXWb"/>
+</div>
+<span class="font-bold uppercase tracking-tight text-on-surface">Debbie W. Schultz</span>
+</div>
+</td>
+<td class="p-4 text-emerald-700">DEM</td>
+<td class="p-4 text-emerald-700">US House</td>
+<td class="p-4 text-right font-bold text-primary-container crt-glow">$982,000</td>
+<td class="p-4 text-center">
+<span class="border border-emerald-400 text-emerald-400 px-3 py-1 text-[0.6rem] font-bold tracking-widest uppercase">TIER 2</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination/Status -->
+<div class="mt-8 flex justify-between items-center text-[0.65rem] font-label text-emerald-900">
+<div class="flex gap-4">
+<span>RECORD_COUNT: 142</span>
+<span>LAST_SYNC: 2024-05-22 14:32:01</span>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1 border border-emerald-900/30 hover:bg-emerald-400/10 text-emerald-700">PREV</button>
+<button class="px-3 py-1 border border-primary-container/50 bg-primary-container/10 text-primary-container">01</button>
+<button class="px-3 py-1 border border-emerald-900/30 hover:bg-emerald-400/10 text-emerald-700">02</button>
+<button class="px-3 py-1 border border-emerald-900/30 hover:bg-emerald-400/10 text-emerald-700">NEXT</button>
+</div>
+</div>
+</section>
+<!-- Pattern Recognition Module -->
+<section class="mt-12 grid grid-cols-1 md:grid-cols-12 gap-6">
+<div class="md:col-span-8 p-10 bg-surface-container-low border border-emerald-900/30 relative ghost-bracket-tl">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-[1px] bg-primary-container"></div>
+<span class="text-[0.65rem] text-primary-container uppercase font-bold tracking-[0.4em]">Intelligence Briefing</span>
+</div>
+<h3 class="font-headline text-3xl font-bold mb-6 uppercase crt-glow text-on-surface">Pattern Recognition: <span class="text-primary-container">"The Tallahassee Conduit"</span></h3>
+<p class="text-emerald-300/70 leading-relaxed max-w-2xl mb-8 font-light italic font-label">
+                Internal analytics detect a high-density cluster of secondary PAC transfers originating from central FL. Funding paths are intentionally obfuscated through multiple 'Grassroots' shell entities before landing in candidate treasury accounts. Direct AIPAC tracking only captures 42% of actual lobby influence.
+            </p>
+<div class="grid grid-cols-2 gap-8">
+<div class="p-6 bg-slate-950 border-l-2 border-on-tertiary-container relative">
+<div class="text-[0.6rem] text-emerald-900 mb-2 uppercase font-label">Risk Probability</div>
+<div class="text-2xl font-bold text-on-tertiary-container flicker-alert">94.2%</div>
+<div class="w-full bg-surface-variant h-1 mt-2">
+<div class="bg-on-tertiary-container w-[94%] h-full"></div>
+</div>
+</div>
+<div class="p-6 bg-slate-950 border-l-2 border-primary-container">
+<div class="text-[0.6rem] text-emerald-900 mb-2 uppercase font-label">Lobbyist Density</div>
+<div class="text-2xl font-bold text-primary-container crt-glow">CRITICAL</div>
+<div class="flex gap-1 mt-2">
+<div class="w-3 h-1 bg-primary-container"></div>
+<div class="w-3 h-1 bg-primary-container"></div>
+<div class="w-3 h-1 bg-primary-container"></div>
+<div class="w-3 h-1 bg-primary-container"></div>
+<div class="w-3 h-1 bg-primary-container animate-pulse"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="md:col-span-4 bg-surface-container-high border border-emerald-900/30 p-0 relative min-h-[300px] overflow-hidden ghost-bracket-tr ghost-bracket-br">
+<img class="w-full h-full object-cover absolute inset-0 opacity-20 mix-blend-screen grayscale contrast-150" data-alt="Complex digital data visualization with connected nodes and flowing light streams" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCd8yVF4DTkedHyO6wi9sPdKWdClSD4FqZhsCsT8KAACL9iORy088WFP6d8LjNNsjxcovldQlpendqI8dlbaxA3N-WE8lKyEmPRXK2yRboy76fOjZAfghRn0sk4Uixc5rDH4qvfhfAr90uwHu90sDM2SOr41dVKzNTW4MCyoiyAydaiUQR6YRUl7SyZLb2Sy8RDrH62Q9YRILcGJdMYP2xUK2WLz_iLLDqWhFLckscjmKiarWh9GAGIN19Vaips7e4gJp4YY_f3KOu"/>
+<div class="relative z-10 p-10 h-full flex flex-col justify-end">
+<div class="bg-slate-950/80 backdrop-blur-md p-6 border border-emerald-900/30">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary-container text-sm">location_on</span>
+<span class="text-[0.7rem] font-bold text-primary-container font-label uppercase">LIVE_DATA_FEED</span>
+</div>
+<div class="space-y-3 font-label">
+<div class="flex justify-between text-[0.6rem]">
+<span class="text-emerald-900">NODE_STATUS:</span>
+<span class="text-primary-container">UPSTREAM_CONNECTED</span>
+</div>
+<div class="flex justify-between text-[0.6rem]">
+<span class="text-emerald-900">PACKET_LOSS:</span>
+<span class="text-on-surface">0.0003%</span>
+</div>
+<div class="flex justify-between text-[0.6rem]">
+<span class="text-emerald-900">GEO_TAG:</span>
+<span class="text-on-surface">FL_STATE_CAPITOL</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (from SCREEN_14) -->
+<footer class="fixed bottom-0 w-full bg-slate-950 border-t border-emerald-900/50 flex justify-between items-center px-6 py-1 z-50">
+<div class="font-label text-[10px] tracking-widest text-emerald-900 uppercase">
+        SYSTEM_STATUS: <span class="text-emerald-500">OPERATIONAL</span> | LATENCY: <span class="text-emerald-500">14MS</span> | NODE_SYNC: <span class="text-emerald-500">100%</span>
+</div>
+<div class="flex gap-6">
+<a class="font-label text-[10px] tracking-widest text-emerald-900 hover:text-emerald-200 uppercase transition-none" href="#">ENCRYPTION_KEYS</a>
+<a class="font-label text-[10px] tracking-widest text-emerald-900 hover:text-emerald-200 uppercase transition-none" href="#">REBOOT_CORE</a>
+<a class="font-label text-[10px] tracking-widest text-emerald-900 hover:text-emerald-200 uppercase transition-none underline" href="#">LOG_OUT</a>
+</div>
+</footer>
+<!-- Terminal Prompt Overlay (Decorative) -->
+<div class="fixed bottom-12 right-6 p-4 bg-slate-950/80 border border-primary-container/30 font-label text-[10px] text-primary-container max-w-xs opacity-50 pointer-events-none z-40">
+<div class="flex gap-2 mb-1">
+<span class="text-emerald-900">$</span>
+<span>snitch_cli --juicebox --rankings</span>
+</div>
+<div class="flex gap-2">
+<span class="text-emerald-900">$</span>
+<span class="animate-pulse">_</span>
+</div>
+</div>
+</body></html>

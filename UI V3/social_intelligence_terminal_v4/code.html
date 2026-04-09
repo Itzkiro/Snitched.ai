@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#007139",
+                        "surface-variant": "#323539",
+                        "secondary-fixed-dim": "#c5c6cb",
+                        "inverse-surface": "#e1e2e7",
+                        "primary-fixed": "#60ff99",
+                        "surface-container": "#1d2023",
+                        "outline": "#849585",
+                        "on-primary-fixed": "#00210c",
+                        "primary-container": "#00ff88",
+                        "outline-variant": "#3b4b3d",
+                        "on-tertiary-container": "#c50039",
+                        "surface-container-highest": "#323539",
+                        "on-primary-fixed-variant": "#005228",
+                        "surface-container-low": "#191c1f",
+                        "on-tertiary-fixed-variant": "#920028",
+                        "on-tertiary": "#68001a",
+                        "on-error-container": "#ffdad6",
+                        "on-primary": "#003919",
+                        "error": "#ffb4ab",
+                        "surface-dim": "#111417",
+                        "tertiary-container": "#ffd4d5",
+                        "secondary-container": "#44474b",
+                        "primary": "#f1ffef",
+                        "on-secondary-fixed-variant": "#44474b",
+                        "surface-container-lowest": "#0c0e12",
+                        "primary-fixed-dim": "#00e479",
+                        "on-surface": "#e1e2e7",
+                        "tertiary-fixed-dim": "#ffb3b6",
+                        "surface-bright": "#37393d",
+                        "on-secondary": "#2e3134",
+                        "surface-tint": "#00e479",
+                        "surface-container-high": "#282a2e",
+                        "surface": "#111417",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#40000c",
+                        "inverse-primary": "#006d37",
+                        "secondary-fixed": "#e1e2e7",
+                        "on-surface-variant": "#b9cbb9",
+                        "on-secondary-fixed": "#191c1f",
+                        "inverse-on-surface": "#2e3134",
+                        "error-container": "#93000a",
+                        "tertiary-fixed": "#ffdada",
+                        "secondary": "#c5c6cb",
+                        "background": "#111417",
+                        "on-background": "#e1e2e7",
+                        "tertiary": "#fffaf9",
+                        "on-secondary-container": "#b3b5ba"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["IBM Plex Mono"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0c0e12;
+            background-image: 
+                linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            overflow-x: hidden;
+        }
+        .scanline {
+            width: 100%;
+            height: 100%;
+            z-index: 99;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(0, 0, 0, 0) 100%);
+            background-size: 100% 4px;
+            position: fixed;
+            pointer-events: none;
+        }
+        .phosphor-glow {
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="text-on-surface selection:bg-primary-container selection:text-on-primary-fixed">
+<div class="scanline"></div>
+<!-- TopNavBar -->
+<nav class="flex flex-col w-full px-0 fixed top-0 z-50 bg-[#0c0e12] border-b border-[#00ff88]/30">
+<div class="flex items-center justify-between px-6 py-2 border-b border-[#00ff88]/10">
+<div class="flex items-center gap-4">
+<span class="text-xl font-headline font-bold tracking-tighter text-[#00ff88]">SNITCHED.AI</span>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<div class="font-label text-[10px] text-primary-container opacity-70 uppercase tracking-widest">
+                    SYSTEM_STATUS: ACTIVE // MODE: AGGREGATE
+                </div>
+</div>
+<div class="flex items-center gap-6">
+<div class="font-label text-xs text-primary-container">
+                    2023-10-27 14:02:11 UTC
+                </div>
+<div class="relative">
+<span class="absolute left-2 top-1/2 -translate-y-1/2 text-primary-container font-label text-xs">&gt;_</span>
+<input class="bg-surface-container-low border-0 border-b border-outline-variant text-primary-container font-label text-xs py-1 pl-7 pr-4 focus:ring-0 focus:border-primary-container w-64 uppercase" placeholder="COMMAND_QUERY" type="text"/>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-0 bg-[#0c0e12]">
+<a class="px-6 py-3 font-label text-xs border border-[#00ff88]/20 text-[#00ff88]/60 hover:bg-[#00ff88]/10 hover:text-[#00ff88] transition-none" href="#">DASHBOARD</a>
+<a class="px-6 py-3 font-label text-xs border border-[#00ff88]/20 text-[#00ff88]/60 hover:bg-[#00ff88]/10 hover:text-[#00ff88] transition-none" href="#">OFFICIALS</a>
+<a class="px-6 py-3 font-label text-xs border border-[#00ff88]/20 text-[#00ff88]/60 hover:bg-[#00ff88]/10 hover:text-[#00ff88] transition-none" href="#">CANDIDATES</a>
+<a class="px-6 py-3 font-label text-xs bg-[#00ff88] text-[#0c0e12] font-bold border-none shadow-[0_0_15px_rgba(0,255,136,0.4)] transition-none" href="#">SOCIAL_INTEL</a>
+<a class="px-6 py-3 font-label text-xs border border-[#00ff88]/20 text-[#00ff88]/60 hover:bg-[#00ff88]/10 hover:text-[#00ff88] transition-none" href="#">HIERARCHY</a>
+<a class="px-6 py-3 font-label text-xs border border-[#00ff88]/20 text-[#00ff88]/60 hover:bg-[#00ff88]/10 hover:text-[#00ff88] transition-none" href="#">JUICE_BOX</a>
+<a class="px-6 py-3 font-label text-xs border border-[#00ff88]/20 text-[#00ff88]/60 hover:bg-[#00ff88]/10 hover:text-[#00ff88] transition-none" href="#">CONNECTIONS</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-32 pb-12 px-6 min-h-screen grid grid-cols-12 gap-1 bg-[#0c0e12]">
+<!-- Left Panel: LIVE_SENTIMENT_FEED -->
+<section class="col-span-12 lg:col-span-3 flex flex-col bg-surface-container-low border border-outline-variant/30 relative">
+<div class="absolute -top-1 -left-1 w-2 h-2 border-t border-l border-primary-container"></div>
+<div class="p-4 border-b border-outline-variant/30 flex items-center justify-between">
+<h2 class="font-headline font-bold text-sm tracking-tight uppercase text-on-surface">LIVE_SENTIMENT_FEED</h2>
+<span class="w-2 h-2 bg-primary-container animate-pulse rounded-full"></span>
+</div>
+<div class="flex-1 overflow-y-auto max-h-[768px] scrollbar-hide">
+<!-- Log Entry -->
+<div class="p-3 border-b border-outline-variant/10 hover:bg-surface-container transition-none group">
+<div class="flex justify-between font-label text-[10px] mb-1">
+<span class="text-primary-container/60">UID: 8821-X</span>
+<span class="text-primary-container/40">14:02:08</span>
+</div>
+<p class="font-label text-[11px] leading-tight text-on-surface mb-2">MENTION: "@Sen_Vance regarding offshore liquidities. Pattern matches: CORRUPTION_SIG_04"</p>
+<div class="flex items-center gap-2">
+<span class="text-[9px] font-label px-1 bg-on-tertiary-container text-white">BEARISH</span>
+<span class="text-[9px] font-label px-1 bg-primary-container/20 text-primary-container">BOT_CONF: 94%</span>
+</div>
+</div>
+<div class="p-3 border-b border-outline-variant/10 hover:bg-surface-container transition-none">
+<div class="flex justify-between font-label text-[10px] mb-1">
+<span class="text-primary-container/60">UID: 9110-Z</span>
+<span class="text-primary-container/40">14:01:55</span>
+</div>
+<p class="font-label text-[11px] leading-tight text-on-surface mb-2">SENTIMENT_SHIFT: Positive cluster forming around #JUICEBOX in District 7.</p>
+<div class="flex items-center gap-2">
+<span class="text-[9px] font-label px-1 bg-primary-container text-on-primary-fixed">BULLISH</span>
+<span class="text-[9px] font-label px-1 bg-outline-variant text-on-surface">ORGANIC</span>
+</div>
+</div>
+<div class="p-3 border-b border-outline-variant/10 bg-on-tertiary-container/5">
+<div class="flex justify-between font-label text-[10px] mb-1">
+<span class="text-on-tertiary-container">CRITICAL_ALERT</span>
+<span class="text-on-tertiary-container">14:01:30</span>
+</div>
+<p class="font-label text-[11px] leading-tight text-on-surface mb-2">ANOMALY: High-velocity dissemination of leaked memos regarding "Project Obsidian".</p>
+<div class="flex items-center gap-2">
+<span class="text-[9px] font-label px-1 bg-on-tertiary-container text-white">SPIKE_DETECTED</span>
+</div>
+</div>
+<!-- Repeated items for density -->
+<div class="p-3 border-b border-outline-variant/10 hover:bg-surface-container">
+<div class="flex justify-between font-label text-[10px] mb-1">
+<span class="text-primary-container/60">UID: 4421-A</span>
+<span class="text-primary-container/40">14:00:12</span>
+</div>
+<p class="font-label text-[11px] leading-tight text-on-surface mb-2">DATA_POINT: FEC filing discrepancy noted by local investigative handle @Snitch_7.</p>
+<div class="flex items-center gap-2">
+<span class="text-[9px] font-label px-1 bg-outline-variant text-on-surface">NEUTRAL</span>
+</div>
+</div>
+<div class="p-3 border-b border-outline-variant/10 hover:bg-surface-container">
+<div class="flex justify-between font-label text-[10px] mb-1">
+<span class="text-primary-container/60">UID: 5567-Q</span>
+<span class="text-primary-container/40">13:58:44</span>
+</div>
+<p class="font-label text-[11px] leading-tight text-on-surface mb-2">NODE_SYNC: Tracking bot farm cluster #SF-0098 targeting @Representative_X.</p>
+<div class="flex items-center gap-2">
+<span class="text-[9px] font-label px-1 bg-on-tertiary-container text-white">BOT_STRIKE</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Center Panel: INFLUENCE_CLOUD -->
+<section class="col-span-12 lg:col-span-6 flex flex-col bg-surface-container border border-outline-variant/30 p-6 relative">
+<div class="absolute -top-1 -right-1 w-2 h-2 border-t border-r border-primary-container"></div>
+<div class="mb-8">
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-headline font-bold text-2xl tracking-tighter uppercase text-primary-container">INFLUENCE_CLOUD</h2>
+<div class="font-label text-[10px] text-outline px-2 py-1 border border-outline-variant">VIEW: SPATIAL_RELATION</div>
+</div>
+<!-- Tactical Cloud Visualization -->
+<div class="relative h-[500px] w-full border border-[#00ff88]/10 bg-surface-container-lowest overflow-hidden flex items-center justify-center">
+<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#00ff88 1px, transparent 0); background-size: 40px 40px;"></div>
+<!-- Term Nodes -->
+<div class="relative z-10 flex flex-wrap gap-4 items-center justify-center p-12 max-w-2xl">
+<span class="font-headline text-5xl font-extrabold text-primary-container phosphor-glow tracking-tighter cursor-crosshair">#JUICEBOX</span>
+<span class="font-label text-lg text-on-surface-variant hover:text-primary-container cursor-crosshair">FEC_FRAUD</span>
+<span class="font-headline text-3xl font-bold text-white/80 tracking-tight cursor-crosshair uppercase">ELECTION_TAMPER</span>
+<span class="font-label text-sm text-outline-variant hover:text-white cursor-crosshair">OFFSHORE_TX</span>
+<span class="font-label text-xl text-primary-container/60 cursor-crosshair uppercase tracking-widest">WHISTLEBLOWER</span>
+<span class="font-headline text-4xl font-black text-on-tertiary-container phosphor-glow cursor-crosshair tracking-tighter">#SCANDAL_LAKE</span>
+<span class="font-label text-md text-on-surface-variant cursor-crosshair">PROX_VOTING</span>
+<span class="font-label text-xs text-outline cursor-crosshair uppercase tracking-tighter">lobbyist_sync</span>
+<span class="font-headline text-2xl font-medium text-white cursor-crosshair tracking-tight uppercase">DARK_MONEY</span>
+<span class="font-label text-lg text-primary-container cursor-crosshair uppercase">PAC_SPIKE</span>
+</div>
+<!-- Scan Axis Lines -->
+<div class="absolute h-px w-full bg-primary-container/20 top-1/4"></div>
+<div class="absolute h-px w-full bg-primary-container/20 top-3/4"></div>
+<div class="absolute w-px h-full bg-primary-container/20 left-1/2"></div>
+<div class="absolute bottom-4 right-4 flex flex-col font-label text-[10px] text-primary-container/50 text-right">
+<span>X_AXIS: VELOCITY</span>
+<span>Y_AXIS: SENTIMENT_MASS</span>
+</div>
+</div>
+</div>
+<!-- Juice Box Component -->
+<div class="mt-auto border border-primary-container p-4 bg-surface-container-high">
+<div class="flex items-center justify-between mb-4">
+<span class="font-label text-xs text-primary-container font-bold uppercase tracking-widest">TELEMETRY: JUICE_BOX_ACTIVE</span>
+<span class="material-symbols-outlined text-primary-container text-sm">monitoring</span>
+</div>
+<div class="grid grid-cols-3 gap-4 mb-4">
+<div>
+<div class="font-label text-[9px] text-outline uppercase">Aggregate Sentiment</div>
+<div class="font-headline text-xl font-bold text-primary-container">74.2% <span class="text-[10px] font-normal">NEUTRAL</span></div>
+</div>
+<div>
+<div class="font-label text-[9px] text-outline uppercase">Anomaly Score</div>
+<div class="font-headline text-xl font-bold text-on-tertiary-container">0.88 <span class="text-[10px] font-normal">HIGH</span></div>
+</div>
+<div>
+<div class="font-label text-[9px] text-outline uppercase">Data Nodes</div>
+<div class="font-headline text-xl font-bold text-on-surface">12,442</div>
+</div>
+</div>
+<!-- Sparkline Graph -->
+<div class="h-12 w-full flex items-end gap-1 px-1 overflow-hidden">
+<div class="w-1 bg-primary-container" style="height: 40%"></div>
+<div class="w-1 bg-primary-container" style="height: 55%"></div>
+<div class="w-1 bg-primary-container" style="height: 45%"></div>
+<div class="w-1 bg-primary-container" style="height: 80%"></div>
+<div class="w-1 bg-on-tertiary-container" style="height: 95%"></div>
+<div class="w-1 bg-on-tertiary-container" style="height: 90%"></div>
+<div class="w-1 bg-primary-container" style="height: 60%"></div>
+<div class="w-1 bg-primary-container" style="height: 30%"></div>
+<div class="w-1 bg-primary-container" style="height: 40%"></div>
+<div class="w-1 bg-primary-container" style="height: 50%"></div>
+<div class="w-1 bg-primary-container" style="height: 65%"></div>
+<div class="w-1 bg-primary-container" style="height: 55%"></div>
+<div class="w-1 bg-on-tertiary-container" style="height: 85%"></div>
+<div class="w-1 bg-primary-container" style="height: 40%"></div>
+<div class="w-1 bg-primary-container" style="height: 30%"></div>
+<div class="w-1 bg-primary-container" style="height: 45%"></div>
+<div class="w-1 bg-primary-container" style="height: 50%"></div>
+<div class="w-1 bg-primary-container" style="height: 70%"></div>
+<div class="w-1 bg-primary-container" style="height: 80%"></div>
+<div class="w-1 bg-primary-container" style="height: 90%"></div>
+<div class="w-1 bg-on-tertiary-container" style="height: 100%"></div>
+<div class="w-1 bg-on-tertiary-container" style="height: 95%"></div>
+<div class="w-1 bg-primary-container" style="height: 60%"></div>
+<div class="w-1 bg-primary-container" style="height: 45%"></div>
+<div class="w-1 bg-primary-container" style="height: 35%"></div>
+<div class="w-1 bg-primary-container" style="height: 40%"></div>
+<div class="w-1 bg-primary-container" style="height: 30%"></div>
+<div class="w-1 bg-primary-container" style="height: 55%"></div>
+<div class="w-1 bg-primary-container" style="height: 45%"></div>
+<div class="w-1 bg-primary-container" style="height: 50%"></div>
+</div>
+</div>
+</section>
+<!-- Right Panel: ANOMALY_DETECTION -->
+<section class="col-span-12 lg:col-span-3 flex flex-col gap-1">
+<div class="bg-surface-container-low border border-outline-variant/30 p-4 flex-1 relative">
+<div class="absolute -bottom-1 -right-1 w-2 h-2 border-b border-r border-primary-container"></div>
+<h2 class="font-headline font-bold text-sm tracking-tight uppercase text-on-surface mb-6 border-b border-outline-variant/30 pb-2">ANOMALY_DETECTION</h2>
+<div class="space-y-6">
+<!-- Entity Spike -->
+<div class="group cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<div>
+<div class="font-label text-[10px] text-primary-container">TARGET: 10042</div>
+<div class="font-headline font-bold text-lg text-white">Sen. Marcus Thorne</div>
+</div>
+<span class="text-on-tertiary-container font-label text-xs animate-pulse">!! SPIKE</span>
+</div>
+<div class="bg-on-tertiary-container/10 p-2 border-l-2 border-on-tertiary-container">
+<div class="font-label text-[10px] text-on-tertiary-container mb-1">SUSPICIOUS_VOLUME_INCREASE: 420%</div>
+<div class="text-[11px] font-body text-on-surface-variant">Cluster of newly created handles (Age &lt; 24h) disseminating tax document hashes.</div>
+</div>
+</div>
+<div class="group cursor-pointer opacity-80 hover:opacity-100">
+<div class="flex justify-between items-start mb-2">
+<div>
+<div class="font-label text-[10px] text-primary-container">TARGET: 30221</div>
+<div class="font-headline font-bold text-lg text-white">Rep. Linda Chen</div>
+</div>
+<span class="text-primary-container font-label text-xs">MONITORING</span>
+</div>
+<div class="bg-primary-container/10 p-2 border-l-2 border-primary-container">
+<div class="font-label text-[10px] text-primary-container mb-1">CORRELATION_ALERT: #PAC_GIFTING</div>
+<div class="text-[11px] font-body text-on-surface-variant">High correlation between policy announcement and specific lobbyist social mentions.</div>
+</div>
+</div>
+<div class="group cursor-pointer opacity-80 hover:opacity-100">
+<div class="flex justify-between items-start mb-2">
+<div>
+<div class="font-label text-[10px] text-primary-container">TARGET: 00922</div>
+<div class="font-headline font-bold text-lg text-white">Gov. Arthur Vance</div>
+</div>
+<span class="text-on-tertiary-container font-label text-xs uppercase">blackout_risk</span>
+</div>
+<div class="bg-surface-container p-2 border-l-2 border-outline-variant">
+<div class="font-label text-[10px] text-outline mb-1">MEDIA_SUPPRESSION_DETECTED</div>
+<div class="text-[11px] font-body text-on-surface-variant">De-indexing of negative news reports on platform 'X' observed in key swing counties.</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Global Risk Metric -->
+<div class="bg-on-tertiary-container p-4 flex items-center justify-between">
+<div>
+<div class="font-label text-[9px] text-white/60 uppercase">Global Social Volatility</div>
+<div class="font-headline text-3xl font-black text-white">CRITICAL</div>
+</div>
+<div class="w-16 h-16 border-4 border-white/20 rounded-full flex items-center justify-center">
+<span class="font-label text-xl font-bold text-white">88</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="fixed bottom-0 w-full flex justify-between items-center px-6 py-1 z-50 bg-[#0c0e12] border-t border-[#00ff88]/20">
+<div class="font-label text-[10px] text-[#00ff88] uppercase tracking-widest">
+            SYSTEM_READY // NODE_SYNC: 100% // LATENCY: 12ms
+        </div>
+<div class="flex gap-4">
+<a class="font-label text-[10px] text-[#00ff88]/40 hover:text-[#00ff88] hover:bg-[#00ff88]/5 uppercase tracking-widest transition-none" href="#">ENCRYPTION_KEYS</a>
+<a class="font-label text-[10px] text-[#00ff88]/40 hover:text-[#00ff88] hover:bg-[#00ff88]/5 uppercase tracking-widest transition-none" href="#">REBOOT_CORE</a>
+<a class="font-label text-[10px] text-[#00ff88]/40 hover:text-[#00ff88] hover:bg-[#00ff88]/5 uppercase tracking-widest transition-none" href="#">TERMINAL_LOGS</a>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TERMINAL_SOVEREIGNTY // SNITCHED.AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary": "#003919",
+              "tertiary-container": "#ffd4d5",
+              "on-surface-variant": "#b9cbb9",
+              "tertiary-fixed-dim": "#ffb3b6",
+              "surface-container": "#1d2023",
+              "surface-tint": "#00e479",
+              "on-secondary": "#2e3134",
+              "on-surface": "#e1e2e7",
+              "inverse-primary": "#006d37",
+              "secondary": "#c5c6cb",
+              "inverse-surface": "#e1e2e7",
+              "secondary-fixed": "#e1e2e7",
+              "surface-container-low": "#191c1f",
+              "secondary-container": "#44474b",
+              "on-tertiary-fixed-variant": "#920028",
+              "on-error-container": "#ffdad6",
+              "error": "#ffb4ab",
+              "surface-bright": "#37393d",
+              "outline": "#849585",
+              "primary-fixed-dim": "#00e479",
+              "on-tertiary": "#68001a",
+              "surface-dim": "#111417",
+              "on-primary-container": "#007139",
+              "on-primary-fixed": "#00210c",
+              "surface": "#111417",
+              "on-secondary-fixed-variant": "#44474b",
+              "outline-variant": "#3b4b3d",
+              "on-tertiary-container": "#c50039",
+              "on-error": "#690005",
+              "surface-container-lowest": "#0c0e12",
+              "on-tertiary-fixed": "#40000c",
+              "surface-variant": "#323539",
+              "on-secondary-container": "#b3b5ba",
+              "surface-container-high": "#282a2e",
+              "error-container": "#93000a",
+              "inverse-on-surface": "#2e3134",
+              "tertiary-fixed": "#ffdada",
+              "background": "#111417",
+              "primary-fixed": "#60ff99",
+              "surface-container-highest": "#323539",
+              "on-secondary-fixed": "#191c1f",
+              "on-primary-fixed-variant": "#005228",
+              "on-background": "#e1e2e7",
+              "primary": "#f1ffef",
+              "secondary-fixed-dim": "#c5c6cb",
+              "primary-container": "#00ff88",
+              "tertiary": "#fffaf9"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["IBM Plex Mono"]
+            },
+            borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "0px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #05070a;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 255, 136, 0.03) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.01));
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .crt-glow {
+            text-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
+        }
+        .crt-glow-border {
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+        }
+        .flicker-alert {
+            animation: flicker 0.15s infinite alternate;
+        }
+        @keyframes flicker {
+            0% { opacity: 1; text-shadow: 0 0 10px #c50039; }
+            100% { opacity: 0.7; text-shadow: 0 0 2px #c50039; }
+        }
+        .ghost-bracket-tl::before {
+            content: ""; position: absolute; top: -1px; left: -1px; width: 8px; height: 8px;
+            border-top: 2px solid #3b4b3d; border-left: 2px solid #3b4b3d;
+        }
+        .ghost-bracket-tr::after {
+            content: ""; position: absolute; top: -1px; right: -1px; width: 8px; height: 8px;
+            border-top: 2px solid #3b4b3d; border-right: 2px solid #3b4b3d;
+        }
+        .ghost-bracket-bl::before {
+            content: ""; position: absolute; bottom: -1px; left: -1px; width: 8px; height: 8px;
+            border-bottom: 2px solid #3b4b3d; border-left: 2px solid #3b4b3d;
+        }
+        .ghost-bracket-br::after {
+            content: ""; position: absolute; bottom: -1px; right: -1px; width: 8px; height: 8px;
+            border-bottom: 2px solid #3b4b3d; border-right: 2px solid #3b4b3d;
+        }
+    </style>
+</head>
+<body class="font-body text-on-surface leading-tight selection:bg-primary-container selection:text-on-primary-container">
+<!-- Header / TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-950 border-b border-emerald-900/50 flex flex-col">
+<!-- Layer 1: Utility -->
+<div class="flex justify-between items-center px-4 py-2 bg-surface-container-lowest border-b border-outline-variant/30 h-10">
+<div class="flex items-center gap-4">
+<div class="group relative">
+<button class="flex items-center gap-2 text-primary-container font-label text-xs tracking-widest hover:text-white transition-none"><span class="material-symbols-outlined text-sm">menu</span> SELECT STATE</button>
+<div class="absolute top-full left-0 mt-1 w-48 bg-slate-950 border border-emerald-900/50 shadow-[0_0_20px_rgba(0,255,136,0.1)] hidden group-hover:block z-[60]">
+<div class="p-2 border-b border-emerald-900/30 bg-emerald-900/10">
+<span class="font-label text-[10px] text-emerald-500 uppercase tracking-widest">SYSTEM_SELECT_NODE</span>
+</div>
+<ul class="py-1 font-label text-xs text-primary-container">
+<li class="px-4 py-2 hover:bg-emerald-400 hover:text-slate-950 cursor-pointer flex items-center justify-between group/item">
+<span>FLORIDA</span>
+<span class="text-[10px] opacity-0 group-hover/item:opacity-100">[LOAD]</span>
+</li>
+<li class="px-4 py-2 hover:bg-emerald-900/20 cursor-pointer flex items-center justify-between group/item">
+<span>CALIFORNIA</span>
+<span class="text-[10px] opacity-0 group-hover/item:opacity-100 text-emerald-700">[OFFLINE]</span>
+</li>
+<li class="px-4 py-2 hover:bg-emerald-900/20 cursor-pointer flex items-center justify-between group/item">
+<span>NEW YORK</span>
+<span class="text-[10px] opacity-0 group-hover/item:opacity-100 text-emerald-700">[OFFLINE]</span>
+</li>
+<li class="px-4 py-2 hover:bg-emerald-900/20 cursor-pointer flex items-center justify-between group/item">
+<span>TEXAS</span>
+<span class="text-[10px] opacity-0 group-hover/item:opacity-100 text-emerald-700">[OFFLINE]</span>
+</li>
+<li class="px-4 py-2 hover:bg-emerald-900/20 cursor-pointer flex items-center justify-between group/item">
+<span>ILLINOIS</span>
+<span class="text-[10px] opacity-0 group-hover/item:opacity-100 text-emerald-700">[OFFLINE]</span>
+</li>
+</ul>
+<div class="p-1 bg-emerald-900/5 text-center">
+<span class="text-[8px] text-emerald-900 animate-pulse">SCANNING_ALL_NODES...</span>
+</div>
+</div></div>
+<div class="h-4 w-px bg-outline-variant/30"></div>
+<div class="text-[10px] font-label text-outline uppercase tracking-tighter">NODE: DC_ENCLAVE_01</div>
+</div>
+<div class="font-label text-xs text-primary-container tracking-[0.2em] crt-glow">
+                2024-05-22 14:32:01 UTC
+            </div>
+<div class="flex items-center gap-4">
+<div class="relative flex items-center bg-surface-container px-2 border-b border-primary-container/50">
+<span class="font-label text-primary-container text-xs mr-2">&gt;_</span>
+<input class="bg-transparent border-none text-xs font-label text-primary-container placeholder:text-emerald-900 focus:ring-0 w-48 p-0 h-6" placeholder="GLOBAL_SEARCH" type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-lg hover:text-primary-container cursor-pointer transition-none">settings</span>
+<span class="material-symbols-outlined text-outline text-lg hover:text-primary-container cursor-pointer transition-none">terminal</span>
+</div>
+</div>
+</div>
+<!-- Layer 2: Navigation -->
+<nav class="flex w-full overflow-x-auto no-scrollbar bg-slate-950">
+<div class="flex divide-x divide-emerald-900/30 w-full">
+<a class="px-6 py-3 bg-emerald-400 text-slate-950 font-label font-bold text-xs tracking-widest shadow-[0_0_15px_rgba(0,255,136,0.5)]" href="#">DASHBOARD</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest border-r border-emerald-900/30 hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">SEATED_OFFICIALS</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest border-r border-emerald-900/30 hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">CANDIDATES</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest border-r border-emerald-900/30 hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">HIERARCHY</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest border-r border-emerald-900/30 hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">JUICE_BOX</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest border-r border-emerald-900/30 hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">SOCIAL_INTEL</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">DATABASE</a>
+</div>
+</nav>
+</header>
+<!-- Main Content -->
+<main class="pt-24 pb-12 px-6 min-h-screen">
+<!-- Hero Section: The Panopticon Lens -->
+<section class="relative w-full border border-emerald-900/50 bg-surface-container-lowest overflow-hidden mb-6 p-12 flex flex-col items-center justify-center text-center">
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at center, #00ff88 0%, transparent 70%);"></div>
+<h1 class="font-headline text-7xl md:text-8xl font-black tracking-tighter text-primary-container crt-glow uppercase mb-4 leading-none">
+                EVERY POLITICIAN.<br/>EVERY DOLLAR.<br/>EVERY LIE.
+            </h1>
+<p class="font-label text-emerald-600 text-sm tracking-[0.5em] mb-8">TOTAL TRANSPARENCY THROUGH MACHINE INTELLIGENCE</p>
+<!-- Wireframe Visualization Area -->
+<div class="w-full max-w-5xl h-64 relative border border-outline-variant/20 bg-black/40">
+<img class="w-full h-full object-cover mix-blend-screen opacity-50 grayscale contrast-150" data-alt="abstract 3D digital wireframe of a complex social network with glowing nodes and interconnecting green lines on black background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4fKJ4iRRX2Wrse9FdxGiodyyLQwmhHr9EJJPhrNn4ZxOa-mVb4uQDb9TtJDbmeUfYm2QmfmTrptZVIwROjuOcDNAvPwQk3KRMDqH5pwM10gFEN-sBoJodnX6fvNFKd9rYKyr3UDew-v6a82eKCKasXrnKrfbatLCSf_ujGGKydG4LClrmmpCgc15DjUTk018VoLwrBAZaeTlSBgKyWewWWZZ66hPArdSyBP80q7exA9-cJDGsj351I0GXAuCaJx_x-f3h9HnBuWTj"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="border border-primary-container/40 p-2 font-label text-[10px] text-primary-container bg-slate-950/80">
+                        SCANNING_NEURAL_CLUSTER: ACTIVE...
+                    </div>
+</div>
+</div>
+</section>
+<!-- Data Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Live Threat Feed -->
+<div class="col-span-12 lg:col-span-4 flex flex-col">
+<div class="bg-surface-container border border-emerald-900/30 h-full relative p-4 ghost-bracket-tl ghost-bracket-br">
+<div class="flex justify-between items-center mb-4 border-b border-outline-variant/30 pb-2">
+<h2 class="font-label text-xs font-bold text-primary-container tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">sensors</span>
+                            LIVE_THREAT_FEED
+                        </h2>
+<span class="font-label text-[10px] text-emerald-900">REALTIME_LOGS</span>
+</div>
+<div class="space-y-3 font-label text-[11px] h-[400px] overflow-hidden">
+<div class="flex gap-3 text-emerald-400 border-l border-emerald-400 pl-2 py-1 bg-emerald-400/5">
+<span class="shrink-0 opacity-50">[14:31:05]</span>
+<span class="uppercase tracking-tight">PAC_TRANSFER: 2.4M REDIRECTED TO SHELL_ENTITY_99</span>
+</div>
+<div class="flex gap-3 text-on-tertiary-container border-l border-on-tertiary-container pl-2 py-1 bg-on-tertiary-container/5">
+<span class="shrink-0 opacity-50">[14:29:44]</span>
+<span class="uppercase tracking-tight font-bold flicker-alert">ANOMALY: VOTING_DATA_SKEW_DETECTION [FL_DISTRICT_12]</span>
+</div>
+<div class="flex gap-3 text-emerald-600 pl-2 py-1">
+<span class="shrink-0 opacity-50">[14:28:12]</span>
+<span class="uppercase tracking-tight">INTEL: NEW LOBBYIST MEETING LOGGED [SEN_GRIFFIN]</span>
+</div>
+<div class="flex gap-3 text-emerald-600 pl-2 py-1">
+<span class="shrink-0 opacity-50">[14:25:30]</span>
+<span class="uppercase tracking-tight">DATABASE: ASSET_DISCLOSURE_SYNC COMPLETE</span>
+</div>
+<div class="flex gap-3 text-emerald-600 pl-2 py-1">
+<span class="shrink-0 opacity-50">[14:22:11]</span>
+<span class="uppercase tracking-tight">SOCIAL: SENTIMENT_DROP DETECTED [GOV_WATKINS]</span>
+</div>
+<div class="flex gap-3 text-on-tertiary-container border-l border-on-tertiary-container pl-2 py-1 bg-on-tertiary-container/5">
+<span class="shrink-0 opacity-50">[14:20:05]</span>
+<span class="uppercase tracking-tight flicker-alert">BREACH: LEAKED_EMAILS_DECRYPTED [ID:8842]</span>
+</div>
+<div class="flex gap-3 text-emerald-600 pl-2 py-1">
+<span class="shrink-0 opacity-50">[14:18:50]</span>
+<span class="uppercase tracking-tight">INTEL: CRYPTO_WALLET_LINKED [REP_SANCHEZ]</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Corruption Leaderboard -->
+<div class="col-span-12 lg:col-span-5">
+<div class="bg-surface-container-high border border-emerald-900/30 h-full p-4 relative ghost-bracket-tr ghost-bracket-bl">
+<div class="flex justify-between items-center mb-6 border-b border-outline-variant/30 pb-2">
+<h2 class="font-label text-xs font-bold text-primary-container tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                            CORRUPTION_LEADERBOARD
+                        </h2>
+<div class="flex gap-2">
+<span class="w-2 h-2 bg-on-tertiary-container rounded-full flicker-alert"></span>
+<span class="font-label text-[10px] text-on-tertiary-container">HIGH_ALERT</span>
+</div>
+</div>
+<div class="space-y-4">
+<!-- Entry 1 -->
+<div class="group cursor-pointer hover:bg-surface-bright/20 border-b border-outline-variant/10 pb-4 flex justify-between items-end">
+<div class="flex gap-4 items-center">
+<div class="w-12 h-12 border border-emerald-900 overflow-hidden">
+<img class="w-full h-full object-cover grayscale brightness-50 contrast-125" data-alt="close-up portrait of a generic middle-aged man in a dark suit with a stern expression in low light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDze6R1dHcXCaL8NcdvMLmgUiGPi2LZtccnwL1E6-UhuwgO06-IvtGMyNuQE94ONZLW6eK5LC2URg6CSOA_SvmXy-H6AW5tiakwrTkEAjYpHIi19OLC-uvNZCJkc3sEI3qnxfNXM0O6FbPiQYTgPFeOawOuq5YoAVB76s_TNJS31obQRMmMsPdEaJzffBWYKtcwxcjW-sdSLX2io6XjlvmMT572Uz8t4_pQYun9bSR09Xzo_Hwn3-epnFhgxaoaimsEs9xMR4jpyna3"/>
+</div>
+<div>
+<div class="font-label text-[10px] text-emerald-700 tracking-tighter">ID: CC_0912 // SENATOR</div>
+<div class="font-headline font-bold text-lg text-white leading-tight">RICHARD STARK</div>
+<div class="font-label text-[10px] text-emerald-500 uppercase">UNEXPLAINED_WEALTH_INDEX: 9.8</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-label text-xs text-on-tertiary-container font-black flicker-alert">FLICKER_ALERT</div>
+<div class="font-label text-2xl text-on-tertiary-container font-black">98.4%</div>
+</div>
+</div>
+<!-- Entry 2 -->
+<div class="group cursor-pointer hover:bg-surface-bright/20 border-b border-outline-variant/10 pb-4 flex justify-between items-end">
+<div class="flex gap-4 items-center">
+<div class="w-12 h-12 border border-emerald-900 overflow-hidden">
+<img class="w-full h-full object-cover grayscale brightness-50 contrast-125" data-alt="close-up portrait of a generic professional woman in a grey suit with a neutral gaze under harsh cool lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtX6abdMGw7XwF3T9dSiaygsgRf6wyIkX0EDxB7Wyl__QT58iVNzzKDJHBBj-vqqAMBSJkJSE8L-gW0YqOxldDNR_N3QpQc3JhD2QBkEAOCzF6UeapVmuq165J_zld9HLWHsDf3coynaXQ2yMQF-YUVxbr3iQ4Z5q3EjjJbFJotLBwLXoVO1MP6DhxOmTyYYH0gFMqSGwKg_CmZ0J_QViw37ZU5e7YGzGU1YPtVNnuUmrWis5qhjIIWDqxCW-31bMxjPivwCgCGO-S"/>
+</div>
+<div>
+<div class="font-label text-[10px] text-emerald-700 tracking-tighter">ID: CC_4410 // GOVERNOR</div>
+<div class="font-headline font-bold text-lg text-white leading-tight">ELENA VANCE</div>
+<div class="font-label text-[10px] text-emerald-500 uppercase">LOBBY_INTERACTION_PEAK: 8.2</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-label text-[10px] text-outline uppercase tracking-widest">STABLE_RISK</div>
+<div class="font-label text-2xl text-primary-container font-black">82.1%</div>
+</div>
+</div>
+<!-- Entry 3 -->
+<div class="group cursor-pointer hover:bg-surface-bright/20 border-b border-outline-variant/10 pb-4 flex justify-between items-end">
+<div class="flex gap-4 items-center">
+<div class="w-12 h-12 border border-emerald-900 overflow-hidden">
+<img class="w-full h-full object-cover grayscale brightness-50 contrast-125" data-alt="close-up portrait of a young male professional in a blue shirt looking away from camera with high contrast shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaP61Ttzff1P3lhd95zmmUKelNcxtbLyUNiIuKrYgJkxM0K0LAg34EnV8iGfggC7s5v9RCr1F4K08xgNzLWXAxb0LkL9x6gZXWLVjeMAXUClZiXrEA8qJ9UwNhkkHQj28C5_jxLnF_VMdpqWXBJtg89kcGtOOxS7KCcUgFBzMpOowExeaOTXlQdb0SvPPfp7Jo_dlYLXm8Cny1rKBKL1oXhKLwwyiVLnUkVAsulqsUnTEqBZpCCQ5Qfq-e4B_nS1GAsQscTgNcPfcW"/>
+</div>
+<div>
+<div class="font-label text-[10px] text-emerald-700 tracking-tighter">ID: CC_7721 // REPRESENTATIVE</div>
+<div class="font-headline font-bold text-lg text-white leading-tight">MARCUS THORNE</div>
+<div class="font-label text-[10px] text-emerald-500 uppercase">POLICY_FLIP_RATE: 7.5</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-label text-[10px] text-outline uppercase tracking-widest">RISING_RANK</div>
+<div class="font-label text-2xl text-primary-container font-black">75.8%</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Geo-Influence Map & Juice Box -->
+<div class="col-span-12 lg:col-span-3 flex flex-col gap-6">
+<!-- Geo Map -->
+<div class="bg-surface-container border border-emerald-900/30 flex-1 p-4 relative ghost-bracket-tl ghost-bracket-tr ghost-bracket-bl ghost-bracket-br overflow-hidden">
+<div class="flex justify-between items-center mb-2">
+<h2 class="font-label text-[10px] font-bold text-primary-container tracking-widest">GEO_INFLUENCE</h2>
+<span class="material-symbols-outlined text-xs text-emerald-700">language</span>
+</div>
+<div class="w-full h-40 bg-slate-900 border border-emerald-900/50 relative">
+<img class="w-full h-full object-cover opacity-40 grayscale contrast-150" data-alt="abstract top down map of city lights from space with glowing green data points and scanning line textures" data-location="Washington DC" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfbxLrWRh_quMayp61WMGDhI1T5KxLuv9V8BXonPTLAMOaL0InoA3xfZsViL8SdVJCpQy_auNSuseMoaPmntDDZbhfsIt3AbVEu3VaD6QbGSwj8O3ErIh3ZdActul7oloOKbh9E2hle32I8WijwlBApQIH83jmPDdhAEwPHlh3THQcGZVii5_62T4HdIujs-bvewfjAlV0Ea8QRP_V5cK9CZyr_JaY13XlXB0Iw1K8ixBV-GVDKaa2ejV8k076uemObB78ZKC9lMcH"/>
+<div class="absolute top-2 left-2 flex items-center gap-1">
+<span class="w-1.5 h-1.5 bg-primary-container"></span>
+<span class="font-label text-[8px] text-primary-container tracking-widest">NODE_ACTIVE</span>
+</div>
+</div>
+<div class="mt-2 font-label text-[9px] text-emerald-700 space-y-1">
+<div class="flex justify-between"><span>NORTH_EAST_CLUSTER:</span><span>74% INTENSITY</span></div>
+<div class="flex justify-between"><span>PACIFIC_RIM_LINK:</span><span>CONNECTED</span></div>
+</div>
+</div>
+<!-- Juice Box (Telemetry) -->
+<div class="bg-slate-950 border-2 border-primary-container p-4 relative overflow-hidden">
+<div class="font-label text-xs font-bold text-primary-container tracking-widest mb-2">JUICE_BOX_TELEMETRY</div>
+<div class="grid grid-cols-2 gap-2 mb-4">
+<div>
+<div class="font-label text-[8px] text-emerald-900 uppercase">VOLATILITY</div>
+<div class="font-label text-xl text-primary-container font-bold">14.2%</div>
+</div>
+<div>
+<div class="font-label text-[8px] text-emerald-900 uppercase">U_DISCLOSURE</div>
+<div class="font-label text-xl text-primary-container font-bold">Δ 0.04</div>
+</div>
+</div>
+<!-- Sparkline -->
+<div class="h-8 w-full bg-primary-container/10 relative">
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none">
+<path d="M0 20 L20 10 L40 25 L60 5 L80 18 L100 12 L120 28 L140 10 L160 22 L180 15 L200 30" fill="none" stroke="#00ff88" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+</svg>
+</div>
+<div class="mt-2 text-[8px] font-label text-primary-container/50 uppercase tracking-widest">REALTIME_LIQUIDITY_INDEX</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="fixed bottom-0 w-full bg-slate-950 border-t border-emerald-900/50 flex justify-between items-center px-6 py-1 z-50">
+<div class="font-label text-[10px] tracking-widest text-emerald-900 uppercase">
+            SYSTEM_STATUS: <span class="text-emerald-500">OPERATIONAL</span> | LATENCY: <span class="text-emerald-500">14MS</span> | NODE_SYNC: <span class="text-emerald-500">100%</span>
+</div>
+<div class="flex gap-6">
+<a class="font-label text-[10px] tracking-widest text-emerald-900 hover:text-emerald-200 uppercase transition-none" href="#">ENCRYPTION_KEYS</a>
+<a class="font-label text-[10px] tracking-widest text-emerald-900 hover:text-emerald-200 uppercase transition-none" href="#">REBOOT_CORE</a>
+<a class="font-label text-[10px] tracking-widest text-emerald-900 hover:text-emerald-200 uppercase transition-none underline" href="#">LOG_OUT</a>
+</div>
+</footer>
+<!-- Terminal Prompt Overlay (Decorative) -->
+<div class="fixed bottom-12 right-6 p-4 bg-surface-container border border-primary-container/30 font-label text-[10px] text-primary-container max-w-xs opacity-50 pointer-events-none">
+<div class="flex gap-2 mb-1">
+<span class="text-emerald-900">$</span>
+<span>snitch_cli --analyze --target=ALL</span>
+</div>
+<div class="flex gap-2">
+<span class="text-emerald-900">$</span>
+<span class="animate-pulse">_</span>
+</div>
+</div>
+</body></html>

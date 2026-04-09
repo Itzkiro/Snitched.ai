@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ORG_HIERARCHY // SNITCHED.AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary": "#003919",
+              "tertiary-container": "#ffd4d5",
+              "on-surface-variant": "#b9cbb9",
+              "tertiary-fixed-dim": "#ffb3b6",
+              "surface-container": "#1d2023",
+              "surface-tint": "#00e479",
+              "on-secondary": "#2e3134",
+              "on-surface": "#e1e2e7",
+              "inverse-primary": "#006d37",
+              "secondary": "#c5c6cb",
+              "inverse-surface": "#e1e2e7",
+              "secondary-fixed": "#e1e2e7",
+              "surface-container-low": "#191c1f",
+              "secondary-container": "#44474b",
+              "on-tertiary-fixed-variant": "#920028",
+              "on-error-container": "#ffdad6",
+              "error": "#ffb4ab",
+              "surface-bright": "#37393d",
+              "outline": "#849585",
+              "primary-fixed-dim": "#00e479",
+              "on-tertiary": "#68001a",
+              "surface-dim": "#111417",
+              "on-primary-container": "#007139",
+              "on-primary-fixed": "#00210c",
+              "surface": "#111417",
+              "on-secondary-fixed-variant": "#44474b",
+              "outline-variant": "#3b4b3d",
+              "on-tertiary-container": "#c50039",
+              "on-error": "#690005",
+              "surface-container-lowest": "#0c0e12",
+              "on-tertiary-fixed": "#40000c",
+              "surface-variant": "#323539",
+              "on-secondary-container": "#b3b5ba",
+              "surface-container-high": "#282a2e",
+              "error-container": "#93000a",
+              "inverse-on-surface": "#2e3134",
+              "tertiary-fixed": "#ffdada",
+              "background": "#111417",
+              "primary-fixed": "#60ff99",
+              "surface-container-highest": "#323539",
+              "on-secondary-fixed": "#191c1f",
+              "on-primary-fixed-variant": "#005228",
+              "on-background": "#e1e2e7",
+              "primary": "#f1ffef",
+              "secondary-fixed-dim": "#c5c6cb",
+              "primary-container": "#00ff88",
+              "tertiary": "#fffaf9"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["IBM Plex Mono"]
+            },
+            borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "0px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #05070a;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 255, 136, 0.03) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.01));
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .crt-glow {
+            text-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
+        }
+        .node-pill {
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+        }
+        .connector-vertical {
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, #00ff88 50%, transparent);
+            height: 40px;
+        }
+        .connector-horizontal {
+            height: 1px;
+            background: #00ff8833;
+        }
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 1.2em;
+            background: #00ff88;
+            margin-left: 4px;
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="font-body text-on-surface leading-tight selection:bg-primary-container selection:text-on-primary-container">
+<header class="fixed top-0 w-full z-50 bg-slate-950 border-b border-emerald-900/50 flex flex-col">
+<!-- Layer 1: Utility -->
+<div class="flex justify-between items-center px-4 py-2 bg-surface-container-lowest border-b border-outline-variant/30 h-10">
+<div class="flex items-center gap-4">
+<div class="group relative">
+<button class="flex items-center gap-2 text-primary-container font-label text-xs tracking-widest hover:text-white transition-none">
+<span class="material-symbols-outlined text-sm">menu</span>
+                    SYSTEM_CORE
+                </button>
+</div>
+<div class="h-4 w-px bg-outline-variant/30"></div>
+<div class="text-[10px] font-label text-outline uppercase tracking-tighter">NODE: DC_ENCLAVE_01</div>
+</div>
+<div class="font-label text-xs text-primary-container tracking-[0.2em] crt-glow">
+            2024-05-22 14:32:01 UTC
+        </div>
+<div class="flex items-center gap-4">
+<div class="relative flex items-center bg-surface-container px-2 border-b border-primary-container/50">
+<span class="font-label text-primary-container text-xs mr-2">&gt;_</span>
+<input class="bg-transparent border-none text-xs font-label text-primary-container placeholder:text-emerald-900 focus:ring-0 w-48 p-0 h-6" placeholder="GLOBAL_SEARCH" type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-lg hover:text-primary-container cursor-pointer transition-none">settings</span>
+<span class="material-symbols-outlined text-outline text-lg hover:text-primary-container cursor-pointer transition-none">terminal</span>
+</div>
+</div>
+</div>
+<!-- Layer 2: Navigation -->
+<nav class="flex w-full overflow-x-auto no-scrollbar bg-slate-950">
+<div class="flex divide-x divide-emerald-900/30 w-full">
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest border-r border-emerald-900/30 hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">DASHBOARD</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest border-r border-emerald-900/30 hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">SEATED_OFFICIALS</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest border-r border-emerald-900/30 hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">CANDIDATES</a>
+<a class="px-6 py-3 bg-emerald-400 text-slate-950 font-label font-bold text-xs tracking-widest shadow-[0_0_15px_rgba(0,255,136,0.5)]" href="#">HIERARCHY</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest border-r border-emerald-900/30 hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">JUICE_BOX</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest border-r border-emerald-900/30 hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">SOCIAL_INTEL</a>
+<a class="px-6 py-3 text-emerald-900 font-label text-xs tracking-widest hover:bg-emerald-900/20 hover:text-emerald-300 transition-none" href="#">DATABASE</a>
+</div>
+</nav>
+</header>
+<main class="pt-28 pb-20 px-6 min-h-screen">
+<!-- Breadcrumb / Header -->
+<header class="mb-12">
+<div class="flex items-center gap-2 mb-2">
+<span class="text-emerald-500 font-label text-xs">$</span>
+<h1 class="font-label text-lg text-primary-container tracking-tighter uppercase crt-glow">
+                INIT_HIERARCHY_VISUALIZER.SH --NODE=FEDERAL_ROOT
+                <span class="terminal-cursor"></span>
+</h1>
+</div>
+<div class="flex gap-4 font-label text-[10px] text-emerald-900 uppercase tracking-widest">
+<span>MAP_ID: X-7741</span>
+<span>ENCRYPTION: RSA-4096</span>
+<span>SYNC: 100%</span>
+</div>
+</header>
+<div class="max-w-6xl mx-auto flex flex-col items-center">
+<!-- ROOT NODE -->
+<div class="relative mb-12 flex flex-col items-center">
+<div class="bg-surface-container-high border-2 border-primary-container p-1 node-pill shadow-[0_0_20px_rgba(0,255,136,0.2)]">
+<div class="bg-black/80 px-12 py-4 flex flex-col items-center text-center">
+<span class="font-label text-[10px] text-primary-container/60 mb-1">01_ROOT_AUTHORITY</span>
+<h2 class="font-headline text-2xl font-black text-white tracking-tighter uppercase mb-2">Executive Branch</h2>
+<div class="flex items-center gap-3">
+<div class="h-px w-8 bg-primary-container/20"></div>
+<span class="font-label text-lg font-black text-primary-container">84.2</span>
+<div class="h-px w-8 bg-primary-container/20"></div>
+</div>
+</div>
+</div>
+<div class="connector-vertical"></div>
+<div class="w-[80vw] max-w-5xl h-px bg-primary-container/20"></div>
+</div>
+<!-- LEVEL 2: STATES -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 w-full">
+<!-- FLORIDA -->
+<div class="flex flex-col items-center">
+<div class="connector-vertical !h-8"></div>
+<div class="w-full bg-surface-container border border-error/50 p-1 node-pill hover:border-primary-container transition-all group">
+<div class="bg-black/60 p-4">
+<div class="flex justify-between items-start mb-3">
+<span class="font-label text-[8px] text-error px-1 border border-error/30">STATE_HIGH_RISK</span>
+<span class="font-label text-[8px] text-emerald-900">ID: FL-01</span>
+</div>
+<h3 class="font-label font-bold text-white text-sm mb-1 uppercase tracking-tighter">FLORIDA_ADMIN</h3>
+<div class="flex justify-between items-center mt-4">
+<div class="font-label text-[10px] text-emerald-700">VOL_ID: 992-X</div>
+<div class="font-label text-xl font-black text-error">72.4</div>
+</div>
+</div>
+</div>
+<div class="connector-vertical !h-12"></div>
+<!-- LEVEL 3: COUNTIES -->
+<div class="w-full space-y-4">
+<div class="bg-surface-container-lowest border-l-4 border-error p-3 flex justify-between items-center group cursor-pointer hover:bg-emerald-900/10">
+<div>
+<div class="font-label text-[8px] text-emerald-900 uppercase">SUB_NODE_A</div>
+<div class="font-label text-[10px] text-white">MIAMI_DADE</div>
+</div>
+<span class="font-label text-sm font-bold text-error">88.0</span>
+</div>
+<div class="bg-surface-container-lowest border-l-4 border-tertiary-container p-3 flex justify-between items-center group cursor-pointer hover:bg-emerald-900/10">
+<div>
+<div class="font-label text-[8px] text-emerald-900 uppercase">SUB_NODE_B</div>
+<div class="font-label text-[10px] text-white">ORANGE_COUNTY</div>
+</div>
+<span class="font-label text-sm font-bold text-tertiary-container">45.2</span>
+</div>
+</div>
+</div>
+<!-- TEXAS -->
+<div class="flex flex-col items-center">
+<div class="connector-vertical !h-8"></div>
+<div class="w-full bg-surface-container border border-primary-container/30 p-1 node-pill hover:border-primary-container transition-all group">
+<div class="bg-black/60 p-4">
+<div class="flex justify-between items-start mb-3">
+<span class="font-label text-[8px] text-primary-container px-1 border border-primary-container/30">STATE_NOMINAL</span>
+<span class="font-label text-[8px] text-emerald-900">ID: TX-01</span>
+</div>
+<h3 class="font-label font-bold text-white text-sm mb-1 uppercase tracking-tighter">TEXAS_GOV_CORP</h3>
+<div class="flex justify-between items-center mt-4">
+<div class="font-label text-[10px] text-emerald-700">VOL_ID: 104-Y</div>
+<div class="font-label text-xl font-black text-primary-container">58.9</div>
+</div>
+</div>
+</div>
+<div class="connector-vertical !h-12"></div>
+<!-- LEVEL 3: COUNTIES -->
+<div class="w-full space-y-4">
+<div class="bg-surface-container-lowest border-l-4 border-error/50 p-3 flex justify-between items-center group cursor-pointer hover:bg-emerald-900/10">
+<div>
+<div class="font-label text-[8px] text-emerald-900 uppercase">SUB_NODE_A</div>
+<div class="font-label text-[10px] text-white">HARRIS_COUNTY</div>
+</div>
+<span class="font-label text-sm font-bold text-error">64.1</span>
+</div>
+<div class="bg-surface-container-lowest border-l-4 border-primary-container p-3 flex justify-between items-center group cursor-pointer hover:bg-emerald-900/10">
+<div>
+<div class="font-label text-[8px] text-emerald-900 uppercase">SUB_NODE_B</div>
+<div class="font-label text-[10px] text-white">TRAVIS_COUNTY</div>
+</div>
+<span class="font-label text-sm font-bold text-primary-container">22.8</span>
+</div>
+</div>
+</div>
+<!-- CALIFORNIA -->
+<div class="flex flex-col items-center">
+<div class="connector-vertical !h-8"></div>
+<div class="w-full bg-surface-container border border-primary-container/30 p-1 node-pill hover:border-primary-container transition-all group">
+<div class="bg-black/60 p-4">
+<div class="flex justify-between items-start mb-3">
+<span class="font-label text-[8px] text-primary-container px-1 border border-primary-container/30">STATE_STABLE</span>
+<span class="font-label text-[8px] text-emerald-900">ID: CA-01</span>
+</div>
+<h3 class="font-label font-bold text-white text-sm mb-1 uppercase tracking-tighter">CALIFORNIA_EXEC</h3>
+<div class="flex justify-between items-center mt-4">
+<div class="font-label text-[10px] text-emerald-700">VOL_ID: 881-A</div>
+<div class="font-label text-xl font-black text-primary-container">14.2</div>
+</div>
+</div>
+</div>
+<div class="connector-vertical !h-12"></div>
+<!-- LEVEL 3: COUNTIES -->
+<div class="w-full space-y-4">
+<div class="bg-surface-container-lowest border-l-4 border-primary-container p-3 flex justify-between items-center group cursor-pointer hover:bg-emerald-900/10">
+<div>
+<div class="font-label text-[8px] text-emerald-900 uppercase">SUB_NODE_A</div>
+<div class="font-label text-[10px] text-white">ALAMEDA_COUNTY</div>
+</div>
+<span class="font-label text-sm font-bold text-primary-container">11.4</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right-side Intelligence Overlay (Floating) -->
+<div class="fixed right-6 top-32 w-72 bg-slate-950/80 border border-emerald-900/50 backdrop-blur-md p-6 hidden xl:block shadow-2xl">
+<div class="flex items-center gap-2 mb-6 border-b border-emerald-900/30 pb-2">
+<span class="material-symbols-outlined text-xs text-primary-container">analytics</span>
+<span class="font-label text-[10px] font-bold text-primary-container tracking-widest">LIVE_TELEMETRY</span>
+</div>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between mb-1">
+<span class="font-label text-[9px] text-emerald-900">NETWORK_LOAD</span>
+<span class="font-label text-[9px] text-primary-container">44%</span>
+</div>
+<div class="h-1 bg-emerald-900/30">
+<div class="h-full bg-primary-container w-[44%] shadow-[0_0_10px_#00ff88]"></div>
+</div>
+</div>
+<div class="font-label text-[10px] leading-relaxed text-emerald-600">
+<span class="text-white">&gt; INFO:</span> CORRUPTION_METRIC_AGGREGATION_ACTIVE.<br/>
+<span class="text-white">&gt; INFO:</span> CROSS-REFERENCING_FEC_REPORTS...<br/>
+<span class="text-white">&gt; INFO:</span> <span class="text-primary-container">READY.</span>
+</div>
+<button class="w-full bg-primary-container text-slate-950 font-label font-bold text-[10px] py-3 uppercase tracking-widest hover:bg-white transition-colors">
+                DOWNLOAD_REPORT.PDF
+            </button>
+</div>
+</div>
+</main>
+<footer class="fixed bottom-0 w-full bg-slate-950 border-t border-emerald-900/50 flex justify-between items-center px-6 py-1 z-50">
+<div class="font-label text-[10px] tracking-widest text-emerald-900 uppercase">
+        SYSTEM_STATUS: <span class="text-emerald-500">OPERATIONAL</span> | LATENCY: <span class="text-emerald-500">14MS</span> | NODE_SYNC: <span class="text-emerald-500">100%</span>
+</div>
+<div class="flex gap-6">
+<a class="font-label text-[10px] tracking-widest text-emerald-900 hover:text-emerald-200 uppercase transition-none" href="#">ENCRYPTION_KEYS</a>
+<a class="font-label text-[10px] tracking-widest text-emerald-900 hover:text-emerald-200 uppercase transition-none" href="#">REBOOT_CORE</a>
+<a class="font-label text-[10px] tracking-widest text-emerald-900 hover:text-emerald-200 uppercase transition-none underline" href="#">LOG_OUT</a>
+</div>
+</footer>
+<div class="fixed bottom-12 right-6 p-4 bg-surface-container border border-primary-container/30 font-label text-[10px] text-primary-container max-w-xs opacity-50 pointer-events-none">
+<div class="flex gap-2 mb-1">
+<span class="text-emerald-900">$</span>
+<span>snitch_cli --analyze --target=HIERARCHY</span>
+</div>
+<div class="flex gap-2">
+<span class="text-emerald-900">$</span>
+<span class="animate-pulse">_</span>
+</div>
+</div>
+</body></html>
