@@ -404,12 +404,8 @@ function scoreTransparency(p: Politician): CorruptionFactor {
     .filter(Boolean).length;
   transparencyPoints += Math.min(20, idCount * 4);
 
-  // Social media presence (0-20 points)
-  maxPoints += 20;
-  const social = p.socialMedia ?? {};
-  const socialCount = [social.twitterHandle, social.facebookPageUrl || social.facebookPageId, social.instagramHandle, social.youtubeChannelId]
-    .filter(Boolean).length;
-  transparencyPoints += Math.min(20, socialCount * 5);
+  // Social media — NOT a corruption factor, excluded from scoring
+  // Having or not having social accounts doesn't indicate corruption
 
   // Campaign finance data quality (0-30 points)
   maxPoints += 30;
@@ -428,7 +424,7 @@ function scoreTransparency(p: Politician): CorruptionFactor {
   const transparencyRatio = maxPoints > 0 ? transparencyPoints / maxPoints : 0.5;
   const rawScore = Math.round((1 - transparencyRatio) * 100);
 
-  const hasAnyData = idCount > 0 || contributions.length > 0 || socialCount > 0 || totalRaised > 0 || hasDonors;
+  const hasAnyData = idCount > 0 || contributions.length > 0 || totalRaised > 0 || hasDonors;
 
   return {
     key: 'transparency',
@@ -437,7 +433,7 @@ function scoreTransparency(p: Politician): CorruptionFactor {
     weight: WEIGHTS.transparency,
     weightedScore: Math.round(rawScore * WEIGHTS.transparency * 10) / 10,
     dataAvailable: hasAnyData,
-    explanation: `${transparencyPoints}/${maxPoints} transparency points. ${idCount} public IDs, ${socialCount} social accounts, ${contributions.length > 0 ? `${contributions.length} itemized records` : hasDonors ? 'top donor data available' : 'no itemized records'}.`,
+    explanation: `${transparencyPoints}/${maxPoints} transparency points. ${idCount} public IDs, ${contributions.length > 0 ? `${contributions.length} itemized records` : hasDonors ? 'top donor data available' : 'no itemized records'}.`,
   };
 }
 
