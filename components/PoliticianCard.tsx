@@ -252,6 +252,27 @@ export default function PoliticianCard({ politician }: Props) {
           </div>
         )}
 
+        {/* Israel Lobby indicator */}
+        {(politician.israelLobbyTotal ?? 0) > 0 && (
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '0.5rem 0.75rem',
+            background: 'rgba(239, 68, 68, 0.05)',
+            border: '1px solid rgba(239, 68, 68, 0.2)',
+            marginBottom: '0.75rem',
+            fontSize: '0.7rem',
+          }}>
+            <span style={{ color: 'var(--terminal-red)' }}>🇮🇱 ISRAEL LOBBY</span>
+            <span style={{ fontWeight: 700, color: 'var(--terminal-red)', fontFamily: 'Bebas Neue, sans-serif', fontSize: '0.9rem' }}>
+              {(politician.israelLobbyTotal ?? 0) >= 1_000_000
+                ? `$${((politician.israelLobbyTotal ?? 0) / 1_000_000).toFixed(1)}M`
+                : `$${((politician.israelLobbyTotal ?? 0) / 1_000).toFixed(0)}K`}
+            </span>
+          </div>
+        )}
+
         {/* Footer */}
         <div
           style={{
