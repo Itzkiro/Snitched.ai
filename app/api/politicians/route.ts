@@ -27,7 +27,7 @@ export async function GET() {
     // bio, social_media, source_ids which bloat the response beyond Vercel limits
     const { data, error } = await client
       .from('politicians')
-      .select('bioguide_id, name, office, office_level, party, district, jurisdiction, jurisdiction_type, photo_url, corruption_score, aipac_funding, juice_box_tier, total_funds, top5_donors, israel_lobby_total, contribution_breakdown, is_active, years_in_office, term_start, term_end, data_source, updated_at, created_at')
+      .select('bioguide_id, name, office, office_level, party, district, jurisdiction, jurisdiction_type, photo_url, corruption_score, aipac_funding, juice_box_tier, total_funds, israel_lobby_total, is_active, years_in_office, data_source, updated_at, created_at')
       .order('name');
 
     if (error) {
@@ -44,46 +44,38 @@ export async function GET() {
     }
 
     // Map Supabase rows to Politician type
-    const politicians: Politician[] = data.map((row: Record<string, unknown>) => {
-      const top5 = (row.top5_donors as Politician['top5Donors']) || [];
-      return {
-        id: row.bioguide_id as string,
-        name: row.name as string,
-        office: row.office as string,
-        officeLevel: row.office_level as Politician['officeLevel'],
-        party: row.party as Politician['party'],
-        district: row.district as string | undefined,
-        jurisdiction: row.jurisdiction as string,
-        jurisdictionType: row.jurisdiction_type as Politician['jurisdictionType'],
-        photoUrl: row.photo_url as string | undefined,
-        corruptionScore: Number(row.corruption_score) || 0,
-        aipacFunding: Number(row.aipac_funding) || 0,
-        juiceBoxTier: row.juice_box_tier as Politician['juiceBoxTier'],
-        totalFundsRaised: Number(row.total_funds) || 0,
-        top3Donors: top5.slice(0, 3),
-        top5Donors: top5,
-        topDonor: top5[0]
-          ? { name: top5[0].name, amount: top5[0].amount }
-          : undefined,
-        israelLobbyTotal: Number(row.israel_lobby_total) || 0,
-        contributionBreakdown: row.contribution_breakdown as Politician['contributionBreakdown'],
-        isActive: row.is_active as boolean,
-        yearsInOffice: Number(row.years_in_office) || 0,
-        tags: [],
-        termStart: row.term_start as string,
-        termEnd: row.term_end as string | undefined,
-        socialMedia: {},
-        source_ids: {},
-        lobbyingRecords: [],
-        contributions: [],
-        courtCases: [],
-        votes: [],
-        socialPosts: [],
-        dataStatus: 'live' as const,
-        dataSource: (row.data_source as string) || 'supabase',
-        lastUpdated: (row.updated_at as string) || (row.created_at as string),
-      };
-    });
+    // Lightweight mapping for list view — no donors, no breakdown, no heavy fields
+    const politicians: Politician[] = data.map((row: Record<string, unknown>) => ({
+      id: row.bioguide_id as string,
+      name: row.name as string,
+      office: row.office as string,
+      officeLevel: row.office_level as Politician['officeLevel'],
+      party: row.party as Politician['party'],
+      district: row.district as string | undefined,
+      jurisdiction: row.jurisdiction as string,
+      jurisdictionType: row.jurisdiction_type as Politician['jurisdictionType'],
+      photoUrl: row.photo_url as string | undefined,
+      corruptionScore: Number(row.corruption_score) || 0,
+      aipacFunding: Number(row.aipac_funding) || 0,
+      juiceBoxTier: row.juice_box_tier as Politician['juiceBoxTier'],
+      totalFundsRaised: Number(row.total_funds) || 0,
+      top3Donors: [],
+      top5Donors: [],
+      israelLobbyTotal: Number(row.israel_lobby_total) || 0,
+      isActive: row.is_active as boolean,
+      yearsInOffice: Number(row.years_in_office) || 0,
+      tags: [],
+      socialMedia: {},
+      source_ids: {},
+      lobbyingRecords: [],
+      contributions: [],
+      courtCases: [],
+      votes: [],
+      socialPosts: [],
+      dataStatus: 'live' as const,
+      dataSource: (row.data_source as string) || 'supabase',
+      lastUpdated: (row.updated_at as string) || (row.created_at as string),
+    }));
 
     return cachedResponse(politicians);
   } catch (error) {
