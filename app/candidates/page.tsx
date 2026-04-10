@@ -24,7 +24,12 @@ async function getPoliticians(): Promise<Politician[]> {
     .select('*')
     .order('name');
 
-  if (error || !data || data.length === 0) {
+  if (error) {
+    console.error('Candidates query error:', error.message);
+    return [];
+  }
+  if (!data || data.length === 0) {
+    console.error('Candidates query returned no data');
     return [];
   }
 
