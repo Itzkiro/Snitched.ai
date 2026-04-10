@@ -55,7 +55,16 @@ from pathlib import Path
 from email.utils import parsedate_to_datetime
 from urllib.parse import quote_plus, urljoin, urlparse
 
+import socket
+socket.setdefaulttimeout(15)  # Global 15s timeout to prevent infinite hangs
+
 import requests
+
+# Configure requests session with strict timeouts
+SESSION = requests.Session()
+SESSION.headers.update({
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+})
 
 # ---------------------------------------------------------------------------
 # Optional: BeautifulSoup (for press release page scraping)
@@ -139,22 +148,7 @@ SUPABASE_HEADERS = {
     "Prefer": "return=representation",
 }
 
-# ---------------------------------------------------------------------------
-# HTTP session with retries and polite headers
-# ---------------------------------------------------------------------------
-
-SESSION = requests.Session()
-SESSION.headers.update(
-    {
-        "User-Agent": (
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/122.0.0.0 Safari/537.36"
-        ),
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.5",
-    }
-)
+# HTTP session defined above (near imports) with global socket timeout
 
 
 def fetch_url(url: str, timeout: int = 20, retries: int = 2) -> Optional[requests.Response]:
