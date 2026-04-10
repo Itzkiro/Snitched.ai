@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServiceRoleSupabase } from '@/lib/supabase-server';
 import { searchCourtRecords } from '@/lib/courtlistener-client';
+import { deepResearch } from '@/lib/research-agent';
 
 /**
  * POST /api/admin
@@ -226,13 +227,22 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ politicians });
     }
 
-    // --- Run research on a politician ---
+    // --- Run deep research on a politician ---
     case 'research': {
+      if (!supabase) return NextResponse.json({ error: 'No DB' }, { status: 500 });
       const { bioguideId } = body;
       if (!bioguideId) return NextResponse.json({ error: 'bioguideId required' }, { status: 400 });
 
       try {
-        const result = await researchPolitician(bioguideId);
+        // Load full politician record
+        const { data: pol, error: polErr } = await supabase
+          .from('politicians')
+          .select('*')
+          .eq('bioguide_id', bioguideId)
+          .single();
+        if (polErr || !pol) return NextResponse.json({ error: `Not found: ${polErr?.message || bioguideId}` }, { status: 404 });
+
+        const result = await deepResearch(pol, supabase);
         return NextResponse.json({ success: true, result });
       } catch (e) {
         return NextResponse.json({ error: e instanceof Error ? e.message : String(e) }, { status: 500 });

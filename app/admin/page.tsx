@@ -20,17 +20,40 @@ interface PoliticianRow {
 }
 
 interface ResearchResult {
-  politician: Record<string, unknown>;
+  politician: { name: string; office: string; party: string; bioguideId: string };
   financials: {
     fecId: string | null;
     totalFunds: number;
     top5Donors: Array<{ name: string; amount: number; type: string }>;
-    contributionBreakdown: Record<string, number> | null;
+    contributionBreakdown: { aipac: number; otherPACs: number; individuals: number; corporate: number } | null;
+    grassrootsRatio: number;
+    foreignInfluenceFlag: boolean;
   };
   courtRecords: Array<Record<string, unknown>>;
-  votingRecords: Array<Record<string, unknown>>;
-  socialPosts: Array<Record<string, unknown>>;
+  lobbying: {
+    totalFilings: number;
+    totalIncome: number;
+    topFirms: Array<{ name: string; income: number; clients: number }>;
+    revolvingDoorCount: number;
+  };
+  webIntel: {
+    newsArticles: Array<{ title: string; url: string; publishedDate?: string }>;
+    scandalFlags: string[];
+    keyFindings: string[];
+  };
+  socialMedia: {
+    postCount: number;
+    platforms: string[];
+    handles: Record<string, string>;
+  };
+  votingRecord: {
+    totalVotes: number;
+    yeaCount: number;
+    nayCount: number;
+    absentCount: number;
+  };
   log: string[];
+  timestamp: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -109,14 +132,13 @@ export default function AdminPage() {
     setStatus('Pushing to live database...');
     try {
       const updates: Record<string, unknown> = {};
-      if (research.financials.totalFunds > 0) updates.total_funds = research.financials.totalFunds;
-      if (research.financials.top5Donors.length > 0) updates.top5_donors = research.financials.top5Donors;
-      if (research.financials.contributionBreakdown) updates.contribution_breakdown = research.financials.contributionBreakdown;
-      if (research.financials.fecId) {
-        const existing = (research.politician.source_ids || {}) as Record<string, unknown>;
-        updates.source_ids = { ...existing, fec_candidate_id: research.financials.fecId };
+      if (research.financials?.totalFunds > 0) updates.total_funds = research.financials.totalFunds;
+      if (research.financials?.top5Donors?.length > 0) updates.top5_donors = research.financials.top5Donors;
+      if (research.financials?.contributionBreakdown) updates.contribution_breakdown = research.financials.contributionBreakdown;
+      if (research.financials?.fecId) {
+        updates.source_ids = { fec_candidate_id: research.financials.fecId };
       }
-      if (research.courtRecords.length > 0) updates.court_records = research.courtRecords;
+      if (research.courtRecords?.length > 0) updates.court_records = research.courtRecords;
 
       await api('push-to-db', { bioguideId: selected.bioguide_id, updates });
       setStatus(`Pushed to DB for ${selected.name}`);
@@ -382,25 +404,47 @@ export default function AdminPage() {
               {/* Research Results */}
               {research && (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                  {/* Scandal Flags */}
+                  {research.webIntel?.scandalFlags?.length > 0 && (
+                    <div className="terminal-card" style={{ padding: '1rem', gridColumn: '1 / -1', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid #ef4444' }}>
+                      <h3 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ef4444', marginBottom: '0.5rem' }}>🚨 SCANDAL FLAGS</h3>
+                      {research.webIntel.scandalFlags.map((f: string, i: number) => (
+                        <div key={i} style={{ fontSize: '0.7rem', color: '#ef4444', padding: '0.2rem 0' }}>{f}</div>
+                      ))}
+                    </div>
+                  )}
+
                   {/* Pillar 1: Financials */}
                   <div className="terminal-card" style={{ padding: '1rem' }}>
                     <h3 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f97583', marginBottom: '0.75rem' }}>💰 FINANCIALS</h3>
                     <div style={{ fontSize: '0.75rem' }}>
-                      <div>FEC ID: <span style={{ color: 'var(--terminal-text-dim)' }}>{research.financials.fecId || 'Not found'}</span></div>
+                      <div>FEC ID: <span style={{ color: 'var(--terminal-text-dim)' }}>{research.financials?.fecId || 'Not found'}</span></div>
                       <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#f97583', margin: '0.5rem 0' }}>
-                        {fmt(research.financials.totalFunds)}
+                        {fmt(research.financials?.totalFunds || 0)}
                       </div>
-                      {research.financials.contributionBreakdown && (
+                      {research.financials?.grassrootsRatio != null && (
+                        <div style={{ fontSize: '0.7rem', marginBottom: '0.5rem' }}>
+                          Grassroots ratio: <span style={{ fontWeight: 700, color: research.financials.grassrootsRatio > 50 ? '#10b981' : '#f59e0b' }}>
+                            {research.financials.grassrootsRatio}%
+                          </span>
+                        </div>
+                      )}
+                      {research.financials?.foreignInfluenceFlag && (
+                        <div style={{ fontSize: '0.7rem', color: '#ef4444', fontWeight: 700, marginBottom: '0.5rem' }}>
+                          ⚠️ FOREIGN INFLUENCE DETECTED
+                        </div>
+                      )}
+                      {research.financials?.contributionBreakdown && (
                         <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)' }}>
                           Individuals: {fmt(research.financials.contributionBreakdown.individuals || 0)} |
                           PACs: {fmt(research.financials.contributionBreakdown.otherPACs || 0)} |
                           Corporate: {fmt(research.financials.contributionBreakdown.corporate || 0)}
                         </div>
                       )}
-                      {research.financials.top5Donors.length > 0 && (
+                      {research.financials?.top5Donors?.length > 0 && (
                         <div style={{ marginTop: '0.75rem' }}>
                           <div style={{ fontSize: '0.7rem', fontWeight: 700, marginBottom: '0.25rem' }}>TOP DONORS</div>
-                          {research.financials.top5Donors.map((d, i) => (
+                          {research.financials.top5Donors.map((d: { name: string; amount: number }, i: number) => (
                             <div key={i} style={{ fontSize: '0.7rem', display: 'flex', justifyContent: 'space-between', padding: '0.15rem 0', borderBottom: '1px solid var(--terminal-border)' }}>
                               <span>{d.name}</span>
                               <span style={{ color: '#f97583', fontWeight: 600 }}>{fmt(d.amount)}</span>
@@ -415,17 +459,17 @@ export default function AdminPage() {
                   <div className="terminal-card" style={{ padding: '1rem' }}>
                     <h3 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#b392f0', marginBottom: '0.75rem' }}>⚖️ COURT RECORDS</h3>
                     <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#b392f0', marginBottom: '0.5rem' }}>
-                      {research.courtRecords.length} records
+                      {research.courtRecords?.length || 0} records
                     </div>
                     <div style={{ maxHeight: '200px', overflow: 'auto' }}>
-                      {research.courtRecords.length === 0 ? (
+                      {!research.courtRecords?.length ? (
                         <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)' }}>No court records found</div>
                       ) : (
-                        research.courtRecords.map((c, i) => (
+                        research.courtRecords.map((c: Record<string, unknown>, i: number) => (
                           <div key={i} style={{ fontSize: '0.7rem', padding: '0.3rem 0', borderBottom: '1px solid var(--terminal-border)' }}>
-                            <div style={{ fontWeight: 600 }}>{String(c.case_name || 'Untitled').slice(0, 60)}</div>
+                            <div style={{ fontWeight: 600 }}>{String(c.caseName || c.case_name || 'Untitled').slice(0, 60)}</div>
                             <div style={{ color: 'var(--terminal-text-dim)' }}>
-                              {String(c.court)} | {String(c.docket_number)} | {String(c.date_filed || 'No date')}
+                              {String(c.court || '')} | {String(c.docketNumber || c.docket_number || '')} | {String(c.dateFiled || c.date_filed || 'No date')}
                             </div>
                           </div>
                         ))
@@ -433,35 +477,72 @@ export default function AdminPage() {
                     </div>
                   </div>
 
-                  {/* Pillar 3: Voting Records */}
+                  {/* Pillar 3: Lobbying */}
                   <div className="terminal-card" style={{ padding: '1rem' }}>
-                    <h3 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#7ee787', marginBottom: '0.75rem' }}>🗳️ VOTING RECORDS</h3>
-                    <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#7ee787', marginBottom: '0.5rem' }}>
-                      {research.votingRecords.length} records
+                    <h3 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#e3b341', marginBottom: '0.75rem' }}>🏛️ LOBBYING</h3>
+                    <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#e3b341', marginBottom: '0.5rem' }}>
+                      {research.lobbying?.totalFilings || 0} filings
                     </div>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)' }}>
-                      {research.votingRecords.length === 0
-                        ? 'No voting records — synced via Congress/LegiScan crons'
-                        : `${research.votingRecords.length} votes on file`}
+                    {research.lobbying?.revolvingDoorCount > 0 && (
+                      <div style={{ fontSize: '0.7rem', color: '#f59e0b', fontWeight: 700, marginBottom: '0.5rem' }}>
+                        🔄 {research.lobbying.revolvingDoorCount} revolving door connections
+                      </div>
+                    )}
+                    <div style={{ maxHeight: '150px', overflow: 'auto' }}>
+                      {(research.lobbying?.topFirms || []).map((f: { name: string; income: number; clients: number }, i: number) => (
+                        <div key={i} style={{ fontSize: '0.7rem', display: 'flex', justifyContent: 'space-between', padding: '0.15rem 0', borderBottom: '1px solid var(--terminal-border)' }}>
+                          <span>{f.name} ({f.clients} clients)</span>
+                          <span style={{ color: '#e3b341', fontWeight: 600 }}>{fmt(f.income)}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
-                  {/* Pillar 4: Social Media */}
+                  {/* Pillar 4: Voting Records */}
+                  <div className="terminal-card" style={{ padding: '1rem' }}>
+                    <h3 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#7ee787', marginBottom: '0.75rem' }}>🗳️ VOTING RECORDS</h3>
+                    <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#7ee787', marginBottom: '0.5rem' }}>
+                      {research.votingRecord?.totalVotes || 0} votes
+                    </div>
+                    {research.votingRecord?.totalVotes > 0 && (
+                      <div style={{ fontSize: '0.7rem', display: 'flex', gap: '1rem' }}>
+                        <span style={{ color: '#56d364' }}>Yea: {research.votingRecord.yeaCount}</span>
+                        <span style={{ color: '#f97583' }}>Nay: {research.votingRecord.nayCount}</span>
+                        <span style={{ color: '#8b949e' }}>Absent: {research.votingRecord.absentCount}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Pillar 5: Social Media */}
                   <div className="terminal-card" style={{ padding: '1rem' }}>
                     <h3 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffa657', marginBottom: '0.75rem' }}>📱 SOCIAL MEDIA</h3>
                     <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#ffa657', marginBottom: '0.5rem' }}>
-                      {research.socialPosts.length} posts
+                      {research.socialMedia?.postCount || 0} posts
+                    </div>
+                    {Object.entries(research.socialMedia?.handles || {}).map(([platform, handle]) => (
+                      <div key={platform} style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)' }}>
+                        {platform}: <span style={{ color: '#ffa657' }}>{String(handle)}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Pillar 6: Web Intelligence */}
+                  <div className="terminal-card" style={{ padding: '1rem' }}>
+                    <h3 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#79c0ff', marginBottom: '0.75rem' }}>🌐 WEB INTEL</h3>
+                    <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#79c0ff', marginBottom: '0.5rem' }}>
+                      {research.webIntel?.newsArticles?.length || 0} articles
                     </div>
                     <div style={{ maxHeight: '200px', overflow: 'auto' }}>
-                      {research.socialPosts.length === 0 ? (
-                        <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)' }}>No social posts — synced via social media cron</div>
-                      ) : (
-                        research.socialPosts.slice(0, 5).map((p, i) => (
-                          <div key={i} style={{ fontSize: '0.7rem', padding: '0.3rem 0', borderBottom: '1px solid var(--terminal-border)' }}>
-                            <div style={{ color: 'var(--terminal-text-dim)' }}>{String(p.platform)} • {String(p.posted_at || '').split('T')[0]}</div>
-                            <div>{String(p.content || '').slice(0, 100)}</div>
-                          </div>
-                        ))
+                      {(research.webIntel?.newsArticles || []).slice(0, 8).map((a: { title: string; url: string; publishedDate?: string }, i: number) => (
+                        <div key={i} style={{ fontSize: '0.7rem', padding: '0.3rem 0', borderBottom: '1px solid var(--terminal-border)' }}>
+                          <a href={a.url} target="_blank" rel="noopener noreferrer" style={{ color: '#79c0ff', textDecoration: 'none' }}>
+                            {a.title || a.url}
+                          </a>
+                          {a.publishedDate && <span style={{ color: 'var(--terminal-text-dim)', marginLeft: '0.5rem' }}>{a.publishedDate.split('T')[0]}</span>}
+                        </div>
+                      ))}
+                      {!research.webIntel?.newsArticles?.length && (
+                        <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)' }}>Add EXA_API_KEY to enable web intelligence</div>
                       )}
                     </div>
                   </div>
