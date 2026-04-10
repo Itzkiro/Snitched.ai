@@ -5,23 +5,24 @@ export const metadata: Metadata = {
   title: 'Candidates',
   description: 'Track Florida political candidates, their campaign filings, and election timelines. Real-time data from FL Division of Elections.',
 };
-import { getServerSupabase } from '@/lib/supabase-server';
+import { getServiceRoleSupabase, getServerSupabase } from '@/lib/supabase-server';
 import type { Politician } from '@/lib/types';
 
 // Force dynamic rendering — candidate data changes frequently
 export const dynamic = 'force-dynamic';
 
 async function getPoliticians(): Promise<Politician[]> {
-  const client = getServerSupabase();
+  const client = getServiceRoleSupabase() || getServerSupabase();
   if (!client) {
     const { getAllPoliticians } = await import('@/lib/real-data');
     return getAllPoliticians();
   }
 
-  // Use select('*') to bypass PostgREST schema cache issue with new columns
+  // Select only needed columns (not *) to avoid response size truncation
   const { data, error } = await client
     .from('politicians')
-    .select('*')
+    .select('bioguide_id, name, office, office_level, party, district, jurisdiction, jurisdiction_type, corruption_score, aipac_funding, is_active, is_candidate, running_for, term_start, term_end, total_funds')
+    .eq('is_candidate', true)
     .order('name');
 
   if (error) {
@@ -29,15 +30,10 @@ async function getPoliticians(): Promise<Politician[]> {
     return [];
   }
   if (!data || data.length === 0) {
-    console.error('Candidates query returned no data');
     return [];
   }
 
-  // Filter candidates in JS since PostgREST may not know about is_candidate column
-  const candidates = data.filter((row: Record<string, unknown>) => row.is_candidate === true);
-  if (candidates.length === 0) return [];
-
-  return candidates.map((row: Record<string, unknown>) => ({
+  return data.map((row: Record<string, unknown>) => ({
     id: row.bioguide_id as string,
     name: row.name as string,
     office: row.office as string,
