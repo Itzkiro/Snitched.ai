@@ -271,9 +271,8 @@ export async function POST(request: NextRequest) {
       if (!supabase) return NextResponse.json({ error: 'No DB' }, { status: 500 });
       const { bioguideId: exportId, format } = body;
 
-      let query = supabase.from('politicians').select('*');
-      if (exportId) query = query.eq('bioguide_id', exportId);
-      else query = query.eq('is_candidate', true);
+      const query = supabase.from('politicians').select('*');
+      if (exportId) query.eq('bioguide_id', exportId);
 
       const { data: exportData } = await query.order('name');
       if (!exportData) return NextResponse.json({ error: 'No data' }, { status: 404 });

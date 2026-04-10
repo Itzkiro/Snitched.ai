@@ -97,9 +97,13 @@ export async function searchDocketsByName(
   const records: CourtRecord[] = [];
 
   try {
-    // Search dockets by case name (party name appears in case names)
+    // Extract last name for post-filtering
+    const nameParts = name.trim().split(/\s+/);
+    const lastName = nameParts[nameParts.length - 1].toLowerCase();
+
+    // Use exact phrase search to reduce false positives
     const params = new URLSearchParams({
-      q: name,
+      q: `"${name}"`,
       type: 'r', // RECAP/docket search
       order_by: 'score desc',
     });
@@ -120,10 +124,14 @@ export async function searchDocketsByName(
     const data = await res.json();
     const results = data.results || [];
 
-    for (const r of results.slice(0, maxResults)) {
+    for (const r of results.slice(0, maxResults * 2)) {
+      const caseName = r.caseName || r.case_name || '';
+      // Filter: last name must appear in case name to avoid false positives
+      if (!caseName.toLowerCase().includes(lastName)) continue;
+
       records.push({
         id: `cl-${r.docket_id || r.id}`,
-        caseName: r.caseName || r.case_name || '',
+        caseName,
         caseNameShort: r.caseNameShort || r.case_name_short || '',
         court: r.court || '',
         courtId: r.court_id || '',
@@ -138,6 +146,7 @@ export async function searchDocketsByName(
           : `https://www.courtlistener.com/docket/${r.docket_id || r.id}/`,
         source: 'courtlistener',
       });
+      if (records.length >= maxResults) break;
     }
   } catch (err) {
     if (err instanceof Error && err.message.includes('Rate limited')) throw err;
@@ -156,6 +165,8 @@ export async function searchOpinionsByName(
 ): Promise<CourtRecord[]> {
   const { maxResults = 10 } = options;
   const records: CourtRecord[] = [];
+  const nameParts = name.trim().split(/\s+/);
+  const lastName = nameParts[nameParts.length - 1].toLowerCase();
 
   try {
     const params = new URLSearchParams({
@@ -176,10 +187,13 @@ export async function searchOpinionsByName(
     const data = await res.json();
     const results = data.results || [];
 
-    for (const r of results.slice(0, maxResults)) {
+    for (const r of results.slice(0, maxResults * 2)) {
+      const caseName = r.caseName || r.case_name || '';
+      if (!caseName.toLowerCase().includes(lastName)) continue;
+
       records.push({
         id: `cl-op-${r.id}`,
-        caseName: r.caseName || r.case_name || '',
+        caseName,
         caseNameShort: r.caseNameShort || r.case_name_short || '',
         court: r.court || '',
         courtId: r.court_id || '',
@@ -194,6 +208,7 @@ export async function searchOpinionsByName(
           : '',
         source: 'courtlistener',
       });
+      if (records.length >= maxResults) break;
     }
   } catch (err) {
     if (err instanceof Error && err.message.includes('Rate limited')) throw err;
