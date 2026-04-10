@@ -209,10 +209,21 @@ export async function POST(request: NextRequest) {
       if (!supabase) return NextResponse.json({ error: 'No DB — SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY missing' }, { status: 500 });
       const { data, error: listErr } = await supabase
         .from('politicians')
-        .select('bioguide_id, name, office, party, is_active, is_candidate, running_for, corruption_score, total_funds')
+        .select('*')
         .order('name');
       if (listErr) return NextResponse.json({ error: `DB query failed: ${listErr.message}`, politicians: [] }, { status: 500 });
-      return NextResponse.json({ politicians: data || [] });
+      const politicians = (data || []).map((p: Record<string, unknown>) => ({
+        bioguide_id: p.bioguide_id,
+        name: p.name,
+        office: p.office,
+        party: p.party,
+        is_active: p.is_active,
+        is_candidate: p.is_candidate ?? false,
+        running_for: p.running_for ?? null,
+        corruption_score: p.corruption_score,
+        total_funds: p.total_funds,
+      }));
+      return NextResponse.json({ politicians });
     }
 
     // --- Run research on a politician ---
