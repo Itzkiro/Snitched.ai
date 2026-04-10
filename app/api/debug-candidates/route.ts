@@ -39,6 +39,10 @@ export async function GET() {
       .from('politicians')
       .select('*', { count: 'exact', head: true });
     debug.test3_total_count = { count, error: err3?.message };
+
+    // Test 4: RPC get_candidates
+    const { data: test4, error: err4 } = await client.rpc('get_candidates');
+    debug.test4_rpc = { count: test4?.length, error: err4?.message, sample: test4?.slice(0, 2)?.map((r: Record<string, unknown>) => r.name) };
   }
 
   return NextResponse.json(debug);
