@@ -490,7 +490,8 @@ export default function TerminalHome() {
 
       {/* Data source footer */}
       <div className="classified-footer">
-        PUBLIC RECORDS: FEC // FL DIVISION OF ELECTIONS // LDA SENATE // LEGISCAN // GOOGLE NEWS
+        PUBLIC RECORDS: FEC // FL DIVISION OF ELECTIONS // LDA SENATE // LEGISCAN // TRACK AIPAC //
+        <Link href="/about" style={{ color: '#fff', marginLeft: '0.5rem', textDecoration: 'underline' }}>METHODOLOGY</Link>
       </div>
     </div>
   );
