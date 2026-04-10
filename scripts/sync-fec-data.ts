@@ -540,13 +540,17 @@ async function processPolitician(
             is_israel_lobby: d.is_israel_lobby ?? false,
           })),
           aipac_funding: Math.round(result.aipac_funding),
-          israel_lobby_total: Math.round(result.israel_lobby_total),
-          israel_lobby_breakdown: {
-            total: Math.round(result.israel_lobby_breakdown.total),
-            pacs: Math.round(result.israel_lobby_breakdown.pacs),
-            ie: Math.round(result.israel_lobby_breakdown.ie),
-            bundlers: 0,
-          },
+          // Only update Israel lobby data if FEC total is HIGHER than existing
+          // (Track AIPAC data includes lobby donors which FEC sync can't detect)
+          ...(Math.round(result.israel_lobby_total) > (politician.israel_lobby_total || 0) ? {
+            israel_lobby_total: Math.round(result.israel_lobby_total),
+            israel_lobby_breakdown: {
+              total: Math.round(result.israel_lobby_breakdown.total),
+              pacs: Math.round(result.israel_lobby_breakdown.pacs),
+              ie: Math.round(result.israel_lobby_breakdown.ie),
+              bundlers: 0,
+            },
+          } : {}),
           contribution_breakdown: {
             aipac: Math.round(breakdownAipac),
             otherPACs: Math.round(breakdownOtherPACs),
