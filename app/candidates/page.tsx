@@ -18,12 +18,8 @@ async function getPoliticians(): Promise<Politician[]> {
     return getAllPoliticians();
   }
 
-  // Select only needed columns (not *) to avoid response size truncation
-  const { data, error } = await client
-    .from('politicians')
-    .select('bioguide_id, name, office, office_level, party, district, jurisdiction, jurisdiction_type, corruption_score, aipac_funding, is_active, is_candidate, running_for, term_start, term_end, total_funds')
-    .eq('is_candidate', true)
-    .order('name');
+  // Use RPC function to bypass PostgREST schema cache issue
+  const { data, error } = await client.rpc('get_candidates');
 
   if (error) {
     console.error('Candidates query error:', error.message);
