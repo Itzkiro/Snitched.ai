@@ -33,6 +33,8 @@ CREATE TABLE IF NOT EXISTS politicians (
 
   -- Status
   is_active       BOOLEAN DEFAULT true,
+  is_candidate    BOOLEAN DEFAULT false,
+  running_for     TEXT,
   years_in_office NUMERIC DEFAULT 0,
   bio             TEXT,
   term_start      TEXT,

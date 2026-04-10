@@ -20,13 +20,12 @@ async function getPoliticians(): Promise<Politician[]> {
 
   const { data, error } = await client
     .from('politicians')
-    .select('bioguide_id, name, office, office_level, party, district, jurisdiction, jurisdiction_type, corruption_score, aipac_funding, is_active, term_start, term_end, total_funds')
-    .eq('is_active', false)
+    .select('bioguide_id, name, office, office_level, party, district, jurisdiction, jurisdiction_type, corruption_score, aipac_funding, is_active, is_candidate, running_for, term_start, term_end, total_funds')
+    .eq('is_candidate', true)
     .order('name');
 
   if (error || !data || data.length === 0) {
-    const { getAllPoliticians } = await import('@/lib/real-data');
-    return getAllPoliticians().filter(p => !p.isActive);
+    return [];
   }
 
   return data.map((row: Record<string, unknown>) => ({
@@ -41,6 +40,8 @@ async function getPoliticians(): Promise<Politician[]> {
     corruptionScore: Number(row.corruption_score) || 0,
     aipacFunding: Number(row.aipac_funding) || 0,
     isActive: row.is_active as boolean,
+    isCandidate: row.is_candidate as boolean,
+    runningFor: row.running_for as string | undefined,
     termStart: row.term_start as string,
     termEnd: row.term_end as string | undefined,
     totalFundsRaised: Number(row.total_funds) || 0,
@@ -100,7 +101,7 @@ export default async function CandidatesPage() {
                     <div>
                       <div className="card-title">{pol.name}</div>
                       <div style={{ fontSize: '11px', color: 'var(--terminal-text-dim)', marginTop: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                        <span>Running for: {pol.office}</span>
+                        <span>Running for: {pol.runningFor || pol.office}</span>
                         <span style={{
                           fontSize: '10px',
                           padding: '0.3rem 0.6rem',
@@ -113,8 +114,11 @@ export default async function CandidatesPage() {
                         </span>
                       </div>
                     </div>
-                    <div className="card-status">
-                      CANDIDATE
+                    <div className="card-status" style={{
+                      fontSize: '10px',
+                      color: pol.isActive ? 'var(--terminal-amber)' : 'var(--terminal-blue)',
+                    }}>
+                      {pol.isActive ? 'SEATED + RUNNING' : 'CANDIDATE'}
                     </div>
                   </div>
 
@@ -148,7 +152,12 @@ export default async function CandidatesPage() {
                     </div>
                   )}
 
-                  {pol.termEnd && pol.termStart && (
+                  {pol.isActive && (
+                    <div style={{ marginTop: '1rem', fontSize: '11px', color: 'var(--terminal-amber)', padding: '0.5rem', background: 'rgba(245, 158, 11, 0.1)', border: '1px solid rgba(245, 158, 11, 0.3)' }}>
+                      Currently serving: {pol.office}
+                    </div>
+                  )}
+                  {!pol.isActive && pol.termEnd && pol.termStart && (
                     <div style={{ marginTop: '1rem', fontSize: '11px', color: 'var(--terminal-text-dim)' }}>
                       Previously served: {new Date(pol.termStart).getFullYear()} - {new Date(pol.termEnd).getFullYear()}
                     </div>

@@ -93,6 +93,8 @@ export interface Politician {
   termEnd?: string;
   yearsInOffice?: number;
   isActive: boolean;
+  isCandidate?: boolean;
+  runningFor?: string;
   tags: Tag[];
   bio?: string;
   socialMedia?: {

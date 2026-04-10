@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import type { Politician } from '@/lib/types';
+import ConnectionsGraph from '@/components/ConnectionsGraph';
 
 // ---------------------------------------------------------------------------
 // Voting Record Types — unified shape for both federal and state votes
@@ -1383,7 +1384,10 @@ export default function PoliticianPage() {
 
           {/* Network / Connections Tab */}
           {activeTab === 'network' && (
-            <ConnectionsTree politician={politician} />
+            <div>
+              <ConnectionsGraph politician={politician} />
+              <ConnectionsTree politician={politician} />
+            </div>
           )}
 
           {/* Social / News Tab */}
