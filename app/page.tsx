@@ -308,6 +308,49 @@ export default function TerminalHome() {
             </div>
           </div>
 
+          {/* Top Israel Lobby Recipients */}
+          {(() => {
+            const topIsrael = [...activePoliticians]
+              .filter(p => (p.israelLobbyTotal || 0) > 0)
+              .sort((a, b) => (b.israelLobbyTotal || 0) - (a.israelLobbyTotal || 0))
+              .slice(0, 5);
+            if (topIsrael.length === 0) return null;
+            return (
+              <div className="terminal-card" style={{ marginBottom: '2rem' }}>
+                <div style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--terminal-red)', marginBottom: '1rem', letterSpacing: '0.1em' }}>
+                  🇮🇱 TOP ISRAEL LOBBY RECIPIENTS
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  {topIsrael.map((pol, i) => (
+                    <Link key={pol.id} href={`/politician/${pol.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                      <div style={{
+                        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                        padding: '0.75rem', background: i === 0 ? 'rgba(239, 68, 68, 0.1)' : 'transparent',
+                        border: i === 0 ? '1px solid rgba(239, 68, 68, 0.3)' : '1px solid var(--terminal-border)',
+                      }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                          <span style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', fontWeight: 700, width: '20px' }}>#{i + 1}</span>
+                          <div>
+                            <div style={{ fontWeight: 700, fontSize: '0.85rem' }}>{pol.name}</div>
+                            <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)' }}>{pol.office}</div>
+                          </div>
+                        </div>
+                        <div style={{ fontWeight: 700, fontFamily: 'Bebas Neue, sans-serif', fontSize: '1.25rem', color: 'var(--terminal-red)' }}>
+                          ${(pol.israelLobbyTotal || 0) >= 1000000
+                            ? `${((pol.israelLobbyTotal || 0) / 1000000).toFixed(1)}M`
+                            : `${((pol.israelLobbyTotal || 0) / 1000).toFixed(0)}K`}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+                <Link href="/juicebox" style={{ display: 'block', textAlign: 'center', marginTop: '1rem', fontSize: '0.75rem', color: 'var(--terminal-red)', textDecoration: 'none', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                  VIEW FULL ISRAEL LOBBY TRACKER →
+                </Link>
+              </div>
+            );
+          })()}
+
           {/* Politician cards grid */}
           <div className="data-grid" style={{ padding: 0 }}>
             {topCorrupted.map((pol) => (
