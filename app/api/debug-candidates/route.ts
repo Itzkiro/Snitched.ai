@@ -10,7 +10,7 @@ export async function GET() {
   const debug: Record<string, unknown> = {
     hasServiceRole: !!serviceClient,
     hasAnon: !!anonClient,
-    supabaseUrl: process.env.SUPABASE_URL ? 'set' : 'missing',
+    supabaseUrl: process.env.SUPABASE_URL ? process.env.SUPABASE_URL.substring(0, 30) + '...' : 'missing',
     supabaseServiceKey: process.env.SUPABASE_SERVICE_ROLE_KEY ? 'set' : 'missing',
     supabaseAnonKey: process.env.SUPABASE_ANON_KEY ? 'set' : 'missing',
     nextPublicUrl: process.env.NEXT_PUBLIC_SUPABASE_URL ? 'set' : 'missing',
