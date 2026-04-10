@@ -37,17 +37,73 @@ import type {
 // Constants
 // ---------------------------------------------------------------------------
 
-/** Neutral score used when data is not available for a factor */
-const PLACEHOLDER_SCORE = 30;
+/** Neutral score when data is unavailable — low baseline (innocent until proven) */
+const PLACEHOLDER_SCORE = 10;
 
 /** Weight configuration — must sum to 1.0 */
-const WEIGHTS = {
+const BASE_WEIGHTS = {
   pacContributionRatio: 0.30,
   lobbyingConnections: 0.20,
   votingAlignment: 0.25,
   transparency: 0.10,
   campaignFinanceRedFlags: 0.15,
 } as const;
+
+/**
+ * Dynamically redistribute weight to favor factors with real data.
+ * Placeholder factors get reduced weight, real data factors absorb it.
+ */
+function getAdjustedWeights(dataAvailable: Record<string, boolean>): Record<string, number> {
+  const keys = Object.keys(BASE_WEIGHTS) as (keyof typeof BASE_WEIGHTS)[];
+  const realKeys = keys.filter(k => dataAvailable[k]);
+  const placeholderKeys = keys.filter(k => !dataAvailable[k]);
+
+  const adjusted: Record<string, number> = {};
+  for (const k of keys) adjusted[k] = BASE_WEIGHTS[k];
+
+  if (realKeys.length === 0 || realKeys.length === keys.length) return adjusted;
+
+  // Placeholder factors keep 30% of their original weight, rest redistributed
+  const PLACEHOLDER_WEIGHT_KEEP = 0.3;
+  let redistributed = 0;
+
+  for (const k of placeholderKeys) {
+    const reduction = adjusted[k] * (1 - PLACEHOLDER_WEIGHT_KEEP);
+    adjusted[k] = adjusted[k] * PLACEHOLDER_WEIGHT_KEEP;
+    redistributed += reduction;
+  }
+
+  // Distribute to real-data factors proportionally, but cap max weight at 40%
+  const MAX_SINGLE_WEIGHT = 0.40;
+  const realTotal = realKeys.reduce((s, k) => s + BASE_WEIGHTS[k], 0);
+  for (const k of realKeys) {
+    adjusted[k] += redistributed * (BASE_WEIGHTS[k] / realTotal);
+  }
+
+  // Cap any single factor and redistribute overflow
+  let overflow = 0;
+  const uncappedKeys: string[] = [];
+  for (const k of realKeys) {
+    if (adjusted[k] > MAX_SINGLE_WEIGHT) {
+      overflow += adjusted[k] - MAX_SINGLE_WEIGHT;
+      adjusted[k] = MAX_SINGLE_WEIGHT;
+    } else {
+      uncappedKeys.push(k);
+    }
+  }
+  if (overflow > 0 && uncappedKeys.length > 0) {
+    const uncappedTotal = uncappedKeys.reduce((s, k) => s + adjusted[k], 0);
+    for (const k of uncappedKeys) {
+      adjusted[k] += overflow * (adjusted[k] / uncappedTotal);
+    }
+  }
+
+  return adjusted;
+}
+
+// Alias for backward compat in factor functions (they read WEIGHTS directly)
+// Actual weights are computed dynamically in computeCorruptionScore
+const WEIGHTS = BASE_WEIGHTS;
 
 // ---------------------------------------------------------------------------
 // Helpers: Derive contribution breakdown from top5Donors
@@ -552,6 +608,7 @@ function formatMoney(amount: number): string {
  * and produces a final score with breakdown.
  */
 export function computeCorruptionScore(politician: Politician): CorruptionScoreResult {
+  // First pass: compute raw scores with base weights
   const factors: CorruptionFactor[] = [
     scorePacContributionRatio(politician),
     scoreLobbyingConnections(politician),
@@ -559,6 +616,17 @@ export function computeCorruptionScore(politician: Politician): CorruptionScoreR
     scoreTransparency(politician),
     scoreCampaignFinanceRedFlags(politician),
   ];
+
+  // Second pass: redistribute weight to favor factors with real data
+  const dataAvailable: Record<string, boolean> = {};
+  for (const f of factors) dataAvailable[f.key] = f.dataAvailable;
+  const adjusted = getAdjustedWeights(dataAvailable);
+
+  // Recompute weighted scores with adjusted weights
+  for (const f of factors) {
+    f.weight = adjusted[f.key] ?? f.weight;
+    f.weightedScore = Math.round(f.rawScore * f.weight * 10) / 10;
+  }
 
   const totalScore = factors.reduce((sum, f) => sum + f.weightedScore, 0);
   const score = Math.round(Math.min(100, Math.max(0, totalScore)));
