@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSupabase } from '@/lib/supabase-server';
 import type { Politician } from '@/lib/types';
 
-// Revalidate every 5 minutes
-export const revalidate = 300;
+// Force dynamic — no stale cache from old DB
+export const dynamic = 'force-dynamic';
 
 async function getJsonPoliticians() {
   const { getAllPoliticians } = await import('@/lib/real-data');
@@ -11,12 +11,7 @@ async function getJsonPoliticians() {
 }
 
 function cachedResponse(data: unknown, status = 200) {
-  return NextResponse.json(data, {
-    status,
-    headers: {
-      'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
-    },
-  });
+  return NextResponse.json(data, { status });
 }
 
 /**
