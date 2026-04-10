@@ -18,17 +18,21 @@ async function getPoliticians(): Promise<Politician[]> {
     return getAllPoliticians();
   }
 
+  // Use select('*') to bypass PostgREST schema cache issue with new columns
   const { data, error } = await client
     .from('politicians')
-    .select('bioguide_id, name, office, office_level, party, district, jurisdiction, jurisdiction_type, corruption_score, aipac_funding, is_active, is_candidate, running_for, term_start, term_end, total_funds')
-    .eq('is_candidate', true)
+    .select('*')
     .order('name');
 
   if (error || !data || data.length === 0) {
     return [];
   }
 
-  return data.map((row: Record<string, unknown>) => ({
+  // Filter candidates in JS since PostgREST may not know about is_candidate column
+  const candidates = data.filter((row: Record<string, unknown>) => row.is_candidate === true);
+  if (candidates.length === 0) return [];
+
+  return candidates.map((row: Record<string, unknown>) => ({
     id: row.bioguide_id as string,
     name: row.name as string,
     office: row.office as string,
