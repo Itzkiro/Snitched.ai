@@ -641,7 +641,8 @@ export default function ConnectionsGraph({ politician }: { politician: Politicia
           ref={containerRef}
           style={{
             width: '100%',
-            height: '550px',
+            height: 'min(550px, 70vw)',
+            minHeight: '300px',
             background: 'rgba(0, 0, 0, 0.4)',
             border: '1px solid var(--terminal-border)',
             borderRadius: '2px',

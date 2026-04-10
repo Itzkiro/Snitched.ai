@@ -295,7 +295,7 @@ export default function AdminPage() {
         </div>
       )}
 
-      <div style={{ display: 'grid', gridTemplateColumns: '350px 1fr', gap: '1rem', alignItems: 'start' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(250px, 350px) 1fr', gap: '1rem', alignItems: 'start' }}>
         {/* LEFT: Politician Selector */}
         <div className="terminal-card" style={{ padding: '1rem' }}>
           <h2 style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--terminal-amber)', marginBottom: '0.75rem', letterSpacing: '0.05em' }}>

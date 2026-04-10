@@ -153,14 +153,39 @@ export async function GET(request: NextRequest) {
       corruption_score: p.corruption_score,
     }));
 
+  // Cross-party analysis: find entities that connect R and D politicians
+  const polPartyMap = new Map<string, string>();
+  for (const p of pols) polPartyMap.set(p.bioguide_id, p.party);
+
+  const crossPartyEntities: Array<{ id: string; label: string; category: string; republicans: number; democrats: number; total: number }> = [];
+  for (const node of nodes) {
+    const connectedPols = nodePolMap.get(node.id);
+    if (!connectedPols || connectedPols.size < 2) continue;
+    let rCount = 0, dCount = 0;
+    for (const pid of connectedPols) {
+      const party = polPartyMap.get(pid);
+      if (party === 'Republican') rCount++;
+      else if (party === 'Democrat') dCount++;
+    }
+    if (rCount > 0 && dCount > 0) {
+      crossPartyEntities.push({
+        id: node.id, label: node.label, category: node.category,
+        republicans: rCount, democrats: dCount, total: connectedPols.size,
+      });
+    }
+  }
+  crossPartyEntities.sort((a, b) => b.total - a.total);
+
   return NextResponse.json({
     nodes,
     edges: visibleEdges,
     politicians,
+    crossParty: crossPartyEntities.slice(0, 20),
     meta: {
       totalNodes: nodes.length,
       totalEdges: visibleEdges.length,
       totalPoliticians: politicians.length,
+      crossPartyCount: crossPartyEntities.length,
       minConnections,
     },
   });

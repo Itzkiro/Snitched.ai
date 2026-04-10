@@ -121,6 +121,7 @@ export default function ConnectionsPage() {
   const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
   const [layout, setLayout] = useState<'fcose' | 'circle' | 'concentric'>('fcose');
   const [search, setSearch] = useState('');
+  const [crossParty, setCrossParty] = useState<Array<{ id: string; label: string; category: string; republicans: number; democrats: number; total: number }>>([]);
 
   const getLayoutOpts = useCallback((name: string): cytoscape.LayoutOptions => {
     switch (name) {
@@ -153,6 +154,7 @@ export default function ConnectionsPage() {
         const edges: ConnEdge[] = data.edges || [];
         const pols: PolNode[] = data.politicians || [];
         setMeta(data.meta || {});
+        setCrossParty(data.crossParty || []);
 
         if (!containerRef.current) return;
 
@@ -384,7 +386,7 @@ export default function ConnectionsPage() {
             Loading network...
           </div>
         )}
-        <div ref={containerRef} style={{ width: '100%', height: 'calc(100vh - 200px)', background: 'rgba(0,0,0,0.3)' }} />
+        <div ref={containerRef} style={{ width: '100%', height: 'min(calc(100vh - 200px), 700px)', minHeight: '400px', background: 'rgba(0,0,0,0.3)' }} />
 
         {/* Detail overlay */}
         {selected && (
@@ -415,6 +417,34 @@ export default function ConnectionsPage() {
           </div>
         )}
       </div>
+
+      {/* Cross-Party Analysis */}
+      {crossParty.length > 0 && (
+        <div style={{ padding: '1.5rem 2rem' }}>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--terminal-amber)', letterSpacing: '0.05em', marginBottom: '1rem' }}>
+            🔀 CROSS-PARTY CONNECTIONS — Entities funding BOTH Republicans & Democrats
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '0.75rem' }}>
+            {crossParty.map(cp => (
+              <div key={cp.id} className="terminal-card" style={{ padding: '0.75rem' }}>
+                <div style={{ fontWeight: 700, fontSize: '0.8rem', marginBottom: '0.25rem' }}>{cp.label}</div>
+                <div style={{ fontSize: '0.65rem', display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                  <span style={{ color: '#ef4444' }}>R: {cp.republicans}</span>
+                  <span style={{ color: '#3b82f6' }}>D: {cp.democrats}</span>
+                  <span style={{ color: 'var(--terminal-text-dim)' }}>Total: {cp.total}</span>
+                  <span style={{
+                    fontSize: '0.55rem', padding: '1px 4px',
+                    background: `${getColor(cp.category)}20`, color: getColor(cp.category),
+                    border: `1px solid ${getColor(cp.category)}40`, fontWeight: 700,
+                  }}>
+                    {cp.category.toUpperCase()}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <div className="classified-footer">
