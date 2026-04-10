@@ -372,71 +372,7 @@ function scoreVotingAlignment(p: Politician): CorruptionFactor {
   };
 }
 
-// ---------------------------------------------------------------------------
-// Factor 4: Transparency Score (10%)
-// ---------------------------------------------------------------------------
-
-function scoreTransparency(p: Politician): CorruptionFactor {
-  let transparencyPoints = 0;
-  let maxPoints = 0;
-
-  // FEC / campaign finance data completeness (0-30 points)
-  maxPoints += 30;
-  const dataSource = p.dataSource ?? '';
-  if (dataSource.includes('api.open.fec.gov') || dataSource === 'fec_api') {
-    transparencyPoints += 30; // Full FEC data
-  } else if (dataSource === 'voterfocus' || dataSource === 'fldoe') {
-    transparencyPoints += 25; // VoterFocus/FLDOE data with real contributions
-  } else if (dataSource.includes('total raised only')) {
-    transparencyPoints += 15;
-  } else if (dataSource.includes('FEC API')) {
-    transparencyPoints += 10;
-  }
-  // State/local with no FEC obligation: partial credit
-  const isFederal = p.officeLevel === 'US Senator' || p.officeLevel === 'US Representative';
-  if (!isFederal && transparencyPoints < 15) {
-    transparencyPoints += 15; // Neutral - FEC doesn't apply
-  }
-
-  // Source IDs available (0-20 points)
-  maxPoints += 20;
-  const sourceIds = p.source_ids ?? {};
-  const idCount = [sourceIds.bioguide_id, sourceIds.govtrack_id, sourceIds.opensecrets_id, sourceIds.fec_candidate_id, sourceIds.votesmart_id]
-    .filter(Boolean).length;
-  transparencyPoints += Math.min(20, idCount * 4);
-
-  // Social media — NOT a corruption factor, excluded from scoring
-  // Having or not having social accounts doesn't indicate corruption
-
-  // Campaign finance data quality (0-30 points)
-  maxPoints += 30;
-  const contributions = p.contributions ?? [];
-  const totalRaised = p.totalFundsRaised ?? 0;
-  const hasDonors = (p.top5Donors?.length ?? 0) > 0;
-
-  if (contributions.length >= 50) {
-    transparencyPoints += 30;
-  } else if (contributions.length >= 10 || (hasDonors && totalRaised > 0)) {
-    transparencyPoints += 20; // Has top donor data even without itemized list
-  } else if (contributions.length > 0 || totalRaised > 0) {
-    transparencyPoints += 10;
-  }
-
-  const transparencyRatio = maxPoints > 0 ? transparencyPoints / maxPoints : 0.5;
-  const rawScore = Math.round((1 - transparencyRatio) * 100);
-
-  const hasAnyData = idCount > 0 || contributions.length > 0 || totalRaised > 0 || hasDonors;
-
-  return {
-    key: 'transparency',
-    label: 'Transparency & Disclosure',
-    rawScore,
-    weight: WEIGHTS.transparency,
-    weightedScore: Math.round(rawScore * WEIGHTS.transparency * 10) / 10,
-    dataAvailable: hasAnyData,
-    explanation: `${transparencyPoints}/${maxPoints} transparency points. ${idCount} public IDs, ${contributions.length > 0 ? `${contributions.length} itemized records` : hasDonors ? 'top donor data available' : 'no itemized records'}.`,
-  };
-}
+// Transparency factor removed — lack of public data is not corruption
 
 // ---------------------------------------------------------------------------
 // Factor 5: Campaign Finance Red Flags (15%)
