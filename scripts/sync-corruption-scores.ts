@@ -47,23 +47,33 @@ async function main() {
   console.log('='.repeat(60));
   if (dryRun) console.log('  [DRY RUN — no changes will be saved]\n');
 
-  // Fetch all politicians
-  const { data: rows, error } = await supabase
-    .from('politicians')
-    .select('*')
-    .order('name')
-    .limit(limit);
+  // Fetch all politicians (paginate past 1000 row limit)
+  const rows: Record<string, unknown>[] = [];
+  let page = 0;
+  while (true) {
+    const { data: batch, error: batchErr } = await supabase
+      .from('politicians')
+      .select('*')
+      .order('name')
+      .range(page * 1000, (page + 1) * 1000 - 1);
+    if (batchErr || !batch) { if (batchErr) console.error('Fetch error:', batchErr); break; }
+    rows.push(...batch);
+    if (batch.length < 1000) break;
+    page++;
+  }
 
-  if (error || !rows) {
-    console.error('Failed to fetch politicians:', error);
+  if (rows.length === 0) {
+    console.error('Failed to fetch politicians');
     process.exit(1);
   }
 
-  console.log(`Fetched ${rows.length} politicians\n`);
+  // Apply --limit if specified
+  const finalRows = rows.slice(0, limit);
+  console.log(`Fetched ${rows.length} politicians (processing ${finalRows.length})\n`);
 
   // Track stats
   const stats = {
-    total: rows.length,
+    total: finalRows.length,
     updated: 0,
     unchanged: 0,
     errors: 0,
@@ -74,7 +84,7 @@ async function main() {
     scoreChanges: [] as { name: string; old: number; new: number; grade: string }[],
   };
 
-  for (const row of rows) {
+  for (const row of finalRows) {
     // Map Supabase row to Politician type
     const top5 = (row.top5_donors ?? []) as Politician['top5Donors'];
     const politician: Politician = {
