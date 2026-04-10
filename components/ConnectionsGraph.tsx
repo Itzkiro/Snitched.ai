@@ -1,52 +1,177 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
-import * as d3 from 'd3';
+import { useRef, useEffect, useState, useCallback } from 'react';
+import cytoscape, { type Core, type NodeSingular } from 'cytoscape';
+import fcose from 'cytoscape-fcose';
 import type { Politician } from '@/lib/types';
 
+// Register fcose layout
+if (typeof window !== 'undefined') {
+  cytoscape.use(fcose);
+}
+
 // ---------------------------------------------------------------------------
-// Types
+// 4 Pillar Categories + Colors (OpenPlanter-inspired)
 // ---------------------------------------------------------------------------
 
-interface GraphNode extends d3.SimulationNodeDatum {
+const PILLAR_COLORS: Record<string, string> = {
+  politician: '#00bfff',
+  pillar: '#64748b',
+  // Pillar 1: Financials
+  'financial': '#f97583',
+  'donor-individual': '#10b981',
+  'donor-pac': '#f59e0b',
+  'donor-corporate': '#60a5fa',
+  'donor-israel': '#ef4444',
+  'lobby-firm': '#e3b341',
+  'lobby-client': '#a78bfa',
+  'ie-committee': '#06b6d4',
+  // Pillar 2: Court / Legal
+  'legal': '#b392f0',
+  'court-case': '#d2a8ff',
+  // Pillar 3: Voting
+  'voting': '#7ee787',
+  'vote-yea': '#56d364',
+  'vote-nay': '#f97583',
+  'vote-absent': '#8b949e',
+  // Pillar 4: Social Media
+  'social': '#ffa657',
+  'social-post': '#ff7b72',
+};
+
+function getCategoryColor(cat: string): string {
+  return PILLAR_COLORS[cat] ?? '#8b949e';
+}
+
+// ---------------------------------------------------------------------------
+// Cytoscape Stylesheet (adapted from OpenPlanter)
+// ---------------------------------------------------------------------------
+
+const graphStyle: cytoscape.StylesheetStyle[] = [
+  {
+    selector: 'node',
+    style: {
+      label: 'data(label)',
+      'background-color': 'data(color)',
+      'background-opacity': 0.85,
+      'border-width': 1,
+      'border-color': 'data(color)',
+      'border-opacity': 0.5,
+      color: '#ffffff',
+      'text-valign': 'bottom',
+      'text-halign': 'center',
+      'text-margin-y': 4,
+      'font-size': 'data(fontSize)',
+      'font-family': 'JetBrains Mono, Fira Code, monospace',
+      shape: 'ellipse',
+      width: 'data(size)',
+      height: 'data(size)',
+      'text-wrap': 'ellipsis',
+      'text-max-width': '120px',
+      'min-zoomed-font-size': 4,
+      'text-outline-color': '#0a0a0a',
+      'text-outline-width': 1.5,
+      'text-outline-opacity': 0.8,
+    },
+  },
+  // Pillar nodes — hexagon
+  {
+    selector: "node[node_type='pillar']",
+    style: { shape: 'hexagon' },
+  },
+  // Entity nodes — round-rectangle
+  {
+    selector: "node[node_type='entity']",
+    style: { shape: 'round-rectangle' },
+  },
+  // Politician — star
+  {
+    selector: "node[node_type='politician']",
+    style: { shape: 'star' },
+  },
+  // Selected
+  {
+    selector: 'node:selected',
+    style: {
+      'border-width': 3,
+      'border-color': '#ffffff',
+      'border-opacity': 1,
+      'background-opacity': 1,
+    },
+  },
+  // Highlighted neighborhood
+  {
+    selector: 'node.highlighted',
+    style: {
+      'border-width': 2,
+      'border-color': '#ffffff',
+      'border-opacity': 0.8,
+      'background-opacity': 1,
+    },
+  },
+  // Dimmed
+  {
+    selector: 'node.dimmed',
+    style: { opacity: 0.12, 'text-opacity': 0 },
+  },
+  // Edges
+  {
+    selector: 'edge',
+    style: {
+      width: 1.2,
+      'line-color': 'data(color)',
+      'target-arrow-shape': 'triangle',
+      'target-arrow-color': 'data(color)',
+      'curve-style': 'bezier',
+      opacity: 0.35,
+    },
+  },
+  // Structural edges (pillar connections) — thicker
+  {
+    selector: "edge[edgeType='pillar']",
+    style: { width: 2.5, opacity: 0.5, 'target-arrow-shape': 'none' },
+  },
+  // Category edges
+  {
+    selector: "edge[edgeType='category']",
+    style: { width: 1.8, opacity: 0.4, 'line-style': 'solid' },
+  },
+  // Highlighted edges
+  {
+    selector: 'edge.highlighted',
+    style: { 'line-color': '#58a6ff', width: 2.5, opacity: 0.8 },
+  },
+  // Dimmed edges
+  {
+    selector: 'edge.dimmed',
+    style: { opacity: 0.05 },
+  },
+  // Hidden
+  {
+    selector: 'node.hidden, edge.hidden',
+    style: { display: 'none' },
+  },
+] as unknown as cytoscape.StylesheetStyle[];
+
+// ---------------------------------------------------------------------------
+// Build graph from Politician data — 4 Pillars
+// ---------------------------------------------------------------------------
+
+interface GraphNode {
   id: string;
   label: string;
-  type: 'politician' | 'individual' | 'pac' | 'corporate' | 'israel' | 'lobby-firm' | 'lobby-client' | 'ie' | 'category';
+  category: string;
+  node_type: 'politician' | 'pillar' | 'category' | 'entity';
   amount?: number;
   sublabel?: string;
   tag?: string;
 }
 
-interface GraphLink extends d3.SimulationLinkDatum<GraphNode> {
-  type: 'funding' | 'lobbying' | 'ie' | 'client' | 'category';
-  amount?: number;
+interface GraphEdge {
+  source: string;
+  target: string;
   label?: string;
-}
-
-// ---------------------------------------------------------------------------
-// Color & sizing helpers
-// ---------------------------------------------------------------------------
-
-const NODE_COLORS: Record<GraphNode['type'], string> = {
-  politician: '#00bfff',
-  individual: '#10b981',
-  pac: '#f59e0b',
-  corporate: '#60a5fa',
-  israel: '#ef4444',
-  'lobby-firm': '#a78bfa',
-  'lobby-client': '#8b5cf6',
-  ie: '#06b6d4',
-  category: '#64748b',
-};
-
-function nodeRadius(node: GraphNode): number {
-  if (node.type === 'politician') return 28;
-  if (node.type === 'category') return 22;
-  if (!node.amount) return 8;
-  if (node.amount >= 1_000_000) return 18;
-  if (node.amount >= 100_000) return 14;
-  if (node.amount >= 10_000) return 11;
-  return 8;
+  edgeType: 'pillar' | 'category' | 'entity';
 }
 
 function formatAmount(n: number): string {
@@ -56,424 +181,502 @@ function formatAmount(n: number): string {
 }
 
 function truncate(s: string, max: number): string {
-  return s.length > max ? s.slice(0, max - 1) + '…' : s;
+  return s.length > max ? s.slice(0, max - 1) + '\u2026' : s;
 }
 
-// ---------------------------------------------------------------------------
-// Build graph data from Politician
-// ---------------------------------------------------------------------------
-
-function buildGraph(politician: Politician): { nodes: GraphNode[]; links: GraphLink[] } {
+function buildGraph(politician: Politician): { nodes: GraphNode[]; edges: GraphEdge[] } {
   const nodes: GraphNode[] = [];
-  const links: GraphLink[] = [];
-  const nodeIds = new Set<string>();
+  const edges: GraphEdge[] = [];
+  const ids = new Set<string>();
 
-  const addNode = (n: GraphNode) => {
-    if (!nodeIds.has(n.id)) {
-      nodeIds.add(n.id);
-      nodes.push(n);
-    }
-  };
+  const add = (n: GraphNode) => { if (!ids.has(n.id)) { ids.add(n.id); nodes.push(n); } };
 
-  // Central politician node
-  addNode({
-    id: 'politician',
-    label: politician.name,
-    type: 'politician',
-    sublabel: politician.office,
-  });
+  // Central politician
+  add({ id: 'pol', label: politician.name, category: 'politician', node_type: 'politician', sublabel: politician.office });
 
+  // ===== PILLAR 1: FINANCIALS =====
   const donors = politician.top5Donors || [];
   const breakdown = politician.contributionBreakdown;
   const lobbyRecords = (politician.lobbyingRecords || []) as unknown as Array<Record<string, unknown>>;
   const ieDetails = politician.israelLobbyBreakdown?.ie_details || [];
 
-  // --- FUNDING ---
-  if (breakdown || donors.length > 0) {
-    addNode({ id: 'cat-funding', label: 'CAMPAIGN FUNDING', type: 'category', amount: politician.totalFundsRaised });
-    links.push({ source: 'politician', target: 'cat-funding', type: 'category' });
+  const hasFinancials = donors.length > 0 || breakdown || lobbyRecords.length > 0 || ieDetails.length > 0;
+  if (hasFinancials) {
+    add({ id: 'p-fin', label: 'FINANCIALS', category: 'financial', node_type: 'pillar', amount: politician.totalFundsRaised });
+    edges.push({ source: 'pol', target: 'p-fin', edgeType: 'pillar' });
 
+    // Donors by type
     if (breakdown) {
-      // Individual donors
       if (breakdown.individuals > 0) {
-        addNode({ id: 'cat-individuals', label: 'Individuals', type: 'category', amount: breakdown.individuals });
-        links.push({ source: 'cat-funding', target: 'cat-individuals', type: 'category' });
+        add({ id: 'cat-indiv', label: 'Individual Donors', category: 'donor-individual', node_type: 'category', amount: breakdown.individuals });
+        edges.push({ source: 'p-fin', target: 'cat-indiv', edgeType: 'category' });
         donors.filter(d => d.type === 'Individual').forEach((d, i) => {
-          const id = `indiv-${i}`;
-          addNode({ id, label: d.name, type: 'individual', amount: d.amount });
-          links.push({ source: 'cat-individuals', target: id, type: 'funding', amount: d.amount });
+          add({ id: `indiv-${i}`, label: truncate(d.name, 25), category: 'donor-individual', node_type: 'entity', amount: d.amount });
+          edges.push({ source: 'cat-indiv', target: `indiv-${i}`, label: formatAmount(d.amount), edgeType: 'entity' });
         });
       }
-
-      // PACs
       if (breakdown.otherPACs > 0) {
-        addNode({ id: 'cat-pacs', label: 'PACs', type: 'category', amount: breakdown.otherPACs });
-        links.push({ source: 'cat-funding', target: 'cat-pacs', type: 'category' });
+        add({ id: 'cat-pac', label: 'PACs', category: 'donor-pac', node_type: 'category', amount: breakdown.otherPACs });
+        edges.push({ source: 'p-fin', target: 'cat-pac', edgeType: 'category' });
         donors.filter(d => d.type === 'PAC').forEach((d, i) => {
-          const id = `pac-${i}`;
-          addNode({ id, label: d.name, type: 'pac', amount: d.amount });
-          links.push({ source: 'cat-pacs', target: id, type: 'funding', amount: d.amount });
+          add({ id: `pac-${i}`, label: truncate(d.name, 25), category: 'donor-pac', node_type: 'entity', amount: d.amount });
+          edges.push({ source: 'cat-pac', target: `pac-${i}`, label: formatAmount(d.amount), edgeType: 'entity' });
         });
       }
-
-      // Corporate
       if (breakdown.corporate > 0) {
-        addNode({ id: 'cat-corp', label: 'Corporate', type: 'category', amount: breakdown.corporate });
-        links.push({ source: 'cat-funding', target: 'cat-corp', type: 'category' });
+        add({ id: 'cat-corp', label: 'Corporate', category: 'donor-corporate', node_type: 'category', amount: breakdown.corporate });
+        edges.push({ source: 'p-fin', target: 'cat-corp', edgeType: 'category' });
         donors.filter(d => d.type === 'Corporate').forEach((d, i) => {
-          const id = `corp-${i}`;
-          addNode({ id, label: d.name, type: 'corporate', amount: d.amount });
-          links.push({ source: 'cat-corp', target: id, type: 'funding', amount: d.amount });
+          add({ id: `corp-${i}`, label: truncate(d.name, 25), category: 'donor-corporate', node_type: 'entity', amount: d.amount });
+          edges.push({ source: 'cat-corp', target: `corp-${i}`, label: formatAmount(d.amount), edgeType: 'entity' });
         });
       }
-
-      // Israel lobby
       if (breakdown.aipac > 0 || (politician.israelLobbyTotal || 0) > 0) {
-        const israelTotal = politician.israelLobbyTotal || breakdown.aipac;
-        addNode({ id: 'cat-israel', label: 'Israel Lobby', type: 'israel', amount: israelTotal });
-        links.push({ source: 'cat-funding', target: 'cat-israel', type: 'category' });
+        add({ id: 'cat-israel', label: 'Israel Lobby', category: 'donor-israel', node_type: 'category', amount: politician.israelLobbyTotal || breakdown.aipac });
+        edges.push({ source: 'p-fin', target: 'cat-israel', edgeType: 'category' });
         donors.filter(d => d.type === 'Israel-PAC').forEach((d, i) => {
-          const id = `israel-${i}`;
-          addNode({ id, label: d.name, type: 'israel', amount: d.amount, tag: 'DIRECT' });
-          links.push({ source: 'cat-israel', target: id, type: 'funding', amount: d.amount });
+          add({ id: `israel-${i}`, label: truncate(d.name, 25), category: 'donor-israel', node_type: 'entity', amount: d.amount, tag: 'DIRECT' });
+          edges.push({ source: 'cat-israel', target: `israel-${i}`, label: formatAmount(d.amount), edgeType: 'entity' });
+        });
+        ieDetails.forEach((ie, i) => {
+          add({ id: `ie-${i}`, label: truncate(ie.committee_name, 25), category: 'ie-committee', node_type: 'entity', amount: ie.amount, tag: ie.is_israel_lobby ? 'ISRAEL LOBBY' : ie.support_oppose });
+          edges.push({ source: 'cat-israel', target: `ie-${i}`, label: formatAmount(ie.amount), edgeType: 'entity' });
         });
       }
     } else {
-      // No breakdown, just show donors directly
       donors.forEach((d, i) => {
-        const type = d.type === 'Israel-PAC' ? 'israel' : d.type === 'PAC' ? 'pac' : d.type === 'Corporate' ? 'corporate' : 'individual';
-        const id = `donor-${i}`;
-        addNode({ id, label: d.name, type, amount: d.amount });
-        links.push({ source: 'cat-funding', target: id, type: 'funding', amount: d.amount });
+        const cat = d.type === 'Israel-PAC' ? 'donor-israel' : d.type === 'PAC' ? 'donor-pac' : d.type === 'Corporate' ? 'donor-corporate' : 'donor-individual';
+        add({ id: `donor-${i}`, label: truncate(d.name, 25), category: cat, node_type: 'entity', amount: d.amount });
+        edges.push({ source: 'p-fin', target: `donor-${i}`, label: formatAmount(d.amount), edgeType: 'entity' });
       });
     }
-  }
 
-  // --- LOBBYING ---
-  if (lobbyRecords.length > 0) {
-    addNode({ id: 'cat-lobbying', label: 'LOBBYING', type: 'category' });
-    links.push({ source: 'politician', target: 'cat-lobbying', type: 'category' });
+    // Lobbying
+    if (lobbyRecords.length > 0) {
+      add({ id: 'cat-lobby', label: 'Lobbying', category: 'lobby-firm', node_type: 'category' });
+      edges.push({ source: 'p-fin', target: 'cat-lobby', edgeType: 'category' });
 
-    const byFirm: Record<string, { income: number; clients: Set<string> }> = {};
-    for (const r of lobbyRecords) {
-      const firm = (r.registrantName as string) || 'Unknown';
-      if (!byFirm[firm]) byFirm[firm] = { income: 0, clients: new Set() };
-      byFirm[firm].income += (r.income as number) || 0;
-      if (r.clientName) byFirm[firm].clients.add(r.clientName as string);
-    }
-
-    Object.entries(byFirm)
-      .sort((a, b) => b[1].income - a[1].income)
-      .slice(0, 15)
-      .forEach(([firm, data], i) => {
-        const firmId = `firm-${i}`;
-        addNode({ id: firmId, label: firm, type: 'lobby-firm', amount: data.income, sublabel: `${data.clients.size} clients` });
-        links.push({ source: 'cat-lobbying', target: firmId, type: 'lobbying', amount: data.income });
-
-        [...data.clients].slice(0, 5).forEach((client, ci) => {
+      const byFirm: Record<string, { income: number; clients: Set<string> }> = {};
+      for (const r of lobbyRecords) {
+        const firm = (r.registrantName as string) || 'Unknown';
+        if (!byFirm[firm]) byFirm[firm] = { income: 0, clients: new Set() };
+        byFirm[firm].income += (r.income as number) || 0;
+        if (r.clientName) byFirm[firm].clients.add(r.clientName as string);
+      }
+      Object.entries(byFirm).sort((a, b) => b[1].income - a[1].income).slice(0, 10).forEach(([firm, data], i) => {
+        add({ id: `firm-${i}`, label: truncate(firm, 25), category: 'lobby-firm', node_type: 'entity', amount: data.income, sublabel: `${data.clients.size} clients` });
+        edges.push({ source: 'cat-lobby', target: `firm-${i}`, edgeType: 'entity' });
+        [...data.clients].slice(0, 3).forEach((client, ci) => {
           if (client !== firm) {
-            const clientId = `client-${i}-${ci}`;
-            addNode({ id: clientId, label: client, type: 'lobby-client' });
-            links.push({ source: firmId, target: clientId, type: 'client' });
+            add({ id: `client-${i}-${ci}`, label: truncate(client, 20), category: 'lobby-client', node_type: 'entity' });
+            edges.push({ source: `firm-${i}`, target: `client-${i}-${ci}`, label: 'CLIENT', edgeType: 'entity' });
           }
         });
       });
+    }
   }
 
-  // --- INDEPENDENT EXPENDITURES ---
-  if (ieDetails.length > 0) {
-    addNode({ id: 'cat-ie', label: 'INDEP. EXPENDITURES', type: 'category' });
-    links.push({ source: 'politician', target: 'cat-ie', type: 'category' });
-
-    ieDetails.sort((a, b) => b.amount - a.amount).slice(0, 10).forEach((ie, i) => {
-      const id = `ie-${i}`;
-      addNode({
-        id,
-        label: ie.committee_name,
-        type: ie.is_israel_lobby ? 'israel' : 'ie',
-        amount: ie.amount,
-        tag: ie.support_oppose === 'support' ? 'SUPPORT' : 'OPPOSE',
-      });
-      links.push({ source: 'cat-ie', target: id, type: 'ie', amount: ie.amount });
+  // ===== PILLAR 2: LEGAL / COURT CASES =====
+  const courtCases = politician.courtCases || [];
+  add({ id: 'p-legal', label: 'COURT RECORDS', category: 'legal', node_type: 'pillar' });
+  edges.push({ source: 'pol', target: 'p-legal', edgeType: 'pillar' });
+  if (courtCases.length > 0) {
+    courtCases.slice(0, 10).forEach((c, i) => {
+      add({ id: `case-${i}`, label: truncate(c.caseNumber || c.summary, 25), category: 'court-case', node_type: 'entity', sublabel: c.status, tag: c.caseType });
+      edges.push({ source: 'p-legal', target: `case-${i}`, label: c.caseType, edgeType: 'entity' });
     });
+  } else {
+    add({ id: 'legal-pending', label: 'Investigation Pending', category: 'legal', node_type: 'entity', sublabel: 'Court records being indexed' });
+    edges.push({ source: 'p-legal', target: 'legal-pending', edgeType: 'entity' });
   }
 
-  return { nodes, links };
+  // ===== PILLAR 3: VOTING RECORDS =====
+  const votingRecords = (politician.votes || []) as unknown as Array<Record<string, unknown>>;
+  add({ id: 'p-votes', label: 'VOTING RECORD', category: 'voting', node_type: 'pillar' });
+  edges.push({ source: 'pol', target: 'p-votes', edgeType: 'pillar' });
+  if (votingRecords.length > 0) {
+    // Summarize votes
+    let yeas = 0, nays = 0, absent = 0;
+    for (const v of votingRecords) {
+      const pos = ((v.votePosition || v.vote_position || '') as string).toLowerCase();
+      if (pos.includes('yea') || pos.includes('yes')) yeas++;
+      else if (pos.includes('nay') || pos.includes('no')) nays++;
+      else absent++;
+    }
+    if (yeas > 0) {
+      add({ id: 'vote-yea', label: `${yeas} YEA votes`, category: 'vote-yea', node_type: 'entity' });
+      edges.push({ source: 'p-votes', target: 'vote-yea', edgeType: 'category' });
+    }
+    if (nays > 0) {
+      add({ id: 'vote-nay', label: `${nays} NAY votes`, category: 'vote-nay', node_type: 'entity' });
+      edges.push({ source: 'p-votes', target: 'vote-nay', edgeType: 'category' });
+    }
+    if (absent > 0) {
+      add({ id: 'vote-absent', label: `${absent} Absent/NV`, category: 'vote-absent', node_type: 'entity' });
+      edges.push({ source: 'p-votes', target: 'vote-absent', edgeType: 'category' });
+    }
+    // Show recent notable votes
+    votingRecords.slice(0, 8).forEach((v, i) => {
+      const bill = (v.billNumber || v.bill_number || `Bill #${i + 1}`) as string;
+      const pos = ((v.votePosition || v.vote_position || 'Unknown') as string);
+      const cat = pos.toLowerCase().includes('yea') || pos.toLowerCase().includes('yes') ? 'vote-yea' : pos.toLowerCase().includes('nay') || pos.toLowerCase().includes('no') ? 'vote-nay' : 'vote-absent';
+      add({ id: `vote-${i}`, label: truncate(bill, 20), category: cat, node_type: 'entity', sublabel: truncate((v.billTitle || v.bill_title || '') as string, 40), tag: pos });
+      edges.push({ source: 'p-votes', target: `vote-${i}`, label: pos, edgeType: 'entity' });
+    });
+  } else {
+    add({ id: 'votes-pending', label: 'No Records Yet', category: 'voting', node_type: 'entity', sublabel: 'Voting data being synced' });
+    edges.push({ source: 'p-votes', target: 'votes-pending', edgeType: 'entity' });
+  }
+
+  // ===== PILLAR 4: SOCIAL MEDIA =====
+  const socialPosts = politician.socialPosts || [];
+  const socialMedia = politician.socialMedia;
+  add({ id: 'p-social', label: 'SOCIAL MEDIA', category: 'social', node_type: 'pillar' });
+  edges.push({ source: 'pol', target: 'p-social', edgeType: 'pillar' });
+  if (socialMedia) {
+    if (socialMedia.twitterHandle) {
+      add({ id: 'social-twitter', label: `@${socialMedia.twitterHandle}`, category: 'social', node_type: 'entity', tag: 'TWITTER' });
+      edges.push({ source: 'p-social', target: 'social-twitter', edgeType: 'category' });
+    }
+    if (socialMedia.instagramHandle) {
+      add({ id: 'social-ig', label: `@${socialMedia.instagramHandle}`, category: 'social', node_type: 'entity', tag: 'INSTAGRAM' });
+      edges.push({ source: 'p-social', target: 'social-ig', edgeType: 'category' });
+    }
+    if (socialMedia.facebookPageUrl) {
+      add({ id: 'social-fb', label: 'Facebook Page', category: 'social', node_type: 'entity', tag: 'FACEBOOK' });
+      edges.push({ source: 'p-social', target: 'social-fb', edgeType: 'category' });
+    }
+  }
+  if (socialPosts.length > 0) {
+    socialPosts.slice(0, 6).forEach((p, i) => {
+      add({ id: `post-${i}`, label: truncate(p.content, 30), category: 'social-post', node_type: 'entity', sublabel: p.platform, tag: p.platform.toUpperCase() });
+      edges.push({ source: 'p-social', target: `post-${i}`, edgeType: 'entity' });
+    });
+  } else if (!socialMedia?.twitterHandle && !socialMedia?.instagramHandle) {
+    add({ id: 'social-pending', label: 'No Social Data', category: 'social', node_type: 'entity', sublabel: 'Monitoring active' });
+    edges.push({ source: 'p-social', target: 'social-pending', edgeType: 'entity' });
+  }
+
+  return { nodes, edges };
 }
 
 // ---------------------------------------------------------------------------
-// D3 Force Graph Component
+// Node sizing (OpenPlanter tier-based)
 // ---------------------------------------------------------------------------
 
+function tierSizing(nodeType: string, deg: number): { size: number; fontSize: string } {
+  switch (nodeType) {
+    case 'politician': return { size: 50 + Math.sqrt(deg) * 4, fontSize: '12px' };
+    case 'pillar': return { size: 35 + Math.sqrt(deg) * 4, fontSize: '10px' };
+    case 'category': return { size: 22 + Math.sqrt(deg) * 3, fontSize: '8px' };
+    case 'entity':
+    default: return { size: 14 + Math.sqrt(deg) * 2, fontSize: '7px' };
+  }
+}
+
+function toCytoElements(graphNodes: GraphNode[], graphEdges: GraphEdge[]): cytoscape.ElementDefinition[] {
+  const degree = new Map<string, number>();
+  for (const n of graphNodes) degree.set(n.id, 0);
+  for (const e of graphEdges) {
+    degree.set(e.source, (degree.get(e.source) ?? 0) + 1);
+    degree.set(e.target, (degree.get(e.target) ?? 0) + 1);
+  }
+
+  const nodes: cytoscape.ElementDefinition[] = graphNodes.map((n) => {
+    const deg = degree.get(n.id) ?? 0;
+    const { size, fontSize } = tierSizing(n.node_type, deg);
+    return {
+      data: {
+        id: n.id,
+        label: n.label,
+        category: n.category,
+        node_type: n.node_type,
+        color: getCategoryColor(n.category),
+        size,
+        fontSize,
+        amount: n.amount,
+        sublabel: n.sublabel,
+        tag: n.tag,
+      },
+    };
+  });
+
+  const cyEdges: cytoscape.ElementDefinition[] = graphEdges.map((e, i) => ({
+    data: {
+      id: `e${i}`,
+      source: e.source,
+      target: e.target,
+      label: e.label,
+      edgeType: e.edgeType,
+      color: getCategoryColor(graphNodes.find(n => n.id === e.source)?.category ?? ''),
+    },
+  }));
+
+  return [...nodes, ...cyEdges];
+}
+
+// ---------------------------------------------------------------------------
+// React Component
+// ---------------------------------------------------------------------------
+
+interface NodeDetail {
+  label: string;
+  category: string;
+  amount?: number;
+  sublabel?: string;
+  tag?: string;
+}
+
 export default function ConnectionsGraph({ politician }: { politician: Politician }) {
-  const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [dimensions, setDimensions] = useState({ width: 900, height: 600 });
-  const [hoveredNode, setHoveredNode] = useState<GraphNode | null>(null);
+  const cyRef = useRef<Core | null>(null);
+  const [selectedNode, setSelectedNode] = useState<NodeDetail | null>(null);
+  const [activeFilter, setActiveFilter] = useState<string | null>(null);
+  const [layout, setLayout] = useState<'fcose' | 'circle' | 'concentric'>('fcose');
 
-  // Responsive sizing
+  const { nodes: graphNodes, edges: graphEdges } = buildGraph(politician);
+
+  // Only render if there's meaningful data beyond just the 4 pillars
+  const entityCount = graphNodes.filter(n => n.node_type === 'entity' || n.node_type === 'category').length;
+
+  const getLayoutOpts = useCallback((name: string): cytoscape.LayoutOptions => {
+    switch (name) {
+      case 'circle':
+        return { name: 'circle', animate: true, animationDuration: 300, avoidOverlap: true } as cytoscape.LayoutOptions;
+      case 'concentric':
+        return {
+          name: 'concentric', animate: true, animationDuration: 300, avoidOverlap: true, minNodeSpacing: 30,
+          concentric: (node: { data: (key: string) => string }) => {
+            const nt = node.data('node_type');
+            if (nt === 'politician') return 4;
+            if (nt === 'pillar') return 3;
+            if (nt === 'category') return 2;
+            return 1;
+          },
+          levelWidth: () => 1,
+        } as unknown as cytoscape.LayoutOptions;
+      case 'fcose':
+      default:
+        return {
+          name: 'fcose', animate: true, animationDuration: 500, randomize: true, quality: 'proof',
+          nodeSeparation: 80, idealEdgeLength: 150, nodeRepulsion: () => 20000,
+          edgeElasticity: () => 0.45, gravity: 0.2, gravityRange: 3.8, numIter: 2500,
+        } as unknown as cytoscape.LayoutOptions;
+    }
+  }, []);
+
+  // Init Cytoscape
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+    if (!containerRef.current || entityCount < 1) return;
 
-    const observer = new ResizeObserver((entries) => {
-      const entry = entries[0];
-      if (entry) {
-        const w = entry.contentRect.width;
-        setDimensions({ width: w, height: Math.max(500, Math.min(w * 0.7, 700)) });
+    const elements = toCytoElements(graphNodes, graphEdges);
+
+    const cy = cytoscape({
+      container: containerRef.current,
+      elements,
+      style: graphStyle,
+      layout: getLayoutOpts(layout),
+      minZoom: 0.2,
+      maxZoom: 4,
+      wheelSensitivity: 0.3,
+    });
+
+    // Click handler — highlight neighborhood
+    cy.on('tap', 'node', (evt) => {
+      const node = evt.target as NodeSingular;
+      cy.elements().removeClass('dimmed highlighted');
+      const neighborhood = node.neighborhood().add(node);
+      cy.elements().not(neighborhood).addClass('dimmed');
+      neighborhood.edges().addClass('highlighted');
+      neighborhood.nodes().addClass('highlighted');
+      node.removeClass('highlighted');
+
+      setSelectedNode({
+        label: node.data('label'),
+        category: node.data('category'),
+        amount: node.data('amount'),
+        sublabel: node.data('sublabel'),
+        tag: node.data('tag'),
+      });
+    });
+
+    // Click background — clear
+    cy.on('tap', (evt) => {
+      if (evt.target === cy) {
+        cy.elements().removeClass('dimmed highlighted');
+        cy.nodes().unselect();
+        setSelectedNode(null);
       }
     });
 
-    observer.observe(container);
-    return () => observer.disconnect();
-  }, []);
+    cyRef.current = cy;
 
-  // D3 simulation
+    return () => {
+      cy.destroy();
+      cyRef.current = null;
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [politician.id, entityCount]);
+
+  // Layout change
   useEffect(() => {
-    const svg = svgRef.current;
-    if (!svg) return;
+    if (cyRef.current) {
+      cyRef.current.layout(getLayoutOpts(layout)).run();
+    }
+  }, [layout, getLayoutOpts]);
 
-    const { nodes, links } = buildGraph(politician);
-    if (nodes.length <= 1) return; // no data
+  // Filter by pillar
+  useEffect(() => {
+    const cy = cyRef.current;
+    if (!cy) return;
 
-    const { width, height } = dimensions;
+    cy.nodes().removeClass('hidden');
+    cy.edges().removeClass('hidden');
 
-    // Clear previous
-    d3.select(svg).selectAll('*').remove();
+    if (activeFilter) {
+      // Find the pillar node and its descendants
+      const pillarNode = cy.getElementById(`p-${activeFilter}`);
+      if (pillarNode.nonempty()) {
+        const pol = cy.getElementById('pol');
+        const connected = pillarNode.successors().add(pillarNode).add(pol);
+        // Also keep the pillar-to-pol edge
+        const pillarEdge = pol.edgesTo(pillarNode).union(pillarNode.edgesTo(pol));
+        const visible = connected.add(pillarEdge);
+        cy.elements().not(visible).addClass('hidden');
+      }
+    }
+  }, [activeFilter]);
 
-    const root = d3.select(svg)
-      .attr('viewBox', `0 0 ${width} ${height}`)
-      .append('g');
+  if (entityCount < 1) return null;
 
-    // Zoom
-    const zoom = d3.zoom<SVGSVGElement, unknown>()
-      .scaleExtent([0.3, 3])
-      .on('zoom', (event) => root.attr('transform', event.transform));
-    d3.select(svg).call(zoom);
-
-    // Arrow marker
-    root.append('defs').selectAll('marker')
-      .data(['arrow'])
-      .join('marker')
-      .attr('id', 'arrow')
-      .attr('viewBox', '0 -5 10 10')
-      .attr('refX', 20)
-      .attr('refY', 0)
-      .attr('markerWidth', 6)
-      .attr('markerHeight', 6)
-      .attr('orient', 'auto')
-      .append('path')
-      .attr('d', 'M0,-5L10,0L0,5')
-      .attr('fill', 'rgba(255,255,255,0.2)');
-
-    // Simulation
-    const simulation = d3.forceSimulation(nodes)
-      .force('link', d3.forceLink<GraphNode, GraphLink>(links).id(d => d.id).distance(d => {
-        if (d.type === 'category') return 100;
-        if (d.type === 'client') return 60;
-        return 80;
-      }))
-      .force('charge', d3.forceManyBody().strength(d => {
-        const n = d as GraphNode;
-        if (n.type === 'politician') return -400;
-        if (n.type === 'category') return -250;
-        return -120;
-      }))
-      .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide<GraphNode>().radius(d => nodeRadius(d) + 4));
-
-    // Links
-    const link = root.append('g')
-      .selectAll('line')
-      .data(links)
-      .join('line')
-      .attr('stroke', d => {
-        if (d.type === 'funding') return 'rgba(245, 158, 11, 0.4)';
-        if (d.type === 'lobbying') return 'rgba(167, 139, 250, 0.4)';
-        if (d.type === 'ie') return 'rgba(6, 182, 212, 0.4)';
-        if (d.type === 'client') return 'rgba(139, 92, 246, 0.25)';
-        return 'rgba(255, 255, 255, 0.15)';
-      })
-      .attr('stroke-width', d => {
-        if (d.type === 'category') return 2;
-        if (d.amount && d.amount >= 100_000) return 2.5;
-        return 1.2;
-      })
-      .attr('marker-end', d => d.type === 'category' ? '' : 'url(#arrow)');
-
-    // Node groups
-    const node = root.append('g')
-      .selectAll<SVGGElement, GraphNode>('g')
-      .data(nodes)
-      .join('g')
-      .attr('cursor', 'pointer')
-      .call(d3.drag<SVGGElement, GraphNode>()
-        .on('start', (event, d) => {
-          if (!event.active) simulation.alphaTarget(0.3).restart();
-          d.fx = d.x;
-          d.fy = d.y;
-        })
-        .on('drag', (event, d) => {
-          d.fx = event.x;
-          d.fy = event.y;
-        })
-        .on('end', (event, d) => {
-          if (!event.active) simulation.alphaTarget(0);
-          d.fx = null;
-          d.fy = null;
-        })
-      );
-
-    // Node circles
-    node.append('circle')
-      .attr('r', d => nodeRadius(d))
-      .attr('fill', d => NODE_COLORS[d.type])
-      .attr('fill-opacity', d => d.type === 'politician' ? 0.9 : 0.7)
-      .attr('stroke', d => NODE_COLORS[d.type])
-      .attr('stroke-width', d => d.type === 'politician' ? 3 : 1.5)
-      .attr('stroke-opacity', 0.8);
-
-    // Politician icon
-    node.filter(d => d.type === 'politician')
-      .append('text')
-      .attr('text-anchor', 'middle')
-      .attr('dominant-baseline', 'central')
-      .attr('font-size', '16px')
-      .text('👤');
-
-    // Category icons
-    node.filter(d => d.type === 'category')
-      .append('text')
-      .attr('text-anchor', 'middle')
-      .attr('dominant-baseline', 'central')
-      .attr('font-size', '12px')
-      .text(d => {
-        if (d.id === 'cat-funding') return '💰';
-        if (d.id === 'cat-lobbying') return '🏛️';
-        if (d.id === 'cat-ie') return '📡';
-        if (d.id === 'cat-israel') return '🇮🇱';
-        return '📂';
-      });
-
-    // Labels
-    node.append('text')
-      .attr('dy', d => nodeRadius(d) + 12)
-      .attr('text-anchor', 'middle')
-      .attr('fill', 'rgba(255, 255, 255, 0.8)')
-      .attr('font-size', d => d.type === 'politician' ? '11px' : d.type === 'category' ? '9px' : '8px')
-      .attr('font-weight', d => d.type === 'politician' || d.type === 'category' ? '700' : '500')
-      .attr('font-family', 'JetBrains Mono, monospace')
-      .attr('letter-spacing', d => d.type === 'category' ? '0.05em' : '0')
-      .text(d => truncate(d.label, d.type === 'politician' ? 30 : 20));
-
-    // Amount labels on larger nodes
-    node.filter(d => d.amount != null && d.amount > 0 && d.type !== 'category')
-      .append('text')
-      .attr('dy', d => nodeRadius(d) + 22)
-      .attr('text-anchor', 'middle')
-      .attr('fill', d => NODE_COLORS[d.type])
-      .attr('font-size', '7px')
-      .attr('font-weight', '700')
-      .attr('font-family', 'Bebas Neue, JetBrains Mono, monospace')
-      .text(d => d.amount ? formatAmount(d.amount) : '');
-
-    // Hover tooltip
-    node.on('mouseenter', (_event, d) => setHoveredNode(d))
-      .on('mouseleave', () => setHoveredNode(null));
-
-    // Tick
-    simulation.on('tick', () => {
-      link
-        .attr('x1', d => (d.source as GraphNode).x!)
-        .attr('y1', d => (d.source as GraphNode).y!)
-        .attr('x2', d => (d.target as GraphNode).x!)
-        .attr('y2', d => (d.target as GraphNode).y!);
-
-      node.attr('transform', d => `translate(${d.x},${d.y})`);
-    });
-
-    return () => { simulation.stop(); };
-  }, [politician, dimensions]);
-
-  const { nodes } = buildGraph(politician);
-  if (nodes.length <= 1) return null; // No graph data
+  const pillars = [
+    { id: 'fin', label: 'Financials', icon: '💰', color: PILLAR_COLORS['financial'] },
+    { id: 'legal', label: 'Court', icon: '⚖️', color: PILLAR_COLORS['legal'] },
+    { id: 'votes', label: 'Voting', icon: '🗳️', color: PILLAR_COLORS['voting'] },
+    { id: 'social', label: 'Social', icon: '📱', color: PILLAR_COLORS['social'] },
+  ];
 
   return (
     <div className="terminal-card" style={{ padding: '1rem', marginBottom: '1.5rem' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+      {/* Header */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
         <h3 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--terminal-blue)', textTransform: 'uppercase', letterSpacing: '0.1em', margin: 0 }}>
-          🗺️ CONNECTION MAP
+          🗺️ 4-PILLAR CONNECTION MAP
         </h3>
         <div style={{ fontSize: '0.65rem', color: 'var(--terminal-text-dim)' }}>
-          Drag nodes to explore • Scroll to zoom • {nodes.length} entities mapped
+          Click nodes to inspect • Drag to pan • Scroll to zoom • {graphNodes.length} entities
+        </div>
+      </div>
+
+      {/* Pillar filters */}
+      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
+        <button
+          onClick={() => setActiveFilter(null)}
+          className="terminal-btn"
+          style={{
+            padding: '0.3rem 0.6rem', fontSize: '0.65rem',
+            background: !activeFilter ? 'rgba(0, 191, 255, 0.2)' : 'transparent',
+            border: `1px solid ${!activeFilter ? 'var(--terminal-blue)' : 'var(--terminal-border)'}`,
+          }}
+        >
+          ALL
+        </button>
+        {pillars.map(p => (
+          <button
+            key={p.id}
+            onClick={() => setActiveFilter(activeFilter === p.id ? null : p.id)}
+            className="terminal-btn"
+            style={{
+              padding: '0.3rem 0.6rem', fontSize: '0.65rem',
+              background: activeFilter === p.id ? `${p.color}20` : 'transparent',
+              border: `1px solid ${activeFilter === p.id ? p.color : 'var(--terminal-border)'}`,
+              color: activeFilter === p.id ? p.color : 'var(--terminal-text-dim)',
+            }}
+          >
+            {p.icon} {p.label}
+          </button>
+        ))}
+
+        <div style={{ marginLeft: 'auto', display: 'flex', gap: '0.25rem' }}>
+          {(['fcose', 'circle', 'concentric'] as const).map(l => (
+            <button
+              key={l}
+              onClick={() => setLayout(l)}
+              className="terminal-btn"
+              style={{
+                padding: '0.25rem 0.5rem', fontSize: '0.6rem',
+                background: layout === l ? 'rgba(255,255,255,0.1)' : 'transparent',
+                border: `1px solid ${layout === l ? 'var(--terminal-text-dim)' : 'var(--terminal-border)'}`,
+              }}
+            >
+              {l === 'fcose' ? 'Force' : l === 'circle' ? 'Circle' : 'Grouped'}
+            </button>
+          ))}
         </div>
       </div>
 
       {/* Legend */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '0.75rem', fontSize: '0.65rem' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', marginBottom: '0.75rem', fontSize: '0.6rem' }}>
         {[
-          { color: NODE_COLORS.individual, label: 'Individual' },
-          { color: NODE_COLORS.pac, label: 'PAC' },
-          { color: NODE_COLORS.corporate, label: 'Corporate' },
-          { color: NODE_COLORS.israel, label: 'Israel Lobby' },
-          { color: NODE_COLORS['lobby-firm'], label: 'Lobby Firm' },
-          { color: NODE_COLORS['lobby-client'], label: 'Client' },
-          { color: NODE_COLORS.ie, label: 'Indep. Expenditure' },
+          { color: PILLAR_COLORS['donor-individual'], label: 'Individual' },
+          { color: PILLAR_COLORS['donor-pac'], label: 'PAC' },
+          { color: PILLAR_COLORS['donor-corporate'], label: 'Corporate' },
+          { color: PILLAR_COLORS['donor-israel'], label: 'Israel Lobby' },
+          { color: PILLAR_COLORS['lobby-firm'], label: 'Lobby Firm' },
+          { color: PILLAR_COLORS['legal'], label: 'Legal' },
+          { color: PILLAR_COLORS['vote-yea'], label: 'Yea Vote' },
+          { color: PILLAR_COLORS['vote-nay'], label: 'Nay Vote' },
+          { color: PILLAR_COLORS['social'], label: 'Social' },
         ].map(item => (
-          <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-            <div style={{ width: 8, height: 8, borderRadius: '50%', background: item.color, flexShrink: 0 }} />
+          <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+            <div style={{ width: 7, height: 7, borderRadius: '50%', background: item.color, flexShrink: 0 }} />
             <span style={{ color: 'var(--terminal-text-dim)' }}>{item.label}</span>
           </div>
         ))}
       </div>
 
       {/* Graph container */}
-      <div ref={containerRef} style={{ width: '100%', position: 'relative', background: 'rgba(0, 0, 0, 0.3)', border: '1px solid var(--terminal-border)', borderRadius: '2px' }}>
-        <svg
-          ref={svgRef}
-          style={{ width: '100%', height: dimensions.height, display: 'block' }}
+      <div style={{ position: 'relative', width: '100%' }}>
+        <div
+          ref={containerRef}
+          style={{
+            width: '100%',
+            height: '550px',
+            background: 'rgba(0, 0, 0, 0.4)',
+            border: '1px solid var(--terminal-border)',
+            borderRadius: '2px',
+          }}
         />
 
-        {/* Hover tooltip */}
-        {hoveredNode && (
+        {/* Detail overlay */}
+        {selectedNode && (
           <div style={{
-            position: 'absolute',
-            top: 8,
-            right: 8,
-            background: 'var(--terminal-card)',
-            border: '1px solid var(--terminal-border)',
-            padding: '0.75rem',
-            fontSize: '0.75rem',
-            maxWidth: '250px',
-            pointerEvents: 'none',
-            zIndex: 10,
+            position: 'absolute', top: 8, right: 8,
+            background: 'var(--terminal-card)', border: '1px solid var(--terminal-border)',
+            padding: '0.75rem', fontSize: '0.75rem', maxWidth: '260px', zIndex: 10,
           }}>
-            <div style={{ fontWeight: 700, color: NODE_COLORS[hoveredNode.type], marginBottom: '0.25rem' }}>
-              {hoveredNode.label}
+            <div style={{ fontWeight: 700, color: getCategoryColor(selectedNode.category), marginBottom: '0.25rem' }}>
+              {selectedNode.label}
             </div>
-            {hoveredNode.sublabel && (
+            {selectedNode.sublabel && (
               <div style={{ color: 'var(--terminal-text-dim)', fontSize: '0.65rem', marginBottom: '0.25rem' }}>
-                {hoveredNode.sublabel}
+                {selectedNode.sublabel}
               </div>
             )}
-            {hoveredNode.amount != null && hoveredNode.amount > 0 && (
-              <div style={{ fontWeight: 700, fontFamily: 'Bebas Neue, monospace', fontSize: '1rem', color: NODE_COLORS[hoveredNode.type] }}>
-                {formatAmount(hoveredNode.amount)}
+            {selectedNode.amount != null && selectedNode.amount > 0 && (
+              <div style={{ fontWeight: 700, fontFamily: 'Bebas Neue, monospace', fontSize: '1rem', color: getCategoryColor(selectedNode.category) }}>
+                {formatAmount(selectedNode.amount)}
               </div>
             )}
-            {hoveredNode.tag && (
-              <div style={{
-                display: 'inline-block',
-                marginTop: '0.25rem',
-                fontSize: '0.6rem',
-                padding: '1px 4px',
-                background: `${NODE_COLORS[hoveredNode.type]}20`,
-                color: NODE_COLORS[hoveredNode.type],
-                border: `1px solid ${NODE_COLORS[hoveredNode.type]}40`,
-                fontWeight: 700,
+            {selectedNode.tag && (
+              <span style={{
+                display: 'inline-block', marginTop: '0.25rem', fontSize: '0.6rem',
+                padding: '1px 4px', background: `${getCategoryColor(selectedNode.category)}20`,
+                color: getCategoryColor(selectedNode.category),
+                border: `1px solid ${getCategoryColor(selectedNode.category)}40`, fontWeight: 700,
               }}>
-                {hoveredNode.tag}
-              </div>
+                {selectedNode.tag}
+              </span>
             )}
           </div>
         )}
