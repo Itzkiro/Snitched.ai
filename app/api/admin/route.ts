@@ -206,11 +206,12 @@ export async function POST(request: NextRequest) {
   switch (action) {
     // --- List politicians for search/select ---
     case 'list-politicians': {
-      if (!supabase) return NextResponse.json({ error: 'No DB' }, { status: 500 });
-      const { data } = await supabase
+      if (!supabase) return NextResponse.json({ error: 'No DB — SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY missing' }, { status: 500 });
+      const { data, error: listErr } = await supabase
         .from('politicians')
         .select('bioguide_id, name, office, party, is_active, is_candidate, running_for, corruption_score, total_funds')
         .order('name');
+      if (listErr) return NextResponse.json({ error: `DB query failed: ${listErr.message}`, politicians: [] }, { status: 500 });
       return NextResponse.json({ politicians: data || [] });
     }
 

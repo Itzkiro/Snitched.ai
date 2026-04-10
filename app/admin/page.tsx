@@ -72,9 +72,13 @@ export default function AdminPage() {
     setLoading('auth');
     try {
       const data = await api('list-politicians');
-      setPoliticians(data.politicians);
-      setAuthenticated(true);
-      setStatus(`Loaded ${data.politicians.length} politicians`);
+      if (data.error) {
+        setStatus(`Error: ${data.error}`);
+      } else {
+        setPoliticians(data.politicians || []);
+        setAuthenticated(true);
+        setStatus(`Loaded ${(data.politicians || []).length} politicians`);
+      }
     } catch (e) {
       setStatus(`Auth failed: ${e instanceof Error ? e.message : String(e)}`);
     }
