@@ -23,22 +23,31 @@ export async function GET() {
       return cachedResponse(politicians);
     }
 
-    // Select only list-view columns — exclude voting_records, lobbying_records,
-    // bio, social_media, source_ids which bloat the response beyond Vercel limits
-    const { data, error } = await client
-      .from('politicians')
-      .select('bioguide_id, name, office, office_level, party, district, jurisdiction, jurisdiction_type, photo_url, corruption_score, aipac_funding, juice_box_tier, total_funds, israel_lobby_total, is_active, years_in_office, data_source, updated_at, created_at')
-      .order('name')
-      .range(0, 3999);
+    // Paginate to get ALL politicians (Supabase caps at 1000 per request)
+    const columns = 'bioguide_id, name, office, office_level, party, district, jurisdiction, jurisdiction_type, photo_url, corruption_score, aipac_funding, juice_box_tier, total_funds, israel_lobby_total, is_active, years_in_office, data_source, updated_at, created_at';
+    const allRows: Record<string, unknown>[] = [];
+    let page = 0;
+    const pageSize = 1000;
+    let hasMore = true;
 
-    if (error) {
-      console.error('Supabase error:', error);
-      const { getAllPoliticians: getJsonPoliticians } = await import('@/lib/real-data');
-      const politicians = getJsonPoliticians();
-      return cachedResponse(politicians);
+    while (hasMore) {
+      const from = page * pageSize;
+      const to = from + pageSize - 1;
+      const { data: batch, error: batchErr } = await client
+        .from('politicians')
+        .select(columns)
+        .order('name')
+        .range(from, to);
+
+      if (batchErr || !batch) break;
+      allRows.push(...batch);
+      hasMore = batch.length === pageSize;
+      page++;
     }
 
-    if (!data || data.length === 0) {
+    const data = allRows;
+
+    if (data.length === 0) {
       const { getAllPoliticians: getJsonPoliticians } = await import('@/lib/real-data');
       const politicians = getJsonPoliticians();
       return cachedResponse(politicians);

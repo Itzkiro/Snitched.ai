@@ -49,13 +49,24 @@ export async function GET(request: NextRequest) {
   const limit = Math.min(Number(params.get('limit') || '300'), 500);
 
   // Load all politicians with data
-  const { data: pols, error } = await supabase
-    .from('politicians')
-    .select('bioguide_id, name, party, office, corruption_score, top5_donors, israel_lobby_breakdown, lobbying_records, court_records')
-    .range(0, 3999);
+  // Paginate to get ALL politicians (Supabase caps at 1000 per request)
+  const connCols = 'bioguide_id, name, party, office, corruption_score, top5_donors, israel_lobby_breakdown, lobbying_records, court_records';
+  const allPols: Record<string, unknown>[] = [];
+  let pg = 0;
+  while (true) {
+    const { data: batch, error: batchErr } = await supabase
+      .from('politicians')
+      .select(connCols)
+      .range(pg * 1000, (pg + 1) * 1000 - 1);
+    if (batchErr || !batch) break;
+    allPols.push(...batch);
+    if (batch.length < 1000) break;
+    pg++;
+  }
+  const pols = allPols;
 
-  if (error || !pols) {
-    return NextResponse.json({ error: error?.message || 'Failed to load' }, { status: 500 });
+  if (pols.length === 0) {
+    return NextResponse.json({ error: 'No politicians found' }, { status: 500 });
   }
 
   // Build graph in memory
@@ -82,11 +93,11 @@ export async function GET(request: NextRequest) {
   }
 
   for (const pol of pols) {
-    const polId = pol.bioguide_id;
-    const donors = pol.top5_donors || [];
-    const lobby = pol.lobbying_records || [];
-    const israelBreakdown = pol.israel_lobby_breakdown || {};
-    const courtRecords = pol.court_records || [];
+    const polId = pol.bioguide_id as string;
+    const donors = (pol.top5_donors || []) as Array<{ name: string; amount: number; type: string }>;
+    const lobby = (pol.lobbying_records || []) as Array<Record<string, unknown>>;
+    const israelBreakdown = (pol.israel_lobby_breakdown || {}) as Record<string, unknown>;
+    const courtRecords = (pol.court_records || []) as Array<Record<string, unknown>>;
 
     for (const d of donors) {
       if (!d.name) continue;
@@ -96,7 +107,7 @@ export async function GET(request: NextRequest) {
       addEdge(polId, nodeId, cat, 'donated_to', d.amount || 0);
     }
 
-    for (const ie of (israelBreakdown.ie_details || [])) {
+    for (const ie of ((israelBreakdown.ie_details || []) as Array<{ committee_name: string; amount: number; is_israel_lobby: boolean; support_oppose: string }>)) {
       if (!ie.committee_name) continue;
       const nodeId = `ie-${slugify(ie.committee_name)}`;
       addNode(nodeId, ie.committee_name, 'israel-pac', ie.amount || 0);
@@ -105,13 +116,13 @@ export async function GET(request: NextRequest) {
 
     for (const r of lobby) {
       if (!r.registrantName) continue;
-      const firmId = `firm-${slugify(r.registrantName)}`;
-      addNode(firmId, r.registrantName, 'lobby-firm', r.income || 0);
-      addEdge(polId, firmId, 'lobby-firm', 'lobbied_by', r.income || 0);
+      const firmId = `firm-${slugify(String(r.registrantName))}`;
+      addNode(firmId, String(r.registrantName), 'lobby-firm', Number(r.income) || 0);
+      addEdge(polId, firmId, 'lobby-firm', 'lobbied_by', Number(r.income) || 0);
     }
 
     for (const c of courtRecords) {
-      const caseName = c.case_name || c.caseName || '';
+      const caseName = String(c.case_name || c.caseName || '');
       if (!caseName) continue;
       const caseId = `case-${slugify(caseName).slice(0, 60)}`;
       addNode(caseId, caseName, 'court-case', 0);
@@ -145,18 +156,18 @@ export async function GET(request: NextRequest) {
   for (const e of visibleEdges) polIds.add(e.source_id);
 
   const politicians = pols
-    .filter(p => polIds.has(p.bioguide_id))
+    .filter(p => polIds.has(p.bioguide_id as string))
     .map(p => ({
-      bioguide_id: p.bioguide_id,
-      name: p.name,
-      party: p.party,
-      office: p.office,
+      bioguide_id: p.bioguide_id as string,
+      name: p.name as string,
+      party: p.party as string,
+      office: p.office as string,
       corruption_score: p.corruption_score,
     }));
 
   // Cross-party analysis: find entities that connect R and D politicians
   const polPartyMap = new Map<string, string>();
-  for (const p of pols) polPartyMap.set(p.bioguide_id, p.party);
+  for (const p of pols) polPartyMap.set(p.bioguide_id as string, p.party as string);
 
   const crossPartyEntities: Array<{ id: string; label: string; category: string; republicans: number; democrats: number; total: number }> = [];
   for (const node of nodes) {

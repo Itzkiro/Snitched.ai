@@ -208,12 +208,21 @@ export async function POST(request: NextRequest) {
     // --- List politicians for search/select ---
     case 'list-politicians': {
       if (!supabase) return NextResponse.json({ error: 'No DB — SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY missing' }, { status: 500 });
-      const { data, error: listErr } = await supabase
-        .from('politicians')
-        .select('*')
-        .order('name')
-        .range(0, 3999);
-      if (listErr) return NextResponse.json({ error: `DB query failed: ${listErr.message}`, politicians: [] }, { status: 500 });
+      const allRows: Record<string, unknown>[] = [];
+      let pg = 0;
+      while (true) {
+        const { data: batch, error: batchErr } = await supabase
+          .from('politicians')
+          .select('*')
+          .order('name')
+          .range(pg * 1000, (pg + 1) * 1000 - 1);
+        if (batchErr) return NextResponse.json({ error: `DB query failed: ${batchErr.message}`, politicians: [] }, { status: 500 });
+        if (!batch) break;
+        allRows.push(...batch);
+        if (batch.length < 1000) break;
+        pg++;
+      }
+      const data = allRows;
       const politicians = (data || []).map((p: Record<string, unknown>) => ({
         bioguide_id: p.bioguide_id,
         name: p.name,

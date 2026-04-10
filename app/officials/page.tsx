@@ -18,12 +18,24 @@ async function getOfficials(): Promise<Politician[]> {
     return getAllPoliticians().filter(p => p.isActive);
   }
 
-  const { data, error } = await client
-    .from('politicians')
-    .select('bioguide_id, name, office, office_level, party, district, jurisdiction, jurisdiction_type, corruption_score, aipac_funding, juice_box_tier, is_active, total_funds')
-    .eq('is_active', true)
-    .order('name')
-    .range(0, 3999);
+  // Paginate to get ALL officials (Supabase caps at 1000 per request)
+  const cols = 'bioguide_id, name, office, office_level, party, district, jurisdiction, jurisdiction_type, corruption_score, aipac_funding, juice_box_tier, is_active, total_funds';
+  const allRows: Record<string, unknown>[] = [];
+  let page = 0;
+  while (true) {
+    const { data: batch, error: batchErr } = await client
+      .from('politicians')
+      .select(cols)
+      .eq('is_active', true)
+      .order('name')
+      .range(page * 1000, (page + 1) * 1000 - 1);
+    if (batchErr || !batch) break;
+    allRows.push(...batch);
+    if (batch.length < 1000) break;
+    page++;
+  }
+  const data = allRows;
+  const error = null;
 
   if (error || !data || data.length === 0) {
     const { getAllPoliticians } = await import('@/lib/real-data');
