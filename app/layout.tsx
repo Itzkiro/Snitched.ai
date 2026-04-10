@@ -9,11 +9,18 @@ export const viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://snitched.ai'),
-  title: "SNITCHED.AI - Florida Corruption Index",
-  description: "Real-Time Political Transparency • Foreign Lobby Tracking • OSINT Intelligence",
+  title: {
+    default: "Snitched.ai — Track Political Corruption in Florida",
+    template: "%s | SNITCHED.AI",
+  },
+  description: "Track political corruption, foreign lobby influence, and campaign finance in Florida. Real-time OSINT intelligence from public records — not opinions.",
+  alternates: {
+    canonical: 'https://snitched.ai',
+  },
   openGraph: {
-    title: "SNITCHED.AI - Florida Corruption Index",
-    description: "Real-Time Political Transparency • Foreign Lobby Tracking • OSINT Intelligence",
+    siteName: 'SNITCHED.AI',
+    title: "Snitched.ai — Track Political Corruption in Florida",
+    description: "Track political corruption, foreign lobby influence, and campaign finance in Florida. Real-time OSINT intelligence from public records — not opinions.",
     images: [
       {
         url: '/og-image.png',
@@ -26,8 +33,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "SNITCHED.AI - Florida Corruption Index",
-    description: "Real-Time Political Transparency • Foreign Lobby Tracking • OSINT Intelligence",
+    site: '@snitchedai',
+    title: "Snitched.ai — Track Political Corruption in Florida",
+    description: "Track political corruption, foreign lobby influence, and campaign finance in Florida. Real-time OSINT intelligence from public records — not opinions.",
     images: ['/og-image.png'],
   },
 };

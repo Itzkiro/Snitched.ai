@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Candidates | SNITCHED.AI',
+  title: 'Candidates',
   description: 'Track Florida political candidates, their campaign filings, and election timelines. Real-time data from FL Division of Elections.',
 };
 import { getServerSupabase } from '@/lib/supabase-server';
