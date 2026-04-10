@@ -141,6 +141,19 @@ export default function TerminalHeader() {
         >
           ⚖️ COMPARE
         </Link>
+        <Link
+          href="/connections"
+          style={{
+            color: pathname === '/connections' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
+            textDecoration: 'none',
+            fontSize: '11px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+            fontWeight: 600
+          }}
+        >
+          🕸️ CONNECTIONS
+        </Link>
 
         {/* Spacer to push search to the right */}
         <div style={{ flex: 1 }} />
