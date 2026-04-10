@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import type { Politician } from '@/lib/types';
+import { computeCorruptionScore, getGradeColor, getConfidenceColor } from '@/lib/corruption-score';
 import ConnectionsGraph from '@/components/ConnectionsGraph';
 
 // ---------------------------------------------------------------------------
@@ -59,6 +60,10 @@ export default function PoliticianPage() {
         }
         if (!res.ok) throw new Error(`API error: ${res.status}`);
         const found: Politician = await res.json();
+        // Compute corruption score with full factor breakdown on the client
+        const scoreResult = computeCorruptionScore(found);
+        found.corruptionScore = scoreResult.score;
+        found.corruptionScoreDetails = scoreResult;
         setPolitician(found);
       } catch (error) {
         console.error('Error loading politician:', error);
@@ -330,25 +335,7 @@ export default function PoliticianPage() {
     return 'CLEAN';
   };
 
-  const getGradeColor = (grade: string) => {
-    switch (grade) {
-      case 'A': return '#10b981';
-      case 'B': return '#22c55e';
-      case 'C': return '#f59e0b';
-      case 'D': return '#ef4444';
-      case 'F': return '#dc2626';
-      default: return '#6b7280';
-    }
-  };
-
-  const getConfidenceColor = (confidence: string) => {
-    switch (confidence) {
-      case 'high': return '#10b981';
-      case 'medium': return '#f59e0b';
-      case 'low': return '#6b7280';
-      default: return '#6b7280';
-    }
-  };
+  // getGradeColor and getConfidenceColor imported from @/lib/corruption-score
 
   const tabs = [
     { id: 'overview', label: 'OVERVIEW', icon: '📋' },
@@ -914,7 +901,7 @@ export default function PoliticianPage() {
                   textTransform: 'uppercase',
                   letterSpacing: '0.05em',
                 }}>
-                  METHODOLOGY — v1 ALGORITHM
+                  METHODOLOGY — v2 ALGORITHM
                 </h3>
                 <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', lineHeight: 1.7, fontFamily: 'JetBrains Mono, monospace' }}>
                   <p style={{ marginBottom: '0.5rem' }}>
