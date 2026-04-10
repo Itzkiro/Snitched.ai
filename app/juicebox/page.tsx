@@ -149,6 +149,19 @@ export default function JuiceBoxPage() {
         </div>
       </div>
 
+      {/* Export bar */}
+      <div style={{ padding: '0.75rem 2rem', borderBottom: '1px solid var(--terminal-border)', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+        <a href="/api/export?format=csv&type=israel_lobby" download className="terminal-btn" style={{ fontSize: '0.7rem', padding: '0.4rem 0.75rem' }}>
+          EXPORT ISRAEL LOBBY CSV
+        </a>
+        <a href="/api/export?format=csv&type=corruption" download className="terminal-btn" style={{ fontSize: '0.7rem', padding: '0.4rem 0.75rem' }}>
+          EXPORT CORRUPTION CSV
+        </a>
+        <a href="/api/export?format=csv&type=all" download className="terminal-btn" style={{ fontSize: '0.7rem', padding: '0.4rem 0.75rem' }}>
+          EXPORT ALL DATA CSV
+        </a>
+      </div>
+
       <div style={{ padding: '2rem' }}>
         <div style={{ maxWidth: '1600px', margin: '0 auto' }}>
           {/* Score Distribution Stats */}
