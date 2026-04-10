@@ -37,8 +37,8 @@ import type {
 // Constants
 // ---------------------------------------------------------------------------
 
-/** Neutral score when data is unavailable — low baseline (innocent until proven) */
-const PLACEHOLDER_SCORE = 10;
+/** No data = no score. Placeholders contribute nothing. */
+const PLACEHOLDER_SCORE = 0;
 
 /** Weight configuration — must sum to 1.0 */
 const BASE_WEIGHTS = {
@@ -237,13 +237,17 @@ function scorePacContributionRatio(p: Politician): CorruptionFactor {
   let pacRatio = pacTotal / totalRaised;
   pacRatio = Math.min(1, Math.max(0, pacRatio));
 
-  const israelLobbyRatio = (p.israelLobbyTotal ?? 0) / totalRaised;
-  const israelPenalty = Math.min(20, israelLobbyRatio * 100 * 1.5);
+  const israelLobbyAmount = (p.israelLobbyTotal ?? 0) + (p.aipacFunding ?? 0);
+  const israelLobbyRatio = israelLobbyAmount / totalRaised;
+  // ANY Israel lobby money = hard penalty (min 30 points)
+  const israelPenalty = israelLobbyAmount > 0
+    ? Math.max(30, Math.min(50, israelLobbyRatio * 100 * 3))
+    : 0;
 
   const individualRatio = individualTotal / totalRaised;
   const individualCredit = Math.min(15, individualRatio * 20);
 
-  let rawScore = Math.round(pacRatio * 65 + israelPenalty - individualCredit);
+  let rawScore = Math.round(pacRatio * 50 + israelPenalty - individualCredit);
   rawScore = Math.min(100, Math.max(0, rawScore));
 
   const pacPct = (pacRatio * 100).toFixed(1);
@@ -511,18 +515,16 @@ function scoreCampaignFinanceRedFlags(p: Politician): CorruptionFactor {
     }
   }
 
-  // Red flag 4: Israel lobby concentration (0-25 points)
-  if (totalRaised > 0) {
-    const israelRatio = (p.israelLobbyTotal ?? 0) / totalRaised;
-    if (israelRatio > 0.15) {
-      redFlagPoints += 25;
-      flags.push(`${(israelRatio * 100).toFixed(1)}% from Israel lobby`);
-    } else if (israelRatio > 0.08) {
-      redFlagPoints += 15;
-      flags.push(`${(israelRatio * 100).toFixed(1)}% from Israel lobby`);
-    } else if (israelRatio > 0.03) {
-      redFlagPoints += 8;
-      flags.push(`${(israelRatio * 100).toFixed(1)}% from Israel lobby`);
+  // Red flag 4: IMMEDIATE FLAG — ANY Israel lobby / AIPAC money
+  const israelTotal = (p.israelLobbyTotal ?? 0) + (p.aipacFunding ?? 0);
+  if (israelTotal > 0) {
+    // Any foreign lobby money is an immediate severe red flag
+    redFlagPoints += 50;
+    const israelStr = israelTotal >= 1_000_000 ? `$${(israelTotal / 1_000_000).toFixed(1)}M` : israelTotal >= 1_000 ? `$${(israelTotal / 1_000).toFixed(0)}K` : `$${israelTotal}`;
+    flags.push(`🚨 FOREIGN LOBBY: ${israelStr} from Israel lobby/AIPAC — immediate red flag`);
+    if (totalRaised > 0) {
+      const pct = ((israelTotal / totalRaised) * 100).toFixed(1);
+      flags.push(`Israel lobby = ${pct}% of total funds`);
     }
   }
 
