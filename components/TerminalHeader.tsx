@@ -128,6 +128,19 @@ export default function TerminalHeader() {
         >
           🔍 DATABASE
         </Link>
+        <Link
+          href="/compare"
+          style={{
+            color: pathname === '/compare' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
+            textDecoration: 'none',
+            fontSize: '11px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+            fontWeight: 600
+          }}
+        >
+          ⚖️ COMPARE
+        </Link>
 
         {/* Spacer to push search to the right */}
         <div style={{ flex: 1 }} />
