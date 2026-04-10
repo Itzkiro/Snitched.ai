@@ -386,6 +386,9 @@ export default function TerminalHome() {
             <Link href="/browse">
               <button className="terminal-btn">DATABASE SEARCH</button>
             </Link>
+            <Link href="/compare">
+              <button className="terminal-btn">COMPARE POLITICIANS</button>
+            </Link>
           </div>
         </div>
 
