@@ -431,6 +431,14 @@ export default function PoliticianPage() {
             >
               SHARE DOSSIER
             </button>
+            <a
+              href={`/api/export?format=csv&type=all`}
+              download
+              className="terminal-btn"
+              style={{ padding: '0.5rem 1rem', fontSize: '0.75rem', textDecoration: 'none' }}
+            >
+              EXPORT CSV
+            </a>
           </div>
 
           {/* Profile Header Card */}
