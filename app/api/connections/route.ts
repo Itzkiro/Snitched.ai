@@ -4,15 +4,38 @@ import { getServiceRoleSupabase } from '@/lib/supabase-server';
 /**
  * GET /api/connections
  *
- * Returns the cross-politician connections graph.
+ * Builds the cross-politician connections graph ON THE FLY from the
+ * politicians table. No dependency on connection_nodes/edges tables.
+ *
  * Query params:
- *   - minConnections: minimum politician_count to include a node (default: 2)
- *   - category: filter by node category
- *   - politician: filter edges by politician bioguide_id
- *   - limit: max nodes (default: 500)
+ *   - minConnections: minimum politician count to include an entity (default: 2)
+ *   - category: filter by entity category
+ *   - limit: max entity nodes (default: 300)
  */
 
 export const dynamic = 'force-dynamic';
+
+interface EntityNode {
+  id: string;
+  label: string;
+  category: string;
+  total_amount: number;
+  politician_count: number;
+}
+
+interface GraphEdge {
+  id: string;
+  source_id: string;
+  target_id: string;
+  source_type: string;
+  target_type: string;
+  label: string;
+  amount: number;
+}
+
+function slugify(s: string): string {
+  return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 80);
+}
 
 export async function GET(request: NextRequest) {
   const supabase = getServiceRoleSupabase();
@@ -22,74 +45,121 @@ export async function GET(request: NextRequest) {
 
   const params = request.nextUrl.searchParams;
   const minConnections = Number(params.get('minConnections') || '2');
-  const category = params.get('category');
-  const politicianId = params.get('politician');
-  const limit = Math.min(Number(params.get('limit') || '500'), 1000);
+  const categoryFilter = params.get('category');
+  const limit = Math.min(Number(params.get('limit') || '300'), 500);
 
-  // Fetch nodes
-  let nodeQuery = supabase
-    .from('connection_nodes')
-    .select('*')
-    .gte('politician_count', minConnections)
-    .order('politician_count', { ascending: false })
-    .limit(limit);
-
-  if (category) {
-    nodeQuery = nodeQuery.eq('category', category);
-  }
-
-  const { data: nodes, error: nodeErr } = await nodeQuery;
-  if (nodeErr) {
-    return NextResponse.json({ error: nodeErr.message }, { status: 500 });
-  }
-
-  // Get node IDs for edge filtering
-  const nodeIds = new Set((nodes || []).map((n: { id: string }) => n.id));
-
-  // Fetch edges connected to these nodes
-  let edgeQuery = supabase
-    .from('connection_edges')
+  // Load all politicians with data
+  const { data: pols, error } = await supabase
+    .from('politicians')
     .select('*');
 
-  if (politicianId) {
-    edgeQuery = edgeQuery.eq('source_id', politicianId);
+  if (error || !pols) {
+    return NextResponse.json({ error: error?.message || 'Failed to load' }, { status: 500 });
   }
 
-  const { data: allEdges, error: edgeErr } = await edgeQuery.limit(5000);
-  if (edgeErr) {
-    return NextResponse.json({ error: edgeErr.message }, { status: 500 });
-  }
+  // Build graph in memory
+  const nodeMap = new Map<string, EntityNode>();
+  const nodePolMap = new Map<string, Set<string>>();
+  const edges: GraphEdge[] = [];
+  const edgeIds = new Set<string>();
 
-  // Filter edges to only include those connected to our nodes
-  const edges = (allEdges || []).filter((e: { target_id: string; source_id: string }) =>
-    nodeIds.has(e.target_id) || nodeIds.has(e.source_id)
-  );
-
-  // Collect politician IDs from edges to include as nodes
-  const politicianIds = new Set<string>();
-  for (const e of edges) {
-    if ((e as { source_type: string }).source_type === 'politician') {
-      politicianIds.add((e as { source_id: string }).source_id);
+  function addNode(id: string, label: string, category: string, amount = 0) {
+    if (nodeMap.has(id)) {
+      nodeMap.get(id)!.total_amount += amount;
+    } else {
+      nodeMap.set(id, { id, label, category, total_amount: amount, politician_count: 0 });
     }
   }
 
-  // Fetch politician nodes
-  let politicians: Array<{ bioguide_id: string; name: string; party: string; office: string; corruption_score: number }> = [];
-  if (politicianIds.size > 0) {
-    const { data: polData } = await supabase
-      .from('politicians')
-      .select('bioguide_id, name, party, office, corruption_score')
-      .in('bioguide_id', Array.from(politicianIds));
-    politicians = polData || [];
+  function addEdge(polId: string, nodeId: string, category: string, label: string, amount = 0) {
+    const eid = `${polId}--${nodeId}`;
+    if (edgeIds.has(eid)) return;
+    edgeIds.add(eid);
+    edges.push({ id: eid, source_id: polId, target_id: nodeId, source_type: 'politician', target_type: category, label, amount });
+    if (!nodePolMap.has(nodeId)) nodePolMap.set(nodeId, new Set());
+    nodePolMap.get(nodeId)!.add(polId);
   }
 
+  for (const pol of pols) {
+    const polId = pol.bioguide_id;
+    const donors = pol.top5_donors || [];
+    const lobby = pol.lobbying_records || [];
+    const israelBreakdown = pol.israel_lobby_breakdown || {};
+    const courtRecords = pol.court_records || [];
+
+    for (const d of donors) {
+      if (!d.name) continue;
+      const nodeId = `donor-${slugify(d.name)}`;
+      const cat = d.type === 'Israel-PAC' ? 'israel-pac' : d.type === 'PAC' ? 'pac' : d.type === 'Corporate' ? 'corporate' : 'donor';
+      addNode(nodeId, d.name, cat, d.amount || 0);
+      addEdge(polId, nodeId, cat, 'donated_to', d.amount || 0);
+    }
+
+    for (const ie of (israelBreakdown.ie_details || [])) {
+      if (!ie.committee_name) continue;
+      const nodeId = `ie-${slugify(ie.committee_name)}`;
+      addNode(nodeId, ie.committee_name, 'israel-pac', ie.amount || 0);
+      addEdge(polId, nodeId, 'israel-pac', 'ie_spending', ie.amount || 0);
+    }
+
+    for (const r of lobby) {
+      if (!r.registrantName) continue;
+      const firmId = `firm-${slugify(r.registrantName)}`;
+      addNode(firmId, r.registrantName, 'lobby-firm', r.income || 0);
+      addEdge(polId, firmId, 'lobby-firm', 'lobbied_by', r.income || 0);
+    }
+
+    for (const c of courtRecords) {
+      const caseName = c.case_name || c.caseName || '';
+      if (!caseName) continue;
+      const caseId = `case-${slugify(caseName).slice(0, 60)}`;
+      addNode(caseId, caseName, 'court-case', 0);
+      addEdge(polId, caseId, 'court-case', 'court_party', 0);
+    }
+  }
+
+  // Set politician_count
+  for (const [nodeId, polIds] of nodePolMap) {
+    const node = nodeMap.get(nodeId);
+    if (node) node.politician_count = polIds.size;
+  }
+
+  // Filter nodes
+  let nodes = Array.from(nodeMap.values())
+    .filter(n => n.politician_count >= minConnections);
+
+  if (categoryFilter) {
+    nodes = nodes.filter(n => n.category === categoryFilter);
+  }
+
+  nodes.sort((a, b) => b.politician_count - a.politician_count);
+  nodes = nodes.slice(0, limit);
+
+  // Filter edges to only those connected to visible nodes
+  const visibleNodeIds = new Set(nodes.map(n => n.id));
+  const visibleEdges = edges.filter(e => visibleNodeIds.has(e.target_id));
+
+  // Collect politician IDs
+  const polIds = new Set<string>();
+  for (const e of visibleEdges) polIds.add(e.source_id);
+
+  const politicians = pols
+    .filter(p => polIds.has(p.bioguide_id))
+    .map(p => ({
+      bioguide_id: p.bioguide_id,
+      name: p.name,
+      party: p.party,
+      office: p.office,
+      corruption_score: p.corruption_score,
+    }));
+
   return NextResponse.json({
-    nodes: nodes || [],
-    edges,
+    nodes,
+    edges: visibleEdges,
     politicians,
     meta: {
-      totalNodes: (nodes || []).length,
-      totalEdges: edges.length,
+      totalNodes: nodes.length,
+      totalEdges: visibleEdges.length,
       totalPoliticians: politicians.length,
       minConnections,
     },
