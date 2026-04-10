@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 import { getServerSupabase } from '@/lib/supabase-server';
 import type { Politician } from '@/lib/types';
 
-// ISR: revalidate every 5 minutes
-export const revalidate = 300;
+// Force dynamic rendering — candidate data changes frequently
+export const dynamic = 'force-dynamic';
 
 async function getPoliticians(): Promise<Politician[]> {
   const client = getServerSupabase();
