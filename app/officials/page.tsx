@@ -149,11 +149,11 @@ export default async function OfficialsPage() {
                       {pol.corruptionScore}/100
                     </div>
                   </div>
-                  {pol.aipacFunding > 0 && (
+                  {(pol.israelLobbyTotal || pol.aipacFunding || 0) > 0 && (
                     <div style={{ textAlign: 'right' }}>
-                      <div style={{ fontSize: '10px', color: 'var(--terminal-text-dim)' }}>AIPAC FUNDING</div>
-                      <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--terminal-red)' }}>
-                        ${(pol.aipacFunding / 1000).toFixed(0)}K
+                      <div style={{ fontSize: '10px', color: 'var(--terminal-text-dim)' }}>ISRAEL LOBBY</div>
+                      <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--terminal-red)', fontFamily: 'Bebas Neue, sans-serif' }}>
+                        {(() => { const amt = pol.israelLobbyTotal || pol.aipacFunding || 0; return amt >= 1000000 ? `$${(amt/1000000).toFixed(1)}M` : `$${(amt/1000).toFixed(0)}K`; })()}
                       </div>
                     </div>
                   )}
