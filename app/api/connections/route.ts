@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSupabase } from '@/lib/supabase-server';
+import { getServiceRoleSupabase } from '@/lib/supabase-server';
 
 /**
  * GET /api/connections
@@ -15,7 +15,7 @@ import { getServerSupabase } from '@/lib/supabase-server';
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
-  const supabase = getServerSupabase();
+  const supabase = getServiceRoleSupabase();
   if (!supabase) {
     return NextResponse.json({ error: 'No database access' }, { status: 500 });
   }
