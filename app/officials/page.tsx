@@ -22,7 +22,8 @@ async function getOfficials(): Promise<Politician[]> {
     .from('politicians')
     .select('bioguide_id, name, office, office_level, party, district, jurisdiction, jurisdiction_type, corruption_score, aipac_funding, juice_box_tier, is_active, total_funds')
     .eq('is_active', true)
-    .order('name');
+    .order('name')
+    .range(0, 3999);
 
   if (error || !data || data.length === 0) {
     const { getAllPoliticians } = await import('@/lib/real-data');

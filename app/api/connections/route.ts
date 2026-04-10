@@ -51,7 +51,8 @@ export async function GET(request: NextRequest) {
   // Load all politicians with data
   const { data: pols, error } = await supabase
     .from('politicians')
-    .select('*');
+    .select('bioguide_id, name, party, office, corruption_score, top5_donors, israel_lobby_breakdown, lobbying_records, court_records')
+    .range(0, 3999);
 
   if (error || !pols) {
     return NextResponse.json({ error: error?.message || 'Failed to load' }, { status: 500 });

@@ -28,7 +28,8 @@ export async function GET() {
     const { data, error } = await client
       .from('politicians')
       .select('bioguide_id, name, office, office_level, party, district, jurisdiction, jurisdiction_type, photo_url, corruption_score, aipac_funding, juice_box_tier, total_funds, israel_lobby_total, is_active, years_in_office, data_source, updated_at, created_at')
-      .order('name');
+      .order('name')
+      .range(0, 3999);
 
     if (error) {
       console.error('Supabase error:', error);

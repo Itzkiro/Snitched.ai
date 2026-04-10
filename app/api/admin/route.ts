@@ -211,7 +211,8 @@ export async function POST(request: NextRequest) {
       const { data, error: listErr } = await supabase
         .from('politicians')
         .select('*')
-        .order('name');
+        .order('name')
+        .range(0, 3999);
       if (listErr) return NextResponse.json({ error: `DB query failed: ${listErr.message}`, politicians: [] }, { status: 500 });
       const politicians = (data || []).map((p: Record<string, unknown>) => ({
         bioguide_id: p.bioguide_id,
