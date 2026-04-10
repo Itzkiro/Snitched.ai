@@ -104,26 +104,10 @@ export default function SearchBar() {
   const [results, setResults] = useState<Array<Politician & { _score: number }>>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  const [politicians, setPoliticians] = useState<Politician[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Load politicians once on mount via API route
-  useEffect(() => {
-    async function loadData() {
-      try {
-        const res = await fetch('/api/politicians');
-        if (!res.ok) throw new Error(`API error: ${res.status}`);
-        const data: Politician[] = await res.json();
-        setPoliticians(data.filter(p => p && p.name && p.office && p.isActive));
-      } catch (err) {
-        console.error('SearchBar: failed to load politicians', err);
-      }
-    }
-    loadData();
-  }, []);
-
-  // Search when query changes
+  // Debounced search via API when query changes
   useEffect(() => {
     if (query.length < 2) {
       setResults([]);
@@ -131,16 +115,20 @@ export default function SearchBar() {
       return;
     }
 
-    const scored = politicians
-      .map(p => ({ ...p, _score: scorePolitician(p, query) }))
-      .filter(p => p._score !== -1)
-      .sort((a, b) => a._score - b._score)
-      .slice(0, 8);
-
-    setResults(scored);
-    setIsOpen(true);
-    setSelectedIndex(-1);
-  }, [query, politicians]);
+    const timer = setTimeout(() => {
+      fetch(`/api/politicians/search?q=${encodeURIComponent(query)}&limit=8`)
+        .then(r => r.json())
+        .then(data => {
+          if (Array.isArray(data)) {
+            setResults(data.map((p: any) => ({ ...p, _score: 0 })));
+            setIsOpen(true);
+            setSelectedIndex(-1);
+          }
+        })
+        .catch(() => setResults([]));
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [query]);
 
   // Close dropdown on outside click
   useEffect(() => {
