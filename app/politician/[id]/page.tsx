@@ -1000,15 +1000,25 @@ export default function PoliticianPage() {
                             </div>
                           </div>
                           <div style={{ padding: '1rem', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem' }}>Bundlers</div>
+                            <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem' }}>Lobby Donors</div>
                             <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ef4444', fontFamily: 'Bebas Neue, sans-serif' }}>
-                              ${politician.israelLobbyBreakdown?.bundlers 
-                                ? (politician.israelLobbyBreakdown.bundlers >= 1000000 
-                                  ? `${(politician.israelLobbyBreakdown.bundlers / 1000000).toFixed(0)}M`
+                              ${politician.israelLobbyBreakdown?.bundlers
+                                ? (politician.israelLobbyBreakdown.bundlers >= 1000000
+                                  ? `${(politician.israelLobbyBreakdown.bundlers / 1000000).toFixed(1)}M`
                                   : `${(politician.israelLobbyBreakdown.bundlers / 1000).toFixed(0)}K`)
                                 : '$0'}
                             </div>
                           </div>
+                        </div>
+                        {/* Affiliated Organizations */}
+                        {(politician.israelLobbyBreakdown as any)?.orgs && (politician.israelLobbyBreakdown as any).orgs.length > 0 && (
+                          <div style={{ marginTop: '1rem', fontSize: '0.75rem', color: 'var(--terminal-text-dim)' }}>
+                            <span style={{ fontWeight: 700 }}>AFFILIATED ORGS: </span>
+                            {(politician.israelLobbyBreakdown as any).orgs.join(', ')}
+                          </div>
+                        )}
+                        <div style={{ marginTop: '0.75rem', fontSize: '0.65rem', color: 'var(--terminal-text-dimmer)' }}>
+                          Source: Track AIPAC (trackaipac.com)
                         </div>
                       </div>
                     )}
