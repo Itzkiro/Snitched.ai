@@ -40,13 +40,14 @@ import type {
 /** No data = no score. Placeholders contribute nothing. */
 const PLACEHOLDER_SCORE = 0;
 
-/** Weight configuration — must sum to 1.0 */
+/** Weight configuration — must sum to 1.0
+ * Transparency removed — lack of public data is not corruption.
+ * Weight redistributed to actual corruption indicators. */
 const BASE_WEIGHTS = {
-  pacContributionRatio: 0.30,
+  pacContributionRatio: 0.35,
   lobbyingConnections: 0.20,
   votingAlignment: 0.25,
-  transparency: 0.10,
-  campaignFinanceRedFlags: 0.15,
+  campaignFinanceRedFlags: 0.20,
 } as const;
 
 /**
@@ -607,11 +608,11 @@ function formatMoney(amount: number): string {
  */
 export function computeCorruptionScore(politician: Politician): CorruptionScoreResult {
   // First pass: compute raw scores with base weights
+  // 4 factors — transparency removed (lack of data ≠ corruption)
   const factors: CorruptionFactor[] = [
     scorePacContributionRatio(politician),
     scoreLobbyingConnections(politician),
     scoreVotingAlignment(politician),
-    scoreTransparency(politician),
     scoreCampaignFinanceRedFlags(politician),
   ];
 
