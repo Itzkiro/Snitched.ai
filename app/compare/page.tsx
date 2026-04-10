@@ -19,32 +19,51 @@ function getScoreColor(score: number): string {
 }
 
 export default function ComparePage() {
-  const [politicians, setPoliticians] = useState<Politician[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [leftId, setLeftId] = useState<string>('');
-  const [rightId, setRightId] = useState<string>('');
+  const [left, setLeft] = useState<Politician | null>(null);
+  const [right, setRight] = useState<Politician | null>(null);
   const [search1, setSearch1] = useState('');
   const [search2, setSearch2] = useState('');
+  const [results1, setResults1] = useState<any[]>([]);
+  const [results2, setResults2] = useState<any[]>([]);
+  const loading = false;
 
+  // Debounced search for left
   useEffect(() => {
-    fetch('/api/politicians')
-      .then(res => res.json())
-      .then(data => {
-        setPoliticians(data.filter((p: Politician) => p.isActive));
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, []);
+    if (search1.length < 2) { setResults1([]); return; }
+    const timer = setTimeout(() => {
+      fetch(`/api/politicians/search?q=${encodeURIComponent(search1)}&limit=8`)
+        .then(r => r.json())
+        .then(d => setResults1(Array.isArray(d) ? d : []))
+        .catch(() => setResults1([]));
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [search1]);
 
-  const left = politicians.find(p => p.id === leftId);
-  const right = politicians.find(p => p.id === rightId);
+  // Debounced search for right
+  useEffect(() => {
+    if (search2.length < 2) { setResults2([]); return; }
+    const timer = setTimeout(() => {
+      fetch(`/api/politicians/search?q=${encodeURIComponent(search2)}&limit=8`)
+        .then(r => r.json())
+        .then(d => setResults2(Array.isArray(d) ? d : []))
+        .catch(() => setResults2([]));
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [search2]);
 
-  const filtered1 = search1
-    ? politicians.filter(p => p.name.toLowerCase().includes(search1.toLowerCase())).slice(0, 8)
-    : [];
-  const filtered2 = search2
-    ? politicians.filter(p => p.name.toLowerCase().includes(search2.toLowerCase())).slice(0, 8)
-    : [];
+  const selectLeft = (p: any) => {
+    fetch(`/api/politicians/${p.id}`).then(r => r.json()).then(d => setLeft(d));
+    setSearch1(''); setResults1([]);
+  };
+  const selectRight = (p: any) => {
+    fetch(`/api/politicians/${p.id}`).then(r => r.json()).then(d => setRight(d));
+    setSearch2(''); setResults2([]);
+  };
+
+  const leftId = left?.id || '';
+  const rightId = right?.id || '';
+  const filtered1 = results1;
+  const filtered2 = results2;
 
   const rows = [
     { label: 'CORRUPTION SCORE', left: left?.corruptionScore ?? 0, right: right?.corruptionScore ?? 0, format: (n: number) => `${n}/100`, color: true },
@@ -84,7 +103,7 @@ export default function ComparePage() {
             <input
               type="text"
               value={left ? left.name : search1}
-              onChange={(e) => { setSearch1(e.target.value); setLeftId(''); }}
+              onChange={(e) => { setSearch1(e.target.value); setLeft(null); }}
               placeholder="Search name..."
               style={{
                 width: '100%', padding: '0.75rem', background: 'var(--terminal-bg)',
@@ -95,7 +114,7 @@ export default function ComparePage() {
             {filtered1.length > 0 && !left && (
               <div style={{ border: '1px solid var(--terminal-border)', maxHeight: '200px', overflowY: 'auto', marginTop: '0.25rem' }}>
                 {filtered1.map(p => (
-                  <div key={p.id} onClick={() => { setLeftId(p.id); setSearch1(''); }}
+                  <div key={p.id} onClick={() => selectLeft(p)}
                     style={{ padding: '0.5rem 0.75rem', cursor: 'pointer', fontSize: '0.8rem', borderBottom: '1px solid var(--terminal-border)' }}
                     onMouseEnter={e => (e.currentTarget.style.background = 'rgba(0,191,255,0.1)')}
                     onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
@@ -117,7 +136,7 @@ export default function ComparePage() {
             <input
               type="text"
               value={right ? right.name : search2}
-              onChange={(e) => { setSearch2(e.target.value); setRightId(''); }}
+              onChange={(e) => { setSearch2(e.target.value); setRight(null); }}
               placeholder="Search name..."
               style={{
                 width: '100%', padding: '0.75rem', background: 'var(--terminal-bg)',
@@ -128,7 +147,7 @@ export default function ComparePage() {
             {filtered2.length > 0 && !right && (
               <div style={{ border: '1px solid var(--terminal-border)', maxHeight: '200px', overflowY: 'auto', marginTop: '0.25rem' }}>
                 {filtered2.map(p => (
-                  <div key={p.id} onClick={() => { setRightId(p.id); setSearch2(''); }}
+                  <div key={p.id} onClick={() => selectRight(p)}
                     style={{ padding: '0.5rem 0.75rem', cursor: 'pointer', fontSize: '0.8rem', borderBottom: '1px solid var(--terminal-border)' }}
                     onMouseEnter={e => (e.currentTarget.style.background = 'rgba(0,191,255,0.1)')}
                     onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
