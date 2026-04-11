@@ -1014,7 +1014,7 @@ export default function PoliticianPage() {
                           </div>
                         )}
                         <div style={{ marginTop: '0.75rem', fontSize: '0.65rem', color: 'var(--terminal-text-dimmer)' }}>
-                          Source: Track AIPAC (trackaipac.com)
+                          Source: FEC filings &amp; public disclosure records
                         </div>
                       </div>
                     )}

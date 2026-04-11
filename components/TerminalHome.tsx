@@ -184,7 +184,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
             </div>
           )}
         </div>
-        <div className="classified-footer">PUBLIC RECORDS: FEC // STATE ELECTIONS // LDA SENATE // LEGISCAN // TRACK AIPAC // <Link href="/about" style={{ color: '#fff', textDecoration: 'underline' }}>METHODOLOGY</Link></div>
+        <div className="classified-footer">PUBLIC RECORDS: FEC // STATE ELECTIONS // LDA SENATE // LEGISCAN // COURTLISTENER // <Link href="/about" style={{ color: '#fff', textDecoration: 'underline' }}>METHODOLOGY</Link></div>
       </div>
     );
   }
@@ -479,7 +479,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
               { name: 'FEC', full: 'Federal Election Commission', desc: 'Campaign contributions, PAC filings, independent expenditures. Updated daily.' },
               { name: 'LDA', full: 'Lobbying Disclosure Act', desc: 'Registered lobbyist filings, client relationships, income reports.' },
               { name: 'LegiScan', full: 'State Legislature Records', desc: 'Roll call votes, bill sponsorships, voting record analysis.' },
-              { name: 'Track AIPAC', full: 'Israel Lobby Data', desc: 'AIPAC bundled donations, pro-Israel PAC money, donor networks.' },
+
               { name: 'CourtListener', full: 'Federal Court Records', desc: 'Court cases, legal proceedings, judicial records.' },
               { name: 'Congress.gov', full: 'Congressional Data', desc: 'Member profiles, committee assignments, legislative activity.' },
             ].map(s => (
@@ -621,7 +621,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
           America First public intelligence platform. Tracking corruption and foreign lobby influence using verified public records.
         </div>
         <div style={{ color: txtMuted, marginBottom: '0.5rem' }}>
-          FEC &middot; LDA Senate &middot; LegiScan &middot; Track AIPAC &middot; CourtListener &middot; Congress.gov
+          FEC &middot; LDA Senate &middot; LegiScan &middot; CourtListener &middot; Congress.gov
         </div>
         <div style={{ color: txtMuted }}>
           <Link href="/about" style={{ color: g, textDecoration: 'none' }}>Methodology</Link>

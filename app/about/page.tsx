@@ -85,7 +85,7 @@ export default function AboutPage() {
             </div>
           </div>
           <p style={{ marginTop: '1rem', fontSize: '0.8rem', color: 'var(--terminal-text-dim)' }}>
-            Lobby donor data sourced from Track AIPAC (trackaipac.com). PAC and IE data from FEC filings.
+            Lobby donor data sourced from FEC filings and public disclosure records. PAC and IE data from FEC filings.
           </p>
         </div>
 
@@ -111,10 +111,8 @@ export default function AboutPage() {
               <div style={{ fontWeight: 700 }}>LegiScan</div>
               <div style={{ color: 'var(--terminal-text-dim)', fontSize: '0.8rem' }}>State and federal voting records — roll call votes on bills for policy alignment scoring.</div>
             </div>
-            <div style={{ padding: '0.75rem', borderLeft: '3px solid var(--terminal-blue)' }}>
-              <div style={{ fontWeight: 700 }}>Track AIPAC</div>
-              <div style={{ color: 'var(--terminal-text-dim)', fontSize: '0.8rem' }}>Israel lobby individual donor data including bundled contributions. The most comprehensive source for lobby donor tracking.</div>
-            </div>
+
+
             <div style={{ padding: '0.75rem', borderLeft: '3px solid var(--terminal-blue)' }}>
               <div style={{ fontWeight: 700 }}>Google News RSS</div>
               <div style={{ color: 'var(--terminal-text-dim)', fontSize: '0.8rem' }}>News mentions and press releases for social intelligence feed.</div>
@@ -161,7 +159,7 @@ export default function AboutPage() {
       </div>
 
       <div className="classified-footer">
-        PUBLIC RECORDS: FEC // STATE ELECTION DATABASES // LDA SENATE // LEGISCAN // TRACK AIPAC // COURTLISTENER
+        PUBLIC RECORDS: FEC // STATE ELECTION DATABASES // LDA SENATE // LEGISCAN // COURTLISTENER
       </div>
     </div>
   );
