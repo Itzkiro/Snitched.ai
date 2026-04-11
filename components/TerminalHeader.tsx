@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import SearchBar from './SearchBar';
+import { useTerminal } from './TerminalContext';
 
 const STATES = [
   { code: 'ALL', name: 'All States' },
@@ -63,6 +64,7 @@ const STATES = [
 export default function TerminalHeader() {
   const pathname = usePathname();
   const router = useRouter();
+  const { exit } = useTerminal();
   const searchParams = useSearchParams();
   const [stateOpen, setStateOpen] = useState(false);
   const [selectedState, setSelectedState] = useState(searchParams.get('state') || 'FL');
@@ -165,20 +167,21 @@ export default function TerminalHeader() {
         alignItems: 'center',
         gap: '2rem'
       }}>
-        <Link 
-          href={`/${stateQuery}`}
-          style={{ 
+        <button
+          onClick={() => { exit(); router.push('/'); }}
+          style={{
+            background: 'none', border: 'none', cursor: 'pointer', padding: 0,
             color: pathname === '/' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
-            textDecoration: 'none',
             fontSize: '11px',
             textTransform: 'uppercase',
             letterSpacing: '0.1em',
             fontWeight: 600,
-            transition: 'color 0.2s'
+            fontFamily: 'var(--font-terminal)',
+            transition: 'color 0.2s',
           }}
         >
           🏠 HOME
-        </Link>
+        </button>
         <Link
           href={`/dashboard${stateQuery}`}
           style={{

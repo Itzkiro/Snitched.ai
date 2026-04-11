@@ -1,25 +1,23 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { getServiceRoleSupabase, getServerSupabase } from '@/lib/supabase-server';
+import type { Politician } from '@/lib/types';
+import { filterByState, getStateName } from '@/lib/state-utils';
 
 export const metadata: Metadata = {
   title: 'Candidates',
-  description: 'Track Florida political candidates, their campaign filings, and election timelines. Real-time data from FL Division of Elections.',
+  description: 'Track political candidates, their campaign filings, and election timelines. Real-time data from FEC and state election databases.',
 };
-import { getServiceRoleSupabase, getServerSupabase } from '@/lib/supabase-server';
-import type { Politician } from '@/lib/types';
-import { filterByState } from '@/lib/state-utils';
 
-// Force dynamic rendering — candidate data changes frequently
 export const dynamic = 'force-dynamic';
 
-async function getPoliticians(): Promise<Politician[]> {
+async function getCandidates(): Promise<Politician[]> {
   const client = getServiceRoleSupabase() || getServerSupabase();
   if (!client) {
     const { getAllPoliticians } = await import('@/lib/real-data');
     return getAllPoliticians();
   }
 
-  // Use RPC function to bypass PostgREST schema cache issue
   const { data, error } = await client.rpc('get_candidates');
 
   if (error) {
@@ -50,193 +48,224 @@ async function getPoliticians(): Promise<Politician[]> {
   })) as Politician[];
 }
 
+function CandidateCard({ pol }: { pol: Politician }) {
+  return (
+    <Link href={`/politician/${pol.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+      <div className="terminal-card">
+        <div className="card-header">
+          <div>
+            <div className="card-title">{pol.name}</div>
+            <div style={{ fontSize: '11px', color: 'var(--terminal-text-dim)', marginTop: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <span>{pol.runningFor || pol.office}</span>
+              <span style={{
+                fontSize: '10px', padding: '0.3rem 0.6rem',
+                background: pol.party === 'Republican' ? '#dc2626' : pol.party === 'Democrat' ? '#2563eb' : '#6b7280',
+                color: '#fff', fontWeight: 600,
+              }}>
+                {pol.party === 'Republican' ? 'R' : pol.party === 'Democrat' ? 'D' : pol.party}
+              </span>
+            </div>
+          </div>
+          <div className="card-status" style={{
+            fontSize: '10px',
+            color: pol.isActive ? 'var(--terminal-amber)' : 'var(--terminal-green)',
+            background: pol.isActive ? 'rgba(255,182,39,0.1)' : 'rgba(0,255,65,0.1)',
+            border: pol.isActive ? '1px solid rgba(255,182,39,0.3)' : '1px solid var(--terminal-green)',
+          }}>
+            {pol.isActive ? 'INCUMBENT' : 'CHALLENGER'}
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.5rem' }}>
+          <div>
+            <div style={{ fontSize: '10px', color: 'var(--terminal-text-dim)' }}>CORRUPTION SCORE</div>
+            <div style={{
+              fontSize: '1.5rem', fontWeight: 700,
+              color: pol.corruptionScore >= 60 ? 'var(--terminal-red)' :
+                     pol.corruptionScore >= 40 ? 'var(--terminal-amber)' : 'var(--terminal-green)',
+            }}>
+              {pol.corruptionScore}/100
+            </div>
+          </div>
+          {pol.aipacFunding > 0 && (
+            <div style={{ textAlign: 'right' }}>
+              <div style={{ fontSize: '10px', color: 'var(--terminal-text-dim)' }}>ISRAEL LOBBY</div>
+              <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--terminal-red)', fontFamily: 'Bebas Neue, sans-serif' }}>
+                {pol.aipacFunding >= 1000000
+                  ? `$${(pol.aipacFunding / 1000000).toFixed(1)}M`
+                  : `$${(pol.aipacFunding / 1000).toFixed(0)}K`}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {pol.jurisdiction && (
+          <div style={{ marginTop: '0.75rem', fontSize: '10px', color: 'var(--terminal-text-dim)', padding: '0.4rem 0', borderTop: '1px solid var(--terminal-border)' }}>
+            {pol.jurisdiction} {pol.district ? `| District ${pol.district}` : ''}
+          </div>
+        )}
+      </div>
+    </Link>
+  );
+}
+
+function SectionHeader({ title, count, icon }: { title: string; count: number; icon: string }) {
+  return (
+    <div style={{ padding: '2rem 2rem 1rem', borderTop: '1px solid var(--terminal-border)' }}>
+      <h2 style={{
+        fontSize: '1.25rem', fontWeight: 600, color: 'var(--terminal-green)',
+        textTransform: 'uppercase', letterSpacing: '0.1em',
+        display: 'flex', alignItems: 'center', gap: '0.5rem',
+      }}>
+        <span>{icon}</span> {title} ({count})
+      </h2>
+    </div>
+  );
+}
+
 export default async function CandidatesPage({ searchParams }: { searchParams: Promise<{ state?: string }> }) {
   const { state: stateParam } = await searchParams;
-  const allCandidates = await getPoliticians();
+  const allCandidates = await getCandidates();
   const candidates = filterByState(allCandidates, stateParam);
+  const stateName = getStateName(stateParam);
+
+  const byLevel = {
+    federal: candidates.filter(p => p.officeLevel === 'US Senator' || p.officeLevel === 'US Representative'),
+    state: candidates.filter(p => p.officeLevel === 'Governor' || p.officeLevel === 'State Senator' || p.officeLevel === 'State Representative'),
+    local: candidates.filter(p =>
+      p.officeLevel !== 'US Senator' && p.officeLevel !== 'US Representative' &&
+      p.officeLevel !== 'Governor' && p.officeLevel !== 'State Senator' && p.officeLevel !== 'State Representative'
+    ),
+  };
+
+  const totalAipac = candidates.reduce((s, p) => s + (p.aipacFunding || 0), 0);
 
   return (
     <div style={{ minHeight: '100vh', paddingBottom: '4rem' }}>
       {/* Title */}
       <div style={{ padding: '2rem', borderBottom: '1px solid var(--terminal-border)' }}>
         <h1 style={{ fontSize: '2.5rem', fontWeight: 400, letterSpacing: '0.05em', marginBottom: '0.5rem' }}>
-          CANDIDATES RUNNING
+          CANDIDATES
         </h1>
         <div style={{ color: 'var(--terminal-text-dim)', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-          2026 Election Cycle | Campaign Finance Monitoring Active
+          {stateName} | 2026 Election Cycle | Campaign Finance Monitoring Active
         </div>
       </div>
 
-      {/* Alert */}
-      <div style={{ padding: '2rem', background: 'rgba(0, 191, 255, 0.05)', borderBottom: '1px solid var(--terminal-border)' }}>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '1rem',
-          padding: '1rem',
-          background: 'var(--terminal-card)',
-          border: '1px solid var(--terminal-blue)'
-        }}>
-          <span style={{ fontSize: '2rem' }}>📢</span>
-          <div>
-            <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--terminal-blue)', marginBottom: '0.25rem' }}>
-              ELECTION INTELLIGENCE ALERT
-            </div>
-            <div style={{ fontSize: '0.875rem', color: 'var(--terminal-text-dim)' }}>
-              Tracking {candidates.length} candidates | Live FEC data integration | AIPAC funding monitoring enabled
-            </div>
-          </div>
+      {/* Stats bar */}
+      <div style={{
+        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+        gap: '1rem', padding: '1rem 2rem', borderBottom: '1px solid var(--terminal-border)',
+      }}>
+        <div className="terminal-card" style={{ padding: '1rem' }}>
+          <div className="stat-value">{candidates.length}</div>
+          <div className="stat-label">TOTAL CANDIDATES</div>
         </div>
+        <div className="terminal-card" style={{ padding: '1rem' }}>
+          <div className="stat-value" style={{ color: 'var(--terminal-green)' }}>{byLevel.federal.length}</div>
+          <div className="stat-label">FEDERAL</div>
+        </div>
+        <div className="terminal-card" style={{ padding: '1rem' }}>
+          <div className="stat-value" style={{ color: 'var(--terminal-amber)' }}>{byLevel.state.length}</div>
+          <div className="stat-label">STATE</div>
+        </div>
+        <div className="terminal-card" style={{ padding: '1rem' }}>
+          <div className="stat-value" style={{ color: 'var(--terminal-text-dim)' }}>{byLevel.local.length}</div>
+          <div className="stat-label">LOCAL</div>
+        </div>
+        {totalAipac > 0 && (
+          <div className="terminal-card" style={{ padding: '1rem' }}>
+            <div className="stat-value danger">
+              {totalAipac >= 1000000 ? `$${(totalAipac / 1000000).toFixed(1)}M` : `$${(totalAipac / 1000).toFixed(0)}K`}
+            </div>
+            <div className="stat-label">AIPAC FUNDING</div>
+          </div>
+        )}
       </div>
 
       {candidates.length > 0 ? (
-        <div style={{ padding: '2rem' }}>
-          <div className="data-grid" style={{ padding: 0 }}>
-            {candidates
-              .filter(pol => pol && pol.id && pol.name && pol.office && pol.party)
-              .map((pol) => (
-              <Link
-                key={pol.id}
-                href={`/politician/${pol.id}`}
-                style={{ textDecoration: 'none', color: 'inherit' }}
-              >
-                <div className="terminal-card">
-                  <div className="card-header">
-                    <div>
-                      <div className="card-title">{pol.name}</div>
-                      <div style={{ fontSize: '11px', color: 'var(--terminal-text-dim)', marginTop: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                        <span>Running for: {pol.runningFor || pol.office}</span>
-                        <span style={{
-                          fontSize: '10px',
-                          padding: '0.3rem 0.6rem',
-                          background: pol.party === 'Republican' ? '#dc2626' : pol.party === 'Democrat' ? '#2563eb' : '#6b7280',
-                          color: '#fff',
-                          borderRadius: '10px',
-                          fontWeight: 600,
-                        }}>
-                          {pol.party === 'Republican' ? '🐘 R' : pol.party === 'Democrat' ? '🫏 D' : pol.party}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="card-status" style={{
-                      fontSize: '10px',
-                      color: pol.isActive ? 'var(--terminal-amber)' : 'var(--terminal-blue)',
-                    }}>
-                      {pol.isActive ? 'SEATED + RUNNING' : 'CANDIDATE'}
-                    </div>
-                  </div>
+        <>
+          {/* Federal Candidates */}
+          {byLevel.federal.length > 0 && (
+            <>
+              <SectionHeader title="FEDERAL CANDIDATES" count={byLevel.federal.length} icon="&#127963;" />
+              <div className="data-grid" style={{ padding: '0 2rem 1rem' }}>
+                {byLevel.federal
+                  .filter(p => p.id && p.name && p.office && p.party)
+                  .map(pol => <CandidateCard key={pol.id} pol={pol} />)}
+              </div>
+            </>
+          )}
 
-                  <div style={{ marginTop: '1rem' }}>
-                    <div style={{ fontSize: '10px', color: 'var(--terminal-text-dim)', marginBottom: '0.5rem' }}>
-                      BACKGROUND CHECK
-                    </div>
-                    <div style={{
-                      fontSize: '1.5rem',
-                      fontWeight: 700,
-                      color: pol.corruptionScore >= 60 ? 'var(--terminal-red)' :
-                             pol.corruptionScore >= 40 ? 'var(--terminal-amber)' : 'var(--terminal-green)'
-                    }}>
-                      SCORE: {pol.corruptionScore}/100
-                    </div>
-                  </div>
+          {/* State Candidates */}
+          {byLevel.state.length > 0 && (
+            <>
+              <SectionHeader title="STATE CANDIDATES" count={byLevel.state.length} icon="&#9878;&#65039;" />
+              <div className="data-grid" style={{ padding: '0 2rem 1rem' }}>
+                {byLevel.state
+                  .filter(p => p.id && p.name && p.office && p.party)
+                  .map(pol => <CandidateCard key={pol.id} pol={pol} />)}
+              </div>
+            </>
+          )}
 
-                  {pol.aipacFunding > 0 && (
-                    <div style={{
-                      padding: '0.75rem',
-                      background: 'rgba(255, 8, 68, 0.1)',
-                      border: '1px solid var(--terminal-red)',
-                      marginTop: '1rem'
-                    }}>
-                      <div style={{ fontSize: '10px', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem' }}>
-                        ⚠️ CAMPAIGN FINANCE ALERT
-                      </div>
-                      <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--terminal-red)' }}>
-                        ${(pol.aipacFunding / 1000).toFixed(0)}K AIPAC FUNDING
-                      </div>
-                    </div>
-                  )}
-
-                  {pol.isActive && (
-                    <div style={{ marginTop: '1rem', fontSize: '11px', color: 'var(--terminal-amber)', padding: '0.5rem', background: 'rgba(245, 158, 11, 0.1)', border: '1px solid rgba(245, 158, 11, 0.3)' }}>
-                      Currently serving: {pol.office}
-                    </div>
-                  )}
-                  {!pol.isActive && pol.termEnd && pol.termStart && (
-                    <div style={{ marginTop: '1rem', fontSize: '11px', color: 'var(--terminal-text-dim)' }}>
-                      Previously served: {new Date(pol.termStart).getFullYear()} - {new Date(pol.termEnd).getFullYear()}
-                    </div>
-                  )}
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
+          {/* Local Candidates */}
+          {byLevel.local.length > 0 && (
+            <>
+              <SectionHeader title="LOCAL CANDIDATES" count={byLevel.local.length} icon="&#127970;" />
+              <div className="data-grid" style={{ padding: '0 2rem 1rem' }}>
+                {byLevel.local
+                  .filter(p => p.id && p.name && p.office && p.party)
+                  .map(pol => <CandidateCard key={pol.id} pol={pol} />)}
+              </div>
+            </>
+          )}
+        </>
       ) : (
-        <div style={{
-          padding: '4rem 2rem',
-          textAlign: 'center',
-          color: 'var(--terminal-text-dim)'
-        }}>
-          <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>📊</div>
-          <div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--terminal-blue)', marginBottom: '1rem' }}>
+        <div style={{ padding: '4rem 2rem', textAlign: 'center', color: 'var(--terminal-text-dim)' }}>
+          <div style={{ fontSize: '3rem', marginBottom: '1rem', opacity: 0.3 }}>&#128269;</div>
+          <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--terminal-green)', marginBottom: '1rem' }}>
             NO ACTIVE CANDIDATES DETECTED
           </div>
-          <div style={{ fontSize: '0.875rem', maxWidth: '600px', margin: '0 auto', lineHeight: 1.6 }}>
-            Candidate monitoring is active. New filings with Florida Division of Elections and FEC will be automatically detected and indexed.
-            System will alert when 2026 primary filing period opens.
+          <div style={{ fontSize: '0.875rem', maxWidth: '500px', margin: '0 auto', lineHeight: 1.6 }}>
+            Candidate monitoring is active for {stateName}. New filings with FEC and state election
+            databases will be automatically detected and indexed when the 2026 filing period opens.
           </div>
           <div style={{ marginTop: '2rem' }}>
-            <Link href="/officials">
-              <button className="terminal-btn">
-                VIEW SEATED OFFICIALS →
-              </button>
+            <Link href={`/officials${stateParam ? `?state=${stateParam}` : ''}`}>
+              <button className="terminal-btn">VIEW SEATED OFFICIALS</button>
             </Link>
           </div>
         </div>
       )}
 
-      {/* Filing information */}
+      {/* Filing Calendar */}
       <div style={{ padding: '2rem', background: 'var(--terminal-surface)', borderTop: '1px solid var(--terminal-border)' }}>
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
           <h3 style={{
-            fontSize: '1rem',
-            fontWeight: 700,
-            color: 'var(--terminal-blue)',
-            marginBottom: '1rem',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em'
+            fontSize: '0.85rem', fontWeight: 700, color: 'var(--terminal-green)',
+            marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.1em',
           }}>
-            📋 2026 FILING CALENDAR
+            2026 FILING CALENDAR
           </h3>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '1rem',
-            fontSize: '11px'
-          }}>
-            <div className="terminal-card">
-              <div style={{ color: 'var(--terminal-text-dim)', marginBottom: '0.5rem' }}>PRIMARY FILING DEADLINE</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>JUN 14, 2026</div>
-            </div>
-            <div className="terminal-card">
-              <div style={{ color: 'var(--terminal-text-dim)', marginBottom: '0.5rem' }}>PRIMARY ELECTION</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>AUG 18, 2026</div>
-            </div>
-            <div className="terminal-card">
-              <div style={{ color: 'var(--terminal-text-dim)', marginBottom: '0.5rem' }}>GENERAL FILING DEADLINE</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>SEP 15, 2026</div>
-            </div>
-            <div className="terminal-card">
-              <div style={{ color: 'var(--terminal-text-dim)', marginBottom: '0.5rem' }}>GENERAL ELECTION</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>NOV 3, 2026</div>
-            </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.75rem', fontSize: '11px' }}>
+            {[
+              { label: 'PRIMARY FILING DEADLINE', date: 'JUN 14, 2026' },
+              { label: 'PRIMARY ELECTION', date: 'AUG 18, 2026' },
+              { label: 'GENERAL FILING DEADLINE', date: 'SEP 15, 2026' },
+              { label: 'GENERAL ELECTION', date: 'NOV 3, 2026' },
+            ].map(d => (
+              <div key={d.label} className="terminal-card" style={{ padding: '0.75rem' }}>
+                <div style={{ color: 'var(--terminal-text-dim)', marginBottom: '0.3rem', fontSize: '0.6rem', letterSpacing: '0.1em' }}>{d.label}</div>
+                <div style={{ fontSize: '1.1rem', fontWeight: 700 }}>{d.date}</div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Data source footer */}
       <div className="classified-footer">
-        ALL DATA ACQUIRED VIA OSINT // PUBLIC RECORDS: FEC, SOCIAL MEDIA, NEWS OUTLETS // CAMPAIGN MONITORING DIVISION
+        ALL DATA ACQUIRED VIA OSINT // PUBLIC RECORDS: FEC, STATE ELECTION DATABASES // CAMPAIGN MONITORING DIVISION
       </div>
     </div>
   );

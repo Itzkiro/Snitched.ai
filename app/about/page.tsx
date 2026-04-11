@@ -22,8 +22,8 @@ export default function AboutPage() {
             MISSION
           </h2>
           <p style={{ lineHeight: 1.8, fontSize: '0.9rem' }}>
-            Snitched.ai is a citizen research platform that tracks corruption and foreign lobby influence
-            among Florida politicians. Every data point is sourced from public records — FEC filings,
+            Snitched.ai is an America First citizen research platform that tracks corruption and foreign lobby influence
+            among American politicians across 11 states. Every data point is sourced from public records — FEC filings,
             state campaign finance databases, lobbying disclosures, and legislative voting records.
             No opinions, no partisan bias. Just data.
           </p>
@@ -129,11 +129,11 @@ export default function AboutPage() {
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
             <div style={{ padding: '1rem', background: 'var(--terminal-bg)', border: '1px solid var(--terminal-border)', textAlign: 'center' }}>
-              <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--terminal-blue)', fontFamily: 'Bebas Neue, sans-serif' }}>423</div>
+              <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--terminal-green)', fontFamily: 'Bebas Neue, sans-serif' }}>6,731+</div>
               <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase' }}>Politicians Tracked</div>
             </div>
             <div style={{ padding: '1rem', background: 'var(--terminal-bg)', border: '1px solid var(--terminal-border)', textAlign: 'center' }}>
-              <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--terminal-green)', fontFamily: 'Bebas Neue, sans-serif' }}>178</div>
+              <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--terminal-green)', fontFamily: 'Bebas Neue, sans-serif' }}>1,644</div>
               <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase' }}>With Funding Data</div>
             </div>
             <div style={{ padding: '1rem', background: 'var(--terminal-bg)', border: '1px solid var(--terminal-border)', textAlign: 'center' }}>
@@ -141,8 +141,8 @@ export default function AboutPage() {
               <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase' }}>Israel Lobby Tracked</div>
             </div>
             <div style={{ padding: '1rem', background: 'var(--terminal-bg)', border: '1px solid var(--terminal-border)', textAlign: 'center' }}>
-              <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--terminal-amber)', fontFamily: 'Bebas Neue, sans-serif' }}>184</div>
-              <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase' }}>With Voting Records</div>
+              <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--terminal-amber)', fontFamily: 'Bebas Neue, sans-serif' }}>11</div>
+              <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase' }}>States Covered</div>
             </div>
           </div>
         </div>
@@ -161,7 +161,7 @@ export default function AboutPage() {
       </div>
 
       <div className="classified-footer">
-        PUBLIC RECORDS: FEC // FL DIVISION OF ELECTIONS // LDA SENATE // LEGISCAN // TRACK AIPAC
+        PUBLIC RECORDS: FEC // STATE ELECTION DATABASES // LDA SENATE // LEGISCAN // TRACK AIPAC // COURTLISTENER
       </div>
     </div>
   );
