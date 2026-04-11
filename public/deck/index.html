@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNITCHED.AI — Pitch Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --g: #00FF41;
+    --g-dim: #00cc33;
+    --g-glow: rgba(0,255,65,0.25);
+    --r: #FF0844;
+    --amber: #FFB627;
+    --bg: #000;
+    --card: rgba(0,255,65,0.03);
+    --border: rgba(0,255,65,0.12);
+    --txt: #c8d6c8;
+    --txt-dim: #6b8a6b;
+    --txt-muted: #3d5a3d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--txt);
+    font-family: 'JetBrains Mono', monospace;
+    overflow: hidden;
+  }
+
+  .deck {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .slide {
+    min-width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.025;
+    background: repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(0,255,65,0.08) 2px, rgba(0,255,65,0.08) 4px);
+    pointer-events: none;
+  }
+
+  .slide-number {
+    position: absolute;
+    bottom: 2rem;
+    right: 3rem;
+    font-size: 0.65rem;
+    color: var(--txt-muted);
+    letter-spacing: 0.2em;
+  }
+
+  .nav-hint {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.6rem;
+    color: var(--txt-muted);
+    letter-spacing: 0.15em;
+    z-index: 100;
+    text-transform: uppercase;
+  }
+
+  h1 { font-family: 'JetBrains Mono', monospace; }
+  h2 { font-family: 'JetBrains Mono', monospace; }
+
+  .tag {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1px solid;
+    margin-bottom: 1.5rem;
+  }
+
+  .stat-row {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.55rem;
+    color: var(--txt-muted);
+    letter-spacing: 0.2em;
+    margin-top: 0.3rem;
+    text-transform: uppercase;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    max-width: 800px;
+    margin-top: 2rem;
+  }
+
+  .feature-card {
+    padding: 1.5rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+
+  .feature-card h3 {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .feature-card p {
+    font-size: 0.7rem;
+    color: var(--txt-dim);
+    line-height: 1.6;
+  }
+
+  .pipeline-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border);
+    max-width: 700px;
+    width: 100%;
+  }
+
+  .pipeline-step:last-child { border-bottom: none; }
+
+  .step-num {
+    font-size: 1.5rem;
+    font-weight: 700;
+    opacity: 0.4;
+    min-width: 36px;
+  }
+
+  .step-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.25rem;
+  }
+
+  .step-desc {
+    font-size: 0.7rem;
+    color: var(--txt-dim);
+    line-height: 1.5;
+  }
+
+  .source-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .source-badge {
+    padding: 0.6rem 1rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    text-align: center;
+    min-width: 120px;
+  }
+
+  .source-badge strong {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--g);
+    margin-bottom: 0.15rem;
+  }
+
+  .source-badge span {
+    font-size: 0.5rem;
+    color: var(--txt-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .threat-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--border);
+    background: var(--card);
+    max-width: 650px;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .threat-name {
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+
+  .threat-detail {
+    font-size: 0.65rem;
+    color: var(--txt-dim);
+    margin-top: 0.15rem;
+  }
+
+  .threat-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    color: var(--r);
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background: var(--g);
+    color: #000;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 0 25px var(--g-glow);
+    margin-top: 2rem;
+  }
+
+  .cta-button:hover {
+    box-shadow: 0 0 40px var(--g-glow), 0 0 80px rgba(0,255,65,0.1);
+  }
+
+  .quote {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 600px;
+    text-align: center;
+    font-style: italic;
+    color: var(--txt);
+  }
+
+  .quote span { color: var(--g); font-weight: 700; font-style: normal; }
+  .quote .red { color: var(--r); }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1: Title -->
+  <div class="slide" style="background: radial-gradient(ellipse 60% 40% at 50% 30%, rgba(0,255,65,0.06), transparent)">
+    <div class="tag" style="color: var(--g); border-color: var(--g)">PUBLIC INTELLIGENCE PLATFORM</div>
+    <h1 style="font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; line-height: 1">
+      <span style="color: var(--g); text-shadow: 0 0 30px var(--g-glow)">SNITCHED</span><span style="color: var(--txt-dim)">.AI</span>
+    </h1>
+    <p style="font-size: 1rem; color: var(--txt-dim); margin-top: 1.5rem; max-width: 500px; text-align: center; line-height: 1.7">
+      Track political corruption, foreign lobby influence, and campaign finance across America. Real data from public records.
+    </p>
+    <div style="margin-top: 2.5rem; font-size: 0.65rem; color: var(--txt-muted); letter-spacing: 0.15em">snitched.ai</div>
+    <div class="slide-number">01 / 10</div>
+  </div>
+
+  <!-- SLIDE 2: The Problem -->
+  <div class="slide" style="background: radial-gradient(ellipse 50% 40% at 50% 50%, rgba(255,8,68,0.05), transparent)">
+    <div class="tag" style="color: var(--r); border-color: var(--r)">THE PROBLEM</div>
+    <h2 style="font-size: 2.2rem; font-weight: 700; text-align: center; max-width: 700px; line-height: 1.3">
+      American politicians serve <span style="color: var(--r)">foreign lobbies</span>, not American citizens
+    </h2>
+    <div class="stat-row" style="margin-top: 3rem">
+      <div class="stat">
+        <div class="stat-value" style="color: var(--r)">$21M+</div>
+        <div class="stat-label">Israel lobby funding tracked</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" style="color: var(--amber)">$808M+</div>
+        <div class="stat-label">Total campaign funds</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" style="color: var(--txt-dim)">0%</div>
+        <div class="stat-label">Transparency before us</div>
+      </div>
+    </div>
+    <p style="margin-top: 2rem; font-size: 0.75rem; color: var(--txt-dim); max-width: 550px; text-align: center; line-height: 1.7">
+      Billions flow from AIPAC, foreign-aligned PACs, and dark money groups into the campaigns of the people who write our laws. Until now, this data was scattered across dozens of government databases.
+    </p>
+    <div class="slide-number">02 / 10</div>
+  </div>
+
+  <!-- SLIDE 3: The Solution -->
+  <div class="slide">
+    <div class="tag" style="color: var(--g); border-color: var(--g)">THE SOLUTION</div>
+    <h2 style="font-size: 2rem; font-weight: 700; text-align: center; max-width: 650px; line-height: 1.3">
+      One platform to <span style="color: var(--g)">expose every dollar</span>
+    </h2>
+    <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--txt-dim); text-align: center; max-width: 550px; line-height: 1.7">
+      Snitched.ai aggregates FEC filings, lobbying disclosures, voting records, and court cases into a single intelligence dashboard. Every data point is verifiable from public records.
+    </p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3 style="color: var(--g)">Corruption Scoring</h3>
+        <p>0-100 score for every politician based on PAC ratios, lobby connections, voting alignment, and financial red flags.</p>
+      </div>
+      <div class="feature-card">
+        <h3 style="color: var(--r)">Israel Lobby Tracking</h3>
+        <p>AIPAC PAC money, bundled donations, independent expenditures. Any foreign lobby money = instant red flag.</p>
+      </div>
+      <div class="feature-card">
+        <h3 style="color: var(--amber)">Connection Mapping</h3>
+        <p>Interactive network graphs showing donor-politician relationships, cross-party connections, and money flow.</p>
+      </div>
+      <div class="feature-card">
+        <h3 style="color: var(--g)">Deep Investigation</h3>
+        <p>Cross-state donor analysis, ownership tracing, voting pattern correlation, money-to-vote timelines.</p>
+      </div>
+    </div>
+    <div class="slide-number">03 / 10</div>
+  </div>
+
+  <!-- SLIDE 4: By The Numbers -->
+  <div class="slide">
+    <div class="tag" style="color: var(--g); border-color: var(--g)">TRACTION</div>
+    <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem">Platform Scale</h2>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-value" style="color: var(--g)">7,028</div>
+        <div class="stat-label">Politicians tracked</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" style="color: var(--g-dim)">11</div>
+        <div class="stat-label">States covered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" style="color: var(--amber)">1,871</div>
+        <div class="stat-label">With financial data</div>
+      </div>
+    </div>
+    <div class="stat-row" style="margin-top: 1.5rem">
+      <div class="stat">
+        <div class="stat-value" style="color: var(--r)">3,432</div>
+        <div class="stat-label">Court records linked</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" style="color: var(--g)">9</div>
+        <div class="stat-label">Automated cron jobs</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" style="color: var(--amber)">6</div>
+        <div class="stat-label">Verified data sources</div>
+      </div>
+    </div>
+    <div class="slide-number">04 / 10</div>
+  </div>
+
+  <!-- SLIDE 5: Top Threats -->
+  <div class="slide" style="background: radial-gradient(ellipse 50% 40% at 50% 50%, rgba(255,8,68,0.04), transparent)">
+    <div class="tag" style="color: var(--r); border-color: var(--r)">THREAT ASSESSMENT</div>
+    <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 2rem">Top Israel Lobby Recipients (Ohio)</h2>
+    <div class="threat-card">
+      <div><div class="threat-name">Shontel Brown</div><div class="threat-detail">OH-11 [D] &middot; U.S. House</div></div>
+      <div class="threat-amount">$6.6M</div>
+    </div>
+    <div class="threat-card">
+      <div><div class="threat-name">Greg Landsman</div><div class="threat-detail">OH-01 [D] &middot; U.S. House</div></div>
+      <div class="threat-amount">$1.7M</div>
+    </div>
+    <div class="threat-card">
+      <div><div class="threat-name">Bernie Moreno</div><div class="threat-detail">OH-SEN [R] &middot; U.S. Senate</div></div>
+      <div class="threat-amount">$1.1M</div>
+    </div>
+    <div class="threat-card">
+      <div><div class="threat-name">Emilia Sykes</div><div class="threat-detail">OH-13 [D] &middot; U.S. House</div></div>
+      <div class="threat-amount">$1.1M</div>
+    </div>
+    <div class="threat-card">
+      <div><div class="threat-name">Max Miller</div><div class="threat-detail">OH-07 [R] &middot; U.S. House</div></div>
+      <div class="threat-amount">$965K</div>
+    </div>
+    <div class="slide-number">05 / 10</div>
+  </div>
+
+  <!-- SLIDE 6: Data Pipeline -->
+  <div class="slide">
+    <div class="tag" style="color: var(--g); border-color: var(--g)">ARCHITECTURE</div>
+    <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 2rem">Data Pipeline</h2>
+    <div class="pipeline-step">
+      <div class="step-num" style="color: var(--g)">01</div>
+      <div><div class="step-title" style="color: var(--g)">DATA INGESTION</div><div class="step-desc">Automated scrapers pull FEC filings, state election data, LDA lobbying disclosures, and court records daily.</div></div>
+    </div>
+    <div class="pipeline-step">
+      <div class="step-num" style="color: var(--g)">02</div>
+      <div><div class="step-title" style="color: var(--g)">ENTITY RESOLUTION</div><div class="step-desc">Politicians matched across FEC, Congress, state databases, and lobby filings. Donors linked to PACs.</div></div>
+    </div>
+    <div class="pipeline-step">
+      <div class="step-num" style="color: var(--amber)">03</div>
+      <div><div class="step-title" style="color: var(--amber)">CORRUPTION ANALYSIS</div><div class="step-desc">4-factor scoring: PAC ratio (35%), lobby connections (20%), voting alignment (25%), red flags (20%).</div></div>
+    </div>
+    <div class="pipeline-step">
+      <div class="step-num" style="color: var(--r)">04</div>
+      <div><div class="step-title" style="color: var(--r)">ISRAEL LOBBY FLAGGING</div><div class="step-desc">Automatic detection of AIPAC PAC money, bundled donations, and pro-Israel independent expenditures.</div></div>
+    </div>
+    <div class="pipeline-step">
+      <div class="step-num" style="color: var(--g)">05</div>
+      <div><div class="step-title" style="color: var(--g)">REAL-TIME INTEL</div><div class="step-desc">AI news monitor (Exa), live FEC filing tracker, auto-severity classification. Updated every 6 hours.</div></div>
+    </div>
+    <div class="slide-number">06 / 10</div>
+  </div>
+
+  <!-- SLIDE 7: Data Sources -->
+  <div class="slide">
+    <div class="tag" style="color: var(--g); border-color: var(--g)">VERIFIED SOURCES</div>
+    <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem">All Public Records. All Verifiable.</h2>
+    <p style="font-size: 0.75rem; color: var(--txt-dim); margin-bottom: 1.5rem">No opinions. No partisan bias. Just data.</p>
+    <div class="source-row">
+      <div class="source-badge"><strong>FEC</strong><span>Campaign Finance</span></div>
+      <div class="source-badge"><strong>LDA</strong><span>Lobbying Disclosures</span></div>
+      <div class="source-badge"><strong>LegiScan</strong><span>Voting Records</span></div>
+      <div class="source-badge"><strong>CourtListener</strong><span>Court Records</span></div>
+      <div class="source-badge"><strong>Congress.gov</strong><span>Legislative Data</span></div>
+      <div class="source-badge"><strong>Exa AI</strong><span>News Intelligence</span></div>
+    </div>
+    <div style="margin-top: 2.5rem; max-width: 600px">
+      <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--txt-dim); padding: 0.5rem 0; border-bottom: 1px solid var(--border)">
+        <span>FEC contribution sync</span><span style="color: var(--g)">Daily 3 AM UTC</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--txt-dim); padding: 0.5rem 0; border-bottom: 1px solid var(--border)">
+        <span>Court records (CourtListener)</span><span style="color: var(--g)">Hourly</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--txt-dim); padding: 0.5rem 0; border-bottom: 1px solid var(--border)">
+        <span>AI news monitor (Exa)</span><span style="color: var(--g)">Every 6 hours</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--txt-dim); padding: 0.5rem 0; border-bottom: 1px solid var(--border)">
+        <span>Platform stats refresh</span><span style="color: var(--g)">Every 12 hours</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--txt-dim); padding: 0.5rem 0">
+        <span>Live FEC filing tracker</span><span style="color: var(--g)">Every 6 hours</span>
+      </div>
+    </div>
+    <div class="slide-number">07 / 10</div>
+  </div>
+
+  <!-- SLIDE 8: Tech Stack -->
+  <div class="slide">
+    <div class="tag" style="color: var(--g); border-color: var(--g)">TECH STACK</div>
+    <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 2rem">Built for Scale</h2>
+    <div class="feature-grid" style="max-width: 700px">
+      <div class="feature-card">
+        <h3 style="color: var(--g)">Frontend</h3>
+        <p>Next.js 16, React 19, TypeScript 5 strict. Terminal/Bloomberg aesthetic with JetBrains Mono.</p>
+      </div>
+      <div class="feature-card">
+        <h3 style="color: var(--g)">Database</h3>
+        <p>Supabase PostgreSQL with Row-Level Security. 7K+ politicians, JSONB records, platform_stats cache.</p>
+      </div>
+      <div class="feature-card">
+        <h3 style="color: var(--amber)">Data Pipeline</h3>
+        <p>9 automated cron jobs. TypeScript sync scripts + Python scrapers (Scrapling). Parallel batch processing.</p>
+      </div>
+      <div class="feature-card">
+        <h3 style="color: var(--amber)">Visualization</h3>
+        <p>Cytoscape.js network graphs, Leaflet maps, interactive comparison tables, timeline views.</p>
+      </div>
+    </div>
+    <div style="margin-top: 2rem; font-size: 0.65rem; color: var(--txt-muted); text-align: center">
+      Deployed on Vercel &middot; Free-tier Supabase &middot; Zero infrastructure cost
+    </div>
+    <div class="slide-number">08 / 10</div>
+  </div>
+
+  <!-- SLIDE 9: Roadmap -->
+  <div class="slide">
+    <div class="tag" style="color: var(--amber); border-color: var(--amber)">ROADMAP</div>
+    <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 2rem">What's Next</h2>
+    <div style="max-width: 600px; width: 100%">
+      <div class="pipeline-step">
+        <div class="step-num" style="color: var(--g)">Q2</div>
+        <div><div class="step-title" style="color: var(--g)">50-STATE COVERAGE</div><div class="step-desc">Expand from 11 to all 50 states. Deep-dive state campaign finance data for every state legislature.</div></div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num" style="color: var(--g)">Q2</div>
+        <div><div class="step-title" style="color: var(--g)">WEBHOOK ALERTS</div><div class="step-desc">Email/Slack notifications when new FEC filings drop for tracked politicians. Real-time alerting.</div></div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num" style="color: var(--amber)">Q3</div>
+        <div><div class="step-title" style="color: var(--amber)">AI INVESTIGATION AGENT</div><div class="step-desc">Natural language queries: "Who funds both Marco Rubio and Ted Cruz?" powered by RAG over our dataset.</div></div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num" style="color: var(--amber)">Q3</div>
+        <div><div class="step-title" style="color: var(--amber)">PUBLIC API</div><div class="step-desc">Open API for journalists, researchers, and civic tech projects to query our corruption database.</div></div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num" style="color: var(--r)">Q4</div>
+        <div><div class="step-title" style="color: var(--r)">MOBILE APP</div><div class="step-desc">Scan a politician's name or QR code at a rally. Get their corruption score, top donors, and lobby ties instantly.</div></div>
+      </div>
+    </div>
+    <div class="slide-number">09 / 10</div>
+  </div>
+
+  <!-- SLIDE 10: CTA -->
+  <div class="slide" style="background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,255,65,0.06), transparent)">
+    <h2 style="font-size: 2.5rem; font-weight: 700; text-align: center; max-width: 600px; line-height: 1.3; margin-bottom: 1rem">
+      Ready to see who <span style="color: var(--r)">owns</span> your politicians?
+    </h2>
+    <p style="font-size: 0.85rem; color: var(--txt-dim); text-align: center; max-width: 450px; line-height: 1.7">
+      Every dollar traced. Every connection mapped. Every lie exposed.
+    </p>
+    <a href="https://snitched.ai" class="cta-button">ENTER TERMINAL &gt;</a>
+    <div style="margin-top: 3rem; font-size: 0.65rem; color: var(--txt-muted); text-align: center; line-height: 2">
+      <div style="color: var(--g); font-weight: 700; font-size: 0.9rem; margin-bottom: 0.5rem">SNITCHED.AI</div>
+      No opinions. No partisan bias. Just data.<br>
+      FEC &middot; LDA Senate &middot; LegiScan &middot; CourtListener &middot; Congress.gov
+    </div>
+    <div class="slide-number">10 / 10</div>
+  </div>
+
+</div>
+
+<div class="nav-hint" id="navHint">&#8592; &#8594; ARROW KEYS TO NAVIGATE</div>
+
+<script>
+  let current = 0;
+  const total = 10;
+  const deck = document.getElementById('deck');
+
+  function goTo(n) {
+    current = Math.max(0, Math.min(total - 1, n));
+    deck.style.transform = `translateX(-${current * 100}vw)`;
+    document.getElementById('navHint').textContent =
+      current === 0 ? '\u2192 ARROW KEYS TO NAVIGATE' :
+      current === total - 1 ? '\u2190 BACK' :
+      `\u2190 \u2192  ${current + 1} / ${total}`;
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+  });
+
+  // Touch swipe support
+  let touchX = 0;
+  document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    const diff = touchX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) goTo(current + (diff > 0 ? 1 : -1));
+  });
+</script>
+
+</body>
+</html>
