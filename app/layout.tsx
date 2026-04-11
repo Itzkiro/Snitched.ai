@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import "./globals-terminal.css";
 import TerminalHeader from "@/components/TerminalHeader";
 
@@ -50,7 +51,9 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
       </head>
       <body>
-        <TerminalHeader />
+        <Suspense>
+          <TerminalHeader />
+        </Suspense>
         {children}
       </body>
     </html>
