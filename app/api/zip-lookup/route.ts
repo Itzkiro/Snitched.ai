@@ -162,41 +162,39 @@ export async function GET(request: NextRequest) {
     getStateFromId(row.bioguide_id as string) === stateCode
   );
 
-  // Step 3: Match to districts
+  // Step 3: Match ONLY to user's specific districts
   const matched = statePols.filter(row => {
     const level = row.office_level as string;
     const dist = row.district as string | null;
     const juris = (row.jurisdiction as string || '').toLowerCase();
 
-    // Statewide — always
+    // Statewide offices — always include
     if (level === 'US Senator' || level === 'Governor') return true;
 
-    // US Representative — match CD
+    // US Representative — only YOUR congressional district
     if (level === 'US Representative') {
-      if (!cd) return true;
+      if (!cd) return false; // don't show any if we can't determine district
       return dist === cd || dist === String(Number(cd));
     }
 
-    // State Senator — match upper chamber district
+    // State Senator — only YOUR state senate district
     if (level === 'State Senator') {
-      if (!sldu) return true;
+      if (!sldu) return false;
       return dist === sldu || dist === String(Number(sldu));
     }
 
-    // State Representative — match lower chamber district
+    // State Representative — only YOUR state house district
     if (level === 'State Representative') {
-      if (!sldl) return true;
+      if (!sldl) return false;
       return dist === sldl || dist === String(Number(sldl));
     }
 
-    // County/local — match county name
-    if (county) {
-      const countyLower = county.toLowerCase();
-      if (juris.includes(countyLower) || juris.includes(countyLower.replace(' county', '').replace(' parish', ''))) {
-        return true;
-      }
-      // Also match "X County" pattern
-      if (juris === `${countyLower} county` || juris === countyLower) return true;
+    // County/local — only YOUR county (exact match)
+    if (!county) return false;
+    const countyLower = county.toLowerCase();
+    // Exact jurisdiction match: "Miami-Dade County" === "miami-dade county"
+    if (juris === `${countyLower} county` || juris === countyLower || juris === `${countyLower} parish`) {
+      return true;
     }
 
     return false;
