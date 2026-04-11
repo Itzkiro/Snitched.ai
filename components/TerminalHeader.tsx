@@ -299,6 +299,19 @@ export default function TerminalHeader() {
         >
           🕸️ CONNECTIONS
         </Link>
+        <Link
+          href="/investigate"
+          style={{
+            color: pathname === '/investigate' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
+            textDecoration: 'none',
+            fontSize: '11px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+            fontWeight: 600
+          }}
+        >
+          🔬 INVESTIGATE
+        </Link>
 
         {/* Spacer to push search to the right */}
         <div style={{ flex: 1 }} />
