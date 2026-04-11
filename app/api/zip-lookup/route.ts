@@ -189,15 +189,23 @@ export async function GET(request: NextRequest) {
       return dist === sldl || dist === String(Number(sldl));
     }
 
-    // County/local — only YOUR county (exact match)
+    // County-wide offices only — exclude city-level (mayors, city council, city commissioners)
+    // because we can't determine which city within the county from ZIP alone
+    const COUNTY_WIDE_OFFICES = [
+      'County Commissioner', 'Sheriff', 'Clerk of Court', 'Clerk of Courts',
+      'Property Appraiser', 'Tax Collector', 'Supervisor of Elections',
+      'State Attorney', 'Public Defender', 'County Auditor', 'County Treasurer',
+      'County Recorder', 'County Engineer', 'County Coroner', 'Prosecutor',
+      'School Board',
+    ];
+
     if (!county) return false;
     const countyLower = county.toLowerCase();
-    // Exact jurisdiction match: "Miami-Dade County" === "miami-dade county"
-    if (juris === `${countyLower} county` || juris === countyLower || juris === `${countyLower} parish`) {
-      return true;
-    }
+    const isCountyMatch = juris === `${countyLower} county` || juris === countyLower || juris === `${countyLower} parish`;
+    if (!isCountyMatch) return false;
 
-    return false;
+    // Only include county-wide offices, not city-level ones
+    return COUNTY_WIDE_OFFICES.some(office => level.includes(office) || level === office);
   });
 
   const mapRow = (row: Record<string, unknown>): Politician => ({
