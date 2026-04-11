@@ -340,6 +340,8 @@ function ZipContent() {
                   lat={results.districtInfo.lat}
                   lng={results.districtInfo.lng}
                   zip={results.zip || zip}
+                  stateCode={results.state}
+                  congressionalDistrict={results.districtInfo.congressionalDistrict}
                   county={results.districtInfo.county}
                   city={results.districtInfo.city}
                   stateName={results.districtInfo.stateName}
