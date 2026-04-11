@@ -162,50 +162,86 @@ export async function GET(request: NextRequest) {
     getStateFromId(row.bioguide_id as string) === stateCode
   );
 
+  const city = districts?.city;
+
+  /**
+   * Check if a DB district field matches a Census district number.
+   * DB stores districts in various formats: "7", "FL-7", "FL State Senate District 7", etc.
+   */
+  function districtMatches(dbDist: string | null, censusNum: string): boolean {
+    if (!dbDist) return false;
+    const num = String(Number(censusNum)); // strip leading zeros: "08" → "8"
+    // Exact: "7"
+    if (dbDist === num || dbDist === censusNum) return true;
+    // Prefixed: "FL-7", "OH-7"
+    if (dbDist.includes(`-${num}`) && dbDist.match(new RegExp(`-${num}$`))) return true;
+    // Full text: "FL State Senate District 7", "District 7"
+    if (dbDist.includes(`District ${num}`) || dbDist.includes(`district ${num}`)) return true;
+    return false;
+  }
+
   // Step 3: Match ONLY to user's specific districts
+  const COUNTY_WIDE_OFFICES = new Set([
+    'County Commissioner', 'Sheriff', 'Clerk of Court', 'Clerk of Courts',
+    'Property Appraiser', 'Tax Collector', 'Supervisor of Elections',
+    'State Attorney', 'Public Defender', 'County Auditor', 'County Treasurer',
+    'County Recorder', 'County Engineer', 'County Coroner', 'Prosecutor',
+    'School Board',
+  ]);
+
   const matched = statePols.filter(row => {
     const level = row.office_level as string;
     const dist = row.district as string | null;
     const juris = (row.jurisdiction as string || '').toLowerCase();
+    const office = (row.office as string || '').toLowerCase();
 
     // Statewide offices — always include
     if (level === 'US Senator' || level === 'Governor') return true;
 
     // US Representative — only YOUR congressional district
     if (level === 'US Representative') {
-      if (!cd) return false; // don't show any if we can't determine district
-      return dist === cd || dist === String(Number(cd));
+      if (!cd) return false;
+      return districtMatches(dist, cd);
     }
 
     // State Senator — only YOUR state senate district
     if (level === 'State Senator') {
       if (!sldu) return false;
-      return dist === sldu || dist === String(Number(sldu));
+      return districtMatches(dist, sldu);
     }
 
     // State Representative — only YOUR state house district
     if (level === 'State Representative') {
       if (!sldl) return false;
-      return dist === sldl || dist === String(Number(sldl));
+      return districtMatches(dist, sldl);
     }
 
-    // County-wide offices only — exclude city-level (mayors, city council, city commissioners)
-    // because we can't determine which city within the county from ZIP alone
-    const COUNTY_WIDE_OFFICES = [
-      'County Commissioner', 'Sheriff', 'Clerk of Court', 'Clerk of Courts',
-      'Property Appraiser', 'Tax Collector', 'Supervisor of Elections',
-      'State Attorney', 'Public Defender', 'County Auditor', 'County Treasurer',
-      'County Recorder', 'County Engineer', 'County Coroner', 'Prosecutor',
-      'School Board',
-    ];
+    // County-level: match county name
+    if (county) {
+      const countyLower = county.toLowerCase();
+      const isCountyJuris = juris === `${countyLower} county` || juris === countyLower || juris === `${countyLower} parish`;
 
-    if (!county) return false;
-    const countyLower = county.toLowerCase();
-    const isCountyMatch = juris === `${countyLower} county` || juris === countyLower || juris === `${countyLower} parish`;
-    if (!isCountyMatch) return false;
+      if (isCountyJuris) {
+        // County-wide offices (sheriff, commissioners, etc.)
+        if (COUNTY_WIDE_OFFICES.has(level) || [...COUNTY_WIDE_OFFICES].some(o => level.includes(o))) return true;
+      }
+    }
 
-    // Only include county-wide offices, not city-level ones
-    return COUNTY_WIDE_OFFICES.some(office => level.includes(office) || level === office);
+    // City-level: only if Census returned a specific city AND the official's office mentions that city
+    if (city) {
+      const cityLower = city.toLowerCase();
+      if (
+        juris.includes(cityLower) ||
+        office.includes(cityLower) ||
+        (level === 'Mayor' && juris.includes(county?.toLowerCase() || '___') && office.includes(cityLower)) ||
+        (level === 'City Council' && office.includes(cityLower)) ||
+        (level === 'City Commissioner' && office.includes(cityLower))
+      ) {
+        return true;
+      }
+    }
+
+    return false;
   });
 
   const mapRow = (row: Record<string, unknown>): Politician => ({
