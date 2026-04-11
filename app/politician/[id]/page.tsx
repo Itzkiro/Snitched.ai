@@ -1382,16 +1382,63 @@ export default function PoliticianPage() {
             <SocialTab politicianId={politician.id} politicianName={politician.name} />
           )}
 
-          {/* Legal tab not yet available */}
+          {/* Legal / Court Records Tab */}
           {activeTab === 'legal' && (
-            <div className="terminal-card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
-              <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>📋</div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-text-dim)' }}>
-                NOT YET AVAILABLE
-              </div>
-              <div style={{ color: 'var(--terminal-text-dim)' }}>
-                Court cases, ethics complaints, and legal records will appear here when data sources are integrated.
-              </div>
+            <div>
+              {politician.courtCases && politician.courtCases.length > 0 ? (
+                <>
+                  <div style={{ marginBottom: '1rem', fontSize: '0.75rem', color: 'var(--terminal-text-dim)' }}>
+                    {politician.courtCases.length} court record{politician.courtCases.length !== 1 ? 's' : ''} found via CourtListener
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                    {politician.courtCases.map((c, i) => (
+                      <div key={c.id || i} className="terminal-card" style={{ padding: '1rem' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', flexWrap: 'wrap' }}>
+                          <div style={{ flex: 1 }}>
+                            <div style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.25rem' }}>
+                              {c.summary || 'Untitled Case'}
+                            </div>
+                            <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: '0.35rem' }}>
+                              {c.court && <span>{c.court}</span>}
+                              {c.caseNumber && <span>Docket: {c.caseNumber}</span>}
+                              {c.caseType && c.caseType !== 'Civil' && <span>Type: {c.caseType}</span>}
+                            </div>
+                          </div>
+                          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexShrink: 0 }}>
+                            <span style={{
+                              fontSize: '0.65rem', fontWeight: 700, padding: '0.2rem 0.5rem',
+                              background: c.status === 'Active' ? 'rgba(245, 158, 11, 0.1)' : 'rgba(0, 191, 255, 0.08)',
+                              color: c.status === 'Active' ? 'var(--terminal-amber)' : 'var(--terminal-blue)',
+                              border: c.status === 'Active' ? '1px solid rgba(245, 158, 11, 0.3)' : '1px solid rgba(0, 191, 255, 0.2)',
+                              textTransform: 'uppercase',
+                            }}>
+                              {c.status}
+                            </span>
+                          </div>
+                        </div>
+                        {c.filedDate && (
+                          <div style={{ marginTop: '0.5rem', fontSize: '0.7rem', color: 'var(--terminal-text-dim)', borderTop: '1px solid var(--terminal-border)', paddingTop: '0.4rem' }}>
+                            Filed: {new Date(c.filedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{ marginTop: '1rem', fontSize: '0.65rem', color: 'var(--terminal-text-dim)' }}>
+                    Source: CourtListener (courtlistener.com) — federal court dockets and opinions
+                  </div>
+                </>
+              ) : (
+                <div className="terminal-card" style={{ textAlign: 'center', padding: '3rem 2rem' }}>
+                  <div style={{ fontSize: '3rem', marginBottom: '1rem', opacity: 0.3 }}>&#9878;</div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--terminal-text-dim)' }}>
+                    NO COURT RECORDS FOUND
+                  </div>
+                  <div style={{ color: 'var(--terminal-text-dim)', fontSize: '0.8rem' }}>
+                    No federal court cases found for this official in the CourtListener database.
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>
