@@ -1,6 +1,7 @@
 import { getServerSupabase } from '@/lib/supabase-server';
 import type { Politician } from '@/lib/types';
 import { filterByState, getStateName } from '@/lib/state-utils';
+import { getAllStats } from '@/lib/platform-stats';
 import TerminalHome from '@/components/TerminalHome';
 
 /**
@@ -93,7 +94,10 @@ async function fetchPoliticians(): Promise<Politician[]> {
 
 export default async function HomePage({ searchParams }: { searchParams: Promise<{ state?: string }> }) {
   const { state: stateParam } = await searchParams;
-  const allPoliticians = await fetchPoliticians();
+  const [allPoliticians, platformStats] = await Promise.all([
+    fetchPoliticians(),
+    getAllStats(),
+  ]);
   const politicians = filterByState(allPoliticians, stateParam);
 
   // Compute key stats for the server-rendered section (visible to crawlers)
@@ -172,7 +176,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
       </section>
 
       {/* Interactive client component with pre-fetched data */}
-      <TerminalHome initialPoliticians={politicians} selectedState={stateParam || null} />
+      <TerminalHome initialPoliticians={politicians} selectedState={stateParam || null} platformStats={platformStats} />
     </>
   );
 }
