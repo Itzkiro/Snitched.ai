@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getServiceRoleSupabase, getServerSupabase } from '@/lib/supabase-server';
 import type { Politician } from '@/lib/types';
 import { filterByState, getStateName } from '@/lib/state-utils';
+import CandidateCompare from './CandidateCompare';
 
 export const metadata: Metadata = {
   title: 'Candidates',
@@ -39,6 +40,7 @@ async function getCandidates(): Promise<Politician[]> {
     jurisdictionType: row.jurisdiction_type as Politician['jurisdictionType'],
     corruptionScore: Number(row.corruption_score) || 0,
     aipacFunding: Number(row.aipac_funding) || 0,
+    israelLobbyTotal: Number(row.israel_lobby_total) || 0,
     isActive: row.is_active as boolean,
     isCandidate: row.is_candidate as boolean,
     runningFor: row.running_for as string | undefined,
@@ -48,21 +50,81 @@ async function getCandidates(): Promise<Politician[]> {
   })) as Politician[];
 }
 
+// ── Helpers ──
+
+function fmtMoney(n: number): string {
+  if (n >= 1e6) return `$${(n / 1e6).toFixed(1)}M`;
+  if (n >= 1e3) return `$${(n / 1e3).toFixed(0)}K`;
+  return n > 0 ? `$${n}` : '$0';
+}
+
+function partyColor(party: string): string {
+  if (party === 'Republican') return '#dc2626';
+  if (party === 'Democrat') return '#2563eb';
+  return '#6b7280';
+}
+
+function partyTag(party: string): string {
+  if (party === 'Republican') return 'R';
+  if (party === 'Democrat') return 'D';
+  return party?.charAt(0) || '?';
+}
+
+/** Group candidates by the seat they're running for */
+function groupByRace(candidates: Politician[]): { seat: string; candidates: Politician[] }[] {
+  const map = new Map<string, Politician[]>();
+  for (const c of candidates) {
+    const seat = c.runningFor || c.office || 'Unknown';
+    if (!map.has(seat)) map.set(seat, []);
+    map.get(seat)!.push(c);
+  }
+  // Sort races: most candidates first, then alphabetical
+  return Array.from(map.entries())
+    .sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]))
+    .map(([seat, cands]) => ({
+      seat,
+      candidates: cands.sort((a, b) => (b.totalFundsRaised || 0) - (a.totalFundsRaised || 0)),
+    }));
+}
+
+/** Categorise races by level */
+function categoriseRaces(races: { seat: string; candidates: Politician[] }[]) {
+  const governor: typeof races = [];
+  const senate: typeof races = [];
+  const house: typeof races = [];
+  const stateLevel: typeof races = [];
+  const local: typeof races = [];
+
+  for (const race of races) {
+    const seat = race.seat.toLowerCase();
+    if (seat.includes('governor')) governor.push(race);
+    else if (seat.includes('senate') || seat.includes('u.s. senate')) senate.push(race);
+    else if (seat.includes('u.s. house') || seat.includes('house fl-')) house.push(race);
+    else if (seat.includes('attorney general') || seat.includes('cfo') || seat.includes('chief financial') ||
+             seat.includes('agriculture') || seat.includes('state senate') || seat.includes('state rep'))
+      stateLevel.push(race);
+    else local.push(race);
+  }
+
+  return { governor, senate, house, stateLevel, local };
+}
+
+// ── Components ──
+
 function CandidateCard({ pol }: { pol: Politician }) {
   return (
-    <Link href={`/politician/${pol.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-      <div className="terminal-card">
+    <Link href={`/politician/${pol.id}`} style={{ textDecoration: 'none', color: 'inherit', flex: '1 1 260px', maxWidth: '400px' }}>
+      <div className="terminal-card" style={{ height: '100%' }}>
         <div className="card-header">
           <div>
             <div className="card-title">{pol.name}</div>
             <div style={{ fontSize: '11px', color: 'var(--terminal-text-dim)', marginTop: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-              <span>{pol.runningFor || pol.office}</span>
+              <span>{pol.office}</span>
               <span style={{
                 fontSize: '10px', padding: '0.3rem 0.6rem',
-                background: pol.party === 'Republican' ? '#dc2626' : pol.party === 'Democrat' ? '#2563eb' : '#6b7280',
-                color: '#fff', fontWeight: 600,
+                background: partyColor(pol.party), color: '#fff', fontWeight: 600,
               }}>
-                {pol.party === 'Republican' ? 'R' : pol.party === 'Democrat' ? 'D' : pol.party}
+                {partyTag(pol.party)}
               </span>
             </div>
           </div>
@@ -76,7 +138,7 @@ function CandidateCard({ pol }: { pol: Politician }) {
           </div>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.5rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.75rem' }}>
           <div>
             <div style={{ fontSize: '10px', color: 'var(--terminal-text-dim)' }}>CORRUPTION SCORE</div>
             <div style={{
@@ -87,21 +149,21 @@ function CandidateCard({ pol }: { pol: Politician }) {
               {pol.corruptionScore}/100
             </div>
           </div>
-          {pol.aipacFunding > 0 && (
-            <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: '10px', color: 'var(--terminal-text-dim)' }}>ISRAEL LOBBY</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--terminal-red)', fontFamily: 'Bebas Neue, sans-serif' }}>
-                {pol.aipacFunding >= 1000000
-                  ? `$${(pol.aipacFunding / 1000000).toFixed(1)}M`
-                  : `$${(pol.aipacFunding / 1000).toFixed(0)}K`}
-              </div>
+          <div style={{ textAlign: 'right' }}>
+            <div style={{ fontSize: '10px', color: 'var(--terminal-text-dim)' }}>FUNDS RAISED</div>
+            <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--terminal-blue)', fontFamily: 'Bebas Neue, sans-serif' }}>
+              {fmtMoney(pol.totalFundsRaised || 0)}
             </div>
-          )}
+          </div>
         </div>
 
-        {pol.jurisdiction && (
-          <div style={{ marginTop: '0.75rem', fontSize: '10px', color: 'var(--terminal-text-dim)', padding: '0.4rem 0', borderTop: '1px solid var(--terminal-border)' }}>
-            {pol.jurisdiction} {pol.district ? `| District ${pol.district}` : ''}
+        {(pol.israelLobbyTotal || pol.aipacFunding || 0) > 0 && (
+          <div style={{
+            marginTop: '0.5rem', padding: '0.4rem 0.5rem',
+            background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.2)',
+            fontSize: '0.75rem', color: 'var(--terminal-red)', fontWeight: 700,
+          }}>
+            {fmtMoney(pol.israelLobbyTotal || pol.aipacFunding || 0)} ISRAEL LOBBY
           </div>
         )}
       </div>
@@ -109,19 +171,96 @@ function CandidateCard({ pol }: { pol: Politician }) {
   );
 }
 
-function SectionHeader({ title, count, icon }: { title: string; count: number; icon: string }) {
+function RaceBlock({ seat, candidates }: { seat: string; candidates: Politician[] }) {
+  const incumbent = candidates.find(c => c.isActive);
+  const challengers = candidates.filter(c => !c.isActive);
+
   return (
-    <div style={{ padding: '2rem 2rem 1rem', borderTop: '1px solid var(--terminal-border)' }}>
-      <h2 style={{
-        fontSize: '1.25rem', fontWeight: 600, color: 'var(--terminal-green)',
-        textTransform: 'uppercase', letterSpacing: '0.1em',
-        display: 'flex', alignItems: 'center', gap: '0.5rem',
+    <div style={{
+      marginBottom: '1.5rem', padding: '1.25rem',
+      background: 'var(--terminal-card)', border: '1px solid var(--terminal-border)',
+    }}>
+      {/* Seat header */}
+      <div style={{
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+        marginBottom: '1rem', paddingBottom: '0.75rem',
+        borderBottom: '1px solid var(--terminal-border)',
       }}>
-        <span>{icon}</span> {title} ({count})
-      </h2>
+        <div>
+          <div style={{ fontSize: '0.6rem', color: 'var(--terminal-text-dim)', letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+            RACE
+          </div>
+          <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--terminal-blue)' }}>
+            {seat}
+          </div>
+        </div>
+        <div style={{
+          fontSize: '0.7rem', padding: '0.3rem 0.75rem',
+          background: 'rgba(0, 191, 255, 0.08)', border: '1px solid rgba(0, 191, 255, 0.2)',
+          color: 'var(--terminal-blue)', fontWeight: 600,
+        }}>
+          {candidates.length} CANDIDATE{candidates.length !== 1 ? 'S' : ''}
+        </div>
+      </div>
+
+      {/* Incumbent sub-section */}
+      {incumbent && (
+        <div style={{ marginBottom: challengers.length > 0 ? '1rem' : 0 }}>
+          <div style={{
+            fontSize: '0.6rem', color: 'var(--terminal-amber)', letterSpacing: '0.15em',
+            textTransform: 'uppercase', marginBottom: '0.5rem', fontWeight: 700,
+          }}>
+            CURRENT SEAT HOLDER
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+            <CandidateCard pol={incumbent} />
+          </div>
+        </div>
+      )}
+
+      {/* Challengers sub-section */}
+      {challengers.length > 0 && (
+        <div>
+          <div style={{
+            fontSize: '0.6rem', color: 'var(--terminal-green)', letterSpacing: '0.15em',
+            textTransform: 'uppercase', marginBottom: '0.5rem', fontWeight: 700,
+          }}>
+            {incumbent ? 'CHALLENGERS' : 'CANDIDATES'}
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+            {challengers.map(c => <CandidateCard key={c.id} pol={c} />)}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+
+function RaceSection({ title, icon, races }: { title: string; icon: string; races: { seat: string; candidates: Politician[] }[] }) {
+  if (races.length === 0) return null;
+  const totalCandidates = races.reduce((s, r) => s + r.candidates.length, 0);
+  return (
+    <>
+      <div style={{ padding: '2rem 2rem 1rem', borderTop: '1px solid var(--terminal-border)' }}>
+        <h2 style={{
+          fontSize: '1.25rem', fontWeight: 600, color: 'var(--terminal-green)',
+          textTransform: 'uppercase', letterSpacing: '0.1em',
+          display: 'flex', alignItems: 'center', gap: '0.5rem',
+        }}>
+          <span>{icon}</span> {title} ({totalCandidates})
+        </h2>
+        <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)', marginTop: '0.25rem' }}>
+          {races.length} race{races.length !== 1 ? 's' : ''}
+        </div>
+      </div>
+      <div style={{ padding: '0 2rem 1rem' }}>
+        {races.map(r => <RaceBlock key={r.seat} seat={r.seat} candidates={r.candidates} />)}
+      </div>
+    </>
+  );
+}
+
+// ── Page ──
 
 export default async function CandidatesPage({ searchParams }: { searchParams: Promise<{ state?: string }> }) {
   const { state: stateParam } = await searchParams;
@@ -129,16 +268,11 @@ export default async function CandidatesPage({ searchParams }: { searchParams: P
   const candidates = filterByState(allCandidates, stateParam);
   const stateName = getStateName(stateParam);
 
-  const byLevel = {
-    federal: candidates.filter(p => p.officeLevel === 'US Senator' || p.officeLevel === 'US Representative'),
-    state: candidates.filter(p => p.officeLevel === 'Governor' || p.officeLevel === 'State Senator' || p.officeLevel === 'State Representative'),
-    local: candidates.filter(p =>
-      p.officeLevel !== 'US Senator' && p.officeLevel !== 'US Representative' &&
-      p.officeLevel !== 'Governor' && p.officeLevel !== 'State Senator' && p.officeLevel !== 'State Representative'
-    ),
-  };
+  const races = groupByRace(candidates);
+  const { governor, senate, house, stateLevel, local } = categoriseRaces(races);
 
-  const totalAipac = candidates.reduce((s, p) => s + (p.aipacFunding || 0), 0);
+  const totalFunds = candidates.reduce((s, p) => s + (p.totalFundsRaised || 0), 0);
+  const totalIsrael = candidates.reduce((s, p) => s + (p.israelLobbyTotal || p.aipacFunding || 0), 0);
 
   return (
     <div style={{ minHeight: '100vh', paddingBottom: '4rem' }}>
@@ -154,7 +288,7 @@ export default async function CandidatesPage({ searchParams }: { searchParams: P
 
       {/* Stats bar */}
       <div style={{
-        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
         gap: '1rem', padding: '1rem 2rem', borderBottom: '1px solid var(--terminal-border)',
       }}>
         <div className="terminal-card" style={{ padding: '1rem' }}>
@@ -162,64 +296,65 @@ export default async function CandidatesPage({ searchParams }: { searchParams: P
           <div className="stat-label">TOTAL CANDIDATES</div>
         </div>
         <div className="terminal-card" style={{ padding: '1rem' }}>
-          <div className="stat-value" style={{ color: 'var(--terminal-green)' }}>{byLevel.federal.length}</div>
-          <div className="stat-label">FEDERAL</div>
+          <div className="stat-value" style={{ color: 'var(--terminal-red)' }}>{governor.reduce((s, r) => s + r.candidates.length, 0)}</div>
+          <div className="stat-label">GOVERNOR</div>
         </div>
         <div className="terminal-card" style={{ padding: '1rem' }}>
-          <div className="stat-value" style={{ color: 'var(--terminal-amber)' }}>{byLevel.state.length}</div>
-          <div className="stat-label">STATE</div>
+          <div className="stat-value" style={{ color: 'var(--terminal-green)' }}>{senate.reduce((s, r) => s + r.candidates.length, 0)}</div>
+          <div className="stat-label">SENATE</div>
         </div>
         <div className="terminal-card" style={{ padding: '1rem' }}>
-          <div className="stat-value" style={{ color: 'var(--terminal-text-dim)' }}>{byLevel.local.length}</div>
-          <div className="stat-label">LOCAL</div>
+          <div className="stat-value" style={{ color: 'var(--terminal-blue)' }}>{house.reduce((s, r) => s + r.candidates.length, 0)}</div>
+          <div className="stat-label">HOUSE</div>
         </div>
-        {totalAipac > 0 && (
+        <div className="terminal-card" style={{ padding: '1rem' }}>
+          <div className="stat-value" style={{ color: 'var(--terminal-amber)' }}>{stateLevel.reduce((s, r) => s + r.candidates.length, 0) + local.reduce((s, r) => s + r.candidates.length, 0)}</div>
+          <div className="stat-label">STATE/LOCAL</div>
+        </div>
+        <div className="terminal-card" style={{ padding: '1rem' }}>
+          <div className="stat-value" style={{ color: 'var(--terminal-green)' }}>{fmtMoney(totalFunds)}</div>
+          <div className="stat-label">TOTAL RAISED</div>
+        </div>
+        {totalIsrael > 0 && (
           <div className="terminal-card" style={{ padding: '1rem' }}>
-            <div className="stat-value danger">
-              {totalAipac >= 1000000 ? `$${(totalAipac / 1000000).toFixed(1)}M` : `$${(totalAipac / 1000).toFixed(0)}K`}
-            </div>
-            <div className="stat-label">AIPAC FUNDING</div>
+            <div className="stat-value danger">{fmtMoney(totalIsrael)}</div>
+            <div className="stat-label">ISRAEL LOBBY</div>
           </div>
         )}
       </div>
 
       {candidates.length > 0 ? (
         <>
-          {/* Federal Candidates */}
-          {byLevel.federal.length > 0 && (
-            <>
-              <SectionHeader title="FEDERAL CANDIDATES" count={byLevel.federal.length} icon="&#127963;" />
-              <div className="data-grid" style={{ padding: '0 2rem 1rem' }}>
-                {byLevel.federal
-                  .filter(p => p.id && p.name && p.office && p.party)
-                  .map(pol => <CandidateCard key={pol.id} pol={pol} />)}
-              </div>
-            </>
-          )}
+          {/* Governor Races */}
+          <RaceSection title="GOVERNOR RACE" icon="&#127963;" races={governor} />
 
-          {/* State Candidates */}
-          {byLevel.state.length > 0 && (
-            <>
-              <SectionHeader title="STATE CANDIDATES" count={byLevel.state.length} icon="&#9878;&#65039;" />
-              <div className="data-grid" style={{ padding: '0 2rem 1rem' }}>
-                {byLevel.state
-                  .filter(p => p.id && p.name && p.office && p.party)
-                  .map(pol => <CandidateCard key={pol.id} pol={pol} />)}
-              </div>
-            </>
-          )}
+          {/* Senate Races */}
+          <RaceSection title="U.S. SENATE" icon="&#127963;" races={senate} />
 
-          {/* Local Candidates */}
-          {byLevel.local.length > 0 && (
-            <>
-              <SectionHeader title="LOCAL CANDIDATES" count={byLevel.local.length} icon="&#127970;" />
-              <div className="data-grid" style={{ padding: '0 2rem 1rem' }}>
-                {byLevel.local
-                  .filter(p => p.id && p.name && p.office && p.party)
-                  .map(pol => <CandidateCard key={pol.id} pol={pol} />)}
-              </div>
-            </>
-          )}
+          {/* House Races */}
+          <RaceSection title="U.S. HOUSE" icon="&#127970;" races={house} />
+
+          {/* State-level Races */}
+          <RaceSection title="STATE OFFICES" icon="&#9878;&#65039;" races={stateLevel} />
+
+          {/* Local Races */}
+          <RaceSection title="LOCAL RACES" icon="&#128203;" races={local} />
+
+          {/* ── Compare Section ── */}
+          <div style={{ padding: '2rem', borderTop: '1px solid var(--terminal-border)', background: 'var(--terminal-surface)' }}>
+            <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+              <h2 style={{
+                fontSize: '1.25rem', fontWeight: 600, color: 'var(--terminal-blue)',
+                textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem',
+              }}>
+                &#9878; COMPARE CANDIDATES
+              </h2>
+              <p style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '1.5rem' }}>
+                Select a race to compare candidates side-by-side — corruption scores, funding, Israel lobby money, and more.
+              </p>
+              <CandidateCompare races={races} />
+            </div>
+          </div>
         </>
       ) : (
         <div style={{ padding: '4rem 2rem', textAlign: 'center', color: 'var(--terminal-text-dim)' }}>
