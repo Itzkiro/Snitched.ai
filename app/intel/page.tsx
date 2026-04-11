@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
 interface Alert {
@@ -50,6 +51,8 @@ function timeAgo(dateStr: string): string {
 }
 
 export default function IntelPage() {
+  const searchParams = useSearchParams();
+  const stateParam = searchParams.get('state') || '';
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [counts, setCounts] = useState({ critical: 0, high: 0, medium: 0, info: 0 });
   const [loading, setLoading] = useState(true);
@@ -61,13 +64,14 @@ export default function IntelPage() {
     const params = new URLSearchParams({ limit: '100' });
     if (filter !== 'all') params.set('severity', filter);
     if (typeFilter !== 'all') params.set('type', typeFilter);
+    if (stateParam) params.set('state', stateParam);
 
     const res = await fetch(`/api/intel?${params}`);
     const data = await res.json();
     setAlerts(data.alerts || []);
     setCounts(data.counts || { critical: 0, high: 0, medium: 0, info: 0 });
     setLoading(false);
-  }, [filter, typeFilter]);
+  }, [filter, typeFilter, stateParam]);
 
   useEffect(() => { loadAlerts(); }, [loadAlerts]);
 

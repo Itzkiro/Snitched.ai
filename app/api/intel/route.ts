@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServiceRoleSupabase } from '@/lib/supabase-server';
+import { getStateFromId } from '@/lib/state-utils';
 
 /**
  * GET /api/intel
@@ -25,6 +26,7 @@ export async function GET(request: NextRequest) {
   const type = params.get('type');
   const severity = params.get('severity');
   const politicianId = params.get('politician_id');
+  const stateFilter = params.get('state');
   const limit = Math.min(Number(params.get('limit') || '50'), 200);
 
   let query = client
@@ -43,12 +45,22 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
+  // Filter by state if specified (match via politician_id prefix)
+  let filtered = data || [];
+  if (stateFilter && stateFilter !== 'ALL') {
+    const upper = stateFilter.toUpperCase();
+    filtered = filtered.filter(a => {
+      if (!a.politician_id) return false;
+      return getStateFromId(a.politician_id as string) === upper;
+    });
+  }
+
   // Count by severity
   const counts = { critical: 0, high: 0, medium: 0, info: 0 };
-  for (const a of data || []) {
+  for (const a of filtered) {
     const s = a.severity as keyof typeof counts;
     if (s in counts) counts[s]++;
   }
 
-  return NextResponse.json({ alerts: data || [], counts, total: data?.length || 0 });
+  return NextResponse.json({ alerts: filtered, counts, total: filtered.length });
 }
