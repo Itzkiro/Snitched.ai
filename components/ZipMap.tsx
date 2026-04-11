@@ -141,8 +141,8 @@ export default function ZipMap({ lat, lng, zip, stateCode, congressionalDistrict
   }, [lat, lng, zip, stateCode, congressionalDistrict, county, city, stateName]);
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: '300px' }}>
-      <div ref={mapRef} style={{ width: '100%', height: '100%', background: '#000' }} />
+    <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
+      <div ref={mapRef} style={{ position: 'absolute', inset: 0, background: '#000' }} />
       <style>{`
         @keyframes mapPulse {
           0% { transform: scale(0.5); opacity: 0.8; }

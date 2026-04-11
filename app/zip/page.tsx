@@ -160,9 +160,9 @@ function ZipContent() {
 
       {/* Results */}
       {results && !loading && (
-        <div style={{ display: 'flex', gap: '0', minHeight: 'calc(100vh - 200px)' }}>
+        <div style={{ display: 'flex', gap: '0' }}>
           {/* Left: results */}
-          <div style={{ flex: '1 1 0', padding: '0 2rem', minWidth: 0, overflowY: 'auto' }}>
+          <div style={{ flex: '1 1 0', padding: '0 2rem', minWidth: 0 }}>
           {/* Result header */}
           <div style={{
             padding: '1.5rem 0', borderBottom: '1px solid var(--terminal-border)',
@@ -325,7 +325,8 @@ function ZipContent() {
           {results.districtInfo?.lat && results.districtInfo?.lng && (
             <div style={{
               flex: '0 0 350px', borderLeft: '1px solid var(--terminal-border)',
-              position: 'sticky', top: 0, height: 'calc(100vh - 140px)', alignSelf: 'flex-start',
+              position: 'sticky', top: 0, height: '500px', alignSelf: 'flex-start',
+              overflow: 'hidden',
             }}>
               <div style={{
                 padding: '0.5rem 0.75rem', background: 'var(--terminal-surface)',
@@ -333,9 +334,9 @@ function ZipContent() {
                 fontSize: '0.6rem', color: 'var(--terminal-text-dim)',
                 letterSpacing: '0.15em', fontWeight: 700,
               }}>
-                LOCATION MAP
+                DISTRICT MAP
               </div>
-              <div style={{ height: 'calc(100% - 30px)' }}>
+              <div style={{ height: '470px', overflow: 'hidden' }}>
                 <ZipMap
                   lat={results.districtInfo.lat}
                   lng={results.districtInfo.lng}
