@@ -105,7 +105,7 @@ export default function TerminalHeader() {
               onClick={() => setStateOpen(!stateOpen)}
               style={{
                 background: 'none', border: '1px solid var(--terminal-border)',
-                color: 'var(--terminal-blue)', cursor: 'pointer', padding: '0.2rem 0.5rem',
+                color: 'var(--terminal-green)', cursor: 'pointer', padding: '0.2rem 0.5rem',
                 fontFamily: 'JetBrains Mono, monospace', fontSize: '0.8rem', fontWeight: 700,
                 display: 'flex', alignItems: 'center', gap: '0.3rem',
                 letterSpacing: '0.05em',
@@ -127,13 +127,13 @@ export default function TerminalHeader() {
                     style={{
                       padding: '0.4rem 0.75rem', cursor: 'pointer', fontSize: '0.75rem',
                       fontFamily: 'JetBrains Mono, monospace',
-                      background: selectedState === s.code ? 'rgba(0, 191, 255, 0.15)' : 'transparent',
-                      color: selectedState === s.code ? 'var(--terminal-blue)' : 'var(--terminal-text)',
+                      background: selectedState === s.code ? 'rgba(0, 255, 65, 0.15)' : 'transparent',
+                      color: selectedState === s.code ? 'var(--terminal-green)' : 'var(--terminal-text)',
                       borderBottom: '1px solid var(--terminal-border)',
                       display: 'flex', justifyContent: 'space-between',
                     }}
-                    onMouseEnter={e => (e.currentTarget.style.background = 'rgba(0, 191, 255, 0.08)')}
-                    onMouseLeave={e => (e.currentTarget.style.background = selectedState === s.code ? 'rgba(0, 191, 255, 0.15)' : 'transparent')}
+                    onMouseEnter={e => (e.currentTarget.style.background = 'rgba(0, 255, 65, 0.08)')}
+                    onMouseLeave={e => (e.currentTarget.style.background = selectedState === s.code ? 'rgba(0, 255, 65, 0.15)' : 'transparent')}
                   >
                     <span>{s.name}</span>
                     <span style={{ color: 'var(--terminal-text-dim)', fontSize: '0.65rem' }}>{s.code}</span>
@@ -168,7 +168,7 @@ export default function TerminalHeader() {
         <Link 
           href={`/${stateQuery}`}
           style={{ 
-            color: pathname === '/' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
+            color: pathname === '/' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
             textDecoration: 'none',
             fontSize: '11px',
             textTransform: 'uppercase',
@@ -179,10 +179,23 @@ export default function TerminalHeader() {
         >
           🏠 HOME
         </Link>
-        <Link 
+        <Link
+          href={`/dashboard${stateQuery}`}
+          style={{
+            color: pathname === '/dashboard' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
+            textDecoration: 'none',
+            fontSize: '11px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+            fontWeight: 600
+          }}
+        >
+          📊 DASHBOARD
+        </Link>
+        <Link
           href={`/officials${stateQuery}`}
           style={{ 
-            color: pathname === '/officials' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
+            color: pathname === '/officials' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
             textDecoration: 'none',
             fontSize: '11px',
             textTransform: 'uppercase',
@@ -195,7 +208,7 @@ export default function TerminalHeader() {
         <Link 
           href={`/candidates${stateQuery}`}
           style={{ 
-            color: pathname === '/candidates' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
+            color: pathname === '/candidates' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
             textDecoration: 'none',
             fontSize: '11px',
             textTransform: 'uppercase',
@@ -208,7 +221,7 @@ export default function TerminalHeader() {
         <Link 
           href={`/hierarchy${stateQuery}`}
           style={{ 
-            color: pathname === '/hierarchy' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
+            color: pathname === '/hierarchy' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
             textDecoration: 'none',
             fontSize: '11px',
             textTransform: 'uppercase',
@@ -221,7 +234,7 @@ export default function TerminalHeader() {
         <Link 
           href={`/juicebox${stateQuery}`}
           style={{ 
-            color: pathname === '/juicebox' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
+            color: pathname === '/juicebox' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
             textDecoration: 'none',
             fontSize: '11px',
             textTransform: 'uppercase',
@@ -234,7 +247,7 @@ export default function TerminalHeader() {
         <Link
           href={`/social${stateQuery}`}
           style={{
-            color: pathname === '/social' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
+            color: pathname === '/social' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
             textDecoration: 'none',
             fontSize: '11px',
             textTransform: 'uppercase',
@@ -247,7 +260,7 @@ export default function TerminalHeader() {
         <Link
           href={`/browse${stateQuery}`}
           style={{
-            color: pathname === '/browse' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
+            color: pathname === '/browse' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
             textDecoration: 'none',
             fontSize: '11px',
             textTransform: 'uppercase',
@@ -260,7 +273,7 @@ export default function TerminalHeader() {
         <Link
           href={`/compare${stateQuery}`}
           style={{
-            color: pathname === '/compare' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
+            color: pathname === '/compare' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
             textDecoration: 'none',
             fontSize: '11px',
             textTransform: 'uppercase',
@@ -273,7 +286,7 @@ export default function TerminalHeader() {
         <Link
           href={`/connections${stateQuery}`}
           style={{
-            color: pathname === '/connections' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
+            color: pathname === '/connections' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
             textDecoration: 'none',
             fontSize: '11px',
             textTransform: 'uppercase',

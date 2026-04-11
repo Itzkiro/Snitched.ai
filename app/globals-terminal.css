@@ -1,19 +1,19 @@
 /* Snitched.ai - Bloomberg Terminal / Intelligence Dashboard Theme */
 
 :root {
-  /* Terminal color palette */
-  --terminal-bg: #0a1628;
-  --terminal-surface: #0f1e3a;
-  --terminal-card: #1a2942;
-  --terminal-border: #2a3f5f;
-  --terminal-blue: #00BFFF;
-  --terminal-cyan: #00D9FF;
+  /* Terminal color palette — green matrix theme */
+  --terminal-bg: #000000;
+  --terminal-surface: #0a0f0a;
+  --terminal-card: #0d140d;
+  --terminal-border: rgba(0,255,65,0.12);
+  --terminal-blue: #00FF41;
+  --terminal-cyan: #00cc33;
   --terminal-green: #00FF41;
   --terminal-red: #FF0844;
   --terminal-amber: #FFB627;
-  --terminal-text: #E0E6ED;
-  --terminal-text-dim: #8B9CB6;
-  --terminal-text-dimmer: #4A5F7F;
+  --terminal-text: #c8d6c8;
+  --terminal-text-dim: #6b8a6b;
+  --terminal-text-dimmer: #3d5a3d;
   
   /* Typography */
   --font-terminal: 'JetBrains Mono', 'IBM Plex Mono', 'Courier New', monospace;
@@ -38,7 +38,7 @@ body {
 /* Terminal header */
 .terminal-header {
   background: #000;
-  border-bottom: 2px solid var(--terminal-blue);
+  border-bottom: 2px solid var(--terminal-green);
   padding: 0.5rem 1.5rem;
   display: flex;
   justify-content: space-between;
@@ -98,8 +98,8 @@ body {
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: rgba(0, 191, 255, 0.1);
-  border: 1px solid var(--terminal-blue);
+  background: rgba(0, 255, 65, 0.1);
+  border: 1px solid var(--terminal-green);
   border-radius: 2px;
   font-size: 1.25rem;
   font-weight: 600;
@@ -156,8 +156,8 @@ body {
 }
 
 .terminal-card:hover {
-  border-color: var(--terminal-blue);
-  box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
+  border-color: var(--terminal-green);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.15);
 }
 
 .card-header {
@@ -173,7 +173,7 @@ body {
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--terminal-blue);
+  color: var(--terminal-green);
 }
 
 .card-status {
@@ -204,7 +204,7 @@ body {
 .stat-value {
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--terminal-blue);
+  color: var(--terminal-green);
   line-height: 1;
   margin-bottom: 0.25rem;
 }
@@ -247,7 +247,7 @@ body {
 }
 
 .feed-title {
-  color: var(--terminal-blue);
+  color: var(--terminal-green);
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -261,7 +261,7 @@ body {
 }
 
 .feed-item:hover {
-  background: rgba(0, 191, 255, 0.05);
+  background: rgba(0, 255, 65, 0.05);
 }
 
 .feed-time {
@@ -304,8 +304,8 @@ body {
 
 .timeline-btn:hover,
 .timeline-btn.active {
-  background: var(--terminal-blue);
-  border-color: var(--terminal-blue);
+  background: var(--terminal-green);
+  border-color: var(--terminal-green);
   color: #000;
 }
 
@@ -325,12 +325,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--terminal-blue);
+  background: var(--terminal-green);
 }
 
 /* Links */
 a {
-  color: var(--terminal-blue);
+  color: var(--terminal-green);
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -344,8 +344,8 @@ a:hover {
 .terminal-btn {
   padding: 0.75rem 1.5rem;
   background: transparent;
-  border: 1px solid var(--terminal-blue);
-  color: var(--terminal-blue);
+  border: 1px solid var(--terminal-green);
+  color: var(--terminal-green);
   font-family: var(--font-terminal);
   font-size: 12px;
   text-transform: uppercase;
@@ -355,7 +355,7 @@ a:hover {
 }
 
 .terminal-btn:hover {
-  background: var(--terminal-blue);
+  background: var(--terminal-green);
   color: #000;
 }
 

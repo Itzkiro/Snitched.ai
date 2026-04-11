@@ -16,14 +16,21 @@ const STATES_WITH_DATA = [
   { code: 'NJ', name: 'New Jersey' },
 ];
 
-const UPDATES = [
-  { date: 'APR 11', title: 'State Filtering', desc: 'Filter all pages by state via dropdown', tag: 'NEW' },
-  { date: 'APR 10', title: 'National Expansion', desc: '11 states, 6,700+ politicians', tag: 'DATA' },
-  { date: 'APR 10', title: 'Ohio Full Depth', desc: '88 counties, 204 judges, 150 state/federal officials', tag: 'DATA' },
-  { date: 'APR 10', title: 'Financial Enrichment', desc: '1,644 officials with real campaign finance ($618M)', tag: 'DATA' },
-  { date: 'APR 10', title: 'Corruption Score v4', desc: '4-factor scoring, Israel lobby instant flag', tag: 'NEW' },
-  { date: 'APR 09', title: 'Connections Graph', desc: 'Interactive donor-politician network visualization', tag: 'NEW' },
-];
+// UPDATES are built dynamically — numbers come from platformStats (refreshed every 12h)
+function buildUpdates(ps: Record<string, number>) {
+  const states = ps['total_states'] || 0;
+  const pols = ps['total_politicians'] || 0;
+  const funded = ps['total_funded'] || 0;
+  const funds = ps['total_campaign_funds'] || 0;
+  const fundsLabel = funds >= 1e9 ? `$${(funds / 1e9).toFixed(1)}B` : funds >= 1e6 ? `$${(funds / 1e6).toFixed(0)}M` : `$${(funds / 1e3).toFixed(0)}K`;
+  return [
+    { date: 'APR 11', title: 'State Filtering', desc: 'Filter all pages by state via dropdown', tag: 'NEW' },
+    { date: 'APR 10', title: 'National Expansion', desc: `${states} states, ${pols.toLocaleString()}+ politicians`, tag: 'DATA' },
+    { date: 'APR 10', title: 'Financial Enrichment', desc: `${funded.toLocaleString()} officials with real campaign finance (${fundsLabel})`, tag: 'DATA' },
+    { date: 'APR 10', title: 'Corruption Score v4', desc: '4-factor scoring, Israel lobby instant flag', tag: 'NEW' },
+    { date: 'APR 09', title: 'Connections Graph', desc: 'Interactive donor-politician network visualization', tag: 'NEW' },
+  ];
+}
 
 // ── Colors ──
 const g = '#00FF41';       // matrix green
@@ -46,9 +53,10 @@ const mono = "'JetBrains Mono', 'Courier New', monospace";
 interface TerminalHomeProps {
   initialPoliticians: Politician[];
   selectedState?: string | null;
+  platformStats?: Record<string, number>;
 }
 
-export default function TerminalHome({ initialPoliticians, selectedState }: TerminalHomeProps) {
+export default function TerminalHome({ initialPoliticians, selectedState, platformStats = {} }: TerminalHomeProps) {
   const router = useRouter();
   const { entered, enter } = useTerminal();
   const [nameQuery, setNameQuery] = useState('');
@@ -387,19 +395,35 @@ export default function TerminalHome({ initialPoliticians, selectedState }: Term
         </div>
       </section>
 
-      {/* ── WHAT IS THIS ── */}
+      {/* ── MISSION ── */}
       <section style={{ padding: '3.5rem 1.5rem', borderTop: `1px solid ${borderC}` }}>
         <div style={{ maxWidth: '780px', margin: '0 auto' }}>
-          <div style={{ fontSize: '0.6rem', color: txtMuted, letterSpacing: '0.2em', marginBottom: '0.3rem' }}>README.md</div>
-          <h2 style={{ fontSize: '1.3rem', fontWeight: 700, color: g, marginBottom: '1.5rem' }}>
-            What is Snitched.ai?
+          <div style={{ fontSize: '0.6rem', color: txtMuted, letterSpacing: '0.2em', marginBottom: '0.3rem' }}>MISSION.md</div>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: g, marginBottom: '0.5rem' }}>
+            America First. Anti-Corruption.
           </h2>
+          <h3 style={{ fontSize: '1rem', fontWeight: 400, color: txt, marginBottom: '1.5rem' }}>
+            Exposing foreign influence over American politicians.
+          </h3>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
+          <div style={{ marginBottom: '2rem', padding: '1.5rem', borderLeft: `3px solid ${r}`, background: 'rgba(255,8,68,0.04)' }}>
+            <p style={{ fontSize: '0.85rem', color: txt, lineHeight: 1.9, marginBottom: '0.8rem' }}>
+              American politicians should serve <span style={{ color: g, fontWeight: 700 }}>American citizens</span> &mdash; not foreign governments, not foreign lobbies, not the highest bidder. Yet billions of dollars flow from foreign-aligned PACs, lobby organizations, and dark money groups directly into the campaigns of the people who write our laws.
+            </p>
+            <p style={{ fontSize: '0.85rem', color: txt, lineHeight: 1.9 }}>
+              Snitched.ai exists to <span style={{ color: r, fontWeight: 700 }}>expose every dollar</span>. We track who takes money from AIPAC, the Israel lobby, and foreign-aligned PACs. We score every politician on corruption. We map every connection between donors, lobbyists, and the officials they own. <span style={{ color: g }}>All from public records. All verifiable. All free.</span>
+            </p>
+          </div>
+
+          {/* Core values */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
             {[
-              { icon: '&#128176;', title: 'FOLLOW THE MONEY', desc: 'FEC filings, state campaign databases, and lobbying disclosures aggregated. See exactly who funds each politician.', c: g },
-              { icon: '&#127758;', title: 'FOREIGN LOBBY', desc: 'Israel lobby PACs, bundled donations, independent expenditures. Track AIPAC-affiliated money in real time.', c: r },
-              { icon: '&#9878;&#65039;', title: 'CORRUPTION SCORE', desc: 'Every politician scored 0-100 on PAC ratios, lobby connections, and campaign finance red flags. Data, not opinions.', c: amber },
+              { icon: '&#127482;&#127480;', title: 'AMERICA FIRST', desc: 'American tax dollars and policy decisions should serve American interests &mdash; not foreign governments or their lobbying arms.', c: g },
+              { icon: '&#128683;', title: 'ANTI-ZIONIST LOBBY', desc: 'AIPAC and its network spend hundreds of millions to buy American politicians. We track every dollar of their influence operation.', c: r },
+              { icon: '&#128274;', title: 'RADICAL TRANSPARENCY', desc: 'Every data point sourced from public FEC filings, lobbying disclosures, and voting records. Fully verifiable, fully open.', c: amber },
+              { icon: '&#9878;&#65039;', title: 'CORRUPTION SCORING', desc: 'Proprietary 0-100 scoring algorithm analyzing PAC ratios, lobby connections, voting alignment with donors, and financial red flags.', c: g },
+              { icon: '&#128376;&#65039;', title: 'CONNECTION MAPPING', desc: 'Interactive network graphs showing who funds who, which donors cross party lines, and how lobby money flows through the system.', c: '#00cc33' },
+              { icon: '&#128202;', title: 'STATE DASHBOARDS', desc: 'Deep-dive dashboards for every state &mdash; party breakdown, top corrupt officials, Israel lobby recipients, and fundraising leaders.', c: amber },
             ].map(c => (
               <div key={c.title} style={{
                 padding: '1.25rem', background: cardBg, border: `1px solid ${borderC}`,
@@ -407,23 +431,64 @@ export default function TerminalHome({ initialPoliticians, selectedState }: Term
               }}
                 onMouseEnter={e => (e.currentTarget.style.borderColor = c.c)}
                 onMouseLeave={e => (e.currentTarget.style.borderColor = borderC)}>
-                <div style={{ fontSize: '1.3rem', marginBottom: '0.6rem' }} dangerouslySetInnerHTML={{ __html: c.icon }} />
-                <div style={{ fontSize: '0.7rem', fontWeight: 700, color: c.c, marginBottom: '0.5rem', letterSpacing: '0.1em' }}>{c.title}</div>
-                <p style={{ fontSize: '0.75rem', color: txtDim, lineHeight: 1.7 }}>{c.desc}</p>
+                <div style={{ fontSize: '1.4rem', marginBottom: '0.6rem' }} dangerouslySetInnerHTML={{ __html: c.icon }} />
+                <div style={{ fontSize: '0.65rem', fontWeight: 700, color: c.c, marginBottom: '0.5rem', letterSpacing: '0.1em' }}>{c.title}</div>
+                <p style={{ fontSize: '0.72rem', color: txtDim, lineHeight: 1.7 }} dangerouslySetInnerHTML={{ __html: c.desc }} />
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Mission */}
-          <div style={{
-            marginTop: '1.5rem', padding: '1.25rem', borderLeft: `2px solid ${g}`,
-            background: gFaint,
-          }}>
-            <p style={{ fontSize: '0.8rem', color: txt, lineHeight: 1.8 }}>
-              <span style={{ color: g, fontWeight: 700 }}>$</span> Every data point sourced from public records &mdash;
-              FEC, state election databases, LDA filings, and LegiScan voting records.
-              <span style={{ color: g }}> No opinions. No partisan bias. Just data.</span>
-            </p>
+      {/* ── HOW IT WORKS ── */}
+      <section style={{ padding: '3rem 1.5rem', borderTop: `1px solid ${borderC}`, background: bg1 }}>
+        <div style={{ maxWidth: '780px', margin: '0 auto' }}>
+          <div style={{ fontSize: '0.6rem', color: txtMuted, letterSpacing: '0.2em', marginBottom: '0.3rem' }}>PIPELINE.md</div>
+          <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: g, marginBottom: '1.5rem' }}>How It Works</h2>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+            {[
+              { step: '01', title: 'DATA INGESTION', desc: 'Automated scrapers pull FEC filings, state election data, LDA lobbying disclosures, and court records daily.', c: g },
+              { step: '02', title: 'ENTITY RESOLUTION', desc: 'Politicians matched across FEC, Congress, state databases, and lobby filings. Donors linked to PACs and organizations.', c: g },
+              { step: '03', title: 'CORRUPTION ANALYSIS', desc: 'Every politician scored on 4 factors: PAC funding ratio, lobby connections, donor voting alignment, and financial red flags.', c: amber },
+              { step: '04', title: 'ISRAEL LOBBY FLAGGING', desc: 'Automatic detection of AIPAC PAC money, Israel lobby bundled donations, and pro-Israel independent expenditures.', c: r },
+              { step: '05', title: 'PUBLIC INTELLIGENCE', desc: 'Results published on searchable dashboards, connection maps, and corruption leaderboards. Updated every 24 hours.', c: g },
+            ].map((s, i, arr) => (
+              <div key={s.step} style={{
+                display: 'flex', gap: '1rem', padding: '1rem 0',
+                borderBottom: i < arr.length - 1 ? `1px solid ${borderC}` : 'none',
+              }}>
+                <div style={{ fontSize: '1.2rem', fontWeight: 700, color: s.c, minWidth: '32px', opacity: 0.5 }}>{s.step}</div>
+                <div>
+                  <div style={{ fontSize: '0.75rem', fontWeight: 700, color: s.c, marginBottom: '0.3rem', letterSpacing: '0.08em' }}>{s.title}</div>
+                  <p style={{ fontSize: '0.72rem', color: txtDim, lineHeight: 1.7 }}>{s.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── DATA SOURCES ── */}
+      <section style={{ padding: '2.5rem 1.5rem', borderTop: `1px solid ${borderC}` }}>
+        <div style={{ maxWidth: '780px', margin: '0 auto' }}>
+          <div style={{ fontSize: '0.6rem', color: txtMuted, letterSpacing: '0.2em', marginBottom: '0.3rem' }}>SOURCES.md</div>
+          <h2 style={{ fontSize: '1rem', fontWeight: 700, color: g, marginBottom: '1.25rem' }}>Verified Data Sources</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.6rem' }}>
+            {[
+              { name: 'FEC', full: 'Federal Election Commission', desc: 'Campaign contributions, PAC filings, independent expenditures. Updated daily.' },
+              { name: 'LDA', full: 'Lobbying Disclosure Act', desc: 'Registered lobbyist filings, client relationships, income reports.' },
+              { name: 'LegiScan', full: 'State Legislature Records', desc: 'Roll call votes, bill sponsorships, voting record analysis.' },
+              { name: 'Track AIPAC', full: 'Israel Lobby Data', desc: 'AIPAC bundled donations, pro-Israel PAC money, donor networks.' },
+              { name: 'CourtListener', full: 'Federal Court Records', desc: 'Court cases, legal proceedings, judicial records.' },
+              { name: 'Congress.gov', full: 'Congressional Data', desc: 'Member profiles, committee assignments, legislative activity.' },
+            ].map(s => (
+              <div key={s.name} style={{ padding: '0.9rem', background: cardBg, border: `1px solid ${borderC}` }}>
+                <div style={{ fontSize: '0.8rem', fontWeight: 700, color: g, marginBottom: '0.15rem' }}>{s.name}</div>
+                <div style={{ fontSize: '0.55rem', color: txtMuted, letterSpacing: '0.08em', marginBottom: '0.3rem' }}>{s.full}</div>
+                <div style={{ fontSize: '0.65rem', color: txtDim, lineHeight: 1.5 }}>{s.desc}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -443,10 +508,7 @@ export default function TerminalHome({ initialPoliticians, selectedState }: Term
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.6rem' }}>
               {topCorrupt.map(pol => (
                 <Link key={pol.id} href={`/politician/${pol.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                  <div style={{
-                    padding: '1rem', background: cardBg, border: `1px solid ${borderC}`,
-                    transition: 'all 0.15s',
-                  }}
+                  <div style={{ padding: '1rem', background: cardBg, border: `1px solid ${borderC}`, transition: 'all 0.15s' }}
                     onMouseEnter={e => { e.currentTarget.style.borderColor = r; e.currentTarget.style.boxShadow = `0 0 10px rgba(255,8,68,0.15)`; }}
                     onMouseLeave={e => { e.currentTarget.style.borderColor = borderC; e.currentTarget.style.boxShadow = 'none'; }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.6rem' }}>
@@ -454,23 +516,13 @@ export default function TerminalHome({ initialPoliticians, selectedState }: Term
                         <div style={{ fontWeight: 700, fontSize: '0.8rem', color: txt }}>{pol.name}</div>
                         <div style={{ fontSize: '0.6rem', color: txtDim, marginTop: '0.1rem' }}>{pol.office}</div>
                       </div>
-                      <span style={{
-                        fontSize: '0.55rem', padding: '0.1rem 0.4rem', alignSelf: 'start',
-                        background: pol.party === 'Republican' ? 'rgba(255,8,68,0.15)' : gFaint,
-                        color: pol.party === 'Republican' ? r : g, fontWeight: 700,
-                      }}>{pol.party === 'Republican' ? 'R' : 'D'}</span>
+                      <span style={{ fontSize: '0.55rem', padding: '0.1rem 0.4rem', alignSelf: 'start', background: pol.party === 'Republican' ? 'rgba(255,8,68,0.15)' : gFaint, color: pol.party === 'Republican' ? r : g, fontWeight: 700 }}>{pol.party === 'Republican' ? 'R' : 'D'}</span>
                     </div>
-                    <div style={{
-                      fontSize: '1.6rem', fontWeight: 700,
-                      color: pol.corruptionScore >= 60 ? r : pol.corruptionScore >= 40 ? amber : g,
-                      lineHeight: 1,
-                    }}>
+                    <div style={{ fontSize: '1.6rem', fontWeight: 700, color: pol.corruptionScore >= 60 ? r : pol.corruptionScore >= 40 ? amber : g, lineHeight: 1 }}>
                       {pol.corruptionScore}<span style={{ fontSize: '0.6rem', color: txtMuted }}>/100</span>
                     </div>
                     {(pol.israelLobbyTotal || pol.aipacFunding || 0) > 0 && (
-                      <div style={{ marginTop: '0.4rem', fontSize: '0.65rem', color: r }}>
-                        {fmtM(pol.israelLobbyTotal || pol.aipacFunding || 0)} ISRAEL LOBBY
-                      </div>
+                      <div style={{ marginTop: '0.4rem', fontSize: '0.65rem', color: r }}>{fmtM(pol.israelLobbyTotal || pol.aipacFunding || 0)} ISRAEL LOBBY</div>
                     )}
                   </div>
                 </Link>
@@ -480,17 +532,46 @@ export default function TerminalHome({ initialPoliticians, selectedState }: Term
         </section>
       )}
 
-      {/* ── UPDATE LOG ── */}
+      {/* ── PLATFORM FEATURES ── */}
       <section style={{ padding: '3rem 1.5rem', borderTop: `1px solid ${borderC}` }}>
+        <div style={{ maxWidth: '780px', margin: '0 auto' }}>
+          <div style={{ fontSize: '0.6rem', color: txtMuted, letterSpacing: '0.2em', marginBottom: '0.3rem' }}>FEATURES.md</div>
+          <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: g, marginBottom: '1.5rem' }}>Platform Features</h2>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+            {[
+              'State-by-state corruption dashboards',
+              'Politician search by name or ZIP code',
+              'Israel lobby funding tracker (AIPAC, UDP, DMFI)',
+              'Interactive donor-politician connection maps',
+              'Corruption scoring algorithm (0-100)',
+              'Federal, state, county & municipal coverage',
+              'Campaign finance breakdown per politician',
+              'Party affiliation & voting record analysis',
+              'Court case & legal proceeding records',
+              'Real-time data from 6 verified sources',
+              'Compare politicians side-by-side',
+              'Government hierarchy drill-down',
+            ].map(f => (
+              <div key={f} style={{ display: 'flex', alignItems: 'start', gap: '0.5rem', padding: '0.4rem 0', fontSize: '0.72rem' }}>
+                <span style={{ color: g, fontSize: '0.6rem', marginTop: '0.15rem' }}>&#9654;</span>
+                <span style={{ color: txt }}>{f}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── UPDATE LOG ── */}
+      <section style={{ padding: '3rem 1.5rem', borderTop: `1px solid ${borderC}`, background: bg1 }}>
         <div style={{ maxWidth: '780px', margin: '0 auto' }}>
           <div style={{ fontSize: '0.6rem', color: txtMuted, letterSpacing: '0.2em', marginBottom: '0.3rem' }}>CHANGELOG</div>
           <h2 style={{ fontSize: '1rem', fontWeight: 700, color: g, marginBottom: '1.25rem' }}>Platform Updates</h2>
 
-          {UPDATES.map((u, i) => (
+          {buildUpdates(platformStats).map((u, i, arr) => (
             <div key={i} style={{
               display: 'flex', alignItems: 'baseline', gap: '0.75rem', padding: '0.6rem 0',
-              borderBottom: i < UPDATES.length - 1 ? `1px solid ${borderC}` : 'none',
-              fontSize: '0.75rem',
+              borderBottom: i < arr.length - 1 ? `1px solid ${borderC}` : 'none', fontSize: '0.75rem',
             }}>
               <span style={{ color: txtMuted, minWidth: '48px', fontSize: '0.6rem' }}>{u.date}</span>
               <span style={{
@@ -508,17 +589,44 @@ export default function TerminalHome({ initialPoliticians, selectedState }: Term
         </div>
       </section>
 
+      {/* ── CTA ── */}
+      <section style={{ padding: '3rem 1.5rem', borderTop: `1px solid ${borderC}`, textAlign: 'center' }}>
+        <div style={{ maxWidth: '500px', margin: '0 auto' }}>
+          <div style={{ fontSize: '1.2rem', fontWeight: 700, color: g, marginBottom: '0.5rem', textShadow: `0 0 20px ${gGlow}` }}>
+            Ready to see who owns your politicians?
+          </div>
+          <p style={{ fontSize: '0.75rem', color: txtDim, marginBottom: '1.5rem', lineHeight: 1.6 }}>
+            Enter the terminal to access the full corruption database, connection maps, and state dashboards.
+          </p>
+          <button onClick={enter}
+            style={{
+              padding: '0.9rem 2.5rem', background: g, border: 'none',
+              color: bg0, fontFamily: mono, fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer',
+              letterSpacing: '0.1em', boxShadow: `0 0 25px ${gGlow}`, transition: 'all 0.2s',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.boxShadow = `0 0 40px ${gGlow}, 0 0 80px rgba(0,255,65,0.1)`; }}
+            onMouseLeave={e => { e.currentTarget.style.boxShadow = `0 0 25px ${gGlow}`; }}>
+            ENTER TERMINAL &gt;
+          </button>
+        </div>
+      </section>
+
       {/* ── FOOTER ── */}
       <footer style={{
-        padding: '1.5rem', textAlign: 'center', borderTop: `1px solid ${borderC}`,
+        padding: '2rem 1.5rem', textAlign: 'center', borderTop: `1px solid ${borderC}`,
         background: bg1, fontSize: '0.65rem',
       }}>
-        <div style={{ color: txtDim, marginBottom: '0.3rem' }}>
-          <span style={{ color: g, fontWeight: 700 }}>SNITCHED.AI</span> &mdash; Public intelligence from public records
+        <div style={{ color: g, fontWeight: 700, fontSize: '0.85rem', marginBottom: '0.5rem' }}>SNITCHED.AI</div>
+        <div style={{ color: txtDim, marginBottom: '0.75rem', lineHeight: 1.6, maxWidth: '400px', margin: '0 auto 0.75rem' }}>
+          America First public intelligence platform. Tracking corruption and foreign lobby influence using verified public records.
+        </div>
+        <div style={{ color: txtMuted, marginBottom: '0.5rem' }}>
+          FEC &middot; LDA Senate &middot; LegiScan &middot; Track AIPAC &middot; CourtListener &middot; Congress.gov
         </div>
         <div style={{ color: txtMuted }}>
-          FEC &middot; LDA &middot; LegiScan &middot; Track AIPAC &middot; CourtListener &middot;&nbsp;
           <Link href="/about" style={{ color: g, textDecoration: 'none' }}>Methodology</Link>
+          <span style={{ margin: '0 0.5rem' }}>&middot;</span>
+          <span>No opinions. No partisan bias. Just data.</span>
         </div>
       </footer>
     </div>
