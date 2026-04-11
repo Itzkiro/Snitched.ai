@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import type { Politician } from '@/lib/types';
 import { getStateName } from '@/lib/state-utils';
+import { useTerminal } from './TerminalContext';
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -102,6 +103,7 @@ interface TerminalHomeProps {
 
 export default function TerminalHome({ initialPoliticians, selectedState }: TerminalHomeProps) {
   const router = useRouter();
+  const { entered, enter } = useTerminal();
   const [nameQuery, setNameQuery] = useState('');
   const [zipQuery, setZipQuery] = useState('');
   const [nameSuggestions, setNameSuggestions] = useState<Politician[]>([]);
@@ -191,6 +193,153 @@ export default function TerminalHome({ initialPoliticians, selectedState }: Term
     .sort((a, b) => (b.israelLobbyTotal || 0) - (a.israelLobbyTotal || 0))
     .slice(0, 5);
 
+  // ──────────────────────────────────────────────────────────────────
+  // LANDING SPLASH (before the user enters the terminal)
+  // ──────────────────────────────────────────────────────────────────
+  if (!entered) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        background: 'linear-gradient(180deg, #000 0%, #0a1628 40%, #0d1f3c 100%)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'var(--terminal-text)',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        {/* Grid background */}
+        <div style={{
+          position: 'absolute', inset: 0, opacity: 0.03,
+          backgroundImage: 'linear-gradient(var(--terminal-blue) 1px, transparent 1px), linear-gradient(90deg, var(--terminal-blue) 1px, transparent 1px)',
+          backgroundSize: '50px 50px',
+          pointerEvents: 'none',
+        }} />
+
+        {/* Scanline overlay */}
+        <div style={{
+          position: 'absolute', inset: 0, opacity: 0.02,
+          background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,191,255,0.03) 2px, rgba(0,191,255,0.03) 4px)',
+          pointerEvents: 'none',
+        }} />
+
+        <div style={{ position: 'relative', textAlign: 'center', maxWidth: '700px', padding: '2rem' }}>
+          {/* Status badge */}
+          <div style={{
+            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+            padding: '0.4rem 1.2rem', marginBottom: '2rem',
+            background: 'rgba(0, 191, 255, 0.06)', border: '1px solid rgba(0, 191, 255, 0.2)',
+            fontSize: '0.65rem', color: 'var(--terminal-blue)', textTransform: 'uppercase',
+            letterSpacing: '0.2em', fontWeight: 600,
+          }}>
+            <span style={{ color: 'var(--terminal-green)', animation: 'pulse 2s infinite' }}>&#9679;</span>
+            SYSTEM ONLINE
+          </div>
+
+          {/* Logo */}
+          <h1 style={{
+            fontSize: 'clamp(3rem, 8vw, 5.5rem)',
+            fontWeight: 700,
+            lineHeight: 1,
+            marginBottom: '0.5rem',
+            letterSpacing: '0.02em',
+          }}>
+            <span style={{ color: 'var(--terminal-blue)' }}>SNITCHED</span>
+            <span style={{ color: 'var(--terminal-text-dim)', fontWeight: 400 }}>.AI</span>
+          </h1>
+
+          {/* Tagline */}
+          <p style={{
+            fontSize: 'clamp(0.9rem, 2vw, 1.15rem)',
+            color: 'var(--terminal-text-dim)',
+            lineHeight: 1.7,
+            marginBottom: '3rem',
+            maxWidth: '550px',
+            margin: '0 auto 3rem',
+          }}>
+            Public intelligence platform tracking political corruption, foreign lobby influence, and campaign finance across America.
+          </p>
+
+          {/* Stats row */}
+          <div style={{
+            display: 'flex', justifyContent: 'center', gap: '2.5rem', flexWrap: 'wrap',
+            marginBottom: '3rem',
+          }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--terminal-blue)', fontFamily: 'Bebas Neue, sans-serif' }}>
+                {politicians.length.toLocaleString()}
+              </div>
+              <div style={{ fontSize: '0.6rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase', letterSpacing: '0.15em' }}>
+                Politicians Tracked
+              </div>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--terminal-green)', fontFamily: 'Bebas Neue, sans-serif' }}>
+                ${(totalFunding / 1000000).toFixed(0)}M
+              </div>
+              <div style={{ fontSize: '0.6rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase', letterSpacing: '0.15em' }}>
+                Funds Tracked
+              </div>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--terminal-red)', fontFamily: 'Bebas Neue, sans-serif' }}>
+                ${(israelLobbyTotal / 1000000).toFixed(1)}M
+              </div>
+              <div style={{ fontSize: '0.6rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase', letterSpacing: '0.15em' }}>
+                Israel Lobby
+              </div>
+            </div>
+          </div>
+
+          {/* Enter Terminal button */}
+          <button
+            onClick={enter}
+            style={{
+              padding: '1rem 3rem',
+              background: 'transparent',
+              border: '2px solid var(--terminal-blue)',
+              color: 'var(--terminal-blue)',
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: '0.9rem',
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '0.2em',
+              cursor: 'pointer',
+              transition: 'all 0.3s',
+              position: 'relative',
+              overflow: 'hidden',
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.background = 'var(--terminal-blue)';
+              e.currentTarget.style.color = '#000';
+              e.currentTarget.style.boxShadow = '0 0 30px rgba(0, 191, 255, 0.4)';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.background = 'transparent';
+              e.currentTarget.style.color = 'var(--terminal-blue)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >
+            ENTER TERMINAL &gt;
+          </button>
+
+          {/* Subtitle under button */}
+          <p style={{
+            fontSize: '0.65rem', color: 'var(--terminal-text-dim)',
+            marginTop: '1.5rem', letterSpacing: '0.15em', textTransform: 'uppercase',
+            opacity: 0.5,
+          }}>
+            No opinions. No partisan bias. Just data.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // ──────────────────────────────────────────────────────────────────
+  // FULL DASHBOARD (after entering the terminal)
+  // ──────────────────────────────────────────────────────────────────
   return (
     <div style={{ minHeight: '100vh', background: 'var(--terminal-bg)', color: 'var(--terminal-text)' }}>
 

@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
 import "./globals-terminal.css";
-import TerminalHeader from "@/components/TerminalHeader";
+import { TerminalProvider } from "@/components/TerminalContext";
+import TerminalShell from "@/components/TerminalShell";
 
 export const viewport = {
   width: 'device-width',
@@ -51,10 +52,13 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
       </head>
       <body>
-        <Suspense>
-          <TerminalHeader />
-        </Suspense>
-        {children}
+        <TerminalProvider>
+          <Suspense>
+            <TerminalShell>
+              {children}
+            </TerminalShell>
+          </Suspense>
+        </TerminalProvider>
       </body>
     </html>
   );
