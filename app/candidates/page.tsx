@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getServiceRoleSupabase, getServerSupabase } from '@/lib/supabase-server';
 import type { Politician } from '@/lib/types';
 import { filterByState, getStateName } from '@/lib/state-utils';
+import ComingSoon, { isStateLive } from '@/components/ComingSoon';
 import CandidateCompare from './CandidateCompare';
 
 export const metadata: Metadata = {
@@ -288,6 +289,7 @@ function RaceSection({ title, icon, races }: { title: string; icon: string; race
 
 export default async function CandidatesPage({ searchParams }: { searchParams: Promise<{ state?: string }> }) {
   const { state: stateParam } = await searchParams;
+  if (!isStateLive(stateParam)) return <ComingSoon stateCode={stateParam!} />;
   const allCandidates = await getCandidates();
   const candidates = filterByState(allCandidates, stateParam);
   const stateName = getStateName(stateParam);

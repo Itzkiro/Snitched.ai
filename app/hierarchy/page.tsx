@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import type { Politician } from '@/lib/types';
 import { getStateName } from '@/lib/state-utils';
+import ComingSoon, { isStateLive } from '@/components/ComingSoon';
 
 interface HierarchyNode {
   id: string;
@@ -211,6 +212,8 @@ function HierarchyContent() {
     if (allPoliticians.length === 0) return null;
     return buildHierarchy(allPoliticians, stateName, rootSlug);
   }, [allPoliticians, stateName, rootSlug]);
+
+  if (!isStateLive(stateParam)) return <ComingSoon stateCode={stateParam || 'FL'} />;
 
   if (loading || !hierarchyData) {
     return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>;

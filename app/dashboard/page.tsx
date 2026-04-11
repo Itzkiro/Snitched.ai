@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import type { Politician } from '@/lib/types';
 import { getStateName } from '@/lib/state-utils';
+import ComingSoon, { isStateLive } from '@/components/ComingSoon';
 
 const g = '#00FF41';
 const r = '#FF0844';
@@ -68,6 +69,8 @@ function DashboardContent() {
   }, [politicians]);
 
   const fmtM = (n: number) => n >= 1e6 ? `$${(n / 1e6).toFixed(1)}M` : n >= 1e3 ? `$${(n / 1e3).toFixed(0)}K` : `$${n}`;
+
+  if (!isStateLive(stateParam)) return <ComingSoon stateCode={stateParam} />;
 
   if (loading) {
     return (
