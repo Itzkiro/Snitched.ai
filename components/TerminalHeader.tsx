@@ -312,6 +312,19 @@ export default function TerminalHeader() {
         >
           🔬 INVESTIGATE
         </Link>
+        <Link
+          href="/intel"
+          style={{
+            color: pathname === '/intel' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
+            textDecoration: 'none',
+            fontSize: '11px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+            fontWeight: 600
+          }}
+        >
+          📡 LIVE INTEL
+        </Link>
 
         {/* Spacer to push search to the right */}
         <div style={{ flex: 1 }} />
