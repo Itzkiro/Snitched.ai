@@ -268,10 +268,10 @@ export async function GET(request: NextRequest) {
   }) as Politician;
 
   const politicians = matched.map(mapRow);
-  // For ballot view: seated officials = anyone who is_active (regardless of candidate status)
-  // Challengers = candidates who are NOT currently seated
+  // Seated Officials = anyone currently active in office
   const officials = politicians.filter(p => p.isActive);
-  const candidates = politicians.filter(p => p.isCandidate && !p.isActive);
+  // Candidates = everyone running (incumbents + challengers) for the ballot view
+  const candidates = politicians.filter(p => p.isCandidate);
 
   return NextResponse.json({
     zip: cleanZip,
