@@ -18,8 +18,8 @@ function ZipContent() {
   const [results, setResults] = useState<{
     zip?: string;
     state: string;
-    districtInfo?: { congressionalDistrict: string | null; stateUpperDistrict: string | null; stateLowerDistrict: string | null; county: string | null } | null;
-    civicOfficials?: Array<{ name: string; office: string; level: string; party: string }>;
+    districtInfo?: { congressionalDistrict: string | null } | null;
+    federalReps?: Array<{ name: string; office: string; level: string; party: string }>;
     officials: Politician[];
     candidates: Politician[];
   } | null>(null);
@@ -172,65 +172,43 @@ function ZipContent() {
               </Link>
             </div>
 
-            {/* District info from Google Civic */}
-            {results.districtInfo && (
-              <div style={{
-                display: 'flex', gap: '1rem', flexWrap: 'wrap', fontSize: '0.7rem',
-              }}>
-                {results.districtInfo.congressionalDistrict && (
-                  <div style={{ padding: '0.4rem 0.6rem', background: 'rgba(0,255,65,0.06)', border: '1px solid var(--terminal-border)' }}>
-                    <span style={{ color: 'var(--terminal-text-dim)' }}>US HOUSE: </span>
-                    <span style={{ color: 'var(--terminal-green)', fontWeight: 700 }}>District {results.districtInfo.congressionalDistrict}</span>
-                  </div>
-                )}
-                {results.districtInfo.stateUpperDistrict && (
-                  <div style={{ padding: '0.4rem 0.6rem', background: 'rgba(0,255,65,0.06)', border: '1px solid var(--terminal-border)' }}>
-                    <span style={{ color: 'var(--terminal-text-dim)' }}>STATE SENATE: </span>
-                    <span style={{ color: 'var(--terminal-green)', fontWeight: 700 }}>District {results.districtInfo.stateUpperDistrict}</span>
-                  </div>
-                )}
-                {results.districtInfo.stateLowerDistrict && (
-                  <div style={{ padding: '0.4rem 0.6rem', background: 'rgba(0,255,65,0.06)', border: '1px solid var(--terminal-border)' }}>
-                    <span style={{ color: 'var(--terminal-text-dim)' }}>STATE HOUSE: </span>
-                    <span style={{ color: 'var(--terminal-green)', fontWeight: 700 }}>District {results.districtInfo.stateLowerDistrict}</span>
-                  </div>
-                )}
-                {results.districtInfo.county && (
-                  <div style={{ padding: '0.4rem 0.6rem', background: 'rgba(0,255,65,0.06)', border: '1px solid var(--terminal-border)' }}>
-                    <span style={{ color: 'var(--terminal-text-dim)' }}>COUNTY: </span>
-                    <span style={{ color: 'var(--terminal-green)', fontWeight: 700 }}>{results.districtInfo.county}</span>
-                  </div>
-                )}
+            {/* District info */}
+            {results.districtInfo?.congressionalDistrict && (
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', fontSize: '0.7rem' }}>
+                <div style={{ padding: '0.4rem 0.6rem', background: 'rgba(0,255,65,0.06)', border: '1px solid var(--terminal-border)' }}>
+                  <span style={{ color: 'var(--terminal-text-dim)' }}>CONGRESSIONAL DISTRICT: </span>
+                  <span style={{ color: 'var(--terminal-green)', fontWeight: 700 }}>{results.state}-{results.districtInfo.congressionalDistrict}</span>
+                </div>
               </div>
             )}
           </div>
 
-          {/* Google Civic Officials (not in our DB) */}
-          {results.civicOfficials && results.civicOfficials.length > 0 && (
+          {/* Federal Representatives from WIMR */}
+          {results.federalReps && results.federalReps.length > 0 && (
             <div style={{ marginTop: '1.5rem' }}>
               <h2 style={{
                 fontSize: '0.85rem', fontWeight: 700, color: 'var(--terminal-amber)',
                 textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.75rem',
               }}>
-                YOUR REPRESENTATIVES (via Google Civic)
+                YOUR FEDERAL REPRESENTATIVES
               </h2>
               <div style={{ border: '1px solid var(--terminal-border)', background: 'var(--terminal-card)' }}>
-                {results.civicOfficials.map((o, i) => (
+                {results.federalReps.map((r, i) => (
                   <div key={i} style={{
                     display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                    padding: '0.65rem 1rem', borderBottom: i < results.civicOfficials!.length - 1 ? '1px solid var(--terminal-border)' : 'none',
+                    padding: '0.65rem 1rem', borderBottom: i < results.federalReps!.length - 1 ? '1px solid var(--terminal-border)' : 'none',
                     fontSize: '0.8rem',
                   }}>
                     <div>
-                      <div style={{ fontWeight: 600 }}>{o.name}</div>
-                      <div style={{ fontSize: '0.65rem', color: 'var(--terminal-text-dim)', marginTop: '0.1rem' }}>{o.office}</div>
+                      <div style={{ fontWeight: 600 }}>{r.name}</div>
+                      <div style={{ fontSize: '0.65rem', color: 'var(--terminal-text-dim)', marginTop: '0.1rem' }}>{r.office}</div>
                     </div>
                     <span style={{
                       fontSize: '0.6rem', padding: '0.15rem 0.4rem', fontWeight: 700,
-                      background: o.party === 'Republican Party' ? 'rgba(255,8,68,0.15)' : o.party === 'Democratic Party' ? 'rgba(0,255,65,0.1)' : 'rgba(255,182,39,0.1)',
-                      color: o.party === 'Republican Party' ? 'var(--terminal-red)' : o.party === 'Democratic Party' ? 'var(--terminal-green)' : 'var(--terminal-amber)',
+                      background: r.party === 'Republican' ? 'rgba(255,8,68,0.15)' : 'rgba(0,255,65,0.1)',
+                      color: r.party === 'Republican' ? 'var(--terminal-red)' : 'var(--terminal-green)',
                     }}>
-                      {o.party === 'Republican Party' ? 'R' : o.party === 'Democratic Party' ? 'D' : o.party}
+                      {r.party === 'Republican' ? 'R' : r.party === 'Democrat' ? 'D' : r.party}
                     </span>
                   </div>
                 ))}
