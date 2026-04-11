@@ -201,6 +201,8 @@ export async function GET(request: NextRequest) {
 
     // Statewide offices — always include
     if (level === 'US Senator' || level === 'Governor') return true;
+    // Catch statewide candidates with non-standard office_level (e.g. "State" for governor candidates)
+    if (office.includes('governor') || office.includes('attorney general') || office.includes('secretary of state')) return true;
 
     // US Representative — only YOUR congressional district
     if (level === 'US Representative') {
