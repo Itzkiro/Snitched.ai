@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import type { Politician } from '@/lib/types';
+import { getStateName } from '@/lib/state-utils';
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -96,9 +97,10 @@ function StatCounter({ value, label, color }: { value: string; label: string; co
 
 interface TerminalHomeProps {
   initialPoliticians: Politician[];
+  selectedState?: string | null;
 }
 
-export default function TerminalHome({ initialPoliticians }: TerminalHomeProps) {
+export default function TerminalHome({ initialPoliticians, selectedState }: TerminalHomeProps) {
   const router = useRouter();
   const [nameQuery, setNameQuery] = useState('');
   const [zipQuery, setZipQuery] = useState('');
@@ -232,8 +234,17 @@ export default function TerminalHome({ initialPoliticians }: TerminalHomeProps) 
             lineHeight: 1.1,
             marginBottom: '1rem',
           }}>
-            <span style={{ color: 'var(--terminal-blue)' }}>SNITCHED</span>
-            <span style={{ color: 'var(--terminal-text-dim)', fontWeight: 400 }}>.AI</span>
+            {selectedState && selectedState !== 'ALL' ? (
+              <>
+                <span style={{ color: 'var(--terminal-blue)' }}>{getStateName(selectedState).toUpperCase()}</span>
+                <span style={{ color: 'var(--terminal-text-dim)', fontWeight: 400 }}> CORRUPTION INDEX</span>
+              </>
+            ) : (
+              <>
+                <span style={{ color: 'var(--terminal-blue)' }}>SNITCHED</span>
+                <span style={{ color: 'var(--terminal-text-dim)', fontWeight: 400 }}>.AI</span>
+              </>
+            )}
           </h1>
 
           {/* Subtitle with typewriter */}
@@ -246,7 +257,9 @@ export default function TerminalHome({ initialPoliticians }: TerminalHomeProps) 
             margin: '0 auto 2.5rem',
           }}>
             <TypewriterText
-              text="Track political corruption, foreign lobby influence, and campaign finance across America. Real data from public records — not opinions."
+              text={selectedState && selectedState !== 'ALL'
+                ? `Track political corruption, foreign lobby influence, and campaign finance in ${getStateName(selectedState)}. Real data from public records.`
+                : "Track political corruption, foreign lobby influence, and campaign finance across America. Real data from public records — not opinions."}
               speed={25}
             />
           </div>

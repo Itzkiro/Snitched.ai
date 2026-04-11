@@ -1,6 +1,6 @@
 import { getServerSupabase } from '@/lib/supabase-server';
 import type { Politician } from '@/lib/types';
-import { filterByState } from '@/lib/state-utils';
+import { filterByState, getStateName } from '@/lib/state-utils';
 import TerminalHome from '@/components/TerminalHome';
 
 /**
@@ -125,7 +125,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
         renders the styled version), but the text is still in the HTML.
       */}
       <section
-        aria-label="Florida Corruption Index Summary"
+        aria-label={`${getStateName(stateParam)} Corruption Index Summary`}
         style={{
           position: 'absolute',
           width: '1px',
@@ -138,11 +138,11 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
           borderWidth: 0,
         }}
       >
-        <h1>Snitched.ai - Florida Corruption Index</h1>
+        <h1>Snitched.ai - {getStateName(stateParam)} Corruption Index</h1>
         <p>
-          Real-time political transparency platform tracking {totalTracked} Florida
+          Real-time political transparency platform tracking {totalTracked} {getStateName(stateParam)}{' '}
           politicians. Exposing foreign lobby influence, campaign finance, and
-          corruption using public records from FEC, FL Division of Elections, LDA,
+          corruption using public records from FEC, state election databases, LDA,
           and LegiScan.
         </p>
         <h2>Key Statistics</h2>
@@ -172,7 +172,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
       </section>
 
       {/* Interactive client component with pre-fetched data */}
-      <TerminalHome initialPoliticians={politicians} />
+      <TerminalHome initialPoliticians={politicians} selectedState={stateParam || null} />
     </>
   );
 }

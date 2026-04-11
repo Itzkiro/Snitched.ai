@@ -4,6 +4,7 @@ import { Suspense, useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import type { Politician } from '@/lib/types';
+import { getStateName } from '@/lib/state-utils';
 
 interface HierarchyNode {
   id: string;
@@ -101,7 +102,7 @@ function buildCountyNode(slug: string, countyName: string, pols: Politician[]): 
  * Build the full hierarchy tree from the flat politician list returned by the API.
  * Every count is derived from the actual data -- nothing is hardcoded.
  */
-function buildHierarchy(all: Politician[]): HierarchyNode {
+function buildHierarchy(all: Politician[], rootName = 'Florida', rootSlug = 'florida'): HierarchyNode {
   const byOffice = (level: Politician['officeLevel']) => all.filter(p => p.officeLevel === level);
 
   // ── Federal ──
@@ -150,8 +151,8 @@ function buildHierarchy(all: Politician[]): HierarchyNode {
   const validTop = topChildren.filter((c): c is HierarchyNode => c != null && c.count > 0);
 
   return {
-    id: 'florida',
-    name: 'Florida',
+    id: rootSlug,
+    name: rootName,
     count: validTop.reduce((s, c) => s + c.count, 0),
     children: validTop,
   };
@@ -180,7 +181,9 @@ export default function HierarchyPage() {
 function HierarchyContent() {
   const searchParams = useSearchParams();
   const stateParam = searchParams.get('state') || '';
-  const [path, setPath] = useState<string[]>(['florida']);
+  const stateName = getStateName(stateParam || 'FL');
+  const rootSlug = stateName.toLowerCase().replace(/\s+/g, '-');
+  const [path, setPath] = useState<string[]>([rootSlug]);
   const [allPoliticians, setAllPoliticians] = useState<Politician[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -200,13 +203,14 @@ function HierarchyContent() {
         setLoading(false);
       }
     }
+    setPath([rootSlug]);
     loadData();
-  }, [stateParam]);
+  }, [stateParam, rootSlug]);
 
   const hierarchyData = useMemo(() => {
     if (allPoliticians.length === 0) return null;
-    return buildHierarchy(allPoliticians);
-  }, [allPoliticians]);
+    return buildHierarchy(allPoliticians, stateName, rootSlug);
+  }, [allPoliticians, stateName, rootSlug]);
 
   if (loading || !hierarchyData) {
     return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>;
@@ -251,7 +255,7 @@ function HierarchyContent() {
       {/* Terminal Title */}
       <div className="terminal-title">
         <div>
-          <h1>HIERARCHY - FLORIDA GOVERNMENT STRUCTURE</h1>
+          <h1>HIERARCHY - {stateName.toUpperCase()} GOVERNMENT STRUCTURE</h1>
           <div className="terminal-subtitle">
             DOGE.gov-Style Drill-Down | Navigate {currentNode.count} Officials
           </div>
