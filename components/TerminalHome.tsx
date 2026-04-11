@@ -163,7 +163,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
         </div>
 
         <div style={{ display: 'flex', gap: '2rem', padding: '2rem', flexWrap: 'wrap' }}>
-          <div style={{ flex: '1 1 500px' }}>
+          <div style={{ flex: '1 1 300px', minWidth: 0 }}>
             <h2 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--terminal-red)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem' }}>HIGHEST CORRUPTION SCORES</h2>
             <div className="data-grid" style={{ padding: 0 }}>
               {topCorrupt.map(pol => (
@@ -178,7 +178,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
             </div>
           </div>
           {topIsrael.length > 0 && (
-            <div style={{ flex: '0 0 300px' }}>
+            <div style={{ flex: '1 1 250px' }}>
               <h2 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--terminal-red)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem' }}>ISRAEL LOBBY TOP</h2>
               {topIsrael.map((pol, i) => (
                 <Link key={pol.id} href={`/politician/${pol.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -312,7 +312,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
           {/* ── Search Bars ── */}
           <div style={{ display: 'flex', gap: '0.75rem', maxWidth: '640px', margin: '0 auto 2.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
             {/* Name */}
-            <form onSubmit={handleName} style={{ flex: '1 1 340px', position: 'relative' }}>
+            <form onSubmit={handleName} style={{ flex: '1 1 220px', position: 'relative' }}>
               <div style={{
                 display: 'flex', alignItems: 'center',
                 background: bg1, border: `1px solid ${borderC}`,
@@ -366,7 +366,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
             </form>
 
             {/* ZIP */}
-            <form onSubmit={handleZip} style={{ flex: '0 1 200px' }}>
+            <form onSubmit={handleZip} style={{ flex: '1 1 150px' }}>
               <div style={{
                 display: 'flex', alignItems: 'center',
                 background: bg1, border: `1px solid ${borderC}`,
@@ -392,7 +392,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
           </div>
 
           {/* ── Stats ── */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '2.5rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
             {[
               { v: politicians.length.toLocaleString(), l: 'TRACKED', c: g },
               { v: fmtM(totalFunding), l: 'FUNDS', c: gDim },
@@ -634,7 +634,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
           <div style={{ fontSize: '0.6rem', color: txtMuted, letterSpacing: '0.2em', marginBottom: '0.3rem' }}>FEATURES.md</div>
           <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: g, marginBottom: '1.5rem' }}>Platform Features</h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '0.5rem' }}>
             {[
               'State-by-state corruption dashboards',
               'Politician search by name or ZIP code',

@@ -124,7 +124,7 @@ function DashboardContent() {
         </div>
 
         {/* Party Breakdown */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.75rem', marginBottom: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '0.75rem', marginBottom: '1.5rem' }}>
           <div style={{ padding: '1rem', background: 'rgba(255,8,68,0.05)', border: '1px solid rgba(255,8,68,0.15)', textAlign: 'center' }}>
             <div style={{ fontSize: '1.8rem', fontWeight: 700, color: r }}>{stats.partyBreakdown.R}</div>
             <div style={{ fontSize: '0.6rem', color: r, letterSpacing: '0.15em' }}>REPUBLICAN</div>

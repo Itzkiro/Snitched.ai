@@ -465,3 +465,27 @@ a:hover {
     font-size: 1.25rem;
   }
 }
+
+/* ============================================================
+   LANDING PAGE & ZIP PAGE MOBILE OVERRIDES
+   ============================================================ */
+
+/* ZIP page: stack map below results on mobile */
+@media (max-width: 768px) {
+  /* Force flex columns to stack */
+  .zip-layout {
+    flex-direction: column !important;
+  }
+  .zip-map-panel {
+    flex: none !important;
+    width: 100% !important;
+    height: 250px !important;
+    position: relative !important;
+    border-left: none !important;
+    border-top: 1px solid var(--terminal-border) !important;
+    order: -1;
+  }
+  .zip-map-inner {
+    height: 220px !important;
+  }
+}

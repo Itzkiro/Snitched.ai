@@ -160,7 +160,7 @@ function ZipContent() {
 
       {/* Results */}
       {results && !loading && (
-        <div style={{ display: 'flex', gap: '0' }}>
+        <div className="zip-layout" style={{ display: 'flex', gap: '0' }}>
           {/* Left: results */}
           <div style={{ flex: '1 1 0', padding: '0 2rem', minWidth: 0 }}>
           {/* Result header */}
@@ -323,7 +323,7 @@ function ZipContent() {
           </div>
           {/* Right: Map */}
           {results.districtInfo?.lat && results.districtInfo?.lng && (
-            <div style={{
+            <div className="zip-map-panel" style={{
               flex: '0 0 350px', borderLeft: '1px solid var(--terminal-border)',
               position: 'sticky', top: 0, height: '500px', alignSelf: 'flex-start',
               overflow: 'hidden',
@@ -336,7 +336,7 @@ function ZipContent() {
               }}>
                 DISTRICT MAP
               </div>
-              <div style={{ height: '470px', overflow: 'hidden' }}>
+              <div className="zip-map-inner" style={{ height: '470px', overflow: 'hidden' }}>
                 <ZipMap
                   lat={results.districtInfo.lat}
                   lng={results.districtInfo.lng}
