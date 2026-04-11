@@ -29,6 +29,7 @@ function ZipContent() {
   } | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [activeTab, setActiveTab] = useState<'officials' | 'candidates'>('officials');
 
   useEffect(() => {
     if (zipParam && zipParam.length === 5) {
@@ -219,74 +220,98 @@ function ZipContent() {
             )}
           </div>
 
-          {/* Officials */}
-          {results.officials.length > 0 && (
-            <div style={{ marginTop: '1.5rem' }}>
-              <h2 style={{
-                fontSize: '0.85rem', fontWeight: 700, color: 'var(--terminal-green)',
-                textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.75rem',
-                display: 'flex', alignItems: 'center', gap: '0.5rem',
-              }}>
-                SEATED OFFICIALS ({results.officials.length})
-              </h2>
-              <div style={{ border: '1px solid var(--terminal-border)', background: 'var(--terminal-card)' }}>
-                {/* Group by level */}
-                {(() => {
-                  const fed = results.officials.filter(p => p.officeLevel === 'US Senator' || p.officeLevel === 'US Representative');
-                  const state = results.officials.filter(p => p.officeLevel === 'Governor' || p.officeLevel === 'State Senator' || p.officeLevel === 'State Representative');
-                  const local = results.officials.filter(p => !['US Senator', 'US Representative', 'Governor', 'State Senator', 'State Representative'].includes(p.officeLevel));
-                  return (
-                    <>
-                      {fed.length > 0 && (
-                        <>
-                          <div style={{ padding: '0.5rem 1rem', background: 'rgba(0,255,65,0.04)', fontSize: '0.6rem', color: 'var(--terminal-text-dim)', letterSpacing: '0.15em', fontWeight: 700, borderBottom: '1px solid var(--terminal-border)' }}>
-                            FEDERAL ({fed.length})
-                          </div>
-                          {fed.map(p => <PoliticianRow key={p.id} pol={p} />)}
-                        </>
-                      )}
-                      {state.length > 0 && (
-                        <>
-                          <div style={{ padding: '0.5rem 1rem', background: 'rgba(0,255,65,0.04)', fontSize: '0.6rem', color: 'var(--terminal-text-dim)', letterSpacing: '0.15em', fontWeight: 700, borderBottom: '1px solid var(--terminal-border)' }}>
-                            STATE ({state.length})
-                          </div>
-                          {state.map(p => <PoliticianRow key={p.id} pol={p} />)}
-                        </>
-                      )}
-                      {local.length > 0 && (
-                        <>
-                          <div style={{ padding: '0.5rem 1rem', background: 'rgba(0,255,65,0.04)', fontSize: '0.6rem', color: 'var(--terminal-text-dim)', letterSpacing: '0.15em', fontWeight: 700, borderBottom: '1px solid var(--terminal-border)' }}>
-                            COUNTY & LOCAL ({local.length})
-                          </div>
-                          {local.map(p => <PoliticianRow key={p.id} pol={p} />)}
-                        </>
-                      )}
-                    </>
-                  );
-                })()}
-              </div>
+          {/* Tabs */}
+          <div style={{
+            display: 'flex', gap: '0', marginTop: '1.5rem',
+            borderBottom: '1px solid var(--terminal-border)',
+          }}>
+            <button
+              onClick={() => setActiveTab('officials')}
+              style={{
+                padding: '0.75rem 1.5rem', background: 'none', border: 'none',
+                borderBottom: activeTab === 'officials' ? '2px solid var(--terminal-green)' : '2px solid transparent',
+                color: activeTab === 'officials' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
+                fontFamily: "'JetBrains Mono', monospace", fontSize: '0.75rem',
+                fontWeight: 700, cursor: 'pointer', textTransform: 'uppercase',
+                letterSpacing: '0.1em', transition: 'all 0.2s',
+              }}
+            >
+              SEATED OFFICIALS ({results.officials.length})
+            </button>
+            <button
+              onClick={() => setActiveTab('candidates')}
+              style={{
+                padding: '0.75rem 1.5rem', background: 'none', border: 'none',
+                borderBottom: activeTab === 'candidates' ? '2px solid var(--terminal-amber)' : '2px solid transparent',
+                color: activeTab === 'candidates' ? 'var(--terminal-amber)' : 'var(--terminal-text-dim)',
+                fontFamily: "'JetBrains Mono', monospace", fontSize: '0.75rem',
+                fontWeight: 700, cursor: 'pointer', textTransform: 'uppercase',
+                letterSpacing: '0.1em', transition: 'all 0.2s',
+              }}
+            >
+              CANDIDATES ({results.candidates.length})
+            </button>
+          </div>
+
+          {/* Officials Tab */}
+          {activeTab === 'officials' && (
+            <div style={{ marginTop: '1rem' }}>
+              {results.officials.length > 0 ? (
+                <div style={{ border: '1px solid var(--terminal-border)', background: 'var(--terminal-card)' }}>
+                  {(() => {
+                    const fed = results.officials.filter(p => p.officeLevel === 'US Senator' || p.officeLevel === 'US Representative');
+                    const stateLevel = results.officials.filter(p => p.officeLevel === 'Governor' || p.officeLevel === 'State Senator' || p.officeLevel === 'State Representative');
+                    const local = results.officials.filter(p => !['US Senator', 'US Representative', 'Governor', 'State Senator', 'State Representative'].includes(p.officeLevel));
+                    return (
+                      <>
+                        {fed.length > 0 && (
+                          <>
+                            <div style={{ padding: '0.5rem 1rem', background: 'rgba(0,255,65,0.04)', fontSize: '0.6rem', color: 'var(--terminal-text-dim)', letterSpacing: '0.15em', fontWeight: 700, borderBottom: '1px solid var(--terminal-border)' }}>
+                              FEDERAL ({fed.length})
+                            </div>
+                            {fed.map(p => <PoliticianRow key={p.id} pol={p} />)}
+                          </>
+                        )}
+                        {stateLevel.length > 0 && (
+                          <>
+                            <div style={{ padding: '0.5rem 1rem', background: 'rgba(0,255,65,0.04)', fontSize: '0.6rem', color: 'var(--terminal-text-dim)', letterSpacing: '0.15em', fontWeight: 700, borderBottom: '1px solid var(--terminal-border)' }}>
+                              STATE ({stateLevel.length})
+                            </div>
+                            {stateLevel.map(p => <PoliticianRow key={p.id} pol={p} />)}
+                          </>
+                        )}
+                        {local.length > 0 && (
+                          <>
+                            <div style={{ padding: '0.5rem 1rem', background: 'rgba(0,255,65,0.04)', fontSize: '0.6rem', color: 'var(--terminal-text-dim)', letterSpacing: '0.15em', fontWeight: 700, borderBottom: '1px solid var(--terminal-border)' }}>
+                              COUNTY & LOCAL ({local.length})
+                            </div>
+                            {local.map(p => <PoliticianRow key={p.id} pol={p} />)}
+                          </>
+                        )}
+                      </>
+                    );
+                  })()}
+                </div>
+              ) : (
+                <div style={{ padding: '2rem 0', textAlign: 'center', color: 'var(--terminal-text-dim)', fontSize: '0.8rem' }}>
+                  No seated officials found for this ZIP code.
+                </div>
+              )}
             </div>
           )}
 
-          {/* Candidates */}
-          {results.candidates.length > 0 && (
-            <div style={{ marginTop: '1.5rem' }}>
-              <h2 style={{
-                fontSize: '0.85rem', fontWeight: 700, color: 'var(--terminal-amber)',
-                textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.75rem',
-              }}>
-                CANDIDATES RUNNING ({results.candidates.length})
-              </h2>
-              <div style={{ border: '1px solid var(--terminal-border)', background: 'var(--terminal-card)' }}>
-                {results.candidates.map(p => <PoliticianRow key={p.id} pol={p} />)}
-              </div>
-            </div>
-          )}
-
-          {results.officials.length === 0 && results.candidates.length === 0 && (
-            <div style={{ padding: '3rem 0', textAlign: 'center', color: 'var(--terminal-text-dim)' }}>
-              <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>No politicians found for {stateName}.</div>
-              <div style={{ fontSize: '0.75rem' }}>This state may not be fully indexed yet.</div>
+          {/* Candidates Tab */}
+          {activeTab === 'candidates' && (
+            <div style={{ marginTop: '1rem' }}>
+              {results.candidates.length > 0 ? (
+                <div style={{ border: '1px solid var(--terminal-border)', background: 'var(--terminal-card)' }}>
+                  {results.candidates.map(p => <PoliticianRow key={p.id} pol={p} />)}
+                </div>
+              ) : (
+                <div style={{ padding: '2rem 0', textAlign: 'center', color: 'var(--terminal-text-dim)', fontSize: '0.8rem' }}>
+                  No active candidates found for this district. Candidate data will appear when the 2026 filing period opens.
+                </div>
+              )}
             </div>
           )}
         </div>
