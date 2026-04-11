@@ -186,6 +186,7 @@ function detectSelfFunding(p: Politician): { amount: number; percentage: number 
   let selfFundingTotal = 0;
 
   for (const d of donors) {
+    if (!d.name) continue;
     const donorName = d.name.toLowerCase();
     // Match: same last name AND (same first name OR type is "Other" which VoterFocus uses for self)
     const donorParts = donorName.split(/\s+/);
@@ -415,7 +416,7 @@ function scoreCampaignFinanceRedFlags(p: Politician): CorruptionFactor {
     const topDonorPct = topDonorAmount / totalRaised;
     // Skip if top donor is self (already flagged above)
     const nameParts = p.name.toLowerCase().split(/\s+/);
-    const isSelfDonor = nameParts.some(part => donors[0].name.toLowerCase().includes(part));
+    const isSelfDonor = donors[0].name ? nameParts.some(part => donors[0].name.toLowerCase().includes(part)) : false;
 
     if (!isSelfDonor) {
       if (topDonorPct > 0.20) {
