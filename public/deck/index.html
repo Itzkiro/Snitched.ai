@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SNITCHED.AI — Pitch Deck</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   :root {
     --g: #00FF41;
@@ -344,36 +346,50 @@
     <div class="slide-number">03 / 10</div>
   </div>
 
-  <!-- SLIDE 4: By The Numbers -->
-  <div class="slide">
+  <!-- SLIDE 4: By The Numbers + Map -->
+  <div class="slide" style="padding: 2.5rem 3rem">
     <div class="tag" style="color: var(--g); border-color: var(--g)">TRACTION</div>
-    <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem">Platform Scale</h2>
-    <div class="stat-row">
-      <div class="stat">
-        <div class="stat-value" style="color: var(--g)">7,028</div>
-        <div class="stat-label">Politicians tracked</div>
+    <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem">Platform Scale &amp; Coverage</h2>
+    <div style="display: flex; gap: 2.5rem; align-items: center; flex-wrap: wrap; max-width: 950px; width: 100%">
+      <!-- Map -->
+      <div style="flex: 1 1 450px; min-height: 340px; position: relative">
+        <div id="deckMap" style="width: 100%; height: 340px; border: 1px solid var(--border); background: #000"></div>
+        <!-- Legend overlaid on map -->
+        <div style="position: absolute; bottom: 12px; left: 12px; display: flex; gap: 1rem; font-size: 0.55rem; background: rgba(0,0,0,0.7); padding: 0.4rem 0.6rem; border: 1px solid var(--border); z-index: 500">
+          <span style="display: flex; align-items: center; gap: 4px"><span style="width:8px;height:8px;border-radius:50%;background:var(--g);box-shadow:0 0 6px var(--g)"></span><span style="color:var(--g)">ACTIVE</span></span>
+          <span style="display: flex; align-items: center; gap: 4px"><span style="width:8px;height:8px;background:rgba(0,255,65,0.15);border:1px solid rgba(0,255,65,0.3)"></span><span style="color:var(--txt-dim)">DATA</span></span>
+          <span style="display: flex; align-items: center; gap: 4px"><span style="width:8px;height:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1)"></span><span style="color:var(--txt-muted)">PENDING</span></span>
+        </div>
       </div>
-      <div class="stat">
-        <div class="stat-value" style="color: var(--g-dim)">11</div>
-        <div class="stat-label">States covered</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value" style="color: var(--amber)">1,871</div>
-        <div class="stat-label">With financial data</div>
-      </div>
-    </div>
-    <div class="stat-row" style="margin-top: 1.5rem">
-      <div class="stat">
-        <div class="stat-value" style="color: var(--r)">3,432</div>
-        <div class="stat-label">Court records linked</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value" style="color: var(--g)">9</div>
-        <div class="stat-label">Automated cron jobs</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value" style="color: var(--amber)">6</div>
-        <div class="stat-label">Verified data sources</div>
+      <!-- Stats -->
+      <div style="flex: 0 0 280px">
+        <div style="margin-bottom: 1.5rem">
+          <div class="stat-value" style="color: var(--g); font-size: 3.5rem">7,028</div>
+          <div class="stat-label">Politicians tracked</div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem">
+          <div>
+            <div class="stat-value" style="color: var(--g-dim); font-size: 2rem">11</div>
+            <div class="stat-label">States</div>
+          </div>
+          <div>
+            <div class="stat-value" style="color: var(--amber); font-size: 2rem">1,871</div>
+            <div class="stat-label">With data</div>
+          </div>
+          <div>
+            <div class="stat-value" style="color: var(--r); font-size: 2rem">3,432</div>
+            <div class="stat-label">Court records</div>
+          </div>
+          <div>
+            <div class="stat-value" style="color: var(--g); font-size: 2rem">9</div>
+            <div class="stat-label">Cron jobs</div>
+          </div>
+        </div>
+        <div style="margin-top: 1.5rem; font-size: 0.6rem; color: var(--txt-dim); line-height: 1.7">
+          <span style="color: var(--g)">FL</span> 2,869 &middot;
+          <span style="color: var(--g)">OH</span> 1,735 &middot;
+          CA 393 &middot; GA 357 &middot; TX 286 &middot; NY 279 &middot; NC 197 &middot; NJ 190 &middot; IL 164 &middot; PA 157 &middot; MI 123
+        </div>
       </div>
     </div>
     <div class="slide-number">04 / 10</div>
@@ -570,6 +586,73 @@
     const diff = touchX - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 50) goTo(current + (diff > 0 ? 1 : -1));
   });
+
+  // ── Leaflet Map for Slide 4 ──
+  const ACTIVE = ['Florida', 'Ohio'];
+  const DATA_STATES = ['California', 'Texas', 'New York', 'Georgia', 'Pennsylvania', 'Illinois', 'North Carolina', 'Michigan', 'New Jersey'];
+
+  let mapInit = false;
+  function initMap() {
+    if (mapInit) return;
+    const el = document.getElementById('deckMap');
+    if (!el) return;
+    mapInit = true;
+
+    const map = L.map(el, {
+      center: [38, -96],
+      zoom: 4,
+      zoomControl: false,
+      attributionControl: false,
+      dragging: false,
+      scrollWheelZoom: false,
+      doubleClickZoom: false,
+      touchZoom: false,
+    });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+      maxZoom: 8,
+      minZoom: 3,
+    }).addTo(map);
+
+    fetch('https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json')
+      .then(r => r.json())
+      .then(geojson => {
+        L.geoJSON(geojson, {
+          style: function(feature) {
+            const name = feature.properties.name || '';
+            const isActive = ACTIVE.includes(name);
+            const hasData = DATA_STATES.includes(name);
+            if (isActive) return { fillColor: '#00FF41', fillOpacity: 0.35, color: '#00FF41', weight: 2.5, opacity: 0.9 };
+            if (hasData) return { fillColor: '#00FF41', fillOpacity: 0.08, color: 'rgba(0,255,65,0.4)', weight: 1, opacity: 0.6 };
+            return { fillColor: 'transparent', fillOpacity: 0, color: 'rgba(255,255,255,0.1)', weight: 0.5, opacity: 0.4 };
+          },
+          onEachFeature: function(feature, layer) {
+            const name = feature.properties.name || '';
+            if (ACTIVE.includes(name)) {
+              const abbr = name === 'Florida' ? 'FL' : 'OH';
+              const center = layer.getBounds().getCenter();
+              L.marker(center, {
+                icon: L.divIcon({
+                  className: '',
+                  html: '<div style="color:#00FF41;font-family:JetBrains Mono,monospace;font-size:12px;font-weight:700;text-shadow:0 0 10px #00FF41,0 0 20px rgba(0,255,65,0.3);text-align:center;pointer-events:none">' + abbr + '</div>',
+                  iconSize: [30, 15],
+                  iconAnchor: [15, 7],
+                }),
+              }).addTo(map);
+            }
+          }
+        }).addTo(map);
+      });
+  }
+
+  // Initialize map when slide 4 (index 3) becomes visible
+  const origGoTo = goTo;
+  goTo = function(n) {
+    origGoTo(n);
+    if (n === 3) setTimeout(initMap, 400);
+  };
+  // Also try on load in case someone lands on slide 4
+  setTimeout(() => { if (current === 3) initMap(); }, 500);
 </script>
 
 </body>
