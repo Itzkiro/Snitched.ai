@@ -470,9 +470,8 @@ a:hover {
    LANDING PAGE & ZIP PAGE MOBILE OVERRIDES
    ============================================================ */
 
-/* ZIP page: stack map below results on mobile */
 @media (max-width: 768px) {
-  /* Force flex columns to stack */
+  /* ZIP page: stack map below results */
   .zip-layout {
     flex-direction: column !important;
   }
@@ -487,5 +486,135 @@ a:hover {
   }
   .zip-map-inner {
     height: 220px !important;
+  }
+
+  /* Landing page hero */
+  .landing-hero {
+    padding: 3rem 1rem 2rem !important;
+  }
+  .landing-hero-inner {
+    padding: 0 !important;
+  }
+  .landing-search-row {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+  .landing-search-row form {
+    flex: none !important;
+    width: 100% !important;
+  }
+  .landing-stats-row {
+    gap: 1rem !important;
+  }
+  .landing-stats-row > div {
+    min-width: 70px !important;
+  }
+  .landing-stats-row .stat-num {
+    font-size: 1.4rem !important;
+  }
+
+  /* State selector */
+  .landing-state-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)) !important;
+    gap: 0.4rem !important;
+  }
+  .landing-state-grid button {
+    padding: 0.6rem 0.5rem !important;
+    font-size: 0.7rem !important;
+  }
+
+  /* Feature cards */
+  .landing-feature-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+
+  /* Sections general */
+  .landing-section {
+    padding: 2rem 1rem !important;
+  }
+  .landing-section-inner {
+    max-width: 100% !important;
+  }
+
+  /* Pipeline steps */
+  .landing-pipeline > div {
+    padding: 0.75rem 0 !important;
+  }
+
+  /* Data sources */
+  .landing-sources-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.4rem !important;
+  }
+
+  /* Corruption cards */
+  .landing-corrupt-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem !important;
+  }
+
+  /* Feature checklist */
+  .landing-checklist {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* CTA section */
+  .landing-cta button {
+    width: 100% !important;
+    padding: 0.8rem 1.5rem !important;
+  }
+
+  /* Footer */
+  .landing-footer {
+    padding: 1.5rem 1rem !important;
+  }
+
+  /* Dashboard */
+  .dash-stats-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)) !important;
+  }
+  .dash-party-grid {
+    grid-template-columns: 1fr 1fr 1fr !important;
+  }
+  .dash-content-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .dash-header {
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+  }
+
+  /* Candidates */
+  .candidate-stats {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)) !important;
+  }
+
+  /* Terminal dashboard (entered mode) */
+  .terminal-dash-cols {
+    flex-direction: column !important;
+  }
+  .terminal-dash-cols > div {
+    flex: none !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-hero h1 {
+    font-size: 1.8rem !important;
+  }
+  .landing-state-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .landing-sources-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .dash-party-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .zip-tabs button {
+    font-size: 0.65rem !important;
+    padding: 0.6rem 0.75rem !important;
   }
 }

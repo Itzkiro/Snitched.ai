@@ -162,7 +162,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
           </form>
         </div>
 
-        <div style={{ display: 'flex', gap: '2rem', padding: '2rem', flexWrap: 'wrap' }}>
+        <div className="terminal-dash-cols" style={{ display: 'flex', gap: '2rem', padding: '2rem', flexWrap: 'wrap' }}>
           <div style={{ flex: '1 1 300px', minWidth: 0 }}>
             <h2 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--terminal-red)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem' }}>HIGHEST CORRUPTION SCORES</h2>
             <div className="data-grid" style={{ padding: 0 }}>
@@ -254,7 +254,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
       <div style={{ position: 'relative', zIndex: 1 }}>
 
       {/* ── HERO ── */}
-      <section style={{
+      <section className="landing-hero" style={{
         position: 'relative', padding: '5rem 1.5rem 3.5rem', textAlign: 'center',
         background: `radial-gradient(ellipse 70% 50% at 50% 0%, rgba(0,255,65,0.07) 0%, transparent 70%), ${bg0}`,
       }}>
@@ -265,7 +265,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
           pointerEvents: 'none',
         }} />
 
-        <div style={{ position: 'relative', maxWidth: '780px', margin: '0 auto' }}>
+        <div className="landing-hero-inner" style={{ position: 'relative', maxWidth: '780px', margin: '0 auto' }}>
           {/* Status line */}
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
@@ -307,7 +307,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
           </p>
 
           {/* ── Search Bars ── */}
-          <div style={{ display: 'flex', gap: '0.75rem', maxWidth: '640px', margin: '0 auto 2.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <div className="landing-search-row" style={{ display: 'flex', gap: '0.75rem', maxWidth: '640px', margin: '0 auto 2.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
             {/* Name */}
             <form onSubmit={handleName} style={{ flex: '1 1 220px', position: 'relative' }}>
               <div style={{
@@ -389,7 +389,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
           </div>
 
           {/* ── Stats ── */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+          <div className="landing-stats-row" style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
             {[
               { v: politicians.length.toLocaleString(), l: 'TRACKED', c: g },
               { v: fmtM(totalFunding), l: 'FUNDS', c: gDim },
@@ -451,7 +451,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '0.5rem' }}>
+          <div className="landing-state-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '0.5rem' }}>
             {statesWithCounts.map(s => (
               <button key={s.code} onClick={() => router.push(`/?state=${s.code}`)}
                 style={{
@@ -509,7 +509,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
           </div>
 
           {/* Core values */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
+          <div className="landing-feature-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
             {[
               { icon: '&#127482;&#127480;', title: 'AMERICA FIRST', desc: 'American tax dollars and policy decisions should serve American interests &mdash; not foreign governments or their lobbying arms.', c: g },
               { icon: '&#128683;', title: 'ANTI-ZIONIST LOBBY', desc: 'AIPAC and its network spend hundreds of millions to buy American politicians. We track every dollar of their influence operation.', c: r },
@@ -567,7 +567,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
         <div style={{ maxWidth: '780px', margin: '0 auto' }}>
           <div style={{ fontSize: '0.6rem', color: txtMuted, letterSpacing: '0.2em', marginBottom: '0.3rem' }}>SOURCES.md</div>
           <h2 style={{ fontSize: '1rem', fontWeight: 700, color: g, marginBottom: '1.25rem' }}>Verified Data Sources</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.6rem' }}>
+          <div className="landing-sources-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.6rem' }}>
             {[
               { name: 'FEC', full: 'Federal Election Commission', desc: 'Campaign contributions, PAC filings, independent expenditures. Updated daily.' },
               { name: 'LDA', full: 'Lobbying Disclosure Act', desc: 'Registered lobbyist filings, client relationships, income reports.' },
@@ -598,7 +598,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
               <button onClick={enter} style={{ background: 'none', border: 'none', color: g, fontFamily: mono, fontSize: '0.7rem', cursor: 'pointer' }}>VIEW ALL &gt;</button>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.6rem' }}>
+            <div className="landing-corrupt-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.6rem' }}>
               {topCorrupt.map(pol => (
                 <Link key={pol.id} href={`/politician/${pol.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                   <div style={{ padding: '1rem', background: cardBg, border: `1px solid ${borderC}`, transition: 'all 0.15s' }}
@@ -631,7 +631,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
           <div style={{ fontSize: '0.6rem', color: txtMuted, letterSpacing: '0.2em', marginBottom: '0.3rem' }}>FEATURES.md</div>
           <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: g, marginBottom: '1.5rem' }}>Platform Features</h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '0.5rem' }}>
+          <div className="landing-checklist" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '0.5rem' }}>
             {[
               'State-by-state corruption dashboards',
               'Politician search by name or ZIP code',

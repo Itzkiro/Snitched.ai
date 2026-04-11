@@ -227,7 +227,7 @@ function ZipContent() {
           </div>
 
           {/* Tabs */}
-          <div style={{
+          <div className="zip-tabs" style={{
             display: 'flex', gap: '0', marginTop: '1.5rem',
             borderBottom: '1px solid var(--terminal-border)',
           }}>

@@ -86,7 +86,7 @@ function DashboardContent() {
   return (
     <div style={{ minHeight: '100vh', background: '#000', color: '#c8d6c8', fontFamily: mono }}>
       {/* Header */}
-      <div style={{
+      <div className="dash-header" style={{
         padding: '1.25rem 2rem', borderBottom: '1px solid rgba(0,255,65,0.12)',
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         background: '#0a0f0a',
@@ -105,7 +105,7 @@ function DashboardContent() {
 
       <div style={{ padding: '1.5rem 2rem' }}>
         {/* Stats Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.75rem', marginBottom: '1.5rem' }}>
+        <div className="dash-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.75rem', marginBottom: '1.5rem' }}>
           {[
             { label: 'TOTAL', value: stats.total.toLocaleString(), color: g },
             { label: 'FEDERAL', value: String(stats.federal.length), color: g },
@@ -124,7 +124,7 @@ function DashboardContent() {
         </div>
 
         {/* Party Breakdown */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '0.75rem', marginBottom: '1.5rem' }}>
+        <div className="dash-party-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '0.75rem', marginBottom: '1.5rem' }}>
           <div style={{ padding: '1rem', background: 'rgba(255,8,68,0.05)', border: '1px solid rgba(255,8,68,0.15)', textAlign: 'center' }}>
             <div style={{ fontSize: '1.8rem', fontWeight: 700, color: r }}>{stats.partyBreakdown.R}</div>
             <div style={{ fontSize: '0.6rem', color: r, letterSpacing: '0.15em' }}>REPUBLICAN</div>
@@ -140,7 +140,7 @@ function DashboardContent() {
         </div>
 
         {/* Three columns */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+        <div className="dash-content-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
           {/* Top Corruption */}
           <div style={{ padding: '1rem', background: 'rgba(0,255,65,0.03)', border: '1px solid rgba(0,255,65,0.12)' }}>
             <div style={{ fontSize: '0.6rem', color: '#3d5a3d', letterSpacing: '0.2em', marginBottom: '0.2rem' }}>THREAT LEVEL</div>
