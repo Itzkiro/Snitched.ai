@@ -1,6 +1,8 @@
 import { getServerSupabase } from '@/lib/supabase-server';
 import type { Politician } from '@/lib/types';
+import { redirect } from 'next/navigation';
 import { filterByState, getStateName } from '@/lib/state-utils';
+import { isStateLive } from '@/components/ComingSoon';
 import { getAllStats } from '@/lib/platform-stats';
 import TerminalHome from '@/components/TerminalHome';
 
@@ -94,6 +96,7 @@ async function fetchPoliticians(): Promise<Politician[]> {
 
 export default async function HomePage({ searchParams }: { searchParams: Promise<{ state?: string }> }) {
   const { state: stateParam } = await searchParams;
+  if (stateParam && !isStateLive(stateParam)) redirect(`/officials?state=${stateParam}`);
   const [allPoliticians, platformStats] = await Promise.all([
     fetchPoliticians(),
     getAllStats(),
