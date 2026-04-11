@@ -2,9 +2,12 @@
 
 import { Suspense, useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import type { Politician } from '@/lib/types';
 import { getStateName } from '@/lib/state-utils';
+
+const ZipMap = dynamic(() => import('@/components/ZipMap'), { ssr: false });
 
 export default function ZipPage() {
   return <Suspense fallback={<div style={{ padding: '2rem', color: 'var(--terminal-green)' }}>Loading...</div>}><ZipContent /></Suspense>;
@@ -23,6 +26,7 @@ function ZipContent() {
       congressionalDistrict: string | null; stateSenateDistrict: string | null;
       stateHouseDistrict: string | null; county: string | null;
       city: string | null; schoolDistrict: string | null;
+      lat: number | null; lng: number | null;
     } | null;
     officials: Politician[];
     candidates: Politician[];
@@ -156,7 +160,9 @@ function ZipContent() {
 
       {/* Results */}
       {results && !loading && (
-        <div style={{ padding: '0 2rem' }}>
+        <div style={{ display: 'flex', gap: '0', minHeight: 'calc(100vh - 200px)' }}>
+          {/* Left: results */}
+          <div style={{ flex: '1 1 0', padding: '0 2rem', minWidth: 0, overflowY: 'auto' }}>
           {/* Result header */}
           <div style={{
             padding: '1.5rem 0', borderBottom: '1px solid var(--terminal-border)',
@@ -312,6 +318,33 @@ function ZipContent() {
                   No active candidates found for this district. Candidate data will appear when the 2026 filing period opens.
                 </div>
               )}
+            </div>
+          )}
+          </div>
+          {/* Right: Map */}
+          {results.districtInfo?.lat && results.districtInfo?.lng && (
+            <div style={{
+              flex: '0 0 350px', borderLeft: '1px solid var(--terminal-border)',
+              position: 'sticky', top: 0, height: 'calc(100vh - 140px)', alignSelf: 'flex-start',
+            }}>
+              <div style={{
+                padding: '0.5rem 0.75rem', background: 'var(--terminal-surface)',
+                borderBottom: '1px solid var(--terminal-border)',
+                fontSize: '0.6rem', color: 'var(--terminal-text-dim)',
+                letterSpacing: '0.15em', fontWeight: 700,
+              }}>
+                LOCATION MAP
+              </div>
+              <div style={{ height: 'calc(100% - 30px)' }}>
+                <ZipMap
+                  lat={results.districtInfo.lat}
+                  lng={results.districtInfo.lng}
+                  zip={results.zip || zip}
+                  county={results.districtInfo.county}
+                  city={results.districtInfo.city}
+                  stateName={results.districtInfo.stateName}
+                />
+              </div>
             </div>
           )}
         </div>

@@ -15,6 +15,8 @@ interface DistrictInfo {
   county: string | null;
   city: string | null;
   schoolDistrict: string | null;
+  lat: number | null;
+  lng: number | null;
 }
 
 /**
@@ -109,6 +111,8 @@ async function getDistrictsFromZip(zip: string): Promise<DistrictInfo | null> {
       county,
       city,
       schoolDistrict,
+      lat: Number(lat),
+      lng: Number(lng),
     };
   } catch (err) {
     console.error('District lookup error:', err);
@@ -272,7 +276,7 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({
     zip: cleanZip,
     state: stateCode,
-    districtInfo: districts || { state: stateCode, stateName: getStateName(stateCode), congressionalDistrict: null, stateSenateDistrict: null, stateHouseDistrict: null, county: null, city: null, schoolDistrict: null },
+    districtInfo: districts || { state: stateCode, stateName: getStateName(stateCode), congressionalDistrict: null, stateSenateDistrict: null, stateHouseDistrict: null, county: null, city: null, schoolDistrict: null, lat: null, lng: null },
     total: politicians.length,
     officials,
     candidates,
