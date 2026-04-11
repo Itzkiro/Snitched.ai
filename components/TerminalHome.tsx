@@ -66,6 +66,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
   const nameRef = useRef<HTMLInputElement>(null);
   const sugRef = useRef<HTMLDivElement>(null);
   const [cursorVisible, setCursorVisible] = useState(true);
+  const [intelAlerts, setIntelAlerts] = useState<{ id: string; severity: string; title: string; type: string; created_at: string; politician_name: string | null; url: string }[]>([]);
 
   const politicians = initialPoliticians;
   const active = politicians.filter(p => p.isActive);
@@ -87,6 +88,13 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
   useEffect(() => {
     const t = setInterval(() => setCursorVisible(v => !v), 530);
     return () => clearInterval(t);
+  }, []);
+
+  // Fetch live intel alerts for landing page sidebar
+  useEffect(() => {
+    fetch('/api/intel?limit=8').then(r => r.json()).then(d => {
+      if (d.alerts) setIntelAlerts(d.alerts);
+    }).catch(() => {});
   }, []);
 
   const handleNameSearch = useCallback((q: string) => {
@@ -343,6 +351,147 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
                 <div style={{ fontSize: '0.55rem', color: txtMuted, marginTop: '0.35rem', letterSpacing: '0.2em' }}>{s.l}</div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── INTEL FEED + US MAP ── */}
+      <section style={{ padding: '3rem 1.5rem', borderTop: `1px solid ${borderC}`, background: bg1 }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto', display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
+
+          {/* LEFT: US Map */}
+          <div style={{ flex: '1 1 400px' }}>
+            <div style={{ fontSize: '0.6rem', color: txtMuted, letterSpacing: '0.2em', marginBottom: '0.3rem' }}>COVERAGE.map</div>
+            <h2 style={{ fontSize: '1rem', fontWeight: 700, color: g, marginBottom: '1rem' }}>
+              Active Surveillance
+              <span style={{ color: cursorVisible ? g : 'transparent', marginLeft: 2 }}>_</span>
+            </h2>
+            {/* Simplified US Map using SVG */}
+            <div style={{ position: 'relative', background: 'rgba(0,255,65,0.02)', border: `1px solid ${borderC}`, padding: '1rem', overflow: 'hidden' }}>
+              <svg viewBox="0 0 960 600" style={{ width: '100%', height: 'auto' }}>
+                {/* Simplified US state outlines — active states get green fill + glow */}
+                {[
+                  { id: 'FL', d: 'M760,440 L780,430 L810,435 L830,445 L840,460 L835,480 L820,490 L800,495 L780,490 L770,480 L760,460Z', active: true },
+                  { id: 'OH', d: 'M680,230 L700,225 L720,230 L725,250 L720,270 L700,280 L680,275 L675,255Z', active: true },
+                  { id: 'CA', d: 'M100,200 L120,180 L130,210 L125,260 L120,310 L110,350 L95,340 L85,300 L80,250 L90,210Z', active: false },
+                  { id: 'TX', d: 'M380,380 L430,370 L470,380 L480,420 L470,460 L440,470 L400,460 L370,440 L360,410Z', active: false },
+                  { id: 'NY', d: 'M770,170 L790,160 L810,165 L815,180 L805,195 L785,200 L770,190Z', active: false },
+                  { id: 'GA', d: 'M710,370 L730,360 L745,370 L745,400 L730,410 L710,405 L705,385Z', active: false },
+                  { id: 'PA', d: 'M730,210 L760,205 L775,210 L775,230 L760,235 L730,230Z', active: false },
+                  { id: 'IL', d: 'M590,230 L605,225 L615,240 L615,280 L605,300 L590,295 L585,260Z', active: false },
+                  { id: 'NC', d: 'M700,320 L750,310 L780,315 L775,330 L745,340 L710,340 L700,335Z', active: false },
+                  { id: 'MI', d: 'M620,160 L640,150 L660,155 L665,180 L655,200 L635,205 L620,195 L615,175Z', active: false },
+                  { id: 'NJ', d: 'M790,210 L800,205 L805,215 L802,230 L795,235 L788,225Z', active: false },
+                  // Background states (not tracked)
+                  { id: 'WA', d: 'M100,70 L140,65 L155,80 L145,100 L120,105 L100,95Z', active: false, bg: true },
+                  { id: 'OR', d: 'M90,100 L130,95 L140,110 L130,135 L100,140 L85,125Z', active: false, bg: true },
+                  { id: 'MT', d: 'M220,80 L290,75 L300,95 L285,115 L230,110 L215,100Z', active: false, bg: true },
+                  { id: 'MN', d: 'M460,100 L500,95 L510,115 L505,150 L480,155 L460,140Z', active: false, bg: true },
+                  { id: 'WI', d: 'M540,120 L570,115 L580,135 L575,165 L555,170 L540,155Z', active: false, bg: true },
+                  { id: 'AZ', d: 'M180,340 L220,335 L230,365 L220,400 L190,405 L175,380Z', active: false, bg: true },
+                  { id: 'CO', d: 'M280,260 L340,255 L345,295 L285,300Z', active: false, bg: true },
+                  { id: 'KS', d: 'M380,290 L440,285 L445,320 L385,325Z', active: false, bg: true },
+                  { id: 'MO', d: 'M510,290 L550,285 L560,310 L555,340 L520,345 L505,325Z', active: false, bg: true },
+                  { id: 'AR', d: 'M510,360 L550,355 L555,385 L540,400 L510,395Z', active: false, bg: true },
+                  { id: 'LA', d: 'M530,420 L560,415 L570,440 L555,455 L530,450Z', active: false, bg: true },
+                  { id: 'AL', d: 'M650,370 L670,365 L675,405 L660,415 L645,400Z', active: false, bg: true },
+                  { id: 'TN', d: 'M610,330 L680,320 L685,340 L615,350Z', active: false, bg: true },
+                  { id: 'VA', d: 'M720,290 L770,280 L780,295 L760,305 L720,310Z', active: false, bg: true },
+                  { id: 'IN', d: 'M620,230 L645,225 L650,270 L635,280 L620,270Z', active: false, bg: true },
+                ].map(state => (
+                  <path key={state.id} d={state.d}
+                    fill={state.active ? 'rgba(0,255,65,0.3)' : (state as {bg?: boolean}).bg ? 'rgba(255,255,255,0.03)' : 'rgba(0,255,65,0.08)'}
+                    stroke={state.active ? g : (state as {bg?: boolean}).bg ? 'rgba(255,255,255,0.06)' : 'rgba(0,255,65,0.15)'}
+                    strokeWidth={state.active ? 2 : 1}
+                    style={{
+                      filter: state.active ? `drop-shadow(0 0 8px ${g})` : 'none',
+                      cursor: state.active ? 'pointer' : 'default',
+                      transition: 'all 0.3s',
+                    }}
+                    onClick={() => { if (!((state as {bg?: boolean}).bg)) router.push(`/?state=${state.id}`); }}
+                  />
+                ))}
+                {/* Active state labels */}
+                <text x="795" y="465" fill={g} fontSize="14" fontWeight="700" fontFamily="JetBrains Mono" textAnchor="middle" style={{ filter: `drop-shadow(0 0 6px ${g})` }}>FL</text>
+                <text x="700" y="255" fill={g} fontSize="14" fontWeight="700" fontFamily="JetBrains Mono" textAnchor="middle" style={{ filter: `drop-shadow(0 0 6px ${g})` }}>OH</text>
+              </svg>
+              {/* Legend */}
+              <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', marginTop: '0.75rem', fontSize: '0.6rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                  <div style={{ width: 8, height: 8, background: g, boxShadow: `0 0 6px ${g}`, borderRadius: '50%' }} />
+                  <span style={{ color: g }}>ACTIVE SURVEILLANCE</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                  <div style={{ width: 8, height: 8, background: 'rgba(0,255,65,0.15)', border: `1px solid ${gBorder}` }} />
+                  <span style={{ color: txtDim }}>DATA COLLECTED</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                  <div style={{ width: 8, height: 8, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }} />
+                  <span style={{ color: txtMuted }}>PENDING</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT: Live Intel Feed */}
+          <div style={{ flex: '1 1 300px', maxWidth: '380px' }}>
+            <div style={{ fontSize: '0.6rem', color: txtMuted, letterSpacing: '0.2em', marginBottom: '0.3rem' }}>INTEL.feed</div>
+            <h2 style={{ fontSize: '1rem', fontWeight: 700, color: g, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              Live Intelligence
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: g, boxShadow: `0 0 8px ${g}`, display: 'inline-block', animation: 'pulse 2s infinite' }} />
+            </h2>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', maxHeight: '420px', overflowY: 'auto' }}>
+              {intelAlerts.length > 0 ? intelAlerts.map(alert => {
+                const sevColor = alert.severity === 'critical' ? r : alert.severity === 'high' ? amber : alert.severity === 'medium' ? '#3b82f6' : txtDim;
+                const mins = Math.floor((Date.now() - new Date(alert.created_at).getTime()) / 60000);
+                const ago = mins < 60 ? `${mins}m` : mins < 1440 ? `${Math.floor(mins / 60)}h` : `${Math.floor(mins / 1440)}d`;
+                return (
+                  <a key={alert.id} href={alert.url || '#'} target="_blank" rel="noopener noreferrer"
+                    style={{
+                      padding: '0.6rem 0.75rem', textDecoration: 'none', color: 'inherit',
+                      background: alert.severity === 'critical' ? 'rgba(255,8,68,0.06)' : cardBg,
+                      border: `1px solid ${alert.severity === 'critical' ? 'rgba(255,8,68,0.2)' : borderC}`,
+                      transition: 'border-color 0.15s', display: 'block',
+                    }}
+                    onMouseEnter={e => (e.currentTarget.style.borderColor = sevColor)}
+                    onMouseLeave={e => (e.currentTarget.style.borderColor = alert.severity === 'critical' ? 'rgba(255,8,68,0.2)' : borderC)}>
+                    <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center', marginBottom: '0.25rem' }}>
+                      <span style={{
+                        fontSize: '0.5rem', fontWeight: 700, padding: '0.1rem 0.3rem',
+                        background: `${sevColor}15`, color: sevColor, border: `1px solid ${sevColor}40`,
+                        textTransform: 'uppercase',
+                      }}>{alert.severity}</span>
+                      <span style={{ fontSize: '0.5rem', color: txtMuted }}>{ago} ago</span>
+                      {alert.type === 'fec_filing' && <span style={{ fontSize: '0.5rem', color: amber }}>FEC</span>}
+                    </div>
+                    <div style={{ fontSize: '0.7rem', fontWeight: 600, color: txt, lineHeight: 1.4 }}>
+                      {alert.title.length > 80 ? alert.title.slice(0, 80) + '...' : alert.title}
+                    </div>
+                    {alert.politician_name && (
+                      <div style={{ fontSize: '0.6rem', color: g, marginTop: '0.15rem' }}>{alert.politician_name}</div>
+                    )}
+                  </a>
+                );
+              }) : (
+                <div style={{ padding: '2rem', textAlign: 'center', color: txtMuted, fontSize: '0.7rem' }}>
+                  Intel feed loading...
+                </div>
+              )}
+            </div>
+
+            <Link href="/intel" style={{ textDecoration: 'none' }}>
+              <div style={{
+                marginTop: '0.75rem', padding: '0.5rem', textAlign: 'center',
+                border: `1px solid ${gBorder}`, fontSize: '0.65rem', color: g,
+                fontWeight: 600, letterSpacing: '0.1em', cursor: 'pointer',
+                transition: 'all 0.2s',
+              }}
+                onMouseEnter={e => { e.currentTarget.style.background = gFaint; e.currentTarget.style.borderColor = g; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = gBorder; }}>
+                VIEW ALL INTEL &gt;
+              </div>
+            </Link>
           </div>
         </div>
       </section>
