@@ -69,7 +69,8 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
   const nameRef = useRef<HTMLInputElement>(null);
   const sugRef = useRef<HTMLDivElement>(null);
   const [cursorVisible, setCursorVisible] = useState(true);
-  const [intelAlerts, setIntelAlerts] = useState<{ id: string; severity: string; title: string; type: string; created_at: string; politician_name: string | null; url: string }[]>([]);
+
+
 
   const politicians = initialPoliticians;
   const active = politicians.filter(p => p.isActive);
@@ -93,12 +94,8 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
     return () => clearInterval(t);
   }, []);
 
-  // Fetch live intel alerts for landing page sidebar
-  useEffect(() => {
-    fetch('/api/intel?limit=8').then(r => r.json()).then(d => {
-      if (d.alerts) setIntelAlerts(d.alerts);
-    }).catch(() => {});
-  }, []);
+
+
 
   const handleNameSearch = useCallback((q: string) => {
     setNameQuery(q);
@@ -441,66 +438,8 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
             </div>
           </div>
 
-          {/* RIGHT: Live Intel Feed */}
-          <div style={{ flex: '1 1 300px', maxWidth: '380px' }}>
-            <div style={{ fontSize: '0.6rem', color: txtMuted, letterSpacing: '0.2em', marginBottom: '0.3rem' }}>INTEL.feed</div>
-            <h2 style={{ fontSize: '1rem', fontWeight: 700, color: g, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              Live Intelligence
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: g, boxShadow: `0 0 8px ${g}`, display: 'inline-block', animation: 'pulse 2s infinite' }} />
-            </h2>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', maxHeight: '420px', overflowY: 'auto' }}>
-              {intelAlerts.length > 0 ? intelAlerts.map(alert => {
-                const sevColor = alert.severity === 'critical' ? r : alert.severity === 'high' ? amber : alert.severity === 'medium' ? '#3b82f6' : txtDim;
-                const mins = Math.floor((Date.now() - new Date(alert.created_at).getTime()) / 60000);
-                const ago = mins < 60 ? `${mins}m` : mins < 1440 ? `${Math.floor(mins / 60)}h` : `${Math.floor(mins / 1440)}d`;
-                return (
-                  <a key={alert.id} href={alert.url || '#'} target="_blank" rel="noopener noreferrer"
-                    style={{
-                      padding: '0.6rem 0.75rem', textDecoration: 'none', color: 'inherit',
-                      background: alert.severity === 'critical' ? 'rgba(255,8,68,0.06)' : cardBg,
-                      border: `1px solid ${alert.severity === 'critical' ? 'rgba(255,8,68,0.2)' : borderC}`,
-                      transition: 'border-color 0.15s', display: 'block',
-                    }}
-                    onMouseEnter={e => (e.currentTarget.style.borderColor = sevColor)}
-                    onMouseLeave={e => (e.currentTarget.style.borderColor = alert.severity === 'critical' ? 'rgba(255,8,68,0.2)' : borderC)}>
-                    <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center', marginBottom: '0.25rem' }}>
-                      <span style={{
-                        fontSize: '0.5rem', fontWeight: 700, padding: '0.1rem 0.3rem',
-                        background: `${sevColor}15`, color: sevColor, border: `1px solid ${sevColor}40`,
-                        textTransform: 'uppercase',
-                      }}>{alert.severity}</span>
-                      <span style={{ fontSize: '0.5rem', color: txtMuted }}>{ago} ago</span>
-                      {alert.type === 'fec_filing' && <span style={{ fontSize: '0.5rem', color: amber }}>FEC</span>}
-                    </div>
-                    <div style={{ fontSize: '0.7rem', fontWeight: 600, color: txt, lineHeight: 1.4 }}>
-                      {alert.title.length > 80 ? alert.title.slice(0, 80) + '...' : alert.title}
-                    </div>
-                    {alert.politician_name && (
-                      <div style={{ fontSize: '0.6rem', color: g, marginTop: '0.15rem' }}>{alert.politician_name}</div>
-                    )}
-                  </a>
-                );
-              }) : (
-                <div style={{ padding: '2rem', textAlign: 'center', color: txtMuted, fontSize: '0.7rem' }}>
-                  Intel feed loading...
-                </div>
-              )}
-            </div>
 
-            <Link href="/intel" style={{ textDecoration: 'none' }}>
-              <div style={{
-                marginTop: '0.75rem', padding: '0.5rem', textAlign: 'center',
-                border: `1px solid ${gBorder}`, fontSize: '0.65rem', color: g,
-                fontWeight: 600, letterSpacing: '0.1em', cursor: 'pointer',
-                transition: 'all 0.2s',
-              }}
-                onMouseEnter={e => { e.currentTarget.style.background = gFaint; e.currentTarget.style.borderColor = g; }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = gBorder; }}>
-                VIEW ALL INTEL &gt;
-              </div>
-            </Link>
-          </div>
         </div>
       </section>
 
