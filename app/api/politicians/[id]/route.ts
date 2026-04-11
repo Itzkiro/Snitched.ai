@@ -108,9 +108,11 @@ export async function GET(
         caseNumber: c.docket_number || c.docketNumber || '',
         court: c.court || '',
         caseType: c.nature_of_suit || c.cause || 'Civil',
-        status: c.date_terminated ? 'Closed' : 'Active',
+        status: (c.date_terminated || c.dateTerminated) ? 'Closed' : 'Active',
         summary: c.case_name || c.caseName || '',
         filedDate: c.date_filed || c.dateFiled || '',
+        url: c.url || '',
+        dateTerminated: c.date_terminated || c.dateTerminated || '',
       })),
       votes: ((row.voting_records as any[]) || []).map((v: any) => ({
         id: String(v.roll_call_id ?? ''),

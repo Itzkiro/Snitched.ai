@@ -157,6 +157,8 @@ export interface CourtCase {
   status: 'Active' | 'Closed' | 'Pending';
   summary: string;
   filedDate: string;
+  url?: string;
+  dateTerminated?: string;
 }
 
 export interface Vote {

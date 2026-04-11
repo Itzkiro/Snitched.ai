@@ -1391,38 +1391,62 @@ export default function PoliticianPage() {
                     {politician.courtCases.length} court record{politician.courtCases.length !== 1 ? 's' : ''} found via CourtListener
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                    {politician.courtCases.map((c, i) => (
-                      <div key={c.id || i} className="terminal-card" style={{ padding: '1rem' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', flexWrap: 'wrap' }}>
-                          <div style={{ flex: 1 }}>
-                            <div style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.25rem' }}>
-                              {c.summary || 'Untitled Case'}
+                    {politician.courtCases.map((c, i) => {
+                      const card = (
+                        <div className="terminal-card" style={{
+                          padding: '1rem',
+                          cursor: c.url ? 'pointer' : 'default',
+                          transition: 'border-color 0.2s',
+                        }}
+                          onMouseEnter={e => { if (c.url) e.currentTarget.style.borderColor = 'var(--terminal-blue)'; }}
+                          onMouseLeave={e => { if (c.url) e.currentTarget.style.borderColor = 'var(--terminal-border)'; }}
+                        >
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', flexWrap: 'wrap' }}>
+                            <div style={{ flex: 1 }}>
+                              <div style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                {c.summary || 'Untitled Case'}
+                                {c.url && <span style={{ fontSize: '0.65rem', color: 'var(--terminal-blue)', fontWeight: 400 }}>&#8599;</span>}
+                              </div>
+                              <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: '0.35rem' }}>
+                                {c.court && <span>{c.court}</span>}
+                                {c.caseNumber && <span>Docket: {c.caseNumber}</span>}
+                                {c.caseType && c.caseType !== 'Civil' && <span>Type: {c.caseType}</span>}
+                              </div>
                             </div>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: '0.35rem' }}>
-                              {c.court && <span>{c.court}</span>}
-                              {c.caseNumber && <span>Docket: {c.caseNumber}</span>}
-                              {c.caseType && c.caseType !== 'Civil' && <span>Type: {c.caseType}</span>}
+                            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexShrink: 0 }}>
+                              <span style={{
+                                fontSize: '0.65rem', fontWeight: 700, padding: '0.2rem 0.5rem',
+                                background: c.status === 'Active' ? 'rgba(245, 158, 11, 0.1)' : 'rgba(0, 191, 255, 0.08)',
+                                color: c.status === 'Active' ? 'var(--terminal-amber)' : 'var(--terminal-blue)',
+                                border: c.status === 'Active' ? '1px solid rgba(245, 158, 11, 0.3)' : '1px solid rgba(0, 191, 255, 0.2)',
+                                textTransform: 'uppercase',
+                              }}>
+                                {c.status}
+                              </span>
                             </div>
                           </div>
-                          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexShrink: 0 }}>
-                            <span style={{
-                              fontSize: '0.65rem', fontWeight: 700, padding: '0.2rem 0.5rem',
-                              background: c.status === 'Active' ? 'rgba(245, 158, 11, 0.1)' : 'rgba(0, 191, 255, 0.08)',
-                              color: c.status === 'Active' ? 'var(--terminal-amber)' : 'var(--terminal-blue)',
-                              border: c.status === 'Active' ? '1px solid rgba(245, 158, 11, 0.3)' : '1px solid rgba(0, 191, 255, 0.2)',
-                              textTransform: 'uppercase',
-                            }}>
-                              {c.status}
+                          <div style={{ marginTop: '0.5rem', fontSize: '0.7rem', color: 'var(--terminal-text-dim)', borderTop: '1px solid var(--terminal-border)', paddingTop: '0.4rem', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
+                            <span>
+                              {c.filedDate && `Filed: ${new Date(c.filedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`}
+                              {c.filedDate && c.dateTerminated && ' — '}
+                              {c.dateTerminated && `Terminated: ${new Date(c.dateTerminated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`}
                             </span>
+                            {c.url && (
+                              <span style={{ color: 'var(--terminal-blue)', fontSize: '0.65rem' }}>
+                                View on CourtListener &#8599;
+                              </span>
+                            )}
                           </div>
                         </div>
-                        {c.filedDate && (
-                          <div style={{ marginTop: '0.5rem', fontSize: '0.7rem', color: 'var(--terminal-text-dim)', borderTop: '1px solid var(--terminal-border)', paddingTop: '0.4rem' }}>
-                            Filed: {new Date(c.filedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                          </div>
-                        )}
-                      </div>
-                    ))}
+                      );
+                      return c.url ? (
+                        <a key={c.id || i} href={c.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                          {card}
+                        </a>
+                      ) : (
+                        <div key={c.id || i}>{card}</div>
+                      );
+                    })}
                   </div>
                   <div style={{ marginTop: '1rem', fontSize: '0.65rem', color: 'var(--terminal-text-dim)' }}>
                     Source: CourtListener (courtlistener.com) — federal court dockets and opinions
