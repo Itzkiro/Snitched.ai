@@ -15,7 +15,14 @@ function ZipContent() {
   const router = useRouter();
   const zipParam = searchParams.get('zip') || '';
   const [zip, setZip] = useState(zipParam);
-  const [results, setResults] = useState<{ zip?: string; state: string; officials: Politician[]; candidates: Politician[] } | null>(null);
+  const [results, setResults] = useState<{
+    zip?: string;
+    state: string;
+    districtInfo?: { congressionalDistrict: string | null; stateUpperDistrict: string | null; stateLowerDistrict: string | null; county: string | null } | null;
+    civicOfficials?: Array<{ name: string; office: string; level: string; party: string }>;
+    officials: Politician[];
+    candidates: Politician[];
+  } | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -148,22 +155,88 @@ function ZipContent() {
           {/* Result header */}
           <div style={{
             padding: '1.5rem 0', borderBottom: '1px solid var(--terminal-border)',
-            display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem',
           }}>
-            <div>
-              <div style={{ fontSize: '0.6rem', color: 'var(--terminal-text-dim)', letterSpacing: '0.15em', marginBottom: '0.2rem' }}>RESULTS FOR ZIP {results.zip || zip}</div>
-              <div style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--terminal-green)' }}>
-                {stateName} &mdash; {results.officials.length + results.candidates.length} Politicians Found
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '0.75rem' }}>
+              <div>
+                <div style={{ fontSize: '0.6rem', color: 'var(--terminal-text-dim)', letterSpacing: '0.15em', marginBottom: '0.2rem' }}>RESULTS FOR ZIP {results.zip || zip}</div>
+                <div style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--terminal-green)' }}>
+                  {stateName} &mdash; {results.officials.length + results.candidates.length} Politicians Found
+                </div>
+              </div>
+              <Link href={`/dashboard?state=${results.state}`} style={{
+                padding: '0.4rem 0.8rem', border: '1px solid var(--terminal-border)',
+                color: 'var(--terminal-green)', fontSize: '0.7rem', textDecoration: 'none',
+                textTransform: 'uppercase', letterSpacing: '0.1em',
+              }}>
+                VIEW {results.state} DASHBOARD
+              </Link>
+            </div>
+
+            {/* District info from Google Civic */}
+            {results.districtInfo && (
+              <div style={{
+                display: 'flex', gap: '1rem', flexWrap: 'wrap', fontSize: '0.7rem',
+              }}>
+                {results.districtInfo.congressionalDistrict && (
+                  <div style={{ padding: '0.4rem 0.6rem', background: 'rgba(0,255,65,0.06)', border: '1px solid var(--terminal-border)' }}>
+                    <span style={{ color: 'var(--terminal-text-dim)' }}>US HOUSE: </span>
+                    <span style={{ color: 'var(--terminal-green)', fontWeight: 700 }}>District {results.districtInfo.congressionalDistrict}</span>
+                  </div>
+                )}
+                {results.districtInfo.stateUpperDistrict && (
+                  <div style={{ padding: '0.4rem 0.6rem', background: 'rgba(0,255,65,0.06)', border: '1px solid var(--terminal-border)' }}>
+                    <span style={{ color: 'var(--terminal-text-dim)' }}>STATE SENATE: </span>
+                    <span style={{ color: 'var(--terminal-green)', fontWeight: 700 }}>District {results.districtInfo.stateUpperDistrict}</span>
+                  </div>
+                )}
+                {results.districtInfo.stateLowerDistrict && (
+                  <div style={{ padding: '0.4rem 0.6rem', background: 'rgba(0,255,65,0.06)', border: '1px solid var(--terminal-border)' }}>
+                    <span style={{ color: 'var(--terminal-text-dim)' }}>STATE HOUSE: </span>
+                    <span style={{ color: 'var(--terminal-green)', fontWeight: 700 }}>District {results.districtInfo.stateLowerDistrict}</span>
+                  </div>
+                )}
+                {results.districtInfo.county && (
+                  <div style={{ padding: '0.4rem 0.6rem', background: 'rgba(0,255,65,0.06)', border: '1px solid var(--terminal-border)' }}>
+                    <span style={{ color: 'var(--terminal-text-dim)' }}>COUNTY: </span>
+                    <span style={{ color: 'var(--terminal-green)', fontWeight: 700 }}>{results.districtInfo.county}</span>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Google Civic Officials (not in our DB) */}
+          {results.civicOfficials && results.civicOfficials.length > 0 && (
+            <div style={{ marginTop: '1.5rem' }}>
+              <h2 style={{
+                fontSize: '0.85rem', fontWeight: 700, color: 'var(--terminal-amber)',
+                textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.75rem',
+              }}>
+                YOUR REPRESENTATIVES (via Google Civic)
+              </h2>
+              <div style={{ border: '1px solid var(--terminal-border)', background: 'var(--terminal-card)' }}>
+                {results.civicOfficials.map((o, i) => (
+                  <div key={i} style={{
+                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                    padding: '0.65rem 1rem', borderBottom: i < results.civicOfficials!.length - 1 ? '1px solid var(--terminal-border)' : 'none',
+                    fontSize: '0.8rem',
+                  }}>
+                    <div>
+                      <div style={{ fontWeight: 600 }}>{o.name}</div>
+                      <div style={{ fontSize: '0.65rem', color: 'var(--terminal-text-dim)', marginTop: '0.1rem' }}>{o.office}</div>
+                    </div>
+                    <span style={{
+                      fontSize: '0.6rem', padding: '0.15rem 0.4rem', fontWeight: 700,
+                      background: o.party === 'Republican Party' ? 'rgba(255,8,68,0.15)' : o.party === 'Democratic Party' ? 'rgba(0,255,65,0.1)' : 'rgba(255,182,39,0.1)',
+                      color: o.party === 'Republican Party' ? 'var(--terminal-red)' : o.party === 'Democratic Party' ? 'var(--terminal-green)' : 'var(--terminal-amber)',
+                    }}>
+                      {o.party === 'Republican Party' ? 'R' : o.party === 'Democratic Party' ? 'D' : o.party}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
-            <Link href={`/dashboard?state=${results.state}`} style={{
-              padding: '0.4rem 0.8rem', border: '1px solid var(--terminal-border)',
-              color: 'var(--terminal-green)', fontSize: '0.7rem', textDecoration: 'none',
-              textTransform: 'uppercase', letterSpacing: '0.1em',
-            }}>
-              VIEW {results.state} DASHBOARD
-            </Link>
-          </div>
+          )}
 
           {/* Officials */}
           {results.officials.length > 0 && (
