@@ -29,7 +29,19 @@ export type OfficeLevel =
   | 'State Attorney'
   | 'Public Defender'
   | 'Soil & Water'
-  | 'Superintendent';
+  | 'Superintendent'
+  | 'District Attorney'
+  | 'Tax Commissioner'
+  | 'Probate Judge'
+  | 'Commission Chair'
+  | 'County Administrator'
+  | 'Prosecutor'
+  | 'County Auditor'
+  | 'County Treasurer'
+  | 'County Recorder'
+  | 'County Coroner'
+  | 'County Engineer'
+  | 'Clerk of Courts';
 
 export type JuiceBoxTier = 'none' | 'compromised' | 'bought' | 'owned';
 
