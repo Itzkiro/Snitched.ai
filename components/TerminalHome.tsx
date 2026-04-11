@@ -112,7 +112,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
     return () => document.removeEventListener('mousedown', h);
   }, []);
 
-  const handleZip = (e: React.FormEvent) => { e.preventDefault(); if (zipQuery.trim()) router.push(`/browse?zip=${encodeURIComponent(zipQuery.trim())}`); };
+  const handleZip = (e: React.FormEvent) => { e.preventDefault(); if (zipQuery.trim()) router.push(`/zip?zip=${encodeURIComponent(zipQuery.trim())}`); };
   const handleName = (e: React.FormEvent) => { e.preventDefault(); if (nameQuery.trim()) router.push(`/browse?q=${encodeURIComponent(nameQuery.trim())}`); };
   const fmtM = (n: number) => n >= 1e6 ? `$${(n / 1e6).toFixed(1)}M` : `$${(n / 1e3).toFixed(0)}K`;
 
