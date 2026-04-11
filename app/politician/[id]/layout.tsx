@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ].filter(Boolean).join(' ');
 
     return {
-      title: `${name} — ${office} | SNITCHED.AI`,
+      title: `${name} — ${office}`,
       description,
       openGraph: {
         title: `${name} — ${office}`,
@@ -52,7 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
       twitter: {
         card: 'summary',
-        title: `${name} — ${office} | SNITCHED.AI`,
+        title: `${name} — ${office}`,
         description,
       },
     };

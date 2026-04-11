@@ -44,6 +44,13 @@ export async function GET(
       .eq('bioguide_id', id)
       .single();
 
+    const { data: socialPosts } = await client
+      .from('social_posts')
+      .select('*')
+      .eq('politician_id', id)
+      .order('posted_at', { ascending: false })
+      .limit(20);
+
     if (error || !row) {
       // Try JSON fallback before returning 404
       const all = await getJsonPoliticians();
@@ -86,8 +93,25 @@ export async function GET(
       socialMedia: (row.social_media as Politician['socialMedia']) || {},
       source_ids: (row.source_ids as Politician['source_ids']) || {},
       lobbyingRecords: (row.lobbying_records as Politician['lobbyingRecords']) || [],
-      contributions: [],
-      courtCases: [],
+      contributions: (top5 || []).map((d, i) => ({
+        id: `contrib-${i}`,
+        politicianId: row.bioguide_id as string,
+        donorName: d.name,
+        donorType: (d.type || 'Individual') as 'PAC' | 'Individual' | 'Corporate',
+        amount: d.amount,
+        date: '',
+        isAipac: d.type === 'Israel-PAC',
+      })),
+      courtCases: (row.court_records || []).map((c: any) => ({
+        id: c.id || '',
+        politicianId: row.bioguide_id,
+        caseNumber: c.docket_number || c.docketNumber || '',
+        court: c.court || '',
+        caseType: c.nature_of_suit || c.cause || 'Civil',
+        status: c.date_terminated ? 'Closed' : 'Active',
+        summary: c.case_name || c.caseName || '',
+        filedDate: c.date_filed || c.dateFiled || '',
+      })),
       votes: ((row.voting_records as any[]) || []).map((v: any) => ({
         id: String(v.roll_call_id ?? ''),
         politicianId: row.bioguide_id as string,
@@ -98,7 +122,16 @@ export async function GET(
         billSummary: v.description ?? '',
         category: '',
       })),
-      socialPosts: [],
+      socialPosts: (socialPosts || []).map((p: any) => ({
+        id: p.id,
+        politicianId: p.politician_id,
+        platform: p.platform,
+        content: p.content,
+        postUrl: p.post_url,
+        postedAt: p.posted_at,
+        sentimentScore: p.sentiment_score || 0,
+        isDeleted: p.is_deleted || false,
+      })),
       dataStatus: 'live' as const,
       dataSource: (row.data_source as string) || 'supabase',
       lastUpdated: (row.updated_at as string) || (row.created_at as string),

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { getServerSupabase } from '@/lib/supabase-server';
+import { getServiceRoleSupabase } from '@/lib/supabase-server';
 
-export const revalidate = 300; // 5 minutes
+export const dynamic = 'force-dynamic';
 
 /**
  * GET /api/stats
@@ -11,7 +11,7 @@ export const revalidate = 300; // 5 minutes
  */
 export async function GET() {
   try {
-    const client = getServerSupabase();
+    const client = getServiceRoleSupabase();
     if (!client) {
       return NextResponse.json({ error: 'Database not configured' }, { status: 503 });
     }
@@ -32,12 +32,21 @@ export async function GET() {
       client.from('social_posts').select('*', { count: 'exact', head: true }),
     ]);
 
-    // Get Israel lobby total sum
-    const { data: israelData } = await client
-      .from('politicians')
-      .select('israel_lobby_total')
-      .gt('israel_lobby_total', 0);
-    const israelLobbyTotal = (israelData || []).reduce((s, r) => s + (Number(r.israel_lobby_total) || 0), 0);
+    // Get Israel lobby total sum (paginate to avoid 1000-row cap)
+    const israelRows: { israel_lobby_total: number }[] = [];
+    let israelPage = 0;
+    while (true) {
+      const { data: batch } = await client
+        .from('politicians')
+        .select('israel_lobby_total')
+        .gt('israel_lobby_total', 0)
+        .range(israelPage * 1000, (israelPage + 1) * 1000 - 1);
+      if (!batch || batch.length === 0) break;
+      israelRows.push(...batch);
+      if (batch.length < 1000) break;
+      israelPage++;
+    }
+    const israelLobbyTotal = israelRows.reduce((s, r) => s + (Number(r.israel_lobby_total) || 0), 0);
 
     // Get top 5 most corrupt
     const { data: topCorrupt } = await client
@@ -65,8 +74,6 @@ export async function GET() {
       israelLobbyTotal,
       topCorrupt: topCorrupt || [],
       topIsrael: topIsrael || [],
-    }, {
-      headers: { 'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600' },
     });
   } catch (error) {
     console.error('Stats API error:', error);

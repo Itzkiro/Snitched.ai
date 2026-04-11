@@ -4,7 +4,7 @@ import type { Politician } from '@/lib/types';
 import BrowseClient from './BrowseClient';
 
 export const metadata: Metadata = {
-  title: 'Database Search | SNITCHED.AI',
+  title: 'Database Search',
   description: 'Search 400+ Florida politicians by name, party, office, or district. Real campaign finance data from FEC and FL Division of Elections.',
 };
 

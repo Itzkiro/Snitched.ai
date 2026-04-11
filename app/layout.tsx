@@ -14,9 +14,6 @@ export const metadata: Metadata = {
     template: "%s | SNITCHED.AI",
   },
   description: "Track political corruption, foreign lobby influence, and campaign finance in Florida. Real-time OSINT intelligence from public records — not opinions.",
-  alternates: {
-    canonical: 'https://snitched.ai',
-  },
   openGraph: {
     siteName: 'SNITCHED.AI',
     title: "Snitched.ai — Track Political Corruption in Florida",

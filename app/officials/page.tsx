@@ -5,14 +5,13 @@ export const metadata: Metadata = {
   title: 'Seated Officials',
   description: 'Florida seated officials — US Senators, Representatives, State Legislators, and County Officials. Corruption scores, campaign finance, and voting records.',
 };
-import { getServerSupabase } from '@/lib/supabase-server';
+import { getServiceRoleSupabase } from '@/lib/supabase-server';
 import type { Politician } from '@/lib/types';
 
-// ISR: revalidate every 5 minutes
-export const revalidate = 300;
+export const dynamic = 'force-dynamic';
 
 async function getOfficials(): Promise<Politician[]> {
-  const client = getServerSupabase();
+  const client = getServiceRoleSupabase();
   if (!client) {
     const { getAllPoliticians } = await import('@/lib/real-data');
     return getAllPoliticians().filter(p => p.isActive);
@@ -192,7 +191,6 @@ export default async function OfficialsPage() {
         <div className="data-grid" style={{ padding: 0 }}>
           {byLevel.state
             .filter(pol => pol && pol.id && pol.name && pol.office && pol.party)
-            .slice(0, 12)
             .map((pol) => (
             <Link
               key={pol.id}
@@ -225,15 +223,6 @@ export default async function OfficialsPage() {
             </Link>
           ))}
         </div>
-        {byLevel.state.length > 12 && (
-          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-            <Link href="/browse?filter=state">
-              <button className="terminal-btn">
-                VIEW ALL {byLevel.state.length} STATE OFFICIALS →
-              </button>
-            </Link>
-          </div>
-        )}
       </div>
 
       {/* County Officials */}
