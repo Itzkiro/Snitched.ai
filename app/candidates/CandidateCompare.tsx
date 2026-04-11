@@ -21,6 +21,22 @@ function partyColor(party: string): string {
   return '#6b7280';
 }
 
+function isIncumbentForSeat(pol: Politician, seat: string): boolean {
+  if (!pol.isActive || !pol.runningFor) return false;
+  const s = seat.toLowerCase();
+  const o = pol.office.toLowerCase();
+  if (o.includes('governor') && s.includes('governor')) return true;
+  if (o.includes('u.s. senate') && s.includes('senate')) return true;
+  if (o.includes('u.s. house') && s.includes('house') && pol.district && s.includes(pol.district.toLowerCase())) return true;
+  if (o.includes('state senator') && s.includes('state senate')) return true;
+  if (o.includes('state rep') && s.includes('state rep')) return true;
+  if (o.includes('attorney general') && s.includes('attorney general')) return true;
+  if (o.includes('cfo') && (s.includes('cfo') || s.includes('chief financial'))) return true;
+  if (o.includes('agriculture') && s.includes('agriculture')) return true;
+  if (o.includes(s) || s.includes(o)) return true;
+  return false;
+}
+
 function scoreColor(score: number): string {
   if (score >= 60) return 'var(--terminal-red)';
   if (score >= 40) return 'var(--terminal-amber)';
@@ -142,11 +158,11 @@ export default function CandidateCompare({ races }: { races: Race[] }) {
                       </span>
                       <span style={{
                         fontSize: '0.6rem', padding: '0.15rem 0.4rem',
-                        background: c.isActive ? 'rgba(255,182,39,0.15)' : 'rgba(0,255,65,0.1)',
-                        color: c.isActive ? 'var(--terminal-amber)' : 'var(--terminal-green)',
-                        border: c.isActive ? '1px solid rgba(255,182,39,0.3)' : '1px solid rgba(0,255,65,0.2)',
+                        background: isIncumbentForSeat(c, race.seat) ? 'rgba(255,182,39,0.15)' : 'rgba(0,255,65,0.1)',
+                        color: isIncumbentForSeat(c, race.seat) ? 'var(--terminal-amber)' : 'var(--terminal-green)',
+                        border: isIncumbentForSeat(c, race.seat) ? '1px solid rgba(255,182,39,0.3)' : '1px solid rgba(0,255,65,0.2)',
                       }}>
-                        {c.isActive ? 'INCUMBENT' : 'CHALLENGER'}
+                        {isIncumbentForSeat(c, race.seat) ? 'INCUMBENT' : 'CHALLENGER'}
                       </span>
                     </div>
                   </Link>

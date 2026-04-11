@@ -109,9 +109,33 @@ function categoriseRaces(races: { seat: string; candidates: Politician[] }[]) {
   return { governor, senate, house, stateLevel, local };
 }
 
+/**
+ * Is this candidate the incumbent for the seat they're running for?
+ * e.g. Byron Donalds is a US Rep running for Governor → NOT incumbent.
+ * Ashley Moody is a US Senator running for US Senate → IS incumbent.
+ */
+function isIncumbentForSeat(pol: Politician): boolean {
+  if (!pol.isActive || !pol.runningFor) return false;
+  const seat = pol.runningFor.toLowerCase();
+  const office = pol.office.toLowerCase();
+  // Direct match: current office contains the seat title or vice versa
+  if (office.includes('governor') && seat.includes('governor')) return true;
+  if (office.includes('u.s. senate') && seat.includes('senate')) return true;
+  if (office.includes('u.s. house') && seat.includes('house') && pol.district && seat.includes(pol.district.toLowerCase())) return true;
+  if (office.includes('state senator') && seat.includes('state senate')) return true;
+  if (office.includes('state rep') && seat.includes('state rep')) return true;
+  if (office.includes('attorney general') && seat.includes('attorney general')) return true;
+  if (office.includes('cfo') && seat.includes('cfo')) return true;
+  if (office.includes('chief financial') && seat.includes('chief financial')) return true;
+  if (office.includes('agriculture') && seat.includes('agriculture')) return true;
+  // Fuzzy: if the running_for seat is part of their current office title
+  if (office.includes(seat) || seat.includes(office)) return true;
+  return false;
+}
+
 // ── Components ──
 
-function CandidateCard({ pol }: { pol: Politician }) {
+function CandidateCard({ pol, incumbent }: { pol: Politician; incumbent: boolean }) {
   return (
     <Link href={`/politician/${pol.id}`} style={{ textDecoration: 'none', color: 'inherit', flex: '1 1 260px', maxWidth: '400px' }}>
       <div className="terminal-card" style={{ height: '100%' }}>
@@ -130,11 +154,11 @@ function CandidateCard({ pol }: { pol: Politician }) {
           </div>
           <div className="card-status" style={{
             fontSize: '10px',
-            color: pol.isActive ? 'var(--terminal-amber)' : 'var(--terminal-green)',
-            background: pol.isActive ? 'rgba(255,182,39,0.1)' : 'rgba(0,255,65,0.1)',
-            border: pol.isActive ? '1px solid rgba(255,182,39,0.3)' : '1px solid var(--terminal-green)',
+            color: incumbent ? 'var(--terminal-amber)' : 'var(--terminal-green)',
+            background: incumbent ? 'rgba(255,182,39,0.1)' : 'rgba(0,255,65,0.1)',
+            border: incumbent ? '1px solid rgba(255,182,39,0.3)' : '1px solid var(--terminal-green)',
           }}>
-            {pol.isActive ? 'INCUMBENT' : 'CHALLENGER'}
+            {incumbent ? 'INCUMBENT' : 'CHALLENGER'}
           </div>
         </div>
 
@@ -172,8 +196,8 @@ function CandidateCard({ pol }: { pol: Politician }) {
 }
 
 function RaceBlock({ seat, candidates }: { seat: string; candidates: Politician[] }) {
-  const incumbent = candidates.find(c => c.isActive);
-  const challengers = candidates.filter(c => !c.isActive);
+  const incumbents = candidates.filter(c => isIncumbentForSeat(c));
+  const challengers = candidates.filter(c => !isIncumbentForSeat(c));
 
   return (
     <div style={{
@@ -204,7 +228,7 @@ function RaceBlock({ seat, candidates }: { seat: string; candidates: Politician[
       </div>
 
       {/* Incumbent sub-section */}
-      {incumbent && (
+      {incumbents.length > 0 && (
         <div style={{ marginBottom: challengers.length > 0 ? '1rem' : 0 }}>
           <div style={{
             fontSize: '0.6rem', color: 'var(--terminal-amber)', letterSpacing: '0.15em',
@@ -213,7 +237,7 @@ function RaceBlock({ seat, candidates }: { seat: string; candidates: Politician[
             CURRENT SEAT HOLDER
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
-            <CandidateCard pol={incumbent} />
+            {incumbents.map(c => <CandidateCard key={c.id} pol={c} incumbent={true} />)}
           </div>
         </div>
       )}
@@ -225,10 +249,10 @@ function RaceBlock({ seat, candidates }: { seat: string; candidates: Politician[
             fontSize: '0.6rem', color: 'var(--terminal-green)', letterSpacing: '0.15em',
             textTransform: 'uppercase', marginBottom: '0.5rem', fontWeight: 700,
           }}>
-            {incumbent ? 'CHALLENGERS' : 'CANDIDATES'}
+            {incumbents.length > 0 ? 'CHALLENGERS' : 'CANDIDATES'}
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
-            {challengers.map(c => <CandidateCard key={c.id} pol={c} />)}
+            {challengers.map(c => <CandidateCard key={c.id} pol={c} incumbent={false} />)}
           </div>
         </div>
       )}
