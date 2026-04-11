@@ -1,53 +1,118 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSupabase } from '@/lib/supabase-server';
 import { getStateFromZip } from '@/lib/zip-lookup';
-import { getStateFromId } from '@/lib/state-utils';
+import { getStateFromId, getStateName } from '@/lib/state-utils';
 import type { Politician } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
 
-interface WIMRMember {
-  name: string;
-  party: string;
+interface DistrictInfo {
   state: string;
-  district: string;
-  phone: string;
-  office: string;
-  link: string;
+  stateName: string;
+  congressionalDistrict: string | null;
+  stateSenateDistrict: string | null;
+  stateHouseDistrict: string | null;
+  county: string | null;
+  city: string | null;
+  schoolDistrict: string | null;
 }
 
 /**
- * Lookup representatives via whoismyrepresentative.com (free, no key).
- * Returns state, congressional district, and member list.
+ * Step 1: ZIP → lat/lng via OpenStreetMap Nominatim (free, no key)
+ * Step 2: lat/lng → districts via Census Bureau Geocoder (free, no key)
  */
-async function lookupDistrict(zip: string): Promise<{
-  state: string | null;
-  congressionalDistrict: string | null;
-  members: WIMRMember[];
-}> {
+async function getDistrictsFromZip(zip: string): Promise<DistrictInfo | null> {
   try {
-    const res = await fetch(
-      `https://whoismyrepresentative.com/getall_mems.php?zip=${zip}&output=json`,
-      { next: { revalidate: 86400 } }, // cache 24h
+    // Get coordinates from ZIP
+    const geoRes = await fetch(
+      `https://nominatim.openstreetmap.org/search?postalcode=${zip}&country=US&format=json&limit=1`,
+      { headers: { 'User-Agent': 'snitched.ai/1.0' }, next: { revalidate: 86400 } },
     );
-    if (!res.ok) return { state: null, congressionalDistrict: null, members: [] };
+    if (!geoRes.ok) return null;
+    const geoData = await geoRes.json();
+    if (!geoData || geoData.length === 0) return null;
 
-    const text = await res.text();
-    // Response sometimes has garbage before the JSON
-    const jsonStart = text.indexOf('{');
-    if (jsonStart === -1) return { state: null, congressionalDistrict: null, members: [] };
+    const lat = geoData[0].lat;
+    const lng = geoData[0].lon;
 
-    const data = JSON.parse(text.slice(jsonStart)) as { results: WIMRMember[] };
-    const members = data.results || [];
+    // Get districts from Census geocoder
+    const censusRes = await fetch(
+      `https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=${lng}&y=${lat}&benchmark=Public_AR_Current&vintage=Current_Current&format=json&layers=all`,
+      { next: { revalidate: 86400 } },
+    );
+    if (!censusRes.ok) return null;
+    const censusData = await censusRes.json();
+    const geo = censusData?.result?.geographies || {};
 
-    const state = members[0]?.state || null;
-    // Find the House member to get district
-    const houseRep = members.find(m => m.district && m.district !== '');
-    const congressionalDistrict = houseRep?.district || null;
+    // Extract district info
+    let state = '';
+    let congressionalDistrict: string | null = null;
+    let stateSenateDistrict: string | null = null;
+    let stateHouseDistrict: string | null = null;
+    let county: string | null = null;
+    let city: string | null = null;
+    let schoolDistrict: string | null = null;
 
-    return { state, congressionalDistrict, members };
-  } catch {
-    return { state: null, congressionalDistrict: null, members: [] };
+    // State
+    const states = geo['States'];
+    if (states?.[0]) {
+      state = states[0].STUSAB || '';
+    }
+
+    // Congressional district
+    const cdKey = Object.keys(geo).find(k => k.includes('Congressional'));
+    if (cdKey && geo[cdKey]?.[0]) {
+      const cdVal = geo[cdKey][0].CD119 || geo[cdKey][0].BASENAME;
+      congressionalDistrict = cdVal ? String(Number(cdVal)) : null;
+    }
+
+    // State Senate (upper)
+    const slduKey = Object.keys(geo).find(k => k.includes('Upper'));
+    if (slduKey && geo[slduKey]?.[0]) {
+      const val = geo[slduKey][0].SLDU || geo[slduKey][0].BASENAME;
+      stateSenateDistrict = val ? String(Number(val)) : null;
+    }
+
+    // State House (lower)
+    const sldlKey = Object.keys(geo).find(k => k.includes('Lower'));
+    if (sldlKey && geo[sldlKey]?.[0]) {
+      const val = geo[sldlKey][0].SLDL || geo[sldlKey][0].BASENAME;
+      stateHouseDistrict = val ? String(Number(val)) : null;
+    }
+
+    // County
+    const counties = geo['Counties'];
+    if (counties?.[0]) {
+      county = counties[0].BASENAME || counties[0].NAME || null;
+    }
+
+    // City
+    const places = geo['Incorporated Places'];
+    if (places?.[0]) {
+      city = places[0].BASENAME || places[0].NAME || null;
+    }
+
+    // School district
+    const schools = geo['Unified School Districts'];
+    if (schools?.[0]) {
+      schoolDistrict = schools[0].BASENAME || schools[0].NAME || null;
+    }
+
+    if (!state) return null;
+
+    return {
+      state,
+      stateName: getStateName(state),
+      congressionalDistrict,
+      stateSenateDistrict,
+      stateHouseDistrict,
+      county,
+      city,
+      schoolDistrict,
+    };
+  } catch (err) {
+    console.error('District lookup error:', err);
+    return null;
   }
 }
 
@@ -59,17 +124,20 @@ export async function GET(request: NextRequest) {
 
   const cleanZip = zip.replace(/\D/g, '').slice(0, 5);
 
-  // Step 1: Lookup district from ZIP
-  const lookup = await lookupDistrict(cleanZip);
-  const stateCode = lookup.state || getStateFromZip(cleanZip);
+  // Step 1: Get exact districts from Census Bureau
+  const districts = await getDistrictsFromZip(cleanZip);
+  const stateCode = districts?.state || getStateFromZip(cleanZip);
 
   if (!stateCode) {
-    return NextResponse.json({ error: 'Could not determine state from ZIP code' }, { status: 404 });
+    return NextResponse.json({ error: 'Could not determine location from ZIP code' }, { status: 404 });
   }
 
-  const cd = lookup.congressionalDistrict;
+  const cd = districts?.congressionalDistrict;
+  const sldu = districts?.stateSenateDistrict;
+  const sldl = districts?.stateHouseDistrict;
+  const county = districts?.county;
 
-  // Step 2: Fetch politicians from DB for this state
+  // Step 2: Fetch politicians from DB
   const client = getServerSupabase();
   if (!client) {
     return NextResponse.json({ error: 'Database unavailable' }, { status: 500 });
@@ -89,30 +157,49 @@ export async function GET(request: NextRequest) {
     page++;
   }
 
-  // Filter to matching state
-  const statePoliticians = allRows.filter(row =>
+  // Filter to state
+  const statePols = allRows.filter(row =>
     getStateFromId(row.bioguide_id as string) === stateCode
   );
 
-  // Step 3: Filter to district-level matches
-  const districtMatched = statePoliticians.filter(row => {
+  // Step 3: Match to districts
+  const matched = statePols.filter(row => {
     const level = row.office_level as string;
     const dist = row.district as string | null;
+    const juris = (row.jurisdiction as string || '').toLowerCase();
 
-    // Statewide officials — always included
+    // Statewide — always
     if (level === 'US Senator' || level === 'Governor') return true;
 
-    // US Representative — match congressional district
+    // US Representative — match CD
     if (level === 'US Representative') {
-      if (!cd) return true; // show all if we couldn't determine district
+      if (!cd) return true;
       return dist === cd || dist === String(Number(cd));
     }
 
-    // State legislators — include all for now (would need state legislative district mapping)
-    if (level === 'State Senator' || level === 'State Representative') return true;
+    // State Senator — match upper chamber district
+    if (level === 'State Senator') {
+      if (!sldu) return true;
+      return dist === sldu || dist === String(Number(sldu));
+    }
 
-    // County/local — include all for this state (user can browse)
-    return true;
+    // State Representative — match lower chamber district
+    if (level === 'State Representative') {
+      if (!sldl) return true;
+      return dist === sldl || dist === String(Number(sldl));
+    }
+
+    // County/local — match county name
+    if (county) {
+      const countyLower = county.toLowerCase();
+      if (juris.includes(countyLower) || juris.includes(countyLower.replace(' county', '').replace(' parish', ''))) {
+        return true;
+      }
+      // Also match "X County" pattern
+      if (juris === `${countyLower} county` || juris === countyLower) return true;
+    }
+
+    return false;
   });
 
   const mapRow = (row: Record<string, unknown>): Politician => ({
@@ -134,25 +221,14 @@ export async function GET(request: NextRequest) {
     runningFor: row.running_for as string | undefined,
   }) as Politician;
 
-  const politicians = districtMatched.map(mapRow);
+  const politicians = matched.map(mapRow);
   const officials = politicians.filter(p => p.isActive && !p.isCandidate);
   const candidates = politicians.filter(p => p.isCandidate);
-
-  // Format representatives from WIMR for display
-  const federalReps = lookup.members.map(m => ({
-    name: m.name,
-    office: m.district ? `US Representative, District ${m.district}` : 'US Senator',
-    level: m.district ? 'federal-house' : 'federal-senate',
-    party: m.party,
-  }));
 
   return NextResponse.json({
     zip: cleanZip,
     state: stateCode,
-    districtInfo: {
-      congressionalDistrict: cd || null,
-    },
-    federalReps,
+    districtInfo: districts || { state: stateCode, stateName: getStateName(stateCode), congressionalDistrict: null, stateSenateDistrict: null, stateHouseDistrict: null, county: null, city: null, schoolDistrict: null },
     total: politicians.length,
     officials,
     candidates,

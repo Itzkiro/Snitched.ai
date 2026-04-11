@@ -18,8 +18,12 @@ function ZipContent() {
   const [results, setResults] = useState<{
     zip?: string;
     state: string;
-    districtInfo?: { congressionalDistrict: string | null } | null;
-    federalReps?: Array<{ name: string; office: string; level: string; party: string }>;
+    districtInfo?: {
+      state: string; stateName: string;
+      congressionalDistrict: string | null; stateSenateDistrict: string | null;
+      stateHouseDistrict: string | null; county: string | null;
+      city: string | null; schoolDistrict: string | null;
+    } | null;
     officials: Politician[];
     candidates: Politician[];
   } | null>(null);
@@ -172,49 +176,48 @@ function ZipContent() {
               </Link>
             </div>
 
-            {/* District info */}
-            {results.districtInfo?.congressionalDistrict && (
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', fontSize: '0.7rem' }}>
-                <div style={{ padding: '0.4rem 0.6rem', background: 'rgba(0,255,65,0.06)', border: '1px solid var(--terminal-border)' }}>
-                  <span style={{ color: 'var(--terminal-text-dim)' }}>CONGRESSIONAL DISTRICT: </span>
-                  <span style={{ color: 'var(--terminal-green)', fontWeight: 700 }}>{results.state}-{results.districtInfo.congressionalDistrict}</span>
-                </div>
+            {/* District info badges */}
+            {results.districtInfo && (
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', fontSize: '0.65rem' }}>
+                {results.districtInfo.congressionalDistrict && (
+                  <div style={{ padding: '0.4rem 0.6rem', background: 'rgba(0,255,65,0.06)', border: '1px solid var(--terminal-border)' }}>
+                    <span style={{ color: 'var(--terminal-text-dim)' }}>US HOUSE </span>
+                    <span style={{ color: 'var(--terminal-green)', fontWeight: 700 }}>{results.state}-{results.districtInfo.congressionalDistrict}</span>
+                  </div>
+                )}
+                {results.districtInfo.stateSenateDistrict && (
+                  <div style={{ padding: '0.4rem 0.6rem', background: 'rgba(0,255,65,0.06)', border: '1px solid var(--terminal-border)' }}>
+                    <span style={{ color: 'var(--terminal-text-dim)' }}>STATE SENATE </span>
+                    <span style={{ color: 'var(--terminal-green)', fontWeight: 700 }}>District {results.districtInfo.stateSenateDistrict}</span>
+                  </div>
+                )}
+                {results.districtInfo.stateHouseDistrict && (
+                  <div style={{ padding: '0.4rem 0.6rem', background: 'rgba(0,255,65,0.06)', border: '1px solid var(--terminal-border)' }}>
+                    <span style={{ color: 'var(--terminal-text-dim)' }}>STATE HOUSE </span>
+                    <span style={{ color: 'var(--terminal-green)', fontWeight: 700 }}>District {results.districtInfo.stateHouseDistrict}</span>
+                  </div>
+                )}
+                {results.districtInfo.county && (
+                  <div style={{ padding: '0.4rem 0.6rem', background: 'rgba(0,255,65,0.06)', border: '1px solid var(--terminal-border)' }}>
+                    <span style={{ color: 'var(--terminal-text-dim)' }}>COUNTY </span>
+                    <span style={{ color: 'var(--terminal-green)', fontWeight: 700 }}>{results.districtInfo.county}</span>
+                  </div>
+                )}
+                {results.districtInfo.city && (
+                  <div style={{ padding: '0.4rem 0.6rem', background: 'rgba(0,255,65,0.06)', border: '1px solid var(--terminal-border)' }}>
+                    <span style={{ color: 'var(--terminal-text-dim)' }}>CITY </span>
+                    <span style={{ color: 'var(--terminal-green)', fontWeight: 700 }}>{results.districtInfo.city}</span>
+                  </div>
+                )}
+                {results.districtInfo.schoolDistrict && (
+                  <div style={{ padding: '0.4rem 0.6rem', background: 'rgba(0,255,65,0.06)', border: '1px solid var(--terminal-border)' }}>
+                    <span style={{ color: 'var(--terminal-text-dim)' }}>SCHOOL </span>
+                    <span style={{ color: 'var(--terminal-green)', fontWeight: 700 }}>{results.districtInfo.schoolDistrict}</span>
+                  </div>
+                )}
               </div>
             )}
           </div>
-
-          {/* Federal Representatives from WIMR */}
-          {results.federalReps && results.federalReps.length > 0 && (
-            <div style={{ marginTop: '1.5rem' }}>
-              <h2 style={{
-                fontSize: '0.85rem', fontWeight: 700, color: 'var(--terminal-amber)',
-                textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.75rem',
-              }}>
-                YOUR FEDERAL REPRESENTATIVES
-              </h2>
-              <div style={{ border: '1px solid var(--terminal-border)', background: 'var(--terminal-card)' }}>
-                {results.federalReps.map((r, i) => (
-                  <div key={i} style={{
-                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                    padding: '0.65rem 1rem', borderBottom: i < results.federalReps!.length - 1 ? '1px solid var(--terminal-border)' : 'none',
-                    fontSize: '0.8rem',
-                  }}>
-                    <div>
-                      <div style={{ fontWeight: 600 }}>{r.name}</div>
-                      <div style={{ fontSize: '0.65rem', color: 'var(--terminal-text-dim)', marginTop: '0.1rem' }}>{r.office}</div>
-                    </div>
-                    <span style={{
-                      fontSize: '0.6rem', padding: '0.15rem 0.4rem', fontWeight: 700,
-                      background: r.party === 'Republican' ? 'rgba(255,8,68,0.15)' : 'rgba(0,255,65,0.1)',
-                      color: r.party === 'Republican' ? 'var(--terminal-red)' : 'var(--terminal-green)',
-                    }}>
-                      {r.party === 'Republican' ? 'R' : r.party === 'Democrat' ? 'D' : r.party}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
 
           {/* Officials */}
           {results.officials.length > 0 && (
