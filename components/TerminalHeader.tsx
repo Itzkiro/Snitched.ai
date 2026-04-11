@@ -68,6 +68,8 @@ export default function TerminalHeader() {
   const [selectedState, setSelectedState] = useState(searchParams.get('state') || 'FL');
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  const stateQuery = selectedState && selectedState !== 'ALL' ? `?state=${selectedState}` : '';
+
   // Close dropdown on click outside
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -164,7 +166,7 @@ export default function TerminalHeader() {
         gap: '2rem'
       }}>
         <Link 
-          href="/"
+          href={`/${stateQuery}`}
           style={{ 
             color: pathname === '/' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
             textDecoration: 'none',
@@ -178,7 +180,7 @@ export default function TerminalHeader() {
           🏠 HOME
         </Link>
         <Link 
-          href="/officials"
+          href={`/officials${stateQuery}`}
           style={{ 
             color: pathname === '/officials' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
             textDecoration: 'none',
@@ -191,7 +193,7 @@ export default function TerminalHeader() {
           👔 SEATED OFFICIALS
         </Link>
         <Link 
-          href="/candidates"
+          href={`/candidates${stateQuery}`}
           style={{ 
             color: pathname === '/candidates' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
             textDecoration: 'none',
@@ -204,7 +206,7 @@ export default function TerminalHeader() {
           🗳️ CANDIDATES
         </Link>
         <Link 
-          href="/hierarchy"
+          href={`/hierarchy${stateQuery}`}
           style={{ 
             color: pathname === '/hierarchy' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
             textDecoration: 'none',
@@ -217,7 +219,7 @@ export default function TerminalHeader() {
           📊 HIERARCHY
         </Link>
         <Link 
-          href="/juicebox"
+          href={`/juicebox${stateQuery}`}
           style={{ 
             color: pathname === '/juicebox' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
             textDecoration: 'none',
@@ -230,7 +232,7 @@ export default function TerminalHeader() {
           💰 JUICE BOX LEADERBOARD
         </Link>
         <Link
-          href="/social"
+          href={`/social${stateQuery}`}
           style={{
             color: pathname === '/social' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
             textDecoration: 'none',
@@ -243,7 +245,7 @@ export default function TerminalHeader() {
           📡 SOCIAL INTEL
         </Link>
         <Link
-          href="/browse"
+          href={`/browse${stateQuery}`}
           style={{
             color: pathname === '/browse' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
             textDecoration: 'none',
@@ -256,7 +258,7 @@ export default function TerminalHeader() {
           🔍 DATABASE
         </Link>
         <Link
-          href="/compare"
+          href={`/compare${stateQuery}`}
           style={{
             color: pathname === '/compare' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
             textDecoration: 'none',
@@ -269,7 +271,7 @@ export default function TerminalHeader() {
           ⚖️ COMPARE
         </Link>
         <Link
-          href="/connections"
+          href={`/connections${stateQuery}`}
           style={{
             color: pathname === '/connections' ? 'var(--terminal-blue)' : 'var(--terminal-text-dim)',
             textDecoration: 'none',

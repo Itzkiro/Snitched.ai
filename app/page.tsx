@@ -1,5 +1,6 @@
 import { getServerSupabase } from '@/lib/supabase-server';
 import type { Politician } from '@/lib/types';
+import { filterByState } from '@/lib/state-utils';
 import TerminalHome from '@/components/TerminalHome';
 
 /**
@@ -90,8 +91,10 @@ async function fetchPoliticians(): Promise<Politician[]> {
   }
 }
 
-export default async function HomePage() {
-  const politicians = await fetchPoliticians();
+export default async function HomePage({ searchParams }: { searchParams: Promise<{ state?: string }> }) {
+  const { state: stateParam } = await searchParams;
+  const allPoliticians = await fetchPoliticians();
+  const politicians = filterByState(allPoliticians, stateParam);
 
   // Compute key stats for the server-rendered section (visible to crawlers)
   const active = politicians.filter(p => p.isActive);

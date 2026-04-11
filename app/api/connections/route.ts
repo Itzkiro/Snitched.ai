@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServiceRoleSupabase } from '@/lib/supabase-server';
+import { getStateFromId } from '@/lib/state-utils';
 
 /**
  * GET /api/connections
@@ -46,6 +47,7 @@ export async function GET(request: NextRequest) {
   const params = request.nextUrl.searchParams;
   const minConnections = Number(params.get('minConnections') || '2');
   const categoryFilter = params.get('category');
+  const stateFilter = params.get('state');
   const limit = Math.min(Number(params.get('limit') || '300'), 500);
 
   // Load all politicians with data
@@ -63,7 +65,9 @@ export async function GET(request: NextRequest) {
     if (batch.length < 1000) break;
     pg++;
   }
-  const pols = allPols;
+  const pols = (!stateFilter || stateFilter === 'ALL')
+    ? allPols
+    : allPols.filter(p => getStateFromId(p.bioguide_id as string) === stateFilter.toUpperCase());
 
   if (pols.length === 0) {
     return NextResponse.json({ error: 'No politicians found' }, { status: 500 });

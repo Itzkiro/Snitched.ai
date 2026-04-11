@@ -1,9 +1,9 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getServerSupabase } from '@/lib/supabase-server';
 import type { Politician } from '@/lib/types';
+import { filterByState } from '@/lib/state-utils';
 
-// Revalidate every 5 minutes — politician data changes at most once/day via cron
-export const revalidate = 300;
+export const dynamic = 'force-dynamic';
 
 function cachedResponse(data: unknown) {
   return NextResponse.json(data, {
@@ -13,7 +13,8 @@ function cachedResponse(data: unknown) {
   });
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const stateParam = request.nextUrl.searchParams.get('state');
   try {
     const client = getServerSupabase();
     if (!client) {
@@ -50,7 +51,7 @@ export async function GET() {
     if (data.length === 0) {
       const { getAllPoliticians: getJsonPoliticians } = await import('@/lib/real-data');
       const politicians = getJsonPoliticians();
-      return cachedResponse(politicians);
+      return cachedResponse(filterByState(politicians, stateParam));
     }
 
     // Map Supabase rows to Politician type
@@ -87,12 +88,12 @@ export async function GET() {
       lastUpdated: (row.updated_at as string) || (row.created_at as string),
     }));
 
-    return cachedResponse(politicians);
+    return cachedResponse(filterByState(politicians, stateParam));
   } catch (error) {
     console.error('Failed to fetch politicians:', error);
     // Fall back to JSON data on any error
     const { getAllPoliticians: getJsonPoliticians } = await import('@/lib/real-data');
     const politicians = getJsonPoliticians();
-    return cachedResponse(politicians);
+    return cachedResponse(filterByState(politicians, stateParam));
   }
 }

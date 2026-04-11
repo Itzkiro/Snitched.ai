@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { Suspense, useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import type { Politician, CorruptionScoreResult, CorruptionGrade, CorruptionConfidence } from '@/lib/types';
 
@@ -31,6 +32,12 @@ function getScoreColor(score: number): string {
 }
 
 export default function JuiceBoxPage() {
+  return <Suspense><JuiceBoxContent /></Suspense>;
+}
+
+function JuiceBoxContent() {
+  const searchParams = useSearchParams();
+  const stateParam = searchParams.get('state') || '';
   const [politicians, setPoliticians] = useState<Politician[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -39,7 +46,8 @@ export default function JuiceBoxPage() {
   useEffect(() => {
     async function loadData() {
       try {
-        const res = await fetch('/api/politicians');
+        const qs = stateParam ? `?state=${stateParam}` : '';
+        const res = await fetch(`/api/politicians${qs}`);
         if (!res.ok) throw new Error(`API error: ${res.status}`);
         const data: Politician[] = await res.json();
         setPoliticians(data);
@@ -51,7 +59,7 @@ export default function JuiceBoxPage() {
       }
     }
     loadData();
-  }, []);
+  }, [stateParam]);
 
   if (loading) {
     return <div style={{ padding: '2rem', textAlign: 'center', color: 'white' }}>Loading...</div>;

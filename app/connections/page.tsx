@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { Suspense, useState, useEffect, useRef, useCallback } from 'react';
+import { useSearchParams } from 'next/navigation';
 import cytoscape, { type Core, type NodeSingular } from 'cytoscape';
 import fcose from 'cytoscape-fcose';
 import Link from 'next/link';
@@ -112,6 +113,12 @@ function fmt(n: number): string {
 }
 
 export default function ConnectionsPage() {
+  return <Suspense><ConnectionsContent /></Suspense>;
+}
+
+function ConnectionsContent() {
+  const searchParams = useSearchParams();
+  const stateParam = searchParams.get('state') || '';
   const containerRef = useRef<HTMLDivElement>(null);
   const cyRef = useRef<Core | null>(null);
   const [loading, setLoading] = useState(true);
@@ -146,6 +153,7 @@ export default function ConnectionsPage() {
       try {
         const params = new URLSearchParams({ minConnections: String(minConn), limit: '400' });
         if (categoryFilter) params.set('category', categoryFilter);
+        if (stateParam) params.set('state', stateParam);
         const res = await fetch(`/api/connections?${params}`);
         const data = await res.json();
         if (data.error) { console.error(data.error); return; }
@@ -249,7 +257,7 @@ export default function ConnectionsPage() {
 
     fetchAndRender();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [minConn, categoryFilter]);
+  }, [minConn, categoryFilter, stateParam]);
 
   // Layout change
   useEffect(() => {

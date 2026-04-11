@@ -7,6 +7,7 @@ export const metadata: Metadata = {
 };
 import { getServiceRoleSupabase } from '@/lib/supabase-server';
 import type { Politician } from '@/lib/types';
+import { filterByState } from '@/lib/state-utils';
 
 export const dynamic = 'force-dynamic';
 
@@ -58,8 +59,10 @@ async function getOfficials(): Promise<Politician[]> {
   })) as Politician[];
 }
 
-export default async function OfficialsPage() {
-  const seatedOfficials = await getOfficials();
+export default async function OfficialsPage({ searchParams }: { searchParams: Promise<{ state?: string }> }) {
+  const { state: stateParam } = await searchParams;
+  const allOfficials = await getOfficials();
+  const seatedOfficials = filterByState(allOfficials, stateParam);
 
   const byLevel = {
     federal: seatedOfficials.filter(p => p.officeLevel === 'US Senator' || p.officeLevel === 'US Representative'),

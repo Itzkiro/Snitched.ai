@@ -7,6 +7,7 @@ export const metadata: Metadata = {
 };
 import { getServiceRoleSupabase, getServerSupabase } from '@/lib/supabase-server';
 import type { Politician } from '@/lib/types';
+import { filterByState } from '@/lib/state-utils';
 
 // Force dynamic rendering — candidate data changes frequently
 export const dynamic = 'force-dynamic';
@@ -49,8 +50,10 @@ async function getPoliticians(): Promise<Politician[]> {
   })) as Politician[];
 }
 
-export default async function CandidatesPage() {
-  const candidates = await getPoliticians();
+export default async function CandidatesPage({ searchParams }: { searchParams: Promise<{ state?: string }> }) {
+  const { state: stateParam } = await searchParams;
+  const allCandidates = await getPoliticians();
+  const candidates = filterByState(allCandidates, stateParam);
 
   return (
     <div style={{ minHeight: '100vh', paddingBottom: '4rem' }}>

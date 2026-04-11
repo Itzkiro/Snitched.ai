@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getServerSupabase } from '@/lib/supabase-server';
 import type { Politician } from '@/lib/types';
+import { filterByState } from '@/lib/state-utils';
 import BrowseClient from './BrowseClient';
 
 export const metadata: Metadata = {
@@ -52,7 +53,9 @@ async function getPoliticians(): Promise<Politician[]> {
   }) as Politician[];
 }
 
-export default async function BrowsePage() {
-  const politicians = await getPoliticians();
+export default async function BrowsePage({ searchParams }: { searchParams: Promise<{ state?: string }> }) {
+  const { state: stateParam } = await searchParams;
+  const allPoliticians = await getPoliticians();
+  const politicians = filterByState(allPoliticians, stateParam);
   return <BrowseClient politicians={politicians} />;
 }

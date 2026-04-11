@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { Suspense, useState, useEffect, useMemo } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import type { Politician } from '@/lib/types';
 
@@ -173,6 +174,12 @@ function sumAipacFunding(node: HierarchyNode): number {
 }
 
 export default function HierarchyPage() {
+  return <Suspense><HierarchyContent /></Suspense>;
+}
+
+function HierarchyContent() {
+  const searchParams = useSearchParams();
+  const stateParam = searchParams.get('state') || '';
   const [path, setPath] = useState<string[]>(['florida']);
   const [allPoliticians, setAllPoliticians] = useState<Politician[]>([]);
   const [loading, setLoading] = useState(true);
@@ -181,7 +188,8 @@ export default function HierarchyPage() {
   useEffect(() => {
     async function loadData() {
       try {
-        const res = await fetch('/api/politicians');
+        const qs = stateParam ? `?state=${stateParam}` : '';
+        const res = await fetch(`/api/politicians${qs}`);
         if (!res.ok) throw new Error(`API error: ${res.status}`);
         const data: Politician[] = await res.json();
         setAllPoliticians(data);
@@ -193,7 +201,7 @@ export default function HierarchyPage() {
       }
     }
     loadData();
-  }, []);
+  }, [stateParam]);
 
   const hierarchyData = useMemo(() => {
     if (allPoliticians.length === 0) return null;
