@@ -203,10 +203,15 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
   return (
     <div style={{ minHeight: '100vh', background: bg0, color: txt, fontFamily: mono, overflowX: 'hidden', position: 'relative' }}>
 
-      {/* ── MATRIX RAIN BACKGROUND (full page) ── */}
-      <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none', overflow: 'hidden' }}>
-        {/* Falling columns of corruption-related text */}
-        {Array.from({ length: 28 }).map((_, col) => {
+      {/* ── MATRIX RAIN BACKGROUND (covers entire page height) ── */}
+      <style>{`
+        @keyframes matrixRain {
+          0% { transform: translateY(-300px); }
+          100% { transform: translateY(100vh); }
+        }
+      `}</style>
+      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 0, pointerEvents: 'none' }}>
+        {Array.from({ length: 35 }).map((_, col) => {
           const words = [
             'AIPAC', '$$$', 'PAC', 'LOBBY', 'BRIBE', 'DARK$', 'FEC', 'FRAUD',
             'DONOR', 'CORP', 'SHELL', 'SUPER', 'IE$$', 'BUNDL', 'K ST',
@@ -215,42 +220,34 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
             'SNITCH', 'TRACE', 'EXPOS', 'FUND$', 'HIDE', 'LIE',
             'STEAL', 'POWER', 'GREED', 'SELL', 'BETRY', 'OWNED',
           ];
-          const isRed = col % 5 === 0; // Every 5th column is red (danger)
+          const isRed = col % 5 === 0;
           const colColor = isRed ? 'rgba(255,8,68,' : 'rgba(0,255,65,';
-          const left = (col / 28 * 100) + (Math.sin(col * 7) * 1.5);
-          const duration = 12 + (col % 7) * 3;
-          const delay = (col * 0.7) % 8;
-          const chars = Array.from({ length: 8 + (col % 5) }).map((_, i) => words[(col * 3 + i) % words.length]);
+          const left = (col / 35 * 100);
+          const duration = 8 + (col % 6) * 2.5;
+          const delay = (col * 0.6) % 7;
+          const chars = Array.from({ length: 12 + (col % 6) }).map((_, i) => words[(col * 3 + i) % words.length]);
 
           return (
             <div key={col} style={{
-              position: 'absolute',
+              position: 'fixed',
               left: `${left}%`,
-              top: '-200px',
+              top: 0,
               fontSize: '0.6rem',
               fontFamily: mono,
               lineHeight: '1.8em',
               letterSpacing: '0.05em',
               whiteSpace: 'nowrap',
-              animation: `matrixFall ${duration}s linear ${delay}s infinite`,
-              willChange: 'transform',
+              animation: `matrixRain ${duration}s linear ${delay}s infinite`,
             }}>
               {chars.map((ch, i) => (
                 <div key={i} style={{
-                  color: `${colColor}${i === 0 ? '0.5' : i < 3 ? '0.2' : '0.07'})`,
-                  textShadow: i === 0 ? `0 0 8px ${colColor}0.6)` : 'none',
+                  color: `${colColor}${i === 0 ? '0.45' : i < 2 ? '0.2' : i < 4 ? '0.1' : '0.05'})`,
+                  textShadow: i === 0 ? `0 0 10px ${colColor}0.5)` : 'none',
                 }}>{ch}</div>
               ))}
             </div>
           );
         })}
-        {/* CSS animation injected via style tag */}
-        <style>{`
-          @keyframes matrixFall {
-            0% { transform: translateY(-200px); }
-            100% { transform: translateY(110vh); }
-          }
-        `}</style>
       </div>
 
       {/* All content sits above the matrix rain */}
