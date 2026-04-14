@@ -46,10 +46,11 @@ function generateEmbedHTML(p: Politician): string {
   const partyBg = p.party === 'Republican' ? '#dc2626' : p.party === 'Democrat' ? '#2563eb' : '#6b7280';
   const partyTag = p.party === 'Republican' ? 'R' : p.party === 'Democrat' ? 'D' : 'I';
   const url = `https://snitched.ai/politician/${p.id}`;
-  const isCandidateOnly = p.isCandidate && !p.isActive;
-  const status = isCandidateOnly ? 'CANDIDATE' : p.isActive ? 'IN OFFICE' : 'FORMER';
-  const statusColor = isCandidateOnly ? '#FFB627' : p.isActive ? '#00FF41' : '#FF6B35';
-  const displayOffice = (p.runningFor && isCandidateOnly) ? `Running for: ${p.runningFor}` : p.office;
+  const isCandidate = p.isCandidate || p.office === 'Candidate' || (p.office || '').includes('(Candidate)');
+  const isSeated = p.isActive && !isCandidate;
+  const status = isCandidate ? 'CANDIDATE' : p.isActive ? 'IN OFFICE' : 'FORMER';
+  const statusColor = isCandidate ? '#FFB627' : p.isActive ? '#00FF41' : '#FF6B35';
+  const displayOffice = (p.runningFor && isCandidate) ? `Running for: ${p.runningFor}` : p.office === 'Candidate' ? (p.runningFor || p.office) : p.office;
   const years = p.yearsInOffice ? `${p.yearsInOffice} yrs` : '';
   const topDonors = (p.top5Donors || p.top3Donors || []).slice(0, 3);
 
