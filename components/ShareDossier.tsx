@@ -37,42 +37,59 @@ function generateEmbedHTML(p: Politician): string {
   const partyBg = p.party === 'Republican' ? '#dc2626' : p.party === 'Democrat' ? '#2563eb' : '#6b7280';
   const partyTag = p.party === 'Republican' ? 'R' : p.party === 'Democrat' ? 'D' : 'I';
   const url = `https://snitched.ai/politician/${p.id}`;
+  const status = p.isActive ? 'ACTIVE' : 'FORMER';
+  const statusColor = p.isActive ? '#00FF41' : '#6b8a6b';
+  const years = p.yearsInOffice ? `${p.yearsInOffice}yr${p.yearsInOffice !== 1 ? 's' : ''}` : '';
+  const topDonors = (p.top5Donors || p.top3Donors || []).slice(0, 3);
+  const donorsHtml = topDonors.length > 0
+    ? topDonors.map((d, i) => `<div style="display:flex;justify-content:space-between;padding:3px 0;${i < topDonors.length - 1 ? 'border-bottom:1px solid rgba(0,255,65,0.06);' : ''}"><span style="font-size:10px;color:#6b8a6b;">${d.name}</span><span style="font-size:10px;font-weight:700;color:${d.type === 'Israel-PAC' ? '#FF0844' : '#00FF41'};">${fmtMoney(d.amount)}</span></div>`).join('')
+    : '<div style="font-size:10px;color:#3d5a3d;">No donor data available</div>';
+  const lobbyWarning = lobby > 0
+    ? `<div style="margin-top:10px;padding:8px 10px;background:rgba(255,8,68,0.06);border:1px solid rgba(255,8,68,0.15);display:flex;justify-content:space-between;align-items:center;"><div style="font-size:9px;color:#FF0844;letter-spacing:1px;font-weight:700;">⚠ ISRAEL LOBBY FUNDING</div><div style="font-size:16px;font-weight:700;color:#FF0844;">${fmtMoney(lobby)}</div></div>`
+    : '';
 
-  return `<!-- SNITCHED.AI Dossier Card -->
-<div style="font-family:'Courier New',monospace;background:#000;color:#c8d6c8;border:1px solid rgba(0,255,65,0.2);max-width:400px;padding:0;overflow:hidden;">
-  <div style="background:rgba(0,255,65,0.06);padding:12px 16px;border-bottom:1px solid rgba(0,255,65,0.12);display:flex;justify-content:space-between;align-items:center;">
+  return `<!-- SNITCHED.AI Dossier Card — Embed this anywhere -->
+<div style="font-family:'Courier New',monospace;background:#000;color:#c8d6c8;border:1px solid rgba(0,255,65,0.2);max-width:420px;padding:0;overflow:hidden;">
+  <div style="background:rgba(0,255,65,0.06);padding:10px 14px;border-bottom:1px solid rgba(0,255,65,0.12);display:flex;justify-content:space-between;align-items:center;">
     <div style="font-size:10px;color:#00FF41;letter-spacing:2px;font-weight:700;">SNITCHED.AI DOSSIER</div>
-    <div style="font-size:9px;color:#3d5a3d;">CORRUPTION INDEX</div>
-  </div>
-  <div style="padding:16px;">
-    <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;">
-      <div>
-        <div style="font-size:16px;font-weight:700;color:#c8d6c8;margin-bottom:4px;">${p.name}</div>
-        <div style="font-size:11px;color:#6b8a6b;">${p.office}</div>
-        <div style="margin-top:6px;display:inline-block;font-size:10px;padding:2px 8px;background:${partyBg};color:#fff;font-weight:700;">${partyTag} — ${p.party}</div>
-      </div>
-      <div style="text-align:center;">
-        <div style="font-size:36px;font-weight:700;color:${gc};line-height:1;">${score}</div>
-        <div style="font-size:9px;color:#3d5a3d;letter-spacing:1px;">/100</div>
-        <div style="font-size:14px;font-weight:700;color:${gc};margin-top:2px;">GRADE: ${grade}</div>
-      </div>
-    </div>
-    <div style="border-top:1px solid rgba(0,255,65,0.1);padding-top:10px;display:flex;gap:16px;">
-      <div>
-        <div style="font-size:9px;color:#3d5a3d;letter-spacing:1px;">FUNDS RAISED</div>
-        <div style="font-size:14px;font-weight:700;color:#00FF41;">${fmtMoney(funds)}</div>
-      </div>${lobby > 0 ? `
-      <div>
-        <div style="font-size:9px;color:#3d5a3d;letter-spacing:1px;">ISRAEL LOBBY</div>
-        <div style="font-size:14px;font-weight:700;color:#FF0844;">${fmtMoney(lobby)}</div>
-      </div>` : ''}
-      <div>
-        <div style="font-size:9px;color:#3d5a3d;letter-spacing:1px;">JURISDICTION</div>
-        <div style="font-size:11px;color:#6b8a6b;">${p.jurisdiction || p.district || '—'}</div>
-      </div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <span style="font-size:8px;padding:2px 6px;background:${statusColor}15;border:1px solid ${statusColor}40;color:${statusColor};font-weight:700;letter-spacing:1px;">${status}</span>
+      <span style="font-size:8px;color:#3d5a3d;">CORRUPTION INDEX</span>
     </div>
   </div>
-  <a href="${url}" target="_blank" rel="noopener" style="display:block;padding:8px 16px;background:rgba(0,255,65,0.04);border-top:1px solid rgba(0,255,65,0.12);font-size:9px;color:#00FF41;text-decoration:none;letter-spacing:1px;text-align:center;">VIEW FULL DOSSIER → SNITCHED.AI</a>
+  <div style="padding:14px;">
+    <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:10px;">
+      <div style="flex:1;">
+        <div style="font-size:15px;font-weight:700;color:#c8d6c8;margin-bottom:3px;">${p.name}</div>
+        <div style="font-size:10px;color:#6b8a6b;margin-bottom:2px;">${p.office}</div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:5px;">
+          <span style="font-size:9px;padding:2px 7px;background:${partyBg};color:#fff;font-weight:700;">${partyTag} — ${p.party}</span>
+          ${years ? `<span style="font-size:9px;color:#3d5a3d;">${years} in office</span>` : ''}
+        </div>
+      </div>
+      <div style="text-align:center;min-width:70px;">
+        <div style="font-size:38px;font-weight:700;color:${gc};line-height:1;">${score}</div>
+        <div style="font-size:8px;color:#3d5a3d;letter-spacing:1px;">/100</div>
+        <div style="font-size:13px;font-weight:700;color:${gc};margin-top:2px;">GRADE: ${grade}</div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(0,255,65,0.1);padding-top:10px;display:flex;gap:14px;">
+      <div>
+        <div style="font-size:8px;color:#3d5a3d;letter-spacing:1px;">TOTAL FUNDS</div>
+        <div style="font-size:13px;font-weight:700;color:#00FF41;">${fmtMoney(funds)}</div>
+      </div>
+      <div>
+        <div style="font-size:8px;color:#3d5a3d;letter-spacing:1px;">JURISDICTION</div>
+        <div style="font-size:10px;color:#6b8a6b;">${p.jurisdiction || p.district || '—'}</div>
+      </div>
+    </div>
+    ${lobbyWarning}
+    <div style="margin-top:10px;">
+      <div style="font-size:8px;color:#3d5a3d;letter-spacing:1px;margin-bottom:4px;">TOP DONORS</div>
+      ${donorsHtml}
+    </div>
+  </div>
+  <a href="${url}" target="_blank" rel="noopener" style="display:block;padding:10px 14px;background:rgba(0,255,65,0.06);border-top:1px solid rgba(0,255,65,0.12);font-size:10px;color:#00FF41;text-decoration:none;letter-spacing:1px;text-align:center;font-weight:700;">SEE FULL DOSSIER → SNITCHED.AI</a>
 </div>`;
 }
 
@@ -94,12 +111,6 @@ export default function ShareDossier({ politician }: ShareDossierProps) {
   };
 
   const score = politician.corruptionScore || 0;
-  const grade = getGrade(score);
-  const gc = gradeColor(grade);
-  const lobby = politician.israelLobbyTotal || politician.aipacFunding || 0;
-  const funds = politician.totalFundsRaised || 0;
-  const partyBg = politician.party === 'Republican' ? '#dc2626' : politician.party === 'Democrat' ? '#2563eb' : '#6b7280';
-  const partyTag = politician.party === 'Republican' ? 'R' : politician.party === 'Democrat' ? 'D' : 'I';
 
   return (
     <>
@@ -143,58 +154,8 @@ export default function ShareDossier({ politician }: ShareDossierProps) {
             <div style={{ padding: '1rem' }}>
               <div style={{ fontSize: '0.6rem', color: '#3d5a3d', letterSpacing: '0.15em', marginBottom: '0.5rem' }}>PREVIEW</div>
 
-              {/* Live preview card */}
-              <div style={{
-                background: '#000', border: '1px solid rgba(0,255,65,0.2)',
-                overflow: 'hidden', marginBottom: '1rem',
-              }}>
-                <div style={{
-                  background: 'rgba(0,255,65,0.06)', padding: '10px 14px',
-                  borderBottom: '1px solid rgba(0,255,65,0.12)',
-                  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                }}>
-                  <span style={{ fontSize: '9px', color: '#00FF41', letterSpacing: '2px', fontWeight: 700 }}>SNITCHED.AI DOSSIER</span>
-                  <span style={{ fontSize: '8px', color: '#3d5a3d' }}>CORRUPTION INDEX</span>
-                </div>
-                <div style={{ padding: '14px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '10px' }}>
-                    <div>
-                      <div style={{ fontSize: '14px', fontWeight: 700, color: '#c8d6c8', marginBottom: '3px' }}>{politician.name}</div>
-                      <div style={{ fontSize: '10px', color: '#6b8a6b' }}>{politician.office}</div>
-                      <div style={{
-                        marginTop: '5px', display: 'inline-block', fontSize: '9px',
-                        padding: '2px 7px', background: partyBg, color: '#fff', fontWeight: 700,
-                      }}>{partyTag} — {politician.party}</div>
-                    </div>
-                    <div style={{ textAlign: 'center' }}>
-                      <div style={{ fontSize: '32px', fontWeight: 700, color: gc, lineHeight: 1 }}>{score}</div>
-                      <div style={{ fontSize: '8px', color: '#3d5a3d', letterSpacing: '1px' }}>/100</div>
-                      <div style={{ fontSize: '12px', fontWeight: 700, color: gc, marginTop: '2px' }}>GRADE: {grade}</div>
-                    </div>
-                  </div>
-                  <div style={{ borderTop: '1px solid rgba(0,255,65,0.1)', paddingTop: '8px', display: 'flex', gap: '14px' }}>
-                    <div>
-                      <div style={{ fontSize: '8px', color: '#3d5a3d', letterSpacing: '1px' }}>FUNDS RAISED</div>
-                      <div style={{ fontSize: '12px', fontWeight: 700, color: '#00FF41' }}>{fmtMoney(funds)}</div>
-                    </div>
-                    {lobby > 0 && (
-                      <div>
-                        <div style={{ fontSize: '8px', color: '#3d5a3d', letterSpacing: '1px' }}>ISRAEL LOBBY</div>
-                        <div style={{ fontSize: '12px', fontWeight: 700, color: '#FF0844' }}>{fmtMoney(lobby)}</div>
-                      </div>
-                    )}
-                    <div>
-                      <div style={{ fontSize: '8px', color: '#3d5a3d', letterSpacing: '1px' }}>JURISDICTION</div>
-                      <div style={{ fontSize: '10px', color: '#6b8a6b' }}>{politician.jurisdiction || politician.district || '—'}</div>
-                    </div>
-                  </div>
-                </div>
-                <div style={{
-                  padding: '7px 14px', background: 'rgba(0,255,65,0.04)',
-                  borderTop: '1px solid rgba(0,255,65,0.12)',
-                  fontSize: '8px', color: '#00FF41', letterSpacing: '1px', textAlign: 'center',
-                }}>VIEW FULL DOSSIER → SNITCHED.AI</div>
-              </div>
+              {/* Live preview — renders the actual embed HTML */}
+              <div style={{ marginBottom: '1rem' }} dangerouslySetInnerHTML={{ __html: embedHTML }} />
 
               {/* Embed code */}
               <div style={{ fontSize: '0.6rem', color: '#3d5a3d', letterSpacing: '0.15em', marginBottom: '0.4rem' }}>EMBED HTML</div>
