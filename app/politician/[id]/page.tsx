@@ -6,6 +6,7 @@ import Link from 'next/link';
 import type { Politician } from '@/lib/types';
 import { computeCorruptionScore, getGradeColor, getConfidenceColor } from '@/lib/corruption-score';
 import ConnectionsGraph from '@/components/ConnectionsGraph';
+import ShareDossier from '@/components/ShareDossier';
 
 // ---------------------------------------------------------------------------
 // Voting Record Types — unified shape for both federal and state votes
@@ -403,22 +404,7 @@ export default function PoliticianPage() {
             >
               ← BACK TO DATABASE
             </Link>
-            <button
-              onClick={() => {
-                const url = window.location.href;
-                const text = `${politician.name} — ${politician.office} | Corruption Score: ${politician.corruptionScore}/100`;
-                if (navigator.share) {
-                  navigator.share({ title: text, url });
-                } else {
-                  navigator.clipboard.writeText(url);
-                  alert('Link copied to clipboard');
-                }
-              }}
-              className="terminal-btn"
-              style={{ padding: '0.5rem 1rem', fontSize: '0.75rem' }}
-            >
-              SHARE DOSSIER
-            </button>
+            <ShareDossier politician={politician} />
             <a
               href={`/api/export?format=csv&type=all`}
               download
