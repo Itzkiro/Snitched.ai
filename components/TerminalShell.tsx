@@ -11,6 +11,9 @@ export default function TerminalShell({ children }: { children: React.ReactNode 
   const { entered } = useTerminal();
   const stateParam = searchParams.get('state');
 
+  // Embed pages render bare — no header, no shell
+  if (pathname.startsWith('/embed')) return <>{children}</>;
+
   // On the homepage, only show header after user clicks "Enter Terminal"
   // On all other pages, always show the header
   const showHeader = pathname !== '/' || entered;

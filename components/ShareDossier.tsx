@@ -153,10 +153,12 @@ export default function ShareDossier({ politician }: ShareDossierProps) {
   const codeRef = useRef<HTMLTextAreaElement>(null);
 
   const embedHTML = generateEmbedHTML(politician);
+  const iframeCode = `<iframe src="https://snitched.ai/embed/${politician.id}" width="100%" height="420" frameborder="0" style="max-width:600px;border:none;"></iframe>`;
   const score = politician.corruptionScore || 0;
+  const [embedType, setEmbedType] = useState<'iframe' | 'html'>('iframe');
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(embedHTML);
+    navigator.clipboard.writeText(embedType === 'iframe' ? iframeCode : embedHTML);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -200,25 +202,53 @@ export default function ShareDossier({ politician }: ShareDossierProps) {
             </div>
 
             <div style={{ padding: '1rem' }}>
-              <div style={{ fontSize: '0.55rem', color: '#3d5a3d', letterSpacing: '0.2em', marginBottom: '0.5rem' }}>PREVIEW</div>
+              <div style={{ fontSize: '0.55rem', color: '#3d5a3d', letterSpacing: '0.2em', marginBottom: '0.5rem' }}>PREVIEW — LIVE DATA FROM DATABASE</div>
 
-              {/* Live preview */}
-              <div style={{ marginBottom: '1rem' }} dangerouslySetInnerHTML={{ __html: embedHTML }} />
+              {/* Live iframe preview */}
+              <div style={{ marginBottom: '1rem', border: '1px solid rgba(0,255,65,0.1)', overflow: 'hidden' }}>
+                <iframe
+                  src={`/embed/${politician.id}`}
+                  width="100%"
+                  height="420"
+                  style={{ border: 'none', display: 'block' }}
+                />
+              </div>
+
+              {/* Embed type toggle */}
+              <div style={{ display: 'flex', gap: '0', marginBottom: '0.5rem' }}>
+                <button onClick={() => setEmbedType('iframe')} style={{
+                  flex: 1, padding: '0.4rem', fontSize: '0.6rem', fontWeight: 700, cursor: 'pointer',
+                  fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.1em',
+                  background: embedType === 'iframe' ? 'rgba(0,255,65,0.08)' : 'transparent',
+                  border: `1px solid ${embedType === 'iframe' ? '#00FF41' : 'rgba(0,255,65,0.1)'}`,
+                  color: embedType === 'iframe' ? '#00FF41' : '#3d5a3d',
+                  borderRight: 'none',
+                }}>IFRAME (LIVE)</button>
+                <button onClick={() => setEmbedType('html')} style={{
+                  flex: 1, padding: '0.4rem', fontSize: '0.6rem', fontWeight: 700, cursor: 'pointer',
+                  fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.1em',
+                  background: embedType === 'html' ? 'rgba(0,255,65,0.08)' : 'transparent',
+                  border: `1px solid ${embedType === 'html' ? '#00FF41' : 'rgba(0,255,65,0.1)'}`,
+                  color: embedType === 'html' ? '#00FF41' : '#3d5a3d',
+                }}>STATIC HTML</button>
+              </div>
 
               {/* Embed code */}
-              <div style={{ fontSize: '0.55rem', color: '#3d5a3d', letterSpacing: '0.2em', marginBottom: '0.4rem' }}>EMBED CODE</div>
               <textarea
                 ref={codeRef}
                 readOnly
-                value={embedHTML}
+                value={embedType === 'iframe' ? iframeCode : embedHTML}
                 style={{
-                  width: '100%', height: '100px', background: '#000',
-                  border: '1px solid rgba(0,255,65,0.1)', color: '#3d5a3d',
-                  fontFamily: "'JetBrains Mono', monospace", fontSize: '0.5rem',
+                  width: '100%', height: embedType === 'iframe' ? '50px' : '100px', background: '#000',
+                  border: '1px solid rgba(0,255,65,0.1)', color: '#00FF41',
+                  fontFamily: "'JetBrains Mono', monospace", fontSize: '0.55rem',
                   padding: '0.5rem', resize: 'vertical', outline: 'none',
                 }}
                 onClick={() => codeRef.current?.select()}
               />
+              <div style={{ fontSize: '0.5rem', color: '#3d5a3d', marginTop: '0.3rem' }}>
+                {embedType === 'iframe' ? '↑ Always shows latest data from database' : '↑ Static snapshot — won\'t update when DB changes'}
+              </div>
 
               {/* Actions */}
               <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.75rem' }}>
