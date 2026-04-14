@@ -44,9 +44,15 @@ function generateEmbedHTML(p: Politician): string {
   const donorsHtml = topDonors.length > 0
     ? topDonors.map((d, i) => `<div style="display:flex;justify-content:space-between;padding:3px 0;${i < topDonors.length - 1 ? 'border-bottom:1px solid rgba(0,255,65,0.06);' : ''}"><span style="font-size:10px;color:#6b8a6b;">${d.name}</span><span style="font-size:10px;font-weight:700;color:${d.type === 'Israel-PAC' ? '#FF0844' : '#00FF41'};">${fmtMoney(d.amount)}</span></div>`).join('')
     : '<div style="font-size:10px;color:#3d5a3d;">No donor data available</div>';
-  const lobbyWarning = lobby > 0
-    ? `<div style="margin-top:10px;padding:8px 10px;background:rgba(255,8,68,0.06);border:1px solid rgba(255,8,68,0.15);display:flex;justify-content:space-between;align-items:center;"><div style="font-size:9px;color:#FF0844;letter-spacing:1px;font-weight:700;">⚠ ISRAEL LOBBY FUNDING</div><div style="font-size:16px;font-weight:700;color:#FF0844;">${fmtMoney(lobby)}</div></div>`
-    : '';
+  const lobbyBox = lobby > 0
+    ? `<div style="margin-top:10px;padding:10px 12px;background:rgba(255,8,68,0.08);border:2px solid rgba(255,8,68,0.3);display:flex;justify-content:space-between;align-items:center;">
+        <div><div style="font-size:9px;color:#FF0844;letter-spacing:1px;font-weight:700;">⚠ FOREIGN INFLUENCE</div><div style="font-size:8px;color:#6b8a6b;margin-top:2px;">Israel Lobby / AIPAC</div></div>
+        <div style="font-size:22px;font-weight:700;color:#FF0844;text-shadow:0 0 10px rgba(255,8,68,0.3);">${fmtMoney(lobby)}</div>
+      </div>`
+    : `<div style="margin-top:10px;padding:10px 12px;background:rgba(0,255,65,0.04);border:2px solid rgba(0,255,65,0.15);display:flex;justify-content:space-between;align-items:center;">
+        <div><div style="font-size:9px;color:#00FF41;letter-spacing:1px;font-weight:700;">✓ FOREIGN INFLUENCE</div><div style="font-size:8px;color:#6b8a6b;margin-top:2px;">Israel Lobby / AIPAC</div></div>
+        <div style="font-size:22px;font-weight:700;color:#00FF41;text-shadow:0 0 10px rgba(0,255,65,0.3);">$0</div>
+      </div>`;
 
   return `<!-- SNITCHED.AI Dossier Card — Embed this anywhere -->
 <div style="font-family:'Courier New',monospace;background:#000;color:#c8d6c8;border:1px solid rgba(0,255,65,0.2);max-width:420px;padding:0;overflow:hidden;">
@@ -83,7 +89,7 @@ function generateEmbedHTML(p: Politician): string {
         <div style="font-size:10px;color:#6b8a6b;">${p.jurisdiction || p.district || '—'}</div>
       </div>
     </div>
-    ${lobbyWarning}
+    ${lobbyBox}
     <div style="margin-top:10px;">
       <div style="font-size:8px;color:#3d5a3d;letter-spacing:1px;margin-bottom:4px;">TOP DONORS</div>
       ${donorsHtml}
