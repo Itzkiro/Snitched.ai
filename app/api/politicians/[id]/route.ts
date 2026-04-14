@@ -11,7 +11,13 @@ async function getJsonPoliticians() {
 }
 
 function cachedResponse(data: unknown, status = 200) {
-  return NextResponse.json(data, { status });
+  return NextResponse.json(data, {
+    status,
+    headers: {
+      'Cache-Control': 'no-store, no-cache, must-revalidate',
+      'CDN-Cache-Control': 'no-store',
+    },
+  });
 }
 
 /**
