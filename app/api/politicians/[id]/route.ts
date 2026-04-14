@@ -91,6 +91,8 @@ export async function GET(
       israelLobbyBreakdown: row.israel_lobby_breakdown as Politician['israelLobbyBreakdown'],
       contributionBreakdown: row.contribution_breakdown as Politician['contributionBreakdown'],
       isActive: row.is_active as boolean,
+      isCandidate: row.is_candidate as boolean,
+      runningFor: row.running_for as string | undefined,
       yearsInOffice: Number(row.years_in_office) || 0,
       tags: [],
       bio: row.bio as string | undefined,
