@@ -46,8 +46,10 @@ function generateEmbedHTML(p: Politician): string {
   const partyBg = p.party === 'Republican' ? '#dc2626' : p.party === 'Democrat' ? '#2563eb' : '#6b7280';
   const partyTag = p.party === 'Republican' ? 'R' : p.party === 'Democrat' ? 'D' : 'I';
   const url = `https://snitched.ai/politician/${p.id}`;
-  const status = p.isActive ? 'IN OFFICE' : 'FORMER';
-  const statusColor = p.isActive ? '#00FF41' : '#FF6B35';
+  const isCandidateOnly = p.isCandidate && !p.isActive;
+  const status = isCandidateOnly ? 'CANDIDATE' : p.isActive ? 'IN OFFICE' : 'FORMER';
+  const statusColor = isCandidateOnly ? '#FFB627' : p.isActive ? '#00FF41' : '#FF6B35';
+  const displayOffice = (p.runningFor && isCandidateOnly) ? `Running for: ${p.runningFor}` : p.office;
   const years = p.yearsInOffice ? `${p.yearsInOffice} yrs` : '';
   const topDonors = (p.top5Donors || p.top3Donors || []).slice(0, 3);
 
@@ -79,7 +81,7 @@ function generateEmbedHTML(p: Politician): string {
     <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:16px;">
       <div style="flex:1;padding-right:16px;">
         <div style="font-size:20px;font-weight:700;color:#fff;margin-bottom:4px;letter-spacing:0.5px;">${p.name}</div>
-        <div style="font-size:12px;color:#6b8a6b;margin-bottom:6px;">${p.office}</div>
+        <div style="font-size:12px;color:#6b8a6b;margin-bottom:6px;">${displayOffice}</div>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
           <span style="font-size:10px;padding:3px 10px;background:${partyBg};color:#fff;font-weight:700;letter-spacing:0.5px;">${partyTag} — ${p.party}</span>
           ${years ? `<span style="font-size:10px;color:#3d5a3d;border:1px solid rgba(0,255,65,0.08);padding:2px 8px;">${years}</span>` : ''}
