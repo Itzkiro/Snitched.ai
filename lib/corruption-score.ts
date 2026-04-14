@@ -221,7 +221,22 @@ function scorePacContributionRatio(p: Politician): CorruptionFactor {
     individuals: derived.individuals,
   } : null);
 
-  if (!effectiveBreakdown || totalRaised === 0) {
+  // If we have an explicit breakdown (even all zeros) OR totalRaised > 0, treat as real data
+  const hasExplicitBreakdown = p.contributionBreakdown !== undefined && p.contributionBreakdown !== null;
+
+  if (!effectiveBreakdown) {
+    if (hasExplicitBreakdown) {
+      // Explicit empty/zero breakdown — treat as real data (no funds raised, zero PAC)
+      return {
+        key: 'pacContributionRatio',
+        label: 'PAC/Lobby Funding Ratio',
+        rawScore: 0,
+        weight: WEIGHTS.pacContributionRatio,
+        weightedScore: 0,
+        dataAvailable: true,
+        explanation: 'No campaign funds raised — no PAC contributions to analyze.',
+      };
+    }
     return {
       key: 'pacContributionRatio',
       label: 'PAC/Lobby Funding Ratio',
@@ -230,6 +245,18 @@ function scorePacContributionRatio(p: Politician): CorruptionFactor {
       weightedScore: PLACEHOLDER_SCORE * WEIGHTS.pacContributionRatio,
       dataAvailable: false,
       explanation: 'No campaign finance data available yet.',
+    };
+  }
+
+  if (totalRaised === 0) {
+    return {
+      key: 'pacContributionRatio',
+      label: 'PAC/Lobby Funding Ratio',
+      rawScore: 0,
+      weight: WEIGHTS.pacContributionRatio,
+      weightedScore: 0,
+      dataAvailable: true,
+      explanation: 'No campaign funds raised — no PAC contributions to analyze.',
     };
   }
 
@@ -272,9 +299,9 @@ function scorePacContributionRatio(p: Politician): CorruptionFactor {
 // ---------------------------------------------------------------------------
 
 function scoreLobbyingConnections(p: Politician): CorruptionFactor {
-  const records = p.lobbyingRecords ?? [];
-
-  if (records.length === 0) {
+  // null/undefined = no data yet (placeholder)
+  // [] (empty array) = data fetched, zero findings (real data, score 0)
+  if (p.lobbyingRecords === undefined || p.lobbyingRecords === null) {
     return {
       key: 'lobbyingConnections',
       label: 'Lobbying Connections',
@@ -283,6 +310,20 @@ function scoreLobbyingConnections(p: Politician): CorruptionFactor {
       weightedScore: PLACEHOLDER_SCORE * WEIGHTS.lobbyingConnections,
       dataAvailable: false,
       explanation: 'Lobbying disclosure data not yet linked to this politician.',
+    };
+  }
+
+  const records = p.lobbyingRecords;
+
+  if (records.length === 0) {
+    return {
+      key: 'lobbyingConnections',
+      label: 'Lobbying Connections',
+      rawScore: 0,
+      weight: WEIGHTS.lobbyingConnections,
+      weightedScore: 0,
+      dataAvailable: true,
+      explanation: 'No lobbying disclosure filings found for this politician.',
     };
   }
 
@@ -312,10 +353,11 @@ function scoreLobbyingConnections(p: Politician): CorruptionFactor {
 // ---------------------------------------------------------------------------
 
 function scoreVotingAlignment(p: Politician): CorruptionFactor {
-  const votes = p.votes ?? [];
-  const hasVoteData = votes.length > 0;
+  // null/undefined = no data yet (placeholder)
+  // [] = data fetched, zero roll-call votes found (real data, score 0)
+  const votesSource = ((p as unknown as { votingRecords?: unknown }).votingRecords ?? p.votes) as unknown;
 
-  if (!hasVoteData) {
+  if (votesSource === undefined || votesSource === null) {
     return {
       key: 'votingAlignment',
       label: 'Voting Alignment with Donors',
@@ -327,6 +369,20 @@ function scoreVotingAlignment(p: Politician): CorruptionFactor {
     };
   }
 
+  const votes = (Array.isArray(votesSource) ? votesSource : []) as NonNullable<Politician['votes']>;
+
+  if (votes.length === 0) {
+    return {
+      key: 'votingAlignment',
+      label: 'Voting Alignment with Donors',
+      rawScore: 0,
+      weight: WEIGHTS.votingAlignment,
+      weightedScore: 0,
+      dataAvailable: true,
+      explanation: 'No roll-call voting records found for this politician (not a voting officeholder).',
+    };
+  }
+
   const israelFundingRatio = (p.totalFundsRaised ?? 0) > 0
     ? (p.israelLobbyTotal ?? 0) / (p.totalFundsRaised ?? 1)
     : 0;
@@ -334,23 +390,34 @@ function scoreVotingAlignment(p: Politician): CorruptionFactor {
   const israelKeywords = ['israel', 'iron dome', 'jerusalem', 'palestinian', 'hamas', 'hezbollah', 'antisemit'];
   const defenseKeywords = ['defense', 'military', 'arms', 'weapon', 'nato', 'aid'];
 
-  const israelVotes = votes.filter(v =>
-    israelKeywords.some(kw => v.billTitle.toLowerCase().includes(kw) || v.billSummary.toLowerCase().includes(kw))
+  // Normalize vote records — support both camelCase (Vote type) and snake_case (DB shape)
+  const getTitle = (v: any): string => (v.billTitle || v.bill_title || '').toLowerCase();
+  const getSummary = (v: any): string => (v.billSummary || v.bill_summary || '').toLowerCase();
+  const getVote = (v: any): string => v.voteValue || v.vote_position || '';
+
+  const israelVotes = votes.filter((v: any) =>
+    israelKeywords.some(kw => getTitle(v).includes(kw) || getSummary(v).includes(kw))
   );
-  const defenseVotes = votes.filter(v =>
-    defenseKeywords.some(kw => v.billTitle.toLowerCase().includes(kw) || v.billSummary.toLowerCase().includes(kw))
+  const defenseVotes = votes.filter((v: any) =>
+    defenseKeywords.some(kw => getTitle(v).includes(kw) || getSummary(v).includes(kw))
   );
 
   let rawScore = 0;
 
   if (israelFundingRatio > 0.05 && israelVotes.length > 0) {
-    const yesVotes = israelVotes.filter(v => v.voteValue === 'Yes').length;
+    const yesVotes = israelVotes.filter((v: any) => {
+      const vote = getVote(v);
+      return vote === 'Yes' || vote === 'Yea';
+    }).length;
     const alignmentRate = yesVotes / israelVotes.length;
     rawScore = Math.round(alignmentRate * 60 + israelFundingRatio * 200);
     rawScore = Math.min(100, rawScore);
   } else if (israelFundingRatio > 0.01 && defenseVotes.length > 0) {
     // Some Israel funding + defense votes — moderate signal
-    const yesDefense = defenseVotes.filter(v => v.voteValue === 'Yes').length;
+    const yesDefense = defenseVotes.filter((v: any) => {
+      const vote = getVote(v);
+      return vote === 'Yes' || vote === 'Yea';
+    }).length;
     const defenseAlignment = defenseVotes.length > 0 ? yesDefense / defenseVotes.length : 0;
     rawScore = Math.round(defenseAlignment * 40 + israelFundingRatio * 100);
     rawScore = Math.min(70, rawScore);
@@ -385,7 +452,9 @@ function scoreCampaignFinanceRedFlags(p: Politician): CorruptionFactor {
   const contributions = p.contributions ?? [];
   const donors = p.top5Donors ?? [];
 
-  if (totalRaised === 0 && !breakdown && donors.length === 0) {
+  const hasExplicitBreakdown = breakdown !== undefined && breakdown !== null;
+
+  if (totalRaised === 0 && !hasExplicitBreakdown && donors.length === 0) {
     return {
       key: 'campaignFinanceRedFlags',
       label: 'Campaign Finance Red Flags',
@@ -487,7 +556,7 @@ function scoreCampaignFinanceRedFlags(p: Politician): CorruptionFactor {
     rawScore,
     weight: WEIGHTS.campaignFinanceRedFlags,
     weightedScore: Math.round(rawScore * WEIGHTS.campaignFinanceRedFlags * 10) / 10,
-    dataAvailable: totalRaised > 0 || contributions.length > 0 || donors.length > 0,
+    dataAvailable: hasExplicitBreakdown || totalRaised > 0 || contributions.length > 0 || donors.length > 0,
     explanation: flags.length > 0
       ? `${flags.length} red flag(s): ${flags.join('; ')}.`
       : 'No red flags detected in available finance data.',
