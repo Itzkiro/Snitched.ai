@@ -23,7 +23,7 @@ export interface EmbedDossierProps {
   lobby: number;
   topDonors: Donor[];
   redFlags: RedFlag[];
-  donationStatus: { label: string; color: string; icon?: string } | null;
+  donationStatus: { label: string; color: string; icon?: string; amount?: number; subtext?: string } | null;
 }
 
 function fmtMoney(n: number): string {
@@ -186,16 +186,22 @@ export default function EmbedDossier(props: EmbedDossierProps) {
           </div>
         </div>
 
-        {/* Foreign Influence */}
+        {/* Donation status / Foreign Influence */}
         <div style={{
           padding: '14px 16px', background: lobbyBg, border: `2px solid ${lobbyBorder}`,
           marginBottom: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         }}>
           <div>
             <div style={{ fontSize: '10px', color: lobbyColor, letterSpacing: '2px', fontWeight: 700 }}>{lobbyIcon} {lobbyLabel}</div>
-            <div style={{ fontSize: '9px', color: '#4a5a4a', marginTop: '3px' }}>Israel Lobby / AIPAC / Foreign PACs</div>
+            {(donationStatus?.subtext ?? 'Israel Lobby / AIPAC / Foreign PACs') && (
+              <div style={{ fontSize: '9px', color: '#4a5a4a', marginTop: '3px' }}>
+                {donationStatus?.subtext ?? 'Israel Lobby / AIPAC / Foreign PACs'}
+              </div>
+            )}
           </div>
-          <div style={{ fontSize: '28px', fontWeight: 700, color: lobbyColor, textShadow: `0 0 15px ${lobbyColor}40`, letterSpacing: '1px' }}>{fmtMoney(lobby)}</div>
+          <div style={{ fontSize: '28px', fontWeight: 700, color: lobbyColor, textShadow: `0 0 15px ${lobbyColor}40`, letterSpacing: '1px' }}>
+            {fmtMoney(donationStatus?.amount ?? lobby)}
+          </div>
         </div>
 
         {/* Stats row */}

@@ -128,8 +128,10 @@ export interface Politician {
     votesmart_id?: string;
     red_flags?: Array<{ label: string; severity: 'high' | 'med' }>;
     // Per-candidate override for the dossier "Foreign Influence" badge.
-    // When set, replaces the auto-derived label/color/icon.
-    donation_status?: { label: string; color: string; icon?: string };
+    // When set, replaces the auto-derived label/color/icon. `amount` overrides
+    // the displayed dollar figure (e.g. self-funding total). `subtext` overrides
+    // the small descriptor line under the label (set to '' to hide).
+    donation_status?: { label: string; color: string; icon?: string; amount?: number; subtext?: string };
   };
   // Data source metadata
   dataStatus?: 'live' | 'mock';
