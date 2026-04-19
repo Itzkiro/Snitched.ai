@@ -1,0 +1,63 @@
+{
+  "scraped_at": "2026-04-19T20:48:43.132Z",
+  "source": "OH SOS CFDISCLOSURE via Playwright",
+  "candidate": "AMY ACTON",
+  "committee": "OHIOANS FOR AMY ACTON",
+  "filter": "amount >= $200",
+  "itemized_count": 3733,
+  "itemized_total": 2644397.250000001,
+  "pac_count": 50,
+  "pac_total": 269640.43,
+  "individual_count": 3683,
+  "individual_total": 2374756.8199999994,
+  "israel_lobby_hits": 0,
+  "israel_lobby_dollars": 0,
+  "oh_pct": 0.879,
+  "missing_employer_ratio": 0.0005430355688297583,
+  "household_bundling_count": 23,
+  "household_bundling_ratio": 0.0061612643986070185,
+  "donation_cv": 3.5571637730163657,
+  "platform_opacity": 0.00024382115811079434,
+  "top_10_org_donors": [
+    {
+      "name": "OHIO DEMOCRATIC PARTY STATE CANDIDATE FUND",
+      "amount": 125000
+    },
+    {
+      "name": "OCSEA/AFSCME LOCAL 11 PAC",
+      "amount": 30000
+    },
+    {
+      "name": "AFSCME - COUNCIL 8 PAC",
+      "amount": 16615.67
+    },
+    {
+      "name": "OAPSE MAKING A DIFFERENCE PCE",
+      "amount": 16615
+    },
+    {
+      "name": "ROUNDING THIRD PAC",
+      "amount": 16615
+    },
+    {
+      "name": "OHIO STATE UAW COMMUNITY ACTION PAC",
+      "amount": 10000
+    },
+    {
+      "name": "OHIO FEDERATION OF TEACHERS PCE",
+      "amount": 8000
+    },
+    {
+      "name": "PUBLIC EMPLOYEE REPRESENTATIVES UNION PAC",
+      "amount": 5000
+    },
+    {
+      "name": "314 ACTION VICTORY FUND",
+      "amount": 5000
+    },
+    {
+      "name": "UNITED STEEL WORKERS DISTRICT 1",
+      "amount": 5000
+    }
+  ]
+}
