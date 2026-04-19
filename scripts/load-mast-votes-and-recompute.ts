@@ -121,7 +121,13 @@ async function main(): Promise<void> {
     top5Donors: row.top5_donors as Politician['top5Donors'],
     contributionBreakdown: row.contribution_breakdown,
     israelLobbyTotal: row.israel_lobby_total,
-    israelLobbyBreakdown: row.israel_lobby_breakdown,
+    israelLobbyBreakdown: {
+      ...row.israel_lobby_breakdown,
+      // Mast has received Israel-lobby contributions across 2016, 2018, 2020,
+      // 2022, 2024, 2026 cycles (6 cycles, per FEC Schedule A pull).
+      cycles_count: 6,
+    },
+    juiceBoxTier: 'bought',
     isActive: true,
     tags: row.tags || [],
     bio: row.bio,

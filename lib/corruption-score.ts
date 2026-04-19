@@ -818,7 +818,35 @@ export function computeCorruptionScore(politician: Politician): CorruptionScoreR
     f.weightedScore = Math.round(f.rawScore * f.weight * 10) / 10;
   }
 
-  const totalScore = factors.reduce((sum, f) => sum + f.weightedScore, 0);
+  let totalScore = factors.reduce((sum, f) => sum + f.weightedScore, 0);
+
+  // v6.3: Sustained-capture multiplier. Politicians with Israel-lobby money
+  // across 3+ consecutive cycles get a score multiplier — sustained relation-
+  // ships are structurally different from one-cycle contributions.
+  //   3 cycles = 1.15x
+  //   4 cycles = 1.20x
+  //   5+ cycles = 1.25x
+  const israelCycles = (politician.israelLobbyBreakdown as { cycles_count?: number } | undefined)?.cycles_count ?? 0;
+  let multiplier = 1.0;
+  if (israelCycles >= 5) multiplier = 1.25;
+  else if (israelCycles === 4) multiplier = 1.20;
+  else if (israelCycles === 3) multiplier = 1.15;
+  if (multiplier > 1.0) {
+    totalScore *= multiplier;
+  }
+
+  // v6.3: juice_box_tier hard floors. Captured politicians can't score below
+  // these thresholds — the tier is a curator-verified signal that structur-
+  // ally overrides ratio-based arithmetic.
+  //   compromised -> floor 45
+  //   bought      -> floor 70
+  //   owned       -> floor 85
+  const tier = politician.juiceBoxTier;
+  const tierFloor = tier === 'owned' ? 85 : tier === 'bought' ? 70 : tier === 'compromised' ? 45 : 0;
+  if (tierFloor > 0 && totalScore < tierFloor) {
+    totalScore = tierFloor;
+  }
+
   const score = Math.round(Math.min(100, Math.max(0, totalScore)));
 
   return {
