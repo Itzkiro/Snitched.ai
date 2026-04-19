@@ -35,21 +35,43 @@ const FEC_API_KEY = process.env.FEC_API_KEY || '';
 const EXA_API_KEY = process.env.EXA_API_KEY || '';
 const COURTLISTENER_TOKEN = process.env.COURTLISTENER_TOKEN || '';
 
-// Israel-lobby PAC committee IDs (federal)
+// Israel-lobby PAC committee IDs (federal). Verified via FEC committee
+// search; TrackAIPAC's abbreviations (AMP, COPAC, NACPAC, PIA, SUNPAC,
+// USI, ZOA) cross-referenced against FEC results.
 const ISRAEL_LOBBY_COMMITTEE_IDS = new Set([
-  'C00104299', // AIPAC PAC
-  'C00797472', // AIPAC PAC (newer id)
-  'C00791699', // United Democracy Project
-  'C00764126', // DMFI PAC
-  'C00068692', // NORPAC
-  'C00441949', // J Street PAC
-  'C00556100', // Republican Jewish Coalition PAC
-  'C00368522', // Pro-Israel America PAC
-  'C00748475', // Jewish Democratic Council PAC
-  'C00488411', // JACPAC
+  // AIPAC
+  'C00104299', 'C00797472', 'C00797670',
+  // Pro-Israel America / PIA
+  'C00368522', 'C00699470', 'C00740936', 'C00687657', 'C90019431',
+  // Republican Jewish Coalition / RJC
+  'C00556100', 'C00345132', 'C30001374', 'C90012063',
+  // DMFI
+  'C00764126', 'C90022864',
+  // J Street
+  'C00441949',
+  // NORPAC
+  'C00068692',
+  // U.S. Israel PAC (USI)
+  'C00127811',
+  // JACPAC (Joint Action Committee for Political Affairs)
+  'C00139659', 'C00488411',
+  // FIPAC (Friends of Israel PAC)
+  'C00141747', 'C00458935', 'C00265470',
+  // Jewish Democratic Council / National Jewish Democratic Council
+  'C00748475', 'C00306670', 'C00268334', 'C90014747',
+  // Jewish Republican PAC
+  'C00202481',
+  // United Democracy Project
+  'C00791699',
+  // American Israel Alliance
+  'C00277228',
+  // Allies for Israel PAC
+  'C00503250',
+  // AMP (Americans for Peaceful Middle East)
+  'C00524652',
 ]);
 
-const ISRAEL_LOBBY_NAME_RE = /AIPAC|AMERICAN ISRAEL|NORPAC|DEMOCRATIC MAJORITY FOR ISRAEL|DMFI|UNITED DEMOCRACY PROJECT|PRO-ISRAEL AMERICA|REPUBLICAN JEWISH COALITION|ZIONIST ORGANIZATION|CHRISTIANS UNITED FOR ISRAEL|JACPAC|JEWISH DEMOCRATIC COUNCIL|FRIENDS OF ISRAEL/i;
+const ISRAEL_LOBBY_NAME_RE = /AIPAC|AMERICAN ISRAEL|NORPAC|DEMOCRATIC MAJORITY FOR ISRAEL|DMFI|UNITED DEMOCRACY PROJECT|PRO-ISRAEL AMERICA|PRO\-ISRAEL AMERICA|REPUBLICAN JEWISH COALITION|ZIONIST ORGANIZATION|CHRISTIANS UNITED FOR ISRAEL|JACPAC|JEWISH DEMOCRATIC COUNCIL|JEWISH REPUBLICAN|FRIENDS OF ISRAEL|FIPAC|ALLIES FOR ISRAEL|ISRAEL ALLIANCE|AMP.*MIDDLE EAST|AMERICANS FOR.*MIDDLE EAST|U\.?S\.? ISRAEL|USI PAC|NATIONAL JEWISH DEMOCRATIC|J STREET|J\-STREET/i;
 
 // Verified Mast social handles (public/press)
 const SOCIAL_MEDIA = {

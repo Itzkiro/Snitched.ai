@@ -41,13 +41,16 @@ import type {
 const PLACEHOLDER_SCORE = 0;
 
 /** Weight configuration — must sum to 1.0
- * v5: donorForensicsScore added as content-neutral anomaly-detection factor.
- * Other weights rebalanced proportionally to make room for it. */
+ * v6: campaignFinanceRedFlags weight raised to 0.30 so Israel-lobby
+ * capture signals (min 30pt floor, max 50pt penalty on that factor)
+ * have proportional impact on the final score. Other weights compressed.
+ * Previous v5 weights kept in comment for audit:
+ *   pac 0.32, lobby 0.18, voting 0.22, redflags 0.18, forensics 0.10 */
 const BASE_WEIGHTS = {
-  pacContributionRatio: 0.32,
-  lobbyingConnections: 0.18,
-  votingAlignment: 0.22,
-  campaignFinanceRedFlags: 0.18,
+  pacContributionRatio: 0.25,
+  lobbyingConnections: 0.15,
+  votingAlignment: 0.20,
+  campaignFinanceRedFlags: 0.30,
   donorForensicsScore: 0.10,
 } as const;
 
