@@ -61,9 +61,14 @@ export default function PoliticianPage() {
         }
         if (!res.ok) throw new Error(`API error: ${res.status}`);
         const found: Politician = await res.json();
-        // Compute corruption score with full factor breakdown on the client
+        // Compute corruption score with full factor breakdown on the client.
+        // EXCEPTION: when red_flags are present, this politician has a
+        // manually-curated extended-rubric score in the DB — preserve it.
+        const hasManualScore = (found.source_ids?.red_flags?.length ?? 0) > 0;
         const scoreResult = computeCorruptionScore(found);
-        found.corruptionScore = scoreResult.score;
+        if (!hasManualScore) {
+          found.corruptionScore = scoreResult.score;
+        }
         found.corruptionScoreDetails = scoreResult;
         setPolitician(found);
       } catch (error) {
