@@ -49,8 +49,8 @@ const ISRAEL_LOBBY_COMMITTEE_IDS = new Set([
   'C00764126', 'C90022864',
   // J Street
   'C00441949',
-  // NORPAC
-  'C00068692',
+  // NORPAC (C00068692 legacy, C00247403 current per FEC Mast pull)
+  'C00068692', 'C00247403',
   // U.S. Israel PAC (USI)
   'C00127811',
   // JACPAC (Joint Action Committee for Political Affairs)

@@ -1,0 +1,107 @@
+{
+  "queried_at": "2026-04-19T23:35:21.676Z",
+  "cycles": [
+    2016,
+    2018,
+    2020,
+    2022,
+    2024,
+    2026
+  ],
+  "results": [
+    {
+      "contributor_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE PAC",
+      "contributor_id": "C00797670",
+      "total": 606667.67,
+      "count": 78,
+      "per_cycle": {
+        "2022": 7250,
+        "2024": 210472,
+        "2026": 388945.67
+      },
+      "first_date": "2022-08-09",
+      "last_date": "2026-03-25"
+    },
+    {
+      "contributor_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+      "contributor_id": "C00797670",
+      "total": 95219,
+      "count": 12,
+      "per_cycle": {
+        "2022": 95219
+      },
+      "first_date": "2022-03-03",
+      "last_date": "2022-06-20"
+    },
+    {
+      "contributor_name": "NORPAC",
+      "contributor_id": "C00247403",
+      "total": 53480,
+      "count": 5,
+      "per_cycle": {
+        "2018": 13000,
+        "2026": 40480
+      },
+      "first_date": "2018-06-15",
+      "last_date": "2025-10-17"
+    },
+    {
+      "contributor_name": "PRO-ISRAEL AMERICA PAC CONDUIT",
+      "contributor_id": "C00699470",
+      "total": 11515,
+      "count": 2,
+      "per_cycle": {
+        "2020": 11515
+      },
+      "first_date": "2020-06-30",
+      "last_date": "2020-08-10"
+    },
+    {
+      "contributor_name": "U.S. ISRAEL PAC  (USI PAC)",
+      "contributor_id": "C00127811",
+      "total": 11500,
+      "count": 3,
+      "per_cycle": {
+        "2022": 5000,
+        "2024": 1500,
+        "2026": 5000
+      },
+      "first_date": "2021-05-10",
+      "last_date": "2025-11-06"
+    },
+    {
+      "contributor_name": "REPUBLICAN JEWISH COALITION PAC CONDUIT",
+      "contributor_id": "C00345132",
+      "total": 1250,
+      "count": 2,
+      "per_cycle": {
+        "2024": 1250
+      },
+      "first_date": "2024-09-15",
+      "last_date": "2024-09-22"
+    },
+    {
+      "contributor_name": "PRO-ISRAEL AMERICA PAC",
+      "contributor_id": "C00699470",
+      "total": 1000,
+      "count": 1,
+      "per_cycle": {
+        "2020": 1000
+      },
+      "first_date": "2019-05-23",
+      "last_date": "2019-05-23"
+    },
+    {
+      "contributor_name": "REPUBLICAN JEWISH COALITION-POLITICAL ACTION COMMITTEE (RJC-PAC)",
+      "contributor_id": "C00345132",
+      "total": 250,
+      "count": 1,
+      "per_cycle": {
+        "2026": 250
+      },
+      "first_date": "2026-01-15",
+      "last_date": "2026-01-15"
+    }
+  ],
+  "grand_total": 780881.67
+}
