@@ -264,13 +264,28 @@ function scorePacContributionRatio(p: Politician): CorruptionFactor {
     };
   }
 
-  const pacTotal = effectiveBreakdown.aipac + effectiveBreakdown.otherPACs + effectiveBreakdown.corporate;
-  const individualTotal = effectiveBreakdown.individuals;
+  // v6.1: reclassify known Israel-lobby bundlers (individuals who are AIPAC
+  // members giving in personal capacity) as PAC-side money, since they're
+  // coordinated through the lobby, not grassroots. Also caps bundlers at
+  // the reported individual total so we never over-move money.
+  const lobbyBundlers = Math.min(
+    p.israelLobbyBreakdown?.bundlers ?? 0,
+    effectiveBreakdown.individuals,
+  );
+  const pacTotalBase = effectiveBreakdown.aipac + effectiveBreakdown.otherPACs + effectiveBreakdown.corporate;
+  const pacTotal = pacTotalBase + lobbyBundlers;
+  const individualTotal = Math.max(0, effectiveBreakdown.individuals - lobbyBundlers);
 
   let pacRatio = pacTotal / totalRaised;
   pacRatio = Math.min(1, Math.max(0, pacRatio));
 
-  const israelLobbyAmount = (p.israelLobbyTotal ?? 0) + (p.aipacFunding ?? 0);
+  // v6.1: israelLobbyTotal already INCLUDES aipacFunding (AIPAC is a subset
+  // of the Israel-lobby universe). Taking the max instead of summing fixes a
+  // double-count bug that inflated Israel amount by ~30% for every politician.
+  const israelLobbyAmount = Math.max(
+    p.israelLobbyTotal ?? 0,
+    p.aipacFunding ?? 0,
+  );
   const israelLobbyRatio = israelLobbyAmount / totalRaised;
   // ANY Israel lobby money = hard penalty (min 30 points)
   const israelPenalty = israelLobbyAmount > 0
@@ -391,8 +406,16 @@ function scoreVotingAlignment(p: Politician): CorruptionFactor {
     ? (p.israelLobbyTotal ?? 0) / (p.totalFundsRaised ?? 1)
     : 0;
 
-  const israelKeywords = ['israel', 'iron dome', 'jerusalem', 'palestinian', 'hamas', 'hezbollah', 'antisemit'];
-  const defenseKeywords = ['defense', 'military', 'arms', 'weapon', 'nato', 'aid'];
+  // v6.1: expanded to cover Iran sanctions / war-powers / BDS / Yemen / Gaza
+  // which are all AIPAC-priority votes that the narrow original list missed.
+  const israelKeywords = [
+    'israel', 'israeli', 'iron dome', 'jerusalem', 'palestinian', 'palestine',
+    'hamas', 'hezbollah', 'antisemit', 'anti-semit', 'zionis', 'zionism',
+    'iran', 'tehran', 'yemen', 'houthi', 'gaza', 'bds', 'boycott',
+    'west bank', 'golan', 'netanyahu', 'idf',
+    'from the river to the sea',
+  ];
+  const defenseKeywords = ['defense', 'military', 'arms', 'weapon', 'nato', 'aid', 'war powers'];
 
   // Normalize vote records — support both camelCase (Vote type) and snake_case (DB shape)
   const getTitle = (v: any): string => (v.billTitle || v.bill_title || '').toLowerCase();
@@ -408,13 +431,34 @@ function scoreVotingAlignment(p: Politician): CorruptionFactor {
 
   let rawScore = 0;
 
-  if (israelFundingRatio > 0.05 && israelVotes.length > 0) {
-    const yesVotes = israelVotes.filter((v: any) => {
+  // v6.1: trigger Israel-aware branch on either ratio OR absolute dollars,
+  // not ratio alone — lifetime aggregates dilute the ratio for long-serving
+  // members even when absolute capture is huge.
+  const israelAbsolute = Math.max(p.israelLobbyTotal ?? 0, p.aipacFunding ?? 0);
+  const hasIsraelCapture = israelFundingRatio > 0.02 || israelAbsolute >= 500_000;
+
+  if (hasIsraelCapture && israelVotes.length > 0) {
+    // Fall back to an explicit `israel_aligned` flag when the vote record
+    // carries one (set by ingest scripts that classify anti-Israel measures
+    // correctly — e.g., "Nay on War Powers resolution" or "Nay on Greene
+    // amendment to strip Israel funding" both count as aligned even though
+    // they're Nay votes).
+    const alignedCount = israelVotes.filter((v: any) => {
+      if (typeof v.israel_aligned === 'boolean') return v.israel_aligned;
       const vote = getVote(v);
       return vote === 'Yes' || vote === 'Yea';
     }).length;
-    const alignmentRate = yesVotes / israelVotes.length;
-    rawScore = Math.round(alignmentRate * 60 + israelFundingRatio * 200);
+    const alignmentRate = alignedCount / israelVotes.length;
+    // Use ratio-weighted component OR absolute-capture component, whichever is higher
+    const ratioComponent = israelFundingRatio * 200;
+    const absoluteComponent = israelAbsolute >= 100_000
+      ? Math.min(40, Math.log10(israelAbsolute / 100_000) * 25)
+      : 0;
+    rawScore = Math.round(alignmentRate * 60 + Math.max(ratioComponent, absoluteComponent));
+    // Sustained high-alignment + high-capture = ceiling bonus
+    if (alignmentRate >= 0.70 && (israelFundingRatio >= 0.04 || israelAbsolute >= 1_000_000)) {
+      rawScore = Math.max(rawScore, 85);
+    }
     rawScore = Math.min(100, rawScore);
   } else if (israelFundingRatio > 0.01 && defenseVotes.length > 0) {
     // Some Israel funding + defense votes — moderate signal
@@ -523,12 +567,29 @@ function scoreCampaignFinanceRedFlags(p: Politician): CorruptionFactor {
   }
 
   // Red flag 4: IMMEDIATE FLAG — ANY Israel lobby / AIPAC money
-  const israelTotal = (p.israelLobbyTotal ?? 0) + (p.aipacFunding ?? 0);
+  // v6.1: israelLobbyTotal already INCLUDES aipacFunding — take the max,
+  // don't sum, to avoid 30% double-count on every AIPAC-backed politician.
+  const israelTotal = Math.max(p.israelLobbyTotal ?? 0, p.aipacFunding ?? 0);
   if (israelTotal > 0) {
-    // Any foreign lobby money is an immediate severe red flag
+    // Baseline hard penalty
     redFlagPoints += 50;
     const israelStr = israelTotal >= 1_000_000 ? `$${(israelTotal / 1_000_000).toFixed(1)}M` : israelTotal >= 1_000 ? `$${(israelTotal / 1_000).toFixed(0)}K` : `$${israelTotal}`;
     flags.push(`🚨 FOREIGN LOBBY: ${israelStr} from Israel lobby/AIPAC — immediate red flag`);
+
+    // v6.1: absolute-dollar Israel capture bonus on top of the ratio-based
+    // cap. Log scale so every order of magnitude of sustained AIPAC dollars
+    // adds measurable weight. Calibration:
+    //   $100K  -> 0 pts
+    //   $500K  -> 10 pts
+    //   $1M    -> 15 pts
+    //   $2.24M -> 20 pts (Mast lifetime)
+    //   $5M    -> 25 pts (cap)
+    if (israelTotal >= 100_000) {
+      const absoluteBonus = Math.min(25, Math.log10(israelTotal / 100_000) * 15);
+      redFlagPoints += Math.round(absoluteBonus);
+      flags.push(`Absolute-\$ capture bonus: +${Math.round(absoluteBonus)} pts (sustained high-dollar lobby relationship)`);
+    }
+
     if (totalRaised > 0) {
       const pct = ((israelTotal / totalRaised) * 100).toFixed(1);
       flags.push(`Israel lobby = ${pct}% of total funds`);
