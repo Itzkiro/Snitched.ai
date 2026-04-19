@@ -149,11 +149,26 @@ async function main(): Promise<void> {
   }
   console.log('');
 
+  // v6.2: auto-assign juice_box_tier based on Israel-lobby capture magnitude.
+  //   >= $5M     -> owned
+  //   >= $2M     -> bought
+  //   >= $500K   -> compromised
+  //   otherwise  -> none
+  const israelTotal = Math.max(row.israel_lobby_total || 0, row.aipac_funding || 0);
+  const juiceBoxTier: 'none' | 'compromised' | 'bought' | 'owned' =
+    israelTotal >= 5_000_000 ? 'owned'
+    : israelTotal >= 2_000_000 ? 'bought'
+    : israelTotal >= 500_000 ? 'compromised'
+    : 'none';
+  console.log(`Juice box tier: ${row.juice_box_tier} → ${juiceBoxTier} (based on $${israelTotal.toLocaleString()} Israel capture)`);
+  console.log('');
+
   if (dryRun) { console.log('[DRY RUN] Re-run with --write.'); return; }
 
   const { error } = await supabase.from('politicians').update({
     voting_records: annotated,
     corruption_score: score.score,
+    juice_box_tier: juiceBoxTier,
     updated_at: new Date().toISOString(),
   }).eq('bioguide_id', BIOGUIDE_ID);
   if (error) { console.error(`DB update failed: ${error.message}`); process.exit(1); }

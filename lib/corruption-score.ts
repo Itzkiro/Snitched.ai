@@ -580,14 +580,45 @@ function scoreCampaignFinanceRedFlags(p: Politician): CorruptionFactor {
     // cap. Log scale so every order of magnitude of sustained AIPAC dollars
     // adds measurable weight. Calibration:
     //   $100K  -> 0 pts
-    //   $500K  -> 10 pts
-    //   $1M    -> 15 pts
-    //   $2.24M -> 20 pts (Mast lifetime)
-    //   $5M    -> 25 pts (cap)
+    //   $500K  -> 14 pts
+    //   $1M    -> 20 pts
+    //   $2.24M -> 28 pts (Mast lifetime)
+    //   $5M    -> 34 pts
+    //   $10M   -> 40 pts (cap)
     if (israelTotal >= 100_000) {
-      const absoluteBonus = Math.min(25, Math.log10(israelTotal / 100_000) * 15);
+      const absoluteBonus = Math.min(40, Math.log10(israelTotal / 100_000) * 20);
       redFlagPoints += Math.round(absoluteBonus);
       flags.push(`Absolute-\$ capture bonus: +${Math.round(absoluteBonus)} pts (sustained high-dollar lobby relationship)`);
+    }
+
+    // v6.2: multi-tier capture escalators — each $500K of Israel money
+    // adds a stacking red flag. Compounds with absolute-$ bonus above.
+    //   >= $1M:     +10 pts, "BOUGHT" tier
+    //   >= $2M:     +15 pts, "FULLY BOUGHT" tier
+    //   >= $5M:     +25 pts, "OWNED" tier
+    if (israelTotal >= 5_000_000) {
+      redFlagPoints += 25;
+      flags.push('🚨 OWNED: $5M+ Israel-lobby capture');
+    } else if (israelTotal >= 2_000_000) {
+      redFlagPoints += 15;
+      flags.push('🚨 FULLY BOUGHT: $2M+ Israel-lobby capture');
+    } else if (israelTotal >= 1_000_000) {
+      redFlagPoints += 10;
+      flags.push('🚨 BOUGHT: $1M+ Israel-lobby capture');
+    }
+
+    // v6.2: lobbying-income absolute red flag — sustained 6-figure lobbying
+    // presence is a separate corruption signal from Israel-lobby money.
+    const lobbyIncome = (p.lobbyingRecords ?? []).reduce(
+      (sum, r) => sum + (Number((r as { income?: number }).income) || 0),
+      0,
+    );
+    if (lobbyIncome >= 1_000_000) {
+      redFlagPoints += 15;
+      flags.push(`Lobbying income \$${(lobbyIncome / 1_000_000).toFixed(1)}M — high lobbyist saturation`);
+    } else if (lobbyIncome >= 500_000) {
+      redFlagPoints += 8;
+      flags.push(`Lobbying income \$${(lobbyIncome / 1_000).toFixed(0)}K`);
     }
 
     if (totalRaised > 0) {
