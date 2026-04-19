@@ -77,7 +77,8 @@ export default function EmbedDossier(props: EmbedDossierProps) {
       </div>
 
       <div style={{ padding: '20px' }}>
-        {/* Name + Score (with toggle) */}
+        {/* Name row — when red_flags are present, the score moves into a
+            prominent full-width card below; otherwise it stays in the corner. */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '16px' }}>
           <div style={{ flex: 1, paddingRight: '16px' }}>
             <div style={{ fontSize: '20px', fontWeight: 700, color: '#fff', marginBottom: '4px', letterSpacing: '0.5px' }}>{name}</div>
@@ -88,63 +89,87 @@ export default function EmbedDossier(props: EmbedDossierProps) {
               <span style={{ fontSize: '10px', color: '#3d5a3d', border: '1px solid rgba(0,255,65,0.08)', padding: '2px 8px' }}>{jurisdiction || district || '—'}</span>
             </div>
           </div>
-          <div style={{
-            minWidth: '160px', maxWidth: '220px', padding: '8px 10px',
-            border: `1px solid ${gc}30`, background: `${gc}08`,
-            cursor: hasRedFlags ? 'pointer' : 'default',
-          }}
-            onClick={() => hasRedFlags && setView(v => v === 'score' ? 'flags' : 'score')}
-            title={hasRedFlags ? 'Click to flip between score and red flags' : ''}
+          {!hasRedFlags && (
+            <div style={{
+              minWidth: '90px', textAlign: 'center', padding: '8px 12px',
+              border: `1px solid ${gc}30`, background: `${gc}08`,
+            }}>
+              <div style={{ fontSize: '42px', fontWeight: 700, color: gc, lineHeight: 1, textShadow: `0 0 20px ${gc}40` }}>{score}</div>
+              <div style={{ fontSize: '9px', color: '#3d5a3d', letterSpacing: '2px', marginTop: '2px' }}>CORRUPTION</div>
+              <div style={{ fontSize: '16px', fontWeight: 700, color: gc, marginTop: '4px', letterSpacing: '2px' }}>{grade}</div>
+            </div>
+          )}
+        </div>
+
+        {/* Prominent score / flags card (matches politician-page style) */}
+        {hasRedFlags && (
+          <div
+            onClick={() => setView(v => v === 'score' ? 'flags' : 'score')}
+            style={{
+              marginBottom: '16px', padding: '16px',
+              border: '1px dashed rgba(255,8,68,0.5)',
+              cursor: 'pointer',
+            }}
+            title="Click to flip between score and red flags"
           >
-            {hasRedFlags && (
-              <div style={{ display: 'flex', gap: '4px', justifyContent: 'center', marginBottom: '6px' }}>
-                {(['score', 'flags'] as const).map(v => (
-                  <button
-                    key={v}
-                    onClick={(e) => { e.stopPropagation(); setView(v); }}
-                    style={{
-                      fontSize: '8px', fontWeight: 700, letterSpacing: '1px',
-                      padding: '3px 6px',
-                      background: view === v ? '#FF0844' : 'transparent',
-                      color: view === v ? '#000' : '#FF0844',
-                      border: '1px solid #FF0844',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    {v === 'score' ? 'SCORE' : `⚠ FLAGS (${redFlags.length})`}
-                  </button>
-                ))}
-              </div>
+            <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
+              {(['score', 'flags'] as const).map(v => (
+                <button
+                  key={v}
+                  onClick={(e) => { e.stopPropagation(); setView(v); }}
+                  style={{
+                    fontSize: '11px', fontWeight: 700, letterSpacing: '1.5px',
+                    padding: '8px 14px',
+                    background: view === v ? '#FF0844' : 'transparent',
+                    color: view === v ? '#000' : '#FF0844',
+                    border: '1px solid #FF0844',
+                    cursor: 'pointer',
+                    fontFamily: "'Courier New','Lucida Console',monospace",
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  {v === 'score' ? 'SCORE' : `⚠ FLAGS (${redFlags.length})`}
+                </button>
+              ))}
+            </div>
+            {view === 'score' && (
+              <>
+                <div style={{ fontSize: '11px', color: '#6b8a6b', letterSpacing: '2px', marginBottom: '6px', textTransform: 'uppercase' }}>
+                  Corruption Score
+                </div>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px' }}>
+                  <span style={{ fontSize: '40px', fontWeight: 700, color: '#FF0844', lineHeight: 1 }}>{score}/100</span>
+                  <span style={{ fontSize: '28px', fontWeight: 700, color: '#FF0844', lineHeight: 1 }}>{grade}</span>
+                </div>
+              </>
             )}
-            {(!hasRedFlags || view === 'score') && (
-              <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '42px', fontWeight: 700, color: gc, lineHeight: 1, textShadow: `0 0 20px ${gc}40` }}>{score}</div>
-                <div style={{ fontSize: '9px', color: '#3d5a3d', letterSpacing: '2px', marginTop: '2px' }}>CORRUPTION</div>
-                <div style={{ fontSize: '16px', fontWeight: 700, color: gc, marginTop: '4px', letterSpacing: '2px' }}>{grade}</div>
-              </div>
-            )}
-            {hasRedFlags && view === 'flags' && (
-              <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
-                {redFlags.map((f, i) => (
-                  <li key={i} style={{
-                    fontSize: '10px', lineHeight: '1.4',
-                    padding: '3px 0 3px 6px',
-                    borderLeft: `2px solid ${f.severity === 'high' ? '#FF0844' : '#f59e0b'}`,
-                    marginBottom: '3px',
-                    color: '#c8d6c8',
-                  }}>
-                    <span style={{
-                      fontSize: '8px', fontWeight: 700,
-                      color: f.severity === 'high' ? '#FF0844' : '#f59e0b',
-                      letterSpacing: '1px', marginRight: '4px',
-                    }}>{f.severity === 'high' ? '[H]' : '[M]'}</span>
-                    {f.label}
-                  </li>
-                ))}
-              </ul>
+            {view === 'flags' && (
+              <>
+                <div style={{ fontSize: '11px', color: '#FF0844', letterSpacing: '2px', marginBottom: '10px', fontWeight: 700, textTransform: 'uppercase' }}>
+                  ⚠ {redFlags.length} red flag{redFlags.length === 1 ? '' : 's'}
+                </div>
+                <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+                  {redFlags.map((f, i) => (
+                    <li key={i} style={{
+                      fontSize: '12px', lineHeight: '1.5',
+                      padding: '4px 0 4px 10px',
+                      borderLeft: `3px solid ${f.severity === 'high' ? '#FF0844' : '#f59e0b'}`,
+                      marginBottom: '6px',
+                      color: '#c8d6c8',
+                    }}>
+                      <span style={{
+                        fontSize: '9px', fontWeight: 700,
+                        color: f.severity === 'high' ? '#FF0844' : '#f59e0b',
+                        letterSpacing: '1px', marginRight: '6px',
+                      }}>{f.severity === 'high' ? '[HIGH]' : '[MED]'}</span>
+                      {f.label}
+                    </li>
+                  ))}
+                </ul>
+              </>
             )}
           </div>
-        </div>
+        )}
 
         {/* Score bar */}
         <div style={{ marginBottom: '16px' }}>
