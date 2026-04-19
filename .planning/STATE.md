@@ -21,6 +21,12 @@ See: .planning/PROJECT.md (updated 2026-04-02)
 
 (None yet)
 
+## Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 260419-ms6 | Corruption scorer v5: donorForensicsScore factor + Acton PAC correction | 2026-04-19 | bb01e16 | [260419-ms6-corruption-scorer-v5-add-donorforensicss](./quick/260419-ms6-corruption-scorer-v5-add-donorforensicss/) |
+
 ## Notes
 
 Project initialized 2026-04-02. Brownfield Next.js + Supabase codebase with existing FEC pipeline for 30 federal politicians.
