@@ -126,6 +126,7 @@ export interface Politician {
     opensecrets_id?: string;
     fec_candidate_id?: string;
     votesmart_id?: string;
+    red_flags?: Array<{ label: string; severity: 'high' | 'med' }>;
   };
   // Data source metadata
   dataStatus?: 'live' | 'mock';

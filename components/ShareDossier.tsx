@@ -39,8 +39,12 @@ function scoreBarColor(score: number): string {
 function generateEmbedHTML(p: Politician): string {
   const score = p.corruptionScore || 0;
   const grade = getGrade(score);
-  const gc = gradeColor(grade);
-  const sbc = scoreBarColor(score);
+  const redFlags = p.source_ids?.red_flags ?? [];
+  const hasRedFlags = redFlags.length > 0;
+  // When red_flags are present, force score box / number / grade / bar to red
+  // regardless of numeric score (matches the politician page treatment).
+  const gc = hasRedFlags ? '#FF0844' : gradeColor(grade);
+  const sbc = hasRedFlags ? '#FF0844' : scoreBarColor(score);
   const lobby = p.israelLobbyTotal || p.aipacFunding || 0;
   const funds = p.totalFundsRaised || 0;
   const partyBg = p.party === 'Republican' ? '#dc2626' : p.party === 'Democrat' ? '#2563eb' : '#6b7280';
@@ -111,6 +115,14 @@ function generateEmbedHTML(p: Politician): string {
       </div>
       <div style="font-size:28px;font-weight:700;color:${lobbyColor};text-shadow:0 0 15px ${lobbyColor}40;letter-spacing:1px;">${fmtMoney(lobby)}</div>
     </div>
+${hasRedFlags ? `
+    <!-- Red Flags -->
+    <div style="padding:14px 16px;background:rgba(255,8,68,0.06);border:2px solid rgba(255,8,68,0.35);margin-bottom:16px;">
+      <div style="font-size:10px;color:#FF0844;letter-spacing:2px;font-weight:700;margin-bottom:8px;">⚠ RED FLAGS — ${redFlags.length} CONCERN${redFlags.length === 1 ? '' : 'S'}</div>
+      <ul style="margin:0;padding:0;list-style:none;">
+        ${redFlags.map(f => `<li style="font-size:11px;color:#c8d6c8;line-height:1.5;padding:4px 0 4px 10px;border-left:3px solid ${f.severity === 'high' ? '#FF0844' : '#f59e0b'};margin-bottom:4px;"><span style="font-size:8px;font-weight:700;color:${f.severity === 'high' ? '#FF0844' : '#f59e0b'};letter-spacing:1px;margin-right:6px;">[${f.severity === 'high' ? 'HIGH' : 'MED'}]</span>${f.label}</li>`).join('')}
+      </ul>
+    </div>` : ''}
 
     <!-- Stats row -->
     <div style="display:flex;gap:0;margin-bottom:16px;">

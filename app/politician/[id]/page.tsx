@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import type { Politician } from '@/lib/types';
-import { computeCorruptionScore, getGradeColor, getConfidenceColor } from '@/lib/corruption-score';
+import { computeCorruptionScore, getGradeColor as libGetGradeColor, getConfidenceColor } from '@/lib/corruption-score';
 import ConnectionsGraph from '@/components/ConnectionsGraph';
 import ShareDossier from '@/components/ShareDossier';
 
@@ -323,11 +323,17 @@ export default function PoliticianPage() {
     );
   }
 
+  // When a politician has flagged red_flags, score box / number / grade all
+  // render red regardless of numeric score (overrides the green/amber bands).
+  const redFlags = politician.source_ids?.red_flags ?? [];
+  const hasRedFlags = redFlags.length > 0;
   const getScoreColor = (score: number) => {
+    if (hasRedFlags) return 'var(--terminal-red)';
     if (score < 40) return 'var(--terminal-green)';
     if (score < 60) return 'var(--terminal-amber)';
     return 'var(--terminal-red)';
   };
+  const getGradeColor = (grade: 'A' | 'B' | 'C' | 'D' | 'F') => hasRedFlags ? 'var(--terminal-red)' : libGetGradeColor(grade);
 
   const getJuiceBoxLabel = (tier: string) => {
     if (tier === 'owned') return '👑 FULLY OWNED';
@@ -583,6 +589,51 @@ export default function PoliticianPage() {
               </div>
             </div>
           </div>
+
+          {/* Red Flags Panel — appears when source_ids.red_flags is set */}
+          {hasRedFlags && (
+            <div style={{
+              marginBottom: '2rem',
+              padding: '1.25rem 1.5rem',
+              background: 'rgba(220, 38, 38, 0.08)',
+              border: '2px solid var(--terminal-red)',
+            }}>
+              <div style={{
+                fontSize: '0.75rem',
+                color: 'var(--terminal-red)',
+                fontWeight: 700,
+                letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                marginBottom: '0.75rem',
+                fontFamily: 'JetBrains Mono, monospace',
+              }}>
+                ⚠ RED FLAGS — {redFlags.length} CONCERN{redFlags.length === 1 ? '' : 'S'}
+              </div>
+              <ul style={{ margin: 0, paddingLeft: '1.25rem', listStyle: 'none' }}>
+                {redFlags.map((f, i) => (
+                  <li key={i} style={{
+                    color: 'var(--terminal-text)',
+                    fontSize: '0.9rem',
+                    lineHeight: '1.6',
+                    paddingLeft: '0.75rem',
+                    borderLeft: `3px solid ${f.severity === 'high' ? 'var(--terminal-red)' : '#f59e0b'}`,
+                    marginBottom: '0.5rem',
+                  }}>
+                    <span style={{
+                      display: 'inline-block',
+                      fontSize: '0.625rem',
+                      fontWeight: 700,
+                      color: f.severity === 'high' ? 'var(--terminal-red)' : '#f59e0b',
+                      letterSpacing: '0.1em',
+                      marginRight: '0.5rem',
+                      textTransform: 'uppercase',
+                    }}>{f.severity === 'high' ? '[HIGH]' : '[MED]'}</span>
+                    {f.label}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Tab Navigation */}
           <div style={{ 
