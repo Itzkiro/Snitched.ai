@@ -40,6 +40,8 @@ export default function PoliticianPage() {
   const [activeTab, setActiveTab] = useState<string>('overview');
   const [politician, setPolitician] = useState<Politician | null>(null);
   const [politicianLoading, setPoliticianLoading] = useState(true);
+  // Score card has two faces: numeric score and red-flag bullet list. Click to flip.
+  const [scoreView, setScoreView] = useState<'score' | 'flags'>('score');
 
   // Voting tab state
   const [votingRecords, setVotingRecords] = useState<VotingRecord[]>([]);
@@ -492,36 +494,98 @@ export default function PoliticianPage() {
                   gap: '1rem',
                   marginTop: '1.5rem',
                 }}>
-                  <div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                      Corruption Score
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
-                      <span style={{ fontSize: '2rem', fontWeight: 700, color: getScoreColor(politician.corruptionScore), fontFamily: 'Bebas Neue, sans-serif' }}>
-                        {politician.corruptionScore}/100
-                      </span>
-                      {politician.corruptionScoreDetails?.grade && (
-                        <span style={{
-                          fontSize: '1.5rem',
-                          fontWeight: 700,
-                          color: getGradeColor(politician.corruptionScoreDetails.grade),
-                          fontFamily: 'Bebas Neue, sans-serif',
-                        }}>
-                          {politician.corruptionScoreDetails.grade}
-                        </span>
-                      )}
-                    </div>
-                    {politician.corruptionScoreDetails?.confidence && (
-                      <div style={{
-                        fontSize: '0.6rem',
-                        color: getConfidenceColor(politician.corruptionScoreDetails.confidence),
-                        marginTop: '0.25rem',
-                        fontWeight: 600,
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.05em',
-                      }}>
-                        {politician.corruptionScoreDetails.confidence} confidence
+                  {/* Corruption Score / Red Flags — 2-page card. Click header tab or card body to flip. */}
+                  <div
+                    onClick={() => hasRedFlags && setScoreView(v => v === 'score' ? 'flags' : 'score')}
+                    style={{
+                      cursor: hasRedFlags ? 'pointer' : 'default',
+                      padding: hasRedFlags ? '0.5rem' : 0,
+                      border: hasRedFlags ? '1px dashed rgba(220,38,38,0.4)' : 'none',
+                      transition: 'background 0.15s',
+                    }}
+                    title={hasRedFlags ? 'Click to flip between score and red flags' : ''}
+                  >
+                    {hasRedFlags && (
+                      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                        {(['score', 'flags'] as const).map(v => (
+                          <button
+                            key={v}
+                            onClick={(e) => { e.stopPropagation(); setScoreView(v); }}
+                            style={{
+                              fontSize: '0.625rem',
+                              fontWeight: 700,
+                              letterSpacing: '0.1em',
+                              padding: '0.25rem 0.6rem',
+                              background: scoreView === v ? 'var(--terminal-red)' : 'transparent',
+                              color: scoreView === v ? '#000' : 'var(--terminal-red)',
+                              border: '1px solid var(--terminal-red)',
+                              cursor: 'pointer',
+                              fontFamily: 'JetBrains Mono, monospace',
+                              textTransform: 'uppercase',
+                            }}
+                          >
+                            {v === 'score' ? 'SCORE' : `⚠ FLAGS (${redFlags.length})`}
+                          </button>
+                        ))}
                       </div>
+                    )}
+                    {(!hasRedFlags || scoreView === 'score') && (
+                      <>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                          Corruption Score
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
+                          <span style={{ fontSize: '2rem', fontWeight: 700, color: getScoreColor(politician.corruptionScore), fontFamily: 'Bebas Neue, sans-serif' }}>
+                            {politician.corruptionScore}/100
+                          </span>
+                          {politician.corruptionScoreDetails?.grade && (
+                            <span style={{
+                              fontSize: '1.5rem',
+                              fontWeight: 700,
+                              color: getGradeColor(politician.corruptionScoreDetails.grade),
+                              fontFamily: 'Bebas Neue, sans-serif',
+                            }}>
+                              {politician.corruptionScoreDetails.grade}
+                            </span>
+                          )}
+                        </div>
+                        {politician.corruptionScoreDetails?.confidence && (
+                          <div style={{
+                            fontSize: '0.6rem',
+                            color: getConfidenceColor(politician.corruptionScoreDetails.confidence),
+                            marginTop: '0.25rem',
+                            fontWeight: 600,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.05em',
+                          }}>
+                            {politician.corruptionScoreDetails.confidence} confidence
+                          </div>
+                        )}
+                      </>
+                    )}
+                    {hasRedFlags && scoreView === 'flags' && (
+                      <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+                        {redFlags.map((f, i) => (
+                          <li key={i} style={{
+                            color: 'var(--terminal-text)',
+                            fontSize: '0.75rem',
+                            lineHeight: '1.5',
+                            paddingLeft: '0.5rem',
+                            borderLeft: `3px solid ${f.severity === 'high' ? 'var(--terminal-red)' : '#f59e0b'}`,
+                            marginBottom: '0.4rem',
+                          }}>
+                            <span style={{
+                              display: 'inline-block',
+                              fontSize: '0.55rem',
+                              fontWeight: 700,
+                              color: f.severity === 'high' ? 'var(--terminal-red)' : '#f59e0b',
+                              letterSpacing: '0.1em',
+                              marginRight: '0.4rem',
+                            }}>{f.severity === 'high' ? '[HIGH]' : '[MED]'}</span>
+                            {f.label}
+                          </li>
+                        ))}
+                      </ul>
                     )}
                   </div>
                   <div>
@@ -595,50 +659,7 @@ export default function PoliticianPage() {
             </div>
           </div>
 
-          {/* Red Flags Panel — appears when source_ids.red_flags is set */}
-          {hasRedFlags && (
-            <div style={{
-              marginBottom: '2rem',
-              padding: '1.25rem 1.5rem',
-              background: 'rgba(220, 38, 38, 0.08)',
-              border: '2px solid var(--terminal-red)',
-            }}>
-              <div style={{
-                fontSize: '0.75rem',
-                color: 'var(--terminal-red)',
-                fontWeight: 700,
-                letterSpacing: '0.15em',
-                textTransform: 'uppercase',
-                marginBottom: '0.75rem',
-                fontFamily: 'JetBrains Mono, monospace',
-              }}>
-                ⚠ RED FLAGS — {redFlags.length} CONCERN{redFlags.length === 1 ? '' : 'S'}
-              </div>
-              <ul style={{ margin: 0, paddingLeft: '1.25rem', listStyle: 'none' }}>
-                {redFlags.map((f, i) => (
-                  <li key={i} style={{
-                    color: 'var(--terminal-text)',
-                    fontSize: '0.9rem',
-                    lineHeight: '1.6',
-                    paddingLeft: '0.75rem',
-                    borderLeft: `3px solid ${f.severity === 'high' ? 'var(--terminal-red)' : '#f59e0b'}`,
-                    marginBottom: '0.5rem',
-                  }}>
-                    <span style={{
-                      display: 'inline-block',
-                      fontSize: '0.625rem',
-                      fontWeight: 700,
-                      color: f.severity === 'high' ? 'var(--terminal-red)' : '#f59e0b',
-                      letterSpacing: '0.1em',
-                      marginRight: '0.5rem',
-                      textTransform: 'uppercase',
-                    }}>{f.severity === 'high' ? '[HIGH]' : '[MED]'}</span>
-                    {f.label}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          {/* (Red Flags now live inside the score-card toggle in the header.) */}
 
           {/* Tab Navigation */}
           <div style={{ 
