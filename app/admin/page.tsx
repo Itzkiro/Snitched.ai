@@ -198,7 +198,7 @@ export default function AdminPage() {
               ${rows.map(r => `<tr>
                 <td>${r.name}</td><td>${r.office}</td><td>${r.party}</td><td>${r.running_for || '-'}</td>
                 <td>${r.corruption_score}</td><td>$${Number(r.total_funds || 0).toLocaleString()}</td>
-                <td>$${Number(r.aipac_funding || 0).toLocaleString()}</td>
+                <td>$${Number((r as Record<string, unknown>).israel_lobby_total || r.aipac_funding || 0).toLocaleString()}</td>
                 <td>${r.court_records_count}</td><td>${r.voting_records_count}</td>
               </tr>`).join('')}
             </table>

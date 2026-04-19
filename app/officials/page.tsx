@@ -20,7 +20,7 @@ async function getOfficials(): Promise<Politician[]> {
   }
 
   // Paginate to get ALL officials (Supabase caps at 1000 per request)
-  const cols = 'bioguide_id, name, office, office_level, party, district, jurisdiction, jurisdiction_type, corruption_score, aipac_funding, juice_box_tier, is_active, total_funds';
+  const cols = 'bioguide_id, name, office, office_level, party, district, jurisdiction, jurisdiction_type, corruption_score, aipac_funding, israel_lobby_total, juice_box_tier, is_active, total_funds';
   const allRows: Record<string, unknown>[] = [];
   let page = 0;
   while (true) {
@@ -54,6 +54,7 @@ async function getOfficials(): Promise<Politician[]> {
     jurisdictionType: row.jurisdiction_type as Politician['jurisdictionType'],
     corruptionScore: Number(row.corruption_score) || 0,
     aipacFunding: Number(row.aipac_funding) || 0,
+    israelLobbyTotal: Number(row.israel_lobby_total) || 0,
     juiceBoxTier: (row.juice_box_tier as Politician['juiceBoxTier']) || 'none',
     isActive: row.is_active as boolean,
     totalFundsRaised: Number(row.total_funds) || 0,

@@ -5,6 +5,12 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import type { Politician } from '@/lib/types';
 import { computeCorruptionScore, getGradeColor as libGetGradeColor, getConfidenceColor } from '@/lib/corruption-score';
+import {
+  getCorruptionScore,
+  getProIsraelLobbyAmount,
+  formatLobbyAmount,
+  PRO_ISRAEL_LOBBY_LABEL,
+} from '@/lib/politician-display';
 import ConnectionsGraph from '@/components/ConnectionsGraph';
 import ShareDossier from '@/components/ShareDossier';
 
@@ -63,15 +69,18 @@ export default function PoliticianPage() {
         }
         if (!res.ok) throw new Error(`API error: ${res.status}`);
         const found: Politician = await res.json();
-        // Compute corruption score with full factor breakdown on the client.
-        // EXCEPTION: when red_flags are present, this politician has a
-        // manually-curated extended-rubric score in the DB — preserve it.
-        const hasManualScore = (found.source_ids?.red_flags?.length ?? 0) > 0;
+        // v6.4: DO NOT recompute the corruption score client-side. The DB
+        // value is authoritative — it was computed by sync-corruption-scores.ts
+        // with the full v6.3+ algorithm (multi-cycle multiplier, tier floors,
+        // forensics) using data we don't always ship to the client. Rerunning
+        // computeCorruptionScore here with incomplete fields produced a score
+        // that disagreed with every other page on the site. The factor break-
+        // down is still computed so the detail view can show explanations —
+        // but the top-line score stays whatever the DB says.
         const scoreResult = computeCorruptionScore(found);
-        if (!hasManualScore) {
-          found.corruptionScore = scoreResult.score;
-        }
         found.corruptionScoreDetails = scoreResult;
+        // Preserve DB-side corruption_score; computed value is for the factor
+        // breakdown UI only.
         setPolitician(found);
       } catch (error) {
         console.error('Error loading politician:', error);
@@ -377,14 +386,14 @@ export default function PoliticianPage() {
       <div style={{ padding: '2rem', borderBottom: '1px solid var(--terminal-border)' }}>
         <div className="alert-level">
           <span className="alert-icon">
-            {politician.corruptionScore >= 60 ? '🚨' : politician.corruptionScore >= 40 ? '⚠️' : '✓'}
+            {getCorruptionScore(politician) >= 60 ? '🚨' : getCorruptionScore(politician) >= 40 ? '⚠️' : '✓'}
           </span>
           <span>
-            CORRUPTION SCORE: {politician.corruptionScore}/100 — GRADE {politician.corruptionScoreDetails?.grade ?? '--'} — {
-              politician.corruptionScore <= 20 ? 'LOW RISK' :
-              politician.corruptionScore <= 40 ? 'MODERATE' :
-              politician.corruptionScore <= 60 ? 'ELEVATED' :
-              politician.corruptionScore <= 80 ? 'HIGH RISK' :
+            CORRUPTION SCORE: {getCorruptionScore(politician)}/100 — GRADE {politician.corruptionScoreDetails?.grade ?? '--'} — {
+              getCorruptionScore(politician) <= 20 ? 'LOW RISK' :
+              getCorruptionScore(politician) <= 40 ? 'MODERATE' :
+              getCorruptionScore(politician) <= 60 ? 'ELEVATED' :
+              getCorruptionScore(politician) <= 80 ? 'HIGH RISK' :
               'SEVERE'
             }
           </span>
@@ -393,11 +402,7 @@ export default function PoliticianPage() {
               ? `${politician.corruptionScoreDetails.confidence.toUpperCase()} CONFIDENCE (${politician.corruptionScoreDetails.dataCompleteness}% data)`
               : ''}
             {politician.juiceBoxTier !== 'none'
-              ? (() => {
-                  const amt = politician.israelLobbyTotal || politician.aipacFunding || 0;
-                  const formatted = amt >= 1_000_000 ? `$${(amt / 1_000_000).toFixed(1)}M` : `$${(amt / 1_000).toFixed(0)}K`;
-                  return ` | ${getJuiceBoxLabel(politician.juiceBoxTier)} - ${formatted} Pro-Israel Lobby`;
-                })()
+              ? ` | ${getJuiceBoxLabel(politician.juiceBoxTier)} - ${formatLobbyAmount(getProIsraelLobbyAmount(politician))} ${PRO_ISRAEL_LOBBY_LABEL}`
               : ''}
           </span>
         </div>
@@ -440,13 +445,13 @@ export default function PoliticianPage() {
                 style={{
                   width: '80px',
                   height: '80px',
-                  border: `3px solid ${getScoreColor(politician.corruptionScore)}`,
+                  border: `3px solid ${getScoreColor(getCorruptionScore(politician))}`,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   fontSize: '4rem',
                   fontWeight: 700,
-                  color: getScoreColor(politician.corruptionScore),
+                  color: getScoreColor(getCorruptionScore(politician)),
                   flexShrink: 0,
                   fontFamily: 'Bebas Neue, sans-serif',
                 }}
@@ -539,8 +544,8 @@ export default function PoliticianPage() {
                           Corruption Score
                         </div>
                         <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
-                          <span style={{ fontSize: '2rem', fontWeight: 700, color: getScoreColor(politician.corruptionScore), fontFamily: 'Bebas Neue, sans-serif' }}>
-                            {politician.corruptionScore}/100
+                          <span style={{ fontSize: '2rem', fontWeight: 700, color: getScoreColor(getCorruptionScore(politician)), fontFamily: 'Bebas Neue, sans-serif' }}>
+                            {getCorruptionScore(politician)}/100
                           </span>
                           {politician.corruptionScoreDetails?.grade && (
                             <span style={{
@@ -594,13 +599,10 @@ export default function PoliticianPage() {
                   </div>
                   <div>
                     <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                      Pro-Israel Lobby
+                      {PRO_ISRAEL_LOBBY_LABEL}
                     </div>
-                    <div style={{ fontSize: '2rem', fontWeight: 700, color: (politician.israelLobbyTotal || politician.aipacFunding) > 0 ? 'var(--terminal-red)' : 'var(--terminal-green)', fontFamily: 'Bebas Neue, sans-serif' }}>
-                      {(() => {
-                        const amt = politician.israelLobbyTotal || politician.aipacFunding || 0;
-                        return amt >= 1_000_000 ? `$${(amt / 1_000_000).toFixed(1)}M` : `$${(amt / 1_000).toFixed(0)}K`;
-                      })()}
+                    <div style={{ fontSize: '2rem', fontWeight: 700, color: getProIsraelLobbyAmount(politician) > 0 ? 'var(--terminal-red)' : 'var(--terminal-green)', fontFamily: 'Bebas Neue, sans-serif' }}>
+                      {formatLobbyAmount(getProIsraelLobbyAmount(politician))}
                     </div>
                   </div>
                   <div>
@@ -797,7 +799,7 @@ export default function PoliticianPage() {
                     width: '120px',
                     height: '120px',
                     borderRadius: '50%',
-                    border: `4px solid ${getScoreColor(politician.corruptionScore)}`,
+                    border: `4px solid ${getScoreColor(getCorruptionScore(politician))}`,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -807,11 +809,11 @@ export default function PoliticianPage() {
                     <span style={{
                       fontSize: '2.5rem',
                       fontWeight: 700,
-                      color: getScoreColor(politician.corruptionScore),
+                      color: getScoreColor(getCorruptionScore(politician)),
                       fontFamily: 'Bebas Neue, sans-serif',
                       lineHeight: 1,
                     }}>
-                      {politician.corruptionScore}
+                      {getCorruptionScore(politician)}
                     </span>
                     <span style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)' }}>/100</span>
                   </div>
@@ -832,10 +834,10 @@ export default function PoliticianPage() {
                       )}
                       <div>
                         <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--terminal-text)' }}>
-                          {politician.corruptionScore <= 20 ? 'LOW RISK' :
-                           politician.corruptionScore <= 40 ? 'MODERATE RISK' :
-                           politician.corruptionScore <= 60 ? 'ELEVATED RISK' :
-                           politician.corruptionScore <= 80 ? 'HIGH RISK' :
+                          {getCorruptionScore(politician) <= 20 ? 'LOW RISK' :
+                           getCorruptionScore(politician) <= 40 ? 'MODERATE RISK' :
+                           getCorruptionScore(politician) <= 60 ? 'ELEVATED RISK' :
+                           getCorruptionScore(politician) <= 80 ? 'HIGH RISK' :
                            'SEVERE RISK'}
                         </div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginTop: '0.25rem' }}>

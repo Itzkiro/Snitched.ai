@@ -160,12 +160,17 @@ function buildHierarchy(all: Politician[], rootName = 'Florida', rootSlug = 'flo
 }
 
 /**
- * Recursively sum AIPAC funding across the entire sub-tree rooted at `node`.
+ * Recursively sum pro-Israel-lobby dollars across the entire sub-tree.
+ * Uses israelLobbyTotal (the full lifetime figure) when available, falling
+ * back to aipacFunding (PAC-only subset) when lobby total isn't populated.
  */
 function sumAipacFunding(node: HierarchyNode): number {
   let total = 0;
   if (node.politicians) {
-    total += node.politicians.reduce((s, p) => s + p.aipacFunding, 0);
+    total += node.politicians.reduce(
+      (s, p) => s + (p.israelLobbyTotal || p.aipacFunding || 0),
+      0,
+    );
   }
   if (node.children) {
     for (const child of node.children) {
@@ -494,7 +499,7 @@ function HierarchyContent() {
                         color: '#f59e0b',
                         borderRadius: '3px',
                       }}>
-                        {politician.juiceBoxTier === 'owned' ? 'OWNED' : politician.juiceBoxTier === 'bought' ? 'BOUGHT' : 'COMPROMISED'} ${(politician.aipacFunding / 1000).toFixed(0)}K
+                        {politician.juiceBoxTier === 'owned' ? 'OWNED' : politician.juiceBoxTier === 'bought' ? 'BOUGHT' : 'COMPROMISED'} {(() => { const amt = politician.israelLobbyTotal || politician.aipacFunding || 0; return amt >= 1_000_000 ? `$${(amt / 1_000_000).toFixed(1)}M` : `$${(amt / 1_000).toFixed(0)}K`; })()}
                       </span>
                     )}
                   </div>
