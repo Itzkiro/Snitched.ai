@@ -57,8 +57,12 @@ export default async function EmbedPage({ params }: { params: Promise<{ id: stri
   const yearsLabel = row.years_in_office ? `${row.years_in_office} yrs` : '';
 
   const topDonors = ((row.top5_donors || []) as Array<{ name: string; amount: number; type: string }>).slice(0, 3);
-  const sourceIds = (row.source_ids || {}) as { red_flags?: Array<{ label: string; severity: 'high' | 'med' }> };
+  const sourceIds = (row.source_ids || {}) as {
+    red_flags?: Array<{ label: string; severity: 'high' | 'med' }>;
+    donation_status?: { label: string; color: string; icon?: string };
+  };
   const redFlags = sourceIds.red_flags ?? [];
+  const donationStatus = sourceIds.donation_status ?? null;
 
   return (
     <EmbedDossier
@@ -79,6 +83,7 @@ export default async function EmbedPage({ params }: { params: Promise<{ id: stri
       lobby={lobby}
       topDonors={topDonors}
       redFlags={redFlags}
+      donationStatus={donationStatus}
     />
   );
 }

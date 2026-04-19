@@ -127,6 +127,9 @@ export interface Politician {
     fec_candidate_id?: string;
     votesmart_id?: string;
     red_flags?: Array<{ label: string; severity: 'high' | 'med' }>;
+    // Per-candidate override for the dossier "Foreign Influence" badge.
+    // When set, replaces the auto-derived label/color/icon.
+    donation_status?: { label: string; color: string; icon?: string };
   };
   // Data source metadata
   dataStatus?: 'live' | 'mock';

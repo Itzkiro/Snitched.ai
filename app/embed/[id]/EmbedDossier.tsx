@@ -23,6 +23,7 @@ export interface EmbedDossierProps {
   lobby: number;
   topDonors: Donor[];
   redFlags: RedFlag[];
+  donationStatus: { label: string; color: string; icon?: string } | null;
 }
 
 function fmtMoney(n: number): string {
@@ -36,7 +37,7 @@ export default function EmbedDossier(props: EmbedDossierProps) {
     bioguideId, name, party, jurisdiction, district, displayOffice,
     status, statusColor, yearsLabel, score, grade,
     baselineGradeColor, baselineScoreBarColor,
-    funds, lobby, topDonors, redFlags,
+    funds, lobby, topDonors, redFlags, donationStatus,
   } = props;
 
   const hasRedFlags = redFlags.length > 0;
@@ -50,11 +51,18 @@ export default function EmbedDossier(props: EmbedDossierProps) {
   const partyTag = party === 'Republican' ? 'R' : party === 'Democrat' ? 'D' : 'I';
   const url = `https://snitched.ai/politician/${bioguideId}`;
 
-  const lobbyColor = lobby > 0 ? '#FF0844' : '#00FF41';
-  const lobbyBg = lobby > 0 ? 'rgba(255,8,68,0.06)' : 'rgba(0,255,65,0.03)';
-  const lobbyBorder = lobby > 0 ? 'rgba(255,8,68,0.25)' : 'rgba(0,255,65,0.12)';
-  const lobbyIcon = lobby > 0 ? '\u26A0' : '\u2713';
-  const lobbyLabel = lobby > 0 ? 'FOREIGN INFLUENCE DETECTED' : 'NO FOREIGN INFLUENCE';
+  // Foreign-influence box: per-candidate donation_status override wins,
+  // else derive from israel_lobby_total (red if > 0, green if 0).
+  const lobbyColor = donationStatus?.color ?? (lobby > 0 ? '#FF0844' : '#00FF41');
+  const hexAlpha = (hex: string, alphaPct: number) => `${hex}${Math.round(alphaPct * 255).toString(16).padStart(2, '0')}`;
+  const lobbyBg = donationStatus
+    ? hexAlpha(donationStatus.color, 0.08)
+    : (lobby > 0 ? 'rgba(255,8,68,0.06)' : 'rgba(0,255,65,0.03)');
+  const lobbyBorder = donationStatus
+    ? hexAlpha(donationStatus.color, 0.4)
+    : (lobby > 0 ? 'rgba(255,8,68,0.25)' : 'rgba(0,255,65,0.12)');
+  const lobbyIcon = donationStatus?.icon ?? (lobby > 0 ? '\u26A0' : '\u2713');
+  const lobbyLabel = donationStatus?.label ?? (lobby > 0 ? 'FOREIGN INFLUENCE DETECTED' : 'NO FOREIGN INFLUENCE');
 
   return (
     <div style={{
