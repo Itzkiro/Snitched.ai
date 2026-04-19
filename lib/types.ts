@@ -136,6 +136,34 @@ export interface Politician {
   votes?: Vote[];
   socialPosts?: SocialPost[];
   lobbyingRecords?: LobbyingRecord[];
+  /**
+   * Donor forensic signals computed from itemized contribution data.
+   * When absent, the donorForensicsScore factor is scored as placeholder.
+   * All ratios are 0-1 (not percentages).
+   */
+  donorForensics?: DonorForensics;
+}
+
+/**
+ * Donor-pattern forensic signals — content-neutral anomaly detection over
+ * itemized donor data. Feeds the donorForensicsScore corruption factor.
+ * Populated by scripts that pull itemized contribution data (OH SOS, FEC, etc.).
+ */
+export interface DonorForensics {
+  /** Fraction of itemized donors above reporting threshold missing employer/occupation (0-1). */
+  missingEmployerRatio: number;
+  /** Fraction of itemized donors giving from outside the politician's jurisdiction (0-1). */
+  outOfStatePct: number;
+  /** Fraction of itemized donors at or near max limit sharing an address with another max donor (0-1). */
+  householdBundling: number;
+  /** Coefficient of variation (std_dev / mean) of itemized donation amounts; low values suggest uniform/automated giving. */
+  donationStdDev: number;
+  /** Fraction of total dollars routed through opaque platforms (ActBlue, WinRed) without direct-committee disclosure (0-1). */
+  platformOpacity: number;
+  /** Number of itemized contributions the forensic signals were computed over. */
+  itemizedCount: number;
+  /** ISO timestamp when these signals were computed. */
+  computedAt: string;
 }
 
 export interface Contribution {

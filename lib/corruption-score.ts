@@ -41,13 +41,14 @@ import type {
 const PLACEHOLDER_SCORE = 0;
 
 /** Weight configuration — must sum to 1.0
- * Transparency removed — lack of public data is not corruption.
- * Weight redistributed to actual corruption indicators. */
+ * v5: donorForensicsScore added as content-neutral anomaly-detection factor.
+ * Other weights rebalanced proportionally to make room for it. */
 const BASE_WEIGHTS = {
-  pacContributionRatio: 0.35,
-  lobbyingConnections: 0.20,
-  votingAlignment: 0.25,
-  campaignFinanceRedFlags: 0.20,
+  pacContributionRatio: 0.32,
+  lobbyingConnections: 0.18,
+  votingAlignment: 0.22,
+  campaignFinanceRedFlags: 0.18,
+  donorForensicsScore: 0.10,
 } as const;
 
 /**
@@ -564,6 +565,94 @@ function scoreCampaignFinanceRedFlags(p: Politician): CorruptionFactor {
 }
 
 // ---------------------------------------------------------------------------
+// Factor 5: Donor Forensics (v5)
+// ---------------------------------------------------------------------------
+
+/**
+ * Content-neutral donor-pattern anomaly detection.
+ * Scores five forensic signals computed from itemized donor data:
+ *   - missingEmployerRatio: blank/"Information Requested" on >$200 donors
+ *   - outOfStatePct: fraction giving from outside politician's jurisdiction
+ *   - householdBundling: max donors sharing an address
+ *   - donationStdDev: coefficient of variation of donation amounts
+ *   - platformOpacity: fraction routed through ActBlue/WinRed without disclosure
+ *
+ * Signals are thresholded and summed — no single signal can spike the score.
+ * Placeholder (rawScore=0) when donorForensics is absent.
+ */
+function scoreDonorForensics(p: Politician): CorruptionFactor {
+  const forensics = p.donorForensics;
+
+  if (!forensics || forensics.itemizedCount === 0) {
+    return {
+      key: 'donorForensicsScore',
+      label: 'Donor Pattern Forensics',
+      rawScore: PLACEHOLDER_SCORE,
+      weight: WEIGHTS.donorForensicsScore,
+      weightedScore: PLACEHOLDER_SCORE * WEIGHTS.donorForensicsScore,
+      dataAvailable: false,
+      explanation: 'No itemized donor data — forensic signals not yet computed.',
+    };
+  }
+
+  const flags: string[] = [];
+  let rawScore = 0;
+
+  // Missing employer >40% = meaningful disclosure gap (FEC/state law requires
+  // employer/occupation for itemized donors >$200). Scale 40-80% → 0-30 pts.
+  if (forensics.missingEmployerRatio >= 0.4) {
+    const penalty = Math.min(30, ((forensics.missingEmployerRatio - 0.4) / 0.4) * 30);
+    rawScore += penalty;
+    flags.push(`${Math.round(forensics.missingEmployerRatio * 100)}% of itemized donors missing employer`);
+  }
+
+  // Out-of-state >50% for a state-level race is unusual. Scale 50-90% → 0-20 pts.
+  if (forensics.outOfStatePct >= 0.5) {
+    const penalty = Math.min(20, ((forensics.outOfStatePct - 0.5) / 0.4) * 20);
+    rawScore += penalty;
+    flags.push(`${Math.round(forensics.outOfStatePct * 100)}% out-of-state donors`);
+  }
+
+  // Household bundling: >5% of itemized at max + shared address is a classic
+  // straw-donor pattern. Scale 5-25% → 0-25 pts.
+  if (forensics.householdBundling >= 0.05) {
+    const penalty = Math.min(25, ((forensics.householdBundling - 0.05) / 0.20) * 25);
+    rawScore += penalty;
+    flags.push(`${Math.round(forensics.householdBundling * 100)}% household-bundling pattern`);
+  }
+
+  // Coefficient of variation < 0.3 means donations are abnormally uniform —
+  // real grassroots has a long tail. Scale 0.3 down to 0 → 0-15 pts.
+  if (forensics.donationStdDev < 0.3 && forensics.donationStdDev >= 0) {
+    const penalty = Math.min(15, ((0.3 - forensics.donationStdDev) / 0.3) * 15);
+    rawScore += penalty;
+    flags.push(`donation amounts abnormally uniform (CV=${forensics.donationStdDev.toFixed(2)})`);
+  }
+
+  // Platform opacity >70% = most money routed through platforms with minimal
+  // direct-committee disclosure. Scale 70-95% → 0-10 pts.
+  if (forensics.platformOpacity >= 0.7) {
+    const penalty = Math.min(10, ((forensics.platformOpacity - 0.7) / 0.25) * 10);
+    rawScore += penalty;
+    flags.push(`${Math.round(forensics.platformOpacity * 100)}% routed through opaque platforms`);
+  }
+
+  const finalRaw = Math.min(100, Math.round(rawScore));
+
+  return {
+    key: 'donorForensicsScore',
+    label: 'Donor Pattern Forensics',
+    rawScore: finalRaw,
+    weight: WEIGHTS.donorForensicsScore,
+    weightedScore: Math.round(finalRaw * WEIGHTS.donorForensicsScore * 10) / 10,
+    dataAvailable: true,
+    explanation: flags.length > 0
+      ? `${flags.length} forensic signal(s) over ${forensics.itemizedCount} itemized donors: ${flags.join('; ')}.`
+      : `${forensics.itemizedCount} itemized donors analyzed; no anomalous patterns detected.`,
+  };
+}
+
+// ---------------------------------------------------------------------------
 // Grade & Confidence Computation
 // ---------------------------------------------------------------------------
 
@@ -613,13 +702,14 @@ function formatMoney(amount: number): string {
  * and produces a final score with breakdown.
  */
 export function computeCorruptionScore(politician: Politician): CorruptionScoreResult {
-  // First pass: compute raw scores with base weights
-  // 4 factors — transparency removed (lack of data ≠ corruption)
+  // First pass: compute raw scores with base weights.
+  // v5: 5 factors — donorForensicsScore added for content-neutral anomaly detection.
   const factors: CorruptionFactor[] = [
     scorePacContributionRatio(politician),
     scoreLobbyingConnections(politician),
     scoreVotingAlignment(politician),
     scoreCampaignFinanceRedFlags(politician),
+    scoreDonorForensics(politician),
   ];
 
   // Second pass: redistribute weight to favor factors with real data
