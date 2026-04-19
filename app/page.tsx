@@ -165,8 +165,12 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
           {topTargets.map(p => (
             <li key={p.id}>
               {p.name} ({p.party}) - {p.office} - Corruption Score: {p.corruptionScore}/100
-              {p.aipacFunding > 0
-                ? ` - AIPAC Funding: $${(p.aipacFunding / 1000).toFixed(0)}K`
+              {(p.israelLobbyTotal || p.aipacFunding) > 0
+                ? (() => {
+                    const amt = p.israelLobbyTotal || p.aipacFunding || 0;
+                    const formatted = amt >= 1_000_000 ? `$${(amt / 1_000_000).toFixed(1)}M` : `$${(amt / 1_000).toFixed(0)}K`;
+                    return ` - Pro-Israel Lobby: ${formatted}`;
+                  })()
                 : ''}
             </li>
           ))}

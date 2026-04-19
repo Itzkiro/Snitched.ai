@@ -366,7 +366,7 @@ function HierarchyContent() {
                 ${(aipacTotal / 1000000).toFixed(1)}M
               </div>
               <div style={{ fontSize: '0.875rem', color: '#888', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                Total AIPAC Funding
+                Total Pro-Israel Lobby
               </div>
             </div>
           </div>

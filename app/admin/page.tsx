@@ -194,7 +194,7 @@ export default function AdminPage() {
             <h1>SNITCHED.AI — Intelligence Export</h1>
             <p>Generated: ${new Date().toISOString()} | ${rows.length} records</p>
             <table>
-              <tr><th>Name</th><th>Office</th><th>Party</th><th>Running For</th><th>Score</th><th>Funds</th><th>AIPAC</th><th>Court</th><th>Votes</th></tr>
+              <tr><th>Name</th><th>Office</th><th>Party</th><th>Running For</th><th>Score</th><th>Funds</th><th>Pro-Israel Lobby</th><th>Court</th><th>Votes</th></tr>
               ${rows.map(r => `<tr>
                 <td>${r.name}</td><td>${r.office}</td><td>${r.party}</td><td>${r.running_for || '-'}</td>
                 <td>${r.corruption_score}</td><td>$${Number(r.total_funds || 0).toLocaleString()}</td>

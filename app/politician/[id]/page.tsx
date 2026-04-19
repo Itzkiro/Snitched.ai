@@ -393,7 +393,11 @@ export default function PoliticianPage() {
               ? `${politician.corruptionScoreDetails.confidence.toUpperCase()} CONFIDENCE (${politician.corruptionScoreDetails.dataCompleteness}% data)`
               : ''}
             {politician.juiceBoxTier !== 'none'
-              ? ` | ${getJuiceBoxLabel(politician.juiceBoxTier)} - $${(politician.aipacFunding / 1000).toFixed(0)}K AIPAC`
+              ? (() => {
+                  const amt = politician.israelLobbyTotal || politician.aipacFunding || 0;
+                  const formatted = amt >= 1_000_000 ? `$${(amt / 1_000_000).toFixed(1)}M` : `$${(amt / 1_000).toFixed(0)}K`;
+                  return ` | ${getJuiceBoxLabel(politician.juiceBoxTier)} - ${formatted} Pro-Israel Lobby`;
+                })()
               : ''}
           </span>
         </div>
@@ -590,10 +594,13 @@ export default function PoliticianPage() {
                   </div>
                   <div>
                     <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                      AIPAC Funding
+                      Pro-Israel Lobby
                     </div>
-                    <div style={{ fontSize: '2rem', fontWeight: 700, color: politician.aipacFunding > 0 ? 'var(--terminal-red)' : 'var(--terminal-green)', fontFamily: 'Bebas Neue, sans-serif' }}>
-                      ${(politician.aipacFunding / 1000).toFixed(0)}K
+                    <div style={{ fontSize: '2rem', fontWeight: 700, color: (politician.israelLobbyTotal || politician.aipacFunding) > 0 ? 'var(--terminal-red)' : 'var(--terminal-green)', fontFamily: 'Bebas Neue, sans-serif' }}>
+                      {(() => {
+                        const amt = politician.israelLobbyTotal || politician.aipacFunding || 0;
+                        return amt >= 1_000_000 ? `$${(amt / 1_000_000).toFixed(1)}M` : `$${(amt / 1_000).toFixed(0)}K`;
+                      })()}
                     </div>
                   </div>
                   <div>

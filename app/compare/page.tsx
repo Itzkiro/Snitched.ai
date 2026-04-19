@@ -538,7 +538,7 @@ export default function ComparePage() {
                 highlightHigher
               />
               <MetricRow
-                label="AIPAC FUNDING"
+                label="PRO-ISRAEL LOBBY PACS"
                 leftValue={formatAmount(left.aipacFunding)}
                 rightValue={formatAmount(right.aipacFunding)}
                 leftRaw={left.aipacFunding}
@@ -546,7 +546,7 @@ export default function ComparePage() {
                 highlightHigher
               />
               <MetricRow
-                label="ISRAEL LOBBY TOTAL"
+                label="PRO-ISRAEL LOBBY TOTAL"
                 leftValue={formatAmount(left.israelLobbyTotal ?? 0)}
                 rightValue={formatAmount(right.israelLobbyTotal ?? 0)}
                 leftRaw={left.israelLobbyTotal ?? 0}
