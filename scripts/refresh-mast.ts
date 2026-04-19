@@ -384,8 +384,20 @@ async function main(): Promise<void> {
   const israelLobbyTotal = israelLobbyLifetime;
   const israelLobbyPacs = israelLobbyPacsLifetime;
 
-  const top5Donors = Object.values(byDonor).sort((a, b) => b.amount - a.amount).slice(0, 5);
-  const topOrgs = Object.values(orgDonors).sort((a, b) => b.amount - a.amount).slice(0, 15);
+  // v6.5: exclude ActBlue/WinRed/Anedot payment processors and joint-
+  // fundraising committees from the display-facing top5. They're conduits,
+  // not corruption signals — showing "WinRed: $4.4M" as a top donor is
+  // meaningless since that's aggregated small-dollar passthrough.
+  const PLATFORM_CONDUIT_RE = /^(ACTBLUE|WINRED|ANEDOT)(\s|,|$)|VICTORY COMMITTEE|JOINT FUNDRAISING/i;
+  const isConduit = (name: string): boolean => PLATFORM_CONDUIT_RE.test((name || '').trim());
+  const top5Donors = Object.values(byDonor)
+    .filter(d => !isConduit(d.name))
+    .sort((a, b) => b.amount - a.amount)
+    .slice(0, 5);
+  const topOrgs = Object.values(orgDonors)
+    .filter(d => !isConduit(d.name))
+    .sort((a, b) => b.amount - a.amount)
+    .slice(0, 15);
 
   console.log(`  AIPAC-only total:           $${aipac.toLocaleString()}`);
   console.log(`  Israel lobby grand total:   $${israelLobbyTotal.toLocaleString()}`);

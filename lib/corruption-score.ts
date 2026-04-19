@@ -528,17 +528,25 @@ function scoreCampaignFinanceRedFlags(p: Politician): CorruptionFactor {
   }
 
   // Red flag 2: Donor concentration (0-25 points)
-  if (donors.length > 0 && totalRaised > 0) {
-    const topDonorAmount = donors[0].amount;
+  // v6.5: skip ActBlue / WinRed / Anedot — they're payment-processor conduits
+  // that aggregate small-dollar donations, not single donors. Treating them
+  // as "top donor X% of total" produces false corruption flags for anyone
+  // running a grassroots small-dollar operation. Skip the politician's own
+  // joint fundraising committees too (e.g., "MAST VICTORY COMMITTEE").
+  const PLATFORM_CONDUIT_RE = /^(ACTBLUE|WINRED|ANEDOT)(\s|,|$)|VICTORY COMMITTEE|JOINT FUNDRAISING/i;
+  const firstRealDonor = donors.find(d => d.name && !PLATFORM_CONDUIT_RE.test(d.name.trim()));
+  if (firstRealDonor && totalRaised > 0) {
+    const topDonorAmount = firstRealDonor.amount;
     const topDonorPct = topDonorAmount / totalRaised;
-    // Skip if top donor is self (already flagged above)
     const nameParts = p.name.toLowerCase().split(/\s+/);
-    const isSelfDonor = donors[0].name ? nameParts.some(part => donors[0].name.toLowerCase().includes(part)) : false;
+    const isSelfDonor = firstRealDonor.name
+      ? nameParts.some(part => firstRealDonor.name.toLowerCase().includes(part))
+      : false;
 
     if (!isSelfDonor) {
       if (topDonorPct > 0.20) {
         redFlagPoints += 25;
-        flags.push(`Top donor "${donors[0].name}" is ${(topDonorPct * 100).toFixed(1)}% of total`);
+        flags.push(`Top donor "${firstRealDonor.name}" is ${(topDonorPct * 100).toFixed(1)}% of total`);
       } else if (topDonorPct > 0.10) {
         redFlagPoints += 15;
         flags.push(`Top donor is ${(topDonorPct * 100).toFixed(1)}% of total`);
@@ -724,13 +732,12 @@ function scoreDonorForensics(p: Politician): CorruptionFactor {
     flags.push(`donation amounts abnormally uniform (CV=${forensics.donationStdDev.toFixed(2)})`);
   }
 
-  // Platform opacity >70% = most money routed through platforms with minimal
-  // direct-committee disclosure. Scale 70-95% → 0-10 pts.
-  if (forensics.platformOpacity >= 0.7) {
-    const penalty = Math.min(10, ((forensics.platformOpacity - 0.7) / 0.25) * 10);
-    rawScore += penalty;
-    flags.push(`${Math.round(forensics.platformOpacity * 100)}% routed through opaque platforms`);
-  }
+  // v6.5: platform_opacity removed from score contribution. ActBlue/WinRed/
+  // Anedot are neutral donation processors — small donors legitimately route
+  // through them. High routing is a function of grassroots fundraising style,
+  // not corruption. Field still tracked on the forensics struct for
+  // transparency/display but contributes 0 points to the score.
+  void forensics.platformOpacity;
 
   const finalRaw = Math.min(100, Math.round(rawScore));
 
