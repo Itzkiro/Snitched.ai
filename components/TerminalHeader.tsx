@@ -261,19 +261,6 @@ export default function TerminalHeader() {
           📡 SOCIAL INTEL
         </Link>
         <Link
-          href={`/tools${stateQuery}`}
-          style={{
-            color: pathname === '/tools' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
-            textDecoration: 'none',
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            fontWeight: 600
-          }}
-        >
-          TOOLS
-        </Link>
-        <Link
           href={`/browse${stateQuery}`}
           style={{
             color: pathname === '/browse' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
@@ -285,19 +272,6 @@ export default function TerminalHeader() {
           }}
         >
           DATABASE
-        </Link>
-        <Link
-          href={`/compare${stateQuery}`}
-          style={{
-            color: pathname === '/compare' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
-            textDecoration: 'none',
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            fontWeight: 600
-          }}
-        >
-          ⚖️ COMPARE
         </Link>
         <Link
           href={`/connections${stateQuery}`}
