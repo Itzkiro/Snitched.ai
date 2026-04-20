@@ -1,0 +1,66 @@
+[
+  {
+    "date": "2026-04-16",
+    "vote": "Nay",
+    "question": "H.Con.Res. 40: Directing the President, pursuant to section 5(c) of the War Powers Resolution, to remove United States Armed Forces from hos",
+    "israel_aligned": true,
+    "category": "passage",
+    "source_url": "https://www.govtrack.ushttps://www.govtrack.us/congress/votes/119-2026/h114"
+  },
+  {
+    "date": "2026-03-05",
+    "vote": "Nay",
+    "question": "H.Con.Res. 38: Directing the President pursuant to section 5(c) of the War Powers Resolution to remove United States Armed Forces from unaut",
+    "israel_aligned": true,
+    "category": "passage",
+    "source_url": "https://www.govtrack.ushttps://www.govtrack.us/congress/votes/119-2026/h85"
+  },
+  {
+    "date": "2026-03-05",
+    "vote": "Yea",
+    "question": "H.Res. 1099: Reaffirming Iran remains the largest state sponsor of terrorism.",
+    "israel_aligned": true,
+    "category": "passage_suspension",
+    "source_url": "https://www.govtrack.ushttps://www.govtrack.us/congress/votes/119-2026/h84"
+  },
+  {
+    "date": "2025-12-17",
+    "vote": "Nay",
+    "question": "H.Con.Res. 61: Directing the President, pursuant to section 5(c) of the War Powers Resolution, to remove United States Armed Forces from hos",
+    "israel_aligned": true,
+    "category": "passage",
+    "source_url": "https://www.govtrack.ushttps://www.govtrack.us/congress/votes/119-2025/h345"
+  },
+  {
+    "date": "2025-07-18",
+    "vote": "No",
+    "question": "H.Amdt. 55 (Greene) to H.R. 4016: To strike funding for the Israeli Cooperative Programs.",
+    "israel_aligned": true,
+    "category": "amendment",
+    "source_url": "https://www.govtrack.ushttps://www.govtrack.us/congress/votes/119-2025/h207"
+  },
+  {
+    "date": "2025-06-09",
+    "vote": "Yea",
+    "question": "H.Res. 481: Condemning the rise in ideologically motivated attacks on Jewish individuals in the United States, including the recent violent ",
+    "israel_aligned": true,
+    "category": "passage_suspension",
+    "source_url": "https://www.govtrack.ushttps://www.govtrack.us/congress/votes/119-2025/h159"
+  },
+  {
+    "date": "2025-06-09",
+    "vote": "Yea",
+    "question": "H.Res. 488: Denouncing the antisemitic terrorist attack in Boulder, Colorado.",
+    "israel_aligned": false,
+    "category": "passage_suspension",
+    "source_url": "https://www.govtrack.ushttps://www.govtrack.us/congress/votes/119-2025/h158"
+  },
+  {
+    "date": "2025-05-14",
+    "vote": "Yea",
+    "question": "H.Res. 352: Calling on elected officials and civil society leaders to counter antisemitism and educate the public on the contributions of th",
+    "israel_aligned": true,
+    "category": "passage_suspension",
+    "source_url": "https://www.govtrack.ushttps://www.govtrack.us/congress/votes/119-2025/h129"
+  }
+]

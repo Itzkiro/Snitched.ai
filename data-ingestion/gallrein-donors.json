@@ -1,0 +1,184 @@
+{
+  "pulled_at": "2026-04-20T19:18:32.441Z",
+  "total_donors": 540,
+  "matches": [
+    {
+      "donor": {
+        "name": "ZEKELMAN, ALAN",
+        "city": "BLOOMFIELD HILLS",
+        "state": "MI",
+        "employer": "NONE",
+        "occupation": "RETIRED",
+        "total": 3500,
+        "contribs": 1,
+        "dates": [
+          "2025-12-02"
+        ]
+      },
+      "match": "ZEKELMAN",
+      "role": "Detroit AIPAC-network steel family (saw 1 donor at $3.5K)"
+    },
+    {
+      "donor": {
+        "name": "ZEKARIA, LEON",
+        "city": "BEVERLY HILLS",
+        "state": "CA",
+        "employer": "WINDSOR",
+        "occupation": "RETAIL EXECUTIVE",
+        "total": 3500,
+        "contribs": 1,
+        "dates": [
+          "2025-12-18"
+        ]
+      },
+      "match": "ZEKARIA",
+      "role": "Saw as top max donor"
+    },
+    {
+      "donor": {
+        "name": "YEMINI, SHAULA",
+        "city": "NEW YORK",
+        "state": "NY",
+        "employer": "NONE",
+        "occupation": "RETIRED",
+        "total": 3500,
+        "contribs": 1,
+        "dates": [
+          "2025-12-18"
+        ]
+      },
+      "match": "YEMINI",
+      "role": "Saw as top max donor"
+    },
+    {
+      "donor": {
+        "name": "WITKIN, JON",
+        "city": "LOS GATOS",
+        "state": "CA",
+        "employer": "NONE",
+        "occupation": "RETIRED",
+        "total": 3500,
+        "contribs": 1,
+        "dates": [
+          "2025-12-02"
+        ]
+      },
+      "match": "WITKIN, JON",
+      "role": "Saw as top max donor"
+    },
+    {
+      "donor": {
+        "name": "WEINBERG, JOSEPH",
+        "city": "BALTIMORE",
+        "state": "MD",
+        "employer": "CORDISH COMPANIES",
+        "occupation": "REAL ESTATE",
+        "total": 3500,
+        "contribs": 1,
+        "dates": [
+          "2025-11-17"
+        ]
+      },
+      "match": "WEINBERG, JOSEPH",
+      "role": "Baltimore real estate, Jewish Federation"
+    },
+    {
+      "donor": {
+        "name": "WEINBERGER, MICHAEL",
+        "city": "TEANECK",
+        "state": "NJ",
+        "employer": "NONE",
+        "occupation": "NOT EMPLOYED",
+        "total": 3500,
+        "contribs": 1,
+        "dates": [
+          "2025-12-17"
+        ]
+      },
+      "match": "WEINBERGER",
+      "role": "Saw as top max donor"
+    },
+    {
+      "donor": {
+        "name": "RUBENSTEIN, MARILYN",
+        "city": "GLEN HEAD",
+        "state": "NY",
+        "employer": "NONE",
+        "occupation": "RETIRED",
+        "total": 3500,
+        "contribs": 1,
+        "dates": [
+          "2025-12-08"
+        ]
+      },
+      "match": "RUBEN",
+      "role": "Common AIPAC bundler surname"
+    },
+    {
+      "donor": {
+        "name": "RUBENSTEIN, BARRY",
+        "city": "GLEN HEAD",
+        "state": "NY",
+        "employer": "NONE",
+        "occupation": "RETIRED",
+        "total": 3500,
+        "contribs": 1,
+        "dates": [
+          "2025-12-08"
+        ]
+      },
+      "match": "RUBEN",
+      "role": "Common AIPAC bundler surname"
+    },
+    {
+      "donor": {
+        "name": "MILSTEIN, ADAM",
+        "city": "ENCINO",
+        "state": "CA",
+        "employer": null,
+        "occupation": null,
+        "total": 3500,
+        "contribs": 1,
+        "dates": [
+          "2025-12-05"
+        ]
+      },
+      "match": "MILSTEIN",
+      "role": "NY real estate / AIPAC"
+    },
+    {
+      "donor": {
+        "name": "WEINBERGER, JAY",
+        "city": "LIVINGSTON",
+        "state": "NJ",
+        "employer": "HOULIHAN LOKEY",
+        "occupation": "INVESTMENT BANKER",
+        "total": 2500,
+        "contribs": 1,
+        "dates": [
+          "2025-11-23"
+        ]
+      },
+      "match": "WEINBERGER",
+      "role": "Saw as top max donor"
+    },
+    {
+      "donor": {
+        "name": "SAMSON, LEE",
+        "city": "LOS ANGELES",
+        "state": "CA",
+        "employer": "PALADIN MGT",
+        "occupation": "CHAIRMAN",
+        "total": 2500,
+        "contribs": 1,
+        "dates": [
+          "2025-12-13"
+        ]
+      },
+      "match": "SAMSON, LEE",
+      "role": "AIPAC top donor"
+    }
+  ],
+  "out_of_state_count": 526,
+  "out_of_state_total": 1087272.8599999999
+}
