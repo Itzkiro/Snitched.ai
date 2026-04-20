@@ -223,8 +223,17 @@ export async function deepResearch(
     courtRecords = existingCourt as unknown as CourtRecord[];
   } else {
     log.push('[COURT] Searching CourtListener...');
-    courtRecords = await searchCourtRecords(name, log);
-    await sleep(300);
+    try {
+      courtRecords = await searchCourtRecords(name, log);
+      await sleep(300);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      if (msg.includes('Rate limited') || msg.includes('429')) {
+        log.push('[COURT] Rate limited — skipping (will be filled by court records cron)');
+      } else {
+        log.push(`[COURT] Error: ${msg}`);
+      }
+    }
   }
 
   // ===== 3. LOBBYING =====

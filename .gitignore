@@ -51,3 +51,11 @@ data-ingestion/legiscan-votes.json
 
 # Keep FEC results tracked (imported by lib/real-data.ts at build time)
 # data-ingestion/jfk-fec-results/ -- DO NOT IGNORE
+
+# Raw FEC / OH SOS itemized contribution pulls — large (10MB-100MB+),
+# rebuildable from upstream APIs at any time. The structured crossref
+# outputs (data-ingestion/*-roster-matches.json, *.csv) ARE committed.
+data-ingestion/*-itemized.json
+data-ingestion/audit-tracker.csv
+data-ingestion/audit-targets.txt
+scrapers/logs/

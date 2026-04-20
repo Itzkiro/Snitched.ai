@@ -37,7 +37,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (format === 'csv') {
-      const headers = ['Name', 'Office', 'Office Level', 'Party', 'District', 'Jurisdiction', 'Corruption Score', 'Total Funds', 'Israel Lobby Total', 'AIPAC PACs', 'Lobby Donors', 'Years in Office'];
+      const headers = ['Name', 'Office', 'Office Level', 'Party', 'District', 'Jurisdiction', 'Corruption Score', 'Total Funds', 'Pro-Israel Lobby Total', 'Pro-Israel Lobby PACs', 'Pro-Israel Lobby-Tied Donors', 'Years in Office'];
       const rows = data.map(row => {
         const breakdown = row.israel_lobby_breakdown as any;
         return [

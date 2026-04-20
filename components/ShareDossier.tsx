@@ -111,7 +111,7 @@ function generateEmbedHTML(p: Politician): string {
     <div style="padding:14px 16px;background:${lobbyBg};border:2px solid ${lobbyBorder};margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;">
       <div>
         <div style="font-size:10px;color:${lobbyColor};letter-spacing:2px;font-weight:700;">${lobbyIcon} ${lobbyLabel}</div>
-        <div style="font-size:9px;color:#4a5a4a;margin-top:3px;">Israel Lobby / AIPAC / Foreign PACs</div>
+        <div style="font-size:9px;color:#4a5a4a;margin-top:3px;">Pro-Israel Lobby / AIPAC / Foreign PACs</div>
       </div>
       <div style="font-size:28px;font-weight:700;color:${lobbyColor};text-shadow:0 0 15px ${lobbyColor}40;letter-spacing:1px;">${fmtMoney(lobby)}</div>
     </div>
@@ -131,7 +131,7 @@ ${hasRedFlags ? `
         <div style="font-size:18px;font-weight:700;color:#00FF41;">${fmtMoney(funds)}</div>
       </div>
       <div style="flex:1;padding:10px 12px;border:1px solid rgba(0,255,65,0.08);border-right:none;">
-        <div style="font-size:8px;color:#3d5a3d;letter-spacing:2px;margin-bottom:4px;">ISRAEL LOBBY</div>
+        <div style="font-size:8px;color:#3d5a3d;letter-spacing:2px;margin-bottom:4px;">PRO-ISRAEL LOBBY</div>
         <div style="font-size:18px;font-weight:700;color:${lobby > 0 ? '#FF0844' : '#3d5a3d'};">${fmtMoney(lobby)}</div>
       </div>
       <div style="flex:1;padding:10px 12px;border:1px solid rgba(0,255,65,0.08);">

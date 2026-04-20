@@ -290,14 +290,23 @@ async function main() {
   console.log();
 
   // ----- Step 1: Fetch our politicians from Supabase -----
-  const { data: dbRows, error: dbError } = await supabase
-    .from('politicians')
-    .select('bioguide_id, name, office, office_level, source_ids')
-    .order('name');
-
-  if (dbError || !dbRows) {
-    console.error('Failed to fetch politicians:', dbError);
-    process.exit(1);
+  // Page through all rows — default limit is 1000 which misses federal
+  // politicians that sort after the first 1000 names alphabetically.
+  const dbRows: any[] = [];
+  const PAGE = 1000;
+  for (let offset = 0; ; offset += PAGE) {
+    const { data: page, error: dbError } = await supabase
+      .from('politicians')
+      .select('bioguide_id, name, office, office_level, source_ids')
+      .order('name')
+      .range(offset, offset + PAGE - 1);
+    if (dbError) {
+      console.error('Failed to fetch politicians:', dbError);
+      process.exit(1);
+    }
+    if (!page || page.length === 0) break;
+    dbRows.push(...page);
+    if (page.length < PAGE) break;
   }
 
   console.log(`Fetched ${dbRows.length} politicians from Supabase\n`);

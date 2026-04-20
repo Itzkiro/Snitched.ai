@@ -193,9 +193,9 @@ export default function EmbedDossier(props: EmbedDossierProps) {
         }}>
           <div>
             <div style={{ fontSize: '10px', color: lobbyColor, letterSpacing: '2px', fontWeight: 700 }}>{lobbyIcon} {lobbyLabel}</div>
-            {(donationStatus?.subtext ?? 'Israel Lobby / AIPAC / Foreign PACs') && (
+            {(donationStatus?.subtext ?? 'Pro-Israel Lobby / AIPAC / Foreign PACs') && (
               <div style={{ fontSize: '9px', color: '#4a5a4a', marginTop: '3px' }}>
-                {donationStatus?.subtext ?? 'Israel Lobby / AIPAC / Foreign PACs'}
+                {donationStatus?.subtext ?? 'Pro-Israel Lobby / AIPAC / Foreign PACs'}
               </div>
             )}
           </div>
@@ -211,7 +211,7 @@ export default function EmbedDossier(props: EmbedDossierProps) {
             <div style={{ fontSize: '18px', fontWeight: 700, color: '#00FF41' }}>{fmtMoney(funds)}</div>
           </div>
           <div style={{ flex: 1, padding: '10px 12px', border: '1px solid rgba(0,255,65,0.08)', borderRight: 'none' }}>
-            <div style={{ fontSize: '8px', color: '#3d5a3d', letterSpacing: '2px', marginBottom: '4px' }}>ISRAEL LOBBY</div>
+            <div style={{ fontSize: '8px', color: '#3d5a3d', letterSpacing: '2px', marginBottom: '4px' }}>PRO-ISRAEL LOBBY</div>
             <div style={{ fontSize: '18px', fontWeight: 700, color: lobby > 0 ? '#FF0844' : '#3d5a3d' }}>{fmtMoney(lobby)}</div>
           </div>
           <div style={{ flex: 1, padding: '10px 12px', border: '1px solid rgba(0,255,65,0.08)' }}>

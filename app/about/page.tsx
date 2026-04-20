@@ -65,23 +65,23 @@ export default function AboutPage() {
           </p>
         </div>
 
-        {/* Israel Lobby Tracking */}
+        {/* Pro-Israel Lobby Tracking */}
         <div className="terminal-card" style={{ marginBottom: '2rem' }}>
           <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--terminal-red)', marginBottom: '1rem' }}>
-            🇮🇱 ISRAEL LOBBY TRACKING
+            🇮🇱 PRO-ISRAEL LOBBY TRACKING
           </h2>
           <p style={{ lineHeight: 1.8, fontSize: '0.9rem', marginBottom: '1rem' }}>
-            Israel lobby funding is tracked across three categories:
+            Pro-Israel lobby funding is tracked across three categories:
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.85rem' }}>
             <div style={{ padding: '0.75rem', background: 'rgba(239, 68, 68, 0.05)', border: '1px solid rgba(239, 68, 68, 0.2)' }}>
-              <span style={{ fontWeight: 700, color: 'var(--terminal-red)' }}>PACs</span> — Direct contributions from Israel lobby political action committees (AIPAC PAC, United Democracy Project, DMFI PAC, NORPAC, RJC, etc.)
+              <span style={{ fontWeight: 700, color: 'var(--terminal-red)' }}>Pro-Israel Lobby PACs</span> — Direct contributions from pro-Israel lobby political action committees (AIPAC PAC, United Democracy Project, DMFI PAC, NORPAC, RJC, etc.)
             </div>
             <div style={{ padding: '0.75rem', background: 'rgba(239, 68, 68, 0.05)', border: '1px solid rgba(239, 68, 68, 0.2)' }}>
-              <span style={{ fontWeight: 700, color: 'var(--terminal-red)' }}>Lobby Donors</span> — Individual contributions from people affiliated with Israel lobby organizations. These are bundled donations organized through AIPAC&apos;s network of donors.
+              <span style={{ fontWeight: 700, color: 'var(--terminal-red)' }}>Pro-Israel Lobby-Tied Donors</span> — Individuals who donated to this politician AND have a documented history of heavy donations to pro-Israel lobby PACs. These are the bundled donations organized through the lobby&apos;s personal-capacity donor network.
             </div>
             <div style={{ padding: '0.75rem', background: 'rgba(239, 68, 68, 0.05)', border: '1px solid rgba(239, 68, 68, 0.2)' }}>
-              <span style={{ fontWeight: 700, color: 'var(--terminal-red)' }}>Independent Expenditures</span> — Money spent by Israel lobby groups to support or oppose candidates without coordinating with their campaigns.
+              <span style={{ fontWeight: 700, color: 'var(--terminal-red)' }}>Pro-Israel Lobby IE</span> — Independent expenditures by pro-Israel lobby Super PACs to support or oppose candidates without coordinating with their campaigns.
             </div>
           </div>
           <p style={{ marginTop: '1rem', fontSize: '0.8rem', color: 'var(--terminal-text-dim)' }}>
@@ -136,7 +136,7 @@ export default function AboutPage() {
             </div>
             <div style={{ padding: '1rem', background: 'var(--terminal-bg)', border: '1px solid var(--terminal-border)', textAlign: 'center' }}>
               <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--terminal-red)', fontFamily: 'Bebas Neue, sans-serif' }}>$20.5M</div>
-              <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase' }}>Israel Lobby Tracked</div>
+              <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase' }}>Pro-Israel Lobby Tracked</div>
             </div>
             <div style={{ padding: '1rem', background: 'var(--terminal-bg)', border: '1px solid var(--terminal-border)', textAlign: 'center' }}>
               <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--terminal-amber)', fontFamily: 'Bebas Neue, sans-serif' }}>11</div>
