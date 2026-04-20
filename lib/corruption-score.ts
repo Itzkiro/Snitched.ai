@@ -287,10 +287,17 @@ function scorePacContributionRatio(p: Politician): CorruptionFactor {
     p.aipacFunding ?? 0,
   );
   const israelLobbyRatio = israelLobbyAmount / totalRaised;
-  // ANY Israel lobby money = hard penalty (min 30 points)
-  const israelPenalty = israelLobbyAmount > 0
+  // v6.6: only apply the 30pt "any Israel money" floor when the amount is
+  // meaningful (≥ \$10,000). Below that it's likely a single historical
+  // donation — punishing the same politician who has then publicly
+  // rejected AIPAC (e.g., Thomas Massie, \$5K from 2013, voted against
+  // every pro-AIPAC measure since) is a false positive.
+  const ISRAEL_FLOOR_THRESHOLD = 10_000;
+  const israelPenalty = israelLobbyAmount >= ISRAEL_FLOOR_THRESHOLD
     ? Math.max(30, Math.min(50, israelLobbyRatio * 100 * 3))
-    : 0;
+    : israelLobbyAmount > 0
+      ? Math.min(10, israelLobbyRatio * 100 * 3)  // token historical donation
+      : 0;
 
   const individualRatio = individualTotal / totalRaised;
   const individualCredit = Math.min(15, individualRatio * 20);
@@ -574,11 +581,13 @@ function scoreCampaignFinanceRedFlags(p: Politician): CorruptionFactor {
     }
   }
 
-  // Red flag 4: IMMEDIATE FLAG — ANY Israel lobby / AIPAC money
+  // Red flag 4: IMMEDIATE FLAG — meaningful Israel lobby / AIPAC money
   // v6.1: israelLobbyTotal already INCLUDES aipacFunding — take the max,
   // don't sum, to avoid 30% double-count on every AIPAC-backed politician.
+  // v6.6: threshold raised to \$10K so token historical donations don't
+  // trigger the full red flag on otherwise-clean politicians.
   const israelTotal = Math.max(p.israelLobbyTotal ?? 0, p.aipacFunding ?? 0);
-  if (israelTotal > 0) {
+  if (israelTotal >= 10_000) {
     // Baseline hard penalty
     redFlagPoints += 50;
     const israelStr = israelTotal >= 1_000_000 ? `$${(israelTotal / 1_000_000).toFixed(1)}M` : israelTotal >= 1_000 ? `$${(israelTotal / 1_000).toFixed(0)}K` : `$${israelTotal}`;
