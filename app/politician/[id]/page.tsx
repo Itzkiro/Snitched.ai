@@ -440,23 +440,38 @@ export default function PoliticianPage() {
           {/* Profile Header Card */}
           <div className="terminal-card" style={{ marginBottom: '2rem' }}>
             <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'start', flexWrap: 'wrap' }}>
-              {/* Initial/Photo */}
+              {/* Score/Grade Badge */}
               <div
                 style={{
                   width: '80px',
                   height: '80px',
                   border: `3px solid ${getScoreColor(getCorruptionScore(politician))}`,
                   display: 'flex',
+                  flexDirection: 'column',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: '4rem',
-                  fontWeight: 700,
                   color: getScoreColor(getCorruptionScore(politician)),
                   flexShrink: 0,
                   fontFamily: 'Bebas Neue, sans-serif',
+                  lineHeight: 1,
                 }}
+                aria-label={`Corruption score ${getCorruptionScore(politician)} of 100, grade ${politician.corruptionScoreDetails?.grade ?? '--'}`}
               >
-                {politician.name.charAt(0)}
+                <span style={{ fontSize: '2.25rem', fontWeight: 700 }}>
+                  {getCorruptionScore(politician)}
+                </span>
+                {politician.corruptionScoreDetails?.grade && (
+                  <span
+                    style={{
+                      fontSize: '1.1rem',
+                      fontWeight: 700,
+                      color: getGradeColor(politician.corruptionScoreDetails.grade),
+                      marginTop: '0.15rem',
+                    }}
+                  >
+                    {politician.corruptionScoreDetails.grade}
+                  </span>
+                )}
               </div>
 
               {/* Details */}
