@@ -89,6 +89,7 @@ export async function GET(
         : undefined,
       israelLobbyTotal: Number(row.israel_lobby_total) || 0,
       israelLobbyBreakdown: row.israel_lobby_breakdown as Politician['israelLobbyBreakdown'],
+      individualDonorBreakdown: row.individual_donor_breakdown as Politician['individualDonorBreakdown'],
       contributionBreakdown: row.contribution_breakdown as Politician['contributionBreakdown'],
       isActive: row.is_active as boolean,
       isCandidate: row.is_candidate as boolean,

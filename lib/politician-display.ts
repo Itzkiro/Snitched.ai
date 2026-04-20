@@ -50,15 +50,34 @@ export function getProIsraelLobbyAmount(p: PoliticianLike | Politician): number 
   return Number(aipacCamel ?? aipacSnake ?? 0) || 0;
 }
 
-/** Format a dollar amount as $XK or $X.XM. */
+/**
+ * Format a dollar amount as raw dollars with comma separators — no K/M/B
+ * abbreviation. Product decision (2026-04-20): citizens verifying claims
+ * against FEC need exact figures, not rounded summaries.
+ */
 export function formatLobbyAmount(amount: number): string {
-  if (amount >= 1_000_000) return `$${(amount / 1_000_000).toFixed(1)}M`;
-  if (amount >= 1_000) return `$${(amount / 1_000).toFixed(0)}K`;
-  return `$${Math.round(amount)}`;
+  const n = Number(amount);
+  if (!Number.isFinite(n)) return '$0';
+  const r = Math.round(n);
+  return `${r < 0 ? '-' : ''}$${Math.abs(r).toLocaleString('en-US')}`;
 }
 
 /**
- * Canonical label for the pro-Israel-lobby metric. Use this constant in
- * headings / labels so the copy stays consistent.
+ * Canonical labels for the pro-Israel-lobby metric and its breakdown. Use
+ * these constants in headings / labels so the copy stays consistent.
+ *
+ * The v2 UI (after 2026-04-20 dual-source rewrite) shows four figures on the
+ * politician detail page:
+ *   1. Total Funding                                (total_funds)
+ *   2. Total Pro-Israel Lobby                       (israel_lobby_total)
+ *   3. Pro-Israel Lobby-Tied Donors (bundlers)      (breakdown.bundlers) —
+ *        individuals who gave to this politician AND have a history of
+ *        heavy donation to pro-Israel lobby PACs.
+ *   4. Pro-Israel Lobby PACs                        (breakdown.pacs) —
+ *        direct PAC contributions.
  */
 export const PRO_ISRAEL_LOBBY_LABEL = 'Pro-Israel Lobby' as const;
+export const PRO_ISRAEL_LOBBY_TOTAL_LABEL = 'Pro-Israel Lobby Total' as const;
+export const PRO_ISRAEL_LOBBY_PACS_LABEL = 'Pro-Israel Lobby PACs' as const;
+export const PRO_ISRAEL_LOBBY_BUNDLERS_LABEL = 'Pro-Israel Lobby-Tied Donors' as const;
+export const PRO_ISRAEL_LOBBY_IE_LABEL = 'Pro-Israel Lobby IE' as const;

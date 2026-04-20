@@ -1015,81 +1015,93 @@ export default function PoliticianPage() {
             <div>
               {politician.totalFundsRaised ? (
                 <div style={{ display: 'grid', gap: '2rem' }}>
-                  {/* Total Funds Collected Card */}
+                  {/* Total Funding Card — receipts + IE support combined */}
                   <div className="terminal-card">
                     <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--terminal-amber)' }}>
-                      💰 TOTAL FUNDS RAISED
+                      💰 TOTAL FUNDING BEHIND CANDIDATE
                     </h3>
-                    <div style={{
-                      fontSize: '4rem',
-                      fontWeight: 700, 
-                      marginBottom: '0.5rem',
-                      color: 'var(--terminal-amber)',
-                      fontFamily: 'Bebas Neue, sans-serif',
-                    }}>
-                      ${politician.totalFundsRaised >= 1000000 
-                        ? `${(politician.totalFundsRaised / 1000000).toFixed(0)}M`
-                        : `${(politician.totalFundsRaised / 1000).toFixed(0)}K`}
-                    </div>
-                    <div style={{ fontSize: '0.875rem', color: 'var(--terminal-text-dim)', marginBottom: '2rem' }}>
-                      Total Campaign Contributions
-                    </div>
+                    {(() => {
+                      const receipts = Number(politician.totalFundsRaised) || 0;
+                      const ie = Number(politician.israelLobbyBreakdown?.ie) || 0;
+                      const combined = receipts + ie;
+                      return (
+                        <>
+                          <div style={{
+                            fontSize: '4rem',
+                            fontWeight: 700,
+                            marginBottom: '0.5rem',
+                            color: 'var(--terminal-amber)',
+                            fontFamily: 'Bebas Neue, sans-serif',
+                          }}>
+                            {formatLobbyAmount(combined)}
+                          </div>
+                          <div style={{ fontSize: '0.875rem', color: 'var(--terminal-text-dim)', marginBottom: '1rem' }}>
+                            Direct committee receipts + Independent Expenditures supporting this candidate
+                          </div>
+                          <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                            gap: '0.75rem',
+                            marginBottom: '2rem',
+                          }}>
+                            <div style={{ padding: '0.75rem', background: 'rgba(251, 191, 36, 0.08)', border: '1px solid rgba(251, 191, 36, 0.25)' }}>
+                              <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Committee Receipts (FEC)</div>
+                              <div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--terminal-amber)', fontFamily: 'Bebas Neue, sans-serif' }}>
+                                {formatLobbyAmount(receipts)}
+                              </div>
+                            </div>
+                            <div style={{ padding: '0.75rem', background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.25)' }}>
+                              <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Independent Expenditures</div>
+                              <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#ef4444', fontFamily: 'Bebas Neue, sans-serif' }}>
+                                {formatLobbyAmount(ie)}
+                              </div>
+                            </div>
+                          </div>
+                        </>
+                      );
+                    })()}
                     {/* Israel Lobby Total - RED HIGHLIGHT */}
                     {politician.israelLobbyTotal && politician.israelLobbyTotal > 0 && (
-                      <div style={{ 
+                      <div style={{
                         borderTop: '2px solid var(--terminal-red)',
                         paddingTop: '1.5rem',
                         marginTop: '1rem',
                       }}>
                         <div style={{ fontSize: '0.875rem', color: 'var(--terminal-red)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700 }}>
-                          🇮🇱 ISRAEL LOBBY TOTAL
+                          🇮🇱 TOTAL PRO-ISRAEL LOBBY
                         </div>
-                        <div style={{ 
-                          fontSize: '3rem', 
-                          fontWeight: 700, 
+                        <div style={{
+                          fontSize: '3rem',
+                          fontWeight: 700,
                           color: '#ef4444',
                           fontFamily: 'Bebas Neue, sans-serif',
                           marginBottom: '1.5rem',
                         }}>
-                          ${politician.israelLobbyTotal >= 1000000 
-                            ? `${(politician.israelLobbyTotal / 1000000).toFixed(0)}M`
-                            : `${(politician.israelLobbyTotal / 1000).toFixed(0)}K`}
+                          {formatLobbyAmount(politician.israelLobbyTotal)}
                         </div>
-                        
+
                         {/* Breakdown */}
-                        <div style={{ 
-                          display: 'grid', 
-                          gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', 
+                        <div style={{
+                          display: 'grid',
+                          gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
                           gap: '1rem',
                         }}>
                           <div style={{ padding: '1rem', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem' }}>PACs</div>
+                            <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem' }} title="Direct contributions from pro-Israel lobby PACs (AIPAC PAC, United Democracy Project, DMFI, NORPAC, RJC, etc.)">Pro-Israel Lobby PACs</div>
                             <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ef4444', fontFamily: 'Bebas Neue, sans-serif' }}>
-                              ${politician.israelLobbyBreakdown?.pacs 
-                                ? (politician.israelLobbyBreakdown.pacs >= 1000000 
-                                  ? `${(politician.israelLobbyBreakdown.pacs / 1000000).toFixed(0)}M`
-                                  : `${(politician.israelLobbyBreakdown.pacs / 1000).toFixed(0)}K`)
-                                : '$0'}
+                              {formatLobbyAmount(Number(politician.israelLobbyBreakdown?.pacs) || 0)}
                             </div>
                           </div>
                           <div style={{ padding: '1rem', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem' }}>IE</div>
+                            <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem' }} title="Independent expenditures by pro-Israel lobby Super PACs supporting or opposing this candidate">Pro-Israel Lobby IE</div>
                             <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ef4444', fontFamily: 'Bebas Neue, sans-serif' }}>
-                              ${politician.israelLobbyBreakdown?.ie 
-                                ? (politician.israelLobbyBreakdown.ie >= 1000000 
-                                  ? `${(politician.israelLobbyBreakdown.ie / 1000000).toFixed(0)}M`
-                                  : `${(politician.israelLobbyBreakdown.ie / 1000).toFixed(0)}K`)
-                                : '$0'}
+                              {formatLobbyAmount(Number(politician.israelLobbyBreakdown?.ie) || 0)}
                             </div>
                           </div>
                           <div style={{ padding: '1rem', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem' }}>Lobby Donors</div>
+                            <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem' }} title="Individuals who donated to this candidate AND have a history of heavy donations to pro-Israel lobby PACs">Pro-Israel Lobby-Tied Donors</div>
                             <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ef4444', fontFamily: 'Bebas Neue, sans-serif' }}>
-                              ${politician.israelLobbyBreakdown?.bundlers
-                                ? (politician.israelLobbyBreakdown.bundlers >= 1000000
-                                  ? `${(politician.israelLobbyBreakdown.bundlers / 1000000).toFixed(1)}M`
-                                  : `${(politician.israelLobbyBreakdown.bundlers / 1000).toFixed(0)}K`)
-                                : '$0'}
+                              {formatLobbyAmount(Number(politician.israelLobbyBreakdown?.bundlers) || 0)}
                             </div>
                           </div>
                         </div>
@@ -1153,9 +1165,7 @@ export default function PoliticianPage() {
                               color: index === 0 ? 'var(--terminal-amber)' : donor.type === 'Israel-PAC' ? '#ef4444' : 'var(--terminal-text)',
                               fontFamily: 'Bebas Neue, sans-serif',
                             }}>
-                              ${donor.amount >= 1000000
-                                ? `${(donor.amount / 1000000).toFixed(0)}M`
-                                : `${(donor.amount / 1000).toFixed(0)}K`}
+                              {formatLobbyAmount(donor.amount)}
                             </div>
                             <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginTop: '0.5rem', textTransform: 'uppercase' }}>
                               {donor.type}
@@ -1185,7 +1195,7 @@ export default function PoliticianPage() {
                           { label: 'Individuals', amount: b.individuals || 0, color: 'var(--terminal-green)' },
                           { label: 'PACs', amount: b.otherPACs || 0, color: 'var(--terminal-amber)' },
                           { label: 'Corporate', amount: b.corporate || 0, color: '#60a5fa' },
-                          ...(b.aipac > 0 ? [{ label: 'Israel Lobby', amount: b.aipac, color: '#ef4444' }] : []),
+                          ...(b.aipac > 0 ? [{ label: 'Pro-Israel Lobby', amount: b.aipac, color: '#ef4444' }] : []),
                         ].filter(s => s.amount > 0).sort((a, b) => b.amount - a.amount);
                         return (
                           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -1211,11 +1221,7 @@ export default function PoliticianPage() {
                                     </span>
                                   </div>
                                   <span style={{ fontWeight: 700, fontFamily: 'Bebas Neue, sans-serif', color: s.color, fontSize: '1.1rem' }}>
-                                    ${s.amount >= 1000000
-                                      ? `${(s.amount / 1000000).toFixed(1)}M`
-                                      : s.amount >= 10000
-                                        ? `${(s.amount / 1000).toFixed(0)}K`
-                                        : s.amount.toLocaleString()}
+                                    {formatLobbyAmount(s.amount)}
                                   </span>
                                 </div>
                               ))}
@@ -1285,11 +1291,7 @@ export default function PoliticianPage() {
                               color: ie.is_israel_lobby ? '#ef4444' : 'var(--terminal-amber)',
                               whiteSpace: 'nowrap',
                             }}>
-                              ${ie.amount >= 1000000
-                                ? `${(ie.amount / 1000000).toFixed(1)}M`
-                                : ie.amount >= 1000
-                                  ? `${(ie.amount / 1000).toFixed(0)}K`
-                                  : ie.amount.toLocaleString()}
+                              {formatLobbyAmount(ie.amount)}
                             </div>
                           </div>
                         ))}
@@ -1690,9 +1692,11 @@ interface TreeNode {
 }
 
 function formatAmount(n: number): string {
-  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`;
-  if (n >= 1_000) return `$${(n / 1_000).toFixed(0)}K`;
-  return `$${n.toLocaleString()}`;
+  // Raw dollars only — no K/M rounding so numbers match across the whole page
+  // and citizens verifying against FEC see exact figures.
+  if (!Number.isFinite(n)) return '$0';
+  const r = Math.round(n);
+  return `${r < 0 ? '-' : ''}$${Math.abs(r).toLocaleString('en-US')}`;
 }
 
 function ConnectionsTree({ politician }: { politician: Politician }) {
@@ -1804,7 +1808,7 @@ function ConnectionsTree({ politician }: { politician: Politician }) {
       ];
       fundingChildren.push({
         id: 'funding-israel',
-        label: 'Israel Lobby',
+        label: 'Pro-Israel Lobby',
         amount: politician.israelLobbyTotal || breakdown.aipac,
         color: '#ef4444',
         icon: '🇮🇱',
@@ -1905,7 +1909,7 @@ function ConnectionsTree({ politician }: { politician: Politician }) {
         amount: ie.amount,
         color: ie.support_oppose === 'support' ? 'var(--terminal-green)' : '#ef4444',
         icon: ie.support_oppose === 'support' ? '✓' : '✗',
-        tag: ie.is_israel_lobby ? 'ISRAEL LOBBY' : ie.support_oppose === 'support' ? 'SUPPORT' : 'OPPOSE',
+        tag: ie.is_israel_lobby ? 'PRO-ISRAEL LOBBY' : ie.support_oppose === 'support' ? 'SUPPORT' : 'OPPOSE',
       }));
 
     tree.push({
@@ -2004,7 +2008,7 @@ function ConnectionsTree({ politician }: { politician: Politician }) {
             </span>
           </div>
           <div>
-            <span style={{ fontWeight: 700, color: '#ef4444' }}>🇮🇱 Israel Lobby</span>
+            <span style={{ fontWeight: 700, color: '#ef4444' }}>🇮🇱 Pro-Israel Lobby</span>
             <span style={{ color: 'var(--terminal-text-dim)', marginLeft: '0.5rem' }}>
               — PACs, Super PACs, and organizations affiliated with pro-Israel advocacy groups (e.g., AIPAC, United Democracy Project, Democratic Majority for Israel). Tracked separately due to significant influence on US foreign policy.
             </span>

@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS politicians (
   israel_lobby_total      NUMERIC DEFAULT 0,
   israel_lobby_breakdown  JSONB,
   contribution_breakdown  JSONB DEFAULT NULL, -- {aipac, otherPACs, individuals, corporate}
+  individual_donor_breakdown JSONB DEFAULT NULL, -- per-donor pro-Israel registry crossref
 
   -- Status
   is_active       BOOLEAN DEFAULT true,

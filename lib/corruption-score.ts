@@ -798,9 +798,10 @@ function computeDataCompleteness(factors: CorruptionFactor[]): number {
 // ---------------------------------------------------------------------------
 
 function formatMoney(amount: number): string {
-  if (amount >= 1_000_000) return `${(amount / 1_000_000).toFixed(1)}M`;
-  if (amount >= 1_000) return `${(amount / 1_000).toFixed(0)}K`;
-  return amount.toFixed(0);
+  // Raw dollars with comma separators — no K/M/B abbreviation (2026-04-20).
+  const n = Number(amount);
+  if (!Number.isFinite(n)) return '0';
+  return Math.round(Math.abs(n)).toLocaleString('en-US');
 }
 
 // ---------------------------------------------------------------------------

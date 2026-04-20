@@ -88,6 +88,32 @@ export interface Politician {
     corporate: number;
   };
   israelLobbyTotal?: number;
+  /**
+   * Per-donor cross-reference vs the pro-Israel individual donor registry
+   * (data/pro-israel-donors-YYYY.csv). Populated by crossref-*-pro-israel.ts
+   * scripts. Complements israelLobbyBreakdown which only covers PAC-level giving.
+   */
+  individualDonorBreakdown?: {
+    itemized_individual_rows: number;
+    matches: number;
+    high_confidence: number;
+    medium_confidence: number;
+    to_candidate: number;
+    these_donors_to_pro_israel_career: number;
+    match_rate_pct: number;
+    top_donors: Array<{
+      name: string;
+      state: string;
+      to_candidate: number;
+      to_pro_israel_career: number;
+      candidate_cycles: string[];
+      pro_israel_cycles: string[];
+      pacs: string[];
+      confidence: 'high' | 'medium';
+    }>;
+    source: string;
+    generated_at: string;
+  };
   israelLobbyBreakdown?: {
     total: number;
     pacs: number;
