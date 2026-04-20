@@ -842,6 +842,24 @@ export function computeCorruptionScore(politician: Politician): CorruptionScoreR
     totalScore *= multiplier;
   }
 
+  // v6.5: Curator-added red_flags contribute to the score so manual research
+  // isn't invisible in the number. Prior behavior: red_flags were only shown
+  // on a separate "FLAGS" tab and didn't affect corruption_score at all.
+  // That meant politicians like Amy Acton (4 curator-high-severity flags
+  // re: COVID overreach + adverse court rulings) scored 0 numerically while
+  // having documented concerns. Now each red flag adds raw points:
+  //   high severity: +5 pts each
+  //   med severity:  +2 pts each
+  // Capped at +30 total so curator additions can't dominate algorithmic
+  // signal — they supplement, don't replace.
+  const redFlagsList = (politician.source_ids as { red_flags?: Array<{ severity?: string }> } | undefined)?.red_flags ?? [];
+  if (redFlagsList.length > 0) {
+    const highCount = redFlagsList.filter(f => f.severity === 'high').length;
+    const medCount = redFlagsList.filter(f => f.severity === 'med').length;
+    const redFlagContribution = Math.min(30, highCount * 5 + medCount * 2);
+    totalScore += redFlagContribution;
+  }
+
   // v6.3: juice_box_tier hard floors. Captured politicians can't score below
   // these thresholds — the tier is a curator-verified signal that structur-
   // ally overrides ratio-based arithmetic.
