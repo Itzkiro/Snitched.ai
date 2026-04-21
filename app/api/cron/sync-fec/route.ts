@@ -419,7 +419,7 @@ export async function GET(request: NextRequest) {
 
     const { data: withFecRaw, error: err1 } = await supabase
       .from('politicians')
-      .select('bioguide_id, name, office, office_level, source_ids')
+      .select('bioguide_id, name, office, office_level, source_ids, israel_lobby_breakdown, aipac_funding, top5_donors')
       .eq('is_active', true)
       .eq('office_level', 'federal')
       .not('source_ids->fec_candidate_id', 'is', null)
@@ -443,7 +443,7 @@ export async function GET(request: NextRequest) {
     if (remaining > 0) {
       const { data, error: err2 } = await supabase
         .from('politicians')
-        .select('bioguide_id, name, office, office_level, source_ids')
+        .select('bioguide_id, name, office, office_level, source_ids, israel_lobby_breakdown, aipac_funding, top5_donors')
         .eq('is_active', true)
         .eq('office_level', 'federal')
         .or('source_ids->fec_candidate_id.is.null,source_ids.is.null')
@@ -625,15 +625,46 @@ export async function GET(request: NextRequest) {
 
         // --- 2g. Final aggregates (bigint columns — whole numbers only) ---
         const totalFunds = Math.round(totals.raised);
-        const aipacFunding = Math.round(aipacDirect + aipacIe);
-        const israelLobbyTotal = Math.round(israelLobbyPacTotal + israelLobbyIeTotal);
+
+        // PRESERVE roster-match artifacts (bundlers, individual_bundlers,
+        // pac_details, bundlers_by_source) from the existing row. The roster-
+        // match pipeline (flag-bundlers-batch.ts, refresh-*-roster cron) owns
+        // those fields; sync-fec owns only the PAC/IE/total-funds side.
+        const politicianRaw = politician as unknown as Record<string, unknown>;
+        const existingBreakdown = (politicianRaw.israel_lobby_breakdown || {}) as Record<string, unknown>;
+        const existingBundlers = Number(existingBreakdown.bundlers) || 0;
+        const existingBundlersBySource = existingBreakdown.bundlers_by_source;
+        const existingIndividualBundlers = existingBreakdown.individual_bundlers;
+        const existingPacDetails = existingBreakdown.pac_details;
+        const existingPacsByCycle = existingBreakdown.pacs_by_cycle;
+        const existingScoringRule = existingBreakdown.scoring_rule;
+
+        // Career-view AIPAC/IE computation.
+        // If sync-fec's single-cycle pull produces a SMALLER pacs figure than
+        // what's already in the row (because a roster-match script wrote a
+        // career-sum value), keep the larger number — we don't want daily
+        // cron to regress real data.
+        const incomingPacs = Math.round(israelLobbyPacTotal);
+        const existingPacs = Number(existingBreakdown.pacs) || 0;
+        const finalPacs = Math.max(incomingPacs, existingPacs);
+        const incomingAipac = Math.round(aipacDirect + aipacIe);
+        const existingAipac = Number(politicianRaw.aipac_funding) || 0;
+        const finalAipac = Math.max(incomingAipac, existingAipac);
+
+        const aipacFunding = finalAipac;
+        const israelLobbyTotal = finalPacs + Math.round(israelLobbyIeTotal) + existingBundlers;
 
         const israelLobbyBreakdown = {
           total: israelLobbyTotal,
-          pacs: Math.round(israelLobbyPacTotal),
+          pacs: finalPacs,
           ie: Math.round(israelLobbyIeTotal),
           ie_details: ieBreakdown,
-          bundlers: 0,
+          bundlers: existingBundlers,                // preserve roster-match
+          ...(existingBundlersBySource ? { bundlers_by_source: existingBundlersBySource } : {}),
+          ...(existingIndividualBundlers ? { individual_bundlers: existingIndividualBundlers } : {}),
+          ...(existingPacDetails ? { pac_details: existingPacDetails } : {}),
+          ...(existingPacsByCycle ? { pacs_by_cycle: existingPacsByCycle } : {}),
+          ...(existingScoringRule ? { scoring_rule: existingScoringRule } : {}),
         };
 
         const contributionBreakdown = {
@@ -644,6 +675,15 @@ export async function GET(request: NextRequest) {
         };
 
         // --- 2h. Upsert to Supabase ---
+        // top5_donors is also owned by the roster-match pipeline when it has
+        // AIPAC-as-top-donor data. Skip overwriting if existing row has an
+        // AIPAC/NORPAC/UDP entry in top5 (indicates roster-match already ran).
+        const existingTop5 = (politicianRaw.top5_donors || []) as Array<Record<string, unknown>>;
+        const existingHasProIsraelTop = existingTop5.some(d =>
+          /AIPAC|NORPAC|UNITED DEMOCRACY PROJECT|DMFI|NATIONAL PAC|PRO.?ISRAEL/i.test(String(d?.name || ''))
+        );
+        const top5ToWrite = existingHasProIsraelTop ? existingTop5 : top5Donors;
+
         const { error: updateError } = await supabase
           .from('politicians')
           .update({
@@ -652,8 +692,8 @@ export async function GET(request: NextRequest) {
             israel_lobby_total: israelLobbyTotal,
             israel_lobby_breakdown: israelLobbyBreakdown,
             contribution_breakdown: contributionBreakdown,
-            top5_donors: top5Donors,
-            data_source: 'fec_api',
+            top5_donors: top5ToWrite,
+            data_source: existingHasProIsraelTop ? 'fec_api+roster_match' : 'fec_api',
             updated_at: new Date().toISOString(),
           })
           .eq('bioguide_id', politician.bioguide_id);

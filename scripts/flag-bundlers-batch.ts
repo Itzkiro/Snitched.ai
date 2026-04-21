@@ -41,6 +41,12 @@ interface CandidateConfig {
   key: string;                 // CLI `--only` filter key
   nameLike: string;            // for self-exclusion (skip contributions from the candidate to themselves)
   sources: SourceConfig[];
+  // Scoring rule for the `bundlers` field (what drives the corruption score):
+  //   'career_sum'      — sum across ALL sources (right for federal incumbents;
+  //                       multi-cycle House runs are one entrenched career)
+  //   'current_campaign' — primary-source only (right for state candidates where
+  //                       the proxy source isn't the same race)
+  scoringRule?: 'career_sum' | 'current_campaign';
 }
 
 const CANDIDATES: CandidateConfig[] = [
@@ -48,6 +54,7 @@ const CANDIDATES: CandidateConfig[] = [
     bioguideId: 'ky-04-thomas-massie',
     key: 'massie',
     nameLike: 'MASSIE',
+    scoringRule: 'career_sum',
     sources: [
       { path: 'data-ingestion/massie-fec-2026-itemized.json', sourceTag: 'fec_2026_house', label: '2026 KY-4 House campaign (FEC, current cycle)', isPrimary: true },
       { path: 'data-ingestion/massie-fec-2024-itemized.json', sourceTag: 'fec_2024_house', label: '2024 KY-4 House campaign (FEC, prior cycle)', isPrimary: false },
@@ -58,6 +65,7 @@ const CANDIDATES: CandidateConfig[] = [
     bioguideId: 'ky-04-2026-ed-gallrein',
     key: 'gallrein',
     nameLike: 'GALLREIN',
+    scoringRule: 'current_campaign',  // first-time candidate, only 2026 data
     sources: [
       { path: 'data-ingestion/gallrein-fec-2026-itemized.json', sourceTag: 'fec_2026_house', label: '2026 KY-4 House challenge (FEC, first-time candidate)', isPrimary: true },
     ],
@@ -66,6 +74,7 @@ const CANDIDATES: CandidateConfig[] = [
     bioguideId: 'fl-21-2026-bernard-taylor',
     key: 'taylor',
     nameLike: 'TAYLOR',
+    scoringRule: 'current_campaign',
     sources: [
       { path: 'data-ingestion/taylor-fec-2026-itemized.json', sourceTag: 'fec_2026_house', label: '2026 FL-21 House challenge (FEC, first-time candidate)', isPrimary: true },
     ],
@@ -74,16 +83,18 @@ const CANDIDATES: CandidateConfig[] = [
     bioguideId: '317b2e4e-5dcf-478b-bad4-1518d0fc20c2',
     key: 'mast',
     nameLike: 'MAST',
+    scoringRule: 'career_sum',
     sources: [
       { path: 'data-ingestion/mast-fec-2026-itemized.json', sourceTag: 'fec_2026_house', label: '2026 FL-21 House campaign (FEC, current cycle)', isPrimary: true },
       { path: 'data-ingestion/mast-fec-2024-itemized.json', sourceTag: 'fec_2024_house', label: '2024 FL-21 House campaign (FEC, prior cycle)', isPrimary: false },
-      { path: 'data-ingestion/mast-fec-2022-itemized.json', sourceTag: 'fec_2022_house', label: '2022 FL-21 House campaign (FEC, historical, partial pull)', isPrimary: false },
+      { path: 'data-ingestion/mast-fec-2022-itemized.json', sourceTag: 'fec_2022_house', label: '2022 FL-21 House campaign (FEC, historical)', isPrimary: false },
     ],
   },
   {
     bioguideId: 'ny-15-ritchie-torres',
     key: 'torres',
     nameLike: 'TORRES',
+    scoringRule: 'career_sum',
     sources: [
       { path: 'data-ingestion/torres-fec-2026-itemized.json', sourceTag: 'fec_2026_house', label: '2026 NY-15 House campaign (FEC, current cycle)', isPrimary: true },
       { path: 'data-ingestion/torres-fec-2024-itemized.json', sourceTag: 'fec_2024_house', label: '2024 NY-15 House campaign (FEC, prior cycle)', isPrimary: false },
@@ -324,16 +335,24 @@ async function processCandidate(
     };
   }
 
-  const scoringBundlers = primary.total;
+  // Scoring rule: 'career_sum' (federal incumbents — sum across all cycles
+  // of same race, reflects true career capture) or 'current_campaign'
+  // (state races / first-time candidates — current filing only). Default
+  // is current_campaign for backward compat with the v1 behavior.
+  const scoringRule = config.scoringRule ?? 'current_campaign';
+  const scoringBundlers = scoringRule === 'career_sum'
+    ? perSource.reduce((sum, s) => sum + s.total, 0)
+    : primary.total;
   const allCycles = new Set<string>();
   for (const d of merged) for (const c of d.pro_israel_cycles) allCycles.add(c);
 
   const newBreakdown = {
     pacs: existingPacs,                                     // preserve
     ie: existingIe,                                         // preserve
-    bundlers: scoringBundlers,                              // from primary only
+    bundlers: scoringBundlers,                              // scoring rule applied
     total: existingPacs + existingIe + scoringBundlers,
     cycles_count: allCycles.size,
+    scoring_rule: scoringRule,
     source: perSource.map(s => s.sourceTag).join('+'),
     bundlers_by_source: bundlersBySource,
     individual_bundlers: merged.map(d => ({
