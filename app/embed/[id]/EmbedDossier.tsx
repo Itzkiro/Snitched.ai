@@ -43,7 +43,9 @@ export default function EmbedDossier(props: EmbedDossierProps) {
   const [view, setView] = useState<'score' | 'flags'>('score');
 
   // Self-funding signal: any top donor marked "(SELF)" in name.
-  const isSelfFunded = topDonors.some(d => /\(SELF\)/i.test(d.name));
+  const selfDonor = topDonors.find(d => /\(SELF\)/i.test(d.name));
+  const isSelfFunded = !!selfDonor;
+  const selfPct = isSelfFunded && funds > 0 ? (selfDonor!.amount / funds) * 100 : 0;
 
   // Color precedence: curator red_flags → red; self-funded → orange; else grade baseline.
   const gc = hasRedFlags ? '#FF0844' : isSelfFunded ? '#f59e0b' : baselineGradeColor;
@@ -206,6 +208,29 @@ export default function EmbedDossier(props: EmbedDossierProps) {
           </div>
         </div>
 
+        {/* Self-funded banner — promoted from Top Donors when candidate self-funds */}
+        {isSelfFunded && (
+          <div style={{
+            padding: '14px 16px',
+            background: 'rgba(255,8,68,0.06)',
+            border: '2px solid rgba(255,8,68,0.4)',
+            marginBottom: '16px',
+            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+          }}>
+            <div>
+              <div style={{ fontSize: '10px', color: '#FF0844', letterSpacing: '2px', fontWeight: 700 }}>
+                ⚠ SELF-FUNDED CANDIDATE
+              </div>
+              <div style={{ fontSize: '9px', color: '#4a5a4a', marginTop: '3px' }}>
+                {selfDonor!.name} — {selfPct.toFixed(0)}% of total raised
+              </div>
+            </div>
+            <div style={{ fontSize: '28px', fontWeight: 700, color: '#FF0844', textShadow: '0 0 15px rgba(255,8,68,0.25)', letterSpacing: '1px' }}>
+              {fmtMoney(selfDonor!.amount)}
+            </div>
+          </div>
+        )}
+
         {/* Stats row */}
         <div style={{ display: 'flex', gap: '0', marginBottom: '16px' }}>
           <div style={{ flex: 1, padding: '10px 12px', border: '1px solid rgba(0,255,65,0.08)', borderRight: 'none' }}>
@@ -225,17 +250,20 @@ export default function EmbedDossier(props: EmbedDossierProps) {
         {/* Top Donors */}
         <div style={{ marginBottom: '4px' }}>
           <div style={{ fontSize: '9px', color: '#3d5a3d', letterSpacing: '2px', marginBottom: '6px' }}>TOP DONORS</div>
-          {topDonors.length > 0 ? topDonors.map((d, i) => (
+          {(() => {
+            const list = topDonors.filter(d => !/\(SELF\)/i.test(d.name));
+            return list.length > 0 ? list.map((d, i) => (
             <div key={i} style={{
               display: 'flex', justifyContent: 'space-between', padding: '3px 0',
-              borderBottom: i < topDonors.length - 1 ? '1px solid rgba(0,255,65,0.06)' : 'none',
+              borderBottom: i < list.length - 1 ? '1px solid rgba(0,255,65,0.06)' : 'none',
             }}>
-              <span style={{ fontSize: '11px', color: /\(SELF\)/i.test(d.name) ? '#FF0844' : '#8a9a8a' }}>{d.name}</span>
-              <span style={{ fontSize: '11px', fontWeight: 700, color: d.type === 'Israel-PAC' || /\(SELF\)/i.test(d.name) ? '#FF0844' : '#00FF41' }}>{fmtMoney(d.amount)}</span>
+              <span style={{ fontSize: '11px', color: '#8a9a8a' }}>{d.name}</span>
+              <span style={{ fontSize: '11px', fontWeight: 700, color: d.type === 'Israel-PAC' ? '#FF0844' : '#00FF41' }}>{fmtMoney(d.amount)}</span>
             </div>
           )) : (
             <div style={{ fontSize: '11px', color: '#3d5a3d' }}>No donor data yet</div>
-          )}
+          );
+          })()}
         </div>
       </div>
 
