@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-04-20T22:14:43.877Z",
+  "generated_at": "2026-04-21T01:15:08.132Z",
   "candidate": {
     "bioguide_id": "ky-04-thomas-massie",
     "name": "Thomas Massie",
     "fec_candidate_id": "H2KY04121"
   },
-  "master_individuals_indexed": 27249,
+  "master_individuals_indexed": 27578,
   "itemized_individual_rows": 8236,
   "matches": [
     {
@@ -168,32 +168,6 @@
         "Mainstream Democrats PAC"
       ],
       "confidence": "high"
-    },
-    {
-      "donorName": "SMITH, COLIN",
-      "firstFromMaster": "COLIN",
-      "state": "MN",
-      "city": "MINNEAPOLIS",
-      "employer": "SILVER MOUNTAIN PARTNERS",
-      "candidateTotal": 20,
-      "candidateContribCount": 1,
-      "candidateCycles": [
-        "2026"
-      ],
-      "proIsraelTotal": 107475,
-      "proIsraelContribCount": 32,
-      "proIsraelCycles": [
-        "2020",
-        "2022",
-        "2023",
-        "2024"
-      ],
-      "proIsraelPacs": [
-        "Pro-Israel America PAC",
-        "AIPAC PAC",
-        "United Democracy Project (UDP)"
-      ],
-      "confidence": "medium"
     },
     {
       "donorName": "BAKER, ALICE",
@@ -554,47 +528,6 @@
       "confidence": "medium"
     },
     {
-      "donorName": "MORGAN, LOUIS",
-      "firstFromMaster": "LOUIS",
-      "state": "AZ",
-      "city": "TUCSON",
-      "employer": "SELF/INVESTMENTS",
-      "candidateTotal": 1500,
-      "candidateContribCount": 1,
-      "candidateCycles": [
-        "2018"
-      ],
-      "proIsraelTotal": 25800,
-      "proIsraelContribCount": 50,
-      "proIsraelCycles": [
-        "2001",
-        "2002",
-        "2003",
-        "2004",
-        "2005",
-        "2006",
-        "2007",
-        "2008",
-        "2009",
-        "2010",
-        "2012",
-        "2013",
-        "2014",
-        "2015",
-        "2016",
-        "2017",
-        "2018",
-        "2019",
-        "2021",
-        "2022",
-        "2023"
-      ],
-      "proIsraelPacs": [
-        "The Desert Caucus"
-      ],
-      "confidence": "medium"
-    },
-    {
       "donorName": "TATE, JOANNE",
       "firstFromMaster": "JOANNE",
       "state": "FL",
@@ -922,6 +855,34 @@
       "confidence": "medium"
     },
     {
+      "donorName": "SCHAEFER, ROWLAND",
+      "firstFromMaster": "ROWLAND",
+      "state": "FL",
+      "city": "MIAMI",
+      "employer": "CLAIRE S STORES INC",
+      "candidateTotal": 300,
+      "candidateContribCount": 3,
+      "candidateCycles": [
+        "2022"
+      ],
+      "proIsraelTotal": 12000,
+      "proIsraelContribCount": 9,
+      "proIsraelCycles": [
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2005",
+        "2006",
+        "2007"
+      ],
+      "proIsraelPacs": [
+        "National PAC",
+        "Washington PAC"
+      ],
+      "confidence": "medium"
+    },
+    {
       "donorName": "GREENBERG, JEREMY",
       "firstFromMaster": "JEREMY",
       "state": "NY",
@@ -990,32 +951,6 @@
       ],
       "proIsraelPacs": [
         "AIPAC PAC"
-      ],
-      "confidence": "medium"
-    },
-    {
-      "donorName": "SCHAEFER, ROWLAND",
-      "firstFromMaster": "ROWLAND",
-      "state": "FL",
-      "city": "MIAMI",
-      "employer": "CLAIRE S STORES INC /PRESIDENT",
-      "candidateTotal": 300,
-      "candidateContribCount": 3,
-      "candidateCycles": [
-        "2022"
-      ],
-      "proIsraelTotal": 11000,
-      "proIsraelContribCount": 8,
-      "proIsraelCycles": [
-        "2001",
-        "2002",
-        "2003",
-        "2005",
-        "2006",
-        "2007"
-      ],
-      "proIsraelPacs": [
-        "Washington PAC"
       ],
       "confidence": "medium"
     },
@@ -1179,32 +1114,6 @@
         "2022"
       ],
       "proIsraelPacs": [
-        "AIPAC PAC"
-      ],
-      "confidence": "medium"
-    },
-    {
-      "donorName": "SMITH, EDWARD",
-      "firstFromMaster": "EDWARD",
-      "state": "CT",
-      "city": "STAMFORD",
-      "employer": "RETIRED",
-      "candidateTotal": 40.4,
-      "candidateContribCount": 2,
-      "candidateCycles": [
-        "2020"
-      ],
-      "proIsraelTotal": 7750,
-      "proIsraelContribCount": 7,
-      "proIsraelCycles": [
-        "2020",
-        "2021",
-        "2022",
-        "2023",
-        "2024"
-      ],
-      "proIsraelPacs": [
-        "Pro-Israel America PAC",
         "AIPAC PAC"
       ],
       "confidence": "medium"
@@ -1446,6 +1355,31 @@
       "confidence": "medium"
     },
     {
+      "donorName": "LEE, BERT",
+      "firstFromMaster": "BERT",
+      "state": "AZ",
+      "city": "TUCSON",
+      "employer": "RETIRED",
+      "candidateTotal": 1000,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 6000,
+      "proIsraelContribCount": 10,
+      "proIsraelCycles": [
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004"
+      ],
+      "proIsraelPacs": [
+        "The Desert Caucus"
+      ],
+      "confidence": "medium"
+    },
+    {
       "donorName": "HAMILTON, MELISSA",
       "firstFromMaster": "MELISSA",
       "state": "CA",
@@ -1492,6 +1426,41 @@
         "AIPAC PAC"
       ],
       "confidence": "high"
+    },
+    {
+      "donorName": "LEAVITT, JOYCE",
+      "firstFromMaster": "JOYCE",
+      "state": "IL",
+      "city": "CHICAGO",
+      "employer": "UNEMPLOYED",
+      "candidateTotal": 55,
+      "candidateContribCount": 3,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 5600,
+      "proIsraelContribCount": 14,
+      "proIsraelCycles": [
+        "2000",
+        "2001",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2011",
+        "2012",
+        "2013",
+        "2023"
+      ],
+      "proIsraelPacs": [
+        "Joint Action Committee for Political Affairs",
+        "United PAC (Illinois)",
+        "AIPAC PAC"
+      ],
+      "confidence": "medium"
     },
     {
       "donorName": "HENRY, JOHN",
@@ -1610,40 +1579,6 @@
       "confidence": "high"
     },
     {
-      "donorName": "LEAVITT, JOYCE",
-      "firstFromMaster": "JOYCE",
-      "state": "IL",
-      "city": "CHICAGO",
-      "employer": "VOLUNTEER",
-      "candidateTotal": 55,
-      "candidateContribCount": 3,
-      "candidateCycles": [
-        "2026"
-      ],
-      "proIsraelTotal": 5100,
-      "proIsraelContribCount": 13,
-      "proIsraelCycles": [
-        "2001",
-        "2003",
-        "2004",
-        "2005",
-        "2006",
-        "2007",
-        "2008",
-        "2009",
-        "2011",
-        "2012",
-        "2013",
-        "2023"
-      ],
-      "proIsraelPacs": [
-        "Joint Action Committee for Political Affairs",
-        "United PAC (Illinois)",
-        "AIPAC PAC"
-      ],
-      "confidence": "medium"
-    },
-    {
       "donorName": "HOWARD, JONATHAN",
       "firstFromMaster": "JONATHAN",
       "state": "NC",
@@ -1684,6 +1619,32 @@
       ],
       "proIsraelPacs": [
         "AIPAC PAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "HAUSER, DIANE",
+      "firstFromMaster": "DIANE",
+      "state": "MI",
+      "city": "WEST BLOOMFIELD",
+      "employer": "HOMEMAKER",
+      "candidateTotal": 1000,
+      "candidateContribCount": 2,
+      "candidateCycles": [
+        "2020",
+        "2022"
+      ],
+      "proIsraelTotal": 5000,
+      "proIsraelContribCount": 5,
+      "proIsraelCycles": [
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004"
+      ],
+      "proIsraelPacs": [
+        "MOPAC"
       ],
       "confidence": "medium"
     },
@@ -1730,28 +1691,25 @@
       "confidence": "medium"
     },
     {
-      "donorName": "LEE, BERT",
-      "firstFromMaster": "BERT",
-      "state": "AZ",
-      "city": "TUCSON",
-      "employer": "RETIRED",
-      "candidateTotal": 1000,
+      "donorName": "CHEN, TINA",
+      "firstFromMaster": "TINA",
+      "state": "NY",
+      "city": "NEW YORK",
+      "employer": "PRODUCER/ACTRESS",
+      "candidateTotal": 250,
       "candidateContribCount": 1,
       "candidateCycles": [
         "2026"
       ],
-      "proIsraelTotal": 4800,
-      "proIsraelContribCount": 8,
+      "proIsraelTotal": 5000,
+      "proIsraelContribCount": 1,
       "proIsraelCycles": [
-        "2001",
-        "2002",
-        "2003",
-        "2004"
+        "2000"
       ],
       "proIsraelPacs": [
-        "The Desert Caucus"
+        "National PAC"
       ],
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "donorName": "NAZARIAN, DAVID",
@@ -1773,31 +1731,6 @@
         "AIPAC PAC"
       ],
       "confidence": "high"
-    },
-    {
-      "donorName": "HAUSER, DIANE",
-      "firstFromMaster": "DIANE",
-      "state": "MI",
-      "city": "WEST BLOOMFIELD",
-      "employer": "HOMEMAKER",
-      "candidateTotal": 1000,
-      "candidateContribCount": 2,
-      "candidateCycles": [
-        "2020",
-        "2022"
-      ],
-      "proIsraelTotal": 4000,
-      "proIsraelContribCount": 4,
-      "proIsraelCycles": [
-        "2001",
-        "2002",
-        "2003",
-        "2004"
-      ],
-      "proIsraelPacs": [
-        "MOPAC"
-      ],
-      "confidence": "medium"
     },
     {
       "donorName": "HOLTZ, DAVID",
@@ -2767,6 +2700,28 @@
       "confidence": "medium"
     },
     {
+      "donorName": "BERGMAN, CINDY",
+      "firstFromMaster": "CINDY",
+      "state": "PA",
+      "city": "MEDIA",
+      "employer": "EXECUTIVE COACH PR CONSULTANT",
+      "candidateTotal": 1000,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2020"
+      ],
+      "proIsraelTotal": 1000,
+      "proIsraelContribCount": 2,
+      "proIsraelCycles": [
+        "2000",
+        "2001"
+      ],
+      "proIsraelPacs": [
+        "Joint Action Committee for Political Affairs"
+      ],
+      "confidence": "medium"
+    },
+    {
       "donorName": "COHEN, SUZANNE",
       "firstFromMaster": "SUZANNE",
       "state": "MA",
@@ -3561,27 +3516,6 @@
       ],
       "proIsraelPacs": [
         "JStreetPAC"
-      ],
-      "confidence": "medium"
-    },
-    {
-      "donorName": "BERGMAN, CINDY",
-      "firstFromMaster": "CINDY",
-      "state": "PA",
-      "city": "MEDIA",
-      "employer": "EXECUTIVE COACH PR CONSULTANT",
-      "candidateTotal": 1000,
-      "candidateContribCount": 1,
-      "candidateCycles": [
-        "2020"
-      ],
-      "proIsraelTotal": 500,
-      "proIsraelContribCount": 1,
-      "proIsraelCycles": [
-        "2001"
-      ],
-      "proIsraelPacs": [
-        "Joint Action Committee for Political Affairs"
       ],
       "confidence": "medium"
     },
@@ -4476,6 +4410,27 @@
       "confidence": "high"
     },
     {
+      "donorName": "WEISS, MIKE",
+      "firstFromMaster": "MIKE",
+      "state": "IL",
+      "city": "CHICAGO",
+      "employer": "HOLLAND & KNIGHT",
+      "candidateTotal": 4000,
+      "candidateContribCount": 2,
+      "candidateCycles": [
+        "2016"
+      ],
+      "proIsraelTotal": 250,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2000"
+      ],
+      "proIsraelPacs": [
+        "City PAC"
+      ],
+      "confidence": "high"
+    },
+    {
       "donorName": "HALL, WENDY",
       "firstFromMaster": "WENDY",
       "state": "MD",
@@ -5110,6 +5065,27 @@
       "confidence": "medium"
     },
     {
+      "donorName": "MARTIN, FRANCINE",
+      "firstFromMaster": "FRANCINE",
+      "state": "MI",
+      "city": "WEST BLOOMFIELD",
+      "employer": "VOLUNTEER",
+      "candidateTotal": 100,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2022"
+      ],
+      "proIsraelTotal": 250,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2000"
+      ],
+      "proIsraelPacs": [
+        "Joint Action Committee for Political Affairs"
+      ],
+      "confidence": "medium"
+    },
+    {
       "donorName": "STONE, CHRISTINE",
       "firstFromMaster": "CHRISTINE",
       "state": "PA",
@@ -5491,9 +5467,9 @@
   ],
   "totals": {
     "donors_matched": 240,
-    "high_confidence": 51,
-    "medium_confidence": 189,
-    "to_candidate": 277989.20000000007,
-    "these_donors_to_pro_israel": 5593978.67
+    "high_confidence": 53,
+    "medium_confidence": 187,
+    "to_candidate": 280778.80000000005,
+    "these_donors_to_pro_israel": 5462653.67
   }
 }

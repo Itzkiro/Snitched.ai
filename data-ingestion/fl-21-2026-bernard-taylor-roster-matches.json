@@ -1,0 +1,42 @@
+{
+  "generated_at": "2026-04-21T00:37:23.509Z",
+  "candidate": {
+    "bioguide_id": "fl-21-2026-bernard-taylor",
+    "name": "Bernard Taylor",
+    "fec_candidate_id": "H6FL21034"
+  },
+  "master_individuals_indexed": 27578,
+  "itemized_individual_rows": 32,
+  "matches": [
+    {
+      "donorName": "ABERLY, NAOMI",
+      "firstFromMaster": "NAOMI",
+      "state": "MA",
+      "city": "BOSTON",
+      "employer": "N/A",
+      "candidateTotal": 500,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 1500,
+      "proIsraelContribCount": 3,
+      "proIsraelCycles": [
+        "2015",
+        "2016",
+        "2018"
+      ],
+      "proIsraelPacs": [
+        "JStreetPAC"
+      ],
+      "confidence": "high"
+    }
+  ],
+  "totals": {
+    "donors_matched": 1,
+    "high_confidence": 1,
+    "medium_confidence": 0,
+    "to_candidate": 500,
+    "these_donors_to_pro_israel": 1500
+  }
+}

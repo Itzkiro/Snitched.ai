@@ -59,3 +59,4 @@ data-ingestion/*-itemized.json
 data-ingestion/audit-tracker.csv
 data-ingestion/audit-targets.txt
 scrapers/logs/
+.vercel

@@ -1,0 +1,751 @@
+{
+  "generated_at": "2026-04-21T01:12:27.290Z",
+  "candidate": {
+    "bioguide_id": "ny-15-jose-vega",
+    "name": "Jose Vega",
+    "fec_candidate_id": "H4NY15147"
+  },
+  "master_individuals_indexed": 27578,
+  "itemized_individual_rows": 1015,
+  "matches": [
+    {
+      "donorName": "PEARL, MORRIS",
+      "firstFromMaster": "MORRIS",
+      "state": "NY",
+      "city": "NEW YORK",
+      "employer": "BLACK ROCK",
+      "candidateTotal": 1500,
+      "candidateContribCount": 2,
+      "candidateCycles": [
+        "2024",
+        "2026"
+      ],
+      "proIsraelTotal": 195899.97,
+      "proIsraelContribCount": 167,
+      "proIsraelCycles": [
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "proIsraelPacs": [
+        "JStreetPAC"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "PEARL, BRUCE",
+      "firstFromMaster": "BRUCE",
+      "state": "AL",
+      "city": "AUBURN",
+      "employer": "UNIVERSITY OF AUBURN",
+      "candidateTotal": 500,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 27000,
+      "proIsraelContribCount": 3,
+      "proIsraelCycles": [
+        "2024"
+      ],
+      "proIsraelPacs": [
+        "RJC Victory Fund",
+        "AIPAC PAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "COOPER, DAVID",
+      "firstFromMaster": "DAVID",
+      "state": "PA",
+      "city": "EASTON",
+      "employer": "LEXUS OF LEHIGH VALLEY",
+      "candidateTotal": 12.5,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 15050,
+      "proIsraelContribCount": 9,
+      "proIsraelCycles": [
+        "2023",
+        "2024",
+        "2026"
+      ],
+      "proIsraelPacs": [
+        "AIPAC PAC"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "CARTER, MICHAEL",
+      "firstFromMaster": "MICHAEL",
+      "state": "CT",
+      "city": "WESTON",
+      "employer": "CARTER MORSE & GOODRICH",
+      "candidateTotal": 15,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 13650,
+      "proIsraelContribCount": 13,
+      "proIsraelCycles": [
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "proIsraelPacs": [
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "LIEBERMAN, JEREMY",
+      "firstFromMaster": "JEREMY",
+      "state": "NY",
+      "city": "FLUSHING",
+      "employer": "POMERANTZ",
+      "candidateTotal": 25,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 13300,
+      "proIsraelContribCount": 5,
+      "proIsraelCycles": [
+        "2023",
+        "2024",
+        "2026"
+      ],
+      "proIsraelPacs": [
+        "AIPAC PAC",
+        "United Democracy Project (UDP)"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "GOODMAN, LAWRENCE",
+      "firstFromMaster": "LAWRENCE",
+      "state": "IL",
+      "city": "HIGHLAND PARK",
+      "employer": "NONE",
+      "candidateTotal": 125,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 12800,
+      "proIsraelContribCount": 13,
+      "proIsraelCycles": [
+        "2003",
+        "2004",
+        "2007",
+        "2012",
+        "2013",
+        "2014"
+      ],
+      "proIsraelPacs": [
+        "Joint Action Committee for Political Affairs",
+        "United PAC (Illinois)",
+        "To Protect Our Heritage PAC",
+        "JStreetPAC"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "BEST, BARRY",
+      "firstFromMaster": "BARRY",
+      "state": "NY",
+      "city": "NEW YORK",
+      "employer": "CITIGROUP",
+      "candidateTotal": 12.5,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 10750,
+      "proIsraelContribCount": 13,
+      "proIsraelCycles": [
+        "2004",
+        "2006",
+        "2007",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "proIsraelPacs": [
+        "Mid Manhattan PAC",
+        "AIPAC PAC"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "FOSTER, MICHAEL",
+      "firstFromMaster": "MICHAEL",
+      "state": "CT",
+      "city": "WESTPORT",
+      "employer": "RFE MANAGMENT CORP",
+      "candidateTotal": 25,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 3750,
+      "proIsraelContribCount": 5,
+      "proIsraelCycles": [
+        "2020",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "proIsraelPacs": [
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "SMALL, ALBERT",
+      "firstFromMaster": "ALBERT",
+      "state": "MD",
+      "city": "BETHESDA",
+      "employer": "SOUTHERN ENGINEERING CO",
+      "candidateTotal": 76.26,
+      "candidateContribCount": 2,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 3100,
+      "proIsraelContribCount": 4,
+      "proIsraelCycles": [
+        "2014",
+        "2016",
+        "2022"
+      ],
+      "proIsraelPacs": [
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "AIPAC PAC"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "COHN, NORMAN",
+      "firstFromMaster": "NORMAN",
+      "state": "PA",
+      "city": "RADNOR",
+      "employer": "NATIONAL BUS SERVICES",
+      "candidateTotal": 125,
+      "candidateContribCount": 2,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 3000,
+      "proIsraelContribCount": 3,
+      "proIsraelCycles": [
+        "2000",
+        "2002",
+        "2004"
+      ],
+      "proIsraelPacs": [
+        "National PAC",
+        "Delaware Valley PAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "LEWIS, SAMUEL",
+      "firstFromMaster": "SAMUEL",
+      "state": "VA",
+      "city": "OAK HILL",
+      "employer": "RETIRED",
+      "candidateTotal": 25,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 1656,
+      "proIsraelContribCount": 4,
+      "proIsraelCycles": [
+        "2024"
+      ],
+      "proIsraelPacs": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "CUNNINGHAM, GEORGE",
+      "firstFromMaster": "GEORGE",
+      "state": "AZ",
+      "city": "TUCSON",
+      "employer": "STATE OF ARIZONA/STATE SENATOR",
+      "candidateTotal": 125,
+      "candidateContribCount": 2,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 1200,
+      "proIsraelContribCount": 2,
+      "proIsraelCycles": [
+        "2000"
+      ],
+      "proIsraelPacs": [
+        "The Desert Caucus"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "WHITE, JOSEPH",
+      "firstFromMaster": "JOSEPH",
+      "state": "OH",
+      "city": "SHAKER HEIGHTS",
+      "employer": "CASE WESTERN RESERVE UNIV",
+      "candidateTotal": 1221.07,
+      "candidateContribCount": 11,
+      "candidateCycles": [
+        "2024",
+        "2026"
+      ],
+      "proIsraelTotal": 1050,
+      "proIsraelContribCount": 2,
+      "proIsraelCycles": [
+        "2022",
+        "2023"
+      ],
+      "proIsraelPacs": [
+        "JStreetPAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "WHITE, MAUREEN",
+      "firstFromMaster": "MAUREEN",
+      "state": "NY",
+      "city": "NEW YORK",
+      "employer": "SAIS",
+      "candidateTotal": 25,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 1000,
+      "proIsraelContribCount": 2,
+      "proIsraelCycles": [
+        "2014"
+      ],
+      "proIsraelPacs": [
+        "JStreetPAC"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "STONE, ARIEL",
+      "firstFromMaster": "ARIEL",
+      "state": "OR",
+      "city": "PORTLAND",
+      "employer": "CONGREGATION SHIR TIKVAH",
+      "candidateTotal": 25,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 1000,
+      "proIsraelContribCount": 2,
+      "proIsraelCycles": [
+        "2008",
+        "2017"
+      ],
+      "proIsraelPacs": [
+        "JStreetPAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "CAMPBELL, JOYCE",
+      "firstFromMaster": "JOYCE",
+      "state": "NY",
+      "city": "NEW YORK",
+      "employer": "SELF",
+      "candidateTotal": 25,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 1000,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2024"
+      ],
+      "proIsraelPacs": [
+        "NorPAC / North Jersey PAC"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "GUERRERO, ANDREA",
+      "firstFromMaster": "ANDREA",
+      "state": "CA",
+      "city": "SAN DIEGO",
+      "employer": "ALLIANCE SAN DIEGO",
+      "candidateTotal": 25,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 750,
+      "proIsraelContribCount": 3,
+      "proIsraelCycles": [
+        "2015",
+        "2023"
+      ],
+      "proIsraelPacs": [
+        "JStreetPAC",
+        "AIPAC PAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "WEISS, BARBARA",
+      "firstFromMaster": "BARBARA",
+      "state": "NY",
+      "city": "LAWRENCE",
+      "employer": "SELF",
+      "candidateTotal": 50,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 645,
+      "proIsraelContribCount": 2,
+      "proIsraelCycles": [
+        "2018",
+        "2024"
+      ],
+      "proIsraelPacs": [
+        "NorPAC / North Jersey PAC"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "GOLDEN, MARILYN",
+      "firstFromMaster": "MARILYN",
+      "state": "CA",
+      "city": "ENCINO",
+      "employer": "N/A/HOMEMAKER",
+      "candidateTotal": 10,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 550,
+      "proIsraelContribCount": 2,
+      "proIsraelCycles": [
+        "2002",
+        "2010"
+      ],
+      "proIsraelPacs": [
+        "World Alliance for Israel PAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "ANDERSON, A",
+      "firstFromMaster": "A",
+      "state": "GA",
+      "city": "ATLANTA",
+      "employer": "N/A",
+      "candidateTotal": 125,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 500,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2017"
+      ],
+      "proIsraelPacs": [
+        "JStreetPAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "SMITH, MORRIS",
+      "firstFromMaster": "MORRIS",
+      "state": "NY",
+      "city": "LAWRENCE",
+      "employer": "SJM CONSULTING INC",
+      "candidateTotal": 50,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 500,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2020"
+      ],
+      "proIsraelPacs": [
+        "NorPAC / North Jersey PAC"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "WHITE, KEVIN",
+      "firstFromMaster": "KEVIN",
+      "state": "CO",
+      "city": "FORT COLLINS",
+      "employer": "TAKEDA",
+      "candidateTotal": 25,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 500,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2024"
+      ],
+      "proIsraelPacs": [
+        "AIPAC PAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "PEARL, AMY",
+      "firstFromMaster": "AMY",
+      "state": "CA",
+      "city": "LOS ALTOS",
+      "employer": "ACORN FINANCIAL PLANNING",
+      "candidateTotal": 4793.72,
+      "candidateContribCount": 14,
+      "candidateCycles": [
+        "2024",
+        "2026"
+      ],
+      "proIsraelTotal": 400,
+      "proIsraelContribCount": 2,
+      "proIsraelCycles": [
+        "2016"
+      ],
+      "proIsraelPacs": [
+        "JStreetPAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "HOFFMAN, MARK",
+      "firstFromMaster": "MARK",
+      "state": "CA",
+      "city": "PLEASANTON",
+      "employer": "LARSON PACKAGING",
+      "candidateTotal": 3500,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 250,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2020"
+      ],
+      "proIsraelPacs": [
+        "Pro-Israel America PAC"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "RUSH, THOMAS",
+      "firstFromMaster": "THOMAS",
+      "state": "NM",
+      "city": "MILLWOOD",
+      "employer": "SELF",
+      "candidateTotal": 3300,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 250,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2014"
+      ],
+      "proIsraelPacs": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "MEYERS, JENNIFER",
+      "firstFromMaster": "JENNIFER",
+      "state": "IL",
+      "city": "GLENCOE",
+      "employer": "J MEYERS",
+      "candidateTotal": 996.8399999999999,
+      "candidateContribCount": 5,
+      "candidateCycles": [
+        "2024",
+        "2026"
+      ],
+      "proIsraelTotal": 250,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2024"
+      ],
+      "proIsraelPacs": [
+        "Joint Action Committee for Political Affairs"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "SANG, ILENE",
+      "firstFromMaster": "ILENE",
+      "state": "IL",
+      "city": "GLENCOE",
+      "employer": "TEACHER",
+      "candidateTotal": 310,
+      "candidateContribCount": 3,
+      "candidateCycles": [
+        "2024",
+        "2026"
+      ],
+      "proIsraelTotal": 250,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2000"
+      ],
+      "proIsraelPacs": [
+        "Joint Action Committee for Political Affairs"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "CLARK, JENNIFER",
+      "firstFromMaster": "JENNIFER",
+      "state": "NY",
+      "city": "BEDFORD",
+      "employer": "SELF",
+      "candidateTotal": 179.36,
+      "candidateContribCount": 3,
+      "candidateCycles": [
+        "2024",
+        "2026"
+      ],
+      "proIsraelTotal": 250,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2024"
+      ],
+      "proIsraelPacs": [
+        "AIPAC PAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "GLASER, MITCHELL",
+      "firstFromMaster": "MITCHELL",
+      "state": "IL",
+      "city": "CHICAGO",
+      "employer": "SELF",
+      "candidateTotal": 75,
+      "candidateContribCount": 2,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 250,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2022"
+      ],
+      "proIsraelPacs": [
+        "AIPAC PAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "LEE, KAREN",
+      "firstFromMaster": "KAREN",
+      "state": "IL",
+      "city": "GLENCOE",
+      "employer": "NONE",
+      "candidateTotal": 25,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 250,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2012"
+      ],
+      "proIsraelPacs": [
+        "Joint Action Committee for Political Affairs"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "KAMARA, AVRAHAM",
+      "firstFromMaster": "AVRAHAM",
+      "state": "WA",
+      "city": "SEATTLE",
+      "employer": "UNIVERSITY OF WASHINGTON",
+      "candidateTotal": 25,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 250,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2024"
+      ],
+      "proIsraelPacs": [
+        "AIPAC PAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "ROBERTS, SHIRLEY",
+      "firstFromMaster": "SHIRLEY",
+      "state": "CA",
+      "city": "WEST HOLLYWOOD",
+      "employer": "N/A/RETIRED",
+      "candidateTotal": 15,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2024"
+      ],
+      "proIsraelTotal": 250,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2007"
+      ],
+      "proIsraelPacs": [
+        "California Jewish Democrats-FED / Democrats for Israel Committee"
+      ],
+      "confidence": "medium"
+    }
+  ],
+  "totals": {
+    "donors_matched": 32,
+    "high_confidence": 12,
+    "medium_confidence": 20,
+    "to_candidate": 17367.25,
+    "these_donors_to_pro_israel": 311300.97
+  }
+}

@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-04-20T22:04:26.916Z",
+  "generated_at": "2026-04-21T01:16:02.822Z",
   "candidate": {
     "bioguide_id": "ky-04-2026-ed-gallrein",
     "name": "Ed Gallrein",
     "fec_candidate_id": "H6KY04171"
   },
-  "master_individuals_indexed": 27249,
+  "master_individuals_indexed": 27578,
   "itemized_individual_rows": 766,
   "matches": [
     {
@@ -116,15 +116,16 @@
       "firstFromMaster": "GARRY",
       "state": "CA",
       "city": "SAN FRANCISCO",
-      "employer": "SELF EMPL /PHYSICIAN",
+      "employer": "PERIODONTIST",
       "candidateTotal": 500,
       "candidateContribCount": 1,
       "candidateCycles": [
         "2026"
       ],
-      "proIsraelTotal": 502030,
-      "proIsraelContribCount": 50,
+      "proIsraelTotal": 503030,
+      "proIsraelContribCount": 51,
       "proIsraelCycles": [
+        "2000",
         "2002",
         "2003",
         "2004",
@@ -303,6 +304,50 @@
       "confidence": "high"
     },
     {
+      "donorName": "FRIEND, DANIELLE",
+      "firstFromMaster": "DANIELLE",
+      "state": "CA",
+      "city": "SAN FRANCISCO",
+      "employer": "ATTORNEY",
+      "candidateTotal": 1000,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 321150,
+      "proIsraelContribCount": 45,
+      "proIsraelCycles": [
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2011",
+        "2012",
+        "2013",
+        "2015",
+        "2017",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2026"
+      ],
+      "proIsraelPacs": [
+        "Friends of Israel PAC / San Franciscans for Good Government",
+        "Pro-Israel America PAC",
+        "Joint Action Committee for Political Affairs",
+        "AIPAC PAC",
+        "United Democracy Project (UDP)"
+      ],
+      "confidence": "high"
+    },
+    {
       "donorName": "SHEAR, HERBERT",
       "firstFromMaster": "HERBERT",
       "state": "PA",
@@ -328,49 +373,6 @@
       "proIsraelPacs": [
         "Republican Jewish Coalition PAC (RJC-PAC)",
         "Pro-Israel America PAC",
-        "AIPAC PAC",
-        "United Democracy Project (UDP)"
-      ],
-      "confidence": "high"
-    },
-    {
-      "donorName": "FRIEND, DANIELLE",
-      "firstFromMaster": "DANIELLE",
-      "state": "CA",
-      "city": "SAN FRANCISCO",
-      "employer": "SELF",
-      "candidateTotal": 1000,
-      "candidateContribCount": 1,
-      "candidateCycles": [
-        "2026"
-      ],
-      "proIsraelTotal": 320150,
-      "proIsraelContribCount": 44,
-      "proIsraelCycles": [
-        "2001",
-        "2002",
-        "2003",
-        "2004",
-        "2005",
-        "2006",
-        "2007",
-        "2008",
-        "2009",
-        "2011",
-        "2012",
-        "2013",
-        "2015",
-        "2017",
-        "2021",
-        "2022",
-        "2023",
-        "2024",
-        "2026"
-      ],
-      "proIsraelPacs": [
-        "Friends of Israel PAC / San Franciscans for Good Government",
-        "Pro-Israel America PAC",
-        "Joint Action Committee for Political Affairs",
         "AIPAC PAC",
         "United Democracy Project (UDP)"
       ],
@@ -624,47 +626,20 @@
       "confidence": "high"
     },
     {
-      "donorName": "HOFFMAN, JOAN",
-      "firstFromMaster": "JOAN",
-      "state": "FL",
-      "city": "PALM BEACH GARDENS",
-      "employer": "RETIRED",
-      "candidateTotal": 1750,
-      "candidateContribCount": 1,
-      "candidateCycles": [
-        "2026"
-      ],
-      "proIsraelTotal": 232400,
-      "proIsraelContribCount": 21,
-      "proIsraelCycles": [
-        "2020",
-        "2021",
-        "2022",
-        "2023",
-        "2024",
-        "2026"
-      ],
-      "proIsraelPacs": [
-        "Pro-Israel America PAC",
-        "AIPAC PAC",
-        "United Democracy Project (UDP)"
-      ],
-      "confidence": "high"
-    },
-    {
       "donorName": "LIBITZKY, MOSES",
       "firstFromMaster": "MOSES",
       "state": "CA",
       "city": "EMERYVILLE",
-      "employer": "SELF",
+      "employer": "REAL ESTATE INVESTOR",
       "candidateTotal": 2000,
       "candidateContribCount": 1,
       "candidateCycles": [
         "2026"
       ],
-      "proIsraelTotal": 232300,
-      "proIsraelContribCount": 65,
+      "proIsraelTotal": 232800,
+      "proIsraelContribCount": 66,
       "proIsraelCycles": [
+        "2000",
         "2001",
         "2002",
         "2003",
@@ -695,6 +670,34 @@
         "Friends of Israel PAC / San Franciscans for Good Government",
         "National PAC",
         "DMFI PAC (Democratic Majority for Israel)",
+        "Pro-Israel America PAC",
+        "AIPAC PAC",
+        "United Democracy Project (UDP)"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "HOFFMAN, JOAN",
+      "firstFromMaster": "JOAN",
+      "state": "FL",
+      "city": "PALM BEACH GARDENS",
+      "employer": "RETIRED",
+      "candidateTotal": 1750,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 232400,
+      "proIsraelContribCount": 21,
+      "proIsraelCycles": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2026"
+      ],
+      "proIsraelPacs": [
         "Pro-Israel America PAC",
         "AIPAC PAC",
         "United Democracy Project (UDP)"
@@ -765,6 +768,54 @@
       "confidence": "high"
     },
     {
+      "donorName": "LAPPIN, ANDREW",
+      "firstFromMaster": "ANDREW",
+      "state": "IL",
+      "city": "GLENCOE",
+      "employer": "BUSINESSMAN",
+      "candidateTotal": 3500,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 220675,
+      "proIsraelContribCount": 84,
+      "proIsraelCycles": [
+        "2000",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2011",
+        "2012",
+        "2013",
+        "2017",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2026"
+      ],
+      "proIsraelPacs": [
+        "National PAC",
+        "City PAC",
+        "United PAC (Illinois)",
+        "To Protect Our Heritage PAC",
+        "Americans United in Support of Democracy / CCNI",
+        "NorPAC / North Jersey PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "DMFI PAC (Democratic Majority for Israel)",
+        "AIPAC PAC",
+        "United Democracy Project (UDP)"
+      ],
+      "confidence": "high"
+    },
+    {
       "donorName": "PESKIN, BIANCA",
       "firstFromMaster": "BIANCA",
       "state": "MA",
@@ -809,52 +860,6 @@
         "AIPAC PAC",
         "DMFI PAC (Democratic Majority for Israel)",
         "US Israel PAC / Florida Congressional Committee"
-      ],
-      "confidence": "high"
-    },
-    {
-      "donorName": "LAPPIN, ANDREW",
-      "firstFromMaster": "ANDREW",
-      "state": "IL",
-      "city": "GLENCOE",
-      "employer": "SELF EMPLOYED",
-      "candidateTotal": 3500,
-      "candidateContribCount": 1,
-      "candidateCycles": [
-        "2026"
-      ],
-      "proIsraelTotal": 217175,
-      "proIsraelContribCount": 82,
-      "proIsraelCycles": [
-        "2003",
-        "2004",
-        "2005",
-        "2006",
-        "2007",
-        "2008",
-        "2009",
-        "2011",
-        "2012",
-        "2013",
-        "2017",
-        "2019",
-        "2020",
-        "2021",
-        "2022",
-        "2023",
-        "2024",
-        "2026"
-      ],
-      "proIsraelPacs": [
-        "City PAC",
-        "United PAC (Illinois)",
-        "To Protect Our Heritage PAC",
-        "Americans United in Support of Democracy / CCNI",
-        "NorPAC / North Jersey PAC",
-        "Republican Jewish Coalition PAC (RJC-PAC)",
-        "DMFI PAC (Democratic Majority for Israel)",
-        "AIPAC PAC",
-        "United Democracy Project (UDP)"
       ],
       "confidence": "high"
     },
@@ -1525,6 +1530,57 @@
       "confidence": "high"
     },
     {
+      "donorName": "ERLBAUM, GARY",
+      "firstFromMaster": "GARY",
+      "state": "PA",
+      "city": "ARDMORE",
+      "employer": "GREENTREE PROPERTIES",
+      "candidateTotal": 1000,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 139400,
+      "proIsraelContribCount": 82,
+      "proIsraelCycles": [
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2026"
+      ],
+      "proIsraelPacs": [
+        "Washington PAC",
+        "Joint Action Committee for Political Affairs",
+        "National Action Committee",
+        "Pro-Israel America PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "AIPAC PAC"
+      ],
+      "confidence": "high"
+    },
+    {
       "donorName": "HIRT, LANCE",
       "firstFromMaster": "LANCE",
       "state": "NY",
@@ -1588,56 +1644,6 @@
       "proIsraelPacs": [
         "NorPAC / North Jersey PAC",
         "United Democracy Project (UDP)",
-        "AIPAC PAC"
-      ],
-      "confidence": "high"
-    },
-    {
-      "donorName": "ERLBAUM, GARY",
-      "firstFromMaster": "GARY",
-      "state": "PA",
-      "city": "ARDMORE",
-      "employer": "GREENTREE PROPERTIES/EXECUTIVE",
-      "candidateTotal": 1000,
-      "candidateContribCount": 1,
-      "candidateCycles": [
-        "2026"
-      ],
-      "proIsraelTotal": 137900,
-      "proIsraelContribCount": 81,
-      "proIsraelCycles": [
-        "2001",
-        "2002",
-        "2003",
-        "2004",
-        "2005",
-        "2006",
-        "2007",
-        "2008",
-        "2009",
-        "2010",
-        "2011",
-        "2012",
-        "2013",
-        "2014",
-        "2015",
-        "2016",
-        "2017",
-        "2018",
-        "2019",
-        "2020",
-        "2021",
-        "2022",
-        "2023",
-        "2024",
-        "2026"
-      ],
-      "proIsraelPacs": [
-        "Washington PAC",
-        "Joint Action Committee for Political Affairs",
-        "National Action Committee",
-        "Pro-Israel America PAC",
-        "Republican Jewish Coalition PAC (RJC-PAC)",
         "AIPAC PAC"
       ],
       "confidence": "high"
@@ -2171,6 +2177,48 @@
       "confidence": "high"
     },
     {
+      "donorName": "FELGOISE, MARC",
+      "firstFromMaster": "MARC",
+      "state": "PA",
+      "city": "BLUE BELL",
+      "employer": "DEVELOPER",
+      "candidateTotal": 1000,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 97050,
+      "proIsraelContribCount": 72,
+      "proIsraelCycles": [
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2009",
+        "2010",
+        "2013",
+        "2014",
+        "2018",
+        "2019",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2026"
+      ],
+      "proIsraelPacs": [
+        "Joint Action Committee for Political Affairs",
+        "National PAC",
+        "National Action Committee",
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "AIPAC PAC",
+        "Pro-Israel America PAC"
+      ],
+      "confidence": "high"
+    },
+    {
       "donorName": "KLEIN, GEORGE",
       "firstFromMaster": "GEORGE",
       "state": "NY",
@@ -2202,47 +2250,6 @@
       ],
       "proIsraelPacs": [
         "Republican Jewish Coalition PAC (RJC-PAC)"
-      ],
-      "confidence": "high"
-    },
-    {
-      "donorName": "FELGOISE, MARC",
-      "firstFromMaster": "MARC",
-      "state": "PA",
-      "city": "BLUE BELL",
-      "employer": "DEVELOPER",
-      "candidateTotal": 1000,
-      "candidateContribCount": 1,
-      "candidateCycles": [
-        "2026"
-      ],
-      "proIsraelTotal": 96550,
-      "proIsraelContribCount": 70,
-      "proIsraelCycles": [
-        "2001",
-        "2002",
-        "2003",
-        "2004",
-        "2005",
-        "2009",
-        "2010",
-        "2013",
-        "2014",
-        "2018",
-        "2019",
-        "2021",
-        "2022",
-        "2023",
-        "2024",
-        "2026"
-      ],
-      "proIsraelPacs": [
-        "Joint Action Committee for Political Affairs",
-        "National PAC",
-        "National Action Committee",
-        "Republican Jewish Coalition PAC (RJC-PAC)",
-        "AIPAC PAC",
-        "Pro-Israel America PAC"
       ],
       "confidence": "high"
     },
@@ -2297,6 +2304,54 @@
         "DMFI PAC (Democratic Majority for Israel)",
         "AIPAC PAC",
         "United Democracy Project (UDP)"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "SEATON, MARTIN",
+      "firstFromMaster": "MARTIN",
+      "state": "CA",
+      "city": "BEVERLY HILLS",
+      "employer": "RETIRED",
+      "candidateTotal": 300,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 91000,
+      "proIsraelContribCount": 88,
+      "proIsraelCycles": [
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2026"
+      ],
+      "proIsraelPacs": [
+        "Citizens Organized Political Action Committee",
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
       ],
       "confidence": "high"
     },
@@ -2418,53 +2473,6 @@
         "Republican Jewish Coalition PAC (RJC-PAC)",
         "United Democracy Project (UDP)",
         "Pro-Israel America PAC"
-      ],
-      "confidence": "high"
-    },
-    {
-      "donorName": "SEATON, MARTIN",
-      "firstFromMaster": "MARTIN",
-      "state": "CA",
-      "city": "BEVERLY HILLS",
-      "employer": "N/A/RETIRED",
-      "candidateTotal": 300,
-      "candidateContribCount": 1,
-      "candidateCycles": [
-        "2026"
-      ],
-      "proIsraelTotal": 87500,
-      "proIsraelContribCount": 86,
-      "proIsraelCycles": [
-        "2001",
-        "2002",
-        "2003",
-        "2004",
-        "2005",
-        "2006",
-        "2007",
-        "2008",
-        "2009",
-        "2010",
-        "2011",
-        "2012",
-        "2013",
-        "2014",
-        "2015",
-        "2016",
-        "2017",
-        "2018",
-        "2019",
-        "2020",
-        "2021",
-        "2022",
-        "2023",
-        "2024",
-        "2026"
-      ],
-      "proIsraelPacs": [
-        "Citizens Organized Political Action Committee",
-        "Pro-Israel America PAC",
-        "AIPAC PAC"
       ],
       "confidence": "high"
     },
@@ -2757,6 +2765,38 @@
       "confidence": "high"
     },
     {
+      "donorName": "BLINBAUM, JACQUES",
+      "firstFromMaster": "JACQUES",
+      "state": "NY",
+      "city": "NEW YORK",
+      "employer": "OLD COURT EQUITIES",
+      "candidateTotal": 3500,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 71627.77,
+      "proIsraelContribCount": 27,
+      "proIsraelCycles": [
+        "2000",
+        "2012",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "proIsraelPacs": [
+        "Mid Manhattan PAC",
+        "NorPAC / North Jersey PAC",
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "confidence": "high"
+    },
+    {
       "donorName": "CATALDO, JENNIFER",
       "firstFromMaster": "JENNIFER",
       "state": "CA",
@@ -2775,36 +2815,6 @@
       "proIsraelPacs": [
         "AIPAC PAC",
         "United Democracy Project (UDP)"
-      ],
-      "confidence": "high"
-    },
-    {
-      "donorName": "BLINBAUM, JACQUES",
-      "firstFromMaster": "JACQUES",
-      "state": "NY",
-      "city": "NEW YORK",
-      "employer": "OLD COURT GROUP",
-      "candidateTotal": 3500,
-      "candidateContribCount": 1,
-      "candidateCycles": [
-        "2026"
-      ],
-      "proIsraelTotal": 71427.77,
-      "proIsraelContribCount": 26,
-      "proIsraelCycles": [
-        "2012",
-        "2020",
-        "2021",
-        "2022",
-        "2023",
-        "2024",
-        "2025",
-        "2026"
-      ],
-      "proIsraelPacs": [
-        "NorPAC / North Jersey PAC",
-        "Pro-Israel America PAC",
-        "AIPAC PAC"
       ],
       "confidence": "high"
     },
@@ -3187,6 +3197,49 @@
       "confidence": "high"
     },
     {
+      "donorName": "KAUFMAN, RONALD",
+      "firstFromMaster": "RONALD",
+      "state": "CA",
+      "city": "SAN FRANCISCO",
+      "employer": "REAL ESTATE",
+      "candidateTotal": 1000,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 59950,
+      "proIsraelContribCount": 44,
+      "proIsraelCycles": [
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2018",
+        "2019",
+        "2022",
+        "2023",
+        "2024",
+        "2026"
+      ],
+      "proIsraelPacs": [
+        "Friends of Israel PAC / San Franciscans for Good Government",
+        "National PAC",
+        "AIPAC PAC"
+      ],
+      "confidence": "high"
+    },
+    {
       "donorName": "GENIRBERG, RICHARD",
       "firstFromMaster": "RICHARD",
       "state": "NV",
@@ -3241,47 +3294,6 @@
       "confidence": "high"
     },
     {
-      "donorName": "KAUFMAN, RONALD",
-      "firstFromMaster": "RONALD",
-      "state": "CA",
-      "city": "SAN FRANCISCO",
-      "employer": "SELF/REAL ESTATE",
-      "candidateTotal": 1000,
-      "candidateContribCount": 1,
-      "candidateCycles": [
-        "2026"
-      ],
-      "proIsraelTotal": 56950,
-      "proIsraelContribCount": 41,
-      "proIsraelCycles": [
-        "2001",
-        "2002",
-        "2003",
-        "2004",
-        "2006",
-        "2007",
-        "2008",
-        "2009",
-        "2011",
-        "2012",
-        "2013",
-        "2014",
-        "2015",
-        "2016",
-        "2018",
-        "2019",
-        "2022",
-        "2023",
-        "2024",
-        "2026"
-      ],
-      "proIsraelPacs": [
-        "Friends of Israel PAC / San Franciscans for Good Government",
-        "AIPAC PAC"
-      ],
-      "confidence": "high"
-    },
-    {
       "donorName": "MARCOVICI, TIVADAR",
       "firstFromMaster": "TIVADAR",
       "state": "NY",
@@ -3306,6 +3318,47 @@
       "proIsraelPacs": [
         "NorPAC / North Jersey PAC",
         "AIPAC PAC"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "FRIEDMAN, JONATHAN",
+      "firstFromMaster": "JONATHAN",
+      "state": "CA",
+      "city": "BEVERLY HILLS",
+      "employer": "HOMEMAKER",
+      "candidateTotal": 3500,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 56599.96000000001,
+      "proIsraelContribCount": 70,
+      "proIsraelCycles": [
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2012",
+        "2013",
+        "2014",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "proIsraelPacs": [
+        "World Alliance for Israel PAC",
+        "AIPAC PAC",
+        "California Jewish Democrats-FED / Democrats for Israel Committee"
       ],
       "confidence": "high"
     },
@@ -3337,15 +3390,16 @@
       "firstFromMaster": "STEVEN",
       "state": "FL",
       "city": "HOLLYWOOD",
-      "employer": "SOUTHERN WINE & SPIRITS/VICE PRESID",
+      "employer": "SOUTHERN WINE & SPIRITS",
       "candidateTotal": 1000,
       "candidateContribCount": 1,
       "candidateCycles": [
         "2026"
       ],
-      "proIsraelTotal": 55600,
-      "proIsraelContribCount": 23,
+      "proIsraelTotal": 56100,
+      "proIsraelContribCount": 24,
       "proIsraelCycles": [
+        "2000",
         "2001",
         "2002",
         "2003",
@@ -3370,46 +3424,6 @@
       "proIsraelPacs": [
         "National Action Committee",
         "AIPAC PAC"
-      ],
-      "confidence": "high"
-    },
-    {
-      "donorName": "FRIEDMAN, JONATHAN",
-      "firstFromMaster": "JONATHAN",
-      "state": "CA",
-      "city": "BEVERLY HILLS",
-      "employer": "N/A/HOMEMAKER",
-      "candidateTotal": 3500,
-      "candidateContribCount": 1,
-      "candidateCycles": [
-        "2026"
-      ],
-      "proIsraelTotal": 55599.96000000001,
-      "proIsraelContribCount": 69,
-      "proIsraelCycles": [
-        "2001",
-        "2002",
-        "2003",
-        "2004",
-        "2005",
-        "2006",
-        "2007",
-        "2008",
-        "2009",
-        "2010",
-        "2012",
-        "2013",
-        "2014",
-        "2022",
-        "2023",
-        "2024",
-        "2025",
-        "2026"
-      ],
-      "proIsraelPacs": [
-        "World Alliance for Israel PAC",
-        "AIPAC PAC",
-        "California Jewish Democrats-FED / Democrats for Israel Committee"
       ],
       "confidence": "high"
     },
@@ -3649,6 +3663,34 @@
       "confidence": "high"
     },
     {
+      "donorName": "JACOBSON, MICHAEL",
+      "firstFromMaster": "MICHAEL",
+      "state": "FL",
+      "city": "HOLLYWOOD",
+      "employer": "SOFTWARE DESIGNER",
+      "candidateTotal": 3500,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 52255,
+      "proIsraelContribCount": 27,
+      "proIsraelCycles": [
+        "2000",
+        "2001",
+        "2002",
+        "2017",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "proIsraelPacs": [
+        "National Action Committee",
+        "AIPAC PAC"
+      ],
+      "confidence": "high"
+    },
+    {
       "donorName": "WEINTRAUB, RICHARD",
       "firstFromMaster": "RICHARD",
       "state": "CA",
@@ -3669,33 +3711,6 @@
       "proIsraelPacs": [
         "AIPAC PAC",
         "United Democracy Project (UDP)"
-      ],
-      "confidence": "high"
-    },
-    {
-      "donorName": "JACOBSON, MICHAEL",
-      "firstFromMaster": "MICHAEL",
-      "state": "FL",
-      "city": "HOLLYWOOD",
-      "employer": "SELF/SOFTWARE DESIGN",
-      "candidateTotal": 3500,
-      "candidateContribCount": 1,
-      "candidateCycles": [
-        "2026"
-      ],
-      "proIsraelTotal": 51430,
-      "proIsraelContribCount": 26,
-      "proIsraelCycles": [
-        "2001",
-        "2002",
-        "2017",
-        "2024",
-        "2025",
-        "2026"
-      ],
-      "proIsraelPacs": [
-        "National Action Committee",
-        "AIPAC PAC"
       ],
       "confidence": "high"
     },
@@ -4281,6 +4296,49 @@
       "confidence": "high"
     },
     {
+      "donorName": "WORNICK, ANITA",
+      "firstFromMaster": "ANITA",
+      "state": "CA",
+      "city": "BURLINGAME",
+      "employer": "VOLUNTEER",
+      "candidateTotal": 1000,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 42250,
+      "proIsraelContribCount": 53,
+      "proIsraelCycles": [
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2020",
+        "2022",
+        "2023",
+        "2024",
+        "2026"
+      ],
+      "proIsraelPacs": [
+        "Friends of Israel PAC / San Franciscans for Good Government",
+        "Pro-Israel America PAC",
+        "DMFI PAC (Democratic Majority for Israel)",
+        "AIPAC PAC"
+      ],
+      "confidence": "high"
+    },
+    {
       "donorName": "YOUNAI, LAURA",
       "firstFromMaster": "LAURA",
       "state": "CA",
@@ -4380,48 +4438,6 @@
       ],
       "proIsraelPacs": [
         "Pro-Israel America PAC",
-        "AIPAC PAC"
-      ],
-      "confidence": "high"
-    },
-    {
-      "donorName": "WORNICK, ANITA",
-      "firstFromMaster": "ANITA",
-      "state": "CA",
-      "city": "BURLINGAME",
-      "employer": "VOLUNTEER",
-      "candidateTotal": 1000,
-      "candidateContribCount": 1,
-      "candidateCycles": [
-        "2026"
-      ],
-      "proIsraelTotal": 40250,
-      "proIsraelContribCount": 51,
-      "proIsraelCycles": [
-        "2001",
-        "2002",
-        "2003",
-        "2004",
-        "2005",
-        "2006",
-        "2007",
-        "2008",
-        "2009",
-        "2011",
-        "2012",
-        "2013",
-        "2014",
-        "2015",
-        "2020",
-        "2022",
-        "2023",
-        "2024",
-        "2026"
-      ],
-      "proIsraelPacs": [
-        "Friends of Israel PAC / San Franciscans for Good Government",
-        "Pro-Israel America PAC",
-        "DMFI PAC (Democratic Majority for Israel)",
         "AIPAC PAC"
       ],
       "confidence": "high"
@@ -5414,6 +5430,46 @@
       "confidence": "high"
     },
     {
+      "donorName": "ZALIS, ROSALIE",
+      "firstFromMaster": "ROSALIE",
+      "state": "CA",
+      "city": "SHERMAN OAKS",
+      "employer": "HOMEMAKER",
+      "candidateTotal": 500,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 28075,
+      "proIsraelContribCount": 30,
+      "proIsraelCycles": [
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2012",
+        "2013",
+        "2014",
+        "2020",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "proIsraelPacs": [
+        "World Alliance for Israel PAC",
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "confidence": "high"
+    },
+    {
       "donorName": "LEIBOWITZ, JOEL",
       "firstFromMaster": "JOEL",
       "state": "FL",
@@ -5642,45 +5698,6 @@
       ],
       "proIsraelPacs": [
         "Republican Jewish Coalition PAC (RJC-PAC)",
-        "Pro-Israel America PAC",
-        "AIPAC PAC"
-      ],
-      "confidence": "high"
-    },
-    {
-      "donorName": "ZALIS, ROSALIE",
-      "firstFromMaster": "ROSALIE",
-      "state": "CA",
-      "city": "SHERMAN OAKS",
-      "employer": "NONE/HOMEMAKER",
-      "candidateTotal": 500,
-      "candidateContribCount": 1,
-      "candidateCycles": [
-        "2026"
-      ],
-      "proIsraelTotal": 27075,
-      "proIsraelContribCount": 29,
-      "proIsraelCycles": [
-        "2001",
-        "2002",
-        "2003",
-        "2004",
-        "2005",
-        "2006",
-        "2007",
-        "2008",
-        "2009",
-        "2010",
-        "2012",
-        "2013",
-        "2014",
-        "2020",
-        "2022",
-        "2023",
-        "2024"
-      ],
-      "proIsraelPacs": [
-        "World Alliance for Israel PAC",
         "Pro-Israel America PAC",
         "AIPAC PAC"
       ],
@@ -8397,6 +8414,40 @@
       "confidence": "high"
     },
     {
+      "donorName": "STRELITZ, BRIAN",
+      "firstFromMaster": "BRIAN",
+      "state": "FL",
+      "city": "MIAMI",
+      "employer": "INTERNATIONAL HOME",
+      "candidateTotal": 1000,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 12650,
+      "proIsraelContribCount": 18,
+      "proIsraelCycles": [
+        "2000",
+        "2002",
+        "2003",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2022",
+        "2023",
+        "2024",
+        "2026"
+      ],
+      "proIsraelPacs": [
+        "National Action Committee",
+        "AIPAC PAC"
+      ],
+      "confidence": "high"
+    },
+    {
       "donorName": "CRANE, EDWARD",
       "firstFromMaster": "EDWARD",
       "state": "FL",
@@ -8466,39 +8517,6 @@
         "2024"
       ],
       "proIsraelPacs": [
-        "AIPAC PAC"
-      ],
-      "confidence": "high"
-    },
-    {
-      "donorName": "STRELITZ, BRIAN",
-      "firstFromMaster": "BRIAN",
-      "state": "FL",
-      "city": "MIAMI",
-      "employer": "URBANISM GROUP/REAL ESTATE",
-      "candidateTotal": 1000,
-      "candidateContribCount": 1,
-      "candidateCycles": [
-        "2026"
-      ],
-      "proIsraelTotal": 12150,
-      "proIsraelContribCount": 17,
-      "proIsraelCycles": [
-        "2002",
-        "2003",
-        "2005",
-        "2006",
-        "2007",
-        "2008",
-        "2009",
-        "2010",
-        "2022",
-        "2023",
-        "2024",
-        "2026"
-      ],
-      "proIsraelPacs": [
-        "National Action Committee",
         "AIPAC PAC"
       ],
       "confidence": "high"
@@ -9744,6 +9762,35 @@
       "confidence": "high"
     },
     {
+      "donorName": "LEVINE, HERBERT",
+      "firstFromMaster": "HERBERT",
+      "state": "TX",
+      "city": "HOUSTON",
+      "employer": "FREDERICK ENERGY LTD",
+      "candidateTotal": 3500,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 9000,
+      "proIsraelContribCount": 9,
+      "proIsraelCycles": [
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007"
+      ],
+      "proIsraelPacs": [
+        "Washington PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "confidence": "high"
+    },
+    {
       "donorName": "ROSENBERG, HERBERT",
       "firstFromMaster": "HERBERT",
       "state": "GA",
@@ -10125,34 +10172,6 @@
       ],
       "proIsraelPacs": [
         "AIPAC PAC"
-      ],
-      "confidence": "high"
-    },
-    {
-      "donorName": "LEVINE, HERBERT",
-      "firstFromMaster": "HERBERT",
-      "state": "TX",
-      "city": "HOUSTON",
-      "employer": "FREDERICK ENERGY LTD /EXEC",
-      "candidateTotal": 3500,
-      "candidateContribCount": 1,
-      "candidateCycles": [
-        "2026"
-      ],
-      "proIsraelTotal": 8000,
-      "proIsraelContribCount": 8,
-      "proIsraelCycles": [
-        "2001",
-        "2002",
-        "2003",
-        "2004",
-        "2005",
-        "2006",
-        "2007"
-      ],
-      "proIsraelPacs": [
-        "Washington PAC",
-        "Republican Jewish Coalition PAC (RJC-PAC)"
       ],
       "confidence": "high"
     },
@@ -12741,6 +12760,31 @@
       "confidence": "high"
     },
     {
+      "donorName": "SCHWARTZ, SHERWOOD",
+      "firstFromMaster": "SHERWOOD",
+      "state": "CA",
+      "city": "BEVERLY HILLS",
+      "employer": "REDWOOD PRODUCTIONS INC",
+      "candidateTotal": 1000,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 3350,
+      "proIsraelContribCount": 4,
+      "proIsraelCycles": [
+        "2000",
+        "2002",
+        "2024"
+      ],
+      "proIsraelPacs": [
+        "National PAC",
+        "World Alliance for Israel PAC",
+        "AIPAC PAC"
+      ],
+      "confidence": "high"
+    },
+    {
       "donorName": "RASIEL, DAVID",
       "firstFromMaster": "DAVID",
       "state": "NY",
@@ -14021,6 +14065,34 @@
       "confidence": "high"
     },
     {
+      "donorName": "SMITH, GREGORY",
+      "firstFromMaster": "GREGORY",
+      "state": "CA",
+      "city": "HIDDEN HILLS",
+      "employer": "GEORGE SMITH FINANCIAL SERVICES",
+      "candidateTotal": 1000,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 1700,
+      "proIsraelContribCount": 6,
+      "proIsraelCycles": [
+        "2000",
+        "2003",
+        "2004",
+        "2005",
+        "2014",
+        "2015"
+      ],
+      "proIsraelPacs": [
+        "Washington PAC",
+        "World Alliance for Israel PAC",
+        "California Jewish Democrats-FED / Democrats for Israel Committee"
+      ],
+      "confidence": "medium"
+    },
+    {
       "donorName": "PERLMUTER, MICHAEL",
       "firstFromMaster": "MICHAEL",
       "state": "OH",
@@ -14175,33 +14247,6 @@
         "AIPAC PAC"
       ],
       "confidence": "high"
-    },
-    {
-      "donorName": "SMITH, GREGORY",
-      "firstFromMaster": "GREGORY",
-      "state": "CA",
-      "city": "HIDDEN HILLS",
-      "employer": "GEORGE SMITH FINANCIAL SERVICES",
-      "candidateTotal": 1000,
-      "candidateContribCount": 1,
-      "candidateCycles": [
-        "2026"
-      ],
-      "proIsraelTotal": 1450,
-      "proIsraelContribCount": 5,
-      "proIsraelCycles": [
-        "2003",
-        "2004",
-        "2005",
-        "2014",
-        "2015"
-      ],
-      "proIsraelPacs": [
-        "Washington PAC",
-        "World Alliance for Israel PAC",
-        "California Jewish Democrats-FED / Democrats for Israel Committee"
-      ],
-      "confidence": "medium"
     },
     {
       "donorName": "TARICA, DAVID",
@@ -14566,6 +14611,27 @@
       "confidence": "high"
     },
     {
+      "donorName": "FRANKEL, RAYMOND",
+      "firstFromMaster": "RAYMOND",
+      "state": "CA",
+      "city": "LOS ANGELES",
+      "employer": "TECHNOLOGICAL INVESTORS",
+      "candidateTotal": 1000,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 1000,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2000"
+      ],
+      "proIsraelPacs": [
+        "National PAC"
+      ],
+      "confidence": "high"
+    },
+    {
       "donorName": "EDELSTEIN, SUSAN",
       "firstFromMaster": "SUSAN",
       "state": "NY",
@@ -14798,50 +14864,6 @@
         "AIPAC PAC"
       ],
       "confidence": "high"
-    },
-    {
-      "donorName": "SCHWARTZ, SUSAN",
-      "firstFromMaster": "SUSAN",
-      "state": "CA",
-      "city": "LOS ANGELES",
-      "employer": "N/A/HOMEMAKER",
-      "candidateTotal": 1000,
-      "candidateContribCount": 1,
-      "candidateCycles": [
-        "2026"
-      ],
-      "proIsraelTotal": 850,
-      "proIsraelContribCount": 3,
-      "proIsraelCycles": [
-        "2002",
-        "2024"
-      ],
-      "proIsraelPacs": [
-        "World Alliance for Israel PAC",
-        "AIPAC PAC"
-      ],
-      "confidence": "high"
-    },
-    {
-      "donorName": "FRANKEL, RINA",
-      "firstFromMaster": "RINA",
-      "state": "OH",
-      "city": "SHAKER HEIGHTS",
-      "employer": "NOT EMPLOYED",
-      "candidateTotal": 1000,
-      "candidateContribCount": 1,
-      "candidateCycles": [
-        "2026"
-      ],
-      "proIsraelTotal": 700,
-      "proIsraelContribCount": 2,
-      "proIsraelCycles": [
-        "2019"
-      ],
-      "proIsraelPacs": [
-        "Joint Action Committee for Political Affairs"
-      ],
-      "confidence": "medium"
     },
     {
       "donorName": "FLECK, EVAN",
@@ -15392,9 +15414,9 @@
   ],
   "totals": {
     "donors_matched": 601,
-    "high_confidence": 585,
-    "medium_confidence": 16,
+    "high_confidence": 586,
+    "medium_confidence": 15,
     "to_candidate": 1028807.21,
-    "these_donors_to_pro_israel": 26072233.830000002
+    "these_donors_to_pro_israel": 26096808.830000002
   }
 }
