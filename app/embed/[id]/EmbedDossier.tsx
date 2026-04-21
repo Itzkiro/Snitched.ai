@@ -42,9 +42,12 @@ export default function EmbedDossier(props: EmbedDossierProps) {
   const hasRedFlags = redFlags.length > 0;
   const [view, setView] = useState<'score' | 'flags'>('score');
 
-  // Force red on score / grade / score-bar when red_flags present.
-  const gc = hasRedFlags ? '#FF0844' : baselineGradeColor;
-  const sbc = hasRedFlags ? '#FF0844' : baselineScoreBarColor;
+  // Self-funding signal: any top donor marked "(SELF)" in name.
+  const isSelfFunded = topDonors.some(d => /\(SELF\)/i.test(d.name));
+
+  // Color precedence: curator red_flags → red; self-funded → orange; else grade baseline.
+  const gc = hasRedFlags ? '#FF0844' : isSelfFunded ? '#f59e0b' : baselineGradeColor;
+  const sbc = hasRedFlags ? '#FF0844' : isSelfFunded ? '#f59e0b' : baselineScoreBarColor;
 
   const partyBg = party === 'Republican' ? '#dc2626' : party === 'Democrat' ? '#2563eb' : '#6b7280';
   const partyTag = party === 'Republican' ? 'R' : party === 'Democrat' ? 'D' : 'I';
@@ -227,8 +230,8 @@ export default function EmbedDossier(props: EmbedDossierProps) {
               display: 'flex', justifyContent: 'space-between', padding: '3px 0',
               borderBottom: i < topDonors.length - 1 ? '1px solid rgba(0,255,65,0.06)' : 'none',
             }}>
-              <span style={{ fontSize: '11px', color: '#8a9a8a' }}>{d.name}</span>
-              <span style={{ fontSize: '11px', fontWeight: 700, color: d.type === 'Israel-PAC' ? '#FF0844' : '#00FF41' }}>{fmtMoney(d.amount)}</span>
+              <span style={{ fontSize: '11px', color: /\(SELF\)/i.test(d.name) ? '#FF0844' : '#8a9a8a' }}>{d.name}</span>
+              <span style={{ fontSize: '11px', fontWeight: 700, color: d.type === 'Israel-PAC' || /\(SELF\)/i.test(d.name) ? '#FF0844' : '#00FF41' }}>{fmtMoney(d.amount)}</span>
             </div>
           )) : (
             <div style={{ fontSize: '11px', color: '#3d5a3d' }}>No donor data yet</div>
