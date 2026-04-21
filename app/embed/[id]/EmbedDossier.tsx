@@ -145,8 +145,8 @@ export default function EmbedDossier(props: EmbedDossierProps) {
                   Corruption Score
                 </div>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px' }}>
-                  <span style={{ fontSize: '40px', fontWeight: 700, color: '#FF0844', lineHeight: 1 }}>{score}/100</span>
-                  <span style={{ fontSize: '28px', fontWeight: 700, color: '#FF0844', lineHeight: 1 }}>{grade}</span>
+                  <span style={{ fontSize: '40px', fontWeight: 700, color: sbc, lineHeight: 1 }}>{score}/100</span>
+                  <span style={{ fontSize: '28px', fontWeight: 700, color: sbc, lineHeight: 1 }}>{grade}</span>
                 </div>
               </>
             )}

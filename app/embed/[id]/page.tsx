@@ -18,9 +18,7 @@ function getGrade(score: number): string {
 function binaryColor(score: number): string {
   return (Number(score) || 0) <= 20 ? '#00FF41' : '#FF0844';
 }
-function gradeColor(_grade: string): string { return '#FF0844'; /* unused — see binaryColor */ }
 function scoreBarColor(score: number): string { return binaryColor(score); }
-void gradeColor;
 
 export default async function EmbedPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -68,7 +66,7 @@ export default async function EmbedPage({ params }: { params: Promise<{ id: stri
       yearsLabel={yearsLabel}
       score={score}
       grade={grade}
-      baselineGradeColor={gradeColor(grade)}
+      baselineGradeColor={binaryColor(score)}
       baselineScoreBarColor={scoreBarColor(score)}
       funds={funds}
       lobby={lobby}
