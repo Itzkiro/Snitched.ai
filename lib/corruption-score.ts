@@ -908,11 +908,14 @@ export function getGradeColor(grade: CorruptionGrade): string {
  * Binary dossier color — the main scorecard uses this instead of the
  * grade-tier gradient. Product decision (2026-04-21): citizens want a
  * blunt clean/captured signal, not an A-F school-grade spectrum.
- *   score === 0  → green  (clean, no red flags, no pro-Israel money)
- *   score >= 1   → red    (any non-zero capture signal at all)
+ *   score <= 20 (grade A)  → green  (clean / negligible capture)
+ *   score >  20            → red    (measurable capture — B/C/D/F)
+ * Grade A covers 0-20; this keeps token-historical-donation cases (e.g.,
+ * Bernard Taylor with $500 from a single donor = score 9) in the green
+ * tier alongside a true 0. Anything that hits grade B or worse is red.
  */
 export function getBinaryScoreColor(score: number): string {
-  return (Number(score) || 0) === 0 ? '#10b981' : '#ef4444';
+  return (Number(score) || 0) <= 20 ? '#10b981' : '#ef4444';
 }
 
 export function getConfidenceLabel(confidence: CorruptionConfidence): string {

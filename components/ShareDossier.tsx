@@ -17,10 +17,10 @@ function getGrade(score: number): string {
 }
 
 // Binary dossier color (2026-04-21 product decision):
-// score === 0  → green (clean)
-// score >= 1   → red   (any non-zero capture signal)
+// score <= 20 (grade A) → green (clean / negligible)
+// score >  20           → red   (measurable capture — B/C/D/F)
 function binaryColor(score: number): string {
-  return (Number(score) || 0) === 0 ? '#00FF41' : '#FF0844';
+  return (Number(score) || 0) <= 20 ? '#00FF41' : '#FF0844';
 }
 
 function generateEmbedHTML(p: Politician): string {
