@@ -4,9 +4,8 @@ import { useState, useRef } from 'react';
 import type { Politician } from '@/lib/types';
 
 function fmtMoney(n: number): string {
-  if (n >= 1e6) return `$${(n / 1e6).toFixed(1)}M`;
-  if (n >= 1e3) return `$${(n / 1e3).toFixed(0)}K`;
-  return n > 0 ? `$${n}` : '$0';
+  if (!Number.isFinite(n) || n <= 0) return '$0';
+  return `$${Math.round(n).toLocaleString('en-US')}`;
 }
 
 function getGrade(score: number): string {

@@ -9,9 +9,9 @@ import type { Politician } from '@/lib/types';
 // ---------------------------------------------------------------------------
 
 function formatAmount(n: number): string {
-  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`;
-  if (n >= 1_000) return `$${(n / 1_000).toFixed(0)}K`;
-  return `$${n.toLocaleString()}`;
+  // Raw dollars only — no K/M rounding.
+  if (!Number.isFinite(n)) return '$0';
+  return `$${Math.round(n).toLocaleString('en-US')}`;
 }
 
 function getScoreColor(score: number): string {

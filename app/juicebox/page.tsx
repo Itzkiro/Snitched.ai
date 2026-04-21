@@ -152,7 +152,7 @@ function JuiceBoxContent() {
             {corruptionRanked.length} officials scored | {highConfidenceCount} high confidence
           </span>
           <span style={{ fontSize: '0.875rem', color: 'var(--terminal-text-dim)', marginLeft: '1rem' }}>
-            | FEC TRACKED: ${(totalFundsTracked / 1000000).toFixed(1)}M
+            | FEC TRACKED: ${Math.round(totalFundsTracked).toLocaleString('en-US')}
           </span>
         </div>
       </div>
@@ -593,9 +593,7 @@ function JuiceBoxContent() {
                         color: 'var(--terminal-amber)',
                         fontFamily: 'Bebas Neue, sans-serif',
                       }}>
-                        ${(politician.totalFundsRaised || 0) >= 1000000
-                          ? `${((politician.totalFundsRaised || 0) / 1000000).toFixed(1)}M`
-                          : `${((politician.totalFundsRaised || 0) / 1000).toFixed(0)}K`}
+                        ${Math.round(politician.totalFundsRaised || 0).toLocaleString('en-US')}
                       </div>
                     </div>
 
@@ -606,7 +604,7 @@ function JuiceBoxContent() {
                         fontFamily: 'Bebas Neue, sans-serif',
                       }}>
                         {(politician.israelLobbyTotal || 0) > 0
-                          ? `$${((politician.israelLobbyTotal || 0) / 1000).toFixed(0)}K`
+                          ? `$${Math.round(politician.israelLobbyTotal || 0).toLocaleString('en-US')}`
                           : '--'}
                       </div>
                     </div>
@@ -667,10 +665,10 @@ function JuiceBoxContent() {
                       letterSpacing: '0.05em',
                       fontFamily: 'JetBrains Mono, monospace',
                     }}>
-                      RANKED BY ISRAEL LOBBY FUNDING
+                      RANKED BY PRO-ISRAEL LOBBY FUNDING
                     </h2>
                     <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginTop: '0.5rem', fontFamily: 'JetBrains Mono, monospace' }}>
-                      ${(totalIsraelLobby / 1000000).toFixed(2)}M total | {tierCounts.owned} owned, {tierCounts.bought} bought, {tierCounts.compromised} compromised
+                      ${Math.round(totalIsraelLobby).toLocaleString('en-US')} total | {tierCounts.owned} owned, {tierCounts.bought} bought, {tierCounts.compromised} compromised
                     </div>
                   </div>
 
@@ -771,9 +769,7 @@ function JuiceBoxContent() {
                             fontSize: '1.25rem', fontWeight: 700, color: '#ef4444',
                             fontFamily: 'Bebas Neue, sans-serif', marginBottom: '0.25rem',
                           }}>
-                            ${politician.israelLobbyTotal && politician.israelLobbyTotal >= 1000000
-                              ? `${(politician.israelLobbyTotal / 1000000).toFixed(2)}M`
-                              : `${((politician.israelLobbyTotal || 0) / 1000).toFixed(0)}K`}
+                            ${Math.round(politician.israelLobbyTotal || 0).toLocaleString('en-US')}
                           </div>
                           <div style={{ fontSize: '0.65rem', color: '#ef4444' }}>
                             {lobbyPercent}% of total
@@ -785,9 +781,7 @@ function JuiceBoxContent() {
                             fontSize: '1rem', fontWeight: 700, color: 'var(--terminal-text-dim)',
                             fontFamily: 'Bebas Neue, sans-serif',
                           }}>
-                            ${politician.totalFundsRaised && politician.totalFundsRaised >= 1000000
-                              ? `${(politician.totalFundsRaised / 1000000).toFixed(1)}M`
-                              : `${((politician.totalFundsRaised || 0) / 1000).toFixed(0)}K`}
+                            ${Math.round(politician.totalFundsRaised || 0).toLocaleString('en-US')}
                           </div>
                         </div>
 
@@ -876,7 +870,7 @@ function JuiceBoxContent() {
                   color: '#10b981',
                   fontFamily: 'Bebas Neue, sans-serif',
                 }}>
-                  ${(totalFundsTracked / 1000000).toFixed(1)}M
+                  ${Math.round(totalFundsTracked).toLocaleString('en-US')}
                 </div>
                 <div style={{ fontSize: '0.625rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                   TOTAL FEC FUNDS TRACKED

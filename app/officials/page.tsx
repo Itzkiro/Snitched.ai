@@ -169,9 +169,9 @@ export default async function OfficialsPage({ searchParams }: { searchParams: Pr
                   </div>
                   {(pol.israelLobbyTotal || pol.aipacFunding || 0) > 0 && (
                     <div style={{ textAlign: 'right' }}>
-                      <div style={{ fontSize: '10px', color: 'var(--terminal-text-dim)' }}>ISRAEL LOBBY</div>
+                      <div style={{ fontSize: '10px', color: 'var(--terminal-text-dim)' }}>PRO-ISRAEL LOBBY</div>
                       <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--terminal-red)', fontFamily: 'Bebas Neue, sans-serif' }}>
-                        {(() => { const amt = pol.israelLobbyTotal || pol.aipacFunding || 0; return amt >= 1000000 ? `$${(amt/1000000).toFixed(1)}M` : `$${(amt/1000).toFixed(0)}K`; })()}
+                        {(() => { const amt = pol.israelLobbyTotal || pol.aipacFunding || 0; return `$${Math.round(amt).toLocaleString('en-US')}`; })()}
                       </div>
                     </div>
                   )}

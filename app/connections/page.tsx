@@ -107,9 +107,8 @@ interface PolNode {
 // ---------------------------------------------------------------------------
 
 function fmt(n: number): string {
-  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`;
-  if (n >= 1_000) return `$${(n / 1_000).toFixed(0)}K`;
-  return n > 0 ? `$${n}` : '';
+  if (!Number.isFinite(n) || n <= 0) return '';
+  return `$${Math.round(n).toLocaleString('en-US')}`;
 }
 
 export default function ConnectionsPage() {

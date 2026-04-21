@@ -68,7 +68,7 @@ function DashboardContent() {
     return { active, federal, stateLeg, local, withFunds, totalFunds, israelLobby, avgCorruption, partyBreakdown, topCorrupt, topFunded, topRaised, total: politicians.length };
   }, [politicians]);
 
-  const fmtM = (n: number) => n >= 1e6 ? `$${(n / 1e6).toFixed(1)}M` : n >= 1e3 ? `$${(n / 1e3).toFixed(0)}K` : `$${n}`;
+  const fmtM = (n: number) => Number.isFinite(n) ? `$${Math.round(n).toLocaleString('en-US')}` : '$0';
 
   if (!isStateLive(stateParam)) return <ComingSoon stateCode={stateParam} />;
 

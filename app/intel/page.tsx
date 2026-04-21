@@ -35,9 +35,9 @@ const TYPE_ICONS: Record<string, string> = {
 };
 
 function fmtMoney(n: number): string {
-  if (n >= 1e6) return `$${(n / 1e6).toFixed(1)}M`;
-  if (n >= 1e3) return `$${(n / 1e3).toFixed(0)}K`;
-  return n > 0 ? `$${n}` : '';
+  // Raw dollars — no K/M rounding.
+  if (!Number.isFinite(n) || n <= 0) return '';
+  return `$${Math.round(n).toLocaleString('en-US')}`;
 }
 
 function timeAgo(dateStr: string): string {

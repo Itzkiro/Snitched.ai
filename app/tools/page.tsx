@@ -66,9 +66,9 @@ async function getCandidatesWithRecords(statePrefix: string): Promise<Candidate[
 // ── Helpers ──
 
 function fmtMoney(n: number): string {
-  if (n >= 1e6) return `$${(n / 1e6).toFixed(1)}M`;
-  if (n >= 1e3) return `$${(n / 1e3).toFixed(0)}K`;
-  return n > 0 ? `$${n.toLocaleString()}` : '$0';
+  // Raw dollars — no K/M rounding.
+  if (!Number.isFinite(n) || n <= 0) return '$0';
+  return `$${Math.round(n).toLocaleString('en-US')}`;
 }
 
 function partyColor(party: string): string {

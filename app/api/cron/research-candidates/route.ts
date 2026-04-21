@@ -91,7 +91,7 @@ async function fetchFecContributions(
     const individuals = totals.individual_contributions || 0;
     const pacs = totals.other_political_committee_contributions || 0;
 
-    log.push(`    FEC totals: $${(totalFunds / 1000).toFixed(0)}K raised`);
+    log.push(`    FEC totals: $${Math.round(totalFunds).toLocaleString('en-US')} raised`);
 
     // Fetch top donors
     await sleep(DELAY_MS);

@@ -25,7 +25,7 @@ function buildUpdates(ps: Record<string, number>) {
   const pols = ps['total_politicians'] || 0;
   const funded = ps['total_funded'] || 0;
   const funds = ps['total_campaign_funds'] || 0;
-  const fundsLabel = funds >= 1e9 ? `$${(funds / 1e9).toFixed(1)}B` : funds >= 1e6 ? `$${(funds / 1e6).toFixed(0)}M` : `$${(funds / 1e3).toFixed(0)}K`;
+  const fundsLabel = `$${Math.round(funds).toLocaleString('en-US')}`;
   return [
     { date: 'APR 11', title: 'State Filtering', desc: 'Filter all pages by state via dropdown', tag: 'NEW' },
     { date: 'APR 10', title: 'National Expansion', desc: `${states} states, ${pols.toLocaleString()}+ politicians`, tag: 'DATA' },
@@ -122,7 +122,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
 
   const handleZip = (e: React.FormEvent) => { e.preventDefault(); if (zipQuery.trim()) router.push(`/zip?zip=${encodeURIComponent(zipQuery.trim())}`); };
   const handleName = (e: React.FormEvent) => { e.preventDefault(); if (nameQuery.trim()) router.push(`/browse?q=${encodeURIComponent(nameQuery.trim())}`); };
-  const fmtM = (n: number) => n >= 1e6 ? `$${(n / 1e6).toFixed(1)}M` : `$${(n / 1e3).toFixed(0)}K`;
+  const fmtM = (n: number) => Number.isFinite(n) ? `$${Math.round(n).toLocaleString('en-US')}` : '$0';
 
   const topCorrupt = [...active].sort((a, b) => b.corruptionScore - a.corruptionScore).slice(0, 6);
   const topIsrael = [...active].filter(p => (p.israelLobbyTotal || 0) > 0)
@@ -136,7 +136,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
       <div style={{ minHeight: '100vh', background: 'var(--terminal-bg)', color: 'var(--terminal-text)' }}>
         <div className="terminal-title"><div>
           <h1>{selectedState && selectedState !== 'ALL' ? `${getStateName(selectedState).toUpperCase()} CORRUPTION INDEX` : 'SNITCHED.AI - CORRUPTION INDEX'}</h1>
-          <div className="terminal-subtitle">{politicians.length.toLocaleString()} politicians | ${(totalFunding / 1e6).toFixed(0)}M+ tracked | Real-time OSINT</div>
+          <div className="terminal-subtitle">{politicians.length.toLocaleString()} politicians | ${Math.round(totalFunding).toLocaleString('en-US')}+ tracked | Real-time OSINT</div>
         </div></div>
 
         <div style={{ padding: '1.5rem 2rem', borderBottom: '1px solid var(--terminal-border)', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>

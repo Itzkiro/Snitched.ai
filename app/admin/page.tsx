@@ -215,7 +215,7 @@ export default function AdminPage() {
     setLoading('');
   };
 
-  const fmt = (n: number) => n >= 1_000_000 ? `$${(n / 1_000_000).toFixed(1)}M` : n >= 1_000 ? `$${(n / 1_000).toFixed(0)}K` : `$${n}`;
+  const fmt = (n: number) => Number.isFinite(n) ? `$${Math.round(n).toLocaleString('en-US')}` : '$0';
 
   const filtered = politicians.filter(p => {
     if (filter === 'candidates' && !p.is_candidate) return false;

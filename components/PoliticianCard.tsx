@@ -143,7 +143,7 @@ export default function PoliticianCard({ politician }: Props) {
           >
             {getJuiceBoxLabel(politician.juiceBoxTier)}
             <span style={{ marginLeft: '0.75rem', fontWeight: 700 }}>
-              ${(politician.aipacFunding / 1000).toFixed(0)}K
+              ${Math.round(politician.aipacFunding).toLocaleString('en-US')}
             </span>
           </div>
         )}
@@ -245,14 +245,12 @@ export default function PoliticianCard({ politician }: Props) {
           }}>
             <span style={{ color: 'var(--terminal-text-dim)' }}>FUNDS RAISED</span>
             <span style={{ fontWeight: 700, color: 'var(--terminal-amber)', fontFamily: 'Bebas Neue, sans-serif', fontSize: '0.9rem' }}>
-              ${(politician.totalFundsRaised ?? 0) >= 1_000_000
-                ? `${((politician.totalFundsRaised ?? 0) / 1_000_000).toFixed(1)}M`
-                : `${((politician.totalFundsRaised ?? 0) / 1_000).toFixed(0)}K`}
+              ${Math.round(politician.totalFundsRaised ?? 0).toLocaleString('en-US')}
             </span>
           </div>
         )}
 
-        {/* Israel Lobby indicator */}
+        {/* Pro-Israel Lobby indicator */}
         {(politician.israelLobbyTotal ?? 0) > 0 && (
           <div style={{
             display: 'flex',
@@ -264,11 +262,9 @@ export default function PoliticianCard({ politician }: Props) {
             marginBottom: '0.75rem',
             fontSize: '0.7rem',
           }}>
-            <span style={{ color: 'var(--terminal-red)' }}>🇮🇱 ISRAEL LOBBY</span>
+            <span style={{ color: 'var(--terminal-red)' }}>🇮🇱 PRO-ISRAEL LOBBY</span>
             <span style={{ fontWeight: 700, color: 'var(--terminal-red)', fontFamily: 'Bebas Neue, sans-serif', fontSize: '0.9rem' }}>
-              {(politician.israelLobbyTotal ?? 0) >= 1_000_000
-                ? `$${((politician.israelLobbyTotal ?? 0) / 1_000_000).toFixed(1)}M`
-                : `$${((politician.israelLobbyTotal ?? 0) / 1_000).toFixed(0)}K`}
+              ${Math.round(politician.israelLobbyTotal ?? 0).toLocaleString('en-US')}
             </span>
           </div>
         )}

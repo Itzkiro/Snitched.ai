@@ -368,7 +368,7 @@ function HierarchyContent() {
             </div>
             <div>
               <div style={{ fontSize: '4rem', fontWeight: 700, color: '#f59e0b', marginBottom: '0.5rem' }}>
-                ${(aipacTotal / 1000000).toFixed(1)}M
+                ${Math.round(aipacTotal).toLocaleString('en-US')}
               </div>
               <div style={{ fontSize: '0.875rem', color: '#888', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                 Total Pro-Israel Lobby
@@ -499,7 +499,7 @@ function HierarchyContent() {
                         color: '#f59e0b',
                         borderRadius: '3px',
                       }}>
-                        {politician.juiceBoxTier === 'owned' ? 'OWNED' : politician.juiceBoxTier === 'bought' ? 'BOUGHT' : 'COMPROMISED'} {(() => { const amt = politician.israelLobbyTotal || politician.aipacFunding || 0; return amt >= 1_000_000 ? `$${(amt / 1_000_000).toFixed(1)}M` : `$${(amt / 1_000).toFixed(0)}K`; })()}
+                        {politician.juiceBoxTier === 'owned' ? 'OWNED' : politician.juiceBoxTier === 'bought' ? 'BOUGHT' : 'COMPROMISED'} {(() => { const amt = politician.israelLobbyTotal || politician.aipacFunding || 0; return `$${Math.round(amt).toLocaleString('en-US')}`; })()}
                       </span>
                     )}
                   </div>

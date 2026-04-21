@@ -122,7 +122,7 @@ async function researchPolitician(bioguideId: string): Promise<ResearchResult> {
             corporate: (t.receipts || 0) - (t.individual_contributions || 0) - (t.other_political_committee_contributions || 0),
             aipac: 0,
           };
-          log.push(`[FEC] Total raised: $${(totalFunds / 1000).toFixed(0)}K`);
+          log.push(`[FEC] Total raised: $${Math.round(totalFunds).toLocaleString('en-US')}`);
         }
       } catch (e) {
         log.push(`[FEC] Totals error: ${e instanceof Error ? e.message : String(e)}`);

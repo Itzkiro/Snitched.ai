@@ -99,7 +99,7 @@ export async function GET(request: NextRequest) {
             type: 'fec_filing',
             severity,
             title: `IE: ${cmtName}`,
-            summary: `${cmtName} spent ${amount >= 1e6 ? `$${(amount / 1e6).toFixed(1)}M` : `$${(amount / 1e3).toFixed(0)}K`} ${supportOppose} ${pol.name}${isIsrael ? ' (ISRAEL LOBBY)' : ''}`,
+            summary: `${cmtName} spent $${Math.round(amount).toLocaleString('en-US')} ${supportOppose} ${pol.name}${isIsrael ? ' (PRO-ISRAEL LOBBY)' : ''}`,
             url: `https://www.fec.gov/data/independent-expenditures/?data_type=processed&committee_id=${cmtId}&candidate_id=${candidateId}`,
             politician_id: pol.bioguide_id,
             politician_name: pol.name,

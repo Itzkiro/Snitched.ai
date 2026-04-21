@@ -96,7 +96,7 @@ function ZipContent() {
               <div style={{ textAlign: 'right' }}>
                 <div style={{ fontSize: '0.55rem', color: 'var(--terminal-text-dim)' }}>LOBBY</div>
                 <div style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--terminal-red)', fontFamily: 'Bebas Neue, sans-serif' }}>
-                  {(() => { const a = pol.israelLobbyTotal || pol.aipacFunding || 0; return a >= 1e6 ? `$${(a/1e6).toFixed(1)}M` : `$${(a/1e3).toFixed(0)}K`; })()}
+                  {(() => { const a = pol.israelLobbyTotal || pol.aipacFunding || 0; return `$${Math.round(a).toLocaleString('en-US')}`; })()}
                 </div>
               </div>
             )}

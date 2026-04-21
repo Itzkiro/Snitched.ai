@@ -155,7 +155,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
         <h2>Key Statistics</h2>
         <ul>
           <li>Politicians tracked: {totalTracked}</li>
-          <li>Israel lobby funding tracked: ${(totalFunding / 1000000).toFixed(2)}M+</li>
+          <li>Pro-Israel lobby funding tracked: ${Math.round(totalFunding).toLocaleString('en-US')}+</li>
           <li>Average corruption score: {avgCorruption}/100</li>
           <li>Politicians flagged for foreign lobby ties: {compromisedCount}</li>
           <li>Politicians with real funding data: {withFunding}</li>
@@ -168,8 +168,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
               {(p.israelLobbyTotal || p.aipacFunding) > 0
                 ? (() => {
                     const amt = p.israelLobbyTotal || p.aipacFunding || 0;
-                    const formatted = amt >= 1_000_000 ? `$${(amt / 1_000_000).toFixed(1)}M` : `$${(amt / 1_000).toFixed(0)}K`;
-                    return ` - Pro-Israel Lobby: ${formatted}`;
+                    return ` - Pro-Israel Lobby: $${Math.round(amt).toLocaleString('en-US')}`;
                   })()
                 : ''}
             </li>

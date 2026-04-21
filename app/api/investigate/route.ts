@@ -365,9 +365,9 @@ async function timeline(client: NonNullable<ReturnType<typeof getServiceRoleSupa
       events.push({
         date: ie.date || '2024-01-01',
         type: 'ie',
-        title: ie.committee_name || 'Israel Lobby IE',
+        title: ie.committee_name || 'Pro-Israel Lobby IE',
         amount: ie.amount,
-        details: `Independent expenditure: $${((ie.amount || 0) / 1000).toFixed(0)}K`,
+        details: `Independent expenditure: $${Math.round(ie.amount || 0).toLocaleString('en-US')}`,
         direction: 'in',
       });
     }
@@ -381,7 +381,7 @@ async function timeline(client: NonNullable<ReturnType<typeof getServiceRoleSupa
       type: 'donation',
       title: d.name,
       amount: d.amount,
-      details: `${d.type} contribution: $${d.amount >= 1e6 ? (d.amount / 1e6).toFixed(1) + 'M' : (d.amount / 1e3).toFixed(0) + 'K'}`,
+      details: `${d.type} contribution: $${Math.round(d.amount || 0).toLocaleString('en-US')}`,
       direction: 'in',
     });
   }
