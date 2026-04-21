@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import type { Politician } from '@/lib/types';
-import { computeCorruptionScore, getGradeColor as libGetGradeColor, getConfidenceColor } from '@/lib/corruption-score';
+import { computeCorruptionScore, getGradeColor as libGetGradeColor, getConfidenceColor, getBinaryScoreColor } from '@/lib/corruption-score';
 import {
   getCorruptionScore,
   getProIsraelLobbyAmount,
@@ -349,7 +349,13 @@ export default function PoliticianPage() {
     if (score < 60) return 'var(--terminal-amber)';
     return 'var(--terminal-red)';
   };
-  const getGradeColor = (grade: 'A' | 'B' | 'C' | 'D' | 'F') => hasRedFlags ? 'var(--terminal-red)' : libGetGradeColor(grade);
+  // Binary dossier rule (2026-04-21): score 0 → all green, >0 → all red.
+  // Red flags always force red regardless of score.
+  const getGradeColor = (_grade: 'A' | 'B' | 'C' | 'D' | 'F') => {
+    if (hasRedFlags) return 'var(--terminal-red)';
+    return getBinaryScoreColor(Number(politician?.corruptionScore) || 0);
+  };
+  void libGetGradeColor; // kept for factor-breakdown tiering if needed later
 
   const getJuiceBoxLabel = (tier: string) => {
     if (tier === 'owned') return '👑 FULLY OWNED';

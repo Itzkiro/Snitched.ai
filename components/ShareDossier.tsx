@@ -16,23 +16,11 @@ function getGrade(score: number): string {
   return 'F';
 }
 
-function gradeColor(grade: string): string {
-  switch (grade) {
-    case 'A': return '#00FF41';
-    case 'B': return '#00cc33';
-    case 'C': return '#FFB627';
-    case 'D': return '#FF6B35';
-    case 'F': return '#FF0844';
-    default: return '#6b8a6b';
-  }
-}
-
-function scoreBarColor(score: number): string {
-  if (score <= 20) return '#00FF41';
-  if (score <= 40) return '#00cc33';
-  if (score <= 60) return '#FFB627';
-  if (score <= 80) return '#FF6B35';
-  return '#FF0844';
+// Binary dossier color (2026-04-21 product decision):
+// score === 0  → green (clean)
+// score >= 1   → red   (any non-zero capture signal)
+function binaryColor(score: number): string {
+  return (Number(score) || 0) === 0 ? '#00FF41' : '#FF0844';
 }
 
 function generateEmbedHTML(p: Politician): string {
@@ -40,10 +28,9 @@ function generateEmbedHTML(p: Politician): string {
   const grade = getGrade(score);
   const redFlags = p.source_ids?.red_flags ?? [];
   const hasRedFlags = redFlags.length > 0;
-  // When red_flags are present, force score box / number / grade / bar to red
-  // regardless of numeric score (matches the politician page treatment).
-  const gc = hasRedFlags ? '#FF0844' : gradeColor(grade);
-  const sbc = hasRedFlags ? '#FF0844' : scoreBarColor(score);
+  // Red flags always force red; otherwise 0 = green, anything > 0 = red.
+  const gc = hasRedFlags ? '#FF0844' : binaryColor(score);
+  const sbc = gc;
   const lobby = p.israelLobbyTotal || p.aipacFunding || 0;
   const funds = p.totalFundsRaised || 0;
   const partyBg = p.party === 'Republican' ? '#dc2626' : p.party === 'Democrat' ? '#2563eb' : '#6b7280';

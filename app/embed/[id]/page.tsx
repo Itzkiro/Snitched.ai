@@ -12,24 +12,14 @@ function getGrade(score: number): string {
   return 'F';
 }
 
-function gradeColor(grade: string): string {
-  switch (grade) {
-    case 'A': return '#00FF41';
-    case 'B': return '#00cc33';
-    case 'C': return '#FFB627';
-    case 'D': return '#FF6B35';
-    case 'F': return '#FF0844';
-    default: return '#6b8a6b';
-  }
+// Binary dossier color (2026-04-21 product decision):
+// score === 0 → green (clean), anything > 0 → red.
+function binaryColor(score: number): string {
+  return (Number(score) || 0) === 0 ? '#00FF41' : '#FF0844';
 }
-
-function scoreBarColor(score: number): string {
-  if (score <= 20) return '#00FF41';
-  if (score <= 40) return '#00cc33';
-  if (score <= 60) return '#FFB627';
-  if (score <= 80) return '#FF6B35';
-  return '#FF0844';
-}
+function gradeColor(_grade: string): string { return '#FF0844'; /* unused — see binaryColor */ }
+function scoreBarColor(score: number): string { return binaryColor(score); }
+void gradeColor;
 
 export default async function EmbedPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
