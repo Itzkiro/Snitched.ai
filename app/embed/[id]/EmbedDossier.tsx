@@ -190,23 +190,26 @@ export default function EmbedDossier(props: EmbedDossierProps) {
           </div>
         </div>
 
-        {/* Donation status / Foreign Influence */}
-        <div style={{
-          padding: '14px 16px', background: lobbyBg, border: `2px solid ${lobbyBorder}`,
-          marginBottom: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        }}>
-          <div>
-            <div style={{ fontSize: '10px', color: lobbyColor, letterSpacing: '2px', fontWeight: 700 }}>{lobbyIcon} {lobbyLabel}</div>
-            {(donationStatus?.subtext ?? 'Pro-Israel Lobby / AIPAC / Foreign PACs') && (
-              <div style={{ fontSize: '9px', color: '#4a5a4a', marginTop: '3px' }}>
-                {donationStatus?.subtext ?? 'Pro-Israel Lobby / AIPAC / Foreign PACs'}
-              </div>
-            )}
+        {/* Donation status / Foreign Influence — shown only when lobby > 0
+            or candidate has an explicit donation_status override */}
+        {(lobby > 0 || !!donationStatus) && (
+          <div style={{
+            padding: '14px 16px', background: lobbyBg, border: `2px solid ${lobbyBorder}`,
+            marginBottom: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+          }}>
+            <div>
+              <div style={{ fontSize: '10px', color: lobbyColor, letterSpacing: '2px', fontWeight: 700 }}>{lobbyIcon} {lobbyLabel}</div>
+              {(donationStatus?.subtext ?? 'Pro-Israel Lobby / AIPAC / Foreign PACs') && (
+                <div style={{ fontSize: '9px', color: '#4a5a4a', marginTop: '3px' }}>
+                  {donationStatus?.subtext ?? 'Pro-Israel Lobby / AIPAC / Foreign PACs'}
+                </div>
+              )}
+            </div>
+            <div style={{ fontSize: '28px', fontWeight: 700, color: lobbyColor, textShadow: `0 0 15px ${lobbyColor}40`, letterSpacing: '1px' }}>
+              {fmtMoney(donationStatus?.amount ?? lobby)}
+            </div>
           </div>
-          <div style={{ fontSize: '28px', fontWeight: 700, color: lobbyColor, textShadow: `0 0 15px ${lobbyColor}40`, letterSpacing: '1px' }}>
-            {fmtMoney(donationStatus?.amount ?? lobby)}
-          </div>
-        </div>
+        )}
 
         {/* Self-funded banner — promoted from Top Donors when candidate self-funds */}
         {isSelfFunded && (
@@ -222,11 +225,16 @@ export default function EmbedDossier(props: EmbedDossierProps) {
                 ⚠ SELF-FUNDED CANDIDATE
               </div>
               <div style={{ fontSize: '9px', color: '#4a5a4a', marginTop: '3px' }}>
-                {selfDonor!.name} — {selfPct.toFixed(0)}% of total raised
+                {selfDonor!.name}
               </div>
             </div>
-            <div style={{ fontSize: '28px', fontWeight: 700, color: '#FF0844', textShadow: '0 0 15px rgba(255,8,68,0.25)', letterSpacing: '1px' }}>
-              {fmtMoney(selfDonor!.amount)}
+            <div style={{ textAlign: 'right' }}>
+              <div style={{ fontSize: '28px', fontWeight: 700, color: '#FF0844', textShadow: '0 0 15px rgba(255,8,68,0.25)', letterSpacing: '1px', lineHeight: 1 }}>
+                {fmtMoney(selfDonor!.amount)}
+              </div>
+              <div style={{ fontSize: '11px', fontWeight: 700, color: '#FF0844', letterSpacing: '1px', marginTop: '4px' }}>
+                {selfPct.toFixed(0)}% SELF-FUNDED
+              </div>
             </div>
           </div>
         )}
