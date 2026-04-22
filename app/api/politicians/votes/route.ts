@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSupabase } from '@/lib/supabase-server';
 
-// Revalidate every 10 minutes
-export const revalidate = 600;
+// Force dynamic rendering (no cache) so manually-seeded voting_records
+// appear immediately. Light endpoint; caching not needed.
+export const dynamic = 'force-dynamic';
 
 /**
  * GET /api/politicians/votes?bioguideId=<id>&category=<category>
