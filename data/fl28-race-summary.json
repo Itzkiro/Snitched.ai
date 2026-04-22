@@ -1,0 +1,19 @@
+[
+  {
+    "name": "Phil Ehr",
+    "party": "Democratic",
+    "fec_id": "H4FL28042",
+    "total_receipts": 1406213.99,
+    "individuals": 1165307.95,
+    "pacs": 0,
+    "self_funding": 27636.27,
+    "real_pac_sum": 251536.27000000002,
+    "israel_pac_sum": 0,
+    "score": 0,
+    "grade": "A",
+    "juice_box_tier": "none",
+    "individual_uniques": 611,
+    "registry_matches_high": 54,
+    "registry_match_to_cand": 95593
+  }
+]

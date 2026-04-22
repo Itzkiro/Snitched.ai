@@ -1,0 +1,1365 @@
+{
+  "generated_at": "2026-04-22T18:17:47.980Z",
+  "candidate": {
+    "name": "Aaron Baker",
+    "party": "REP",
+    "state": "FL",
+    "district": "06",
+    "candidate_ids": [
+      "H6FL06324",
+      "H6FL06241"
+    ],
+    "committees": [
+      "C00902478",
+      "C00893289"
+    ],
+    "principal_committee": "C00902478"
+  },
+  "totals": [
+    {
+      "committee_id": "C00902478",
+      "all_other_loans": 0,
+      "candidate_contribution": 337.76,
+      "cash_on_hand_beginning_period": 0,
+      "committee_designation": "P",
+      "committee_designation_full": "Principal campaign committee",
+      "committee_name": "AARON 4 FL",
+      "committee_state": "FL",
+      "committee_type": "H",
+      "committee_type_full": "House",
+      "contribution_refunds": 3735,
+      "contributions": 62611.14,
+      "coverage_end_date": "2026-03-31T00:00:00",
+      "coverage_start_date": "2025-04-01T00:00:00",
+      "cycle": 2026,
+      "disbursements": 62726.32,
+      "filing_frequency": "Q",
+      "filing_frequency_full": "Quarterly filer",
+      "first_f1_date": "2025-04-15",
+      "first_file_date": "2025-04-15",
+      "individual_contributions": 26863.92,
+      "individual_itemized_contributions": 17767,
+      "individual_unitemized_contributions": 9096.92,
+      "last_beginning_image_number": "202604159863110283",
+      "last_cash_on_hand_end_period": 552.08,
+      "last_debts_owed_by_committee": 375,
+      "last_debts_owed_to_committee": 0,
+      "last_report_type_full": "APRIL QUARTERLY",
+      "last_report_year": 2026,
+      "loan_repayments": 0,
+      "loan_repayments_candidate_loans": 0,
+      "loan_repayments_other_loans": 0,
+      "loans": 375,
+      "loans_made_by_candidate": 375,
+      "net_contributions": 58876.14,
+      "net_operating_expenditures": 58501.32,
+      "offsets_to_operating_expenditures": 300,
+      "operating_expenditures": 58801.32,
+      "organization_type": null,
+      "organization_type_full": null,
+      "other_disbursements": 190,
+      "other_political_committee_contributions": 33909.46,
+      "other_receipts": 0,
+      "party_full": "REPUBLICAN PARTY",
+      "political_party_committee_contributions": 1500,
+      "receipts": 63286.14,
+      "refunded_individual_contributions": 135,
+      "refunded_other_political_committee_contributions": 3600,
+      "refunded_political_party_committee_contributions": 0,
+      "transaction_coverage_date": "2025-12-31",
+      "transfers_from_other_authorized_committee": 0,
+      "transfers_to_other_authorized_committee": 0,
+      "treasurer_name": "BAKER, AARON"
+    },
+    {
+      "committee_id": "C00893289",
+      "all_other_loans": 0,
+      "candidate_contribution": 60,
+      "cash_on_hand_beginning_period": 0,
+      "committee_designation": "A",
+      "committee_designation_full": "Authorized by a candidate",
+      "committee_name": "AARON 4 FL 6",
+      "committee_state": "FL",
+      "committee_type": "H",
+      "committee_type_full": "House",
+      "contribution_refunds": 95,
+      "contributions": 21409.68,
+      "coverage_end_date": "2025-03-13T00:00:00",
+      "coverage_start_date": "2024-10-01T00:00:00",
+      "cycle": 2026,
+      "disbursements": 32436.26,
+      "filing_frequency": "T",
+      "filing_frequency_full": "Terminated",
+      "first_f1_date": "2024-11-26",
+      "first_file_date": "2024-11-26",
+      "individual_contributions": 21349.68,
+      "individual_itemized_contributions": 18807.03,
+      "individual_unitemized_contributions": 2542.65,
+      "last_beginning_image_number": "202503149754177348",
+      "last_cash_on_hand_end_period": 2.55,
+      "last_debts_owed_by_committee": 11029.13,
+      "last_debts_owed_to_committee": 0,
+      "last_report_type_full": "TERMINATION REPORT",
+      "last_report_year": 2025,
+      "loan_repayments": 0,
+      "loan_repayments_candidate_loans": 0,
+      "loan_repayments_other_loans": 0,
+      "loans": 11029.13,
+      "loans_made_by_candidate": 11029.13,
+      "net_contributions": 21314.68,
+      "net_operating_expenditures": 32341.26,
+      "offsets_to_operating_expenditures": 0,
+      "operating_expenditures": 32341.26,
+      "organization_type": null,
+      "organization_type_full": null,
+      "other_disbursements": 0,
+      "other_political_committee_contributions": 0,
+      "other_receipts": 0,
+      "party_full": "REPUBLICAN PARTY",
+      "political_party_committee_contributions": 0,
+      "receipts": 32438.81,
+      "refunded_individual_contributions": 95,
+      "refunded_other_political_committee_contributions": 0,
+      "refunded_political_party_committee_contributions": 0,
+      "transaction_coverage_date": "2025-03-13",
+      "transfers_from_other_authorized_committee": 0,
+      "transfers_to_other_authorized_committee": 0,
+      "treasurer_name": "BAKER, AARON"
+    }
+  ],
+  "summary": {
+    "individual_rows": 820,
+    "individual_uniques": 166,
+    "individual_sum": 66197.86999999998,
+    "conduit_rows": 87,
+    "conduit_sum": 19095.819999999996,
+    "real_pac_rows": 18,
+    "real_pac_sum": 14386.89,
+    "real_pacs": [
+      {
+        "name": "BAKER, AARON",
+        "state": "FL",
+        "total": 11801.89,
+        "count": 12
+      },
+      {
+        "name": "AZAPAC",
+        "state": "CT",
+        "total": 1500,
+        "count": 1
+      },
+      {
+        "name": "WE THE PEOPLE ELECT PATRIOTS",
+        "state": "FL",
+        "total": 1000,
+        "count": 1
+      },
+      {
+        "name": "BONIN, JUDY",
+        "state": "VA",
+        "total": 35,
+        "count": 1
+      },
+      {
+        "name": "BLEMASTER, GARY",
+        "state": "FL",
+        "total": 25,
+        "count": 1
+      },
+      {
+        "name": "BLAIR, ALAN",
+        "state": "VA",
+        "total": 15,
+        "count": 1
+      },
+      {
+        "name": "UMER, M",
+        "state": "CA",
+        "total": 10,
+        "count": 1
+      }
+    ],
+    "pro_israel_registry_size": 33587,
+    "pro_israel_matches": 17,
+    "pro_israel_matches_high_confidence": 6,
+    "pro_israel_match_to_candidate": 2749.360000000001,
+    "pro_israel_match_career_pro_israel": 511535
+  },
+  "top_individual_donors": [
+    {
+      "name": "BONIN, JUDY",
+      "state": "VA",
+      "city": "STAUNTON",
+      "employer": "SELF",
+      "occupation": "SELF",
+      "total": 8840,
+      "count": 358,
+      "first_date": "2025-07-21",
+      "last_date": "2025-12-22"
+    },
+    {
+      "name": "WALLING, ANNETTE",
+      "state": "FL",
+      "city": "LAKELAND",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 6883.300000000001,
+      "count": 3,
+      "first_date": "2024-12-22",
+      "last_date": "2025-06-11"
+    },
+    {
+      "name": "BLEMASTER, GARY",
+      "state": "FL",
+      "city": "NAPLES",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 4971,
+      "count": 119,
+      "first_date": "2025-08-04",
+      "last_date": "2025-12-24"
+    },
+    {
+      "name": "HANIFIL, DARREN",
+      "state": "MN",
+      "city": "EXCELSIOR",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 3855,
+      "count": 99,
+      "first_date": "2025-08-04",
+      "last_date": "2025-12-21"
+    },
+    {
+      "name": "WALLING, DEAN",
+      "state": "FL",
+      "city": "LAKELAND",
+      "employer": "MS INDUSTRIAL",
+      "occupation": "SALES MANAGER",
+      "total": 3500,
+      "count": 7,
+      "first_date": "2025-05-12",
+      "last_date": "2025-09-30"
+    },
+    {
+      "name": "TURNER, THOMAS",
+      "state": "FL",
+      "city": "ELKTON",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 3000,
+      "count": 3,
+      "first_date": "2025-01-02",
+      "last_date": "2025-01-13"
+    },
+    {
+      "name": "BLAIR, ALAN",
+      "state": "VA",
+      "city": "VIENNA",
+      "employer": "CONTRACTOR",
+      "occupation": "CONTRACTOR",
+      "total": 2430,
+      "count": 14,
+      "first_date": "2025-08-13",
+      "last_date": "2025-10-21"
+    },
+    {
+      "name": "MARTINEAU, JIM",
+      "state": "CA",
+      "city": "RANCHO PALOS VERDE",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 2228,
+      "count": 2,
+      "first_date": "2025-01-06",
+      "last_date": "2025-01-06"
+    },
+    {
+      "name": "AWAD, IBRAHIM",
+      "state": "GA",
+      "city": "MARIETTA",
+      "employer": "THE AWAD LAW FIRM, P.C.",
+      "occupation": "ATTORNEY",
+      "total": 2082.04,
+      "count": 2,
+      "first_date": "2025-12-19",
+      "last_date": "2025-12-19"
+    },
+    {
+      "name": "CLEMENTS, MATTHEW",
+      "state": "AL",
+      "city": "MULGA",
+      "employer": "KLLM",
+      "occupation": "TRUCK DRIVER",
+      "total": 2082.04,
+      "count": 2,
+      "first_date": "2025-10-23",
+      "last_date": "2025-10-23"
+    },
+    {
+      "name": "ABUTAA, ADAM",
+      "state": "FL",
+      "city": "POMPANO BEACH",
+      "employer": "EMGAGE ACTION FL",
+      "occupation": "ORGANIZING MANAGER",
+      "total": 2082.04,
+      "count": 2,
+      "first_date": "2025-10-22",
+      "last_date": "2025-10-22"
+    },
+    {
+      "name": "BOLING, RODERIC",
+      "state": "FL",
+      "city": "LONGWOOD",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 2082.03,
+      "count": 1,
+      "first_date": "2025-01-13",
+      "last_date": "2025-01-13"
+    },
+    {
+      "name": "HOOD, SARAH LIBBIE",
+      "state": "FL",
+      "city": "ORMOND BEACH",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 2000,
+      "count": 1,
+      "first_date": "2025-01-04",
+      "last_date": "2025-01-04"
+    },
+    {
+      "name": "HOOD, GARY",
+      "state": "FL",
+      "city": "ORMOND BEACH",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 2000,
+      "count": 1,
+      "first_date": "2025-01-04",
+      "last_date": "2025-01-04"
+    },
+    {
+      "name": "SMITH, DAVID",
+      "state": "FL",
+      "city": "ORMOND BEACH",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 1545.1,
+      "count": 8,
+      "first_date": "2024-12-23",
+      "last_date": "2025-10-22"
+    },
+    {
+      "name": "SHIBLY, HASSAN",
+      "state": "FL",
+      "city": "SEFFNER",
+      "employer": "MUSLIM LEGAL",
+      "occupation": "LAWYER",
+      "total": 1250,
+      "count": 2,
+      "first_date": "2025-08-31",
+      "last_date": "2025-12-18"
+    },
+    {
+      "name": "KHATTAK, RAIHAAN",
+      "state": "FL",
+      "city": "KISSIMMEE",
+      "employer": "OSCEOLA INFECTIOUS DISEASE CONS SERV",
+      "occupation": "PHYSICIAN",
+      "total": 1000,
+      "count": 1,
+      "first_date": "2025-12-18",
+      "last_date": "2025-12-18"
+    },
+    {
+      "name": "ABUTAA, ABBAS Y",
+      "state": "VA",
+      "city": "OAKTON",
+      "employer": "SELF/OWNER",
+      "occupation": "GAS STATION",
+      "total": 1000,
+      "count": 1,
+      "first_date": "2025-11-29",
+      "last_date": "2025-11-29"
+    },
+    {
+      "name": "KARDAME, UZMA",
+      "state": "CA",
+      "city": "FREMONT",
+      "employer": "ILM ACADEMY",
+      "occupation": "TEACHER",
+      "total": 1000,
+      "count": 2,
+      "first_date": "2025-12-13",
+      "last_date": "2025-12-13"
+    },
+    {
+      "name": "WORCESTER, JAMES",
+      "state": "FL",
+      "city": "ORMOND BEACH",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 1000,
+      "count": 1,
+      "first_date": "2025-01-03",
+      "last_date": "2025-01-03"
+    },
+    {
+      "name": "KERIN, BRITTON",
+      "state": "AK",
+      "city": "FAIRBANKS",
+      "employer": "SELF",
+      "occupation": "LANDLORD",
+      "total": 542,
+      "count": 1,
+      "first_date": "2025-12-22",
+      "last_date": "2025-12-22"
+    },
+    {
+      "name": "LEBLANC, JACQUELINE",
+      "state": "FL",
+      "city": "ST. AUGUSTINE",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 500,
+      "count": 1,
+      "first_date": "2025-08-11",
+      "last_date": "2025-08-11"
+    },
+    {
+      "name": "WILLIAMS, THOMAS",
+      "state": "FL",
+      "city": "INTERLACHEN",
+      "employer": "TMT AUTO CLINIC",
+      "occupation": "OWNER",
+      "total": 500,
+      "count": 1,
+      "first_date": "2025-11-21",
+      "last_date": "2025-11-21"
+    },
+    {
+      "name": "KARGAR, RAHAMAN",
+      "state": "FL",
+      "city": "TAMPA",
+      "employer": "RAHAMAN",
+      "occupation": "SELF",
+      "total": 500,
+      "count": 1,
+      "first_date": "2025-12-18",
+      "last_date": "2025-12-18"
+    },
+    {
+      "name": "DISTEFANO, YOUMNA",
+      "state": "FL",
+      "city": "FORT LAUDERDALE",
+      "employer": "SELF",
+      "occupation": "PHYSICIAN",
+      "total": 500,
+      "count": 1,
+      "first_date": "2025-10-30",
+      "last_date": "2025-10-30"
+    },
+    {
+      "name": "DEL SIGNORE, MICHELE",
+      "state": "TX",
+      "city": "FARMERS BRANCH",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 500,
+      "count": 1,
+      "first_date": "2025-12-30",
+      "last_date": "2025-12-30"
+    },
+    {
+      "name": "SAIA, PAUL",
+      "state": "FL",
+      "city": "MELBOURNE",
+      "employer": "SELF",
+      "occupation": "SELF",
+      "total": 475,
+      "count": 10,
+      "first_date": "2025-01-27",
+      "last_date": "2025-12-08"
+    },
+    {
+      "name": "COONLY, JOHN",
+      "state": "TX",
+      "city": "AUSTIN",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 400,
+      "count": 3,
+      "first_date": "2025-01-16",
+      "last_date": "2025-01-20"
+    },
+    {
+      "name": "LEVINE, MICHAEL",
+      "state": "FL",
+      "city": "MOUNT DORA",
+      "employer": "LEVINE ASSET MANAGEMENT",
+      "occupation": "PRINCIPAL BROKER",
+      "total": 350,
+      "count": 2,
+      "first_date": "2025-08-16",
+      "last_date": "2025-08-16"
+    },
+    {
+      "name": "CUMMINGS JR, DANIEL",
+      "state": "TN",
+      "city": "MEMPHIS",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 350,
+      "count": 15,
+      "first_date": "2025-08-09",
+      "last_date": "2025-09-24"
+    },
+    {
+      "name": "PEACOCK, GLEN",
+      "state": "FL",
+      "city": "ORMOND BEACH",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 335,
+      "count": 1,
+      "first_date": "2025-01-13",
+      "last_date": "2025-01-13"
+    },
+    {
+      "name": "MCINNIS, GORDON",
+      "state": "FL",
+      "city": "FORT MCCOY",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 308.2,
+      "count": 3,
+      "first_date": "2025-08-27",
+      "last_date": "2025-12-31"
+    },
+    {
+      "name": "KHINDRI, AJAY",
+      "state": "FL",
+      "city": "ORLANDO",
+      "employer": "KHINDRCARE LLC",
+      "occupation": "HOME HEALTH AGENCY",
+      "total": 260.26,
+      "count": 2,
+      "first_date": "2025-08-26",
+      "last_date": "2025-08-26"
+    },
+    {
+      "name": "TAMARGO, TARA",
+      "state": "FL",
+      "city": "MELBOURNE",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 260.25,
+      "count": 1,
+      "first_date": "2025-01-01",
+      "last_date": "2025-01-01"
+    },
+    {
+      "name": "GAWNE, MARY",
+      "state": "MD",
+      "city": "ARNOLD",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 260.25,
+      "count": 1,
+      "first_date": "2024-12-02",
+      "last_date": "2024-12-02"
+    },
+    {
+      "name": "AMEENUDDIN, MUSTAFA",
+      "state": "FL",
+      "city": "LUTZ",
+      "employer": "LAW OFFICE OF AMEEN AND SHAFII",
+      "occupation": "ATTORNEY",
+      "total": 250,
+      "count": 1,
+      "first_date": "2025-12-18",
+      "last_date": "2025-12-18"
+    },
+    {
+      "name": "BURKE, MARGARET",
+      "state": "FL",
+      "city": "ORMOND BEACH",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 250,
+      "count": 1,
+      "first_date": "2025-01-13",
+      "last_date": "2025-01-13"
+    },
+    {
+      "name": "ABBOUD, CHARLES",
+      "state": "FL",
+      "city": "CLERMONT",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 208.2,
+      "count": 2,
+      "first_date": "2025-09-29",
+      "last_date": "2025-09-29"
+    },
+    {
+      "name": "GIORGI, CARL",
+      "state": "NV",
+      "city": "LAS VEGAS",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 208.2,
+      "count": 2,
+      "first_date": "2025-07-29",
+      "last_date": "2025-07-29"
+    },
+    {
+      "name": "FENWICK, SAMUEL",
+      "state": "TX",
+      "city": "AUSTIN",
+      "employer": "TIEMANN LAND AND CATTLE DEVELOPMENT",
+      "occupation": "DEVELOPER",
+      "total": 208.2,
+      "count": 2,
+      "first_date": "2025-07-30",
+      "last_date": "2025-07-30"
+    },
+    {
+      "name": "SHORT, CATHERINE",
+      "state": "FL",
+      "city": "DAYTONA BEACH",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 200,
+      "count": 1,
+      "first_date": "2025-10-15",
+      "last_date": "2025-10-15"
+    },
+    {
+      "name": "CAMPBELL, RICHARD",
+      "state": "NC",
+      "city": "LEXINGTON",
+      "employer": "VANN YORK AUTO GROUP",
+      "occupation": "",
+      "total": 150,
+      "count": 3,
+      "first_date": "2025-08-08",
+      "last_date": "2025-10-10"
+    },
+    {
+      "name": "ELLEN, MARY",
+      "state": "FL",
+      "city": "CRYSTAL RIVER",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 104.1,
+      "count": 2,
+      "first_date": "2025-12-13",
+      "last_date": "2025-12-31"
+    },
+    {
+      "name": "KHURI, SAMER",
+      "state": "TX",
+      "city": "AUSTIN",
+      "employer": "DOORDASH",
+      "occupation": "DATA SCIENTIST",
+      "total": 100,
+      "count": 1,
+      "first_date": "2025-12-17",
+      "last_date": "2025-12-17"
+    },
+    {
+      "name": "EDMONSTON, BRIAN",
+      "state": "CA",
+      "city": "POWAY",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 100,
+      "count": 1,
+      "first_date": "2025-12-17",
+      "last_date": "2025-12-17"
+    },
+    {
+      "name": "BAKER, JASON",
+      "state": "GA",
+      "city": "NEWNAN",
+      "employer": "DIAMOND PHARMACY SERVICES",
+      "occupation": "DIRECTOR OF STRATEGIC INITIATIVES",
+      "total": 100,
+      "count": 1,
+      "first_date": "2025-12-14",
+      "last_date": "2025-12-14"
+    },
+    {
+      "name": "KHAN, HASSAN",
+      "state": "AZ",
+      "city": "PHOENIX",
+      "employer": "AMEX",
+      "occupation": "DEVELOPER",
+      "total": 76.03,
+      "count": 2,
+      "first_date": "2025-10-14",
+      "last_date": "2025-12-13"
+    },
+    {
+      "name": "SOSHI, JETON",
+      "state": "FL",
+      "city": "OAKLAND PARK",
+      "employer": "SOSHI BUILDERS",
+      "occupation": "SOSHI BUILDERS",
+      "total": 62,
+      "count": 2,
+      "first_date": "2025-09-02",
+      "last_date": "2025-09-08"
+    },
+    {
+      "name": "UMER, M",
+      "state": "CA",
+      "city": "REDDING",
+      "employer": "GERIATRIC CARE",
+      "occupation": "PHYSICIAN",
+      "total": 60,
+      "count": 6,
+      "first_date": "2025-07-30",
+      "last_date": "2025-12-30"
+    },
+    {
+      "name": "WIEGAND, VIRGINIA",
+      "state": "WA",
+      "city": "SEATTLE",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 52.05,
+      "count": 1,
+      "first_date": "2025-07-30",
+      "last_date": "2025-07-30"
+    }
+  ],
+  "real_pac_contributions": [
+    {
+      "date": "2025-10-16",
+      "amount": 1500,
+      "name": "AZAPAC",
+      "committee_id": "C00916379",
+      "state": "CT",
+      "cycle": 2026,
+      "baker_committee": "C00902478"
+    },
+    {
+      "date": "2025-05-05",
+      "amount": 375,
+      "name": "BAKER, AARON",
+      "committee_id": null,
+      "state": "FL",
+      "cycle": 2026,
+      "baker_committee": "C00902478"
+    },
+    {
+      "date": "2025-09-02",
+      "amount": 125,
+      "name": "BAKER, AARON",
+      "committee_id": null,
+      "state": "FL",
+      "cycle": 2026,
+      "baker_committee": "C00902478"
+    },
+    {
+      "date": "2025-07-10",
+      "amount": 100,
+      "name": "BAKER, AARON",
+      "committee_id": null,
+      "state": "FL",
+      "cycle": 2026,
+      "baker_committee": "C00902478"
+    },
+    {
+      "date": "2025-05-28",
+      "amount": 100,
+      "name": "BAKER, AARON",
+      "committee_id": null,
+      "state": "FL",
+      "cycle": 2026,
+      "baker_committee": "C00902478"
+    },
+    {
+      "date": "2025-07-20",
+      "amount": 35,
+      "name": "BONIN, JUDY",
+      "committee_id": null,
+      "state": "VA",
+      "cycle": 2026,
+      "baker_committee": "C00902478"
+    },
+    {
+      "date": "2025-07-21",
+      "amount": 25,
+      "name": "BLEMASTER, GARY",
+      "committee_id": null,
+      "state": "FL",
+      "cycle": 2026,
+      "baker_committee": "C00902478"
+    },
+    {
+      "date": "2025-09-18",
+      "amount": 15,
+      "name": "BLAIR, ALAN",
+      "committee_id": null,
+      "state": "VA",
+      "cycle": 2026,
+      "baker_committee": "C00902478"
+    },
+    {
+      "date": "2025-09-30",
+      "amount": 10,
+      "name": "UMER, M",
+      "committee_id": null,
+      "state": "CA",
+      "cycle": 2026,
+      "baker_committee": "C00902478"
+    },
+    {
+      "date": "2025-04-17",
+      "amount": 5.21,
+      "name": "BAKER, AARON",
+      "committee_id": null,
+      "state": "FL",
+      "cycle": 2026,
+      "baker_committee": "C00902478"
+    },
+    {
+      "date": "2025-06-10",
+      "amount": 5,
+      "name": "BAKER, AARON",
+      "committee_id": null,
+      "state": "FL",
+      "cycle": 2026,
+      "baker_committee": "C00902478"
+    },
+    {
+      "date": "2025-04-01",
+      "amount": 2.55,
+      "name": "BAKER, AARON",
+      "committee_id": null,
+      "state": "FL",
+      "cycle": 2026,
+      "baker_committee": "C00902478"
+    },
+    {
+      "date": "2024-12-18",
+      "amount": 10000,
+      "name": "BAKER, AARON",
+      "committee_id": null,
+      "state": "FL",
+      "cycle": 2026,
+      "baker_committee": "C00893289"
+    },
+    {
+      "date": "2024-12-23",
+      "amount": 1000,
+      "name": "WE THE PEOPLE ELECT PATRIOTS",
+      "committee_id": null,
+      "state": "FL",
+      "cycle": 2026,
+      "baker_committee": "C00893289"
+    },
+    {
+      "date": "2025-02-13",
+      "amount": 700,
+      "name": "BAKER, AARON",
+      "committee_id": null,
+      "state": "FL",
+      "cycle": 2026,
+      "baker_committee": "C00893289"
+    },
+    {
+      "date": "2025-02-14",
+      "amount": 239.13,
+      "name": "BAKER, AARON",
+      "committee_id": null,
+      "state": "FL",
+      "cycle": 2026,
+      "baker_committee": "C00893289"
+    },
+    {
+      "date": "2025-03-03",
+      "amount": 90,
+      "name": "BAKER, AARON",
+      "committee_id": null,
+      "state": "FL",
+      "cycle": 2026,
+      "baker_committee": "C00893289"
+    },
+    {
+      "date": "2025-01-13",
+      "amount": 60,
+      "name": "BAKER, AARON",
+      "committee_id": null,
+      "state": "FL",
+      "cycle": 2026,
+      "baker_committee": "C00893289"
+    }
+  ],
+  "pro_israel_matches": [
+    {
+      "donorName": "MALKIN, BARRY",
+      "firstFromMaster": "BARRY",
+      "state": "IL",
+      "city": "CHICAGO",
+      "employer": "JMB REALTY",
+      "candidateTotal": 20.82,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 217400,
+      "proIsraelContribCount": 58,
+      "proIsraelCycles": [
+        "1989",
+        "1991",
+        "1993",
+        "1994",
+        "1995",
+        "1996",
+        "1997",
+        "1998",
+        "1999",
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2005",
+        "2007",
+        "2009",
+        "2011",
+        "2013",
+        "2014",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "proIsraelPacs": [
+        "City PAC",
+        "Joint Action Committee for Political Affairs",
+        "Americans United in Support of Democracy / CCNI",
+        "To Protect Our Heritage PAC",
+        "DMFI PAC (Democratic Majority for Israel)",
+        "AIPAC PAC",
+        "United Democracy Project (UDP)"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "HIRT, LANCE",
+      "firstFromMaster": "LANCE",
+      "state": "NY",
+      "city": "LAWRENCE",
+      "employer": "LINDSAY GOLDBERG",
+      "candidateTotal": 5.21,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 139393,
+      "proIsraelContribCount": 31,
+      "proIsraelCycles": [
+        "2009",
+        "2010",
+        "2012",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "proIsraelPacs": [
+        "NorPAC / North Jersey PAC",
+        "AIPAC PAC",
+        "United Democracy Project (UDP)"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "AMIR, HERTA",
+      "firstFromMaster": "HERTA",
+      "state": "CA",
+      "city": "BEVERLY HILLS",
+      "employer": "ECONOMIST",
+      "candidateTotal": 52.05,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 98500,
+      "proIsraelContribCount": 81,
+      "proIsraelCycles": [
+        "1983",
+        "1984",
+        "1985",
+        "1986",
+        "1987",
+        "1988",
+        "1989",
+        "1990",
+        "1991",
+        "1992",
+        "1993",
+        "1994",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2013",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "proIsraelPacs": [
+        "Citizens Organized Political Action Committee",
+        "World Alliance for Israel PAC",
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "WILLIAMS, TIM",
+      "firstFromMaster": "TIM",
+      "state": "GA",
+      "city": "DOUGLASVILLE",
+      "employer": "GREYSTONE POWER CORPORATION",
+      "candidateTotal": 500,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 23000,
+      "proIsraelContribCount": 25,
+      "proIsraelCycles": [
+        "2022",
+        "2023",
+        "2024",
+        "2026"
+      ],
+      "proIsraelPacs": [
+        "AIPAC PAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "SMITH, DONALD",
+      "firstFromMaster": "DONALD",
+      "state": "FL",
+      "city": "MIAMI BEACH",
+      "employer": "FLORIDA FIDELITY FINANCIAL",
+      "candidateTotal": 1545.1,
+      "candidateContribCount": 8,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 9792,
+      "proIsraelContribCount": 9,
+      "proIsraelCycles": [
+        "1985",
+        "1986",
+        "1987",
+        "1988",
+        "2015",
+        "2021",
+        "2023",
+        "2025"
+      ],
+      "proIsraelPacs": [
+        "National Action Committee",
+        "National PAC",
+        "NorPAC / North Jersey PAC",
+        "SunPAC",
+        "AIPAC PAC"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "NEWMAN, JEFFREY",
+      "firstFromMaster": "JEFFREY",
+      "state": "FL",
+      "city": "MIAMI",
+      "employer": "INSURANCE",
+      "candidateTotal": 26.03,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 9250,
+      "proIsraelContribCount": 19,
+      "proIsraelCycles": [
+        "1988",
+        "1990",
+        "1991",
+        "1993",
+        "1994",
+        "1995",
+        "1996",
+        "1997",
+        "1999",
+        "2002",
+        "2003",
+        "2005",
+        "2006",
+        "2007",
+        "2022",
+        "2024"
+      ],
+      "proIsraelPacs": [
+        "National Action Committee",
+        "AIPAC PAC"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "JACKSON, JOSEPH",
+      "firstFromMaster": "JOSEPH",
+      "state": "PA",
+      "city": "PHILA",
+      "employer": "NOT EMPLOYED",
+      "candidateTotal": 10,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 5000,
+      "proIsraelContribCount": 4,
+      "proIsraelCycles": [
+        "2021"
+      ],
+      "proIsraelPacs": [
+        "Pro-Israel America PAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "ROBERTS, DARREN",
+      "firstFromMaster": "DARREN",
+      "state": "FL",
+      "city": "BOCA RATON",
+      "employer": "SELF",
+      "candidateTotal": 20,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 2500,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2025"
+      ],
+      "proIsraelPacs": [
+        "AIPAC PAC"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "LEVINE, MIKE",
+      "firstFromMaster": "MIKE",
+      "state": "FL",
+      "city": "TAMPA",
+      "employer": "TEXTILE OUTLET",
+      "candidateTotal": 350,
+      "candidateContribCount": 2,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 2250,
+      "proIsraelContribCount": 3,
+      "proIsraelCycles": [
+        "1983",
+        "1984",
+        "2012"
+      ],
+      "proIsraelPacs": [
+        "BAYPAC",
+        "American Principles"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "A, SHERMAN",
+      "firstFromMaster": "SHERMAN",
+      "state": "OH",
+      "city": "PEPPER PIKE",
+      "employer": "SHERMAN BOSEMAN LEGAL GROUP",
+      "candidateTotal": 50,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 1000,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2021"
+      ],
+      "proIsraelPacs": [
+        "Pro-Israel America PAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "WILLIAMS, LOUIS",
+      "firstFromMaster": "LOUIS",
+      "state": "IL",
+      "city": "CHICAGO",
+      "employer": "LA SALLE AFFILIATES",
+      "candidateTotal": 26.03,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 1000,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "1992"
+      ],
+      "proIsraelPacs": [
+        "National PAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "BYRD, JUDY",
+      "firstFromMaster": "JUDY",
+      "state": "FL",
+      "city": "ST PETERSBURG",
+      "employer": "DIVERSIFIED HEALTH SERVICES",
+      "candidateTotal": 26.03,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 1000,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "1986"
+      ],
+      "proIsraelPacs": [
+        "National PAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "ROBERTS, CAROL",
+      "firstFromMaster": "CAROL",
+      "state": "FL",
+      "city": "WEST PALM BEACH",
+      "employer": "PALM BEACH COUNTY/COUNTY COMMISSION",
+      "candidateTotal": 26.03,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 500,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2002"
+      ],
+      "proIsraelPacs": [
+        "Joint Action Committee for Political Affairs"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "JOHNS, LESLIE",
+      "firstFromMaster": "LESLIE",
+      "state": "CA",
+      "city": "LOS ANGELES",
+      "employer": "UCLA",
+      "candidateTotal": 26.03,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 250,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2026"
+      ],
+      "proIsraelPacs": [
+        "AIPAC PAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "BROWN, DIANE",
+      "firstFromMaster": "DIANE",
+      "state": "TX",
+      "city": "HIGHLAND VILLAGE",
+      "employer": "SELF-EMPLOYED",
+      "candidateTotal": 26.03,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 250,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2013"
+      ],
+      "proIsraelPacs": [
+        "JStreetPAC"
+      ],
+      "confidence": "high"
+    },
+    {
+      "donorName": "ROCKS, SANDRA",
+      "firstFromMaster": "SANDRA",
+      "state": "NY",
+      "city": "NEW YORK",
+      "employer": "CLEARY GOTTLIEB STEEN & HAMILTON LLP",
+      "candidateTotal": 15,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 250,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2012"
+      ],
+      "proIsraelPacs": [
+        "JStreetPAC"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "donorName": "HARTMAN, JAIME",
+      "firstFromMaster": "JAIME",
+      "state": "NY",
+      "city": "NEW ROCHELLE",
+      "employer": "SELF",
+      "candidateTotal": 25,
+      "candidateContribCount": 1,
+      "candidateCycles": [
+        "2026"
+      ],
+      "proIsraelTotal": 200,
+      "proIsraelContribCount": 1,
+      "proIsraelCycles": [
+        "2015"
+      ],
+      "proIsraelPacs": [
+        "NorPAC / North Jersey PAC"
+      ],
+      "confidence": "medium"
+    }
+  ]
+}
