@@ -62,6 +62,33 @@ export async function GET(request: NextRequest) {
       };
     });
 
+    // Fallback: if the 3-table schema is empty for this politician, try the
+    // politicians.voting_records JSON field (used for manually-seeded votes).
+    if (transformed.length === 0) {
+      const { data: pol } = await client
+        .from('politicians')
+        .select('voting_records')
+        .eq('bioguide_id', bioguideId)
+        .single();
+      const vr = (pol?.voting_records || []) as Array<Record<string, unknown>>;
+      if (vr.length > 0) {
+        const mapped = vr.map(v => ({
+          id: v.id,
+          vote_date: v.date,
+          bill_number: v.billNumber,
+          result: 'See bill',
+          bills: {
+            title: v.billTitle,
+            summary: v.billSummary,
+            ai_primary_category: v.category,
+            bill_number: v.billNumber,
+          },
+          politician_votes: [{ position: v.voteValue === 'Yes' ? 'Yea' : v.voteValue === 'No' ? 'Nay' : v.voteValue }],
+        }));
+        return NextResponse.json(mapped);
+      }
+    }
+
     return NextResponse.json(transformed);
   } catch (error) {
     console.error('Politician votes API error:', error);
