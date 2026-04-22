@@ -1,480 +1,330 @@
-# Concerns & Tech Debt
+# Codebase Concerns
 
-## Security
+**Analysis Date:** 2026-04-22
 
-### CRITICAL: Hardcoded Supabase Service Role Key Exposed
-**Severity:** CRITICAL
-**File:** `/Users/kirolosabdalla/Snitched.ai/scripts/sync-social-media.ts` (lines 30-32)
-
-A Supabase service role JWT is hardcoded directly in the source code:
-```typescript
-const SUPABASE_URL = 'https://[REDACTED].supabase.co';
-const SUPABASE_SERVICE_KEY = '[REDACTED - service_role JWT]';
-```
-
-**Impact:**
-- Any attacker with access to this repository can use the service role key to bypass all row-level security (RLS) policies
-- Service role keys grant unrestricted database access
-- The key is visible in git history and may have been exposed
-
-**Action Required:**
-1. IMMEDIATELY rotate this Supabase service role key
-2. Move to environment variables (use `process.env.SUPABASE_SERVICE_KEY`)
-3. Update `.env.local` and Vercel environment variables
-4. Remove from git history: `git filter-branch --tree-filter 'rm -f scripts/sync-social-media.ts' -- --all`
+Severity legend: **CRITICAL** (ship blocker / legal risk / credential exposure), **HIGH** (data integrity or major security), **MEDIUM** (tech debt / fragility), **LOW** (cleanup / polish).
 
 ---
 
-### Missing Input Validation & SQL Injection Risk
-**Severity:** HIGH
-**Files:**
-- `/Users/kirolosabdalla/Snitched.ai/app/api/bills/search/route.ts` (line 28)
-- `/Users/kirolosabdalla/Snitched.ai/app/api/lobbying/route.ts` (lines 79-93)
+## CRITICAL
 
-The search query is passed directly to Supabase `.ilike()` without validation:
-```typescript
-// app/api/bills/search/route.ts, line 28
-.or(`title.ilike.%${query}%,summary.ilike.%${query}%,description.ilike.%${query}%`)
-```
+### C1. Real secrets committed to `.env` and `CLAUDE.md` instructs rotation never happened
 
-While Supabase's PostgREST API uses parameterized queries internally, lack of input validation allows:
-- DoS via extremely long queries
-- Malicious regex patterns in search
-- No length limits enforced
+- Files: `.env` (lines 5, 9, 10, 12, 15, 19, 22, 25, 28), `CLAUDE.md` (line referencing "Supabase service role key needs immediate rotation")
+- Evidence: `.env` contains live, non-placeholder keys for `FEC_API_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_ANON_KEY`, `LEGISCAN_API_KEY`, `ADMIN_SECRET` (`901aa0d201d78605b715b2f76029eb63`), `COURTLISTENER_TOKEN`, `EXA_API_KEY`, `GOOGLE_CIVIC_API_KEY`. The service-role JWT has `"exp":2090721773` (~year 2036) — a ~10-year window of database control if leaked.
+- `.gitignore` does list `.env`, but the file is still present on disk with production-looking values, and `CLAUDE.md` explicitly reads "Supabase service role key needs immediate rotation" — meaning the team already knows it was exposed and still has not rotated.
+- Impact: A single leak of the service role key grants full `SELECT/INSERT/UPDATE/DELETE` on the `politicians` table (see C2 about RLS). Full database takeover, including the ability to silently re-score any politician or inject libelous records.
+- Fix: Rotate all keys in `.env` today. Move to Vercel env vars only. Grep git history (`git log -p --all -- .env`) to confirm the file was never committed. If it was, treat every key as burned.
 
-**Action Required:**
-1. Add input validation: max 100 chars for search query
-2. Sanitize special characters or use strict allowlisting
-3. Add rate limiting to search endpoints
+### C2. Supabase Row-Level Security is effectively disabled for `politicians` table
 
----
+- File: `supabase/schema.sql` lines 67-82
+- Evidence:
+  ```sql
+  CREATE POLICY "Anon insert access" ON politicians FOR INSERT WITH CHECK (true);
+  CREATE POLICY "Anon update access" ON politicians FOR UPDATE USING (true);
+  CREATE POLICY "Anon delete access" ON politicians FOR DELETE USING (true);
+  ```
+  RLS is "enabled" but the policies `WITH CHECK (true)` / `USING (true)` let the anon JWT do anything. The anon key is hard-coded into client-side Next.js via `NEXT_PUBLIC_SUPABASE_ANON_KEY` (`.env` line 12) and baked into every browser bundle — anyone who visits the site can extract it from DevTools and then `DELETE FROM politicians;` or `UPDATE politicians SET corruption_score = 0;` directly against Supabase's REST endpoint.
+- Impact: Trivial defacement or mass score manipulation by any visitor. Given the project's legal/political sensitivity (naming politicians with funding from the "Israel lobby"), a single hostile actor could insert false records and make the platform the source of defamatory claims.
+- Fix: Replace the anon insert/update/delete policies with `FOR ALL USING (auth.role() = 'service_role') WITH CHECK (auth.role() = 'service_role')`. All writes already go through server-side cron routes using `SUPABASE_SERVICE_ROLE_KEY` via `lib/supabase-server.ts:38-60`, so removing anon write access will not break the pipeline. Tables `social_posts`, `scrape_runs`, `platform_stats`, `intel_alerts` have similar "Service *" policies with `USING (true)` — audit all four.
 
-### Insecure JSON Parsing Without Try-Catch
-**Severity:** MEDIUM
-**Files:**
-- `/Users/kirolosabdalla/Snitched.ai/scripts/sync-social-media.ts` (lines 317, 333)
-- `/Users/kirolosabdalla/Snitched.ai/scripts/social-media-daemon.ts` (line 152, 373)
-- `/Users/kirolosabdalla/Snitched.ai/data-ingestion/fetch-fec-data.ts` (lines 606, 628)
+### C3. Un-audited politicians (~6,680+) are publicly visible despite explicit user directive
 
-Multiple locations parse JSON without proper error handling:
-```typescript
-// scripts/sync-social-media.ts, line 317
-const data: ScraperOutput = JSON.parse(raw);
-```
+- User-stated requirement (from memory `project_snitched_audit_resume.md` lines 13-15, 17-21): "clean the whole Database and audit one by one and hide those who aren't audited." Resume steps specify adding an `is_audited: boolean` column and filtering `is_active = true AND is_audited = true` on list/search/compare pages.
+- Current state (evidence):
+  - Schema: `supabase/schema.sql` lines 9-59 show NO `is_audited` column. `grep -rn "is_audited\|audit_status\|audited.*true"` across `/app`, `/lib`, `/components`, `/supabase` returns zero matches.
+  - Browse page: `app/browse/BrowseClient.tsx` line 18 — filter is `if (!p || !p.isActive) return false;` only. No audit gate.
+  - List API: `app/api/politicians/route.ts` lines 37-46 — no `is_audited` filter, paginated over ALL rows.
+  - Search API: `app/api/politicians/search/route.ts` line 28 — only filters `is_active=true`, exposes every un-audited name.
+  - Detail API: `app/api/politicians/[id]/route.ts` lines 47-51 — no audit gate, any visitor can load any bioguide_id.
+  - Candidates page: `app/candidates/page.tsx` line 23 — calls `rpc('get_candidates')` (opaque; needs RLS/DB verification) with no audit filter.
+  - Export API: `app/api/export/route.ts` line 24 — `WHERE is_active = true`, no audit filter; leaks every un-audited score to CSV.
+  - Audit tracker: `data-ingestion/audit-tracker.csv` has 45 audited entries as of 2026-04-22 (last row `va-senate-2026-mark-warner` at 03:15:13Z). Even at 45, the hidden cohort is ~99.3% of the database.
+- Impact: Users browsing `/browse`, `/candidates`, `/officials`, or hitting `/api/politicians` get a mix of carefully-sourced numbers (Mast, Torres, Gallrein, Warner etc.) and low-confidence seed data (e.g. `oh_sos_playwright_2026q1`, `manual`, `ny-officials-seed-2026`). The un-audited scores can be wrong by 20-40 points (see audit-tracker.csv `old_score` vs `new_score` column — Ritchie Torres went 65→85, Shontel Brown 51→85, Wasserman Schultz 63→73). Publishing those values as "data-driven corruption scores" against real living politicians is the exact legal-risk surface of this platform.
+- Fix (blocking):
+  1. Run migration `005_add_is_audited.sql` adding `is_audited BOOLEAN DEFAULT false` on `politicians`, with index `idx_politicians_is_audited`.
+  2. Backfill `TRUE` for the 45 bioguide_ids in `data-ingestion/audit-tracker.csv`.
+  3. Add `.eq('is_audited', true)` to: `app/api/politicians/route.ts:39`, `app/api/politicians/search/route.ts:28`, `app/api/politicians/[id]/route.ts:48-49` (return 404 for un-audited), `app/api/export/route.ts:24`, `app/api/investigate/route.ts` pagination, `app/api/stats/route.ts:20-30` counts, RPC `get_candidates`.
+  4. Gate the `/politician/[id]` page SSR on `is_audited` — return 404 instead of fallback JSON for un-audited IDs.
+  5. Add explicit `robots.ts`/`sitemap.ts` filter so un-audited pages aren't indexed.
 
-**Risk:**
-- Malformed files cause unhandled exceptions
-- No recovery mechanism
-- Crashes the script silently if file is corrupted
+### C4. Bills search is vulnerable to PostgREST injection via unescaped `%` interpolation
 
-**Action Required:**
-Wrap all `JSON.parse()` in try-catch blocks with fallback values.
-
----
-
-### Environment Variables Not Validated at Startup
-**Severity:** MEDIUM
-**Files:** Multiple API routes and scripts
-
-Critical environment variables are checked lazily:
-- `FEC_API_KEY` (validated in `/Users/kirolosabdalla/Snitched.ai/lib/fec-client.ts`, line 16)
-- `CRON_SECRET` (validated in `/Users/kirolosabdalla/Snitched.ai/lib/cron-auth.ts`, line 21)
-- `LDA_API_KEY` (validated in `/Users/kirolosabdalla/Snitched.ai/app/api/lobbying/route.ts`, line 37)
-
-If missing, the application fails at runtime instead of startup.
-
-**Action Required:**
-Create an env validation script that runs at server startup to fail fast.
-
----
-
-## Performance
-
-### Inefficient API Caching Strategy
-**Severity:** MEDIUM
-
-**Files:**
-- `/Users/kirolosabdalla/Snitched.ai/lib/fec-client.ts` (line 56)
-- `/Users/kirolosabdalla/Snitched.ai/app/api/lobbying/route.ts` (line 120)
-
-Cache is set to 5 minutes (`revalidate: 300`) for all FEC/LDA API responses:
-```typescript
-next: { revalidate: 300 }, // cache for 5 minutes to stay under rate limits
-```
-
-**Issues:**
-1. FEC data changes daily but is cached for 5 min
-2. No cache invalidation strategy when data updates
-3. LDA API has 120 req/min limit but 5-min cache doesn't align with update frequency
-
-**Recommendation:**
-- Use `revalidate: 86400` (1 day) for FEC since it batches daily
-- Add cache tag headers for granular invalidation
-- Implement stale-while-revalidate pattern
+- File: `app/api/bills/search/route.ts` line 28
+- Evidence:
+  ```ts
+  const query = searchParams.get('q') || '';
+  ...
+  .or(`title.ilike.%${query}%,summary.ilike.%${query}%,description.ilike.%${query}%`)
+  ```
+  A caller sending `?q=foo,description.ilike.,id.eq.1` breaks out of the intended filter and can `OR` in arbitrary PostgREST predicates. Combined with C2 (permissive RLS on the `bills` table if it mirrors `politicians`), this becomes an unauthorized-read primitive.
+- Impact: At minimum, ability to exfiltrate full rows of any table the anon role can SELECT; at worst, if any policy allows writes, attacker-controlled filters can target unintended rows.
+- Fix: Escape user input and prefer `ilike` per column with parameter binding. Example:
+  ```ts
+  const safe = query.replace(/[,()%]/g, '');
+  .or(`title.ilike.%${safe}%,summary.ilike.%${safe}%`)
+  ```
+  Better: use Postgres full-text search via `textSearch('title_fts', query, { type: 'websearch' })`.
 
 ---
 
-### Politician Page Loads All Data Eagerly
-**Severity:** LOW-MEDIUM
-**File:** `/Users/kirolosabdalla/Snitched.ai/app/politician/[id]/page.tsx` (lines 50-66)
+## HIGH
 
-The politician page loads ALL politicians to find one by ID:
-```typescript
-const res = await fetch('/api/politicians');
-const allPoliticians: Politician[] = await res.json();
-const found = allPoliticians.find(p => p.id === params.id);
-```
+### H1. `ADMIN_SECRET` and `CRON_SECRET` fall back to each other and to empty string
 
-**Issue:**
-- O(n) lookup inefficient with thousands of politicians
-- API endpoint `/api/politicians` likely returns full dataset
+- File: `app/api/admin/route.ts` line 21
+- Evidence: `const ADMIN_SECRET = process.env.ADMIN_SECRET || process.env.CRON_SECRET || '';`. If neither is set, `ADMIN_SECRET` becomes `''`, and `verifyAdmin` at line 27-34 rejects with `"Admin not configured"` — but in dev or staging with `CRON_SECRET` set, ANY client that hits `/api/admin` with `x-admin-secret: <cron-secret>` can `push-to-db`, `research`, `export`, and `list-politicians`. The cron secret leaks through every Vercel cron invocation; if a single cron log is exposed, admin access follows.
+- `.env` line 18 shows `CRON_SECRET=` (empty), line 19 shows a real `ADMIN_SECRET`. On the production Vercel project the two are likely both set, amplifying the blast radius.
+- Impact: Silent privilege escalation from cron bearer to admin. The admin route can rewrite `corruption_score`, `top5_donors`, `israel_lobby_total` — the exact fields consumed by the public UI.
+- Fix: Drop the `|| process.env.CRON_SECRET` fallback. Require `ADMIN_SECRET` explicitly. Add constant-time compare (`crypto.timingSafeEqual`) instead of `auth !== ADMIN_SECRET` at line 31.
 
-**Recommendation:**
-- Create `/api/politicians/[id]` endpoint for direct lookup
-- Use pagination for politician lists
+### H2. Admin authentication uses timing-unsafe string comparison and fixed 32-hex token
 
----
+- File: `app/api/admin/route.ts` line 31
+- Evidence: `if (!auth || auth !== ADMIN_SECRET)` compares with `!==`, which short-circuits and leaks length/prefix information via response timing. The token in `.env` line 19 (`901aa0d201d78605b715b2f76029eb63`) is only 128 bits of hex with no rotation policy; there's no rate limit and no lockout on failed attempts.
+- Impact: Offline / online brute-force of the admin token. An attacker with admin access can rewrite any row, overwrite any corruption score, or delete politicians.
+- Fix: Use `crypto.timingSafeEqual(Buffer.from(auth), Buffer.from(ADMIN_SECRET))` with length check first. Add per-IP rate limit via `x-forwarded-for` + in-memory sliding window. Rotate to a 256-bit secret.
 
-### Large Files Not Optimized
-**Severity:** LOW
-**Files with size concerns:**
-- `/Users/kirolosabdalla/Snitched.ai/app/politician/[id]/page.tsx` (1200 lines)
-- `/Users/kirolosabdalla/Snitched.ai/app/juicebox/page.tsx` (875 lines)
-- `/Users/kirolosabdalla/Snitched.ai/scripts/sync-legiscan-data.ts` (812 lines)
+### H3. Every public read endpoint paginates over the entire `politicians` table unbounded
 
-These exceed the recommended 400-800 line guideline.
+- Files:
+  - `app/api/politicians/route.ts` lines 34-47 (while loop with no hard cap)
+  - `app/api/connections/route.ts` lines 57-65 (same pattern)
+  - `app/api/investigate/route.ts` lines 16-27 `fetchAllPoliticians` helper — used by `crossStateConnections`, `ownershipTracing`, `votingPatterns`
+  - `app/api/stats/route.ts` lines 37-48 (Israel lobby sum loops all > 0 rows)
+- Evidence: at ~6,727 rows this is tolerable, but the code walks `/api/investigate?tool=cross-state` over all rows, builds `donorMap` in memory, and the Ohio bundler expansion and pro-Israel cross-ref signals (see memory `project_snitched_individual_bundler_signal.md`) add thousands of JSONB `individual_bundlers` entries per row. Each call pulls dozens of MB into a 5-min Vercel serverless function with 1024MB default memory.
+- Impact:
+  - Cold-start OOM risk as bundler data grows. Function timeout on `/investigate` already a risk.
+  - Completely trivial DoS: a script that hits `/api/investigate?tool=cross-state` 10x/sec from a single IP will saturate the Supabase free-tier bandwidth budget in minutes.
+  - Every `/api/politicians` response sends ~6,727 rows to the client even though the browse UI filters client-side to ~100 on screen.
+- Fix: Add server-side pagination (`?page&pageSize`) to `/api/politicians`. Cache `/api/investigate` outputs for 15-60 min (`next: { revalidate: 900 }`). Move heavy aggregations to materialized views or a nightly Supabase SQL function that pre-computes `cross_state_donors`, `lobby_chains`, `voting_pairs`.
 
----
+### H4. `/api/debug-candidates` is publicly exposed in production and leaks Supabase env-var presence
 
-## Technical Debt
+- File: `app/api/debug-candidates/route.ts` lines 10-18
+- Evidence: `GET /api/debug-candidates` returns JSON like `{ hasServiceRole: true, supabaseUrl: "https://xwaejtxqhwendbbdiowa.supabase.co...", ... }`. No auth gate. It runs four queries against the live DB on every call.
+- Impact: Reveals deployment topology (service role is or isn't set, exact Supabase URL prefix, which env fallback path is active). Useful reconnaissance before C2 exploitation. Also a gratuitous cost multiplier if scraped.
+- Fix: Delete the file, or wrap in `verifyAdmin(request)` so it only responds to the admin bearer.
 
-### Weak Type Safety Throughout Codebase
-**Severity:** MEDIUM
-**Count:** 55+ instances of `any` type usage
+### H5. Corruption scores are published without a visible confidence tier or audit-state badge
 
-**Examples:**
-- `/Users/kirolosabdalla/Snitched.ai/app/api/fec/candidates/route.ts` (lines 65, 84-93) uses `(c: any)` and `(pc: any)`
-- `/Users/kirolosabdalla/Snitched.ai/app/politician/[id]/page.tsx` (line 99) uses `(row: Record<string, unknown>)`
+- File: `app/politician/[id]/page.tsx` (2169 lines; client-side render), specifically the score card around line 50 (`scoreView` state flip) and the client-side score recomputation at lines 72-84.
+- Evidence: The page shows a numeric score (e.g. "78/D") equally for both audited rows (Mast, Torres, Gallrein, Warner — where the score is backed by full FEC itemized + roster-match) and un-audited seed rows (where `corruption_score` is whatever `seed-*.js` wrote months ago or `fec_api` default-inferred). `data_source` in the DB (seen in audit-tracker CSV and CLAUDE resume notes) distinguishes these but is not surfaced in the UI. The `confidence` column in `audit-tracker.csv` ("high") is not stored in the DB at all.
+- Impact: Legal/reputational — publishing a "78/D Corrupt" score for a politician the team has not actually audited is the definitional libel-per-se risk for this platform. A named politician with a wrongly-high score has a direct defamation cause of action; the site's radical-transparency framing does not shield the publisher from publishing a demonstrably wrong number.
+- Fix: Until C3 is resolved and un-audited rows are hidden, gate the numeric score behind `is_audited`; for un-audited rows show `— (pending verification)` or omit. Add a per-page disclosure block that cites the specific sources used for this politician (already stored in `data_source`).
 
-**Impact:**
-- Type checking disabled for critical data transformations
-- Contributions, politician data, and votes lack type safety
-- Refactoring is fragile and error-prone
+### H6. `sync-fec` cron ignores 80% of tracked rows per run and has no backoff on FEC rate-limit
 
-**Action Required:**
-1. Create strict TypeScript interfaces for all API responses
-2. Use `unknown` instead of `any` where type is uncertain
-3. Add type guards and discriminator unions for polymorphic data
+- File: `app/api/cron/sync-fec/route.ts` lines 27-31, 720-730
+- Evidence: `MAX_POLITICIANS_PER_RUN = 50` runs once per day (CLAUDE.md states 3 AM UTC cron). To cover ~6,700 politicians would take ~134 days — meaning a row synced today won't be resynced until August. On rate-limit (429) line 726-729 just `break`s out of the loop; no exponential backoff, no resume cursor stored, no persistent record of which rows were last synced, so the next run doesn't know where to pick up.
+- Impact:
+  - Financial data on display is up to 4 months stale for most rows and up to 134 days stale for the long tail.
+  - A single rate-limit day halves the already-slow convergence.
+  - The public-facing claim in CLAUDE.md that data is "Updated every 24 hours" is not true for ~6,670 of 6,720 rows.
+- Fix: Add a `last_synced_at TIMESTAMPTZ` column, `ORDER BY last_synced_at NULLS FIRST` in the query at line 420-426, and raise `MAX_POLITICIANS_PER_RUN` to ~200 (fits in 5 min at 600ms/req × ~15 req/politician). Implement exponential backoff (`1s, 2s, 4s, 8s, 30s`) instead of hard-`break`.
 
----
+### H7. FEC fallback name search hard-codes `state: 'FL'`, silently breaks for non-FL politicians
 
-### Hardcoded Constants Scattered in Code
-**Severity:** LOW-MEDIUM
+- File: `app/api/cron/sync-fec/route.ts` lines 346-354, 363-370
+- Evidence:
+  ```ts
+  const data = await fecFetch('/candidates/search/', {
+    name: politician.name,
+    state: 'FL',
+    office: officeCode,
+    ...
+  });
+  ```
+  The sync cron runs over the full DB (Ohio, Kentucky, New York, California, etc. per `audit-tracker.csv`) but the FEC lookup only ever passes `state: 'FL'`. Any politician whose `source_ids.fec_candidate_id` is null will never be resolved via name lookup unless they happen to be a Florida candidate. Silently skipped at line 507.
+- Impact: Thousands of non-FL politicians have no path to getting their FEC ID linked automatically. Their `total_funds`, `israel_lobby_total`, `top5_donors` will remain default-zero forever, which feeds into C3/H5 (they appear as "clean / A grade" simply because their data is missing).
+- Fix: Derive state from `bioguide_id` prefix via `lib/state-utils.ts:getStateFromId` and pass it dynamically. Add a fallback to no-state search with stricter name match.
 
-**Israel Lobby Lists** hardcoded in multiple files:
-- `/Users/kirolosabdalla/Snitched.ai/lib/fec-client.ts` (lines 93-119)
-- `/Users/kirolosabdalla/Snitched.ai/scripts/sync-fec-data.ts` (similar list)
-- `/Users/kirolosabdalla/Snitched.ai/data-ingestion/fetch-fec-data.ts` (duplicated)
+### H8. Cron routes each re-implement FEC fetch + sleep + rate-limit logic
 
-Committee IDs and name patterns are duplicated across files.
+- Files: `app/api/cron/sync-fec/route.ts` lines 68-70, `app/api/cron/research-candidates/route.ts` lines 33-43, `app/api/cron/track-fec-filings/route.ts`, `lib/research-agent.ts` line 35, `lib/roster-match.ts` line 160, `lib/fec-client.ts` (the real canonical one). Four parallel re-implementations.
+- Evidence: `sync-fec/route.ts:68` defines its own `sleep`. `research-candidates/route.ts:29` redefines `FEC_BASE` and `fecFetch` from scratch rather than importing `lib/fec-client.ts`. `roster-match.ts:160` does `await sleep(30_000); return fecFetch(...)` — a blind 30s retry that will blow past Vercel's 300s `maxDuration` on any route that hits back-to-back 429s.
+- Impact: Fixes to rate-limit handling (H6) have to be applied in four places; easy to miss one. Inconsistent behavior on 5xx.
+- Fix: Delete the duplicate `fecFetch` implementations; import `lib/fec-client.ts` everywhere and extend it with an `options.retries` argument.
 
-**Action Required:**
-Consolidate into a single configuration file or database table for maintainability.
+### H9. Scoring algorithm weights change rapidly and silently re-tune published scores
 
----
-
-### Missing Error Recovery in Cron Jobs
-**Severity:** MEDIUM
-**Files:**
-- `/Users/kirolosabdalla/Snitched.ai/app/api/cron/sync-fec/route.ts`
-- Scripts under `scripts/sync-*.ts`
-
-**Issues:**
-1. Partial sync failures silently continue
-2. Rate-limit handling stops processing but doesn't retry later
-3. No exponential backoff for transient failures
-4. Database update errors are logged but don't block further processing
-
-**Example:**
-```typescript
-// sync-fec/route.ts, lines 220-230
-} catch (err) {
-  const message = err instanceof Error ? err.message : String(err);
-  errorCount++;
-  errors.push({ candidateId: candidate.fecCandidateId, error: message });
-  log.push(`  ${candidate.name}: ERROR - ${message}`);
-
-  if (message.includes('rate limit')) {
-    log.push('Rate limited by FEC API. Stopping sync to avoid further errors.');
-    break;
-  }
-}
-```
-
-If a politician sync fails (network error, DB error), the cron continues without retry.
+- File: `lib/corruption-score.ts` line 47 (comment "Previous v5 weights kept in comment for audit"), 935 total lines across v6.5 rules per memory `project_snitched_audit_resume.md` lines 45-50.
+- Evidence: Memory `project_snitched_individual_bundler_signal.md` notes the Acton score moved 12 → 27 purely because a bundler cross-ref signal was added. Users who bookmarked `/politician/oh-gov-2026-amy-acton` see the score silently shift by 15 points with no change log surfaced in the UI. The client-side page explicitly does NOT recompute the score (`politician/[id]/page.tsx:72-84`), so audited politicians whose DB score came from v6.3 disagree numerically with the v6.5 factor breakdown rendered beside them.
+- Impact: Users can't tell if a score moved because new evidence arrived or because the formula changed. Screenshots circulated by the community will mismatch the live page. Inconsistent versioning weakens the "data-driven" claim.
+- Fix: Stamp every DB row with `scorer_version` and `scored_at`; surface both on the detail page. Write a migration notes file in `supabase/migrations/` explaining each weight change. Consider an immutable `corruption_score_history` table so the graph shows the score over time.
 
 ---
 
-### Corruption Score Algorithm Relies on Placeholder Data
-**Severity:** MEDIUM
-**File:** `/Users/kirolosabdalla/Snitched.ai/lib/corruption-score.ts` (lines 40-41, 252-266)
+## MEDIUM
 
-Multiple factors use placeholder score when data is unavailable:
-```typescript
-const PLACEHOLDER_SCORE = 30;
-// Used for voting alignment when votes.length === 0 (lines 252-266)
-```
+### M1. `app/politician/[id]/page.tsx` is a 2,169-line client component
 
-**Issues:**
-1. Placeholder scores skew results for politicians without voting data
-2. Confidence level doesn't properly reflect missing factors
-3. Grade can be misleading (A-F) when based mostly on placeholders
+- File: `app/politician/[id]/page.tsx` (line count from `wc -l`)
+- Evidence: Entire profile, including all tabs (overview/votes/funding/social/lobby/connections), rendered client-side with `'use client'` and `useEffect`-based data loading. 25 `useEffect`/`fetch` occurrences. Loads `politician` then separately loads votes, then ConnectionsGraph client-side.
+- Impact:
+  - SEO: politician names and data render after hydration, so Google crawls mostly empty HTML.
+  - First Contentful Paint: large JS bundle ship + multiple round-trips.
+  - Maintainability: 2,169 lines in one file violates the project's "<800 line" convention.
+  - Inconsistent with SSR on `/candidates` which uses server components.
+- Fix: Convert the shell to a Server Component that loads politician + votes + social in parallel server-side, then passes data to smaller client islands (e.g. `<ScoreCard>`, `<VoteTable>`, `<ConnectionsGraphIsland>`). Split into `page.tsx` (server), `PoliticianClient.tsx` (interactive bits), and per-tab components.
 
-**Recommendation:**
-- Show "Insufficient Data" for politicians below confidence threshold
-- Only compute score for politicians with 3+ factors available
+### M2. `dangerouslySetInnerHTML` used for HTML-entity emoji rendering
 
----
+- File: `components/TerminalHome.tsx` lines 527, 529
+- Evidence: Home page landing content passes HTML entities (e.g. `&#127482;&#127480;`) as strings and renders via `dangerouslySetInnerHTML`. Data is static in the source file, not user input — no XSS today.
+- Impact: Gratuitous use of a footgun pattern. If future editors add text from DB (e.g. politician name in a marketing module), the precedent is risky.
+- Fix: Use React.Fragment with the entity in JSX (`<>{'\u{1F1FA}\u{1F1F8}'}</>`) or just paste the emoji character literally.
 
-## Missing Features / Incomplete
+### M3. Fallback from Supabase → local JSON can leak 188-politician Florida seed as "fresh" data
 
-### Voting Alignment Algorithm Incomplete
-**Severity:** MEDIUM
-**File:** `/Users/kirolosabdalla/Snitched.ai/lib/corruption-score.ts` (lines 252-303)
+- File: `lib/real-data.ts` lines 11-20, `app/api/politicians/route.ts` lines 20-25, 51-55, 92-98
+- Evidence: When Supabase returns 0 rows or errors, the API route imports `@/lib/real-data` and serves `data-ingestion/phase1/processed/florida_politicians.json` + `data-ingestion/jfk-fec-results/jfk-fec-full-results.json` (last modified 2026-04-01). The fallback is silent — the `dataSource: 'supabase'` mapping at line 87 stays "supabase" even when we actually served JSON from February.
+- Impact: Debugging data mismatches is hard because the UI claims Supabase when it isn't. A Supabase outage hides instead of errors. Stale JSON overrides fresh DB edits.
+- Fix: Make the fallback explicit: set `dataStatus: 'fallback-json'`, log a Sentry/console warning every time the fallback fires, and surface a banner in the UI when the list is from the fallback.
 
-The voting alignment scoring is acknowledged as incomplete:
-```typescript
-// Factor 3: Voting Alignment with Donor Interests (25%)
-// "Placeholder until voting data flows in"
-```
+### M4. Persistent in-memory Supabase client singleton across serverless invocations
 
-**Current state:**
-- Uses keyword matching on bill title/summary
-- No actual voting record analysis against donor positions
-- Votes are fetched but not correlated with campaign donations
+- File: `lib/supabase-server.ts` lines 9-10, 21-31, 50-59
+- Evidence: Module-level `_supabase` / `_serviceRoleSupabase` caches are fine for long-running processes but Vercel serverless cold-warm-cold cycles mean the singleton re-creates on every cold start, while a warm function reuses it. If env vars change (rotation), a warm instance keeps serving with the old key until eviction. Also, if the service role key is read at first call, a misconfigured function with NEXT_PUBLIC fallback silently downgrades to anon permissions for 15 min.
+- Impact: Subtle. Masks auth-config errors during deploys.
+- Fix: Cache the URL+key hash alongside the client and invalidate on mismatch. Or drop the singleton and rely on fetch-level keep-alive.
 
-**Required to complete:**
-1. Map donors to their industry/issue positions (AIPAC → Israel, etc.)
-2. Track voting patterns on bills related to each donor's interests
-3. Calculate correlation between votes and donor funding
+### M5. Scripts directory is a graveyard of 100+ throwaway files with no retention policy
 
----
+- Files: `scripts/` directory has 104 entries (`ls | wc -l`).
+- Evidence: Mix of active cron triggers (`refresh-mast.ts` 2026-04-19, `refresh-acton.ts` 2026-04-19, `refresh-vivek.ts` 2026-04-19), one-off probes (`probe-oh-sos.ts` through `probe-oh-sos-maint.ts` — 6 variants, all 2026-04-19), stealth scrapers (`scrape-vivek-oh-sos-stealth.ts`, `scrape-vivek-oh-sos-headless.ts`, `scrape-vivek-oh-sos.ts` — 3 versions), seed scripts from 2026-04-11 (`seed-ohio-*`, `seed-nj-officials.js`, `seed-nc-county-officials.ts`). Many already obsolete (their output CSV is committed to `data-ingestion/`).
+- Also 7 `*_SEEDING_REPORT.md` files in the project root all dated 2026-04-11 — legacy artifacts that should live in `/docs` or be deleted.
+- Impact: New contributors can't tell which scripts are production-essential (invoked by cron) vs historical. Scripts are excluded from TypeScript compilation (`tsconfig.json` excludes `scripts/`) so they rot silently.
+- Fix: Split into `scripts/cron/` (invoked by Vercel cron, CI-typechecked), `scripts/tools/` (hand-run utilities), `scripts/archive/` (kept for reference, non-functional). Move the `*_SEEDING_REPORT.md` files to `/docs/seed-reports/` or delete.
 
-### Social Media Scraper Integration Fragile
-**Severity:** MEDIUM
-**Files:**
-- `/Users/kirolosabdalla/Snitched.ai/scripts/sync-social-media.ts`
-- Python scrapers in `/Users/kirolosabdalla/Snitched.ai/scrapers/`
+### M6. Homepage SEO exposes un-audited politicians via `sitemap.ts`/`robots.ts`
 
-**Issues:**
-1. Python scraper runs via `spawn()` with no timeout
-2. Output file location hardcoded
-3. RPC call to create table may fail silently with comment `// RPC might not exist, that's OK` (line 199)
-4. No recovery if scraper hangs
+- Files: `app/sitemap.ts`, `app/robots.ts` (both present in `app/` listing)
+- Evidence: Not yet read; given C3 has no `is_audited` filter anywhere, it's highly likely the sitemap enumerates all politicians including seed rows.
+- Impact: Google indexes profile pages with low-confidence scores. Even after C3 is fixed, pre-existing indexed URLs will keep returning data for weeks.
+- Fix: After C3, regenerate sitemap from `is_audited = true` rows only. Submit URL removal requests in Search Console for any un-audited URLs already indexed.
 
-**Action Required:**
-1. Add 5-min timeout to Python subprocess
-2. Use environment variables for output paths
-3. Fail explicitly if table doesn't exist instead of silently continuing
+### M7. CLAUDE.md overstates cron schedule — `vercel.json` has `crons: []`
 
----
+- File: `vercel.json` (single line: `{ "crons": [] }`), `CLAUDE.md` documents five cron routes
+- Evidence: CLAUDE.md claims "Scheduled Cron Jobs (Vercel Cron)" with routes `/api/cron/sync-fec` etc. on specific schedules, but `vercel.json` has an empty `crons` array. Either Vercel Cron is configured via the dashboard UI (invisible to the repo) or the crons aren't actually running.
+- Impact: Truth-in-documentation bug. If a contributor deploys a fresh Vercel project from this repo, none of the cron jobs will fire.
+- Fix: Populate `vercel.json` with the actual cron schedule so deploy state matches docs; or remove the table from CLAUDE.md.
 
-### LDA API Deprecation Not Handled
-**Severity:** LOW-MEDIUM
-**File:** `/Users/kirolosabdalla/Snitched.ai/app/api/lobbying/route.ts` (lines 10-11, 145-149)
+### M8. `as any` and `Record<string, unknown>` patchwork throughout API layer
 
-The Senate LDA API sunsets **June 30, 2026**:
-```typescript
-deprecationNotice: 'This API will be sunset on June 30, 2026. Migrate to lda.gov.',
-successorApi: 'https://lda.gov/api/v1/',
-```
+- Files: 28 occurrences of `as any` / `: any` / `any[]` across `app`, `lib`, `components` (`grep` count).
+- Example: `app/api/politicians/[id]/route.ts:114-125` casts `row.court_records` via `(c: any)`, `row.voting_records as any[]`.
+- Impact: Type-checker can't catch upstream schema shifts (e.g., when a sync cron renames `court_records.case_name` to `case_name_short`). Runtime errors surface only on specific politician detail pages.
+- Fix: Define `CourtRecord`, `VotingRecord`, `SocialPost`, `Top5Donor` interfaces in `lib/types.ts` and import everywhere. Replace `as any` with `z.parse` at DB boundary if Zod is adopted.
 
-**Status:**
-- New lda.gov API endpoint is identified but not yet integrated
-- No migration plan documented
-- Response includes deprecation notice but no migration code
+### M9. Social-media daemon depends on cloned repos that are `.gitignored`
 
-**Action Required:**
-Create parallel integration with lda.gov API before June 2026.
+- File: `.gitignore` lines 36-41 explicitly exclude `scrapers/social-analyzer/`, `scrapers/facebook-scraper/`, `scrapers/TwitterUserScraper/`, `scrapers/OpenPlanter/`, `scrapers/openFEC/`
+- Evidence: `scrapers/scrape-social-media.py` (2,065 lines) imports or shells out to these directories. A fresh clone of Snitched.ai cannot run the social scraper without manually hunting down four external repos.
+- Impact: Onboarding is broken; daemon cannot be redeployed from scratch; bus-factor on the person who set up the original scraper.
+- Fix: Vendor the minimal necessary functions into `scrapers/` or replace with `pip install` packages pinned in `requirements.txt`.
 
----
+### M10. `.vercelignore` excludes `database` and `scrapers` — but also `scripts`, which the build may need
 
-## Fragile Areas
+- File: `.vercelignore` (lines seen via earlier cat)
+- Evidence: Excludes `scripts`, `database`, `scrapers`, `scrapers/node_modules`, `.env*.local`.
+- `next.config.ts` adds `outputFileTracingIncludes: { '/api/cron/refresh-gallrein-roster': ['./data/pro-israel-donors-*.csv'] }` — meaning the runtime reads files from `data/` at runtime.
+- Excluding `scripts` from the Vercel upload is fine (they're CLI-only), but if any cron route accidentally `import`s from `../../scripts/...` it will ENOENT in production.
+- Fix: Grep cron routes for any import traversing into `scripts/` before trusting this configuration.
 
-### Supabase Client Initialization
-**Severity:** MEDIUM
-**File:** `/Users/kirolosabdalla/Snitched.ai/lib/supabase-server.ts`
+### M11. Export endpoints unlimited — `/api/export?type=all` returns the full DB as CSV
 
-Multiple clients are cached as module-level singletons:
-```typescript
-let _supabase: SupabaseClient | null = null;
-let _serviceRoleSupabase: SupabaseClient | null = null;
-```
+- File: `app/api/export/route.ts` lines 20-34
+- Evidence: No limit, no auth, no rate-limit. Returns `name, office, corruption_score, israel_lobby_total, ...` for every row where `is_active=true`. The admin `/api/admin` export is gated by `ADMIN_SECRET`, but the public `/api/export` is wide open.
+- Impact: Trivial bulk-scrape. Compounds C3 — the entire un-audited DB ships as a downloadable CSV with "CORRUPTION SCORE" headers.
+- Fix: Require auth, add daily rate limit per IP, add `is_audited = true` filter once C3 ships. Add a hash-signed download link with short TTL.
 
-**Risks:**
-1. Env var changes after initialization won't update client
-2. Race condition if called during env variable setup
-3. Fallback to `NEXT_PUBLIC_` keys may leak anon key to client
+### M12. `israel_lobby_breakdown` JSONB is mutated by multiple cron writers without locking
 
-**Better approach:**
-- Create clients on-demand instead of caching
-- Or validate env vars at startup once
+- File: `app/api/cron/sync-fec/route.ts` lines 632-668 (preserves fields from roster-match pipeline), `lib/roster-match.ts` (the other writer).
+- Evidence: The hand-rolled merge logic at lines 633-668 reads `existingBreakdown` and re-copies `bundlers`, `bundlers_by_source`, `individual_bundlers`, `pac_details`, `pacs_by_cycle`, `scoring_rule` — but only the keys the author remembered. If a new roster-match script adds `foreign_exec_bundlers` next month, `sync-fec` will silently drop it on the next daily write.
+- Impact: Data loss after introducing new breakdown categories; fragile to additions in `lib/roster-match.ts` or `scripts/crossref-*.ts`.
+- Fix: Spread the full object — `{ ...existingBreakdown, total: ..., pacs: finalPacs, ie: ..., ie_details: ... }` — and only whitelist the keys this cron owns (total, pacs, ie, ie_details).
 
----
+### M13. `lib/corruption-score.ts` is 935 lines with no tests
 
-### No Input Validation for Numeric Ranges
-**Severity:** LOW-MEDIUM
-**Files:**
-- `/Users/kirolosabdalla/Snitched.ai/app/api/fec/candidates/route.ts` (line 44)
-- `/Users/kirolosabdalla/Snitched.ai/app/api/lobbying/route.ts` (line 72)
+- File: `lib/corruption-score.ts` — 935 lines
+- Evidence: No `.test.ts`/`.spec.ts` files exist anywhere in the repo (`package.json` has no test script, `testing.md` from GSD rules requires 80% coverage). The scorer has tier floors, multi-cycle multipliers, forensic signal caps, red-flag escalators — all implicit in imperative code with no unit tests.
+- Impact: A single bad `min/max` change (like the Acton 12→27 reported in memory) could easily bleed into production for days before anyone notices. No regression harness.
+- Fix: Write golden-case tests for the 4 audited politicians (Mast 78, Acton 27, Vivek 60, Taylor 12, Torres 85, Gallrein 85 etc. from `audit-tracker.csv`). Lock scorer-version → expected-score in a snapshot file. Run in CI.
 
-Pagination parameters are parsed but not validated for reasonable ranges:
-```typescript
-const perPage = Math.min(Number(searchParams.get('per_page') || '20'), 100);
-```
+### M14. `next: { revalidate: 300 }` on FEC fetch vs `export const dynamic = 'force-dynamic'` on routes
 
-**Issue:**
-- No minimum value check (could be 0 or negative)
-- No validation of page numbers (could be negative)
-- NaN handling for invalid integers missing
-
-**Recommendation:**
-```typescript
-const perPage = Math.max(1, Math.min(Number(searchParams.get('per_page') || '20'), 100));
-const page = Math.max(1, Number(searchParams.get('page') || '1'));
-```
+- File: `lib/fec-client.ts` line 56, every cron route has `export const dynamic = 'force-dynamic'`
+- Evidence: The FEC client caches its outbound response for 5 min, but the cron route is marked fully dynamic. During a cron run, the 5-min cache means sequential requests for the same candidate (committees → totals → schedule_a) can hit stale cached 5xx responses and skip the real API, masking errors.
+- Impact: Intermittent "looks synced, didn't sync" bugs.
+- Fix: Change `next: { revalidate: 300 }` to `cache: 'no-store'` inside cron contexts, OR drop the cache entirely and rely on in-process caching.
 
 ---
 
-### Unstructured Error Responses
-**Severity:** LOW
-**Files:**
-- Multiple API routes return inconsistent error shapes
-- Some return `{ error: string }`, others return `{ error, details }`
-- `fecErrorResponse()` helper in `/Users/kirolosabdalla/Snitched.ai/lib/fec-client.ts` normalizes FEC errors but not used everywhere
+## LOW
 
-**Action Required:**
-Create middleware or wrapper to standardize all error responses.
+### L1. Many `console.log`/`console.error` left in production API and lib code
 
----
+- Evidence: 34 `console.*` occurrences in `app/api/`, `lib/`, `components/`. Project rules (`common/coding-style.md`, `typescript/coding-style.md`) ban `console.log` in production code.
+- Impact: Log noise on Vercel, harder to find real errors, no structured logging.
+- Fix: Introduce a tiny logger (`lib/logger.ts`) with levels and structured fields.
 
-### No Query Parameter Allowlisting
-**Severity:** LOW
-**Files:** All API routes
+### L2. Hard-coded URL "Snitched.ai" / contact info nowhere found
 
-Query parameters are passed directly to external APIs:
-```typescript
-// app/api/lobbying/route.ts, lines 74-93
-if (year) ldaParams.set('filing_year', year);
-if (registrant) ldaParams.set('registrant_name', registrant);
-// ... many more
-```
+- File: No `CONTACT.md`, no `SECURITY.md`, no disclaimer page under `/app/about/` surfaced in this audit.
+- Impact: Given the platform publishes negative scores on named politicians, the absence of a `SECURITY.md` (vuln disclosure), `LEGAL.md` (takedown policy, correction request flow), and a visible `about`-page disclosure of methodology is a legal-hygiene gap.
+- Fix: Add `/app/about/page.tsx` with methodology, `docs/SECURITY.md` with vuln disclosure pointer, a visible takedown/correction email.
 
-While safe for string params, unexpected parameters could break API contracts.
+### L3. Loose URL handling in `zip-lookup` calls third-party geocoders without retry
 
-**Recommendation:**
-Explicitly define which parameters are accepted and reject others.
+- File: `app/api/zip-lookup/route.ts` lines 26-46 (seen)
+- Evidence: Calls Nominatim (OpenStreetMap) and Census Geocoder; if either is down the endpoint returns null. No fallback to a local ZIP→state lookup via `lib/zip-lookup.ts`.
+- Impact: Home page ZIP lookup breaks whenever either third-party has an outage.
+- Fix: Implement a simple local ZIP→state lookup with the bundled csv; only hit Census for district-level enrichment.
 
----
+### L4. Mobile optimization plan dated 2026-04-01 never marked complete
 
-## TODOs Found
+- File: `MOBILE-OPTIMIZATION-PLAN.md` (4.9KB, last touched 2026-04-01)
+- Impact: Either the plan is stale or mobile is actually not optimized. Unclear which.
+- Fix: Either mark status in the plan (or delete if done), or fold the outstanding items into the current GSD roadmap.
 
-### Dashboard HTML TODO
-**File:** `dashboard.html` (line 332)
-```html
-<!-- TODO -->
-```
+### L5. `investigations/` directory has two undocumented entries
 
-Incomplete comment marker - purpose unclear.
+- File: `investigations/fl-polk-lakeland-mayor-mccarley`, `investigations/fl-polk-schoolboard-d6-sharpless`
+- Evidence: Only 2 dirs, no README. Likely abandoned / WIP research notes.
+- Impact: Nothing ships from this dir; clutter.
+- Fix: Document purpose in `investigations/README.md` or archive.
 
----
+### L6. `Eleni Contribution.xls` is a 262KB binary spreadsheet committed to the repo root
 
-### Documentation Template (Not a Code TODO)
-**File:** `docs/TICKETS.md` (line 114)
-```markdown
-### [TICK-XXX] Title
-```
-
-This is a documentation template, not a code concern.
+- File: `Eleni Contribution.xls` (262 KB)
+- Impact: Binary files in git bloat history; source of data not documented.
+- Fix: Move to `data-ingestion/raw/` with a provenance note, or delete if already imported.
 
 ---
 
-## Priority Issues (Ranked)
+## Summary Heat Map
 
-### 🔴 P0: CRITICAL (Do Immediately)
+| Area | Critical | High | Medium | Low |
+|---|---|---|---|---|
+| Data integrity (audit gating) | C3 | H5 | M6 | — |
+| Secrets / auth | C1, C2, C4 | H1, H2, H4 | — | — |
+| Data pipeline reliability | — | H6, H7, H8 | M3, M12, M14 | L3 |
+| Performance / scaling | — | H3 | M1, M4 | — |
+| Code quality / tech debt | — | — | M2, M5, M7, M8, M10, M11, M13 | L1, L4, L5, L6 |
+| Legal / disclosure | C3 | H5, H9 | — | L2 |
 
-1. **Rotate Supabase Service Role Key** (`scripts/sync-social-media.ts:30-32`)
-   - Hardcoded JWT token exposed in source code
-   - Bypass of all RLS policies possible
-   - Must rotate before any further commits
+## Top 5 Fix-First (by blast radius × ease)
 
-2. **Validate Environment Variables at Startup**
-   - Prevent runtime failures from missing secrets
-   - Create validation script that runs before server starts
-
-### 🔴 P1: HIGH (This Sprint)
-
-3. **Add Input Validation to API Endpoints**
-   - `/app/api/bills/search/route.ts` - sanitize `q` parameter
-   - `/app/api/lobbying/route.ts` - validate numeric ranges
-   - Max length checks, NaN handling, bounds validation
-
-4. **Fix JSON Parsing in Scripts**
-   - Wrap all `JSON.parse()` calls in try-catch
-   - Files: `sync-social-media.ts`, `social-media-daemon.ts`, data-ingestion scripts
-
-5. **Strengthen Type Safety**
-   - Replace 55+ `any` usages with proper types
-   - Create interfaces for API responses
-   - Use type guards for polymorphic data
-
-### 🟡 P2: MEDIUM (Next Sprint)
-
-6. **Refactor Large Files**
-   - Break up 1200-line `app/politician/[id]/page.tsx`
-   - Extract voting, contributions, social tabs into sub-components
-   - Split sync scripts into modular functions
-
-7. **Implement Cron Job Retry Logic**
-   - Add exponential backoff for transient failures
-   - Queue failed items for retry in next cycle
-   - Improve rate-limit handling
-
-8. **Create Politician Direct Lookup API**
-   - Replace `/api/politicians` full dataset load
-   - Add `/api/politicians/[id]` endpoint
-   - Improve politician page performance
-
-9. **Migration Plan for LDA API Deprecation**
-   - Integrate lda.gov API before June 30, 2026
-   - Test parity with senate.lda.gov API
-   - Plan cutover date
-
-### 🟢 P3: LOW (Next Quarter)
-
-10. **Consolidate Hardcoded Constants**
-    - Move Israel lobby committee IDs to single source
-    - Extract magic numbers and thresholds to config
-
-11. **Standardize Error Responses**
-    - Create consistent error response format
-    - Document error codes and meanings
-
-12. **Review Corruption Score Confidence Levels**
-    - Audit placeholder score impact on grades
-    - Consider hiding low-confidence scores
+1. **C3** — Add `is_audited` column and filter everywhere. Blocks legal risk; user explicitly asked for it.
+2. **C2 + C1** — Rotate keys, tighten RLS policies. One afternoon of work.
+3. **C4** — Escape the bills `or()` query. 5 minutes.
+4. **H4** — Delete `/api/debug-candidates` or gate it. 2 minutes.
+5. **M13** — Write corruption-score regression tests before any more weight changes. Otherwise every tweak is a coin flip for the published scores.
 
 ---
 
-## Summary
-
-**Total Issues Found:** 27
-**Critical:** 1 (hardcoded secret)
-**High:** 4 (input validation, JSON parsing, type safety, env validation)
-**Medium:** 9 (performance, error handling, type safety, API design)
-**Low:** 8 (code organization, standards, deprecation planning)
-
-**Action Items:** 32
-**Estimated Effort:** 2-3 weeks for P0-P1, 2-3 weeks for P2
-
-**Immediate Risk:** Hardcoded Supabase service key must be rotated before any deployment or further work.
+*Concerns audit: 2026-04-22*

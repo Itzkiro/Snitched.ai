@@ -1,195 +1,192 @@
 # External Integrations
 
-## Databases
+**Analysis Date:** 2026-04-22
 
-### Supabase (PostgreSQL)
-- **Type**: PostgreSQL database hosted on Supabase
-- **Client library**: `@supabase/supabase-js` v2.98.0
-- **Usage pattern**: Both public read-only access and service-role elevated access for cron jobs
-- **Server implementation**: `lib/supabase-server.ts`
-  - `getServerSupabase()` — Standard client for reading data
-  - `getServiceRoleSupabase()` — Service role client for cron jobs to bypass RLS
-- **Authentication method**: API key-based (anon key + optional service role key)
-- **Environment variables**:
-  - `SUPABASE_URL` or `NEXT_PUBLIC_SUPABASE_URL`
-  - `SUPABASE_ANON_KEY` or `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-  - `SUPABASE_SERVICE_ROLE_KEY` (server-side only, required for cron jobs)
+Snitched.ai is integration-heavy: nearly every feature pulls from a public-records API or scrapes a government site. All third-party calls go through thin server-side wrappers so API keys stay out of the browser.
 
-### Tables
+## APIs & External Services
 
-1. **`politicians`** — Core politician data
-   - Primary Key: `bioguide_id`
-   - Tracks: name, office, party, jurisdiction, corruption scores, funding sources, social media handles
-   - Linked to: contributions (FEC), voting records (Congress.gov), social media posts
-   - Source file: `/supabase/schema.sql`
+**Campaign Finance:**
+- **FEC API** (`https://api.open.fec.gov/v1`) — Federal Election Commission. Source of federal contributions, candidate/committee data, Schedule A (itemized individual contribs), Schedule E (independent expenditures).
+  - Shared wrapper: `lib/fec-client.ts` — `fecFetch(endpoint, params)` with rate-limit (429) handling, 5-minute Next fetch cache, `FecError` class, and `fecErrorResponse()` helper. Also exports `ISRAEL_LOBBY_COMMITTEE_IDS` and `isIsraelLobbyDonor(...)`.
+  - Proxy routes: `app/api/fec/candidates/route.ts`, `app/api/fec/contributions/route.ts`, `app/api/fec/filings/route.ts`.
+  - Cron consumers: `app/api/cron/sync-fec/route.ts` (daily 3 AM UTC), `app/api/cron/track-fec-filings/route.ts` (every 6h), `app/api/cron/refresh-gallrein-roster/route.ts` (weekly), `app/api/cron/research-candidates/route.ts` (daily 6 AM).
+  - Script consumers: `scripts/sync-fec-data.ts`, `scripts/fetch-fec-schedule-a.ts`, `scripts/fetch-mast-ie.ts`, `scripts/build-pro-israel-registry.ts`, `scripts/crossref-*-pro-israel.ts`, plus Python `scrapers/scrape-fec-data.py` and `scrapers/jfk-fec-scraper.py`.
+  - Rate limit: **1,000 requests/hour per key**. Clients use 300–600ms inter-request delays.
+  - Auth: `FEC_API_KEY` env var (query-string `api_key` param).
 
-2. **`social_posts`** — Scraped social media posts from politicians
-   - Primary Key: `id`
-   - Tracks: platform, content, engagement metrics (likes, shares, comments, views), sentiment scores
-   - Indexed by: `politician_id`, `platform`, `posted_at`, `scraped_at`
-   - Source file: `/supabase/schema.sql`
+- **LegiScan API** (`https://api.legiscan.com/`) — State legislature bills and roll-call votes (primary use: FL).
+  - Proxy route: `app/api/legiscan/route.ts` (allow-listed ops: `getSessionList`, `getMasterList`, `getBill`, `getRollCall`, `getSponsoredList`, `getSearch`).
+  - Cron: `app/api/cron/sync-legiscan/route.ts` (daily 5 AM UTC, `MAX_BILLS_PER_RUN=50`, 300ms delays).
+  - Script: `scripts/sync-legiscan-data.ts`, `data-ingestion/fetch-legiscan-data.ts`.
+  - Rate limit: **30,000 requests/month** (free tier), ~1,000/day. Script caps at ~200/run.
+  - Auth: `LEGISCAN_API_KEY` env var.
 
-3. **`scrape_runs`** — Monitoring/auditing table for daemon scrape cycles
-   - Primary Key: `id` (auto-increment)
-   - Tracks: run status, posts found, errors, logs, metadata
-   - Indexed by: `run_type`, `started_at`
-   - Source file: `/supabase/schema.sql`
+- **Congress.gov API** (`https://api.congress.gov/v3`) — Federal member profiles, bills, votes.
+  - Direct-fetch routes: `app/api/congress/members/route.ts`, `app/api/congress/bills/route.ts`, `app/api/bills/search/route.ts`.
+  - Cron: `app/api/cron/sync-congress/route.ts` (daily 4 AM UTC, `DELAY_BETWEEN_REQUESTS_MS=200`).
+  - Scripts: `scripts/sync-congress-data.ts`, `scripts/populate-oh-voting-records.ts`.
+  - Rate limit: ~5,000 requests/hour per key.
+  - Auth: `CONGRESS_API_KEY` env var (header).
 
-4. **`bills`** — Legislative bills from Congress.gov and LegiScan
-   - Fields: bill_type, bill_number, title, sponsors_count, introduced_date, policy_area, source, source_url
-   - Populated by: `/api/cron/sync-congress` and `/api/cron/sync-legiscan`
+**Lobbying:**
+- **Senate LDA (Lobbying Disclosure Act) API** (`https://lda.senate.gov/api/v1`) — Registered-lobbyist filings, quarterly contributions, FECA reports.
+  - Proxy route: `app/api/lobbying/route.ts` — forwards `filings` and `contributions` endpoints with rich filter params (year, quarter, registrant, client, state, issues, amounts).
+  - Scripts: `scripts/fetch-torres-lobbying.ts`, `scripts/fetch-warner-lobbying.ts`, `scripts/sync-lobbying-data.ts`, `scripts/lda_oh_populate.ts`.
+  - Known issue (documented in `app/api/lobbying/route.ts` header): **the Senate endpoint sunsets June 30, 2026**; successor at `lda.gov` must be migrated.
+  - Auth: `LDA_API_KEY` env var.
 
-5. **`votes`** — Roll-call votes on bills
-   - Fields: bill_id, roll_number, chamber, congress, vote_date, yea_count, nay_count
-   - Populated by: Congress.gov and LegiScan sync jobs
+**Court Records:**
+- **CourtListener API** (`https://www.courtlistener.com/api/rest/v4`) — Federal + state court dockets and opinions.
+  - Shared client: `lib/courtlistener-client.ts` — `searchCourtRecords(...)` with typed `CourtListenerDocket` / `CourtListenerOpinion` / `CourtRecord`.
+  - Cron: `app/api/cron/sync-court-records/route.ts` (~hourly, `MAX_POLITICIANS_PER_RUN=250`, 600ms delays, 2 API calls per politician — dockets + opinions).
+  - Also consumed from `lib/research-agent.ts` (deep-research workflow) and `app/api/cron/research-candidates/route.ts`.
+  - Rate limit: **5,000 queries/hour** authenticated; unauthenticated is lower.
+  - Auth: `COURTLISTENER_TOKEN` env var (optional; higher limits when set).
 
-6. **`politician_votes`** — Individual politician votes on bills
-   - Fields: vote_id, politician_id, position (Yea/Nay/NV/Absent)
-   - Populated by: LegiScan sync job
+**Web Search / Intel:**
+- **Exa AI** (`https://api.exa.ai/search`) — Neural web search for news/scandal monitoring.
+  - Cron: `app/api/cron/monitor-news/route.ts` (every 6h) — keyword-joined query across tracked politicians with a `SCANDAL_KEYWORDS` list (indicted, bribery, AIPAC, FARA, insider trading, etc.). Auto-inserts `intel_alerts` rows with severity classification.
+  - Also used inside `lib/research-agent.ts`.
+  - Auth: `EXA_API_KEY` env var (header `x-api-key`).
 
-## APIs & Services
+**State Secretary of State Scraping (no API, requires browser automation):**
+- **Ohio SOS** (`https://www6.ohiosos.gov/ords/f?p=CFDISCLOSURE:73`, `https://data.ohiosos.gov`) — Ohio campaign finance itemized contributions; Cloudflare-protected.
+  - Bulk download: `scripts/fetch-oh-sos-bulk.ts` (Playwright chromium).
+  - Stealth path: `scripts/scrape-vivek-oh-sos-stealth.ts` — uses `playwright-extra` + `puppeteer-extra-plugin-stealth` to bypass Cloudflare bot detection.
+  - Probes: `scripts/probe-oh-sos*.ts`, `scripts/scrape-vivek-oh-sos*.ts`.
+  - Python ingest: `scrapers/scrape-ohio-campaign-finance.py`.
+- **California CAL-ACCESS** (`https://cal-access.sos.ca.gov/Campaign/Candidates/`) — CA state candidates.
+  - Script: `scripts/scrape-serpa-calaccess.ts`.
+- **Florida Division of Elections** (`https://dos.elections.myflorida.com`) — state/county candidates.
+  - Scraper: `scrapers/fl-doe-scraper.py`, `scrapers/fetch-fishback-fldoe.py`.
+- **Ballotpedia** (`https://ballotpedia.org`) — enrichment for Ohio candidates.
+  - Scraper: `scrapers/enrich-oh-ballotpedia.py`.
+- **Track AIPAC** (`https://www.trackaipac.com/state/florida`) — third-party Israel-lobby tracker.
+  - Script: `scripts/scrape-track-aipac.ts` (plain `fetch` + HTML parsing, no headless browser).
 
-### Federal Election Commission (FEC) API
-- **Endpoint**: `https://api.open.fec.gov/v1`
-- **Rate limit**: 1,000 requests/hour per API key
-- **Authentication**: API key query parameter
-- **Environment variable**: `FEC_API_KEY`
-- **Client implementation**: `lib/fec-client.ts`
-  - `fecFetch(endpoint, params)` — Wrapper with rate-limit awareness and error handling
-  - Caches responses for 5 minutes to respect rate limits
-- **Sync job**: `/api/cron/sync-fec` (daily at 3 AM UTC)
-- **Data retrieved**:
-  - Candidate committees via `/candidate/{candidateId}/committees/`
-  - Schedule A contributions via `/schedules/schedule_a/`
-  - Identifies Israel lobby contributions via hardcoded committee IDs and name patterns
-  - Tracks: total funds, AIPAC funding, top 5 donors, Israel lobby breakdown
-- **Special logic**:
-  - Israel lobby detection (`isIsraelLobbyDonor()`) via committee ID or donor name patterns
-  - Known PAC IDs: AIPAC (C00104414), UDP (C00803833), DMFI (C00776997), etc. (see `fec-client.ts` for full list)
+**Voters / Registrars:**
+- **VoterFocus** (`https://www.voterfocus.com`) — referenced for FL county voter info (URL pattern in scraper scaffolding, not a structured API).
 
-### Congress.gov API
-- **Endpoint**: `https://api.congress.gov/v3`
-- **Rate limit**: ~5,000 requests/hour per API key
-- **Authentication**: API key query parameter
-- **Environment variable**: `CONGRESS_API_KEY`
-- **Sync job**: `/api/cron/sync-congress` (daily at 4 AM UTC)
-- **Data retrieved**:
-  - Current member list (`/member?currentMember=true&limit=250`)
-  - Bills from current Congress session (`/bill/{congress}`)
-  - Bill details (`/bill/{congress}/{billType}/{billNumber}`)
-  - Roll-call votes (`/bill/{congress}/{billType}/{billNumber}/actions`)
-  - Member names, party, photos, office information
-- **Congress session calculation**: Dynamically computed as `Math.floor((currentYear - 1789) / 2) + 1`
-- **Data synced**: Bills (title, sponsors, policy area, introduced date, status), votes, member photos/party
-- **Lookback window**: Last 2 days for bill updates
+## Data Storage
 
-### LegiScan API
-- **Endpoint**: `https://api.legiscan.com/`
-- **Rate limit**: 30,000 requests/month (~1,000/day) on free tier
-- **Authentication**: API key query parameter (`key` param)
-- **Environment variable**: `LEGISCAN_API_KEY`
-- **Sync job**: `/api/cron/sync-legiscan` (daily at 5 AM UTC)
-- **Scope**: Florida (FL) state legislature only
-- **Data retrieved**:
-  - Session list (`?op=getSessionList&state=FL`)
-  - Master bill list for active session (`?op=getMasterList&id={sessionId}`)
-  - Bill details (`?op=getBill&id={billId}`)
-  - Roll-call votes (`?op=getRollCall&id={rollCallId}`)
-  - Individual legislator votes
-- **Session awareness**:
-  - Tracks FL legislative session (typically Jan-Apr)
-  - Adjusts lookback window: 2 days during session, 7 days off-session
-  - Selects most recent non-special session
-- **Data synced**: Bill status, sponsors, descriptions, vote counts, individual legislator positions
-- **Vote mapping**: Yea/Nay/NV/Absent with chamber (House/Senate)
+**Databases:**
+- **Supabase PostgreSQL** (hosted at `https://xwaejtxqhwendbbdiowa.supabase.co`, discovered via scripts).
+  - Client factory: `lib/supabase-server.ts` — memoized `getServerSupabase()` (anon key, RLS-respecting reads) and `getServiceRoleSupabase()` (service-role key for cron writes, bypasses RLS).
+  - Schema: `supabase/schema.sql`, `supabase/connections-schema.sql`, migrations `supabase/migrations/001_add_contribution_breakdown.sql` through `004_add_individual_donor_breakdown.sql`.
+  - Key tables: `politicians` (PK `bioguide_id`), `social_posts`, `scrape_runs`, `intel_alerts`, `platform_stats`.
+  - Row-Level Security: enabled on all tables; public read, service-role write.
+  - Connection env vars (see below): `SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_ANON_KEY` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`.
+  - Python access: direct PostgREST via `requests` in `scrapers/scrape-social-media.py` (reads `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY`) and `scrapers/enrich-oh-ballotpedia.py`. A legacy `SUPABASE_DB_URL` path (direct psycopg2) also exists in `scrapers/db_helper.py`.
 
-## Authentication
+**File Storage:**
+- **Local filesystem only.** No S3 / Supabase Storage / Cloudinary detected.
+- Large datasets committed to the repo as JSON/CSV under `data/` (pro-Israel donor registry CSVs by year, 1978–present), `data-ingestion/` (per-candidate itemized FEC pulls, roster-match results, FLDOE & CalAccess dumps), and `scrapers/sample-data/`.
+- `next.config.ts` explicitly whitelists `data/pro-israel-donors-*.csv` into the Vercel serverless bundle for `/api/cron/refresh-gallrein-roster`.
 
-### Supabase Authentication Methods
-- **Type**: Row Level Security (RLS) policies
-- **Access tiers**:
-  - **Public read** (`SELECT`): Unauthenticated users can read politicians, social posts, scrape runs
-  - **Anonymous write** (`INSERT`, `UPDATE`, `DELETE`): Cron jobs use service role key
-- **No user login system**: Current implementation is read-only for end users, authenticated API access for cron jobs
-- **Session management**: Disabled (`persistSession: false`, `autoRefreshToken: false`) for cron operations
+**Caching:**
+- Next.js built-in fetch cache — `lib/fec-client.ts` uses `next: { revalidate: 300 }` (5 min) to stay under FEC rate limits.
+- No Redis / Upstash / Vercel KV detected.
 
-### Cron Job Authentication
-- **Type**: Bearer token verification
-- **Header**: `Authorization: Bearer {CRON_SECRET}`
-- **Implementation**: `lib/cron-auth.ts`
-  - `verifyCronAuth(request)` — Validates bearer token against `CRON_SECRET` env var
-  - `cronResponse(job, result)` — Standardized JSON response format
-- **Trigger**: Vercel cron scheduler (configured in `vercel.json`)
-- **Secret generation**: `openssl rand -hex 32`
+## Authentication & Identity
 
-## Hosting & Deploy
+**User authentication:**
+- **None.** The platform is fully public per `.planning/PROJECT.md` ("OAuth login — no user accounts needed for public data"). RLS uses public-read policies.
 
-### Vercel
-- **Platform**: Vercel serverless platform
-- **Configuration file**: `/vercel.json`
-- **Runtime**: Node.js (Next.js 16 compatible)
-- **Features used**:
-  - Serverless API routes (Next.js API routes)
-  - Scheduled cron jobs (via `crons` array)
-  - Build optimization (Next.js 16)
-- **Max duration for cron jobs**: 5 minutes (300 seconds) for FEC/Congress/LegiScan syncs, 1 minute (60 seconds) for health checks
-- **Deployment**: Git-based continuous deployment (source of truth: GitHub)
+**Service authentication:**
+- **Vercel Cron → API** — `lib/cron-auth.ts` exports `verifyCronAuth(request)` which checks `Authorization: Bearer <CRON_SECRET>`. Required by every cron handler (`app/api/cron/*/route.ts`).
+- **Admin endpoint** — `app/api/admin/route.ts` uses `ADMIN_SECRET` env var.
+- **Supabase service-role** — `SUPABASE_SERVICE_ROLE_KEY` used by cron writers via `getServiceRoleSupabase()`. Per `.planning/PROJECT.md` / `ROADMAP.md` Phase 1, this key was previously hardcoded in 8 scripts and must remain rotated.
 
-### Local Development
-- **Dev server**: `npm run dev` (Next.js dev server, typically http://localhost:3000)
-- **Build**: `npm run build` (Next.js build -> `.next/` directory)
-- **Production**: `npm start` (serves built `.next/` output)
+## Monitoring & Observability
 
-## Monitoring & Analytics
+**Error Tracking:**
+- **None configured.** No Sentry / Datadog / Rollbar SDK. Cron handlers return `cronResponse()` JSON summaries with `success`, `synced`, `errors`, `details`, `duration_ms` — operator-visible only in Vercel logs.
 
-### Scrape Runs Monitoring
-- **Table**: `supabase.scrape_runs`
-- **Tracked metrics**:
-  - `started_at`, `completed_at` — Timing
-  - `status` — 'running', 'completed', 'failed'
-  - `posts_found`, `posts_new`, `errors` — Counts
-  - `log` — JSONB array of log entries
-  - `metadata` — JSONB for arbitrary data
-- **Health check**: `/api/cron/sync-social-media` monitors daemon health
-  - Checks if last run was within 30 min (healthy), 2 hours (delayed), or >2 hours (stale)
-  - Reports total posts in DB and posts scraped in last 24 hours
+**Logs:**
+- Server-side: `console.log` / `console.error` → Vercel function logs.
+- Python scrapers: `logging` module with file handlers (`scrapers/logs/social-media.log`, configured in `scrapers/scrape-social-media.py:122`).
+- Health endpoint: `app/api/daemon-status/route.ts` (used by `app/api/cron/sync-social-media/route.ts`).
 
-### Social Media Scraping
-- **Architecture**: Persistent daemon running on Mac mini (not part of Vercel deployment)
-- **Coordination**: Writes to `scrape_runs` table for health monitoring
-- **Data stored**: `social_posts` table (platform, content, engagement metrics, sentiment)
-- **Cron fallback**: 6-hourly health check via `/api/cron/sync-social-media` catches if daemon is stale
+## CI/CD & Deployment
 
-### Error Handling & Logging
-- **Cron job responses**: Standardized JSON including:
-  - `success` (boolean)
-  - `synced` (count of items processed)
-  - `errors` (count of errors)
-  - `details` (metadata including `log` array)
-  - `duration_ms` (execution time)
-- **Rate limit handling**:
-  - FEC: Retries with exponential backoff (500ms between candidates), stops on 429
-  - Congress.gov: Stops immediately on 429 (rate-limited)
-  - LegiScan: Stops immediately on 429
-- **Error messages**: Include API error details, database constraints, connection issues
+**Hosting:**
+- **Vercel** serverless. `.vercel/` directory linked to a project; `.vercelignore` excludes scraper/ingest artifacts.
+- Function limits enforced: cron routes declare `maxDuration = 300` (seconds) and `dynamic = 'force-dynamic'`.
 
-### Data Provenance
-- **Source tracking**:
-  - `politicians.data_source` — where politician data originated
-  - `politicians.source_ids` — JSONB with external IDs (e.g., `fec_candidate_id`, `bioguide_id`)
-  - `bills.source` — 'congress.gov' or 'legiscan'
-  - `bills.source_url` — Direct link to bill on source site
-  - `votes.source` — 'congress.gov' or 'legiscan'
-- **Update tracking**: All tables have `updated_at` timestamp (auto-updated via trigger)
+**CI Pipeline:**
+- **None detected.** No `.github/workflows/`, no CircleCI, no GitLab CI config. Deploys appear to be git-push → Vercel.
 
-## Third-Party Integrations Summary
+**Deployment hooks:**
+- Vercel Cron Jobs (see below). No external scheduler (no Upstash Qstash / Inngest / Temporal).
 
-| Service | Purpose | Rate Limit | Sync Frequency |
-|---|---|---|---|
-| FEC API | Campaign finance data | 1,000 reqs/hr | Daily (3 AM UTC) |
-| Congress.gov | Federal bills, votes, members | ~5,000 reqs/hr | Daily (4 AM UTC) |
-| LegiScan | FL state legislature | 30K reqs/month | Daily (5 AM UTC) |
-| Vercel Cron | Job scheduling | N/A | 4 scheduled jobs |
-| Supabase | Database & RLS | Rate-limited by plan | Real-time for reads |
-| Mac mini daemon | Social media scraping | Platform-specific | Continuous (6hr health check) |
+## Environment Configuration
 
+**Required env vars (Next.js runtime):**
+- `SUPABASE_URL` — Supabase project URL. Falls back to `NEXT_PUBLIC_SUPABASE_URL` in `lib/supabase-server.ts`.
+- `SUPABASE_ANON_KEY` — Public PostgREST key for RLS-respecting reads. Falls back to `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+- `SUPABASE_SERVICE_ROLE_KEY` — Elevated write key for cron jobs (bypasses RLS). Consumed by `getServiceRoleSupabase()`.
+- `FEC_API_KEY` — FEC API key (1,000 req/hr).
+- `CONGRESS_API_KEY` — Congress.gov key (~5,000 req/hr).
+- `LEGISCAN_API_KEY` — LegiScan key (30K/month).
+- `LDA_API_KEY` — Senate LDA lobbying key.
+- `COURTLISTENER_TOKEN` — CourtListener token (5K/hr when set; optional).
+- `EXA_API_KEY` — Exa AI search key for `monitor-news` and `lib/research-agent.ts`.
+- `CRON_SECRET` — Bearer token enforced by `lib/cron-auth.ts`.
+- `ADMIN_SECRET` — Admin endpoint guard in `app/api/admin/route.ts`.
+- `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` — Legacy public fallbacks (used during migration; keep in sync).
+
+**Required env vars (Python scrapers):**
+- `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` (or legacy `SUPABASE_SERVICE_KEY`) — REST writes in `scrapers/scrape-social-media.py:136-140`, `scrapers/scrape-ohio-campaign-finance.py:51-52`, `scrapers/fetch-fishback-fldoe.py:60-61`, `scrapers/enrich-oh-ballotpedia.py:191-192`.
+- `FEC_API_KEY` — `scrapers/scrape-fec-data.py:301`, `scrapers/jfk-fec-scraper.py:350`.
+- `SUPABASE_DB_URL` — Optional direct psycopg2 path in `scrapers/db_helper.py:40`.
+- `FB_ACCESS_TOKEN` — Optional Facebook Graph API access for `scrapers/scrape-social-media.py:1261` (`https://graph.facebook.com`).
+- `IG_USERNAME`, `IG_PASSWORD` — Optional Instagram credentials for Instaloader (`scrapers/scrape-social-media.py:1432-1433`).
+- `SCRAPER_API_KEY` — Referenced in `scrapers/README.md:210` for an internal push webhook (not currently invoked in code).
+
+**Secrets location:**
+- Committed `.env` file at repo root (1.5KB). Contents intentionally not read. `.env*` is in `.gitignore`; the tracked file is a local-only dev copy.
+- Vercel project environment (managed via Vercel dashboard — not in repo).
+
+## Webhooks & Callbacks
+
+**Incoming:**
+- `app/api/webhooks/` directory exists but is **empty** (no `route.ts`). No webhook receivers currently wired.
+- Vercel Cron deliveries (treated as webhooks) land on `app/api/cron/*/route.ts` handlers, authenticated via `verifyCronAuth`.
+
+**Outgoing:**
+- None detected. No outbound webhooks, Slack/Discord notifiers, or email senders wired.
+- `scrapers/README.md` references a hypothetical `X-API-Key: SCRAPER_API_KEY` header for an internal push endpoint — not yet implemented.
+
+## Vercel Cron Jobs
+
+Configured cron handlers (routes exist under `app/api/cron/`) — each uses `verifyCronAuth`, `force-dynamic`, and writes via `getServiceRoleSupabase()`:
+
+| Route | Intended schedule (per CLAUDE.md / README.md) | Purpose |
+|-------|-----------------------------------------------|---------|
+| `app/api/cron/sync-fec/route.ts` | `0 3 * * *` (3 AM UTC daily) | Refresh FEC contributions, IE, and multi-cycle totals for tracked politicians |
+| `app/api/cron/sync-congress/route.ts` | `0 4 * * *` (4 AM UTC daily) | Sync Congress.gov members, bills, roll-call votes |
+| `app/api/cron/sync-legiscan/route.ts` | `0 5 * * *` (5 AM UTC daily) | Sync FL state legislature bills + votes |
+| `app/api/cron/sync-court-records/route.ts` | `5 * * * *` (hourly) | Sync CourtListener dockets + opinions for all politicians |
+| `app/api/cron/research-candidates/route.ts` | `0 6 * * *` (daily) | Enrich candidate profiles across 4 pillars |
+| `app/api/cron/track-fec-filings/route.ts` | `0 3,9,15,21 * * *` (every 6h) | Live new-filing detection, auto-create intel_alerts |
+| `app/api/cron/monitor-news/route.ts` | `0 2,8,14,20 * * *` (every 6h) | Exa AI scandal-keyword news monitoring |
+| `app/api/cron/sync-social-media/route.ts` | `0 */6 * * *` (every 6h) | Daemon health check + social scraping trigger |
+| `app/api/cron/refresh-gallrein-roster/route.ts` | Mondays 02:00 UTC | Weekly pro-Israel roster re-cross-reference for KY-04 |
+| `app/api/cron/sync-stats/route.ts` | Every 12h | Recompute `platform_stats` table |
+
+**Critical gap:** `vercel.json` currently contains `{ "crons": [] }` — none of the above schedules are active on Vercel. All handlers exist and are callable manually, but Vercel will not fire them until `vercel.json` is re-populated.
+
+## Scraping Subsystem
+
+Separate from the Next.js deploy; runs locally or on a self-managed host.
+
+- Entry point: `scripts/social-media-daemon.ts` (long-running tsx process).
+- Python scrapers (`scrapers/*.py`) are invoked via subprocess or directly; dependencies in `scrapers/requirements.txt`.
+- Social sources (see `scrapers/scrape-social-media.py`): Google News RSS, YouTube RSS, official .gov RSS, Twitter/X (Twikit guest mode + syndication), Facebook (`facebook_scraper` lib for public pages), Instagram (`instaloader` for public profiles). Optional paid path via `FB_ACCESS_TOKEN` → `https://graph.facebook.com`.
+- Output: `data-ingestion/social-media-posts.json` → upserted into `social_posts` table via Supabase REST.
+- Browser automation: Playwright chromium (`scripts/fetch-oh-sos-bulk.ts`, `scripts/probe-oh-sos*.ts`), plus stealth variant (`scripts/scrape-vivek-oh-sos-stealth.ts`) for Cloudflare-guarded OH SOS.
+
+---
+
+*Integration audit: 2026-04-22*
