@@ -65,13 +65,25 @@ export async function GET(request: NextRequest) {
 
     // Fallback: if the 3-table schema is empty for this politician, try the
     // politicians.voting_records JSON field (used for manually-seeded votes).
+    // The UI may pass either our bioguide_id (slug) OR the real Congress
+    // bioguide stored in source_ids.bioguide_id (e.g. "W000805"). Try both.
     if (transformed.length === 0) {
-      const { data: pol } = await client
+      let polRow: { voting_records?: unknown } | null = null;
+      const primary = await client
         .from('politicians')
         .select('voting_records')
         .eq('bioguide_id', bioguideId)
-        .single();
-      const vr = (pol?.voting_records || []) as Array<Record<string, unknown>>;
+        .maybeSingle();
+      polRow = primary.data;
+      if (!polRow?.voting_records || (polRow.voting_records as unknown[]).length === 0) {
+        const bySource = await client
+          .from('politicians')
+          .select('voting_records')
+          .eq('source_ids->>bioguide_id', bioguideId)
+          .maybeSingle();
+        if (bySource.data?.voting_records) polRow = bySource.data;
+      }
+      const vr = (polRow?.voting_records || []) as Array<Record<string, unknown>>;
       if (vr.length > 0) {
         const mapped = vr.map(v => ({
           id: v.id,
