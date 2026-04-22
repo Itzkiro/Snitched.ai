@@ -1,12 +1,26 @@
 # Phase 1: Infrastructure & Security Hardening - Context
 
 **Gathered:** 2026-04-02
+**Scope expanded:** 2026-04-22 (added D-04, D-05, D-06 after codebase remap surfaced C2/C3/C4)
 **Status:** Ready for planning
 
 <domain>
 ## Phase Boundary
 
-Secure the foundation before any data or UI work. Rotate the exposed Supabase service role key, add `/api/politicians/[id]` endpoint to eliminate the 400-politician over-fetch, remove publicly-accessible `dashboard.html`, and ensure all credential files use environment variables.
+Secure the foundation before any data or UI work. This phase covers both original infrastructure scope and three CRITICAL concerns surfaced by the 2026-04-22 codebase remap:
+
+**Original scope (2026-04-02):**
+- Rotate the exposed Supabase service role key
+- Add `/api/politicians/[id]` endpoint to eliminate the 400-politician over-fetch
+- Remove publicly-accessible `dashboard.html`
+- Ensure all credential files use environment variables
+
+**Expanded scope (2026-04-22):**
+- Tighten Supabase RLS so the published anon key cannot UPDATE/DELETE `politicians` (C2 — policies currently `WITH CHECK (true)` / `USING (true)`)
+- Add `is_audited` visibility gate so un-audited politicians don't surface publicly with corruption scores (C3 — 45/6,727 audited; 99.3% currently leaked)
+- Sanitize the bills search endpoint to prevent PostgREST `.or()` injection via raw user input (C4 — `app/api/bills/search/route.ts:28`)
+
+The ordering matters: C2/C3/C4 must ship **before or alongside** key rotation. Rotating a key on a DB anyone can write to is half a fix.
 
 </domain>
 
@@ -22,11 +36,27 @@ Secure the foundation before any data or UI work. Rotate the exposed Supabase se
 ### API endpoint design
 - **D-03:** Claude's discretion — create `/api/politicians/[id]` following existing codebase patterns. The current `/api/politicians` returns full Politician objects, so the single-record endpoint should return the same shape for consistency. Use the existing Supabase client pattern with JSON fallback.
 
+### RLS hardening (C2)
+- **D-04:** Claude's discretion — tighten RLS policies on `politicians`, `social_posts`, `scrape_runs`, and any other user-writable tables so the `NEXT_PUBLIC_SUPABASE_ANON_KEY` (which ships to the browser) is READ-ONLY. All writes must go through the service role (cron jobs, admin endpoints). Verify via a test: using only the anon key, an UPDATE/DELETE against `politicians` must fail.
+
+### is_audited visibility gate (C3)
+- **D-05:** Claude's discretion on implementation, but these invariants are non-negotiable:
+  1. Add an `is_audited` boolean column to `politicians` (default `false`).
+  2. Backfill from the source of truth — `data-ingestion/audit-tracker.csv` lists the politicians that have been hand-audited. Mark exactly those rows `true`.
+  3. Every public read endpoint (`app/api/politicians/route.ts`, `app/api/politicians/search/route.ts`, `app/api/politicians/[id]/route.ts`, `app/api/politicians/export/route.ts`) and the Browse UI (`components/BrowseClient.tsx`) must filter `is_audited = true` for unauthenticated requests.
+  4. Admin/cron paths (service role) keep full visibility so the audit workflow itself can see un-audited rows.
+  5. A /hidden-or-equivalent admin page for toggling audit status is out of scope — toggling happens via SQL or an ingestion script for now.
+
+### Bills search sanitization (C4)
+- **D-06:** Claude's discretion — fix `app/api/bills/search/route.ts:28` so raw user input is no longer interpolated into a PostgREST `.or()` string. Accepted approaches: use `.textSearch()` with a tsvector column, use parameterized `.ilike()` on specific fields, or strictly whitelist/escape the input. Also do a grep pass for the same pattern in other routes (`.or(`, `.rpc(`, template-literal-in-filter) and patch any siblings found.
+
 ### Claude's Discretion
 - Key rotation approach (rotate + update env vars, git scrub optional)
 - `/api/politicians/[id]` response shape and caching strategy (follow existing patterns)
 - Env validation approach at startup
-- Input validation improvements scope (if any fits this phase)
+- RLS policy shape (single permissive-select + restricted-write, or role-based — whichever fits Supabase conventions)
+- Whether `is_audited` filter is enforced at the RLS layer, the API layer, or both (defense-in-depth preferred)
+- Migration ordering: whether C3's column-add runs before or after C2's RLS change (both must ship in this phase)
 
 </decisions>
 
@@ -62,6 +92,9 @@ No external specs — requirements fully captured in decisions above and codebas
 - `app/politician/[id]/page.tsx` (line ~50-66) — currently fetches ALL politicians then filters client-side; will use new endpoint
 - `vercel.json` — may need `.vercelignore` update if `dashboard.html` is in deployment
 - `.env` / Vercel env vars — key rotation target
+- **RLS (C2):** `supabase/schema.sql` holds the current permissive policies — rewrite there
+- **Audit gate (C3):** column-add migration in `supabase/`, backfill via `data-ingestion/audit-tracker.csv` (45 audited rows), filter in all public read endpoints: `app/api/politicians/route.ts`, `app/api/politicians/search/route.ts`, `app/api/politicians/[id]/route.ts`, `app/api/politicians/export/route.ts`, and `components/BrowseClient.tsx`
+- **Bills sanitization (C4):** `app/api/bills/search/route.ts:28` is the known injection point; grep for `.or(` template literals elsewhere
 
 </code_context>
 

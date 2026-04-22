@@ -25,7 +25,7 @@
 
 ### Phase 1: Infrastructure & Security Hardening
 
-**Goal:** Establish a safe, performant foundation before any data or UI work — rotate the exposed service role key, add `/api/politicians/[id]` to eliminate the 400-politician over-fetch, and remove the publicly-accessible `dashboard.html`.
+**Goal:** Establish a safe, performant foundation before any data or UI work — rotate the exposed service role key, harden Supabase RLS, add an `is_audited` visibility gate so un-audited politicians aren't publicly exposed, fix bills-search query injection, add `/api/politicians/[id]` to eliminate the 400-politician over-fetch, and remove the publicly-accessible `dashboard.html`.
 
 **Requirements:** (no v1 functional requirements; prerequisite for all phases)
 
@@ -38,6 +38,9 @@
 2. The Supabase service role JWT that was hardcoded in 8 scripts has been rotated and the old key is revoked.
 3. `dashboard.html` is no longer publicly accessible (returns 404 or requires auth).
 4. All 8 previously-hardcoded credential files reference environment variables only, verified by a grep scan showing zero hardcoded JWTs.
+5. **(C2)** An UPDATE or DELETE against `politicians` using only the anon key fails. Writes only succeed with the service role.
+6. **(C3)** An `is_audited` column exists on `politicians`, is backfilled `true` for the rows in `data-ingestion/audit-tracker.csv` (and `false` everywhere else), and every public read path (`/api/politicians`, `/search`, `/[id]`, `/export`, plus `BrowseClient.tsx`) returns only audited rows for unauthenticated requests.
+7. **(C4)** `app/api/bills/search/route.ts` no longer interpolates raw user input into a PostgREST filter; a grep for `.or(\`` / template-literal-in-filter patterns across all API routes returns zero matches.
 
 ---
 
