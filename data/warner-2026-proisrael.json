@@ -1,0 +1,1311 @@
+{
+  "cycle": 2026,
+  "pages_fetched": 90,
+  "total_itemized_receipts_200plus": 16583456.360000001,
+  "row_count": 8912,
+  "pac_direct_proisrael": 759049,
+  "pac_breakdown": {
+    "AIPAC PAC": 759049
+  },
+  "individual_bundler_proisrael": 357146,
+  "matched_unique_individuals": 144,
+  "top_individuals": [
+    {
+      "name": "WURTZEL, ALAN L.",
+      "state": "DC",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 7000,
+      "lifetime": 124250,
+      "pacs": "JStreetPAC",
+      "count": 2
+    },
+    {
+      "name": "STAVIS, ROBERT M.",
+      "state": "NY",
+      "employer": "BESSEMER VENTURE PARTNERS",
+      "to_warner": 7000,
+      "lifetime": 175000,
+      "pacs": "Mainstream Democrats PAC; DMFI PAC (Democratic Majority for Israel); JDCA PAC",
+      "count": 2
+    },
+    {
+      "name": "STAVIS, AMY",
+      "state": "NY",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 7000,
+      "lifetime": 55000,
+      "pacs": "Joint Action Committee for Political Affairs; DMFI PAC (Democratic Majority for Israel)",
+      "count": 2
+    },
+    {
+      "name": "SPILKER, MARC",
+      "state": "NY",
+      "employer": "GPS INVESTMENT PARTNERS",
+      "to_warner": 7000,
+      "lifetime": 152900,
+      "pacs": "AIPAC PAC; United Democracy Project (UDP)",
+      "count": 2
+    },
+    {
+      "name": "VOGELSTEIN, JOHN L.",
+      "state": "NY",
+      "employer": "WARBURG PINCUS",
+      "to_warner": 7000,
+      "lifetime": 1000,
+      "pacs": "National PAC",
+      "count": 2
+    },
+    {
+      "name": "ZWANZIGER, RON",
+      "state": "MA",
+      "employer": "ELECTRADX",
+      "to_warner": 7000,
+      "lifetime": 8947,
+      "pacs": "JStreetPAC",
+      "count": 2
+    },
+    {
+      "name": "PEELER, DAVID",
+      "state": "MA",
+      "employer": "BERKSHIRE PARTNERS",
+      "to_warner": 7000,
+      "lifetime": 150000,
+      "pacs": "DMFI PAC (Democratic Majority for Israel); Mainstream Democrats PAC",
+      "count": 2
+    },
+    {
+      "name": "FRIEDMAN, EMANUEL J.",
+      "state": "DC",
+      "employer": "EJF ALTERNATIVE ASSET MANAGEMENT",
+      "to_warner": 7000,
+      "lifetime": 10000,
+      "pacs": "DMFI PAC (Democratic Majority for Israel)",
+      "count": 2
+    },
+    {
+      "name": "ZIENTS, MARY M.",
+      "state": "DC",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 7000,
+      "lifetime": 6500,
+      "pacs": "JStreetPAC",
+      "count": 2
+    },
+    {
+      "name": "SABAN, HAIM",
+      "state": "CA",
+      "employer": "SABAN CAPITAL GROUP",
+      "to_warner": 7000,
+      "lifetime": 3035000,
+      "pacs": "JDCA PAC; DMFI PAC (Democratic Majority for Israel); United Democracy Project (UDP)",
+      "count": 2
+    },
+    {
+      "name": "BLITZER, DAVID S.",
+      "state": "NY",
+      "employer": "BLACKSTONE, INC.",
+      "to_warner": 7000,
+      "lifetime": 102800,
+      "pacs": "Pro-Israel America PAC; DMFI PAC (Democratic Majority for Israel)",
+      "count": 2
+    },
+    {
+      "name": "PRITZKER, PENNY",
+      "state": "IL",
+      "employer": "PSP PARTNERS",
+      "to_warner": 7000,
+      "lifetime": 3000,
+      "pacs": "Multi-Issue PAC",
+      "count": 2
+    },
+    {
+      "name": "WEISS, ANTONIO",
+      "state": "NY",
+      "employer": "HARVARD KENNEDY SCHOOL",
+      "to_warner": 7000,
+      "lifetime": 1200,
+      "pacs": "AIPAC PAC",
+      "count": 2
+    },
+    {
+      "name": "ABRAMSON, RONALD D.",
+      "state": "DC",
+      "employer": "BUCHANAN INGERSOLL & ROONEY PC",
+      "to_warner": 7000,
+      "lifetime": 500,
+      "pacs": "National PAC",
+      "count": 2
+    },
+    {
+      "name": "LAZOWSKI, ALAN",
+      "state": "CT",
+      "employer": "LAZ PARKING",
+      "to_warner": 7000,
+      "lifetime": 9000,
+      "pacs": "AIPAC PAC",
+      "count": 2
+    },
+    {
+      "name": "SECUNDA, THOMAS F.",
+      "state": "NY",
+      "employer": "BLOOMBERG LP",
+      "to_warner": 7000,
+      "lifetime": 350000,
+      "pacs": "DMFI PAC (Democratic Majority for Israel)",
+      "count": 2
+    },
+    {
+      "name": "RAPPAPORT, JILL",
+      "state": "FL",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 6200,
+      "lifetime": 2900,
+      "pacs": "Republican Jewish Coalition PAC (RJC-PAC)",
+      "count": 3
+    },
+    {
+      "name": "GOLDSTEIN, SARAH",
+      "state": "NY",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 5046,
+      "lifetime": 22330,
+      "pacs": "Hudson Valley PAC; Bi-County PAC; NorPAC / North Jersey PAC; National PAC; AIPAC PAC",
+      "count": 2
+    },
+    {
+      "name": "ZELNICK, STRAUSS",
+      "state": "NY",
+      "employer": "TAKE-TWO INTERACTIVE",
+      "to_warner": 5000,
+      "lifetime": 1000,
+      "pacs": "NorPAC / North Jersey PAC",
+      "count": 3
+    },
+    {
+      "name": "CLARK, JAMES",
+      "state": "NY",
+      "employer": "CABOT SQUARE CAPITAL",
+      "to_warner": 5000,
+      "lifetime": 250,
+      "pacs": "AIPAC PAC",
+      "count": 2
+    },
+    {
+      "name": "RATNER, ALBERT",
+      "state": "OH",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 5000,
+      "lifetime": 104883,
+      "pacs": "The Desert Caucus; Heartland PAC; City PAC; AIPAC PAC; DMFI PAC (Democratic Majority for Israel)",
+      "count": 2
+    },
+    {
+      "name": "COHEN, RICHARD D.",
+      "state": "NY",
+      "employer": "CAPITAL PROPERTIES",
+      "to_warner": 5000,
+      "lifetime": 213250,
+      "pacs": "Washington PAC; Mid Manhattan PAC; Hudson Valley PAC; NorPAC / North Jersey PAC; National PAC; Pro-Israel America PAC; AIPAC PAC; DMFI PAC (Democratic Majority for Israel); United Democracy Project (UDP); JStreetPAC",
+      "count": 2
+    },
+    {
+      "name": "ROGOVIN, JAYE",
+      "state": "CA",
+      "employer": "SELF EMPLOYED",
+      "to_warner": 5000,
+      "lifetime": 16250,
+      "pacs": "World Alliance for Israel PAC; Republican Jewish Coalition PAC (RJC-PAC)",
+      "count": 2
+    },
+    {
+      "name": "HOROWITZ RATNER, ILANA",
+      "state": "OH",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 5000,
+      "lifetime": 97800.01,
+      "pacs": "JStreetPAC; JDCA PAC",
+      "count": 2
+    },
+    {
+      "name": "RATNER, RONALD",
+      "state": "OH",
+      "employer": "FOREST CITY",
+      "to_warner": 5000,
+      "lifetime": 61500,
+      "pacs": "Heartland PAC; JStreetPAC; JDCA PAC",
+      "count": 2
+    },
+    {
+      "name": "LEVIN, MORTON Q.",
+      "state": "OH",
+      "employer": "LEVIN GROUP, INC.",
+      "to_warner": 5000,
+      "lifetime": 20500,
+      "pacs": "Pro-Israel America PAC; AIPAC PAC; United Democracy Project (UDP)",
+      "count": 2
+    },
+    {
+      "name": "MORGENSTERN, MARC",
+      "state": "OH",
+      "employer": "BLUE MESA PARTNERS",
+      "to_warner": 5000,
+      "lifetime": 1800,
+      "pacs": "Heartland PAC",
+      "count": 2
+    },
+    {
+      "name": "COHEN, MARCELLA E.",
+      "state": "MD",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 5000,
+      "lifetime": 39850,
+      "pacs": "Washington PAC; National PAC; Friends of Israel PAC / San Franciscans for Good Government; Maryland Association for Concerned Citizens PAC; Joint Action Committee for Political Affairs; AIPAC PAC",
+      "count": 2
+    },
+    {
+      "name": "RATNER, DENNIS",
+      "state": "FL",
+      "employer": "DFR HOLDINGS",
+      "to_warner": 5000,
+      "lifetime": 500,
+      "pacs": "AIPAC PAC",
+      "count": 3
+    },
+    {
+      "name": "ZIRKIN, NANCY",
+      "state": "MD",
+      "employer": "LEADERSHIP CONFERENCE ON CIVIL RIGHTS",
+      "to_warner": 5000,
+      "lifetime": 10200,
+      "pacs": "JStreetPAC",
+      "count": 2
+    },
+    {
+      "name": "GRINSTEIN, GERALD",
+      "state": "WA",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 5000,
+      "lifetime": 1000,
+      "pacs": "JStreetPAC",
+      "count": 2
+    },
+    {
+      "name": "HELLER, STEVEN",
+      "state": "CA",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 5000,
+      "lifetime": 500,
+      "pacs": "World Alliance for Israel PAC",
+      "count": 2
+    },
+    {
+      "name": "PRIMUS, LISA",
+      "state": "NY",
+      "employer": "SELF EMPLOYED",
+      "to_warner": 3700,
+      "lifetime": 19900,
+      "pacs": "J Street Action Fund; JStreetPAC",
+      "count": 2
+    },
+    {
+      "name": "MINSKY, YARON",
+      "state": "NY",
+      "employer": "JANESTREET",
+      "to_warner": 3700,
+      "lifetime": 33000,
+      "pacs": "JStreetPAC",
+      "count": 2
+    },
+    {
+      "name": "SOLOMON, JEFFREY M.",
+      "state": "NY",
+      "employer": "TD COWEN",
+      "to_warner": 3500,
+      "lifetime": 7900,
+      "pacs": "NorPAC / North Jersey PAC; AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "BRONFEIN, MICHAEL G.",
+      "state": "MD",
+      "employer": "CURIO WELLNESS",
+      "to_warner": 3500,
+      "lifetime": 25750,
+      "pacs": "Maryland Association for Concerned Citizens PAC; AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "TAYLOR, KATHRYN",
+      "state": "CA",
+      "employer": "SELF EMPLOYED",
+      "to_warner": 3500,
+      "lifetime": 1000,
+      "pacs": "DMFI PAC (Democratic Majority for Israel)",
+      "count": 1
+    },
+    {
+      "name": "KELLY, JOHN",
+      "state": "IL",
+      "employer": "ALL CIRCO",
+      "to_warner": 3500,
+      "lifetime": 2000,
+      "pacs": "JStreetPAC",
+      "count": 1
+    },
+    {
+      "name": "LEVENSON, BRUCE",
+      "state": "MD",
+      "employer": "UNITED COMMUNICATIONS GROUP",
+      "to_warner": 3500,
+      "lifetime": 3500,
+      "pacs": "AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "ATKINS, CHET",
+      "state": "NH",
+      "employer": "TREMONT STRATEGIES GROUP, LLC",
+      "to_warner": 3500,
+      "lifetime": 2000,
+      "pacs": "JStreetPAC",
+      "count": 1
+    },
+    {
+      "name": "ALSOP, JOSEPH",
+      "state": "MA",
+      "employer": "ALSOP LOUIE PARTNERS",
+      "to_warner": 3500,
+      "lifetime": 3500,
+      "pacs": "JStreetPAC",
+      "count": 1
+    },
+    {
+      "name": "BOGER, JOSHUA S.",
+      "state": "MA",
+      "employer": "ALKEUS PHARMACEUTICALS",
+      "to_warner": 3500,
+      "lifetime": 12299.99,
+      "pacs": "JStreetPAC",
+      "count": 1
+    },
+    {
+      "name": "LIPMAN, BARRY R.",
+      "state": "CA",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 3500,
+      "lifetime": 2000,
+      "pacs": "JStreetPAC",
+      "count": 2
+    },
+    {
+      "name": "GURAL, JEFFREY",
+      "state": "NY",
+      "employer": "NEWMARK GRUBB KNIGHT FRANK",
+      "to_warner": 3500,
+      "lifetime": 14600,
+      "pacs": "AIPAC PAC",
+      "count": 2
+    },
+    {
+      "name": "JACOBSON, MITCHELL",
+      "state": "NY",
+      "employer": "MSC INDUSTRIAL DIRECT, INC.",
+      "to_warner": 3500,
+      "lifetime": 46600,
+      "pacs": "Pro-Israel America PAC; AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "ABERLY, NAOMI D.",
+      "state": "MA",
+      "employer": "LEBOWITZ-ABERLY FAMILY FOUNDATION",
+      "to_warner": 3000,
+      "lifetime": 1500,
+      "pacs": "JStreetPAC",
+      "count": 3
+    },
+    {
+      "name": "FELDMAN, CYNTHIA",
+      "state": "TX",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 3000,
+      "lifetime": 2500,
+      "pacs": "AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "LIEBER, JAMES E.",
+      "state": "NY",
+      "employer": "LIEBER STRATEGIES",
+      "to_warner": 2500,
+      "lifetime": 4650,
+      "pacs": "National PAC; JStreetPAC; NorPAC / North Jersey PAC",
+      "count": 1
+    },
+    {
+      "name": "HARMAN, JANE",
+      "state": "CA",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 2500,
+      "lifetime": 4875,
+      "pacs": "World Alliance for Israel PAC; Joint Action Committee for Political Affairs",
+      "count": 1
+    },
+    {
+      "name": "RATNER, JAMES",
+      "state": "OH",
+      "employer": "RMS INVESTMENT GROUP",
+      "to_warner": 2500,
+      "lifetime": 93550,
+      "pacs": "Heartland PAC; JStreetPAC; DMFI PAC (Democratic Majority for Israel); AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "RATNER, SUSAN",
+      "state": "OH",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 2500,
+      "lifetime": 19000,
+      "pacs": "JStreetPAC",
+      "count": 1
+    },
+    {
+      "name": "KANFER, JOE",
+      "state": "OH",
+      "employer": "GOJO INDUSTRIES",
+      "to_warner": 2500,
+      "lifetime": 64400,
+      "pacs": "Heartland PAC; DMFI PAC (Democratic Majority for Israel); JDCA PAC; AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "HALPERT, STUART D.",
+      "state": "FL",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 2500,
+      "lifetime": 650,
+      "pacs": "National Action Committee",
+      "count": 2
+    },
+    {
+      "name": "TISCH, LAURIE",
+      "state": "NY",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 2500,
+      "lifetime": 66600,
+      "pacs": "JStreetPAC; DMFI PAC (Democratic Majority for Israel); NorPAC / North Jersey PAC",
+      "count": 1
+    },
+    {
+      "name": "GOLDEN, JOHN",
+      "state": "NY",
+      "employer": "SELF EMPLOYED",
+      "to_warner": 2500,
+      "lifetime": 100000,
+      "pacs": "United Democracy Project (UDP)",
+      "count": 1
+    },
+    {
+      "name": "LUBETZKY, DANIEL",
+      "state": "TX",
+      "employer": "KIND",
+      "to_warner": 2500,
+      "lifetime": 24100,
+      "pacs": "AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "BROWN, MARCUS",
+      "state": "VA",
+      "employer": "COMMONWEALTH ONCOLOGY GROUP",
+      "to_warner": 2500,
+      "lifetime": 300,
+      "pacs": "JStreetPAC",
+      "count": 1
+    },
+    {
+      "name": "GREEN, JOEL",
+      "state": "DC",
+      "employer": "WILMERHALE",
+      "to_warner": 2000,
+      "lifetime": 2500,
+      "pacs": "JStreetPAC",
+      "count": 1
+    },
+    {
+      "name": "ROSENTHAL, SHARI",
+      "state": "CA",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 2000,
+      "lifetime": 600,
+      "pacs": "AIPAC PAC",
+      "count": 2
+    },
+    {
+      "name": "WEINBERG, MATTHEW",
+      "state": "NY",
+      "employer": "IEX GROUP, INC.",
+      "to_warner": 2000,
+      "lifetime": 500,
+      "pacs": "Joint Action Committee for Political Affairs",
+      "count": 1
+    },
+    {
+      "name": "SALTZMAN, SHELLY",
+      "state": "OH",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 2000,
+      "lifetime": 1800,
+      "pacs": "JDCA PAC",
+      "count": 1
+    },
+    {
+      "name": "ALTMAN, MICHAEL",
+      "state": "NY",
+      "employer": "MICHAEL ALTMAN FINE ART & ADVISORY SER",
+      "to_warner": 2000,
+      "lifetime": 1125,
+      "pacs": "NorPAC / North Jersey PAC",
+      "count": 1
+    },
+    {
+      "name": "BLOOM, STEVEN",
+      "state": "NY",
+      "employer": "SELF EMPLOYED",
+      "to_warner": 2000,
+      "lifetime": 4390,
+      "pacs": "NorPAC / North Jersey PAC; AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "BRADLEY, KATHERINE BRITTAIN",
+      "state": "DC",
+      "employer": "CITYBRIDGE FOUNDATION",
+      "to_warner": 2000,
+      "lifetime": 5000,
+      "pacs": "JStreetPAC",
+      "count": 2
+    },
+    {
+      "name": "CONWAY, WILLIAM B. JR",
+      "state": "MD",
+      "employer": "CARLYLE GROUP",
+      "to_warner": 2000,
+      "lifetime": 750,
+      "pacs": "JStreetPAC",
+      "count": 2
+    },
+    {
+      "name": "CLARK, SIMON J.",
+      "state": "MA",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 2000,
+      "lifetime": 3610,
+      "pacs": "JStreetPAC",
+      "count": 2
+    },
+    {
+      "name": "HOROWITZ, JOSEPH",
+      "state": "CA",
+      "employer": "ICON VENTURES",
+      "to_warner": 2000,
+      "lifetime": 250,
+      "pacs": "JStreetPAC",
+      "count": 2
+    },
+    {
+      "name": "BLODGETT, WILLIAM",
+      "state": "NY",
+      "employer": "TREDWAY",
+      "to_warner": 1800,
+      "lifetime": 13200,
+      "pacs": "AIPAC PAC; NorPAC / North Jersey PAC",
+      "count": 1
+    },
+    {
+      "name": "FROST, MARTIN",
+      "state": "VA",
+      "employer": "POLSINELLI SHALTON FALNIGAN SUELTHAUS",
+      "to_warner": 1750,
+      "lifetime": 1000,
+      "pacs": "JDCA PAC",
+      "count": 2
+    },
+    {
+      "name": "SIEGEL, CHARLES",
+      "state": "TX",
+      "employer": "WATERS KRAUS PAUL & SIEGEL",
+      "to_warner": 1750,
+      "lifetime": 250,
+      "pacs": "JDCA PAC",
+      "count": 1
+    },
+    {
+      "name": "GREENSPAN, ALAN",
+      "state": "TX",
+      "employer": "SOUTHERN GLAZER'S WINE AND SPIRITS",
+      "to_warner": 1750,
+      "lifetime": 11250,
+      "pacs": "JDCA PAC; AIPAC PAC; DMFI PAC (Democratic Majority for Israel)",
+      "count": 1
+    },
+    {
+      "name": "BROWN, JANICE",
+      "state": "VA",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 1500,
+      "lifetime": 500,
+      "pacs": "National PAC",
+      "count": 2
+    },
+    {
+      "name": "PARIS, ZACHARY T.",
+      "state": "OH",
+      "employer": "JONES DAY",
+      "to_warner": 1500,
+      "lifetime": 200,
+      "pacs": "JStreetPAC",
+      "count": 1
+    },
+    {
+      "name": "EFFRON, BLAIR W.",
+      "state": "NY",
+      "employer": "CENTERVIEW PARTNERS",
+      "to_warner": 1500,
+      "lifetime": 9000,
+      "pacs": "AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "WHITE, MAUREEN",
+      "state": "NY",
+      "employer": "REFUGEES INTERNATIONAL",
+      "to_warner": 1200,
+      "lifetime": 1000,
+      "pacs": "JStreetPAC",
+      "count": 2
+    },
+    {
+      "name": "SCHAUFELD, FREDRICK D.",
+      "state": "VA",
+      "employer": "SWAN HILL TOP",
+      "to_warner": 1200,
+      "lifetime": 52700,
+      "pacs": "JStreetPAC",
+      "count": 2
+    },
+    {
+      "name": "FELDMAN, MICHAEL",
+      "state": "NY",
+      "employer": "THE GLOVER PARK GROUP",
+      "to_warner": 1200,
+      "lifetime": 1200,
+      "pacs": "Joint Action Committee for Political Affairs; NorPAC / North Jersey PAC",
+      "count": 1
+    },
+    {
+      "name": "SCHAUFELD, KAREN G.",
+      "state": "VA",
+      "employer": "NONE",
+      "to_warner": 1200,
+      "lifetime": 52700,
+      "pacs": "JStreetPAC",
+      "count": 2
+    },
+    {
+      "name": "WASSERMAN, CASEY",
+      "state": "CA",
+      "employer": "WASSERMAN",
+      "to_warner": 1200,
+      "lifetime": 14000,
+      "pacs": "AIPAC PAC",
+      "count": 2
+    },
+    {
+      "name": "CHAPMAN, JULIANNA",
+      "state": "VA",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 1200,
+      "lifetime": 11500,
+      "pacs": "Washington PAC; National Action Committee; Pro-Israel America PAC; AIPAC PAC",
+      "count": 2
+    },
+    {
+      "name": "DREYFUS, MARK",
+      "state": "VA",
+      "employer": "ECPI UNIVERSITY",
+      "to_warner": 1000,
+      "lifetime": 3500,
+      "pacs": "National PAC",
+      "count": 1
+    },
+    {
+      "name": "OBERFELD, MAURICIO",
+      "state": "CA",
+      "employer": "SELF EMPLOYED",
+      "to_warner": 1000,
+      "lifetime": 8250,
+      "pacs": "Pro-Israel America PAC; AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "GREUEL, WENDY",
+      "state": "CA",
+      "employer": "MANATT, PHELPS & PHILLIPS, LLP",
+      "to_warner": 1000,
+      "lifetime": 1000,
+      "pacs": "California Jewish Democrats-FED / Democrats for Israel Committee",
+      "count": 1
+    },
+    {
+      "name": "SAFRAN, THOMAS L.",
+      "state": "CA",
+      "employer": "THOMAS SAFRAN & ASSOCIATES",
+      "to_warner": 1000,
+      "lifetime": 50400,
+      "pacs": "JStreetPAC; JDCA PAC",
+      "count": 1
+    },
+    {
+      "name": "NADEL, JOSEPH",
+      "state": "CA",
+      "employer": "BERGER, NADEL & VARNELLI",
+      "to_warner": 1000,
+      "lifetime": 500,
+      "pacs": "JStreetPAC",
+      "count": 2
+    },
+    {
+      "name": "FELDMAN, STAN",
+      "state": "NJ",
+      "employer": "IEX GROUP, INC.",
+      "to_warner": 1000,
+      "lifetime": 5100,
+      "pacs": "Hudson Valley PAC; AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "HIRSCHHORN, DANIEL B.",
+      "state": "MD",
+      "employer": "AMERICAN TRADING & PRODUCTION",
+      "to_warner": 1000,
+      "lifetime": 17750,
+      "pacs": "Maryland Association for Concerned Citizens PAC; AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "LUNDQUIST, LORAINE",
+      "state": "CA",
+      "employer": "SOUTH COAST AIR QUALITY MANAGEMENT",
+      "to_warner": 1000,
+      "lifetime": 200,
+      "pacs": "California Jewish Democrats-FED / Democrats for Israel Committee",
+      "count": 1
+    },
+    {
+      "name": "GOLDBERG, LARRY",
+      "state": "OH",
+      "employer": "GOLDBERG COMPANIES",
+      "to_warner": 1000,
+      "lifetime": 2000,
+      "pacs": "AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "BANGEL, BRAD J.",
+      "state": "VA",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 1000,
+      "lifetime": 2500,
+      "pacs": "Pro-Israel America PAC; AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "FRIEDMAN, RICHARD L.",
+      "state": "MA",
+      "employer": "CARPENTER & COMPANY",
+      "to_warner": 1000,
+      "lifetime": 16850,
+      "pacs": "Pro-Israel America PAC; AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "BROWN, ANDY",
+      "state": "TX",
+      "employer": "TRAVIS COUNTY",
+      "to_warner": 1000,
+      "lifetime": 2500,
+      "pacs": "AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "POORVU, WILLIAM J.",
+      "state": "MA",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 1000,
+      "lifetime": 250,
+      "pacs": "Joint Action Committee for Political Affairs",
+      "count": 1
+    },
+    {
+      "name": "GROSSMAN, REBECCA",
+      "state": "AZ",
+      "employer": "SCOTTSDALE ASSOC. OF REALTORS",
+      "to_warner": 1000,
+      "lifetime": 6000,
+      "pacs": "The Desert Caucus",
+      "count": 2
+    },
+    {
+      "name": "STEIN, GIDEON",
+      "state": "NY",
+      "employer": "THE MORIAH FUND",
+      "to_warner": 1000,
+      "lifetime": 1000,
+      "pacs": "NorPAC / North Jersey PAC",
+      "count": 1
+    },
+    {
+      "name": "LEVIN, BETTY N.",
+      "state": "VA",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 1000,
+      "lifetime": 250,
+      "pacs": "Joint Action Committee for Political Affairs",
+      "count": 1
+    },
+    {
+      "name": "RAPPAPORT, SUSAN",
+      "state": "DC",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 1000,
+      "lifetime": 550,
+      "pacs": "Joint Action Committee for Political Affairs",
+      "count": 2
+    },
+    {
+      "name": "MILLER, LESLIE ANNE",
+      "state": "PA",
+      "employer": "SELF EMPLOYED",
+      "to_warner": 1000,
+      "lifetime": 1500,
+      "pacs": "Joint Action Committee for Political Affairs",
+      "count": 1
+    },
+    {
+      "name": "COHEN, JONATHAN",
+      "state": "NY",
+      "employer": "SELF EMPLOYED",
+      "to_warner": 1000,
+      "lifetime": 11970,
+      "pacs": "Mid Manhattan PAC; Bi-County PAC; JStreetPAC; NorPAC / North Jersey PAC; Republican Jewish Coalition PAC (RJC-PAC); AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "LESE, WILLIAM",
+      "state": "NY",
+      "employer": "BRAEMAR ENERGY VENTURES",
+      "to_warner": 1000,
+      "lifetime": 4000,
+      "pacs": "Mid Manhattan PAC",
+      "count": 1
+    },
+    {
+      "name": "FASS, DANIEL E.",
+      "state": "NY",
+      "employer": "WESTMED MEDICAL GROUP",
+      "to_warner": 1000,
+      "lifetime": 260,
+      "pacs": "Hudson Valley PAC",
+      "count": 1
+    },
+    {
+      "name": "ROLFE, RONALD",
+      "state": "NY",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 1000,
+      "lifetime": 9500,
+      "pacs": "JStreetPAC",
+      "count": 1
+    },
+    {
+      "name": "RIZZOLO, CAROL",
+      "state": "CT",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 1000,
+      "lifetime": 1000,
+      "pacs": "JDCA PAC",
+      "count": 1
+    },
+    {
+      "name": "GASSON, DAVID",
+      "state": "MA",
+      "employer": "MG HOUSING STRATEGIES",
+      "to_warner": 1000,
+      "lifetime": 1250,
+      "pacs": "JStreetPAC",
+      "count": 1
+    },
+    {
+      "name": "FOSTER, THOMAS",
+      "state": "VA",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 1000,
+      "lifetime": 1000,
+      "pacs": "JStreetPAC",
+      "count": 1
+    },
+    {
+      "name": "BRINT, DAVID",
+      "state": "IL",
+      "employer": "BRINSHORE",
+      "to_warner": 1000,
+      "lifetime": 250,
+      "pacs": "AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "LANE, BRUCE",
+      "state": "MD",
+      "employer": "MERIDIAN GROUP",
+      "to_warner": 1000,
+      "lifetime": 45700,
+      "pacs": "United Democracy Project (UDP); AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "FINKELSTEIN, HOWARD",
+      "state": "FL",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 1000,
+      "lifetime": 13000,
+      "pacs": "AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "ROSEN, MICHELE",
+      "state": "WA",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 1000,
+      "lifetime": 168100,
+      "pacs": "Joint Action Committee for Political Affairs; JDCA PAC; AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "ROSENSTEIN, LIZANNE",
+      "state": "NY",
+      "employer": "THREE ROSE III CORP",
+      "to_warner": 1000,
+      "lifetime": 25000,
+      "pacs": "DMFI PAC (Democratic Majority for Israel)",
+      "count": 1
+    },
+    {
+      "name": "SHAYNE, JONATHAN A.",
+      "state": "TN",
+      "employer": "SHAYNE & JACOBS, LLC",
+      "to_warner": 1000,
+      "lifetime": 2350,
+      "pacs": "JStreetPAC",
+      "count": 1
+    },
+    {
+      "name": "AYOOB, EDWARD P.",
+      "state": "DC",
+      "employer": "BARNES & THORNBURG",
+      "to_warner": 1000,
+      "lifetime": 1250,
+      "pacs": "JStreetPAC",
+      "count": 1
+    },
+    {
+      "name": "GART, KENNETH I.",
+      "state": "CO",
+      "employer": "THE GART COMPANIES",
+      "to_warner": 1000,
+      "lifetime": 6700,
+      "pacs": "Democratic Jewish Outreach PA; AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "GOLD, DAVID",
+      "state": "CA",
+      "employer": "HOMESTEAD COMMUNITIES, LLC",
+      "to_warner": 1000,
+      "lifetime": 1250,
+      "pacs": "Friends of Israel PAC / San Franciscans for Good Government; Republican Jewish Coalition PAC (RJC-PAC)",
+      "count": 1
+    },
+    {
+      "name": "MERAGE, DAVID",
+      "state": "CO",
+      "employer": "CONSOLIDATED INVESTMENT GROUP",
+      "to_warner": 1000,
+      "lifetime": 7500,
+      "pacs": "Pro-Israel America PAC; AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "RIDDER, MARIE W.",
+      "state": "VA",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 1000,
+      "lifetime": 1000,
+      "pacs": "JStreetPAC",
+      "count": 1
+    },
+    {
+      "name": "BRIDGE, ED L.",
+      "state": "WA",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 1000,
+      "lifetime": 2000,
+      "pacs": "Northwest PAC; AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "GLASER, DANIEL",
+      "state": "NY",
+      "employer": "CLAYTON, DUBILIER & RICE",
+      "to_warner": 1000,
+      "lifetime": 6000,
+      "pacs": "AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "LOVE, REGINALD",
+      "state": "DC",
+      "employer": "SELF EMPLOYED",
+      "to_warner": 1000,
+      "lifetime": 500,
+      "pacs": "Pro-Israel America PAC",
+      "count": 1
+    },
+    {
+      "name": "RHODES, JASON",
+      "state": "MA",
+      "employer": "ATLAS VENTURES",
+      "to_warner": 500,
+      "lifetime": 500,
+      "pacs": "DMFI PAC (Democratic Majority for Israel)",
+      "count": 1
+    },
+    {
+      "name": "ROSSKAMM, ALAN",
+      "state": "OH",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 500,
+      "lifetime": 76900,
+      "pacs": "JStreetPAC; JDCA PAC; AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "DUBBIN, SAMUEL",
+      "state": "FL",
+      "employer": "DUBBIN & KRAVETZ, LLP",
+      "to_warner": 500,
+      "lifetime": 4390,
+      "pacs": "National Action Committee; SunPAC",
+      "count": 1
+    },
+    {
+      "name": "MANOCHERIAN, BERNICE",
+      "state": "NY",
+      "employer": "MANOCHERIAN BROTHERS",
+      "to_warner": 500,
+      "lifetime": 44375,
+      "pacs": "Joint Action Committee for Political Affairs; National PAC; Women's Pro-Israel National PAC; National Action Committee; Mid Manhattan PAC; NorPAC / North Jersey PAC",
+      "count": 1
+    },
+    {
+      "name": "LEVY, LORI",
+      "state": "TX",
+      "employer": "TEXAS ASSOCIATION OF REALTORS",
+      "to_warner": 500,
+      "lifetime": 200,
+      "pacs": "AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "PAUL, ROBERT",
+      "state": "PA",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 500,
+      "lifetime": 2000,
+      "pacs": "JStreetPAC; Democratic Jewish Outreach PA; AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "JOHNSON, CASEY",
+      "state": "CA",
+      "employer": "AITKEN AITKEN COHN",
+      "to_warner": 500,
+      "lifetime": 3300,
+      "pacs": "Pro-Israel America PAC; Republican Jewish Coalition PAC (RJC-PAC)",
+      "count": 1
+    },
+    {
+      "name": "SIMON, MARSHA",
+      "state": "DC",
+      "employer": "MJ SIMON AND COMPANY",
+      "to_warner": 500,
+      "lifetime": 250,
+      "pacs": "JStreetPAC",
+      "count": 1
+    },
+    {
+      "name": "BAKER, JEFFREY",
+      "state": "IL",
+      "employer": "ILLINOIS ASSOC. OF REALTORS",
+      "to_warner": 500,
+      "lifetime": 750,
+      "pacs": "City PAC; AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "SMITH, DOUGLAS G.",
+      "state": "MD",
+      "employer": "VOICESTREAM",
+      "to_warner": 400,
+      "lifetime": 5000,
+      "pacs": "Maryland Association for Concerned Citizens PAC",
+      "count": 2
+    },
+    {
+      "name": "BERKE, ERIC",
+      "state": "MA",
+      "employer": "TORQUEST",
+      "to_warner": 400,
+      "lifetime": 3000,
+      "pacs": "Pro-Israel America PAC",
+      "count": 2
+    },
+    {
+      "name": "SCHIFTER, RICHARD P.",
+      "state": "DC",
+      "employer": "TPG PARTNERS",
+      "to_warner": 400,
+      "lifetime": 13800,
+      "pacs": "DMFI PAC (Democratic Majority for Israel); AIPAC PAC",
+      "count": 2
+    },
+    {
+      "name": "DESAI, ANKIT N.",
+      "state": "DC",
+      "employer": "ABI ASSOCIATES",
+      "to_warner": 400,
+      "lifetime": 500,
+      "pacs": "JStreetPAC",
+      "count": 2
+    },
+    {
+      "name": "SLOANE, ALEXANDER",
+      "state": "NY",
+      "employer": "GARNETT STATION PARTNERS",
+      "to_warner": 400,
+      "lifetime": 38200,
+      "pacs": "United Democracy Project (UDP); NorPAC / North Jersey PAC",
+      "count": 2
+    },
+    {
+      "name": "BROWN, MICHAEL",
+      "state": "CA",
+      "employer": "DEFENSE INNOVATION UNIT",
+      "to_warner": 400,
+      "lifetime": 750,
+      "pacs": "Washington PAC; National PAC",
+      "count": 2
+    },
+    {
+      "name": "COURTHEOUX, RICHARD J.",
+      "state": "IL",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 250,
+      "lifetime": 20450,
+      "pacs": "National PAC; Americans United in Support of Democracy / CCNI; Pro-Israel America PAC; AIPAC PAC; DMFI PAC (Democratic Majority for Israel)",
+      "count": 1
+    },
+    {
+      "name": "GRAY, ANITA",
+      "state": "OH",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 250,
+      "lifetime": 11600,
+      "pacs": "Heartland PAC; Pro-Israel America PAC; AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "ROSENBERG, ENID",
+      "state": "OH",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 250,
+      "lifetime": 750,
+      "pacs": "AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "SPIEGEL, DAVID",
+      "state": "CA",
+      "employer": "ACTIVE WASHINGTON BOWLING",
+      "to_warner": 250,
+      "lifetime": 15500,
+      "pacs": "Pro-Israel America PAC; AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "GEWIRZ, STEVEN",
+      "state": "DC",
+      "employer": "POTOMAC INVESTMENT PROPERTIES, INC.",
+      "to_warner": 250,
+      "lifetime": 3500,
+      "pacs": "Joint Action Committee for Political Affairs",
+      "count": 1
+    },
+    {
+      "name": "STERN, BRUCE",
+      "state": "NJ",
+      "employer": "STARK & STARK",
+      "to_warner": 250,
+      "lifetime": 1000,
+      "pacs": "NorPAC / North Jersey PAC",
+      "count": 1
+    },
+    {
+      "name": "SCHENK, FREDERICK",
+      "state": "CA",
+      "employer": "SCHENK LAW FIRM",
+      "to_warner": 250,
+      "lifetime": 500,
+      "pacs": "AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "WILLIAMS, DAVID R.",
+      "state": "VA",
+      "employer": "GEORGE MASON UNIVERSITY",
+      "to_warner": 200,
+      "lifetime": 500,
+      "pacs": "JStreetPAC",
+      "count": 1
+    },
+    {
+      "name": "COHEN, EVELYN",
+      "state": "PA",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 200,
+      "lifetime": 1500,
+      "pacs": "Delaware Valley PAC; AIPAC PAC",
+      "count": 1
+    },
+    {
+      "name": "SONDHEIM, JOHN W.",
+      "state": "MD",
+      "employer": "NOT EMPLOYED",
+      "to_warner": 200,
+      "lifetime": 3200,
+      "pacs": "JStreetPAC",
+      "count": 1
+    }
+  ],
+  "grand_total_proisrael": 1116195
+}

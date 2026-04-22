@@ -1,0 +1,731 @@
+{
+  "total": 200340.59,
+  "hits": [
+    {
+      "cycle": 2008,
+      "pac_id": "C00138560",
+      "pac_name": "Washington PAC",
+      "amt": 5000,
+      "date": "2008-09-26"
+    },
+    {
+      "cycle": 2008,
+      "pac_id": "C00187526",
+      "pac_name": "City PAC",
+      "amt": 2000,
+      "date": "2008-08-04"
+    },
+    {
+      "cycle": 2008,
+      "pac_id": "C00138560",
+      "pac_name": "Washington PAC",
+      "amt": 3000,
+      "date": "2008-06-10"
+    },
+    {
+      "cycle": 2008,
+      "pac_id": "C00139659",
+      "pac_name": "Joint Action Committee for Political Affairs",
+      "amt": 2500,
+      "date": "2008-03-27"
+    },
+    {
+      "cycle": 2008,
+      "pac_id": "C00139659",
+      "pac_name": "Joint Action Committee for Political Affairs",
+      "amt": 1000,
+      "date": "2008-03-27"
+    },
+    {
+      "cycle": 2008,
+      "pac_id": "C00150995",
+      "pac_name": "National PAC",
+      "amt": 5000,
+      "date": "2008-03-19"
+    },
+    {
+      "cycle": 2008,
+      "pac_id": "C00110585",
+      "pac_name": "Citizens Organized Political Action Committee",
+      "amt": 5000,
+      "date": "2008-03-18"
+    },
+    {
+      "cycle": 2008,
+      "pac_id": "C00236596",
+      "pac_name": "World Alliance for Israel PAC",
+      "amt": 1000,
+      "date": "2008-03-18"
+    },
+    {
+      "cycle": 2008,
+      "pac_id": "C00247403",
+      "pac_name": "NorPAC / North Jersey PAC",
+      "amt": 5000,
+      "date": "2008-03-15"
+    },
+    {
+      "cycle": 2008,
+      "pac_id": "C00147983",
+      "pac_name": "National Action Committee",
+      "amt": 5000,
+      "date": "2008-03-15"
+    },
+    {
+      "cycle": 2008,
+      "pac_id": "C00147983",
+      "pac_name": "National Action Committee",
+      "amt": 5000,
+      "date": "2008-02-26"
+    },
+    {
+      "cycle": 2008,
+      "pac_id": "C00378216",
+      "pac_name": "SunPAC",
+      "amt": 2500,
+      "date": "2008-02-08"
+    },
+    {
+      "cycle": 2008,
+      "pac_id": "C00138560",
+      "pac_name": "Washington PAC",
+      "amt": 1000,
+      "date": "2007-12-10"
+    },
+    {
+      "cycle": 2008,
+      "pac_id": "C00138560",
+      "pac_name": "Washington PAC",
+      "amt": 1000,
+      "date": "2007-11-01"
+    },
+    {
+      "cycle": 2010,
+      "pac_id": "C00138560",
+      "pac_name": "Washington PAC",
+      "amt": 500,
+      "date": "2010-12-07"
+    },
+    {
+      "cycle": 2010,
+      "pac_id": "C00138560",
+      "pac_name": "Washington PAC",
+      "amt": 1000,
+      "date": "2010-11-22"
+    },
+    {
+      "cycle": 2010,
+      "pac_id": "C00138560",
+      "pac_name": "Washington PAC",
+      "amt": 1000,
+      "date": "2010-10-07"
+    },
+    {
+      "cycle": 2010,
+      "pac_id": "C00138560",
+      "pac_name": "Washington PAC",
+      "amt": 1000,
+      "date": "2009-12-09"
+    },
+    {
+      "cycle": 2012,
+      "pac_id": "C00309781",
+      "pac_name": "Phoenix Education Partners / Apollo Education Group",
+      "amt": 2000,
+      "date": "2012-10-11"
+    },
+    {
+      "cycle": 2012,
+      "pac_id": "C00247403",
+      "pac_name": "NorPAC / North Jersey PAC",
+      "amt": 1000,
+      "date": "2012-07-12"
+    },
+    {
+      "cycle": 2012,
+      "pac_id": "C00247403",
+      "pac_name": "NorPAC / North Jersey PAC",
+      "amt": 2500,
+      "date": "2012-07-12"
+    },
+    {
+      "cycle": 2012,
+      "pac_id": "C00247403",
+      "pac_name": "NorPAC / North Jersey PAC",
+      "amt": 2000,
+      "date": "2012-07-12"
+    },
+    {
+      "cycle": 2012,
+      "pac_id": "C00138560",
+      "pac_name": "Washington PAC",
+      "amt": 500,
+      "date": "2011-11-30"
+    },
+    {
+      "cycle": 2012,
+      "pac_id": "C00138560",
+      "pac_name": "Washington PAC",
+      "amt": 500,
+      "date": "2011-09-29"
+    },
+    {
+      "cycle": 2012,
+      "pac_id": "C00138560",
+      "pac_name": "Washington PAC",
+      "amt": 500,
+      "date": "2011-09-29"
+    },
+    {
+      "cycle": 2012,
+      "pac_id": "C00138560",
+      "pac_name": "Washington PAC",
+      "amt": 1000,
+      "date": "2011-08-15"
+    },
+    {
+      "cycle": 2014,
+      "pac_id": "C00139659",
+      "pac_name": "Joint Action Committee for Political Affairs",
+      "amt": 37.39,
+      "date": "2014-10-31"
+    },
+    {
+      "cycle": 2014,
+      "pac_id": "C00139659",
+      "pac_name": "Joint Action Committee for Political Affairs",
+      "amt": 103.2,
+      "date": "2014-10-16"
+    },
+    {
+      "cycle": 2014,
+      "pac_id": "C00139659",
+      "pac_name": "Joint Action Committee for Political Affairs",
+      "amt": 2500,
+      "date": "2014-07-21"
+    },
+    {
+      "cycle": 2014,
+      "pac_id": "C00147983",
+      "pac_name": "National Action Committee",
+      "amt": 5000,
+      "date": "2014-05-21"
+    },
+    {
+      "cycle": 2014,
+      "pac_id": "C00141747",
+      "pac_name": "Friends of Israel PAC / San Franciscans for Good Government",
+      "amt": 5000,
+      "date": "2014-04-29"
+    },
+    {
+      "cycle": 2014,
+      "pac_id": "C00139659",
+      "pac_name": "Joint Action Committee for Political Affairs",
+      "amt": 2500,
+      "date": "2014-02-25"
+    },
+    {
+      "cycle": 2014,
+      "pac_id": "C00195024",
+      "pac_name": "Maryland Association for Concerned Citizens PAC",
+      "amt": 5000,
+      "date": "2013-07-30"
+    },
+    {
+      "cycle": 2014,
+      "pac_id": "C00138560",
+      "pac_name": "Washington PAC",
+      "amt": 4000,
+      "date": "2013-02-23"
+    },
+    {
+      "cycle": 2018,
+      "pac_id": "C00204388",
+      "pac_name": "Bi-County PAC",
+      "amt": 5000,
+      "date": "2018-02-15"
+    },
+    {
+      "cycle": 2018,
+      "pac_id": "C00204388",
+      "pac_name": "Bi-County PAC",
+      "amt": 5000,
+      "date": "2018-02-15"
+    },
+    {
+      "cycle": 2020,
+      "pac_id": "C00378216",
+      "pac_name": "SunPAC",
+      "amt": 5000,
+      "date": "2020-11-03"
+    },
+    {
+      "cycle": 2020,
+      "pac_id": "C00710848",
+      "pac_name": "DMFI PAC (Democratic Majority for Israel)",
+      "amt": 2500,
+      "date": "2020-10-27"
+    },
+    {
+      "cycle": 2020,
+      "pac_id": "C00139659",
+      "pac_name": "Joint Action Committee for Political Affairs",
+      "amt": 2500,
+      "date": "2020-10-09"
+    },
+    {
+      "cycle": 2020,
+      "pac_id": "C00195024",
+      "pac_name": "Maryland Association for Concerned Citizens PAC",
+      "amt": 5000,
+      "date": "2020-02-29"
+    },
+    {
+      "cycle": 2024,
+      "pac_id": "C00247403",
+      "pac_name": "NorPAC / North Jersey PAC",
+      "amt": 2300,
+      "date": "2024-12-16"
+    },
+    {
+      "cycle": 2024,
+      "pac_id": "C00247403",
+      "pac_name": "NorPAC / North Jersey PAC",
+      "amt": 500,
+      "date": "2024-12-16"
+    },
+    {
+      "cycle": 2024,
+      "pac_id": "C00247403",
+      "pac_name": "NorPAC / North Jersey PAC",
+      "amt": 3300,
+      "date": "2024-12-16"
+    },
+    {
+      "cycle": 2024,
+      "pac_id": "C00247403",
+      "pac_name": "NorPAC / North Jersey PAC",
+      "amt": 2300,
+      "date": "2024-12-16"
+    },
+    {
+      "cycle": 2024,
+      "pac_id": "C00247403",
+      "pac_name": "NorPAC / North Jersey PAC",
+      "amt": 500,
+      "date": "2024-12-16"
+    },
+    {
+      "cycle": 2024,
+      "pac_id": "C00247403",
+      "pac_name": "NorPAC / North Jersey PAC",
+      "amt": 500,
+      "date": "2024-12-16"
+    },
+    {
+      "cycle": 2024,
+      "pac_id": "C00247403",
+      "pac_name": "NorPAC / North Jersey PAC",
+      "amt": 2000,
+      "date": "2024-12-16"
+    },
+    {
+      "cycle": 2024,
+      "pac_id": "C00247403",
+      "pac_name": "NorPAC / North Jersey PAC",
+      "amt": 3300,
+      "date": "2024-12-16"
+    },
+    {
+      "cycle": 2024,
+      "pac_id": "C00247403",
+      "pac_name": "NorPAC / North Jersey PAC",
+      "amt": 1000,
+      "date": "2024-03-06"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 5000,
+      "date": "2025-12-26"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 2000,
+      "date": "2025-12-26"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 3500,
+      "date": "2025-11-28"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 3500,
+      "date": "2025-11-28"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 3500,
+      "date": "2025-11-28"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 3500,
+      "date": "2025-11-28"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 2500,
+      "date": "2025-11-20"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 2500,
+      "date": "2025-11-20"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 3500,
+      "date": "2025-11-20"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 2500,
+      "date": "2025-11-20"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 3500,
+      "date": "2025-11-20"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 1000,
+      "date": "2025-10-09"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 3500,
+      "date": "2025-10-09"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 2000,
+      "date": "2025-10-09"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 1000,
+      "date": "2025-10-09"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 1000,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 2000,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 3500,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 1000,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 2000,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 1000,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 3000,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 1000,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 1000,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 1000,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 500,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 1000,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 3000,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 3000,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 1000,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 2000,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 1000,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 1000,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 1000,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 1000,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 1000,
+      "date": "2025-10-02"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 2000,
+      "date": "2025-09-25"
+    },
+    {
+      "cycle": 2026,
+      "pac_id": "C00797670",
+      "pac_name": "AIPAC PAC",
+      "amt": 1000,
+      "date": "2025-09-25"
+    }
+  ],
+  "byPac": {
+    "Washington PAC": {
+      "total": 20000,
+      "cycles": [
+        2008,
+        2010,
+        2012,
+        2014
+      ],
+      "count": 13
+    },
+    "City PAC": {
+      "total": 2000,
+      "cycles": [
+        2008
+      ],
+      "count": 1
+    },
+    "Joint Action Committee for Political Affairs": {
+      "total": 11140.59,
+      "cycles": [
+        2008,
+        2014,
+        2020
+      ],
+      "count": 7
+    },
+    "National PAC": {
+      "total": 5000,
+      "cycles": [
+        2008
+      ],
+      "count": 1
+    },
+    "Citizens Organized Political Action Committee": {
+      "total": 5000,
+      "cycles": [
+        2008
+      ],
+      "count": 1
+    },
+    "World Alliance for Israel PAC": {
+      "total": 1000,
+      "cycles": [
+        2008
+      ],
+      "count": 1
+    },
+    "NorPAC / North Jersey PAC": {
+      "total": 26200,
+      "cycles": [
+        2008,
+        2012,
+        2024
+      ],
+      "count": 13
+    },
+    "National Action Committee": {
+      "total": 15000,
+      "cycles": [
+        2008,
+        2014
+      ],
+      "count": 3
+    },
+    "SunPAC": {
+      "total": 7500,
+      "cycles": [
+        2008,
+        2020
+      ],
+      "count": 2
+    },
+    "Phoenix Education Partners / Apollo Education Group": {
+      "total": 2000,
+      "cycles": [
+        2012
+      ],
+      "count": 1
+    },
+    "Friends of Israel PAC / San Franciscans for Good Government": {
+      "total": 5000,
+      "cycles": [
+        2014
+      ],
+      "count": 1
+    },
+    "Maryland Association for Concerned Citizens PAC": {
+      "total": 10000,
+      "cycles": [
+        2014,
+        2020
+      ],
+      "count": 2
+    },
+    "Bi-County PAC": {
+      "total": 10000,
+      "cycles": [
+        2018
+      ],
+      "count": 2
+    },
+    "DMFI PAC (Democratic Majority for Israel)": {
+      "total": 2500,
+      "cycles": [
+        2020
+      ],
+      "count": 1
+    },
+    "AIPAC PAC": {
+      "total": 78000,
+      "cycles": [
+        2026
+      ],
+      "count": 38
+    }
+  }
+}
