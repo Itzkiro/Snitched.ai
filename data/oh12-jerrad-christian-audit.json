@@ -1,0 +1,340 @@
+{
+  "generated_at": "2026-04-23T23:56:06.263Z",
+  "candidate": {
+    "name": "Jerrad Christian",
+    "party": "D",
+    "state": "OH",
+    "district": "12",
+    "fec_candidate_id": "H4OH12080",
+    "committees": [
+      "C00851956"
+    ]
+  },
+  "totals": [
+    {
+      "committee_id": "C00851956",
+      "all_other_loans": 0,
+      "candidate_contribution": 0,
+      "cash_on_hand_beginning_period": 3757.68,
+      "committee_designation": "P",
+      "committee_designation_full": "Principal campaign committee",
+      "committee_name": "CITIZENS FOR J CHRISTIAN",
+      "committee_state": "OH",
+      "committee_type": "H",
+      "committee_type_full": "House",
+      "contribution_refunds": 422,
+      "contributions": 45318.31,
+      "coverage_end_date": "2026-03-31T00:00:00",
+      "coverage_start_date": "2025-01-01T00:00:00",
+      "cycle": 2026,
+      "disbursements": 36593.49,
+      "filing_frequency": "Q",
+      "filing_frequency_full": "Quarterly filer",
+      "first_f1_date": "2023-10-01",
+      "first_file_date": "2023-10-01",
+      "individual_contributions": 45318.31,
+      "individual_itemized_contributions": 13140,
+      "individual_unitemized_contributions": 32178.31,
+      "last_beginning_image_number": "202604119857095056",
+      "last_cash_on_hand_end_period": 12482.54,
+      "last_debts_owed_by_committee": 0,
+      "last_debts_owed_to_committee": 0,
+      "last_report_type_full": "APRIL QUARTERLY",
+      "last_report_year": 2026,
+      "loan_repayments": 0,
+      "loan_repayments_candidate_loans": 0,
+      "loan_repayments_other_loans": 0,
+      "loans": 0,
+      "loans_made_by_candidate": 0,
+      "net_contributions": 44896.31,
+      "net_operating_expenditures": 36171.45,
+      "offsets_to_operating_expenditures": 0.04,
+      "operating_expenditures": 36171.49,
+      "organization_type": null,
+      "organization_type_full": null,
+      "other_disbursements": 0,
+      "other_political_committee_contributions": 0,
+      "other_receipts": 0,
+      "party_full": "DEMOCRATIC PARTY",
+      "political_party_committee_contributions": 0,
+      "receipts": 45318.35,
+      "refunded_individual_contributions": 422,
+      "refunded_other_political_committee_contributions": 0,
+      "refunded_political_party_committee_contributions": 0,
+      "transaction_coverage_date": "2026-03-31",
+      "transfers_from_other_authorized_committee": 0,
+      "transfers_to_other_authorized_committee": 0,
+      "treasurer_name": "CHRISTIAN, MARTHA MAXINE"
+    },
+    {
+      "committee_id": "C00851956",
+      "all_other_loans": 0,
+      "candidate_contribution": 0,
+      "cash_on_hand_beginning_period": 0,
+      "committee_designation": "A",
+      "committee_designation_full": "Authorized by a candidate",
+      "committee_name": "CITIZENS FOR J CHRISTIAN",
+      "committee_state": "OH",
+      "committee_type": "H",
+      "committee_type_full": "House",
+      "contribution_refunds": 1518.5,
+      "contributions": 340217.1,
+      "coverage_end_date": "2024-12-31T00:00:00",
+      "coverage_start_date": "2023-10-01T00:00:00",
+      "cycle": 2024,
+      "disbursements": 338240.57,
+      "filing_frequency": "Q",
+      "filing_frequency_full": "Quarterly filer",
+      "first_f1_date": "2023-10-01",
+      "first_file_date": "2023-10-01",
+      "individual_contributions": 331117.1,
+      "individual_itemized_contributions": 116847.2,
+      "individual_unitemized_contributions": 214269.9,
+      "last_beginning_image_number": "202501189747626742",
+      "last_cash_on_hand_end_period": 3757.68,
+      "last_debts_owed_by_committee": 0,
+      "last_debts_owed_to_committee": 0,
+      "last_report_type_full": "YEAR-END",
+      "last_report_year": 2024,
+      "loan_repayments": 0,
+      "loan_repayments_candidate_loans": 0,
+      "loan_repayments_other_loans": 0,
+      "loans": 0,
+      "loans_made_by_candidate": 0,
+      "net_contributions": 338698.6,
+      "net_operating_expenditures": 334940.92,
+      "offsets_to_operating_expenditures": 1781.15,
+      "operating_expenditures": 336722.07,
+      "organization_type": null,
+      "organization_type_full": null,
+      "other_disbursements": 0,
+      "other_political_committee_contributions": 9100,
+      "other_receipts": 0,
+      "party_full": "DEMOCRATIC PARTY",
+      "political_party_committee_contributions": 0,
+      "receipts": 341998.25,
+      "refunded_individual_contributions": 1518.5,
+      "refunded_other_political_committee_contributions": 0,
+      "refunded_political_party_committee_contributions": 0,
+      "transaction_coverage_date": "2024-12-31",
+      "transfers_from_other_authorized_committee": 0,
+      "transfers_to_other_authorized_committee": 0,
+      "treasurer_name": "CHRISTIAN, MARTHA MAXINE"
+    }
+  ],
+  "current_cycle": {
+    "cycle": 2026,
+    "receipts": 45318.35,
+    "individuals": 45318.31,
+    "pacs": 0,
+    "self_funding": 0,
+    "israel_pac_total": 0,
+    "israel_pac_rows": [],
+    "top_pacs": [],
+    "top_individuals": [
+      {
+        "name": "HAAS, SUSAN",
+        "state": "OH",
+        "employer": "RETIRED",
+        "occupation": "RETIRED",
+        "total": 3500,
+        "count": 1
+      },
+      {
+        "name": "LAING, TRACEE",
+        "state": "OH",
+        "employer": "NOT EMPLOYED",
+        "occupation": "NOT EMPLOYED",
+        "total": 3400,
+        "count": 5
+      },
+      {
+        "name": "KELSEY, KEENAN",
+        "state": "CA",
+        "employer": "NOT EMPLOYED",
+        "occupation": "NOT EMPLOYED",
+        "total": 1000,
+        "count": 1
+      },
+      {
+        "name": "WAGNER, LINDA",
+        "state": "OH",
+        "employer": "NOT EMPLOYED",
+        "occupation": "NOT EMPLOYED",
+        "total": 900,
+        "count": 18
+      },
+      {
+        "name": "ACTBLUE",
+        "state": "MA",
+        "employer": "",
+        "occupation": "",
+        "total": 775,
+        "count": 19
+      },
+      {
+        "name": "CONNOR, MARGOT",
+        "state": "OH",
+        "employer": "NOT EMPLOYED",
+        "occupation": "NOT EMPLOYED",
+        "total": 500,
+        "count": 1
+      },
+      {
+        "name": "BEYER, STEVEN",
+        "state": "OH",
+        "employer": "RETIRED",
+        "occupation": "RETIRED",
+        "total": 435,
+        "count": 17
+      },
+      {
+        "name": "RAYDER, KATHLEEN",
+        "state": "OH",
+        "employer": "NOT EMPLOYED",
+        "occupation": "NOT EMPLOYED",
+        "total": 400,
+        "count": 4
+      },
+      {
+        "name": "HEIRONIMUS, THERESA",
+        "state": "OH",
+        "employer": "NOT EMPLOYED",
+        "occupation": "NOT EMPLOYED",
+        "total": 300,
+        "count": 3
+      },
+      {
+        "name": "SCOTT, PAMELA",
+        "state": "OH",
+        "employer": "NOT EMPLOYED",
+        "occupation": "NOT EMPLOYED",
+        "total": 250,
+        "count": 1
+      },
+      {
+        "name": "R SEVERNS, THOMAS",
+        "state": "OH",
+        "employer": "NOT EMPLOYED",
+        "occupation": "NOT EMPLOYED",
+        "total": 250,
+        "count": 1
+      },
+      {
+        "name": "PIERCE, NANCY",
+        "state": "OH",
+        "employer": "NOT EMPLOYED",
+        "occupation": "NOT EMPLOYED",
+        "total": 250,
+        "count": 1
+      },
+      {
+        "name": "GORDON, WILLIAM",
+        "state": "OH",
+        "employer": "NOT EMPLOYED",
+        "occupation": "NOT EMPLOYED",
+        "total": 250,
+        "count": 1
+      },
+      {
+        "name": "CRANE, MICHAEL",
+        "state": "OH",
+        "employer": "NOT EMPLOYED",
+        "occupation": "NOT EMPLOYED",
+        "total": 250,
+        "count": 1
+      },
+      {
+        "name": "RUCH, EDWARD",
+        "state": "OH",
+        "employer": "IVY GARTH SEEDS AND PLANTS",
+        "occupation": "SMALL BUSINESS OWNER",
+        "total": 250,
+        "count": 1
+      },
+      {
+        "name": "CICCHELLA, ANGELIQUE",
+        "state": "OH",
+        "employer": "SELF-EMPLOYED",
+        "occupation": "HOME HEALTHCARE",
+        "total": 250,
+        "count": 4
+      },
+      {
+        "name": "DUNGAN, SCOTT",
+        "state": "OH",
+        "employer": "NOT EMPLOYED",
+        "occupation": "NOT EMPLOYED",
+        "total": 225,
+        "count": 3
+      },
+      {
+        "name": "KLIMT, MAURINE",
+        "state": "NY",
+        "employer": "NOT EMPLOYED",
+        "occupation": "NOT EMPLOYED",
+        "total": 225,
+        "count": 9
+      },
+      {
+        "name": "CARUS, MARISSA",
+        "state": "MA",
+        "employer": "SELF",
+        "occupation": "FILM PRODUCTION",
+        "total": 165,
+        "count": 13
+      },
+      {
+        "name": "GRIFFITH, HOLLY",
+        "state": "CA",
+        "employer": "D&E SUPPORT PROFESSIONALS, INC",
+        "occupation": "MANAGER",
+        "total": 135,
+        "count": 7
+      },
+      {
+        "name": "CRARY, JILL",
+        "state": "CA",
+        "employer": "NOT EMPLOYED",
+        "occupation": "NOT EMPLOYED",
+        "total": 130,
+        "count": 4
+      },
+      {
+        "name": "GRIFFITH, HOLLY",
+        "state": "WA",
+        "employer": "D&E SUPPORT PROFESSIONALS INC",
+        "occupation": "MANAGER",
+        "total": 75,
+        "count": 3
+      }
+    ],
+    "registry_matches": 1,
+    "registry_high": 0,
+    "registry_match_to_candidate": 250
+  },
+  "historical_breakdown": {
+    "all_cycles_receipts": 387317,
+    "all_cycles_self_funding": 0,
+    "cycles": [
+      2024,
+      2026
+    ],
+    "pre_current_cycle_individuals": 1109,
+    "pre_current_cycle_israel_pacs": 0,
+    "pre_current_cycle_real_pac_sum": 8323.8,
+    "registry_matches_all_cycles": 27,
+    "registry_high_confidence_all_cycles": 8,
+    "registry_match_all_cycles_to_candidate": 13669
+  },
+  "score": 0,
+  "grade": "A",
+  "confidence": "high",
+  "juice_box_tier": "none",
+  "positive_flags": [
+    "[fec 2026-cycle] $0 in pro-Israel PAC contributions in current (2026) cycle.",
+    "[fec 2026-cycle] $0 in external PAC money — 2026 campaign is 100% individual-donor + self-funded.",
+    "[registry 2026-cycle] 1 donors match registry but total only $250 to candidate (0.55% of individuals) — no capture signal."
+  ],
+  "red_flags": []
+}
