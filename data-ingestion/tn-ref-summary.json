@@ -1,0 +1,161 @@
+[
+  {
+    "committee_key": "fritts-gov-2026",
+    "label": "Monty Fritts — TN Governor 2026",
+    "candidate_id": 11767,
+    "owner_string": "FRITTS (GOVERNOR), MONTY",
+    "total_reports": 2,
+    "total_receipts": 167292.45999999993,
+    "total_expenditures": 120173.60000000002,
+    "individual_rows": 383,
+    "pac_rows": 0,
+    "top_donors": [
+      {
+        "name": "TN FIREARMS ASSN LEGISLATIVE ACTION COMM. (TFALAC)",
+        "total": 15400
+      },
+      {
+        "name": "ELLIOTT, BEVERLY",
+        "total": 10600
+      },
+      {
+        "name": "KNOX LIBERTY ORGANIZATION",
+        "total": 6800
+      },
+      {
+        "name": "BOBO, NORMAN",
+        "total": 5300
+      },
+      {
+        "name": "COFFEY, DON",
+        "total": 5300
+      },
+      {
+        "name": "HUMBLE, GARY",
+        "total": 5300
+      },
+      {
+        "name": "SEAY, ROBERT",
+        "total": 5300
+      },
+      {
+        "name": "WATKINS, EDWIN",
+        "total": 5300
+      },
+      {
+        "name": "WATKINS, KAREN",
+        "total": 5300
+      },
+      {
+        "name": "HOFSETH, DANA",
+        "total": 5208.65
+      }
+    ]
+  },
+  {
+    "committee_key": "blackburn-gov-2026",
+    "label": "Marsha Blackburn — TN Governor 2026",
+    "candidate_id": 11725,
+    "owner_string": "BLACKBURN, MARSHA",
+    "total_reports": 2,
+    "total_receipts": 6754961.240000152,
+    "total_expenditures": 2357520.02,
+    "individual_rows": 35355,
+    "pac_rows": 42,
+    "top_donors": [
+      {
+        "name": "GO NETN PAC",
+        "total": 30800
+      },
+      {
+        "name": "HNTB TENNESSEE PAC",
+        "total": 30800
+      },
+      {
+        "name": "TRACTOR SUPPLY COMPANY POLITICAL ACTION COMMITTEE",
+        "total": 30800
+      },
+      {
+        "name": "CHS/COMMUNITY HEALTH SYSTEMS, INC.",
+        "total": 30800
+      },
+      {
+        "name": "FRIENDS OF THA",
+        "total": 30800
+      },
+      {
+        "name": "JOE PAC",
+        "total": 30800
+      },
+      {
+        "name": "ANDERSON, CHARLES",
+        "total": 29200
+      },
+      {
+        "name": "HASLAM, JAMES",
+        "total": 20600
+      },
+      {
+        "name": "LIFEPOINT HEALTH PAC",
+        "total": 20000
+      },
+      {
+        "name": "A BETTER TOMORROW",
+        "total": 15400
+      }
+    ]
+  },
+  {
+    "committee_key": "fritts-tn32-historical",
+    "label": "Monty Fritts — TN House District 32 (historical)",
+    "candidate_id": 9137,
+    "owner_string": "FRITTS, MONTY",
+    "total_reports": 17,
+    "total_receipts": 45042.910000000025,
+    "total_expenditures": 48772.090000000004,
+    "individual_rows": 135,
+    "pac_rows": 2,
+    "top_donors": [
+      {
+        "name": "FRITTS, MONTY",
+        "total": 6477.18
+      },
+      {
+        "name": "KIRKHAM, STEVE",
+        "total": 2500
+      },
+      {
+        "name": "SILVERA, ROBERT",
+        "total": 2000
+      },
+      {
+        "name": "DRAMM, RICK",
+        "total": 1600
+      },
+      {
+        "name": "GARRETT, JOHNNY",
+        "total": 1500
+      },
+      {
+        "name": "HILL'S BONDING COMPANY",
+        "total": 1500
+      },
+      {
+        "name": "JONES, CHARLIE",
+        "total": 1500
+      },
+      {
+        "name": "SILVERA, LINDA",
+        "total": 1500
+      },
+      {
+        "name": "EZ RENTALS",
+        "total": 1500
+      },
+      {
+        "name": "DRAMM, LORI",
+        "total": 1400
+      }
+    ]
+  }
+]

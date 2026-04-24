@@ -1,0 +1,232 @@
+{
+  "source": "TN-REF-fullReportExcelExportPublic-2026",
+  "method": "high-confidence-only (last+first-name+state exact)",
+  "total_individual_rows_scanned": 35318,
+  "unique_donors": 16291,
+  "total_raised_individual": 6139368,
+  "matches": [
+    {
+      "name": "UIHLEIN, ELIZABETH",
+      "state": "IL",
+      "to_blackburn": 10600,
+      "career_to_pro_israel_pacs": 3000000,
+      "employer": "ULINE",
+      "occupation": "CEO",
+      "pacs": ["Preserve America PAC (Miriam Adelson)"]
+    },
+    {
+      "name": "GROVEMAN, ANDREW",
+      "state": "TN",
+      "to_blackburn": 2500,
+      "career_to_pro_israel_pacs": 258512,
+      "employer": "BELZ ENTERPRISES",
+      "occupation": "OWNER",
+      "pacs": ["Pro-Israel America PAC", "AIPAC PAC", "United Democracy Project (UDP)"]
+    },
+    {
+      "name": "COHEN, RICHARD",
+      "state": "NY",
+      "to_blackburn": 262,
+      "career_to_pro_israel_pacs": 213250,
+      "employer": "RETIRED",
+      "pacs": ["Washington PAC", "Pro-Israel America PAC", "NorPAC / North Jersey PAC", "United Democracy Project (UDP)"]
+    },
+    {
+      "name": "HASLAM, SUSAN",
+      "state": "TN",
+      "to_blackburn": 10600,
+      "career_to_pro_israel_pacs": 25000,
+      "employer": "HASLAM SPORTS GROUP",
+      "occupation": "CEO",
+      "pacs": ["DMFI PAC (Democratic Majority for Israel)"]
+    },
+    {
+      "name": "RIKLIN, ARTHUR",
+      "state": "TX",
+      "to_blackburn": 100,
+      "career_to_pro_israel_pacs": 7000,
+      "pacs": ["Because I Care PAC", "Republican Jewish Coalition PAC (RJC-PAC)", "National Action Committee"]
+    },
+    {
+      "name": "OLSWANGER, SAM",
+      "state": "DC",
+      "to_blackburn": 10600,
+      "career_to_pro_israel_pacs": 6750,
+      "employer": "Akin Gump Strauss Hauer & Feld",
+      "occupation": "Senior Policy Advisor",
+      "pacs": ["Pro-Israel America PAC", "AIPAC PAC"],
+      "foreign_money_flag": "Akin Gump is FARA-registered firm representing foreign sovereigns"
+    },
+    {
+      "name": "MILES, PAUL",
+      "state": "NJ",
+      "to_blackburn": 300,
+      "career_to_pro_israel_pacs": 5000,
+      "pacs": ["Republican Jewish Coalition PAC (RJC-PAC)"]
+    },
+    {
+      "name": "GANZ, CHARLES",
+      "state": "GA",
+      "to_blackburn": 50,
+      "career_to_pro_israel_pacs": 2950,
+      "pacs": ["AIPAC PAC"]
+    },
+    {
+      "name": "COOK, JAMES",
+      "state": "FL",
+      "to_blackburn": 24,
+      "career_to_pro_israel_pacs": 2011,
+      "pacs": ["Republican Jewish Coalition PAC (RJC-PAC)"]
+    },
+    {
+      "name": "JORDAN, DAVID",
+      "state": "TN",
+      "to_blackburn": 7300,
+      "career_to_pro_israel_pacs": 2000,
+      "employer": "FIRST HORIZON",
+      "occupation": "PRESIDENT",
+      "pacs": ["AIPAC PAC"]
+    },
+    {
+      "name": "FRIEDMAN, RUTH",
+      "state": "OH",
+      "to_blackburn": 26,
+      "career_to_pro_israel_pacs": 1400,
+      "pacs": ["AIPAC PAC"]
+    },
+    {
+      "name": "KOZINSKI, ALEX",
+      "state": "CA",
+      "to_blackburn": 72,
+      "career_to_pro_israel_pacs": 1400,
+      "occupation": "ATTORNEY",
+      "pacs": ["Republican Jewish Coalition PAC (RJC-PAC)"]
+    },
+    {
+      "name": "BYRD, BARNEY",
+      "state": "TN",
+      "to_blackburn": 10600,
+      "career_to_pro_israel_pacs": 1000,
+      "employer": "GEN CAP AMERICA",
+      "occupation": "CEO",
+      "pacs": ["AIPAC PAC"]
+    },
+    {
+      "name": "HARRIS, DAVID",
+      "state": "TX",
+      "to_blackburn": 61,
+      "career_to_pro_israel_pacs": 1000,
+      "pacs": ["Pro-Israel America PAC"]
+    },
+    {
+      "name": "SIMMONS, LINDA",
+      "state": "CA",
+      "to_blackburn": 4,
+      "career_to_pro_israel_pacs": 1000,
+      "pacs": ["Republican Jewish Coalition PAC (RJC-PAC)"]
+    },
+    {
+      "name": "BELZ, RACHEL",
+      "state": "TN",
+      "to_blackburn": 10600,
+      "career_to_pro_israel_pacs": 800,
+      "employer": "HOMEMAKER",
+      "pacs": ["Washington PAC", "AIPAC PAC"]
+    },
+    {
+      "name": "JAVITS, ERIC",
+      "state": "FL",
+      "to_blackburn": 521,
+      "career_to_pro_israel_pacs": 500,
+      "pacs": ["Republican Jewish Coalition PAC (RJC-PAC)"]
+    },
+    {
+      "name": "RICHTER, LINDA",
+      "state": "IL",
+      "to_blackburn": 1,
+      "career_to_pro_israel_pacs": 500,
+      "pacs": ["Joint Action Committee for Political Affairs"]
+    },
+    {
+      "name": "SMITH, WILLIAM",
+      "state": "PA",
+      "to_blackburn": 1,
+      "career_to_pro_israel_pacs": 250,
+      "pacs": ["JStreetPAC"]
+    },
+    {
+      "name": "BROWN, DIANE",
+      "state": "TX",
+      "to_blackburn": 114,
+      "career_to_pro_israel_pacs": 250,
+      "pacs": ["JStreetPAC"]
+    },
+    {
+      "name": "GORDON, BARBARA",
+      "state": "CA",
+      "to_blackburn": 25,
+      "career_to_pro_israel_pacs": 250,
+      "pacs": ["JDCA PAC"]
+    },
+    {
+      "name": "JOHNSON, RICHARD",
+      "state": "MN",
+      "to_blackburn": 43,
+      "career_to_pro_israel_pacs": 250,
+      "pacs": ["JStreetPAC"]
+    },
+    {
+      "name": "MORRIS, DAVID",
+      "state": "TX",
+      "to_blackburn": 14,
+      "career_to_pro_israel_pacs": 250,
+      "pacs": ["JStreetPAC"]
+    },
+    {
+      "name": "ROBINSON, EDWARD",
+      "state": "UT",
+      "to_blackburn": 100,
+      "career_to_pro_israel_pacs": 250,
+      "pacs": ["AIPAC PAC"]
+    },
+    {
+      "name": "FOX, EDWARD",
+      "state": "NJ",
+      "to_blackburn": 35,
+      "career_to_pro_israel_pacs": 200,
+      "pacs": ["NorPAC / North Jersey PAC"]
+    }
+  ],
+  "totals": {
+    "bundler_count": 25,
+    "to_blackburn_sum": 64554,
+    "career_to_pro_israel_sum": 3531773
+  },
+  "notable_clusters": [
+    {
+      "name": "Uihlein/Adelson Preserve America PAC nexus",
+      "description": "Elizabeth Uihlein (Uline CEO, IL) contributed $10,600 to Blackburn's TN gubernatorial committee; her lifetime $3,000,000 to Preserve America PAC (Miriam Adelson's super PAC) is the single largest pro-Israel-network donor pool represented in this cross-ref.",
+      "total_to_blackburn": 10600,
+      "total_career_pro_israel": 3000000
+    },
+    {
+      "name": "Belz family Memphis Jewish-philanthropy real-estate dynasty",
+      "description": "Rachel Belz ($10,600 to Blackburn, AIPAC / Washington PAC ties) and Andrew Groveman of Belz Enterprises ($2,500 to Blackburn, Pro-Israel America / AIPAC / UDP ties). Combined Blackburn bundle = $13,100; combined lifetime pro-Israel-PAC giving = $259,312.",
+      "total_to_blackburn": 13100,
+      "total_career_pro_israel": 259312
+    },
+    {
+      "name": "Haslam Sports Group (TN)",
+      "description": "Susan Haslam (HASLAM SPORTS GROUP CEO) contributed $10,600 to Blackburn with $25,000 DMFI PAC career — embeds Blackburn in the Haslam family political-finance network.",
+      "total_to_blackburn": 10600,
+      "total_career_pro_israel": 25000
+    },
+    {
+      "name": "Akin Gump FARA-registered-firm employee",
+      "description": "Sam Olswanger, Senior Policy Advisor at AKIN GUMP STRAUSS HAUER & FELD (FARA-registered firm representing foreign sovereigns), contributed $10,600 to Blackburn and has $6,750 career giving to Pro-Israel America PAC and AIPAC PAC — direct FARA-firm money overlay on pro-Israel-lobby bundler signal.",
+      "total_to_blackburn": 10600,
+      "total_career_pro_israel": 6750
+    }
+  ],
+  "generated_at": "2026-04-23T00:00:00.000Z"
+}

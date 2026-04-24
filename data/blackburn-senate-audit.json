@@ -1,0 +1,2156 @@
+{
+  "generated_at": "2026-04-23T23:42:43.620Z",
+  "candidate": {
+    "name": "Marsha Blackburn",
+    "party": "REP",
+    "state": "TN",
+    "office": "Senate",
+    "candidate_id": "S8TN00337",
+    "house_candidate_id": "H2TN06030",
+    "principal_committee_id": "C00376939",
+    "leadership_pac_ids": [],
+    "jfc_ids": [
+      "C00689471",
+      "C00683029",
+      "C00674770",
+      "C00686741",
+      "C00678235"
+    ],
+    "notes": "Running for TN Governor 2026 at state level (separate TN REF filing); Senate seat up 2030."
+  },
+  "cycle": 2026,
+  "total_receipts": 2753251.3,
+  "committee_totals": [
+    {
+      "all_other_loans": 0,
+      "candidate_contribution": 0,
+      "cash_on_hand_beginning_period": 5138614.78,
+      "committee_designation": "P",
+      "committee_designation_full": "Principal campaign committee",
+      "committee_id": "C00376939",
+      "committee_name": "MARSHA FOR SENATE",
+      "committee_state": "TN",
+      "committee_type": "S",
+      "committee_type_full": "Senate",
+      "contribution_refunds": 0,
+      "contributions": 363677.23,
+      "coverage_end_date": "2026-03-31T00:00:00",
+      "coverage_start_date": "2025-01-01T00:00:00",
+      "cycle": 2026,
+      "disbursements": 2830269.25,
+      "filing_frequency": "Q",
+      "filing_frequency_full": "Quarterly filer",
+      "first_f1_date": "2002-04-25",
+      "first_file_date": "2002-04-25",
+      "individual_contributions": 240177.23,
+      "individual_itemized_contributions": 177600.45,
+      "individual_unitemized_contributions": 62576.78,
+      "last_beginning_image_number": "202604159857722684",
+      "last_cash_on_hand_end_period": 5061596.83,
+      "last_debts_owed_by_committee": 0,
+      "last_debts_owed_to_committee": 0,
+      "last_report_type_full": "APRIL QUARTERLY",
+      "last_report_year": 2026,
+      "loan_repayments": 0,
+      "loan_repayments_candidate_loans": 0,
+      "loan_repayments_other_loans": 0,
+      "loans": 0,
+      "loans_made_by_candidate": 0,
+      "net_contributions": 363677.23,
+      "net_operating_expenditures": 2469178.83,
+      "offsets_to_operating_expenditures": 326090.42,
+      "operating_expenditures": 2795269.25,
+      "organization_type": null,
+      "organization_type_full": null,
+      "other_disbursements": 35000,
+      "other_political_committee_contributions": 123500,
+      "other_receipts": 177486.39,
+      "party_full": "REPUBLICAN PARTY",
+      "political_party_committee_contributions": 0,
+      "receipts": 2753251.3,
+      "refunded_individual_contributions": 0,
+      "refunded_other_political_committee_contributions": 0,
+      "refunded_political_party_committee_contributions": 0,
+      "transaction_coverage_date": "2025-12-31",
+      "transfers_from_other_authorized_committee": 1885997.26,
+      "transfers_to_other_authorized_committee": 0,
+      "treasurer_name": "GANT, RON M."
+    }
+  ],
+  "individual_total": 800578.8699999994,
+  "individual_rows": 1020,
+  "real_pac_total": 2162323.92,
+  "real_pac_rows": 109,
+  "conduit_total": 179490.71999999997,
+  "conduit_rows": 55,
+  "pro_israel_pacs": [
+    {
+      "committee_id": "C00247403",
+      "name": "NORPAC",
+      "amount": 19204.51,
+      "count": 1,
+      "matched_by": "committee_id"
+    }
+  ],
+  "pro_israel_pac_total": 19204.51,
+  "pro_israel_bundlers_high_conf": [
+    {
+      "name": "LEVY, EDWARD",
+      "state": "MI",
+      "to_blackburn": 4336,
+      "career_to_pro_israel_pacs": 1345050,
+      "pacs": [
+        "National PAC",
+        "Americans United in Support of Democracy / CCNI",
+        "Americans for Good Government",
+        "National Action Committee",
+        "NorPAC / North Jersey PAC",
+        "To Protect Our Heritage PAC",
+        "Maryland Association for Concerned Citizens PAC",
+        "RJC Victory Fund",
+        "Pro-Israel America PAC",
+        "AIPAC PAC",
+        "DMFI PAC (Democratic Majority for Israel)",
+        "United Democracy Project (UDP)"
+      ],
+      "candidate_cycles": [
+        "2026"
+      ],
+      "pro_israel_cycles": [
+        "1983",
+        "1984",
+        "1985",
+        "1987",
+        "1988",
+        "1989",
+        "1991",
+        "1995",
+        "1997",
+        "1999",
+        "2001",
+        "2003",
+        "2005",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ]
+    },
+    {
+      "name": "CHOUAKE, BENJAMIN",
+      "state": "NJ",
+      "to_blackburn": 6500,
+      "career_to_pro_israel_pacs": 1094500.02,
+      "pacs": [
+        "NorPAC / North Jersey PAC",
+        "National Action Committee",
+        "Hudson Valley PAC",
+        "AIPAC PAC",
+        "United Democracy Project (UDP)"
+      ],
+      "candidate_cycles": [
+        "2026"
+      ],
+      "pro_israel_cycles": [
+        "1992",
+        "1998",
+        "1999",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ]
+    },
+    {
+      "name": "HALPERN, JUDITH",
+      "state": "NY",
+      "to_blackburn": 6500,
+      "career_to_pro_israel_pacs": 715775,
+      "pacs": [
+        "NorPAC / North Jersey PAC",
+        "United Democracy Project (UDP)",
+        "AIPAC PAC"
+      ],
+      "candidate_cycles": [
+        "2026"
+      ],
+      "pro_israel_cycles": [
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ]
+    },
+    {
+      "name": "DRESNER, LINDA",
+      "state": "MI",
+      "to_blackburn": 3460,
+      "career_to_pro_israel_pacs": 409100,
+      "pacs": [
+        "Americans for Good Government",
+        "NorPAC / North Jersey PAC",
+        "National PAC",
+        "DMFI PAC (Democratic Majority for Israel)",
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "candidate_cycles": [
+        "2026"
+      ],
+      "pro_israel_cycles": [
+        "2003",
+        "2005",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2016",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ]
+    },
+    {
+      "name": "STERN, TRUDY",
+      "state": "NY",
+      "to_blackburn": 1000,
+      "career_to_pro_israel_pacs": 70584.9,
+      "pacs": [
+        "NorPAC / North Jersey PAC"
+      ],
+      "candidate_cycles": [
+        "2026"
+      ],
+      "pro_israel_cycles": [
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2012",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ]
+    },
+    {
+      "name": "JACOBS, BENJAMIN",
+      "state": "NJ",
+      "to_blackburn": 10500,
+      "career_to_pro_israel_pacs": 29495,
+      "pacs": [
+        "NorPAC / North Jersey PAC"
+      ],
+      "candidate_cycles": [
+        "2026"
+      ],
+      "pro_israel_cycles": [
+        "2002",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2014",
+        "2022",
+        "2023",
+        "2024"
+      ]
+    },
+    {
+      "name": "JACOBS, SHIRA",
+      "state": "NJ",
+      "to_blackburn": 2000,
+      "career_to_pro_israel_pacs": 20085,
+      "pacs": [
+        "NorPAC / North Jersey PAC",
+        "AIPAC PAC"
+      ],
+      "candidate_cycles": [
+        "2026"
+      ],
+      "pro_israel_cycles": [
+        "2008",
+        "2009",
+        "2010",
+        "2012",
+        "2017",
+        "2019",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ]
+    },
+    {
+      "name": "TOLL, BRUCE",
+      "state": "FL",
+      "to_blackburn": 3000,
+      "career_to_pro_israel_pacs": 3500,
+      "pacs": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "candidate_cycles": [
+        "2026"
+      ],
+      "pro_israel_cycles": [
+        "2020",
+        "2024"
+      ]
+    },
+    {
+      "name": "STERN, MICHAEL",
+      "state": "CA",
+      "to_blackburn": 3500,
+      "career_to_pro_israel_pacs": 3175,
+      "pacs": [
+        "World Alliance for Israel PAC",
+        "AIPAC PAC",
+        "Joint Action Committee for Political Affairs"
+      ],
+      "candidate_cycles": [
+        "2026"
+      ],
+      "pro_israel_cycles": [
+        "1997",
+        "2000",
+        "2001",
+        "2002",
+        "2022",
+        "2023",
+        "2024"
+      ]
+    },
+    {
+      "name": "MILLER, JEFFREY",
+      "state": "TN",
+      "to_blackburn": 210,
+      "career_to_pro_israel_pacs": 2200,
+      "pacs": [
+        "Pro-Israel America PAC"
+      ],
+      "candidate_cycles": [
+        "2026"
+      ],
+      "pro_israel_cycles": [
+        "2021"
+      ]
+    },
+    {
+      "name": "JORDAN, DAVID",
+      "state": "TN",
+      "to_blackburn": 1500,
+      "career_to_pro_israel_pacs": 2000,
+      "pacs": [
+        "AIPAC PAC"
+      ],
+      "candidate_cycles": [
+        "2026"
+      ],
+      "pro_israel_cycles": [
+        "2025"
+      ]
+    },
+    {
+      "name": "LEVY, LAURENCE",
+      "state": "FL",
+      "to_blackburn": 250,
+      "career_to_pro_israel_pacs": 1750,
+      "pacs": [
+        "US Israel PAC / Florida Congressional Committee",
+        "AIPAC PAC"
+      ],
+      "candidate_cycles": [
+        "2026"
+      ],
+      "pro_israel_cycles": [
+        "2014",
+        "2026"
+      ]
+    },
+    {
+      "name": "PHILLIPS, CHARLOTTE",
+      "state": "TN",
+      "to_blackburn": 3300,
+      "career_to_pro_israel_pacs": 1250,
+      "pacs": [
+        "National PAC"
+      ],
+      "candidate_cycles": [
+        "2026"
+      ],
+      "pro_israel_cycles": [
+        "1997",
+        "1998"
+      ]
+    },
+    {
+      "name": "ROSS, JOSH",
+      "state": "IL",
+      "to_blackburn": 3000,
+      "career_to_pro_israel_pacs": 850,
+      "pacs": [
+        "To Protect Our Heritage PAC",
+        "JStreetPAC"
+      ],
+      "candidate_cycles": [
+        "2026"
+      ],
+      "pro_israel_cycles": [
+        "2017",
+        "2022"
+      ]
+    },
+    {
+      "name": "BELZ, RACHEL",
+      "state": "TN",
+      "to_blackburn": 3500,
+      "career_to_pro_israel_pacs": 800,
+      "pacs": [
+        "Washington PAC",
+        "AIPAC PAC"
+      ],
+      "candidate_cycles": [
+        "2026"
+      ],
+      "pro_israel_cycles": [
+        "2015",
+        "2026"
+      ]
+    },
+    {
+      "name": "SMITH, WILLIAM",
+      "state": "TN",
+      "to_blackburn": 400,
+      "career_to_pro_israel_pacs": 700,
+      "pacs": [
+        "JStreetPAC"
+      ],
+      "candidate_cycles": [
+        "2026"
+      ],
+      "pro_israel_cycles": [
+        "2012"
+      ]
+    },
+    {
+      "name": "ANDERSON, DEBRA",
+      "state": "PA",
+      "to_blackburn": 950,
+      "career_to_pro_israel_pacs": 250,
+      "pacs": [
+        "Democratic Jewish Outreach PA"
+      ],
+      "candidate_cycles": [
+        "2026"
+      ],
+      "pro_israel_cycles": [
+        "2022"
+      ]
+    },
+    {
+      "name": "GROSSMAN, BRIAN",
+      "state": "CA",
+      "to_blackburn": 300,
+      "career_to_pro_israel_pacs": 250,
+      "pacs": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "candidate_cycles": [
+        "2026"
+      ],
+      "pro_israel_cycles": [
+        "2014"
+      ]
+    },
+    {
+      "name": "DAVIS, DOUGLAS",
+      "state": "OH",
+      "to_blackburn": 475,
+      "career_to_pro_israel_pacs": 200,
+      "pacs": [
+        "AIPAC PAC"
+      ],
+      "candidate_cycles": [
+        "2026"
+      ],
+      "pro_israel_cycles": [
+        "2022"
+      ]
+    }
+  ],
+  "pro_israel_bundlers_medium_conf": [
+    {
+      "name": "STANARD, JAMES",
+      "state": "OH",
+      "to_blackburn": 9659.4,
+      "career_to_pro_israel_pacs": 200000,
+      "pacs": [
+        "RJC Victory Fund"
+      ]
+    },
+    {
+      "name": "BAILEY, MORRIS",
+      "state": "NY",
+      "to_blackburn": 3000,
+      "career_to_pro_israel_pacs": 150000,
+      "pacs": [
+        "United Democracy Project (UDP)"
+      ]
+    },
+    {
+      "name": "JOHNSON, BRAD",
+      "state": "MN",
+      "to_blackburn": 1250,
+      "career_to_pro_israel_pacs": 42000,
+      "pacs": [
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "Pro-Israel America PAC",
+        "AIPAC PAC",
+        "United Democracy Project (UDP)"
+      ]
+    },
+    {
+      "name": "HILL, SKURA",
+      "state": "CA",
+      "to_blackburn": 400,
+      "career_to_pro_israel_pacs": 32680,
+      "pacs": [
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ]
+    },
+    {
+      "name": "THOMPSON, DIANE",
+      "state": "AZ",
+      "to_blackburn": 950,
+      "career_to_pro_israel_pacs": 25000,
+      "pacs": [
+        "Phoenix Education Partners / Apollo Education Group"
+      ]
+    },
+    {
+      "name": "LEE, BERT",
+      "state": "AZ",
+      "to_blackburn": 500,
+      "career_to_pro_israel_pacs": 21900,
+      "pacs": [
+        "The Desert Caucus"
+      ]
+    },
+    {
+      "name": "FORBES, NATHAN",
+      "state": "MI",
+      "to_blackburn": 250,
+      "career_to_pro_israel_pacs": 20000,
+      "pacs": [
+        "United Democracy Project (UDP)"
+      ]
+    },
+    {
+      "name": "WEISKOPF, JEFFREY",
+      "state": "NY",
+      "to_blackburn": 225,
+      "career_to_pro_israel_pacs": 16000,
+      "pacs": [
+        "AIPAC PAC"
+      ]
+    },
+    {
+      "name": "MORGAN, HARVEY",
+      "state": "FL",
+      "to_blackburn": 1000,
+      "career_to_pro_israel_pacs": 14000,
+      "pacs": [
+        "AIPAC PAC"
+      ]
+    },
+    {
+      "name": "SANDERS, MARK",
+      "state": "TX",
+      "to_blackburn": 475,
+      "career_to_pro_israel_pacs": 12000,
+      "pacs": [
+        "AIPAC PAC"
+      ]
+    },
+    {
+      "name": "COOPER, VICKI",
+      "state": "NY",
+      "to_blackburn": 475,
+      "career_to_pro_israel_pacs": 10000,
+      "pacs": [
+        "DMFI PAC (Democratic Majority for Israel)",
+        "AIPAC PAC"
+      ]
+    },
+    {
+      "name": "PARKER, SUSAN",
+      "state": "CA",
+      "to_blackburn": 952.85,
+      "career_to_pro_israel_pacs": 9760,
+      "pacs": [
+        "World Alliance for Israel PAC"
+      ]
+    },
+    {
+      "name": "HILL, JOY",
+      "state": "NY",
+      "to_blackburn": 250,
+      "career_to_pro_israel_pacs": 8963.99,
+      "pacs": [
+        "JStreetPAC"
+      ]
+    },
+    {
+      "name": "MARTIN, ELIZABETH",
+      "state": "CT",
+      "to_blackburn": 500,
+      "career_to_pro_israel_pacs": 8000,
+      "pacs": [
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ]
+    },
+    {
+      "name": "ANDERSON, ERIK",
+      "state": "MA",
+      "to_blackburn": 500,
+      "career_to_pro_israel_pacs": 7600,
+      "pacs": [
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ]
+    },
+    {
+      "name": "PHILLIPS, ROXANNE",
+      "state": "FL",
+      "to_blackburn": 500,
+      "career_to_pro_israel_pacs": 7250,
+      "pacs": [
+        "Joint Action Committee for Political Affairs"
+      ]
+    },
+    {
+      "name": "BARTON, JULIE",
+      "state": "AZ",
+      "to_blackburn": 487.5,
+      "career_to_pro_israel_pacs": 7100,
+      "pacs": [
+        "Joint Action Committee for Political Affairs"
+      ]
+    },
+    {
+      "name": "GILBERT, DON",
+      "state": "CA",
+      "to_blackburn": 475,
+      "career_to_pro_israel_pacs": 7000,
+      "pacs": [
+        "AIPAC PAC"
+      ]
+    },
+    {
+      "name": "FRY, MILTON",
+      "state": "MO",
+      "to_blackburn": 1000,
+      "career_to_pro_israel_pacs": 6000,
+      "pacs": [
+        "St. Louisans for Better Government"
+      ]
+    },
+    {
+      "name": "DOWNEY, THOMAS",
+      "state": "DC",
+      "to_blackburn": 1000,
+      "career_to_pro_israel_pacs": 5000,
+      "pacs": [
+        "JStreetPAC"
+      ]
+    },
+    {
+      "name": "FREEMAN, JONATHAN",
+      "state": "CA",
+      "to_blackburn": 250,
+      "career_to_pro_israel_pacs": 5000,
+      "pacs": [
+        "DMFI PAC (Democratic Majority for Israel)"
+      ]
+    },
+    {
+      "name": "PARKER, CAREENA",
+      "state": "NJ",
+      "to_blackburn": 253,
+      "career_to_pro_israel_pacs": 3250,
+      "pacs": [
+        "NorPAC / North Jersey PAC"
+      ]
+    },
+    {
+      "name": "SCHALL, JENNIFER",
+      "state": "CA",
+      "to_blackburn": 340,
+      "career_to_pro_israel_pacs": 2800,
+      "pacs": [
+        "Pro-Israel America PAC"
+      ]
+    },
+    {
+      "name": "PACK, STEVEN",
+      "state": "KS",
+      "to_blackburn": 2500,
+      "career_to_pro_israel_pacs": 2500,
+      "pacs": [
+        "AIPAC PAC"
+      ]
+    },
+    {
+      "name": "ZINN, WENDY",
+      "state": "IL",
+      "to_blackburn": 749.54,
+      "career_to_pro_israel_pacs": 1250,
+      "pacs": [
+        "Joint Action Committee for Political Affairs"
+      ]
+    },
+    {
+      "name": "RHEE, HONG",
+      "state": "CA",
+      "to_blackburn": 1000,
+      "career_to_pro_israel_pacs": 1025,
+      "pacs": [
+        "World Alliance for Israel PAC"
+      ]
+    },
+    {
+      "name": "GOODMAN, WILLIAM",
+      "state": "FL",
+      "to_blackburn": 1561.5,
+      "career_to_pro_israel_pacs": 1000,
+      "pacs": [
+        "US Israel PAC / Florida Congressional Committee",
+        "National PAC"
+      ]
+    },
+    {
+      "name": "BELL, WENDY",
+      "state": "MO",
+      "to_blackburn": 300,
+      "career_to_pro_israel_pacs": 1000,
+      "pacs": [
+        "St. Louisans for Better Government"
+      ]
+    },
+    {
+      "name": "ROLLINS, JACK",
+      "state": "NY",
+      "to_blackburn": 250,
+      "career_to_pro_israel_pacs": 1000,
+      "pacs": [
+        "National PAC"
+      ]
+    },
+    {
+      "name": "MAY, JOSEPH",
+      "state": "TN",
+      "to_blackburn": 240.35,
+      "career_to_pro_israel_pacs": 1000,
+      "pacs": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ]
+    },
+    {
+      "name": "BURNS, TIMOTHY",
+      "state": "IL",
+      "to_blackburn": 237.5,
+      "career_to_pro_israel_pacs": 1000,
+      "pacs": [
+        "City PAC"
+      ]
+    },
+    {
+      "name": "SAMUELS, ROBYN",
+      "state": "NY",
+      "to_blackburn": 250,
+      "career_to_pro_israel_pacs": 800,
+      "pacs": [
+        "NorPAC / North Jersey PAC"
+      ]
+    },
+    {
+      "name": "BLOCK, GAY",
+      "state": "NM",
+      "to_blackburn": 500,
+      "career_to_pro_israel_pacs": 750,
+      "pacs": [
+        "JStreetPAC"
+      ]
+    },
+    {
+      "name": "JONES, SONDRA",
+      "state": "PA",
+      "to_blackburn": 1500,
+      "career_to_pro_israel_pacs": 625,
+      "pacs": [
+        "Women's Pro-Israel National PAC"
+      ]
+    },
+    {
+      "name": "KRAUSZ, ROBERT",
+      "state": "NY",
+      "to_blackburn": 445.7,
+      "career_to_pro_israel_pacs": 620,
+      "pacs": [
+        "NorPAC / North Jersey PAC"
+      ]
+    },
+    {
+      "name": "SMITH, BRENT",
+      "state": "IL",
+      "to_blackburn": 3500,
+      "career_to_pro_israel_pacs": 500,
+      "pacs": [
+        "To Protect Our Heritage PAC"
+      ]
+    },
+    {
+      "name": "JONES, CORY",
+      "state": "IL",
+      "to_blackburn": 712.5,
+      "career_to_pro_israel_pacs": 500,
+      "pacs": [
+        "Joint Action Committee for Political Affairs"
+      ]
+    },
+    {
+      "name": "JOHNSTON, MATTHEW",
+      "state": "CA",
+      "to_blackburn": 250,
+      "career_to_pro_israel_pacs": 500,
+      "pacs": [
+        "Phoenix Education Partners / Apollo Education Group"
+      ]
+    },
+    {
+      "name": "JONES, GEORGE",
+      "state": "NJ",
+      "to_blackburn": 210,
+      "career_to_pro_israel_pacs": 500,
+      "pacs": [
+        "Hudson Valley PAC"
+      ]
+    },
+    {
+      "name": "HALL, PATRICIA",
+      "state": "CA",
+      "to_blackburn": 250,
+      "career_to_pro_israel_pacs": 400,
+      "pacs": [
+        "JStreetPAC"
+      ]
+    },
+    {
+      "name": "NOVICK, AMANDA",
+      "state": "NY",
+      "to_blackburn": 3500,
+      "career_to_pro_israel_pacs": 360,
+      "pacs": [
+        "AIPAC PAC"
+      ]
+    },
+    {
+      "name": "MIRSKY, CHANA",
+      "state": "NY",
+      "to_blackburn": 3458.75,
+      "career_to_pro_israel_pacs": 336,
+      "pacs": [
+        "NorPAC / North Jersey PAC"
+      ]
+    },
+    {
+      "name": "WHITE, RUTH",
+      "state": "FL",
+      "to_blackburn": 3500,
+      "career_to_pro_israel_pacs": 250,
+      "pacs": [
+        "Joint Action Committee for Political Affairs"
+      ]
+    },
+    {
+      "name": "TANNENBAUM, JONNE",
+      "state": "IL",
+      "to_blackburn": 3500,
+      "career_to_pro_israel_pacs": 250,
+      "pacs": [
+        "Joint Action Committee for Political Affairs"
+      ]
+    },
+    {
+      "name": "STEVENS, RICHARD",
+      "state": "MI",
+      "to_blackburn": 2500,
+      "career_to_pro_israel_pacs": 250,
+      "pacs": [
+        "AIPAC PAC"
+      ]
+    },
+    {
+      "name": "HOWARD, LEO",
+      "state": "CA",
+      "to_blackburn": 1510,
+      "career_to_pro_israel_pacs": 250,
+      "pacs": [
+        "World Alliance for Israel PAC"
+      ]
+    },
+    {
+      "name": "ELLIS, ELEANOR",
+      "state": "NJ",
+      "to_blackburn": 520.51,
+      "career_to_pro_israel_pacs": 250,
+      "pacs": [
+        "NorPAC / North Jersey PAC"
+      ]
+    },
+    {
+      "name": "SCOTT, PHYLLIS",
+      "state": "CA",
+      "to_blackburn": 237.5,
+      "career_to_pro_israel_pacs": 250,
+      "pacs": [
+        "World Alliance for Israel PAC"
+      ]
+    },
+    {
+      "name": "OWENS, JOSEPHINE",
+      "state": "CA",
+      "to_blackburn": 237.5,
+      "career_to_pro_israel_pacs": 250,
+      "pacs": [
+        "Phoenix Education Partners / Apollo Education Group"
+      ]
+    },
+    {
+      "name": "WILLIAMS, STACI",
+      "state": "DC",
+      "to_blackburn": 1451.6,
+      "career_to_pro_israel_pacs": 225,
+      "pacs": [
+        "Women's Pro-Israel National PAC"
+      ]
+    },
+    {
+      "name": "CRAMER, JAMES",
+      "state": "CA",
+      "to_blackburn": 6068.25,
+      "career_to_pro_israel_pacs": 200,
+      "pacs": [
+        "JStreetPAC"
+      ]
+    },
+    {
+      "name": "COBB, STEVEN",
+      "state": "AZ",
+      "to_blackburn": 237.5,
+      "career_to_pro_israel_pacs": 200,
+      "pacs": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ]
+    }
+  ],
+  "ie_for": [],
+  "ie_for_total": 0,
+  "ie_against": [],
+  "ie_against_total": 0,
+  "pro_israel_ie_for": [],
+  "foreign_money_signals": [
+    {
+      "type": "fara_firm_employer",
+      "donor": "MAROTTA, MARNE",
+      "amount": 3500,
+      "state": "VA",
+      "employer": "ARNOLD & PORTER",
+      "note": "employer matches FARA firm keyword \"ARNOLD & PORTER\""
+    },
+    {
+      "type": "foreign_parent_pac",
+      "donor": "SIEMENS CORPORATION PAC",
+      "amount": 2500,
+      "note": "foreign-parent corp PAC \"SIEMENS\""
+    },
+    {
+      "type": "foreign_parent_pac",
+      "donor": "TOYOTA MOTOR NORTH AMERICA INC POLITICAL ACTION COMMITTEE (",
+      "amount": 1000,
+      "note": "foreign-parent corp PAC \"TOYOTA\""
+    },
+    {
+      "type": "foreign_parent_pac",
+      "donor": "TOYOTA MOTOR NORTH AMERICA INC POLITICAL ACTION COMMITTEE (",
+      "amount": 1000,
+      "note": "foreign-parent corp PAC \"TOYOTA\""
+    }
+  ],
+  "top_individual_donors": [
+    {
+      "name": "CASTLE, JOHN K. MR.",
+      "state": "NY",
+      "city": "NEW YORK",
+      "employer": "CASTLE HARLAN INC",
+      "occupation": "MERCHANT BANKER",
+      "total": 13500,
+      "count": 2,
+      "first_date": "2025-03-31",
+      "last_date": "2025-03-31"
+    },
+    {
+      "name": "WINKLEVOSS, CAMERON",
+      "state": "NY",
+      "city": "NEW YORK",
+      "employer": "WINKLEVOSS CAPITAL MANAGEMENT",
+      "occupation": "FOUNDER",
+      "total": 10500,
+      "count": 2,
+      "first_date": "2025-03-14",
+      "last_date": "2025-03-14"
+    },
+    {
+      "name": "JACOBS, BEN",
+      "state": "NJ",
+      "city": "ENGLEWOOD",
+      "employer": "SELF-EMPLOYED",
+      "occupation": "FINANCE",
+      "total": 10500,
+      "count": 2,
+      "first_date": "2025-03-24",
+      "last_date": "2025-03-24"
+    },
+    {
+      "name": "STANARD, JAMES N. MR.",
+      "state": "FL",
+      "city": "SARASOTA",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 9659.4,
+      "count": 2,
+      "first_date": "2025-04-13",
+      "last_date": "2025-04-13"
+    },
+    {
+      "name": "BROYDRICK, WILLIAM",
+      "state": "DE",
+      "city": "REHOBOTH BEACH",
+      "employer": "BROYDRICK AND ASSOCIATES",
+      "occupation": "CONSULTANT",
+      "total": 8500,
+      "count": 8,
+      "first_date": "2025-02-19",
+      "last_date": "2025-07-30"
+    },
+    {
+      "name": "SMITH, THOMAS W.",
+      "state": "FL",
+      "city": "BOCA RATON",
+      "employer": "PRESCOTT INVESTORS INC.",
+      "occupation": "INVESTOR",
+      "total": 7000,
+      "count": 2,
+      "first_date": "2025-04-08",
+      "last_date": "2025-04-08"
+    },
+    {
+      "name": "RABOIS, KEITH MR.",
+      "state": "FL",
+      "city": "MIAMI BEACH",
+      "employer": "FOUNDERS FUND",
+      "occupation": "PARTNER",
+      "total": 7000,
+      "count": 2,
+      "first_date": "2025-02-25",
+      "last_date": "2025-02-25"
+    },
+    {
+      "name": "MCINERNEY, THOMAS E. MR.",
+      "state": "CT",
+      "city": "WESTPORT",
+      "employer": "BLUFF POINT ASSOC",
+      "occupation": "VENTURE CAPITAL INVESTOR",
+      "total": 7000,
+      "count": 2,
+      "first_date": "2025-03-28",
+      "last_date": "2025-03-28"
+    },
+    {
+      "name": "MCINERNEY, PAULA G. MS.",
+      "state": "CT",
+      "city": "WESTPORT",
+      "employer": "BLUFF POINT ASSOC.",
+      "occupation": "VENTURE CAPITAL INVESTOR",
+      "total": 7000,
+      "count": 2,
+      "first_date": "2025-03-28",
+      "last_date": "2025-03-28"
+    },
+    {
+      "name": "KELSEY, JOHN DAVID",
+      "state": "CT",
+      "city": "OLD LYME",
+      "employer": "HAMILTON POINT INVESTMENTS LLC",
+      "occupation": "INVESTMENT MANAGER",
+      "total": 7000,
+      "count": 2,
+      "first_date": "2025-03-31",
+      "last_date": "2025-03-31"
+    },
+    {
+      "name": "HEGYI, ALBERT MR.",
+      "state": "NY",
+      "city": "NEW YORK",
+      "employer": "1ST FINANCIAL BANK USA",
+      "occupation": "BANKER",
+      "total": 7000,
+      "count": 2,
+      "first_date": "2025-02-04",
+      "last_date": "2025-02-04"
+    },
+    {
+      "name": "SANDERSON, JOE F. MR. JR.",
+      "state": "MS",
+      "city": "LAUREL",
+      "employer": "SANDERSON FARMS",
+      "occupation": "CHAIRMAN",
+      "total": 7000,
+      "count": 2,
+      "first_date": "2025-11-06",
+      "last_date": "2025-11-06"
+    },
+    {
+      "name": "BELLUCHIE, LAURENCE",
+      "state": "MD",
+      "city": "ANNAPOLIS",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 6895.9,
+      "count": 4,
+      "first_date": "2025-02-05",
+      "last_date": "2025-05-05"
+    },
+    {
+      "name": "GRAHAM, HERBERT",
+      "state": "TX",
+      "city": "ODESSA",
+      "employer": "GBE",
+      "occupation": "INVESTER",
+      "total": 6700,
+      "count": 2,
+      "first_date": "2025-01-24",
+      "last_date": "2025-01-24"
+    },
+    {
+      "name": "DEMENT, WILLIAM D. MR.",
+      "state": "TN",
+      "city": "JACKSON",
+      "employer": "DEMENT CONSTRUCTION COMPANY",
+      "occupation": "ROAD BUILDER",
+      "total": 6500,
+      "count": 2,
+      "first_date": "2025-05-21",
+      "last_date": "2025-05-21"
+    },
+    {
+      "name": "HALPERN, JACK MR.",
+      "state": "NY",
+      "city": "NEW YORK",
+      "employer": "ATLANTIC REALTY",
+      "occupation": "REAL ESTATE",
+      "total": 6500,
+      "count": 2,
+      "first_date": "2025-03-24",
+      "last_date": "2025-03-24"
+    },
+    {
+      "name": "MILIAS, ELIZABETH A.",
+      "state": "CO",
+      "city": "ASPEN",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 6500,
+      "count": 2,
+      "first_date": "2025-03-28",
+      "last_date": "2025-03-28"
+    },
+    {
+      "name": "CHOUAKE, BEN MR.",
+      "state": "NJ",
+      "city": "ENGLEWOOD",
+      "employer": "SELF-EMPLOYED",
+      "occupation": "PHYSICIAN",
+      "total": 6500,
+      "count": 3,
+      "first_date": "2025-03-04",
+      "last_date": "2025-03-24"
+    },
+    {
+      "name": "CRAMER, JOHN",
+      "state": "IA",
+      "city": "JOHNSTON",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 6068.25,
+      "count": 2,
+      "first_date": "2025-03-21",
+      "last_date": "2025-03-21"
+    },
+    {
+      "name": "TAYLOR, JOANNE",
+      "state": "CA",
+      "city": "SALINAS",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 5000,
+      "count": 2,
+      "first_date": "2025-05-28",
+      "last_date": "2025-05-28"
+    },
+    {
+      "name": "CATSIMATIDIS, JOHN MR.",
+      "state": "NY",
+      "city": "NEW YORK",
+      "employer": "UNITED REFINING CO.",
+      "occupation": "CHAIRMAN",
+      "total": 5000,
+      "count": 2,
+      "first_date": "2025-02-21",
+      "last_date": "2025-02-21"
+    },
+    {
+      "name": "MANN, GERALD",
+      "state": "FL",
+      "city": "NAPLES",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 4917.959999999999,
+      "count": 6,
+      "first_date": "2025-01-18",
+      "last_date": "2025-10-18"
+    },
+    {
+      "name": "SWEET, STEPHEN",
+      "state": "TX",
+      "city": "HOUSTON",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 4855.76,
+      "count": 3,
+      "first_date": "2025-10-27",
+      "last_date": "2025-11-13"
+    },
+    {
+      "name": "SWAIM, SUSAN",
+      "state": "NM",
+      "city": "ELEPHANT BUTTE",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 4575,
+      "count": 10,
+      "first_date": "2025-04-01",
+      "last_date": "2025-12-01"
+    },
+    {
+      "name": "LEVY, EDWARD C.",
+      "state": "MI",
+      "city": "BIRMINGHAM",
+      "employer": "EDW. C. LEVY CO.",
+      "occupation": "CHAIRMAN",
+      "total": 4336,
+      "count": 4,
+      "first_date": "2025-04-11",
+      "last_date": "2025-05-16"
+    },
+    {
+      "name": "SMITH, THOMAS S. MR.",
+      "state": "TX",
+      "city": "HOUSTON",
+      "employer": "ADAMS RESOURCES",
+      "occupation": "CHAIRMAN",
+      "total": 4252.5,
+      "count": 4,
+      "first_date": "2025-05-05",
+      "last_date": "2025-08-15"
+    },
+    {
+      "name": "FARMER, MARGE",
+      "state": "MI",
+      "city": "ROCKFORD",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-09-26",
+      "last_date": "2025-09-26"
+    },
+    {
+      "name": "ARVIG, ALLEN",
+      "state": "MN",
+      "city": "PERHAM",
+      "employer": "ARVIG ENTERPRISES",
+      "occupation": "PRESIDENT",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-07-17",
+      "last_date": "2025-07-17"
+    },
+    {
+      "name": "WHITE, ROBERT N.",
+      "state": "LA",
+      "city": "NEW IBERIA",
+      "employer": "INFORMATION REQUESTED PER BEST EFFORTS",
+      "occupation": "INFORMATION REQUESTED PER BEST EFFORTS",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-06-05",
+      "last_date": "2025-06-05"
+    },
+    {
+      "name": "WEST, JONATHAN MR.",
+      "state": "TN",
+      "city": "CELINA",
+      "employer": "TWIN LAKES",
+      "occupation": "CEO",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-04-03",
+      "last_date": "2025-04-03"
+    },
+    {
+      "name": "WALKER, CEIL T.",
+      "state": "TN",
+      "city": "MEMPHIS",
+      "employer": "WALKER & ASSOCIATES",
+      "occupation": "MARKETING",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-04-03",
+      "last_date": "2025-04-03"
+    },
+    {
+      "name": "VON, SYDNEY",
+      "state": "CA",
+      "city": "BERKELEY",
+      "employer": "METR",
+      "occupation": "MEMBER OF TECHNICAL STAFF",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-06-25",
+      "last_date": "2025-06-25"
+    },
+    {
+      "name": "STERN, MARC I. MR.",
+      "state": "CA",
+      "city": "MALIBU",
+      "employer": "THE TCW GROUP INC.",
+      "occupation": "EXECUTIVE",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-05-15",
+      "last_date": "2025-05-15"
+    },
+    {
+      "name": "SPENCER, RICHARD F. MR.",
+      "state": "CA",
+      "city": "FRESNO",
+      "employer": "SPENCER ENTERPRISES",
+      "occupation": "DEVELOPER",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-05-09",
+      "last_date": "2025-05-09"
+    },
+    {
+      "name": "SPENCER, KAREN A.",
+      "state": "CA",
+      "city": "FRESNO",
+      "employer": "HOMEMAKER",
+      "occupation": "HOMEMAKER",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-05-09",
+      "last_date": "2025-05-09"
+    },
+    {
+      "name": "SMUCKER, TIM",
+      "state": "OH",
+      "city": "NEW FRANKLIN",
+      "employer": "J. M. SMUCKER COMPANY",
+      "occupation": "CHAIRMAN EMERITUS",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-05-09",
+      "last_date": "2025-05-09"
+    },
+    {
+      "name": "SMITH, MARK",
+      "state": "TN",
+      "city": "SIGNAL MOUNTAIN",
+      "employer": "MILLER MARTIN PLLC",
+      "occupation": "ATTORNEY",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-04-30",
+      "last_date": "2025-04-30"
+    },
+    {
+      "name": "SMITH, BRANDON",
+      "state": "TN",
+      "city": "NASHVILLE",
+      "employer": "HOLTZMAN VOGEL",
+      "occupation": "ATTORNEY",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-04-16",
+      "last_date": "2025-04-16"
+    },
+    {
+      "name": "PARIKH, RAVI",
+      "state": "NY",
+      "city": "NEW YORK",
+      "employer": "NULLFRAME INC",
+      "occupation": "EXECUTIVE",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-06-25",
+      "last_date": "2025-06-25"
+    },
+    {
+      "name": "NOVICK, ABIGAIL",
+      "state": "NJ",
+      "city": "PRINCETON",
+      "employer": "HORIZON",
+      "occupation": "ADVISOR",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-06-25",
+      "last_date": "2025-06-25"
+    },
+    {
+      "name": "MCEVOY, JEFF",
+      "state": "TN",
+      "city": "MEMPHIS",
+      "employer": "SELF-EMPLOYED",
+      "occupation": "ATTORNEY",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-05-07",
+      "last_date": "2025-05-07"
+    },
+    {
+      "name": "MARTINO, LANA",
+      "state": "FL",
+      "city": "TAMPA",
+      "employer": "MRLC LLC",
+      "occupation": "OWNER",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-04-17",
+      "last_date": "2025-04-17"
+    },
+    {
+      "name": "KLINSKY, STEVEN B. MR.",
+      "state": "NY",
+      "city": "NEW YORK",
+      "employer": "NEW MOUNTAIN CAPITAL",
+      "occupation": "CEO",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-04-16",
+      "last_date": "2025-04-16"
+    },
+    {
+      "name": "KLINGENSTEIN, THOMAS",
+      "state": "NY",
+      "city": "NEW YORK",
+      "employer": "COHENKLINGENSTEIN LLC",
+      "occupation": "INVESTMENT COUNSELOR",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-05-01",
+      "last_date": "2025-05-01"
+    },
+    {
+      "name": "GOLUB, LAWRENCE",
+      "state": "NY",
+      "city": "NEW YORK",
+      "employer": "GOLUB CAPITAL",
+      "occupation": "CHIEF EXECUTIVE OFFICER",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-04-14",
+      "last_date": "2025-04-14"
+    },
+    {
+      "name": "FREY, ROBERT C. MR.",
+      "state": "TN",
+      "city": "BRENTWOOD",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-05-01",
+      "last_date": "2025-05-01"
+    },
+    {
+      "name": "DUPRE, REGGIE",
+      "state": "LA",
+      "city": "OPELOUSAS",
+      "employer": "DUPRE LOGISTICS LLC",
+      "occupation": "CHIARMAN",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-05-09",
+      "last_date": "2025-05-09"
+    },
+    {
+      "name": "DULEBA, GRETTA",
+      "state": "WA",
+      "city": "BELLEVUE",
+      "employer": "MACHINE INTELLIGENCE RESEARCH INSTITUT",
+      "occupation": "EXECUTIVE ASSISTANT",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-06-25",
+      "last_date": "2025-06-25"
+    },
+    {
+      "name": "COGGIN, DAVID GERALD MR.",
+      "state": "TN",
+      "city": "MURFREESBORO",
+      "employer": "THE COGGIN GROUP",
+      "occupation": "PARTNER",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-05-01",
+      "last_date": "2025-05-01"
+    },
+    {
+      "name": "BOATWRIGHT, STEVEN L.",
+      "state": "TN",
+      "city": "MILLINGTON",
+      "employer": "BOATWRIGHT DRUG CO",
+      "occupation": "PHARMACY OWNER",
+      "total": 3500,
+      "count": 1,
+      "first_date": "2025-06-05",
+      "last_date": "2025-06-05"
+    }
+  ],
+  "top_real_pac_contributions": [
+    {
+      "name": "BLACKBURN TENNESSEE VICTORY FUND",
+      "state": "TN",
+      "city": "BRENTWOOD",
+      "employer": "",
+      "occupation": "",
+      "total": 1603643.75,
+      "count": 8,
+      "first_date": "2025-03-31",
+      "last_date": "2025-12-31"
+    },
+    {
+      "name": "MARSHA FOR GOVERNOR",
+      "state": "TN",
+      "city": "BRENTWOOD",
+      "employer": "",
+      "occupation": "",
+      "total": 234500.13000000003,
+      "count": 16,
+      "first_date": "2025-09-09",
+      "last_date": "2025-12-30"
+    },
+    {
+      "name": "PINNACLE FINANCIAL PARTNERS",
+      "state": "TN",
+      "city": "NASHVILLE",
+      "employer": "",
+      "occupation": "",
+      "total": 138346.61000000002,
+      "count": 15,
+      "first_date": "2025-01-31",
+      "last_date": "2025-12-31"
+    },
+    {
+      "name": "NORPAC",
+      "state": "NJ",
+      "city": "ENGLEWOOD CLIFFS",
+      "employer": "",
+      "occupation": "",
+      "total": 19204.51,
+      "count": 1,
+      "first_date": "2025-03-24",
+      "last_date": "2025-03-24"
+    },
+    {
+      "name": "OSHKOSH CORPORATION EMPLOYEES PAC (OCEPAC)",
+      "state": "WI",
+      "city": "OSHKOSH",
+      "employer": "",
+      "occupation": "",
+      "total": 10000,
+      "count": 2,
+      "first_date": "2025-07-18",
+      "last_date": "2025-07-18"
+    },
+    {
+      "name": "NATIONAL HEALTH CORPORATION POLITICAL ACTION COMMITTEE",
+      "state": "TN",
+      "city": "MURFREESBORO",
+      "employer": "",
+      "occupation": "",
+      "total": 5000,
+      "count": 1,
+      "first_date": "2025-08-12",
+      "last_date": "2025-08-12"
+    },
+    {
+      "name": "UNITED STATES CELLULAR CORPORATION POLITICAL ACTION COMMITTE",
+      "state": "IL",
+      "city": "CHICAGO",
+      "employer": "",
+      "occupation": "",
+      "total": 5000,
+      "count": 1,
+      "first_date": "2025-07-18",
+      "last_date": "2025-07-18"
+    },
+    {
+      "name": "LKQ CORPORATION EMPLOYEE GOOD GOVERNMENT FUND",
+      "state": "DC",
+      "city": "WASHINGTON",
+      "employer": "",
+      "occupation": "",
+      "total": 5000,
+      "count": 1,
+      "first_date": "2025-08-04",
+      "last_date": "2025-08-04"
+    },
+    {
+      "name": "SCHNEIDER NATIONAL INC. TRANSPAC",
+      "state": "WI",
+      "city": "GREEN BAY",
+      "employer": "",
+      "occupation": "",
+      "total": 5000,
+      "count": 1,
+      "first_date": "2025-05-09",
+      "last_date": "2025-05-09"
+    },
+    {
+      "name": "HERBALIFE INTERNATIONAL INC. PAC",
+      "state": "DC",
+      "city": "WASHINGTON",
+      "employer": "",
+      "occupation": "",
+      "total": 5000,
+      "count": 1,
+      "first_date": "2025-05-01",
+      "last_date": "2025-05-01"
+    },
+    {
+      "name": "DIRECT SUPPLY INC. PARTNERS PAC (DSI PARTNERS PAC)",
+      "state": "WI",
+      "city": "MILWAUKEE",
+      "employer": "",
+      "occupation": "",
+      "total": 5000,
+      "count": 1,
+      "first_date": "2025-06-30",
+      "last_date": "2025-06-30"
+    },
+    {
+      "name": "AMERICAN COLLEGE OF RADIOLOGY ASSOCIATION PAC",
+      "state": "VA",
+      "city": "RESTON",
+      "employer": "",
+      "occupation": "",
+      "total": 5000,
+      "count": 1,
+      "first_date": "2025-05-30",
+      "last_date": "2025-05-30"
+    },
+    {
+      "name": "A NEW NATION PAC",
+      "state": "MO",
+      "city": "BALLWIN",
+      "employer": "",
+      "occupation": "",
+      "total": 5000,
+      "count": 1,
+      "first_date": "2025-04-26",
+      "last_date": "2025-04-26"
+    },
+    {
+      "name": "UNUM GROUP POLITICAL ACTION COMMITTEE (UNUMPAC)",
+      "state": "TN",
+      "city": "CHATTANOOGA",
+      "employer": "",
+      "occupation": "",
+      "total": 5000,
+      "count": 1,
+      "first_date": "2025-03-28",
+      "last_date": "2025-03-28"
+    },
+    {
+      "name": "MASTERCARD INTERNATIONAL INC. EMPLOYEES' PAC",
+      "state": "DC",
+      "city": "WASHINGTON",
+      "employer": "",
+      "occupation": "",
+      "total": 5000,
+      "count": 1,
+      "first_date": "2025-03-31",
+      "last_date": "2025-03-31"
+    },
+    {
+      "name": "HDR INC. EMPLOYEE OWNERS PAC",
+      "state": "NE",
+      "city": "OMAHA",
+      "employer": "",
+      "occupation": "",
+      "total": 5000,
+      "count": 1,
+      "first_date": "2025-03-31",
+      "last_date": "2025-03-31"
+    },
+    {
+      "name": "CAPITAL ONE FINANCIAL CORP. ASSOC. POLITICAL FUND",
+      "state": "VA",
+      "city": "MCLEAN",
+      "employer": "",
+      "occupation": "",
+      "total": 5000,
+      "count": 1,
+      "first_date": "2025-03-28",
+      "last_date": "2025-03-28"
+    },
+    {
+      "name": "1-800 CONTACTS INC. PAC",
+      "state": "UT",
+      "city": "DRAPER",
+      "employer": "",
+      "occupation": "",
+      "total": 5000,
+      "count": 1,
+      "first_date": "2025-03-20",
+      "last_date": "2025-03-20"
+    },
+    {
+      "name": "SMITH & NEPHEW INC. PAC (S+N PAC)",
+      "state": "DC",
+      "city": "WASHINGTON",
+      "employer": "",
+      "occupation": "",
+      "total": 5000,
+      "count": 1,
+      "first_date": "2025-03-28",
+      "last_date": "2025-03-28"
+    },
+    {
+      "name": "SENATE CONSERVATIVES FUND",
+      "state": "DC",
+      "city": "WASHINGTON",
+      "employer": "",
+      "occupation": "",
+      "total": 5000,
+      "count": 1,
+      "first_date": "2025-01-10",
+      "last_date": "2025-01-10"
+    },
+    {
+      "name": "MEDTRONIC INC. PAC",
+      "state": "DC",
+      "city": "WASHINGTON",
+      "employer": "",
+      "occupation": "",
+      "total": 5000,
+      "count": 1,
+      "first_date": "2025-03-31",
+      "last_date": "2025-03-31"
+    },
+    {
+      "name": "CADENCE BANK PAC",
+      "state": "MS",
+      "city": "TUPELO",
+      "employer": "",
+      "occupation": "",
+      "total": 5000,
+      "count": 1,
+      "first_date": "2025-01-24",
+      "last_date": "2025-01-24"
+    },
+    {
+      "name": "VULCAN MATERIALS COMPANY POLITICAL ACTION COMMITTEE",
+      "state": "AL",
+      "city": "BIRMINGHAM",
+      "employer": "",
+      "occupation": "",
+      "total": 2500,
+      "count": 1,
+      "first_date": "2025-06-30",
+      "last_date": "2025-06-30"
+    },
+    {
+      "name": "SIEMENS CORPORATION PAC",
+      "state": "DC",
+      "city": "WASHINGTON",
+      "employer": "",
+      "occupation": "",
+      "total": 2500,
+      "count": 1,
+      "first_date": "2025-05-01",
+      "last_date": "2025-05-01"
+    },
+    {
+      "name": "ELEVANCE HEALTH INC. POLITICAL ACTION COMMITTEE (ELEVANCE H",
+      "state": "DC",
+      "city": "WASHINGTON",
+      "employer": "",
+      "occupation": "",
+      "total": 2500,
+      "count": 1,
+      "first_date": "2025-06-13",
+      "last_date": "2025-06-13"
+    },
+    {
+      "name": "AON CORPORATION POLITICAL ACTION COMMITTEE",
+      "state": "IL",
+      "city": "CHICAGO",
+      "employer": "",
+      "occupation": "",
+      "total": 2500,
+      "count": 1,
+      "first_date": "2025-05-30",
+      "last_date": "2025-05-30"
+    },
+    {
+      "name": "RBC USA HOLDCO CORPORATION FEDERAL POLITICAL ACTION COMMITTE",
+      "state": "NY",
+      "city": "NEW YORK",
+      "employer": "",
+      "occupation": "",
+      "total": 2500,
+      "count": 1,
+      "first_date": "2025-03-28",
+      "last_date": "2025-03-28"
+    },
+    {
+      "name": "KAH HOSPICE COMPANY INC. (DBA GENTIVA) PAC",
+      "state": "GA",
+      "city": "ATLANTA",
+      "employer": "",
+      "occupation": "",
+      "total": 2500,
+      "count": 1,
+      "first_date": "2025-03-31",
+      "last_date": "2025-03-31"
+    },
+    {
+      "name": "CARRIER GLOBAL CORPORATION POLITICAL ACTION COMMITTEE",
+      "state": "FL",
+      "city": "PALM BEACH GARDENS",
+      "employer": "",
+      "occupation": "",
+      "total": 2500,
+      "count": 1,
+      "first_date": "2025-03-28",
+      "last_date": "2025-03-28"
+    },
+    {
+      "name": "ALTICOR INC. POLITICAL ACTION COMMITTEE ALTIPAC",
+      "state": "MI",
+      "city": "ADA",
+      "employer": "",
+      "occupation": "",
+      "total": 2500,
+      "count": 1,
+      "first_date": "2025-03-28",
+      "last_date": "2025-03-28"
+    },
+    {
+      "name": "TROUTMAN PEPPER LOCKE LLP POLITICAL ACTION COMMITTEE INC.",
+      "state": "GA",
+      "city": "ATLANTA",
+      "employer": "",
+      "occupation": "",
+      "total": 2500,
+      "count": 2,
+      "first_date": "2025-06-30",
+      "last_date": "2025-06-30"
+    },
+    {
+      "name": "FLIGHT CHOICE",
+      "state": "TN",
+      "city": "ALCOA",
+      "employer": "",
+      "occupation": "",
+      "total": 2412.18,
+      "count": 1,
+      "first_date": "2025-04-08",
+      "last_date": "2025-04-08"
+    },
+    {
+      "name": "USANA HEALTH SCIENCES INC PAC",
+      "state": "UT",
+      "city": "SALT LAKE CITY",
+      "employer": "",
+      "occupation": "",
+      "total": 2000,
+      "count": 1,
+      "first_date": "2025-05-01",
+      "last_date": "2025-05-01"
+    },
+    {
+      "name": "NEWS CORPORATION POLITICAL ACTION COMMITTEE (NEWS CORP PAC)",
+      "state": "NY",
+      "city": "NEW YORK",
+      "employer": "",
+      "occupation": "",
+      "total": 2000,
+      "count": 1,
+      "first_date": "2025-05-11",
+      "last_date": "2025-05-11"
+    },
+    {
+      "name": "TRANE TECHNOLOGIES COMPANY LLC POLITICAL ACTION COMMITTEE",
+      "state": "NC",
+      "city": "DAVIDSON",
+      "employer": "",
+      "occupation": "",
+      "total": 2000,
+      "count": 1,
+      "first_date": "2025-06-13",
+      "last_date": "2025-06-13"
+    },
+    {
+      "name": "SAMSUNG ELECTRONICS AMERICA INC POLITICAL ACTION COMMITTEE",
+      "state": "DC",
+      "city": "WASHINGTON",
+      "employer": "",
+      "occupation": "",
+      "total": 2000,
+      "count": 1,
+      "first_date": "2025-06-13",
+      "last_date": "2025-06-13"
+    },
+    {
+      "name": "MOTOROLA SOLUTIONS INC. POLITICAL ACTION COMMITTEE",
+      "state": "DC",
+      "city": "WASHINGTON",
+      "employer": "",
+      "occupation": "",
+      "total": 2000,
+      "count": 1,
+      "first_date": "2025-06-13",
+      "last_date": "2025-06-13"
+    },
+    {
+      "name": "ENTERTAINMENT SOFTWARE ASSOCIATION PAC (ESA PAC)",
+      "state": "DC",
+      "city": "WASHINGTON",
+      "employer": "",
+      "occupation": "",
+      "total": 2000,
+      "count": 1,
+      "first_date": "2025-05-21",
+      "last_date": "2025-05-21"
+    },
+    {
+      "name": "CONSUMER TECHNOLOGY ASSOCIATION PAC",
+      "state": "VA",
+      "city": "ARLINGTON",
+      "employer": "",
+      "occupation": "",
+      "total": 2000,
+      "count": 1,
+      "first_date": "2025-05-16",
+      "last_date": "2025-05-16"
+    },
+    {
+      "name": "ZILLOW GROUP INC. POLITICAL ACTION COMMITTEE (ZG PAC)",
+      "state": "WA",
+      "city": "SEATTLE",
+      "employer": "",
+      "occupation": "",
+      "total": 2000,
+      "count": 1,
+      "first_date": "2025-01-15",
+      "last_date": "2025-01-15"
+    },
+    {
+      "name": "TOYOTA MOTOR NORTH AMERICA INC POLITICAL ACTION COMMITTEE (",
+      "state": "DC",
+      "city": "WASHINGTON",
+      "employer": "",
+      "occupation": "",
+      "total": 2000,
+      "count": 2,
+      "first_date": "2025-03-18",
+      "last_date": "2025-05-20"
+    },
+    {
+      "name": "NATIONAL VENTURE CAPITAL ASSOCIATION VENTUREPAC",
+      "state": "DC",
+      "city": "WASHINGTON",
+      "employer": "",
+      "occupation": "",
+      "total": 1500,
+      "count": 1,
+      "first_date": "2025-07-11",
+      "last_date": "2025-07-11"
+    },
+    {
+      "name": "SYLVAMO CORPORATION PAC",
+      "state": "DC",
+      "city": "WASHINGTON",
+      "employer": "",
+      "occupation": "",
+      "total": 1500,
+      "count": 1,
+      "first_date": "2025-06-30",
+      "last_date": "2025-06-30"
+    },
+    {
+      "name": "LANTHEUS HOLDINGS INC POLITICAL ACTION COMMITTEE (LANTHEUS P",
+      "state": "MA",
+      "city": "BEDFORD",
+      "employer": "",
+      "occupation": "",
+      "total": 1500,
+      "count": 1,
+      "first_date": "2025-06-30",
+      "last_date": "2025-06-30"
+    },
+    {
+      "name": "HEALTHCARE DISTRIBUTION ALLIANCE POLITICAL ACTION COMMITTEE",
+      "state": "VA",
+      "city": "ARLINGTON",
+      "employer": "",
+      "occupation": "",
+      "total": 1500,
+      "count": 1,
+      "first_date": "2025-06-13",
+      "last_date": "2025-06-13"
+    },
+    {
+      "name": "COMMUNITY SOLAR ACTION FUND",
+      "state": "DC",
+      "city": "WASHINGTON",
+      "employer": "",
+      "occupation": "",
+      "total": 1500,
+      "count": 1,
+      "first_date": "2025-06-30",
+      "last_date": "2025-06-30"
+    },
+    {
+      "name": "AXXESS CONSULT INC POLITICAL ACTION COMMITTEE (AXXESS PAC)",
+      "state": "TX",
+      "city": "DALLAS",
+      "employer": "",
+      "occupation": "",
+      "total": 1500,
+      "count": 1,
+      "first_date": "2025-06-13",
+      "last_date": "2025-06-13"
+    },
+    {
+      "name": "AMERICAN OSTEOPATHIC INFORMATION ASSOCIATION - OSTEOPATHIC P",
+      "state": "DC",
+      "city": "WASHINGTON",
+      "employer": "",
+      "occupation": "",
+      "total": 1500,
+      "count": 1,
+      "first_date": "2025-06-13",
+      "last_date": "2025-06-13"
+    },
+    {
+      "name": "YOPAC",
+      "state": "VA",
+      "city": "ALEXANDRIA",
+      "employer": "",
+      "occupation": "",
+      "total": 1500,
+      "count": 1,
+      "first_date": "2025-01-21",
+      "last_date": "2025-01-21"
+    },
+    {
+      "name": "POLITICAL ACTION COMMITTEE OF THE AMERICAN ASSOCIATION OF OR",
+      "state": "DC",
+      "city": "WASHINGTON",
+      "employer": "",
+      "occupation": "",
+      "total": 1500,
+      "count": 1,
+      "first_date": "2025-03-28",
+      "last_date": "2025-03-28"
+    }
+  ]
+}
