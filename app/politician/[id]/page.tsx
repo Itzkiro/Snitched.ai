@@ -13,6 +13,7 @@ import {
 } from '@/lib/politician-display';
 import ConnectionsGraph from '@/components/ConnectionsGraph';
 import ShareDossier from '@/components/ShareDossier';
+import DownloadDossier from '@/components/DownloadDossier';
 
 // ---------------------------------------------------------------------------
 // Voting Record Types — unified shape for both federal and state votes
@@ -409,7 +410,9 @@ export default function PoliticianPage() {
               : ''}
             {politician.juiceBoxTier !== 'none'
               ? ` | ${getJuiceBoxLabel(politician.juiceBoxTier)} - ${formatLobbyAmount(getProIsraelLobbyAmount(politician))} ${PRO_ISRAEL_LOBBY_LABEL}`
-              : ''}
+              : (getProIsraelLobbyAmount(politician) === 0 && !hasRedFlags)
+                ? ` | ✓ NO FOREIGN INFLUENCE DETECTED`
+                : ''}
           </span>
         </div>
       </div>
@@ -433,6 +436,7 @@ export default function PoliticianPage() {
               ← BACK TO DATABASE
             </Link>
             <ShareDossier politician={politician} />
+            <DownloadDossier politician={politician} />
             <a
               href={`/api/export?format=csv&type=all`}
               download

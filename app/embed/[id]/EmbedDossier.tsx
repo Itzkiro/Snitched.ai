@@ -190,26 +190,23 @@ export default function EmbedDossier(props: EmbedDossierProps) {
           </div>
         </div>
 
-        {/* Donation status / Foreign Influence — shown only when lobby > 0
-            or candidate has an explicit donation_status override */}
-        {(lobby > 0 || !!donationStatus) && (
-          <div style={{
-            padding: '14px 16px', background: lobbyBg, border: `2px solid ${lobbyBorder}`,
-            marginBottom: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-          }}>
-            <div>
-              <div style={{ fontSize: '10px', color: lobbyColor, letterSpacing: '2px', fontWeight: 700 }}>{lobbyIcon} {lobbyLabel}</div>
-              {(donationStatus?.subtext ?? 'Pro-Israel Lobby / AIPAC / Foreign PACs') && (
-                <div style={{ fontSize: '9px', color: '#4a5a4a', marginTop: '3px' }}>
-                  {donationStatus?.subtext ?? 'Pro-Israel Lobby / AIPAC / Foreign PACs'}
-                </div>
-              )}
-            </div>
-            <div style={{ fontSize: '28px', fontWeight: 700, color: lobbyColor, textShadow: `0 0 15px ${lobbyColor}40`, letterSpacing: '1px' }}>
-              {fmtMoney(donationStatus?.amount ?? lobby)}
+        {/* Donation status / Foreign Influence — always rendered.
+            Lobby > 0 (or donation_status override) → red "FOREIGN INFLUENCE DETECTED".
+            Lobby == 0 → green "✓ NO FOREIGN INFLUENCE" affirmation. */}
+        <div style={{
+          padding: '14px 16px', background: lobbyBg, border: `2px solid ${lobbyBorder}`,
+          marginBottom: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+        }}>
+          <div>
+            <div style={{ fontSize: '10px', color: lobbyColor, letterSpacing: '2px', fontWeight: 700 }}>{lobbyIcon} {lobbyLabel}</div>
+            <div style={{ fontSize: '9px', color: '#4a5a4a', marginTop: '3px' }}>
+              {donationStatus?.subtext ?? 'Pro-Israel Lobby / AIPAC / Foreign PACs'}
             </div>
           </div>
-        )}
+          <div style={{ fontSize: '28px', fontWeight: 700, color: lobbyColor, textShadow: `0 0 15px ${lobbyColor}40`, letterSpacing: '1px' }}>
+            {fmtMoney(donationStatus?.amount ?? lobby)}
+          </div>
+        </div>
 
         {/* Self-funded banner — promoted from Top Donors when candidate self-funds */}
         {isSelfFunded && (

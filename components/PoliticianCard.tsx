@@ -136,8 +136,8 @@ export default function PoliticianCard({ politician }: Props) {
         )}
 
         {/* Juice Box Tag */}
-        {politician.juiceBoxTier !== 'none' && (
-          <div 
+        {politician.juiceBoxTier !== 'none' ? (
+          <div
             className={`tag tag-${politician.juiceBoxTier.replace('_', '-')}`}
             style={{ marginBottom: '1.5rem', display: 'inline-flex' }}
           >
@@ -146,7 +146,22 @@ export default function PoliticianCard({ politician }: Props) {
               ${Math.round(politician.aipacFunding).toLocaleString('en-US')}
             </span>
           </div>
-        )}
+        ) : ((politician.israelLobbyTotal ?? 0) === 0 && (politician.aipacFunding ?? 0) === 0) ? (
+          <div
+            style={{
+              marginBottom: '1.5rem',
+              display: 'inline-flex',
+              padding: '0.4rem 0.75rem',
+              border: '1px solid var(--terminal-green, #10b981)',
+              color: 'var(--terminal-green, #10b981)',
+              fontSize: '0.75rem',
+              fontWeight: 700,
+              letterSpacing: '0.1em',
+            }}
+          >
+            ✓ NO FOREIGN INFLUENCE DETECTED
+          </div>
+        ) : null}
 
         {/* Top Donor */}
         {politician.topDonor?.name && (
