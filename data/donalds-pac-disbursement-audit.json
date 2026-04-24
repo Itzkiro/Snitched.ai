@@ -1,0 +1,4716 @@
+{
+  "candidate_id": "H2FL14186",
+  "principal_committee_ids": [
+    "C00733329",
+    "C00509877"
+  ],
+  "method": "schedule_b_by_disburser — corrected for earlier broken Schedule A contributor_committee_id filter",
+  "audited_at": "2026-04-24T22:26:11.951Z",
+  "finished_at": "2026-04-24T22:29:46.384Z",
+  "total_pacs_checked": 92,
+  "by_cycle": {
+    "2020": {
+      "total": 21000,
+      "entries": [
+        {
+          "pac_id": "C00127811",
+          "pac_name": "U.S. ISRAEL PAC (USI PAC)",
+          "donalds_cmte": "C00733329",
+          "cycle": 2020,
+          "amount": 3500,
+          "date": "2020-09-25",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CAMPAIGN CONTRIBUTION",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00492579",
+          "pac_name": "American Principles",
+          "donalds_cmte": "C00733329",
+          "cycle": 2020,
+          "amount": 1500,
+          "date": "2020-09-25",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CAMPAIGN CONTRIBUTION",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00492579",
+          "pac_name": "American Principles",
+          "donalds_cmte": "C00733329",
+          "cycle": 2020,
+          "amount": 1000,
+          "date": "2020-07-10",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CAMPAIGN CONTRIBUTION",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2020,
+          "amount": 5000,
+          "date": "2020-10-09",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2020,
+          "amount": 5000,
+          "date": "2020-09-29",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00236489",
+          "pac_name": "J Street PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2020,
+          "amount": 5000,
+          "date": "2020-09-21",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2020 GENERAL",
+          "earmark_donor": null
+        }
+      ]
+    },
+    "2022": {
+      "total": 44309.3,
+      "entries": [
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 36,
+          "date": "2022-11-09",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF GARY KATZ. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF GARY KATZ",
+          "earmark_donor": "GARY KATZ"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 5000,
+          "date": "2022-09-28",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CONTRIBUTION TO COMMITTEE",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": -2100,
+          "date": "2022-09-23",
+          "type": "direct",
+          "memo": "",
+          "purpose": "VOID - CONTRIBUTION TO COMMITTEE",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": -5000,
+          "date": "2022-09-23",
+          "type": "direct",
+          "memo": "",
+          "purpose": "VOID - CONTRIBUTION TO COMMITTEE",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 100,
+          "date": "2022-09-19",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF PHILIP H. COHEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF PHILIP H. COHEN",
+          "earmark_donor": "PHILIP H"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 250,
+          "date": "2022-09-12",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MAYRA LICHTER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MAYRA LICHTER",
+          "earmark_donor": "MAYRA LICHTER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 250,
+          "date": "2022-08-29",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF PAUL KRUSS. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF PAUL KRUSS",
+          "earmark_donor": "PAUL KRUSS"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 100,
+          "date": "2022-08-11",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF HARRY PELLMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF HARRY PELLMAN",
+          "earmark_donor": "HARRY PELLMAN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 125,
+          "date": "2022-08-08",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF DOUGLAS WOLL. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF DOUGLAS WOLL",
+          "earmark_donor": "DOUGLAS WOLL"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 125,
+          "date": "2022-08-08",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MARGO WOLL. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MARGO WOLL",
+          "earmark_donor": "MARGO WOLL"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 500,
+          "date": "2022-08-01",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF SHELDON GOODMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF SHELDON GOODMAN",
+          "earmark_donor": "SHELDON GOODMAN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 5000,
+          "date": "2022-07-13",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CONTRIBUTION TO COMMITTEE",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 2100,
+          "date": "2022-07-13",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CONTRIBUTION TO COMMITTEE",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 100,
+          "date": "2022-04-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF RAFAEL COHEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF RAFAEL COHEN",
+          "earmark_donor": "RAFAEL COHEN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 10,
+          "date": "2022-04-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MOSHE FRIDMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MOSHE FRIDMAN",
+          "earmark_donor": "MOSHE FRIDMAN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 25,
+          "date": "2022-04-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF PAUL LUBETKIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF PAUL LUBETKIN",
+          "earmark_donor": "PAUL LUBETKIN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 2900,
+          "date": "2022-04-14",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CONTRIBUTION TO COMMITTEE",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 500,
+          "date": "2022-04-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF PETER LIVINGSTON. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF PETER LIVINGSTON",
+          "earmark_donor": "PETER LIVINGSTON"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1000,
+          "date": "2022-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF LISA BENSMIHEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF LISA BENSMIHEN",
+          "earmark_donor": "LISA BENSMIHEN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1500,
+          "date": "2022-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF SETHS WISE. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF SETHS WISE",
+          "earmark_donor": "SETHS WISE"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1500,
+          "date": "2022-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF STEWART HESCHELES. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF STEWART HESCHELES",
+          "earmark_donor": "STEWART HESCHELES"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1500,
+          "date": "2022-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF STUART MORRIS. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF STUART MORRIS",
+          "earmark_donor": "STUART MORRIS"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1500,
+          "date": "2022-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF LARRY GENET. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF LARRY GENET",
+          "earmark_donor": "LARRY GENET"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1500,
+          "date": "2022-03-27",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF ADELA ETCHARREN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF ADELA ETCHARREN",
+          "earmark_donor": "ADELA ETCHARREN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1500,
+          "date": "2022-03-27",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF BEN GENET. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF BEN GENET",
+          "earmark_donor": "BEN GENET"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1500,
+          "date": "2022-03-27",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF PAUL ROSENBERG. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF PAUL ROSENBERG",
+          "earmark_donor": "PAUL ROSENBERG"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 500,
+          "date": "2022-03-27",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF LISA BENSMIHEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF LISA BENSMIHEN",
+          "earmark_donor": "LISA BENSMIHEN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1500,
+          "date": "2022-03-27",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF BRIAN KOPELOWITZ. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF BRIAN KOPELOWITZ",
+          "earmark_donor": "BRIAN KOPELOWITZ"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1500,
+          "date": "2022-03-27",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF DEBRA GILL. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF DEBRA GILL",
+          "earmark_donor": "DEBRA GILL"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 250,
+          "date": "2022-10-06",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ALAN SAGER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ALAN SAGER",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 10.8,
+          "date": "2022-09-26",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 0.3,
+          "date": "2022-09-26",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 27.2,
+          "date": "2022-09-23",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM JACK POTOK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM JACK POTOK",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00492579",
+          "pac_name": "American Principles",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1500,
+          "date": "2022-09-07",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CAMPAIGN CONTRIBUTION",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 5000,
+          "date": "2022-09-20",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 3000,
+          "date": "2022-07-25",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1000,
+          "date": "2022-05-24",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1000,
+          "date": "2021-03-26",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00236489",
+          "pac_name": "J Street PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 2500,
+          "date": "2022-09-14",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2022 GENERAL",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00236489",
+          "pac_name": "J Street PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 2500,
+          "date": "2022-06-06",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2022 PRIMARY",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00236489",
+          "pac_name": "J Street PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 2500,
+          "date": "2021-07-22",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2022 PRIMARY",
+          "earmark_donor": null
+        }
+      ]
+    },
+    "2024": {
+      "total": 61819.08999999999,
+      "entries": [
+        {
+          "pac_id": "C00104299",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-09-30",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2024 GENERAL",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00104299",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3000,
+          "date": "2023-10-25",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2024 PRIMARY",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2024-10-30",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF NATHANIEL DOLNER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF NATHANIEL DOLNER",
+          "earmark_donor": "NATHANIEL DOLNER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1,
+          "date": "2024-10-30",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF GREGORY LEVINE. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF GREGORY LEVINE",
+          "earmark_donor": "GREGORY LEVINE"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-10-23",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF ARTHUR AGATSTON. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF ARTHUR AGATSTON",
+          "earmark_donor": "ARTHUR AGATSTON"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 200,
+          "date": "2024-10-18",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF SCOTT FANE. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF SCOTT FANE",
+          "earmark_donor": "SCOTT FANE"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2024-10-18",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF HARRY PELLMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF HARRY PELLMAN",
+          "earmark_donor": "HARRY PELLMAN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5,
+          "date": "2024-10-16",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF CHAD BARBER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF CHAD BARBER",
+          "earmark_donor": "CHAD BARBER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 250,
+          "date": "2024-09-25",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF PHILLIP ROSENTHAL. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF PHILLIP ROSENTHAL",
+          "earmark_donor": "PHILLIP ROSENTHAL"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2024-09-25",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF ALBERTO CAMHI. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF ALBERTO CAMHI",
+          "earmark_donor": "ALBERTO CAMHI"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5000,
+          "date": "2024-09-24",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CONTRIBUTION TO COMMITTEE",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-09-11",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF ELIZABETH SCHULTZ. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF ELIZABETH SCHULTZ",
+          "earmark_donor": "ELIZABETH SCHULTZ"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2000,
+          "date": "2024-08-28",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MICHAEL HOBERMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MICHAEL HOBERMAN",
+          "earmark_donor": "MICHAEL HOBERMAN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1.18,
+          "date": "2024-08-21",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF E SEGAL. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF E SEGAL",
+          "earmark_donor": "E SEGAL"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 36,
+          "date": "2024-07-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MARVIN DENNIS. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MARVIN DENNIS",
+          "earmark_donor": "MARVIN DENNIS"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 25,
+          "date": "2024-07-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MARK MOSS. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MARK MOSS",
+          "earmark_donor": "MARK MOSS"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 250,
+          "date": "2024-07-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF NIR SAMUEL. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF NIR SAMUEL",
+          "earmark_donor": "NIR SAMUEL"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5.11,
+          "date": "2024-07-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF VIKTOR LITVINOV. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF VIKTOR LITVINOV",
+          "earmark_donor": "VIKTOR LITVINOV"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5000,
+          "date": "2024-07-10",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CONTRIBUTION TO COMMITTEE",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2000,
+          "date": "2024-06-19",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MICHAEL HOBERMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MICHAEL HOBERMAN",
+          "earmark_donor": "MICHAEL HOBERMAN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 250,
+          "date": "2024-06-12",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MARK MILLER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MARK MILLER",
+          "earmark_donor": "MARK MILLER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2024-06-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF SCOTT FANE. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF SCOTT FANE",
+          "earmark_donor": "SCOTT FANE"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-06-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF LARRY BROWN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF LARRY BROWN",
+          "earmark_donor": "LARRY BROWN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2024-05-22",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF ARIEL FURST. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF ARIEL FURST",
+          "earmark_donor": "ARIEL FURST"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 9.13,
+          "date": "2024-04-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF ALEXANDER GRIMM. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF ALEXANDER GRIMM",
+          "earmark_donor": "ALEXANDER GRIMM"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1,
+          "date": "2024-04-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF RICHARD DIAMOND. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF RICHARD DIAMOND",
+          "earmark_donor": "RICHARD DIAMOND"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 6600,
+          "date": "2024-01-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF DAVID ZALIK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF DAVID ZALIK",
+          "earmark_donor": "DAVID ZALIK"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 6600,
+          "date": "2024-01-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF HELEN ZALIK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF HELEN ZALIK",
+          "earmark_donor": "HELEN ZALIK"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5,
+          "date": "2023-11-08",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF FLORENCE BARBER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF FLORENCE BARBER",
+          "earmark_donor": "FLORENCE BARBER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2023-10-18",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF JEFFREY FISHER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF JEFFREY FISHER",
+          "earmark_donor": "JEFFREY FISHER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5,
+          "date": "2023-10-11",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF CHAD BARBER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF CHAD BARBER",
+          "earmark_donor": "CHAD BARBER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 200,
+          "date": "2023-09-13",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF DIANE COHEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF DIANE COHEN",
+          "earmark_donor": "DIANE COHEN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2900,
+          "date": "2023-01-04",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF SANFORD PERL. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF SANFORD PERL",
+          "earmark_donor": "SANFORD PERL"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 75,
+          "date": "2024-11-03",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM HAROLD GOLDFARB. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM HAROLD GOLDFARB",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 50,
+          "date": "2024-11-01",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ARON SWERDLIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ARON SWERDLIN",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 50,
+          "date": "2024-10-28",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM MATTHEW BERRY. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM MATTHEW BERRY",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 16.67,
+          "date": "2024-10-25",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM CAROL ROARK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM CAROL ROARK",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 6.1,
+          "date": "2024-10-23",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM RAYMOND MORENO. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM RAYMOND MORENO",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 36,
+          "date": "2024-10-21",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 50,
+          "date": "2024-10-08",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ARON SWERDLIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ARON SWERDLIN",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 15,
+          "date": "2024-09-30",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM CAROL ROARK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM CAROL ROARK",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 10,
+          "date": "2024-09-26",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM WENDY WAGNER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM WENDY WAGNER",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 68.18,
+          "date": "2024-09-20",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM STEVEN SILVERSTEIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM STEVEN SILVERSTEIN",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-09-05",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 80,
+          "date": "2024-09-04",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM DAVID SCHULAK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM DAVID SCHULAK",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 80,
+          "date": "2024-09-04",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM DAVID SCHULAK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM DAVID SCHULAK",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-08-25",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-08-25",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-08-22",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-08-22",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-08-19",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5,
+          "date": "2024-08-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5,
+          "date": "2024-08-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5,
+          "date": "2024-08-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5,
+          "date": "2024-08-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 4,
+          "date": "2024-08-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-08-09",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-08-06",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2024-08-04",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ELLEN GOLDSCHILD. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ELLEN GOLDSCHILD",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 50,
+          "date": "2024-08-03",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ARON SWERDLIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ARON SWERDLIN",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2.42,
+          "date": "2024-07-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-07-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-07-19",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-07-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-07-04",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-07-03",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-07-03",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-07-01",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-06-30",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2024-06-28",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM STEVEN SILVERSTEIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM STEVEN SILVERSTEIN",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-06-28",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2.33,
+          "date": "2024-06-25",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-06-25",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-06-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-06-22",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-06-22",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-06-16",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-06-16",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-06-14",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-06-14",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-06-12",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-06-09",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-06-06",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 50,
+          "date": "2024-06-03",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ARON SWERDLIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ARON SWERDLIN",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-06-03",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-06-01",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 25,
+          "date": "2024-05-23",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ROBERTO ELOVIC. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ROBERTO ELOVIC",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-05-22",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-05-18",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-05-15",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-05-15",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-05-13",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-05-11",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-05-08",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-05-03",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-04-29",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-04-29",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-04-25",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-04-20",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2.27,
+          "date": "2024-04-14",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 18,
+          "date": "2024-04-13",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-04-05",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 50,
+          "date": "2024-04-02",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ARON SWERDLIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ARON SWERDLIN",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-03-30",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-03-30",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-03-30",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-03-26",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-03-16",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-03-15",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-03-15",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-14",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM DEAN FARACCHIO. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM DEAN FARACCHIO",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2024-03-06",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KEVIN WOLKENFELD. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KEVIN WOLKENFELD",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 50,
+          "date": "2024-02-19",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM LONNIE WULFE. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM LONNIE WULFE",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5.2,
+          "date": "2023-12-21",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM JOSEPH AUSTIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM JOSEPH AUSTIN",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 42.5,
+          "date": "2023-12-21",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM DANIEL EHRENSAFT. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM DANIEL EHRENSAFT",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2023-12-08",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM MARION ZOLA. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM MARION ZOLA",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2023-10-29",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM DEAN FARACCHIO. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM DEAN FARACCHIO",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2023-08-18",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM MARION ZOLA. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM MARION ZOLA",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00068692",
+          "pac_name": "NORPAC (legacy ID)",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-10-22",
+          "type": "direct",
+          "memo": "",
+          "purpose": "DIRECT CONTRIBUTION / US HOUSE / FL-19",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00492579",
+          "pac_name": "American Principles",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1500,
+          "date": "2024-11-18",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CAMPAIGN CONTRIBUTION",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5000,
+          "date": "2024-09-20",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2000,
+          "date": "2023-04-17",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00236489",
+          "pac_name": "J Street PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-07-17",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2024 PRIMARY",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00236489",
+          "pac_name": "J Street PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5000,
+          "date": "2024-07-17",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2024 GENERAL",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00236489",
+          "pac_name": "J Street PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-02-15",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2024 PRIMARY",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00236489",
+          "pac_name": "J Street PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-02-12",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2024 PRIMARY",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00236489",
+          "pac_name": "J Street PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2000,
+          "date": "2023-07-24",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2024 PRIMARY",
+          "earmark_donor": null
+        }
+      ]
+    },
+    "2026": {
+      "total": 7000,
+      "entries": [
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2026,
+          "amount": 5000,
+          "date": "2025-03-31",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CONTRIBUTION",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2026,
+          "amount": 2000,
+          "date": "2025-02-05",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        }
+      ]
+    }
+  },
+  "by_pac": {
+    "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE PAC": {
+      "committee_id": "C00104299",
+      "total_all_cycles": 4000,
+      "by_cycle": {
+        "2024": 4000
+      },
+      "by_donalds_cmte": {
+        "C00733329": 4000
+      },
+      "entries": [
+        {
+          "pac_id": "C00104299",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-09-30",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2024 GENERAL",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00104299",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3000,
+          "date": "2023-10-25",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2024 PRIMARY",
+          "earmark_donor": null
+        }
+      ],
+      "earmarked_donors": []
+    },
+    "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO": {
+      "committee_id": "C00797670",
+      "total_all_cycles": 59864.42,
+      "by_cycle": {
+        "2022": 25021,
+        "2024": 34843.42
+      },
+      "by_donalds_cmte": {
+        "C00733329": 59864.42
+      },
+      "entries": [
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2024-10-30",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF NATHANIEL DOLNER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF NATHANIEL DOLNER",
+          "earmark_donor": "NATHANIEL DOLNER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1,
+          "date": "2024-10-30",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF GREGORY LEVINE. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF GREGORY LEVINE",
+          "earmark_donor": "GREGORY LEVINE"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-10-23",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF ARTHUR AGATSTON. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF ARTHUR AGATSTON",
+          "earmark_donor": "ARTHUR AGATSTON"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 200,
+          "date": "2024-10-18",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF SCOTT FANE. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF SCOTT FANE",
+          "earmark_donor": "SCOTT FANE"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2024-10-18",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF HARRY PELLMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF HARRY PELLMAN",
+          "earmark_donor": "HARRY PELLMAN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5,
+          "date": "2024-10-16",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF CHAD BARBER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF CHAD BARBER",
+          "earmark_donor": "CHAD BARBER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 250,
+          "date": "2024-09-25",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF PHILLIP ROSENTHAL. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF PHILLIP ROSENTHAL",
+          "earmark_donor": "PHILLIP ROSENTHAL"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2024-09-25",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF ALBERTO CAMHI. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF ALBERTO CAMHI",
+          "earmark_donor": "ALBERTO CAMHI"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5000,
+          "date": "2024-09-24",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CONTRIBUTION TO COMMITTEE",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-09-11",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF ELIZABETH SCHULTZ. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF ELIZABETH SCHULTZ",
+          "earmark_donor": "ELIZABETH SCHULTZ"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2000,
+          "date": "2024-08-28",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MICHAEL HOBERMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MICHAEL HOBERMAN",
+          "earmark_donor": "MICHAEL HOBERMAN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1.18,
+          "date": "2024-08-21",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF E SEGAL. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF E SEGAL",
+          "earmark_donor": "E SEGAL"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 36,
+          "date": "2024-07-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MARVIN DENNIS. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MARVIN DENNIS",
+          "earmark_donor": "MARVIN DENNIS"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 25,
+          "date": "2024-07-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MARK MOSS. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MARK MOSS",
+          "earmark_donor": "MARK MOSS"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 250,
+          "date": "2024-07-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF NIR SAMUEL. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF NIR SAMUEL",
+          "earmark_donor": "NIR SAMUEL"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5.11,
+          "date": "2024-07-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF VIKTOR LITVINOV. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF VIKTOR LITVINOV",
+          "earmark_donor": "VIKTOR LITVINOV"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5000,
+          "date": "2024-07-10",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CONTRIBUTION TO COMMITTEE",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2000,
+          "date": "2024-06-19",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MICHAEL HOBERMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MICHAEL HOBERMAN",
+          "earmark_donor": "MICHAEL HOBERMAN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 250,
+          "date": "2024-06-12",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MARK MILLER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MARK MILLER",
+          "earmark_donor": "MARK MILLER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2024-06-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF SCOTT FANE. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF SCOTT FANE",
+          "earmark_donor": "SCOTT FANE"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-06-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF LARRY BROWN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF LARRY BROWN",
+          "earmark_donor": "LARRY BROWN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2024-05-22",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF ARIEL FURST. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF ARIEL FURST",
+          "earmark_donor": "ARIEL FURST"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 9.13,
+          "date": "2024-04-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF ALEXANDER GRIMM. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF ALEXANDER GRIMM",
+          "earmark_donor": "ALEXANDER GRIMM"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1,
+          "date": "2024-04-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF RICHARD DIAMOND. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF RICHARD DIAMOND",
+          "earmark_donor": "RICHARD DIAMOND"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 6600,
+          "date": "2024-01-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF DAVID ZALIK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF DAVID ZALIK",
+          "earmark_donor": "DAVID ZALIK"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 6600,
+          "date": "2024-01-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF HELEN ZALIK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF HELEN ZALIK",
+          "earmark_donor": "HELEN ZALIK"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5,
+          "date": "2023-11-08",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF FLORENCE BARBER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF FLORENCE BARBER",
+          "earmark_donor": "FLORENCE BARBER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2023-10-18",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF JEFFREY FISHER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF JEFFREY FISHER",
+          "earmark_donor": "JEFFREY FISHER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5,
+          "date": "2023-10-11",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF CHAD BARBER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF CHAD BARBER",
+          "earmark_donor": "CHAD BARBER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 200,
+          "date": "2023-09-13",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF DIANE COHEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF DIANE COHEN",
+          "earmark_donor": "DIANE COHEN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2900,
+          "date": "2023-01-04",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF SANFORD PERL. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF SANFORD PERL",
+          "earmark_donor": "SANFORD PERL"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 36,
+          "date": "2022-11-09",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF GARY KATZ. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF GARY KATZ",
+          "earmark_donor": "GARY KATZ"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 5000,
+          "date": "2022-09-28",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CONTRIBUTION TO COMMITTEE",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": -2100,
+          "date": "2022-09-23",
+          "type": "direct",
+          "memo": "",
+          "purpose": "VOID - CONTRIBUTION TO COMMITTEE",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": -5000,
+          "date": "2022-09-23",
+          "type": "direct",
+          "memo": "",
+          "purpose": "VOID - CONTRIBUTION TO COMMITTEE",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 100,
+          "date": "2022-09-19",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF PHILIP H. COHEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF PHILIP H. COHEN",
+          "earmark_donor": "PHILIP H"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 250,
+          "date": "2022-09-12",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MAYRA LICHTER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MAYRA LICHTER",
+          "earmark_donor": "MAYRA LICHTER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 250,
+          "date": "2022-08-29",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF PAUL KRUSS. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF PAUL KRUSS",
+          "earmark_donor": "PAUL KRUSS"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 100,
+          "date": "2022-08-11",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF HARRY PELLMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF HARRY PELLMAN",
+          "earmark_donor": "HARRY PELLMAN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 125,
+          "date": "2022-08-08",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF DOUGLAS WOLL. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF DOUGLAS WOLL",
+          "earmark_donor": "DOUGLAS WOLL"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 125,
+          "date": "2022-08-08",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MARGO WOLL. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MARGO WOLL",
+          "earmark_donor": "MARGO WOLL"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 500,
+          "date": "2022-08-01",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF SHELDON GOODMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF SHELDON GOODMAN",
+          "earmark_donor": "SHELDON GOODMAN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 5000,
+          "date": "2022-07-13",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CONTRIBUTION TO COMMITTEE",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 2100,
+          "date": "2022-07-13",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CONTRIBUTION TO COMMITTEE",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 100,
+          "date": "2022-04-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF RAFAEL COHEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF RAFAEL COHEN",
+          "earmark_donor": "RAFAEL COHEN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 10,
+          "date": "2022-04-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MOSHE FRIDMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MOSHE FRIDMAN",
+          "earmark_donor": "MOSHE FRIDMAN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 25,
+          "date": "2022-04-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF PAUL LUBETKIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF PAUL LUBETKIN",
+          "earmark_donor": "PAUL LUBETKIN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 2900,
+          "date": "2022-04-14",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CONTRIBUTION TO COMMITTEE",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 500,
+          "date": "2022-04-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF PETER LIVINGSTON. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF PETER LIVINGSTON",
+          "earmark_donor": "PETER LIVINGSTON"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1000,
+          "date": "2022-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF LISA BENSMIHEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF LISA BENSMIHEN",
+          "earmark_donor": "LISA BENSMIHEN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1500,
+          "date": "2022-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF SETHS WISE. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF SETHS WISE",
+          "earmark_donor": "SETHS WISE"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1500,
+          "date": "2022-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF STEWART HESCHELES. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF STEWART HESCHELES",
+          "earmark_donor": "STEWART HESCHELES"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1500,
+          "date": "2022-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF STUART MORRIS. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF STUART MORRIS",
+          "earmark_donor": "STUART MORRIS"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1500,
+          "date": "2022-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF LARRY GENET. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF LARRY GENET",
+          "earmark_donor": "LARRY GENET"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1500,
+          "date": "2022-03-27",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF ADELA ETCHARREN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF ADELA ETCHARREN",
+          "earmark_donor": "ADELA ETCHARREN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1500,
+          "date": "2022-03-27",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF BEN GENET. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF BEN GENET",
+          "earmark_donor": "BEN GENET"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1500,
+          "date": "2022-03-27",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF PAUL ROSENBERG. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF PAUL ROSENBERG",
+          "earmark_donor": "PAUL ROSENBERG"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 500,
+          "date": "2022-03-27",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF LISA BENSMIHEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF LISA BENSMIHEN",
+          "earmark_donor": "LISA BENSMIHEN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1500,
+          "date": "2022-03-27",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF BRIAN KOPELOWITZ. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF BRIAN KOPELOWITZ",
+          "earmark_donor": "BRIAN KOPELOWITZ"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1500,
+          "date": "2022-03-27",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF DEBRA GILL. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF DEBRA GILL",
+          "earmark_donor": "DEBRA GILL"
+        }
+      ],
+      "earmarked_donors": [
+        "NATHANIEL DOLNER",
+        "GREGORY LEVINE",
+        "ARTHUR AGATSTON",
+        "SCOTT FANE",
+        "HARRY PELLMAN",
+        "CHAD BARBER",
+        "PHILLIP ROSENTHAL",
+        "ALBERTO CAMHI",
+        "ELIZABETH SCHULTZ",
+        "MICHAEL HOBERMAN",
+        "E SEGAL",
+        "MARVIN DENNIS",
+        "MARK MOSS",
+        "NIR SAMUEL",
+        "VIKTOR LITVINOV",
+        "MARK MILLER",
+        "LARRY BROWN",
+        "ARIEL FURST",
+        "ALEXANDER GRIMM",
+        "RICHARD DIAMOND",
+        "DAVID ZALIK",
+        "HELEN ZALIK",
+        "FLORENCE BARBER",
+        "JEFFREY FISHER",
+        "DIANE COHEN",
+        "SANFORD PERL",
+        "GARY KATZ",
+        "PHILIP H",
+        "MAYRA LICHTER",
+        "PAUL KRUSS",
+        "DOUGLAS WOLL",
+        "MARGO WOLL",
+        "SHELDON GOODMAN",
+        "RAFAEL COHEN",
+        "MOSHE FRIDMAN",
+        "PAUL LUBETKIN",
+        "PETER LIVINGSTON",
+        "LISA BENSMIHEN",
+        "SETHS WISE",
+        "STEWART HESCHELES",
+        "STUART MORRIS",
+        "LARRY GENET",
+        "ADELA ETCHARREN",
+        "BEN GENET",
+        "PAUL ROSENBERG",
+        "BRIAN KOPELOWITZ",
+        "DEBRA GILL"
+      ]
+    },
+    "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE": {
+      "committee_id": "C00345132",
+      "total_all_cycles": 8763.970000000001,
+      "by_cycle": {
+        "2022": 288.3,
+        "2024": 3475.67,
+        "2026": 5000
+      },
+      "by_donalds_cmte": {
+        "C00733329": 8763.970000000001
+      },
+      "entries": [
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2026,
+          "amount": 5000,
+          "date": "2025-03-31",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CONTRIBUTION",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 75,
+          "date": "2024-11-03",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM HAROLD GOLDFARB. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM HAROLD GOLDFARB",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 50,
+          "date": "2024-11-01",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ARON SWERDLIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ARON SWERDLIN",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 50,
+          "date": "2024-10-28",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM MATTHEW BERRY. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM MATTHEW BERRY",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 16.67,
+          "date": "2024-10-25",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM CAROL ROARK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM CAROL ROARK",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 6.1,
+          "date": "2024-10-23",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM RAYMOND MORENO. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM RAYMOND MORENO",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 36,
+          "date": "2024-10-21",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 50,
+          "date": "2024-10-08",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ARON SWERDLIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ARON SWERDLIN",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 15,
+          "date": "2024-09-30",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM CAROL ROARK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM CAROL ROARK",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 10,
+          "date": "2024-09-26",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM WENDY WAGNER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM WENDY WAGNER",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 68.18,
+          "date": "2024-09-20",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM STEVEN SILVERSTEIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM STEVEN SILVERSTEIN",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-09-05",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 80,
+          "date": "2024-09-04",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM DAVID SCHULAK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM DAVID SCHULAK",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 80,
+          "date": "2024-09-04",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM DAVID SCHULAK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM DAVID SCHULAK",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-08-25",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-08-25",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-08-22",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-08-22",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-08-19",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5,
+          "date": "2024-08-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5,
+          "date": "2024-08-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5,
+          "date": "2024-08-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5,
+          "date": "2024-08-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 4,
+          "date": "2024-08-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-08-09",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-08-06",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2024-08-04",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ELLEN GOLDSCHILD. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ELLEN GOLDSCHILD",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 50,
+          "date": "2024-08-03",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ARON SWERDLIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ARON SWERDLIN",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2.42,
+          "date": "2024-07-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-07-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-07-19",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-07-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-07-04",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-07-03",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-07-03",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-07-01",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-06-30",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2024-06-28",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM STEVEN SILVERSTEIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM STEVEN SILVERSTEIN",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-06-28",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2.33,
+          "date": "2024-06-25",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-06-25",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-06-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-06-22",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-06-22",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-06-16",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-06-16",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-06-14",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-06-14",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-06-12",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-06-09",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-06-06",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 50,
+          "date": "2024-06-03",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ARON SWERDLIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ARON SWERDLIN",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-06-03",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-06-01",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 25,
+          "date": "2024-05-23",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ROBERTO ELOVIC. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ROBERTO ELOVIC",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 3,
+          "date": "2024-05-22",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-05-18",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-05-15",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-05-15",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-05-13",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-05-11",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-05-08",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-05-03",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-04-29",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-04-29",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-04-25",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-04-20",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2.27,
+          "date": "2024-04-14",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 18,
+          "date": "2024-04-13",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-04-05",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 50,
+          "date": "2024-04-02",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ARON SWERDLIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ARON SWERDLIN",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-03-30",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-03-30",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-03-30",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-03-26",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-03-16",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-03-15",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2,
+          "date": "2024-03-15",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KARYL SAVAGEAU",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-14",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM DEAN FARACCHIO. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM DEAN FARACCHIO",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2024-03-06",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM KEVIN WOLKENFELD. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM KEVIN WOLKENFELD",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 50,
+          "date": "2024-02-19",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM LONNIE WULFE. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM LONNIE WULFE",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5.2,
+          "date": "2023-12-21",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM JOSEPH AUSTIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM JOSEPH AUSTIN",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 42.5,
+          "date": "2023-12-21",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM DANIEL EHRENSAFT. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM DANIEL EHRENSAFT",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2023-12-08",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM MARION ZOLA. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM MARION ZOLA",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2023-10-29",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM DEAN FARACCHIO. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM DEAN FARACCHIO",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2023-08-18",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM MARION ZOLA. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM MARION ZOLA",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 250,
+          "date": "2022-10-06",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ALAN SAGER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ALAN SAGER",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 10.8,
+          "date": "2022-09-26",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 0.3,
+          "date": "2022-09-26",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 27.2,
+          "date": "2022-09-23",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM JACK POTOK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM JACK POTOK",
+          "earmark_donor": null
+        }
+      ],
+      "earmarked_donors": []
+    },
+    "NORPAC (legacy ID)": {
+      "committee_id": "C00068692",
+      "total_all_cycles": 1000,
+      "by_cycle": {
+        "2024": 1000
+      },
+      "by_donalds_cmte": {
+        "C00733329": 1000
+      },
+      "entries": [
+        {
+          "pac_id": "C00068692",
+          "pac_name": "NORPAC (legacy ID)",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-10-22",
+          "type": "direct",
+          "memo": "",
+          "purpose": "DIRECT CONTRIBUTION / US HOUSE / FL-19",
+          "earmark_donor": null
+        }
+      ],
+      "earmarked_donors": []
+    },
+    "U.S. ISRAEL PAC (USI PAC)": {
+      "committee_id": "C00127811",
+      "total_all_cycles": 3500,
+      "by_cycle": {
+        "2020": 3500
+      },
+      "by_donalds_cmte": {
+        "C00733329": 3500
+      },
+      "entries": [
+        {
+          "pac_id": "C00127811",
+          "pac_name": "U.S. ISRAEL PAC (USI PAC)",
+          "donalds_cmte": "C00733329",
+          "cycle": 2020,
+          "amount": 3500,
+          "date": "2020-09-25",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CAMPAIGN CONTRIBUTION",
+          "earmark_donor": null
+        }
+      ],
+      "earmarked_donors": []
+    },
+    "American Principles": {
+      "committee_id": "C00492579",
+      "total_all_cycles": 5500,
+      "by_cycle": {
+        "2020": 2500,
+        "2022": 1500,
+        "2024": 1500
+      },
+      "by_donalds_cmte": {
+        "C00733329": 5500
+      },
+      "entries": [
+        {
+          "pac_id": "C00492579",
+          "pac_name": "American Principles",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1500,
+          "date": "2024-11-18",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CAMPAIGN CONTRIBUTION",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00492579",
+          "pac_name": "American Principles",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1500,
+          "date": "2022-09-07",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CAMPAIGN CONTRIBUTION",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00492579",
+          "pac_name": "American Principles",
+          "donalds_cmte": "C00733329",
+          "cycle": 2020,
+          "amount": 1500,
+          "date": "2020-09-25",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CAMPAIGN CONTRIBUTION",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00492579",
+          "pac_name": "American Principles",
+          "donalds_cmte": "C00733329",
+          "cycle": 2020,
+          "amount": 1000,
+          "date": "2020-07-10",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CAMPAIGN CONTRIBUTION",
+          "earmark_donor": null
+        }
+      ],
+      "earmarked_donors": []
+    },
+    "NORPAC": {
+      "committee_id": "C00030718",
+      "total_all_cycles": 29000,
+      "by_cycle": {
+        "2020": 10000,
+        "2022": 10000,
+        "2024": 7000,
+        "2026": 2000
+      },
+      "by_donalds_cmte": {
+        "C00733329": 29000
+      },
+      "entries": [
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2026,
+          "amount": 2000,
+          "date": "2025-02-05",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5000,
+          "date": "2024-09-20",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2000,
+          "date": "2023-04-17",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 5000,
+          "date": "2022-09-20",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 3000,
+          "date": "2022-07-25",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1000,
+          "date": "2022-05-24",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 1000,
+          "date": "2021-03-26",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2020,
+          "amount": 5000,
+          "date": "2020-10-09",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2020,
+          "amount": 5000,
+          "date": "2020-09-29",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        }
+      ],
+      "earmarked_donors": []
+    },
+    "J Street PAC": {
+      "committee_id": "C00236489",
+      "total_all_cycles": 22500,
+      "by_cycle": {
+        "2020": 5000,
+        "2022": 7500,
+        "2024": 10000
+      },
+      "by_donalds_cmte": {
+        "C00733329": 22500
+      },
+      "entries": [
+        {
+          "pac_id": "C00236489",
+          "pac_name": "J Street PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-07-17",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2024 PRIMARY",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00236489",
+          "pac_name": "J Street PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 5000,
+          "date": "2024-07-17",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2024 GENERAL",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00236489",
+          "pac_name": "J Street PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-02-15",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2024 PRIMARY",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00236489",
+          "pac_name": "J Street PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-02-12",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2024 PRIMARY",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00236489",
+          "pac_name": "J Street PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2024,
+          "amount": 2000,
+          "date": "2023-07-24",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2024 PRIMARY",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00236489",
+          "pac_name": "J Street PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 2500,
+          "date": "2022-09-14",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2022 GENERAL",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00236489",
+          "pac_name": "J Street PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 2500,
+          "date": "2022-06-06",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2022 PRIMARY",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00236489",
+          "pac_name": "J Street PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2022,
+          "amount": 2500,
+          "date": "2021-07-22",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2022 PRIMARY",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00236489",
+          "pac_name": "J Street PAC",
+          "donalds_cmte": "C00733329",
+          "cycle": 2020,
+          "amount": 5000,
+          "date": "2020-09-21",
+          "type": "direct",
+          "memo": "",
+          "purpose": "2020 GENERAL",
+          "earmark_donor": null
+        }
+      ],
+      "earmarked_donors": []
+    }
+  },
+  "independent_expenditures": [],
+  "summary": {
+    "cycle_2012_direct_and_earmarked": 0,
+    "cycle_2014_direct_and_earmarked": 0,
+    "cycle_2016_direct_and_earmarked": 0,
+    "cycle_2018_direct_and_earmarked": 0,
+    "cycle_2020_direct_and_earmarked": 21000,
+    "cycle_2022_direct_and_earmarked": 44309.3,
+    "cycle_2024_direct_and_earmarked": 61819.08999999999,
+    "cycle_2026_direct_and_earmarked": 7000,
+    "total_all_cycles": 134128.38999999998,
+    "unique_earmarked_donors": 47,
+    "independent_expenditures_for_support": 0,
+    "independent_expenditures_oppose": 0,
+    "earmarked_donors_also_on_blackburn_tn_gov": [],
+    "earmarked_donors_also_on_rose_aipac": [
+      {
+        "name": "E SEGAL",
+        "to_donalds": 1.18,
+        "to_rose_on_aipac_memo": 1.19,
+        "cycles_donalds": [
+          2024
+        ],
+        "pacs_donalds": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ]
+      },
+      {
+        "name": "VIKTOR LITVINOV",
+        "to_donalds": 5.11,
+        "to_rose_on_aipac_memo": 5.1,
+        "cycles_donalds": [
+          2024
+        ],
+        "pacs_donalds": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ]
+      },
+      {
+        "name": "ALEXANDER GRIMM",
+        "to_donalds": 9.13,
+        "to_rose_on_aipac_memo": 9.14,
+        "cycles_donalds": [
+          2024
+        ],
+        "pacs_donalds": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ]
+      },
+      {
+        "name": "RICHARD DIAMOND",
+        "to_donalds": 1,
+        "to_rose_on_aipac_memo": 0,
+        "cycles_donalds": [
+          2024
+        ],
+        "pacs_donalds": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ]
+      },
+      {
+        "name": "JEFFREY FISHER",
+        "to_donalds": 500,
+        "to_rose_on_aipac_memo": 500,
+        "cycles_donalds": [
+          2024
+        ],
+        "pacs_donalds": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ]
+      }
+    ],
+    "top_earmark_donors": [
+      {
+        "name": "DAVID ZALIK",
+        "total": 6600,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "HELEN ZALIK",
+        "total": 6600,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "MICHAEL HOBERMAN",
+        "total": 4000,
+        "count": 2,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "SANFORD PERL",
+        "total": 2900,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "LISA BENSMIHEN",
+        "total": 1500,
+        "count": 2,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2022
+        ]
+      },
+      {
+        "name": "SETHS WISE",
+        "total": 1500,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2022
+        ]
+      },
+      {
+        "name": "STEWART HESCHELES",
+        "total": 1500,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2022
+        ]
+      },
+      {
+        "name": "STUART MORRIS",
+        "total": 1500,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2022
+        ]
+      },
+      {
+        "name": "LARRY GENET",
+        "total": 1500,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2022
+        ]
+      },
+      {
+        "name": "ADELA ETCHARREN",
+        "total": 1500,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2022
+        ]
+      },
+      {
+        "name": "BEN GENET",
+        "total": 1500,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2022
+        ]
+      },
+      {
+        "name": "PAUL ROSENBERG",
+        "total": 1500,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2022
+        ]
+      },
+      {
+        "name": "BRIAN KOPELOWITZ",
+        "total": 1500,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2022
+        ]
+      },
+      {
+        "name": "DEBRA GILL",
+        "total": 1500,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2022
+        ]
+      },
+      {
+        "name": "ARTHUR AGATSTON",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "LARRY BROWN",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "ELIZABETH SCHULTZ",
+        "total": 500,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "JEFFREY FISHER",
+        "total": 500,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "SHELDON GOODMAN",
+        "total": 500,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2022
+        ]
+      },
+      {
+        "name": "PETER LIVINGSTON",
+        "total": 500,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2022
+        ]
+      }
+    ]
+  }
+}

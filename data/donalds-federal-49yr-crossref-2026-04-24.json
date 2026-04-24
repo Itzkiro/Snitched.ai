@@ -1,0 +1,3401 @@
+{
+  "source": "FEC Schedule A all cycles 2012-2026 for C00733329 + C00509877 (Byron Donalds)",
+  "method": "high-confidence-only (last + full-first-name + state exact; NFD-normalized, suffix-stripped)",
+  "registry": {
+    "years": "1978-2026",
+    "year_count": 49,
+    "unique_individuals": 40276,
+    "index_keys": 37768
+  },
+  "donalds_donor_universe": {
+    "committee_ids": [
+      "C00733329",
+      "C00509877"
+    ],
+    "candidate_id": "H2FL14186",
+    "unique_donors": 7953,
+    "total_itemized_receipts": 6445786.12,
+    "cycles": [
+      2012,
+      2014,
+      2016,
+      2018,
+      2020,
+      2022,
+      2024,
+      2026
+    ],
+    "by_cycle": {
+      "2012": {
+        "rows": 205,
+        "total": 120322.06
+      },
+      "2014": {
+        "rows": 0,
+        "total": 0
+      },
+      "2016": {
+        "rows": 0,
+        "total": 0
+      },
+      "2018": {
+        "rows": 0,
+        "total": 0
+      },
+      "2020": {
+        "rows": 0,
+        "total": 0
+      },
+      "2022": {
+        "rows": 10371,
+        "total": 2635723.2600000002
+      },
+      "2024": {
+        "rows": 16683,
+        "total": 3352613.3599999906
+      },
+      "2026": {
+        "rows": 3567,
+        "total": 337127.4399999995
+      }
+    }
+  },
+  "matches": [
+    {
+      "name": "UIHLEIN, ELIZABETH",
+      "state": "IL",
+      "employer_last_seen": "HOMEMAKER",
+      "occupation_last_seen": "HOMEMAKER",
+      "to_donalds_all_cycles": 2900,
+      "to_donalds_by_cycle": {
+        "2022": 2900
+      },
+      "career_to_pro_israel_pacs": 3000000,
+      "pacs_given_to": [
+        "Preserve America PAC (Miriam Adelson)"
+      ],
+      "pro_israel_cycles": [
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": true,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "ZALIK, DAVID",
+      "state": "GA",
+      "employer_last_seen": "GOLDMAN SACHS",
+      "occupation_last_seen": "EXECUTIVE",
+      "to_donalds_all_cycles": 6600,
+      "to_donalds_by_cycle": {
+        "2024": 6600
+      },
+      "career_to_pro_israel_pacs": 2553800,
+      "pacs_given_to": [
+        "United Democracy Project (UDP)",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "SINGER, PAUL",
+      "state": "FL",
+      "employer_last_seen": "ELLIOTT INVESTMENT MANAGEMENT",
+      "occupation_last_seen": "CO-CEO CO-CIO PRESIDENT",
+      "to_donalds_all_cycles": 6628.57,
+      "to_donalds_by_cycle": {
+        "2022": 6628.57
+      },
+      "career_to_pro_israel_pacs": 2500000,
+      "pacs_given_to": [
+        "Preserve America PAC (Miriam Adelson)"
+      ],
+      "pro_israel_cycles": [
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "MIZEL, LARRY",
+      "state": "CO",
+      "employer_last_seen": "M D C HOLDINGS INC",
+      "occupation_last_seen": "EXECUTIVE CHAIRMAN OF THE BOARD",
+      "to_donalds_all_cycles": 2900,
+      "to_donalds_by_cycle": {
+        "2024": 2900
+      },
+      "career_to_pro_israel_pacs": 1062500,
+      "pacs_given_to": [
+        "Washington PAC",
+        "National PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "RJC Victory Fund",
+        "AIPAC PAC",
+        "United Democracy Project (UDP)"
+      ],
+      "pro_israel_cycles": [
+        "1982",
+        "1984",
+        "1985",
+        "1986",
+        "1987",
+        "1988",
+        "1989",
+        "1990",
+        "1991",
+        "1992",
+        "1993",
+        "1994",
+        "1995",
+        "1996",
+        "1997",
+        "1998",
+        "1999",
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "ZALIK, HELEN",
+      "state": "GA",
+      "employer_last_seen": "HOMEMAKER",
+      "occupation_last_seen": "HOMEMAKER",
+      "to_donalds_all_cycles": 6600,
+      "to_donalds_by_cycle": {
+        "2024": 6600
+      },
+      "career_to_pro_israel_pacs": 453800,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "LOEB, DANIEL",
+      "state": "NY",
+      "employer_last_seen": "THIRD POINT LLC",
+      "occupation_last_seen": "CEO",
+      "to_donalds_all_cycles": 5800,
+      "to_donalds_by_cycle": {
+        "2022": 5800
+      },
+      "career_to_pro_israel_pacs": 381200,
+      "pacs_given_to": [
+        "DMFI PAC (Democratic Majority for Israel)",
+        "AIPAC PAC",
+        "United Democracy Project (UDP)"
+      ],
+      "pro_israel_cycles": [
+        "2021",
+        "2022",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "PERL, SANFORD",
+      "state": "IL",
+      "employer_last_seen": "KIRKLAND & ELLIS LLP",
+      "occupation_last_seen": "ATTORNEY",
+      "to_donalds_all_cycles": 2900,
+      "to_donalds_by_cycle": {
+        "2022": 2900
+      },
+      "career_to_pro_israel_pacs": 267300,
+      "pacs_given_to": [
+        "City PAC",
+        "Pro-Israel America PAC",
+        "AIPAC PAC",
+        "United Democracy Project (UDP)",
+        "To Protect Our Heritage PAC"
+      ],
+      "pro_israel_cycles": [
+        "2006",
+        "2008",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "WOLDENBERG, JORGE",
+      "state": "FL",
+      "employer_last_seen": "CORPAC",
+      "occupation_last_seen": "CHAIRMAN",
+      "to_donalds_all_cycles": 2500,
+      "to_donalds_by_cycle": {
+        "2022": 2500
+      },
+      "career_to_pro_israel_pacs": 146993,
+      "pacs_given_to": [
+        "US Israel PAC / Florida Congressional Committee",
+        "American Principles",
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2004",
+        "2005",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "FISHER, JEFFREY",
+      "state": "NY",
+      "employer_last_seen": "TOURO UNIVERSITY",
+      "occupation_last_seen": "SPECIAL PROGRAMS ADMINISTRATOR",
+      "to_donalds_all_cycles": 500,
+      "to_donalds_by_cycle": {
+        "2024": 500
+      },
+      "career_to_pro_israel_pacs": 123783,
+      "pacs_given_to": [
+        "AIPAC PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2022",
+        "2023",
+        "2024",
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": true,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": true
+    },
+    {
+      "name": "BEREN, ADAM",
+      "state": "KS",
+      "employer_last_seen": "BEREXCO LLC",
+      "occupation_last_seen": "PRESIDENT",
+      "to_donalds_all_cycles": 2900,
+      "to_donalds_by_cycle": {
+        "2022": 2900
+      },
+      "career_to_pro_israel_pacs": 121900,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "RJC Victory Fund",
+        "NorPAC / North Jersey PAC"
+      ],
+      "pro_israel_cycles": [
+        "2016",
+        "2020",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "HOBERMAN, MICHAEL",
+      "state": "TX",
+      "employer_last_seen": "VSC MANAGEMENT",
+      "occupation_last_seen": "MANAGEMENT",
+      "to_donalds_all_cycles": 4000,
+      "to_donalds_by_cycle": {
+        "2024": 4000
+      },
+      "career_to_pro_israel_pacs": 116200,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2018",
+        "2020",
+        "2022",
+        "2024",
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "GENET, BEN",
+      "state": "FL",
+      "employer_last_seen": "GENET PROPERTY GROUP",
+      "occupation_last_seen": "REAL ESTATE",
+      "to_donalds_all_cycles": 1500,
+      "to_donalds_by_cycle": {
+        "2022": 1500
+      },
+      "career_to_pro_israel_pacs": 114500,
+      "pacs_given_to": [
+        "Pro-Israel America PAC",
+        "United Democracy Project (UDP)",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2020",
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "STAHL, LEWIS",
+      "state": "FL",
+      "employer_last_seen": "NEXTGEN MANAGEMENT",
+      "occupation_last_seen": "PARTNER",
+      "to_donalds_all_cycles": 9500,
+      "to_donalds_by_cycle": {
+        "2022": 2900,
+        "2024": 6600
+      },
+      "career_to_pro_israel_pacs": 109877,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "Pro-Israel America PAC"
+      ],
+      "pro_israel_cycles": [
+        "2020",
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "MILSTEIN, GILA",
+      "state": "CA",
+      "employer_last_seen": "ENTREPRENEUR",
+      "occupation_last_seen": "ENTREPRENEUR",
+      "to_donalds_all_cycles": 3300,
+      "to_donalds_by_cycle": {
+        "2024": 3300
+      },
+      "career_to_pro_israel_pacs": 107500,
+      "pacs_given_to": [
+        "World Alliance for Israel PAC",
+        "United Democracy Project (UDP)",
+        "AIPAC PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2009",
+        "2010",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "JOHNSON, CHARLES",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 6600,
+      "to_donalds_by_cycle": {
+        "2024": 6600
+      },
+      "career_to_pro_israel_pacs": 100000,
+      "pacs_given_to": [
+        "Preserve America PAC (Sheldon Adelson)"
+      ],
+      "pro_israel_cycles": [
+        "2020"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "FRIEDMAN, HARVEY",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 1000,
+      "to_donalds_by_cycle": {
+        "2022": 1000
+      },
+      "career_to_pro_israel_pacs": 93765,
+      "pacs_given_to": [
+        "US Israel PAC / Florida Congressional Committee",
+        "Washington PAC",
+        "National Action Committee",
+        "National PAC",
+        "St. Louisans for Better Government"
+      ],
+      "pro_israel_cycles": [
+        "1982",
+        "1984",
+        "1985",
+        "1986",
+        "1987",
+        "1988",
+        "1989",
+        "1990",
+        "1991",
+        "1993",
+        "1996",
+        "1998",
+        "1999",
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2012",
+        "2014",
+        "2015"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "GENET, LARRY",
+      "state": "FL",
+      "employer_last_seen": "BANYAN HOLDINGS",
+      "occupation_last_seen": "REAL ESTATE",
+      "to_donalds_all_cycles": 1500,
+      "to_donalds_by_cycle": {
+        "2022": 1500
+      },
+      "career_to_pro_israel_pacs": 92212,
+      "pacs_given_to": [
+        "AIPAC PAC",
+        "United Democracy Project (UDP)"
+      ],
+      "pro_israel_cycles": [
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "STEIN, SHELDON",
+      "state": "TX",
+      "employer_last_seen": "GLAZERS BEER",
+      "occupation_last_seen": "CEO",
+      "to_donalds_all_cycles": 5000,
+      "to_donalds_by_cycle": {
+        "2024": 5000
+      },
+      "career_to_pro_israel_pacs": 89900,
+      "pacs_given_to": [
+        "Washington PAC",
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "BERMAN, WAYNE",
+      "state": "DC",
+      "employer_last_seen": "BLACKSTONE",
+      "occupation_last_seen": "SR MANAGING DIRECTOR",
+      "to_donalds_all_cycles": 1000,
+      "to_donalds_by_cycle": {
+        "2024": 1000
+      },
+      "career_to_pro_israel_pacs": 72600,
+      "pacs_given_to": [
+        "National PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "1987",
+        "1988",
+        "1991",
+        "1992",
+        "1995",
+        "1996",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2021",
+        "2022",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "TOWBIN, STEVEN",
+      "state": "IL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 1000,
+      "to_donalds_by_cycle": {
+        "2022": 1000
+      },
+      "career_to_pro_israel_pacs": 58150,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "SHAPIRO, JAYNE",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 250,
+      "to_donalds_by_cycle": {
+        "2022": 250
+      },
+      "career_to_pro_israel_pacs": 56000,
+      "pacs_given_to": [
+        "American Principles",
+        "US Israel PAC / Florida Congressional Committee"
+      ],
+      "pro_israel_cycles": [
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "POST, LAWRENCE",
+      "state": "CA",
+      "employer_last_seen": "POST ADVISORY GROUP LLC",
+      "occupation_last_seen": "INVESTMENT ADVISOR",
+      "to_donalds_all_cycles": 500,
+      "to_donalds_by_cycle": {
+        "2024": 500
+      },
+      "career_to_pro_israel_pacs": 54579,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2014",
+        "2016",
+        "2020",
+        "2022",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "GOLDMAN, MARC",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 600,
+      "to_donalds_by_cycle": {
+        "2024": 600
+      },
+      "career_to_pro_israel_pacs": 51600,
+      "pacs_given_to": [
+        "American Principles",
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2011",
+        "2012",
+        "2014",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "AWNER, JONATHAN",
+      "state": "FL",
+      "employer_last_seen": "AKERMAN LLP",
+      "occupation_last_seen": "ATTORNEY",
+      "to_donalds_all_cycles": 250,
+      "to_donalds_by_cycle": {
+        "2022": 250
+      },
+      "career_to_pro_israel_pacs": 51500,
+      "pacs_given_to": [
+        "SunPAC",
+        "Because I Care PAC",
+        "US Israel PAC / Florida Congressional Committee",
+        "American Principles",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2004",
+        "2007",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "BENSMIHEN, LISA",
+      "state": "FL",
+      "employer_last_seen": "UNITED ELDER CARE SERVICES",
+      "occupation_last_seen": "HOME CARE",
+      "to_donalds_all_cycles": 1500,
+      "to_donalds_by_cycle": {
+        "2022": 1500
+      },
+      "career_to_pro_israel_pacs": 50417,
+      "pacs_given_to": [
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "FEINGOLD, BARBARA",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 12400,
+      "to_donalds_by_cycle": {
+        "2022": 5800,
+        "2024": 6600
+      },
+      "career_to_pro_israel_pacs": 46700,
+      "pacs_given_to": [
+        "National Action Committee",
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "RJC Victory Fund"
+      ],
+      "pro_israel_cycles": [
+        "1991",
+        "1993",
+        "1994",
+        "1996",
+        "1997",
+        "1998",
+        "1999",
+        "2000",
+        "2001",
+        "2003",
+        "2005",
+        "2006",
+        "2007",
+        "2009",
+        "2010",
+        "2020",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "SIEGAL, MICHAEL",
+      "state": "OH",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 100,
+      "to_donalds_by_cycle": {
+        "2024": 100
+      },
+      "career_to_pro_israel_pacs": 44200,
+      "pacs_given_to": [
+        "Heartland PAC",
+        "National PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "1986",
+        "1987",
+        "1988",
+        "1989",
+        "1990",
+        "1991",
+        "1992",
+        "1993",
+        "1994",
+        "1996",
+        "1998",
+        "1999",
+        "2000",
+        "2001",
+        "2004",
+        "2005",
+        "2006",
+        "2020",
+        "2021",
+        "2022",
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "FARACCHIO, DEAN",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 2000,
+      "to_donalds_by_cycle": {
+        "2024": 2000
+      },
+      "career_to_pro_israel_pacs": 40840,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2016",
+        "2017",
+        "2020",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "TAYLOR, JUDITH",
+      "state": "PA",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 14850,
+      "to_donalds_by_cycle": {
+        "2022": 6750,
+        "2024": 8100
+      },
+      "career_to_pro_israel_pacs": 39900,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "RJC Victory Fund"
+      ],
+      "pro_israel_cycles": [
+        "2016",
+        "2017",
+        "2018",
+        "2020",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "SAGER, ALAN",
+      "state": "TX",
+      "employer_last_seen": "SELF-EMPLOYED",
+      "occupation_last_seen": "ENTRPRENEUR",
+      "to_donalds_all_cycles": 250,
+      "to_donalds_by_cycle": {
+        "2022": 250
+      },
+      "career_to_pro_israel_pacs": 35750,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2002",
+        "2004",
+        "2007",
+        "2018",
+        "2021",
+        "2022"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "EFUNE, MELANIE",
+      "state": "AZ",
+      "employer_last_seen": "HILTYS",
+      "occupation_last_seen": "ELECTRI CAL CONTRACTOR",
+      "to_donalds_all_cycles": 346.5,
+      "to_donalds_by_cycle": {
+        "2024": 346.5
+      },
+      "career_to_pro_israel_pacs": 33200,
+      "pacs_given_to": [
+        "Pro-Israel America PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2020",
+        "2021",
+        "2022",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "KOETHER, BERNARD",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 680,
+      "to_donalds_by_cycle": {
+        "2024": 680
+      },
+      "career_to_pro_israel_pacs": 33100,
+      "pacs_given_to": [
+        "American Principles"
+      ],
+      "pro_israel_cycles": [
+        "2015",
+        "2018",
+        "2019",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "MILSTEIN, ADAM",
+      "state": "CA",
+      "employer_last_seen": "ENTREPRENEUR",
+      "occupation_last_seen": "ENTREPRENEUR",
+      "to_donalds_all_cycles": 6600,
+      "to_donalds_by_cycle": {
+        "2024": 6600
+      },
+      "career_to_pro_israel_pacs": 27400,
+      "pacs_given_to": [
+        "World Alliance for Israel PAC",
+        "AIPAC PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2008",
+        "2022",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "FIELDS, CLIVE",
+      "state": "TX",
+      "employer_last_seen": "SELF-EMPLOYED",
+      "occupation_last_seen": "MEDICIAL SERVICES",
+      "to_donalds_all_cycles": 6600,
+      "to_donalds_by_cycle": {
+        "2024": 6600
+      },
+      "career_to_pro_israel_pacs": 26500,
+      "pacs_given_to": [
+        "AIPAC PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "WEINBERGER, MEG",
+      "state": "FL",
+      "employer_last_seen": "HOMEMAKER",
+      "occupation_last_seen": "HOMEMAKER",
+      "to_donalds_all_cycles": 3300,
+      "to_donalds_by_cycle": {
+        "2024": 3300
+      },
+      "career_to_pro_israel_pacs": 25000,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "KOPELOWITZ, BRIAN",
+      "state": "FL",
+      "employer_last_seen": "KOPELOWITZ OSTROW P A",
+      "occupation_last_seen": "ATTORNEY",
+      "to_donalds_all_cycles": 1500,
+      "to_donalds_by_cycle": {
+        "2022": 1500
+      },
+      "career_to_pro_israel_pacs": 23304,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "BERNSTEIN, RICHARD",
+      "state": "NY",
+      "employer_last_seen": "P&E PROPERTIES INC",
+      "occupation_last_seen": "EXECUTIVE",
+      "to_donalds_all_cycles": 500,
+      "to_donalds_by_cycle": {
+        "2024": 500
+      },
+      "career_to_pro_israel_pacs": 20500,
+      "pacs_given_to": [
+        "Mid Manhattan PAC",
+        "National PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "1986",
+        "1988",
+        "1990",
+        "1991",
+        "1992",
+        "1993",
+        "1994",
+        "1995",
+        "1996",
+        "1997",
+        "1998",
+        "1999",
+        "2000",
+        "2008",
+        "2014",
+        "2018",
+        "2020",
+        "2022"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "ROSENTHAL, PHILLIP",
+      "state": "VA",
+      "employer_last_seen": "NATIONWIDE CREDIT CORP",
+      "occupation_last_seen": "MANAGER",
+      "to_donalds_all_cycles": 250,
+      "to_donalds_by_cycle": {
+        "2024": 250
+      },
+      "career_to_pro_israel_pacs": 20500,
+      "pacs_given_to": [
+        "Pro-Israel America PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2020",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "HESCHELES, STEWART",
+      "state": "FL",
+      "employer_last_seen": "SELF-EMPLOYED",
+      "occupation_last_seen": "SALES",
+      "to_donalds_all_cycles": 1500,
+      "to_donalds_by_cycle": {
+        "2022": 1500
+      },
+      "career_to_pro_israel_pacs": 19334,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "FISKE, STEPHEN",
+      "state": "FL",
+      "employer_last_seen": "CITY FIRST MORTGAGE CORPORATION",
+      "occupation_last_seen": "BANKING",
+      "to_donalds_all_cycles": 500,
+      "to_donalds_by_cycle": {
+        "2022": 500
+      },
+      "career_to_pro_israel_pacs": 19100,
+      "pacs_given_to": [
+        "National Action Committee",
+        "US Israel PAC / Florida Congressional Committee",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2012",
+        "2013",
+        "2015",
+        "2018",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "AGATSTON, ARTHUR",
+      "state": "FL",
+      "employer_last_seen": "AGATSTON CENTER FOR PREVENTIVE MED",
+      "occupation_last_seen": "PHYSICIAN",
+      "to_donalds_all_cycles": 1000,
+      "to_donalds_by_cycle": {
+        "2024": 1000
+      },
+      "career_to_pro_israel_pacs": 18800,
+      "pacs_given_to": [
+        "SunPAC",
+        "American Principles",
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2007",
+        "2011",
+        "2020",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "FANE, SCOTT",
+      "state": "FL",
+      "employer_last_seen": "SELF-EMPLOYED",
+      "occupation_last_seen": "CPA",
+      "to_donalds_all_cycles": 200,
+      "to_donalds_by_cycle": {
+        "2024": 200
+      },
+      "career_to_pro_israel_pacs": 18550,
+      "pacs_given_to": [
+        "SunPAC",
+        "US Israel PAC / Florida Congressional Committee",
+        "Pro-Israel America PAC",
+        "AIPAC PAC",
+        "United Democracy Project (UDP)"
+      ],
+      "pro_israel_cycles": [
+        "2015",
+        "2016",
+        "2018",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "BLUMBERG, DAVID",
+      "state": "FL",
+      "employer_last_seen": "BLUMBERG CAPITAL",
+      "occupation_last_seen": "BLUMBERG CAPITAL",
+      "to_donalds_all_cycles": 1500,
+      "to_donalds_by_cycle": {
+        "2022": 1500
+      },
+      "career_to_pro_israel_pacs": 18300,
+      "pacs_given_to": [
+        "American Principles",
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "US Israel PAC / Florida Congressional Committee"
+      ],
+      "pro_israel_cycles": [
+        "2021",
+        "2022",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "PELLMAN, HARRY",
+      "state": "CA",
+      "employer_last_seen": "EDINGER PEDIATRICS",
+      "occupation_last_seen": "PEDIATRICIAN",
+      "to_donalds_all_cycles": 100,
+      "to_donalds_by_cycle": {
+        "2022": 100
+      },
+      "career_to_pro_israel_pacs": 15250,
+      "pacs_given_to": [
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "ABRAMOWITZ, KENNETH",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 250,
+      "to_donalds_by_cycle": {
+        "2022": 250
+      },
+      "career_to_pro_israel_pacs": 15200,
+      "pacs_given_to": [
+        "American Principles",
+        "NorPAC / North Jersey PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "ROSENBERG, PAUL",
+      "state": "FL",
+      "employer_last_seen": "ROSENBERG & ROSENBERG P A",
+      "occupation_last_seen": "ATTORNEY",
+      "to_donalds_all_cycles": 1500,
+      "to_donalds_by_cycle": {
+        "2022": 1500
+      },
+      "career_to_pro_israel_pacs": 14800,
+      "pacs_given_to": [
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2021",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "BROWN, LARRY",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 1000,
+      "to_donalds_by_cycle": {
+        "2024": 1000
+      },
+      "career_to_pro_israel_pacs": 14500,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "SMIEDT, EVAN",
+      "state": "CA",
+      "employer_last_seen": "THE FUNDWORKS LLC",
+      "occupation_last_seen": "OWNER",
+      "to_donalds_all_cycles": 6600,
+      "to_donalds_by_cycle": {
+        "2024": 6600
+      },
+      "career_to_pro_israel_pacs": 14175,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "ADLER, DANIEL",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 1000,
+      "to_donalds_by_cycle": {
+        "2022": 1000
+      },
+      "career_to_pro_israel_pacs": 14000,
+      "pacs_given_to": [
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "WOLFE, BARRY",
+      "state": "CA",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 509,
+      "to_donalds_by_cycle": {
+        "2024": 509
+      },
+      "career_to_pro_israel_pacs": 13000,
+      "pacs_given_to": [
+        "World Alliance for Israel PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2008",
+        "2022",
+        "2023",
+        "2024",
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "JANAY, GAD",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 2497.5,
+      "to_donalds_by_cycle": {
+        "2022": 1000,
+        "2024": 1497.5
+      },
+      "career_to_pro_israel_pacs": 12700,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2018",
+        "2022",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "GOODMAN, SHELDON",
+      "state": "FL",
+      "employer_last_seen": "UNEMPLOYED",
+      "occupation_last_seen": "UNEMPLOYED",
+      "to_donalds_all_cycles": 500,
+      "to_donalds_by_cycle": {
+        "2022": 500
+      },
+      "career_to_pro_israel_pacs": 11750,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2022",
+        "2023"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "SCHARF, MICHAEL",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 1000,
+      "to_donalds_by_cycle": {
+        "2022": 500,
+        "2024": 500
+      },
+      "career_to_pro_israel_pacs": 11300,
+      "pacs_given_to": [
+        "Washington PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "1988",
+        "2020",
+        "2022"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "MORRIS, STUART",
+      "state": "FL",
+      "employer_last_seen": "COZEN O CONNOR",
+      "occupation_last_seen": "ATTORNEY",
+      "to_donalds_all_cycles": 1500,
+      "to_donalds_by_cycle": {
+        "2022": 1500
+      },
+      "career_to_pro_israel_pacs": 10709,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2022",
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "MOSKOWITZ, CHERNA",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 5800,
+      "to_donalds_by_cycle": {
+        "2022": 5800
+      },
+      "career_to_pro_israel_pacs": 10000,
+      "pacs_given_to": [
+        "National Action Committee",
+        "American Principles"
+      ],
+      "pro_israel_cycles": [
+        "2009",
+        "2018"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "SCHULTZ, ELIZABETH",
+      "state": "NY",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 500,
+      "to_donalds_by_cycle": {
+        "2024": 500
+      },
+      "career_to_pro_israel_pacs": 9750,
+      "pacs_given_to": [
+        "Joint Action Committee for Political Affairs",
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2004",
+        "2020",
+        "2024",
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "SMITH, DAVID",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 474.85,
+      "to_donalds_by_cycle": {
+        "2022": 125,
+        "2024": 349.85
+      },
+      "career_to_pro_israel_pacs": 8792,
+      "pacs_given_to": [
+        "National Action Committee",
+        "National PAC",
+        "SunPAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "1985",
+        "1986",
+        "1987",
+        "1988",
+        "2021",
+        "2023",
+        "2025"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "ALEMBIK, STEVEN",
+      "state": "FL",
+      "employer_last_seen": "SMA COMMUNICATIONS",
+      "occupation_last_seen": "OWNER",
+      "to_donalds_all_cycles": 1000,
+      "to_donalds_by_cycle": {
+        "2022": 1000
+      },
+      "career_to_pro_israel_pacs": 8700,
+      "pacs_given_to": [
+        "National Action Committee",
+        "American Principles"
+      ],
+      "pro_israel_cycles": [
+        "2007",
+        "2008",
+        "2010",
+        "2011",
+        "2017",
+        "2019",
+        "2020"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "SALL, STEVEN",
+      "state": "CT",
+      "employer_last_seen": "RCG",
+      "occupation_last_seen": "MANUFACTERER",
+      "to_donalds_all_cycles": 354.1,
+      "to_donalds_by_cycle": {
+        "2024": 354.1
+      },
+      "career_to_pro_israel_pacs": 8500,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2022",
+        "2023",
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "JACOBSON, HAL",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 500,
+      "to_donalds_by_cycle": {
+        "2022": 500
+      },
+      "career_to_pro_israel_pacs": 8000,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "GILL, DEBRA",
+      "state": "FL",
+      "employer_last_seen": "NOT EMPLOYED",
+      "occupation_last_seen": "NOT EMPLOYED",
+      "to_donalds_all_cycles": 1500,
+      "to_donalds_by_cycle": {
+        "2022": 1500
+      },
+      "career_to_pro_israel_pacs": 7834,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2022"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "PORTER, RICHARD",
+      "state": "IL",
+      "employer_last_seen": "KIRKLAND AND ELLIS",
+      "occupation_last_seen": "VP",
+      "to_donalds_all_cycles": 5800,
+      "to_donalds_by_cycle": {
+        "2022": 5800
+      },
+      "career_to_pro_israel_pacs": 7000,
+      "pacs_given_to": [
+        "City PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2019",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "BOOK, RONALD",
+      "state": "FL",
+      "employer_last_seen": "SELF-EMPLOYED",
+      "occupation_last_seen": "ATTORNEY",
+      "to_donalds_all_cycles": 5800,
+      "to_donalds_by_cycle": {
+        "2022": 5800
+      },
+      "career_to_pro_israel_pacs": 7000,
+      "pacs_given_to": [
+        "National Action Committee"
+      ],
+      "pro_israel_cycles": [
+        "1988",
+        "1990",
+        "1992",
+        "1993",
+        "1994",
+        "1996",
+        "2001"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "OLSWANGER, SAM",
+      "state": "DC",
+      "employer_last_seen": "AKIN GUMP STRAUSS HAUER FELD LLP",
+      "occupation_last_seen": "SENIOR POLICY ADVISOR",
+      "to_donalds_all_cycles": 500,
+      "to_donalds_by_cycle": {
+        "2022": 500
+      },
+      "career_to_pro_israel_pacs": 6750,
+      "pacs_given_to": [
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "also_on_rose_aipac_earmark_list": true,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": true,
+      "also_on_rose_federal_49yr": true,
+      "foreign_money_flag": "AKIN GUMP STRAUSS HAUER FELD LLP is a FARA-registered firm representing foreign sovereigns"
+    },
+    {
+      "name": "LIVINGSTON, PETER",
+      "state": "FL",
+      "employer_last_seen": "CONSULTANTS IN DIAGNOSTIC IMAGING",
+      "occupation_last_seen": "MD",
+      "to_donalds_all_cycles": 500,
+      "to_donalds_by_cycle": {
+        "2022": 500
+      },
+      "career_to_pro_israel_pacs": 6700,
+      "pacs_given_to": [
+        "Pro-Israel America PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2020",
+        "2021",
+        "2022"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "POGIN, RICHARD",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 1500,
+      "to_donalds_by_cycle": {
+        "2024": 1500
+      },
+      "career_to_pro_israel_pacs": 6200,
+      "pacs_given_to": [
+        "Pro-Israel America PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2020",
+        "2021",
+        "2022",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "NOUROMID, DORIS",
+      "state": "CA",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 1000,
+      "to_donalds_by_cycle": {
+        "2024": 1000
+      },
+      "career_to_pro_israel_pacs": 6000,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2020"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "FRIEDLAND, SAMUEL",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 5000,
+      "to_donalds_by_cycle": {
+        "2022": 3000,
+        "2024": 2000
+      },
+      "career_to_pro_israel_pacs": 5500,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "American Principles"
+      ],
+      "pro_israel_cycles": [
+        "2008",
+        "2015",
+        "2018",
+        "2019"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "RUDDY, CHRISTOPHER",
+      "state": "FL",
+      "employer_last_seen": "NEWSMAX MEDIA INC",
+      "occupation_last_seen": "CHIEF EXECUTIVE OFFICER",
+      "to_donalds_all_cycles": 5000,
+      "to_donalds_by_cycle": {
+        "2024": 5000
+      },
+      "career_to_pro_israel_pacs": 5500,
+      "pacs_given_to": [
+        "American Principles"
+      ],
+      "pro_israel_cycles": [
+        "2012",
+        "2013"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "ETCHARREN, ADELA",
+      "state": "FL",
+      "employer_last_seen": "HOMEMAKER",
+      "occupation_last_seen": "HOMEMAKER",
+      "to_donalds_all_cycles": 1500,
+      "to_donalds_by_cycle": {
+        "2022": 1500
+      },
+      "career_to_pro_israel_pacs": 5500,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "MILES, PAUL",
+      "state": "NJ",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 2350,
+      "to_donalds_by_cycle": {
+        "2022": 600,
+        "2024": 1750
+      },
+      "career_to_pro_israel_pacs": 5000,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2012",
+        "2014",
+        "2016",
+        "2017",
+        "2020"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": true,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "UTLEY, DEREK",
+      "state": "FL",
+      "employer_last_seen": "X STRATEGIES LLC",
+      "occupation_last_seen": "CHAIRMAN",
+      "to_donalds_all_cycles": 290,
+      "to_donalds_by_cycle": {
+        "2022": 290
+      },
+      "career_to_pro_israel_pacs": 5000,
+      "pacs_given_to": [
+        "American Principles"
+      ],
+      "pro_israel_cycles": [
+        "2022"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "MILLER, MARK",
+      "state": "NJ",
+      "employer_last_seen": "SUMMIT HEALTH/ VILLAGE MD",
+      "occupation_last_seen": "PHYSICIAN",
+      "to_donalds_all_cycles": 250,
+      "to_donalds_by_cycle": {
+        "2024": 250
+      },
+      "career_to_pro_israel_pacs": 5000,
+      "pacs_given_to": [
+        "NorPAC / North Jersey PAC",
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2008",
+        "2020",
+        "2021",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "FRIED, WILBUR",
+      "state": "NY",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 50,
+      "to_donalds_by_cycle": {
+        "2022": 50
+      },
+      "career_to_pro_israel_pacs": 4750,
+      "pacs_given_to": [
+        "Washington PAC",
+        "National PAC"
+      ],
+      "pro_israel_cycles": [
+        "1986",
+        "1988",
+        "1989",
+        "1990",
+        "1991",
+        "1992",
+        "2004"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "ROBERTS, NATALIE",
+      "state": "CA",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 151,
+      "to_donalds_by_cycle": {
+        "2024": 151
+      },
+      "career_to_pro_israel_pacs": 4650,
+      "pacs_given_to": [
+        "Multi-Issue PAC",
+        "National PAC",
+        "World Alliance for Israel PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "1986",
+        "1987",
+        "1989",
+        "2003",
+        "2005",
+        "2008",
+        "2009",
+        "2014",
+        "2016",
+        "2020",
+        "2022"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "BRONSNICK, WARREN",
+      "state": "NJ",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 250,
+      "to_donalds_by_cycle": {
+        "2022": 250
+      },
+      "career_to_pro_israel_pacs": 4500,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2019",
+        "2020",
+        "2022"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "ZOLA, MARION",
+      "state": "CA",
+      "employer_last_seen": "SELF-EMPLOYED",
+      "occupation_last_seen": "WRITER",
+      "to_donalds_all_cycles": 100,
+      "to_donalds_by_cycle": {
+        "2024": 100
+      },
+      "career_to_pro_israel_pacs": 4500,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "WOLL, DOUGLAS",
+      "state": "MI",
+      "employer_last_seen": "UNEMPLOYED",
+      "occupation_last_seen": "UNEMPLOYED",
+      "to_donalds_all_cycles": 250,
+      "to_donalds_by_cycle": {
+        "2022": 250
+      },
+      "career_to_pro_israel_pacs": 4438,
+      "pacs_given_to": [
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2020",
+        "2022",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "WIENIR, MICHAEL",
+      "state": "CA",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 1000,
+      "to_donalds_by_cycle": {
+        "2024": 1000
+      },
+      "career_to_pro_israel_pacs": 4000,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2025",
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "KLOCK, JOSEPH",
+      "state": "FL",
+      "employer_last_seen": "RASCO KLOCK PEREZ NIETO",
+      "occupation_last_seen": "ATTY",
+      "to_donalds_all_cycles": 250,
+      "to_donalds_by_cycle": {
+        "2024": 250
+      },
+      "career_to_pro_israel_pacs": 3500,
+      "pacs_given_to": [
+        "National Action Committee"
+      ],
+      "pro_israel_cycles": [
+        "1986",
+        "1987",
+        "1990",
+        "1991",
+        "1992",
+        "1993",
+        "1994"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "FAVRE, ART",
+      "state": "LA",
+      "employer_last_seen": "PERFORMANCE CONTRACTORS INC",
+      "occupation_last_seen": "CONTRACTOR",
+      "to_donalds_all_cycles": 2900,
+      "to_donalds_by_cycle": {
+        "2022": 2900
+      },
+      "career_to_pro_israel_pacs": 3300,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2023"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "WILLIAMS, CONNIE",
+      "state": "PA",
+      "employer_last_seen": "STATE OF PENNSYLVANIA/STATE REPRESE",
+      "occupation_last_seen": "STATE REPRESENTATIVE",
+      "to_donalds_all_cycles": 250,
+      "to_donalds_by_cycle": {
+        "2024": 250
+      },
+      "career_to_pro_israel_pacs": 3270,
+      "pacs_given_to": [
+        "Joint Action Committee for Political Affairs"
+      ],
+      "pro_israel_cycles": [
+        "2001",
+        "2002",
+        "2005",
+        "2012",
+        "2013",
+        "2014"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "WOLF, FRAN",
+      "state": "OH",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 581.24,
+      "to_donalds_by_cycle": {
+        "2024": 581.24
+      },
+      "career_to_pro_israel_pacs": 3000,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "KUTLER, EDWARD",
+      "state": "MD",
+      "employer_last_seen": "THE KUTLER GROUP",
+      "occupation_last_seen": "LOBBYIST",
+      "to_donalds_all_cycles": 250,
+      "to_donalds_by_cycle": {
+        "2022": 250
+      },
+      "career_to_pro_israel_pacs": 2750,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2022",
+        "2025"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "STOCH, LINDA",
+      "state": "FL",
+      "employer_last_seen": "HOMEMAKER",
+      "occupation_last_seen": "HOMEMAKER",
+      "to_donalds_all_cycles": 3900,
+      "to_donalds_by_cycle": {
+        "2022": 3900
+      },
+      "career_to_pro_israel_pacs": 2500,
+      "pacs_given_to": [
+        "American Pro-Israel PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2018",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "HOFFMAN, JOY",
+      "state": "CO",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 3197.79,
+      "to_donalds_by_cycle": {
+        "2022": 500,
+        "2024": 2697.79
+      },
+      "career_to_pro_israel_pacs": 2500,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2014",
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "GOLDMAN, DAVID",
+      "state": "FL",
+      "employer_last_seen": "JUSTICEPAYS COM",
+      "occupation_last_seen": "LAWYER",
+      "to_donalds_all_cycles": 2000,
+      "to_donalds_by_cycle": {
+        "2026": 2000
+      },
+      "career_to_pro_israel_pacs": 2500,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "COHEN, MARK",
+      "state": "MA",
+      "employer_last_seen": "OPRSYSTEMS",
+      "occupation_last_seen": "PRESIDENT",
+      "to_donalds_all_cycles": 1000,
+      "to_donalds_by_cycle": {
+        "2024": 1000
+      },
+      "career_to_pro_israel_pacs": 2500,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "MILLER, CHARLES",
+      "state": "GA",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 150,
+      "to_donalds_by_cycle": {
+        "2024": 150
+      },
+      "career_to_pro_israel_pacs": 2500,
+      "pacs_given_to": [
+        "JStreetPAC"
+      ],
+      "pro_israel_cycles": [
+        "2012",
+        "2016",
+        "2017",
+        "2018"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "KEISER, BELINDA",
+      "state": "FL",
+      "employer_last_seen": "KEISER UNIVERSITY",
+      "occupation_last_seen": "VICE CHANCELLOR",
+      "to_donalds_all_cycles": 3300,
+      "to_donalds_by_cycle": {
+        "2024": 3300
+      },
+      "career_to_pro_israel_pacs": 2000,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "RUBENSTEIN, JAMES",
+      "state": "FL",
+      "employer_last_seen": "ADVOCATE RADIATION ONCOLOGY LLC",
+      "occupation_last_seen": "PHYSICIAN",
+      "to_donalds_all_cycles": 2900,
+      "to_donalds_by_cycle": {
+        "2024": 2900
+      },
+      "career_to_pro_israel_pacs": 2000,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2026"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "DIMICCO, DANIEL",
+      "state": "NC",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 2500,
+      "to_donalds_by_cycle": {
+        "2024": 2500
+      },
+      "career_to_pro_israel_pacs": 2000,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2023"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "VOLPERT, BARRY",
+      "state": "NY",
+      "employer_last_seen": "CRESTVIEW PARTNERS",
+      "occupation_last_seen": "EXECUTIVE",
+      "to_donalds_all_cycles": 1000,
+      "to_donalds_by_cycle": {
+        "2024": 1000
+      },
+      "career_to_pro_israel_pacs": 2000,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "BROWN, CHARLES",
+      "state": "NC",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 301,
+      "to_donalds_by_cycle": {
+        "2022": 301
+      },
+      "career_to_pro_israel_pacs": 2000,
+      "pacs_given_to": [
+        "JStreetPAC"
+      ],
+      "pro_israel_cycles": [
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "SAMUEL, NIR",
+      "state": "FL",
+      "employer_last_seen": "VOLT AIR",
+      "occupation_last_seen": "MANAGEMENT",
+      "to_donalds_all_cycles": 250,
+      "to_donalds_by_cycle": {
+        "2024": 250
+      },
+      "career_to_pro_israel_pacs": 2000,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2023",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "FINK, ROBERT",
+      "state": "CA",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "LIFE INSURANCE",
+      "to_donalds_all_cycles": 250,
+      "to_donalds_by_cycle": {
+        "2024": 250
+      },
+      "career_to_pro_israel_pacs": 1500,
+      "pacs_given_to": [
+        "AIPAC PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2022",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "KOZINSKI, ALEX",
+      "state": "CA",
+      "employer_last_seen": "ALEX KOZINSKI",
+      "occupation_last_seen": "LAWYER",
+      "to_donalds_all_cycles": 175,
+      "to_donalds_by_cycle": {
+        "2022": 175
+      },
+      "career_to_pro_israel_pacs": 1400,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2020"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": true,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "FARRELL, PETER",
+      "state": "TX",
+      "employer_last_seen": "RESMED INC",
+      "occupation_last_seen": "FOUNDER",
+      "to_donalds_all_cycles": 1000,
+      "to_donalds_by_cycle": {
+        "2024": 1000
+      },
+      "career_to_pro_israel_pacs": 1020,
+      "pacs_given_to": [
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2021",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "CURRY, MICHAEL",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 9100,
+      "to_donalds_by_cycle": {
+        "2022": 2500,
+        "2024": 6600
+      },
+      "career_to_pro_israel_pacs": 1000,
+      "pacs_given_to": [
+        "Preserve America PAC (Sheldon Adelson)"
+      ],
+      "pro_israel_cycles": [
+        "2020"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "PELTZ, NELSON",
+      "state": "FL",
+      "employer_last_seen": "TRIAN FUND MANAGEMENT",
+      "occupation_last_seen": "EXECUTIVE",
+      "to_donalds_all_cycles": 5800,
+      "to_donalds_by_cycle": {
+        "2022": 5800
+      },
+      "career_to_pro_israel_pacs": 1000,
+      "pacs_given_to": [
+        "National PAC"
+      ],
+      "pro_israel_cycles": [
+        "1992"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "KIDAN, ADAM",
+      "state": "FL",
+      "employer_last_seen": "ATLANTIC SOLUTIONS GROUP INC",
+      "occupation_last_seen": "EXECUTIVE",
+      "to_donalds_all_cycles": 5000,
+      "to_donalds_by_cycle": {
+        "2024": 5000
+      },
+      "career_to_pro_israel_pacs": 1000,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "TRACY, DON",
+      "state": "IL",
+      "employer_last_seen": "BROWN HAY",
+      "occupation_last_seen": "ATTORNEY",
+      "to_donalds_all_cycles": 1500,
+      "to_donalds_by_cycle": {
+        "2024": 1500
+      },
+      "career_to_pro_israel_pacs": 1000,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2022"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "HAAG, THOMAS",
+      "state": "WI",
+      "employer_last_seen": "STATE COLLECTION SERV",
+      "occupation_last_seen": "DEBT COLLECTOR",
+      "to_donalds_all_cycles": 1150,
+      "to_donalds_by_cycle": {
+        "2022": 1150
+      },
+      "career_to_pro_israel_pacs": 1000,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2020"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "PRICE, STUART",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 1000,
+      "to_donalds_by_cycle": {
+        "2022": 1000
+      },
+      "career_to_pro_israel_pacs": 1000,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "GARVEY, JOHN",
+      "state": "KS",
+      "employer_last_seen": "GARVEY VENTURES",
+      "occupation_last_seen": "EXEC",
+      "to_donalds_all_cycles": 964.95,
+      "to_donalds_by_cycle": {
+        "2024": 964.95
+      },
+      "career_to_pro_israel_pacs": 1000,
+      "pacs_given_to": [
+        "American Principles"
+      ],
+      "pro_israel_cycles": [
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "PECHTER, JACK",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 500,
+      "to_donalds_by_cycle": {
+        "2022": 500
+      },
+      "career_to_pro_israel_pacs": 1000,
+      "pacs_given_to": [
+        "Maryland Association for Concerned Citizens PAC"
+      ],
+      "pro_israel_cycles": [
+        "2019"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "SULLIVAN, MARI",
+      "state": "TX",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 500,
+      "to_donalds_by_cycle": {
+        "2024": 500
+      },
+      "career_to_pro_israel_pacs": 1000,
+      "pacs_given_to": [
+        "Preserve America PAC (Sheldon Adelson)"
+      ],
+      "pro_israel_cycles": [
+        "2020"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "FRANKMAN, HARRY",
+      "state": "MN",
+      "employer_last_seen": "FRANKMAN LAW",
+      "occupation_last_seen": "ATTORNEY",
+      "to_donalds_all_cycles": 250,
+      "to_donalds_by_cycle": {
+        "2024": 250
+      },
+      "career_to_pro_israel_pacs": 1000,
+      "pacs_given_to": [
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2020",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "MILLER, LAURA",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 151,
+      "to_donalds_by_cycle": {
+        "2022": 151
+      },
+      "career_to_pro_israel_pacs": 1000,
+      "pacs_given_to": [
+        "US Israel PAC / Florida Congressional Committee"
+      ],
+      "pro_israel_cycles": [
+        "2002",
+        "2003",
+        "2004"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "ROKOWSKY, ISAAC",
+      "state": "NY",
+      "employer_last_seen": "SELF-EMPLOYED",
+      "occupation_last_seen": "REALTOR",
+      "to_donalds_all_cycles": 100,
+      "to_donalds_by_cycle": {
+        "2024": 100
+      },
+      "career_to_pro_israel_pacs": 1000,
+      "pacs_given_to": [
+        "Hudson Valley PAC"
+      ],
+      "pro_israel_cycles": [
+        "1987"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "PALERMO, MARK",
+      "state": "NY",
+      "employer_last_seen": "SELF-EMPLOYED",
+      "occupation_last_seen": "LAWYER CONSULTANT",
+      "to_donalds_all_cycles": 120.24,
+      "to_donalds_by_cycle": {
+        "2024": 120.24
+      },
+      "career_to_pro_israel_pacs": 750,
+      "pacs_given_to": [
+        "JStreetPAC"
+      ],
+      "pro_israel_cycles": [
+        "2016"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "GAMBINO, JOSEPH",
+      "state": "NY",
+      "employer_last_seen": "INFORMATION REQUESTED",
+      "occupation_last_seen": "INFORMATION REQUESTED",
+      "to_donalds_all_cycles": 250,
+      "to_donalds_by_cycle": {
+        "2022": 250
+      },
+      "career_to_pro_israel_pacs": 600,
+      "pacs_given_to": [
+        "Hudson Valley PAC"
+      ],
+      "pro_israel_cycles": [
+        "1993"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "BAUM, DAVID",
+      "state": "FL",
+      "employer_last_seen": "ENTREPRENEUR",
+      "occupation_last_seen": "ENTREPRENEUR",
+      "to_donalds_all_cycles": 6600,
+      "to_donalds_by_cycle": {
+        "2024": 6600
+      },
+      "career_to_pro_israel_pacs": 500,
+      "pacs_given_to": [
+        "United PAC (Illinois)"
+      ],
+      "pro_israel_cycles": [
+        "2016"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "GADE, GILLES",
+      "state": "NY",
+      "employer_last_seen": "CROSS RIVER",
+      "occupation_last_seen": "CEO",
+      "to_donalds_all_cycles": 2900,
+      "to_donalds_by_cycle": {
+        "2022": 2900
+      },
+      "career_to_pro_israel_pacs": 500,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2020"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "KERR, MICHAEL",
+      "state": "NY",
+      "employer_last_seen": "OPTIMUM SOLUTIONS CORP",
+      "occupation_last_seen": "EXECUTIVE",
+      "to_donalds_all_cycles": 2900,
+      "to_donalds_by_cycle": {
+        "2022": 2900
+      },
+      "career_to_pro_israel_pacs": 500,
+      "pacs_given_to": [
+        "NorPAC / North Jersey PAC"
+      ],
+      "pro_israel_cycles": [
+        "2008"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "FRANCO, OMAR",
+      "state": "VA",
+      "employer_last_seen": "BECKER POLIAKOFF P A",
+      "occupation_last_seen": "SENIOR DIRECTOR",
+      "to_donalds_all_cycles": 1500,
+      "to_donalds_by_cycle": {
+        "2022": 500,
+        "2024": 1000
+      },
+      "career_to_pro_israel_pacs": 500,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "JAVITS, ERIC",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 600,
+      "to_donalds_by_cycle": {
+        "2024": 600
+      },
+      "career_to_pro_israel_pacs": 500,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": true,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "BARBI, LESLIE",
+      "state": "WI",
+      "employer_last_seen": "RGA",
+      "occupation_last_seen": "EXECUTIVE",
+      "to_donalds_all_cycles": 500,
+      "to_donalds_by_cycle": {
+        "2022": 500
+      },
+      "career_to_pro_israel_pacs": 500,
+      "pacs_given_to": [
+        "Preserve America PAC (Sheldon Adelson)"
+      ],
+      "pro_israel_cycles": [
+        "2020"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "LEVINE, ARTHUR",
+      "state": "NY",
+      "employer_last_seen": "ARTHUR LEVINE ASSOCI",
+      "occupation_last_seen": "PRESIDENT",
+      "to_donalds_all_cycles": 100,
+      "to_donalds_by_cycle": {
+        "2022": 100
+      },
+      "career_to_pro_israel_pacs": 500,
+      "pacs_given_to": [
+        "Hudson Valley PAC"
+      ],
+      "pro_israel_cycles": [
+        "1985"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "BENDER, SALLY",
+      "state": "CA",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 100,
+      "to_donalds_by_cycle": {
+        "2024": 100
+      },
+      "career_to_pro_israel_pacs": 500,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2020",
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "MORGENSTERN, MICHAEL",
+      "state": "FL",
+      "employer_last_seen": "SELF-EMPLOYED",
+      "occupation_last_seen": "LAW",
+      "to_donalds_all_cycles": 100,
+      "to_donalds_by_cycle": {
+        "2026": 100
+      },
+      "career_to_pro_israel_pacs": 500,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "SIMKO, PAUL",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 1980,
+      "to_donalds_by_cycle": {
+        "2022": 1980
+      },
+      "career_to_pro_israel_pacs": 250,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2020"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "SHERMAN, JOEL",
+      "state": "NY",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 650,
+      "to_donalds_by_cycle": {
+        "2022": 650
+      },
+      "career_to_pro_israel_pacs": 250,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2014"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "DIAMOND, WILLIAM",
+      "state": "FL",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 401.05,
+      "to_donalds_by_cycle": {
+        "2024": 401.05
+      },
+      "career_to_pro_israel_pacs": 250,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2022"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "BROWN, ROBERT",
+      "state": "CA",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 376,
+      "to_donalds_by_cycle": {
+        "2022": 376
+      },
+      "career_to_pro_israel_pacs": 250,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "WOLF, DAVID",
+      "state": "MI",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 100,
+      "to_donalds_by_cycle": {
+        "2024": 100
+      },
+      "career_to_pro_israel_pacs": 250,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2025"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "GUMPRECHT, THOMAS",
+      "state": "WA",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 465.5,
+      "to_donalds_by_cycle": {
+        "2024": 465.5
+      },
+      "career_to_pro_israel_pacs": 238,
+      "pacs_given_to": [
+        "Preserve America PAC (Miriam Adelson)"
+      ],
+      "pro_israel_cycles": [
+        "2024"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    },
+    {
+      "name": "TAFT, NANCY",
+      "state": "MI",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_donalds_all_cycles": 1452.53,
+      "to_donalds_by_cycle": {
+        "2022": 379.28,
+        "2026": 1073.25
+      },
+      "career_to_pro_israel_pacs": 200,
+      "pacs_given_to": [
+        "Pro-Israel America PAC"
+      ],
+      "pro_israel_cycles": [
+        "2022"
+      ],
+      "also_on_rose_aipac_earmark_list": false,
+      "also_on_donalds_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal_49yr": false
+    }
+  ],
+  "named_interest_hits": [
+    {
+      "name": "SAM OLSWANGER",
+      "match": {
+        "name": "OLSWANGER, SAM",
+        "state": "DC",
+        "employer_last_seen": "AKIN GUMP STRAUSS HAUER FELD LLP",
+        "occupation_last_seen": "SENIOR POLICY ADVISOR",
+        "to_donalds_all_cycles": 500,
+        "to_donalds_by_cycle": {
+          "2022": 500
+        },
+        "career_to_pro_israel_pacs": 6750,
+        "pacs_given_to": [
+          "Pro-Israel America PAC",
+          "AIPAC PAC"
+        ],
+        "pro_israel_cycles": [
+          "2021",
+          "2022",
+          "2023"
+        ],
+        "also_on_rose_aipac_earmark_list": true,
+        "also_on_donalds_aipac_earmark_list": false,
+        "also_on_blackburn_tn_gov": true,
+        "also_on_rose_federal_49yr": true,
+        "foreign_money_flag": "AKIN GUMP STRAUSS HAUER FELD LLP is a FARA-registered firm representing foreign sovereigns"
+      },
+      "note": "Akin Gump, DC, FARA firm"
+    },
+    {
+      "name": "LAWRENCE HYATT",
+      "match": null
+    },
+    {
+      "name": "JACK ADES",
+      "match": null
+    },
+    {
+      "name": "JONATHAN CAPLAN",
+      "match": null
+    },
+    {
+      "name": "SETH DAMSKI",
+      "match": null
+    },
+    {
+      "name": "JONATHAN SLASS",
+      "match": null
+    },
+    {
+      "name": "STUART KUNTZ",
+      "match": null
+    },
+    {
+      "name": "RUSSELL HERMAN",
+      "match": null
+    },
+    {
+      "name": "BARNEY BYRD",
+      "match": null
+    }
+  ],
+  "totals": {
+    "high_conf_match_count": 128,
+    "high_conf_total_to_donalds": 262947.82,
+    "combined_career_to_pro_israel": 12711780,
+    "cycle_2026_live_signal": 3173.25,
+    "cross_identified_with_blackburn_tn_gov": [
+      "UIHLEIN, ELIZABETH",
+      "OLSWANGER, SAM",
+      "MILES, PAUL",
+      "KOZINSKI, ALEX",
+      "JAVITS, ERIC"
+    ],
+    "cross_identified_with_rose_federal_49yr": [
+      "FISHER, JEFFREY",
+      "OLSWANGER, SAM"
+    ],
+    "cross_identified_with_rose_aipac_earmark": [
+      "FISHER, JEFFREY",
+      "OLSWANGER, SAM"
+    ]
+  },
+  "generated_at": "2026-04-24T22:48:48.548Z"
+}
