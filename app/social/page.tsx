@@ -4,16 +4,13 @@ import SocialFeed from '@/components/SocialFeed';
 
 export default function SocialPage() {
   return (
-    <main style={{ maxWidth: 1200, margin: '0 auto', padding: '1.5rem' }}>
+    <main className="p-3 sm:p-6 lg:p-8" style={{ maxWidth: 1200, margin: '0 auto' }}>
       <div style={{ marginBottom: '1.5rem' }}>
         <h1
+          className="text-2xl sm:text-[28px] lg:text-[32px] uppercase tracking-[0.08em] mb-4"
           style={{
-            fontSize: '16px',
             fontWeight: 700,
             color: 'var(--terminal-cyan)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            marginBottom: '0.25rem',
           }}
         >
           Social Intelligence Feed
