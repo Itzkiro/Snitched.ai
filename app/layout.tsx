@@ -79,10 +79,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${bebasNeue.variable} ${inter.variable} ${jetBrainsMono.variable}`}>
+        {/*
+          Skip-link per D-27 (a11y) and UI-SPEC §11. Visually hidden until the
+          element receives keyboard focus, at which point the `focus:top-2`
+          rule slides it into view. The 100 ms transition matches the drawer
+          animation budget (D-07) so motion reads as a single system.
+        */}
+        <a
+          href="#main"
+          className="absolute -top-12 left-2 z-[100] bg-terminal-green text-black px-3 py-2 font-mono text-xs uppercase tracking-[0.08em] focus:top-2 transition-[top] duration-100"
+        >
+          Skip to content
+        </a>
         <TerminalProvider>
           <Suspense>
             <TerminalShell>
-              {children}
+              <main id="main">
+                {children}
+              </main>
             </TerminalShell>
           </Suspense>
         </TerminalProvider>

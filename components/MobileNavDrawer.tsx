@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import DaemonStatusIndicator from './DaemonStatusIndicator';
 
 export interface NavLink {
@@ -47,6 +48,7 @@ export default function MobileNavDrawer({
 }: MobileNavDrawerProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const touchStartXRef = useRef<number | null>(null);
+  const pathname = usePathname();
 
   // Esc to close
   useEffect(() => {
@@ -147,19 +149,30 @@ export default function MobileNavDrawer({
         <div className="border-t border-terminal-border my-2" />
 
         {/* Nav links */}
-        <nav className="flex-1 overflow-y-auto" aria-label="Primary">
+        <nav className="flex-1 overflow-y-auto" aria-label="Mobile primary">
           <ul className="flex flex-col">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  onClick={onClose}
-                  className="block min-h-[48px] px-4 py-3 text-base font-mono uppercase tracking-[0.08em] text-terminal-text hover:bg-terminal-green/10"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
+            {navLinks.map((link) => {
+              // Match the link's pathname (strip any query string) against the
+              // active route so `aria-current="page"` reflects the live URL —
+              // the off-canvas drawer reuses the same href list as the desktop
+              // nav (which carries `?state=…`), so we compare on pathname only.
+              const linkPath = link.href.split('?')[0];
+              const isActive = pathname === linkPath;
+              return (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    onClick={onClose}
+                    aria-current={isActive ? 'page' : undefined}
+                    className={`block min-h-[48px] px-4 py-3 text-base font-mono uppercase tracking-[0.08em] hover:bg-terminal-green/10 ${
+                      isActive ? 'text-terminal-green' : 'text-terminal-text'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 

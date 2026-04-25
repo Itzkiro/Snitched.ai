@@ -716,11 +716,15 @@ export default function PoliticianPage() {
 
           {/* (Red Flags now live inside the score-card toggle in the header.) */}
 
-          {/* Tab Navigation — sticky scroll-snap strip per UI-SPEC §6 + D-10/D-11/D-12 */}
+          {/* Tab Navigation — sticky scroll-snap strip per UI-SPEC §6 + D-10/D-11/D-12.
+              role="tablist" + aria-label provides the semantic profile-sections
+              landmark per plan 10-06 a11y audit (D-27). aria-current="page" on
+              the active tab is set in the .map() below. */}
           <div className="relative mb-8">
             <div
               className="sticky top-[56px] z-30 flex overflow-x-auto snap-x snap-mandatory border-b-2 border-[var(--terminal-border)] bg-black/85 backdrop-blur"
               role="tablist"
+              aria-label="Profile sections"
             >
               {tabs.map(tab => {
                 const isActive = activeTab === tab.id;
@@ -1426,8 +1430,12 @@ export default function PoliticianPage() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', padding: '1rem', background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--terminal-border)' }}>
                     <div className="flex items-center gap-2 flex-wrap">
                       <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'JetBrains Mono, monospace', marginRight: '0.5rem' }}>FILTER:</div>
-                      {/* Vote filter buttons — 44 px tap targets per AUDIT §1.4 + D-03; wrap on base, scroll-snap on sm+ */}
-                      <div className="flex flex-wrap gap-2 sm:flex-nowrap sm:overflow-x-auto sm:snap-x sm:snap-mandatory pb-2 w-full sm:w-auto">
+                      {/* Vote filter buttons — 44 px tap targets per AUDIT §1.4 + D-03; wrap on base, scroll-snap on sm+.
+                          data-vote-filter is the test-instrumentation hook used by
+                          tests/e2e/mobile/profile.spec.ts (plan 10-06). Individual
+                          buttons inherit via the parent selector
+                          `[data-vote-filter] button`. */}
+                      <div data-vote-filter className="flex flex-wrap gap-2 sm:flex-nowrap sm:overflow-x-auto sm:snap-x sm:snap-mandatory pb-2 w-full sm:w-auto">
                         {(['all', 'israel', 'defense', 'foreign', 'anti-america-first', 'domestic'] as VoteCategoryFilter[]).map((f) => {
                           const isActive = voteCategoryFilter === f;
                           return (
