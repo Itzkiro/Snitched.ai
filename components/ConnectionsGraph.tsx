@@ -433,14 +433,12 @@ export default function ConnectionsGraph({ politician }: { politician: Politicia
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const [layout, setLayout] = useState<'fcose' | 'circle' | 'concentric'>('fcose');
 
-  // Mobile config branch per D-04 (prefers-reduced-motion guard), D-30
-  // (?legacy_graph=1 rollback flag), AUDIT §1.4 (Cytoscape main-thread block
-  // mitigation on Moto G Power class devices). These flags are captured once
-  // at mount via matchMedia / URLSearchParams — not reactive, because
-  // re-initialising Cytoscape on viewport change would break user node
-  // positions. See RISKS §2.1 for the node-position drift tradeoff.
-  const isLegacyGraph = typeof window !== 'undefined'
-    && new URLSearchParams(window.location.search).get('legacy_graph') === '1';
+  // Mobile config branch per D-04 (prefers-reduced-motion guard), AUDIT §1.4
+  // (Cytoscape main-thread block mitigation on Moto G Power class devices).
+  // These flags are captured once at mount via matchMedia — not reactive,
+  // because re-initialising Cytoscape on viewport change would break user
+  // node positions. See RISKS §2.1 for the node-position drift tradeoff.
+  // The legacy rollback flag was retired in plan 10-06 (Phase F) per D-30.
   const prefersReducedMotion = typeof window !== 'undefined'
     && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
@@ -468,22 +466,11 @@ export default function ConnectionsGraph({ politician }: { politician: Politicia
         } as unknown as cytoscape.LayoutOptions;
       case 'fcose':
       default:
-        if (isLegacyGraph) {
-          // ?legacy_graph=1 rollback — byte-equivalent to pre-phase-10
-          // production config. Every option key enumerated here matches
-          // today's production values exactly; changing any requires
-          // updating RISKS §2.1 and the checkpoint verification.
-          return {
-            name: 'fcose', animate: true, animationDuration: 500, randomize: true, quality: 'proof',
-            nodeSeparation: 80, idealEdgeLength: 150, nodeRepulsion: () => 20000,
-            edgeElasticity: () => 0.45, gravity: 0.2, gravityRange: 3.8, numIter: 2500,
-          } as unknown as cytoscape.LayoutOptions;
-        }
-        // Non-legacy (default) path — mobile reductions per UI-SPEC §10
-        // ConnectionsGraph row: numIter 600 on mobile, animate false on
-        // mobile or when prefers-reduced-motion: reduce, randomize false
-        // for deterministic layouts across runs (fcose has no public seed
-        // parameter; randomize:false is the documented determinism lever).
+        // Default path — mobile reductions per UI-SPEC §10 ConnectionsGraph
+        // row: numIter 600 on mobile, animate false on mobile or when
+        // prefers-reduced-motion: reduce, randomize false for deterministic
+        // layouts across runs (fcose has no public seed parameter;
+        // randomize:false is the documented determinism lever).
         return {
           name: 'fcose',
           animate: (isMobile || prefersReducedMotion) ? false : true,
@@ -499,7 +486,7 @@ export default function ConnectionsGraph({ politician }: { politician: Politicia
           numIter: isMobile ? 600 : 2500,
         } as unknown as cytoscape.LayoutOptions;
     }
-  }, [isLegacyGraph, isMobile, prefersReducedMotion]);
+  }, [isMobile, prefersReducedMotion]);
 
   // Init Cytoscape
   useEffect(() => {
@@ -675,6 +662,8 @@ export default function ConnectionsGraph({ politician }: { politician: Politicia
       <div className="relative w-full">
         <div
           ref={containerRef}
+          role="region"
+          aria-label="Politician connections graph"
           className="min-h-[280px] h-[60vw] sm:h-[400px] lg:h-[550px] w-full bg-black/40 border border-[var(--terminal-border)] rounded-sm"
         />
 
