@@ -413,15 +413,10 @@ a:hover {
     gap: 0.75rem;
   }
 
-  /* Navigation — scrollable horizontal strip */
-  .terminal-nav {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    gap: 0.5rem !important;
-    padding: 0.5rem 0.75rem !important;
-    scrollbar-width: none;
-  }
-  .terminal-nav::-webkit-scrollbar { display: none; }
+  /* Navigation — replaced by responsive layout in TerminalHeader.tsx (Phase 10
+     Wave 2). The mobile nav is now an off-canvas drawer (MobileNavDrawer.tsx)
+     mounted behind lg:hidden, so the legacy overflow-x scrollable strip is
+     obsolete. */
 
   /* Cards — less padding */
   .terminal-card {
