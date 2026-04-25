@@ -1,0 +1,27 @@
+{
+  "source": "TN-REF-11451-2026",
+  "method": "high-confidence-only (last+full-first-name+state exact)",
+  "total_individual_rows_scanned": 1490,
+  "unique_donors": 1118,
+  "total_raised_individual": 1420229.78,
+  "matches": [
+    {
+      "name": "SMITH, WILLIAM",
+      "state": "TN",
+      "to_rose": 35,
+      "career_to_pro_israel_pacs": 700,
+      "pacs": [
+        "JStreetPAC"
+      ],
+      "employer": "RETIRED",
+      "occupation": "RETIRED"
+    }
+  ],
+  "totals": {
+    "bundler_count": 1,
+    "to_rose_sum": 35,
+    "career_to_pro_israel_sum": 700
+  },
+  "notable_clusters": [],
+  "generated_at": "2026-04-24T01:38:12.100Z"
+}

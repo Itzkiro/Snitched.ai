@@ -1,0 +1,28 @@
+{
+  "source": "FL DOE campaign-finance contributions portal (2026 GOV)",
+  "method": "high-confidence-only (last + full-first-name + state exact; NFD-normalized, suffix-stripped)",
+  "registry": {
+    "years": "1978-2026",
+    "year_count": 49,
+    "unique_individuals": 40276,
+    "index_keys": 37768
+  },
+  "candidate": {
+    "key": "fishback",
+    "name": "James Fishback",
+    "total_raised": 154837.79,
+    "total_rows": 1996,
+    "unique_donors": 1479
+  },
+  "matches": [],
+  "totals": {
+    "high_conf_match_count": 0,
+    "high_conf_total_to_candidate": 0,
+    "combined_career_to_pro_israel": 0,
+    "cross_with_blackburn": [],
+    "cross_with_rose": [],
+    "known_bundler_hits": []
+  },
+  "cross_candidate_known_bundlers": [],
+  "generated_at": "2026-04-24T22:25:41.282Z"
+}

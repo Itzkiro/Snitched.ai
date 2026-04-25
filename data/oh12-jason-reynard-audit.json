@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-04-24T22:45:16.123Z",
+  "candidate": {
+    "name": "Jason Reynard",
+    "party": "D",
+    "state": "OH",
+    "district": "12",
+    "fec_candidate_id": null,
+    "committees": []
+  },
+  "totals": [],
+  "current_cycle": {
+    "cycle": 2026,
+    "receipts": 0,
+    "individuals": 0,
+    "pacs": 0,
+    "self_funding": 0,
+    "israel_pac_total": 0
+  },
+  "score": 0,
+  "grade": "A",
+  "confidence": "low",
+  "juice_box_tier": "none",
+  "positive_flags": [
+    "[fec 2026-cycle] No FEC committee registered — fundraising under federal $5K reporting threshold; structurally cannot be captured by pro-Israel PAC money in 2026 cycle.",
+    "[grassroots] Sub-threshold candidate; no donor concentration risk possible."
+  ],
+  "red_flags": [],
+  "note": "Sub-FEC-threshold grassroots candidate. Confidence is LOW — no public financial signal exists yet. Re-audit if Reynard files an FEC committee or his campaign clears $5K."
+}

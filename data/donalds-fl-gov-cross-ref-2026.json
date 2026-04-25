@@ -1,0 +1,93 @@
+{
+  "source": "FL DOE campaign-finance contributions portal (2026 GOV)",
+  "method": "high-confidence-only (last + full-first-name + state exact; NFD-normalized, suffix-stripped)",
+  "registry": {
+    "years": "1978-2026",
+    "year_count": 49,
+    "unique_individuals": 40276,
+    "index_keys": 37768
+  },
+  "candidate": {
+    "key": "donalds",
+    "name": "Byron Donalds",
+    "total_raised": 238688.31,
+    "total_rows": 1944,
+    "unique_donors": 770
+  },
+  "matches": [
+    {
+      "name": "ABRAMOWITZ, KENNETH",
+      "state": "FL",
+      "city": "LAKE WORTH",
+      "employer_last_seen": "NGN CAPITAL",
+      "occupation_last_seen": "RETIRED",
+      "to_candidate": 4000,
+      "career_to_pro_israel_pacs": 15200,
+      "pacs_given_to": [
+        "American Principles",
+        "NorPAC / North Jersey PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal": false
+    },
+    {
+      "name": "ADLER, DANIEL",
+      "state": "FL",
+      "city": "FORT MYERS",
+      "employer_last_seen": "BUYMEBEAUTY",
+      "occupation_last_seen": "ATTORNEY",
+      "to_candidate": 2000,
+      "career_to_pro_israel_pacs": 14000,
+      "pacs_given_to": [
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal": false
+    },
+    {
+      "name": "ALLEN, JOHN",
+      "state": "CA",
+      "city": "BEAUMONT",
+      "employer_last_seen": "N/A",
+      "occupation_last_seen": "RETIRED",
+      "to_candidate": 15,
+      "career_to_pro_israel_pacs": 250,
+      "pacs_given_to": [
+        "JStreetPAC"
+      ],
+      "pro_israel_cycles": [
+        "2014"
+      ],
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal": false
+    }
+  ],
+  "totals": {
+    "high_conf_match_count": 3,
+    "high_conf_total_to_candidate": 6015,
+    "combined_career_to_pro_israel": 29450,
+    "cross_with_blackburn": [],
+    "cross_with_rose": [],
+    "known_bundler_hits": []
+  },
+  "cross_candidate_known_bundlers": [],
+  "generated_at": "2026-04-24T22:25:41.249Z"
+}

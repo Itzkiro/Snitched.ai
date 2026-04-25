@@ -1,0 +1,983 @@
+{
+  "bioguide_id": "ca-30-2026-laura-friedman",
+  "name": "Laura Friedman",
+  "fec_candidate_id": "H4CA30149",
+  "fec_committee_id": "C00831321",
+  "cycle": 2026,
+  "generated_at": "2026-04-24T23:25:34.413Z",
+  "totals": {
+    "scoring_receipts_multi_cycle": 2476115.75,
+    "current_cycle_receipts": 640450.64,
+    "israel_lobby_total": 361318.02999999997,
+    "aipac_funding": 9000,
+    "bundler_total": 338718.02999999997,
+    "ie_israel": 0,
+    "match_count": 225,
+    "match_rate_pct": 11.3,
+    "cycles_count": 2,
+    "active_cycles": [
+      2024,
+      2026
+    ]
+  },
+  "score": {
+    "old": 90,
+    "new": 60,
+    "grade": "C"
+  },
+  "tier": {
+    "old": "none",
+    "new": "none"
+  },
+  "israel_lobby_breakdown": {
+    "total": 361318.02999999997,
+    "pacs": 22600,
+    "ie": 0,
+    "bundlers": 338718.02999999997,
+    "source": "fec_2024+2026+pro_israel_pacs+49yr_bundler_registry",
+    "scoring_scope": "incumbent_reelection_multi_cycle:2024+2026",
+    "snapshot": "2026-04-24",
+    "cycles_count": 2,
+    "active_cycles": [
+      2024,
+      2026
+    ],
+    "pac_details": [
+      {
+        "pac_id": "C00797670",
+        "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION COMMITTEE",
+        "amount": 4000,
+        "date": "2024-10-18",
+        "cycle": 2024
+      },
+      {
+        "pac_id": "C00441949",
+        "pac_name": "JSTREETPAC",
+        "amount": 2500,
+        "date": "2025-11-07",
+        "cycle": 2026
+      },
+      {
+        "pac_id": "C00441949",
+        "pac_name": "JSTREETPAC",
+        "amount": 2000,
+        "date": "2025-10-30",
+        "cycle": 2026
+      },
+      {
+        "pac_id": "C00139659",
+        "pac_name": "JOINT ACTION COMMITTEE FOR POLITICAL AFFAIRS",
+        "amount": 1500,
+        "date": "2024-10-08",
+        "cycle": 2024
+      },
+      {
+        "pac_id": "C00797670",
+        "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION COMMITTEE",
+        "amount": 1000,
+        "date": "2024-09-24",
+        "cycle": 2024
+      },
+      {
+        "pac_id": "C00710848",
+        "pac_name": "DMFI PAC",
+        "amount": 1000,
+        "date": "2024-06-28",
+        "cycle": 2024
+      },
+      {
+        "pac_id": "C00797670",
+        "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION COMMITTEE",
+        "amount": 1000,
+        "date": "2024-04-25",
+        "cycle": 2024
+      },
+      {
+        "pac_id": "C00797670",
+        "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION COMMITTEE",
+        "amount": 1000,
+        "date": "2024-11-04",
+        "cycle": 2024
+      },
+      {
+        "pac_id": "C00441949",
+        "pac_name": "JSTREETPAC",
+        "amount": 1000,
+        "date": "2025-10-30",
+        "cycle": 2026
+      },
+      {
+        "pac_id": "C00441949",
+        "pac_name": "JSTREETPAC",
+        "amount": 1000,
+        "date": "2025-10-23",
+        "cycle": 2026
+      },
+      {
+        "pac_id": "C00797670",
+        "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION COMMITTEE",
+        "amount": 500,
+        "date": "2024-10-03",
+        "cycle": 2024
+      },
+      {
+        "pac_id": "C00441949",
+        "pac_name": "JSTREETPAC",
+        "amount": 500,
+        "date": "2024-08-30",
+        "cycle": 2024
+      },
+      {
+        "pac_id": "C00797670",
+        "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION COMMITTEE",
+        "amount": 500,
+        "date": "2024-07-05",
+        "cycle": 2024
+      },
+      {
+        "pac_id": "C00797670",
+        "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION COMMITTEE",
+        "amount": 500,
+        "date": "2024-05-16",
+        "cycle": 2024
+      },
+      {
+        "pac_id": "C00441949",
+        "pac_name": "JSTREETPAC",
+        "amount": 500,
+        "date": "2025-10-01",
+        "cycle": 2026
+      },
+      {
+        "pac_id": "C00441949",
+        "pac_name": "JSTREETPAC",
+        "amount": 500,
+        "date": "2025-10-16",
+        "cycle": 2026
+      },
+      {
+        "pac_id": "C00441949",
+        "pac_name": "JSTREETPAC",
+        "amount": 500,
+        "date": "2025-10-01",
+        "cycle": 2026
+      },
+      {
+        "pac_id": "C00441949",
+        "pac_name": "JSTREETPAC",
+        "amount": 350,
+        "date": "2024-09-24",
+        "cycle": 2024
+      },
+      {
+        "pac_id": "C00797670",
+        "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION COMMITTEE",
+        "amount": 250,
+        "date": "2024-09-18",
+        "cycle": 2024
+      },
+      {
+        "pac_id": "C00441949",
+        "pac_name": "JSTREETPAC",
+        "amount": 250,
+        "date": "2024-09-19",
+        "cycle": 2024
+      },
+      {
+        "pac_id": "C00441949",
+        "pac_name": "JSTREETPAC",
+        "amount": 250,
+        "date": "2024-09-19",
+        "cycle": 2024
+      },
+      {
+        "pac_id": "C00441949",
+        "pac_name": "JSTREETPAC",
+        "amount": 250,
+        "date": "2024-09-19",
+        "cycle": 2024
+      },
+      {
+        "pac_id": "C00441949",
+        "pac_name": "JSTREETPAC",
+        "amount": 250,
+        "date": "2024-06-30",
+        "cycle": 2024
+      },
+      {
+        "pac_id": "C00797670",
+        "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION COMMITTEE",
+        "amount": 250,
+        "date": "2024-11-04",
+        "cycle": 2024
+      },
+      {
+        "pac_id": "C00441949",
+        "pac_name": "JSTREETPAC",
+        "amount": 250,
+        "date": "2025-10-01",
+        "cycle": 2026
+      },
+      {
+        "pac_id": "C00441949",
+        "pac_name": "JSTREETPAC",
+        "amount": 250,
+        "date": "2025-10-10",
+        "cycle": 2026
+      },
+      {
+        "pac_id": "C00441949",
+        "pac_name": "JSTREETPAC",
+        "amount": 250,
+        "date": "2025-10-01",
+        "cycle": 2026
+      },
+      {
+        "pac_id": "C00441949",
+        "pac_name": "JSTREETPAC",
+        "amount": 250,
+        "date": "2025-10-30",
+        "cycle": 2026
+      },
+      {
+        "pac_id": "C00441949",
+        "pac_name": "JSTREETPAC",
+        "amount": 250,
+        "date": "2025-10-23",
+        "cycle": 2026
+      }
+    ],
+    "ie_details": [],
+    "individual_registry": {
+      "itemized_individual_rows": 1994,
+      "matches": 225,
+      "high_confidence": 151,
+      "medium_confidence": 74,
+      "to_candidate": 338718.02999999997,
+      "these_donors_to_pro_israel_career": 6921216.590000001,
+      "match_rate_pct": 11.3,
+      "top_donors": [
+        {
+          "name": "CAMERON, RONALD",
+          "state": "AR",
+          "to_candidate": 13500,
+          "to_pro_israel_career": 2500000,
+          "candidate_cycles": [
+            "2024",
+            "2026"
+          ],
+          "pro_israel_cycles": [
+            "2020",
+            "2024"
+          ],
+          "pacs": [
+            "Preserve America PAC (Sheldon Adelson)",
+            "Preserve America PAC (Miriam Adelson)"
+          ],
+          "confidence": "medium"
+        },
+        {
+          "name": "GORDON, PATRICIA",
+          "state": "CA",
+          "to_candidate": 750,
+          "to_pro_israel_career": 747050,
+          "candidate_cycles": [
+            "2024",
+            "2026"
+          ],
+          "pro_israel_cycles": [
+            "2023",
+            "2024"
+          ],
+          "pacs": [
+            "JStreetPAC"
+          ],
+          "confidence": "high"
+        },
+        {
+          "name": "FISHMAN, STEVEN",
+          "state": "CA",
+          "to_candidate": 500,
+          "to_pro_israel_career": 480706.33,
+          "candidate_cycles": [
+            "2026"
+          ],
+          "pro_israel_cycles": [
+            "2013",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2026"
+          ],
+          "pacs": [
+            "World Alliance for Israel PAC",
+            "Pro-Israel America PAC",
+            "AIPAC PAC",
+            "DMFI PAC (Democratic Majority for Israel)",
+            "United Democracy Project (UDP)"
+          ],
+          "confidence": "high"
+        },
+        {
+          "name": "YOUNG, MICHAEL",
+          "state": "NY",
+          "to_candidate": 350,
+          "to_pro_israel_career": 310827.32,
+          "candidate_cycles": [
+            "2024"
+          ],
+          "pro_israel_cycles": [
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "pacs": [
+            "JStreetPAC",
+            "J Street Action Fund",
+            "AIPAC PAC"
+          ],
+          "confidence": "high"
+        },
+        {
+          "name": "HORWICH, ADA",
+          "state": "CA",
+          "to_candidate": 3500,
+          "to_pro_israel_career": 207494,
+          "candidate_cycles": [
+            "2024",
+            "2026"
+          ],
+          "pro_israel_cycles": [
+            "1989",
+            "1990",
+            "1992",
+            "1994",
+            "1996",
+            "1997",
+            "1998",
+            "1999",
+            "2000",
+            "2001",
+            "2002",
+            "2003",
+            "2004",
+            "2005",
+            "2006",
+            "2007",
+            "2008",
+            "2009",
+            "2010",
+            "2012",
+            "2013",
+            "2014",
+            "2015",
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "pacs": [
+            "World Alliance for Israel PAC",
+            "Joint Action Committee for Political Affairs",
+            "National Action Committee",
+            "National PAC",
+            "Citizens Organized Political Action Committee",
+            "California Jewish Democrats-FED / Democrats for Israel Committee",
+            "JDCA PAC"
+          ],
+          "confidence": "high"
+        },
+        {
+          "name": "LAINER, ELEANOR",
+          "state": "CA",
+          "to_candidate": 3300,
+          "to_pro_israel_career": 160500,
+          "candidate_cycles": [
+            "2024"
+          ],
+          "pro_israel_cycles": [
+            "2020",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "pacs": [
+            "JStreetPAC",
+            "JDCA PAC"
+          ],
+          "confidence": "high"
+        },
+        {
+          "name": "ASHER, ROBERT",
+          "state": "IL",
+          "to_candidate": 1000,
+          "to_pro_israel_career": 144425,
+          "candidate_cycles": [
+            "2026"
+          ],
+          "pro_israel_cycles": [
+            "1979",
+            "1983",
+            "1985",
+            "1987",
+            "1989",
+            "1991",
+            "1993",
+            "1995",
+            "1996",
+            "1997",
+            "1999",
+            "2001",
+            "2003",
+            "2004",
+            "2006",
+            "2007",
+            "2008",
+            "2009",
+            "2012",
+            "2013",
+            "2019",
+            "2021"
+          ],
+          "pacs": [
+            "Americans United in Support of Democracy / CCNI",
+            "City PAC",
+            "National PAC",
+            "National Action Committee",
+            "To Protect Our Heritage PAC",
+            "United PAC (Illinois)",
+            "AIPAC PAC"
+          ],
+          "confidence": "medium"
+        },
+        {
+          "name": "BENDER, DONNA",
+          "state": "CA",
+          "to_candidate": 500,
+          "to_pro_israel_career": 134270,
+          "candidate_cycles": [
+            "2024"
+          ],
+          "pro_israel_cycles": [
+            "2006",
+            "2008",
+            "2009",
+            "2010",
+            "2012",
+            "2013",
+            "2014",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025",
+            "2026"
+          ],
+          "pacs": [
+            "World Alliance for Israel PAC",
+            "Pro-Israel America PAC",
+            "AIPAC PAC",
+            "United Democracy Project (UDP)"
+          ],
+          "confidence": "high"
+        },
+        {
+          "name": "WEINER, SANFORD",
+          "state": "CA",
+          "to_candidate": 250,
+          "to_pro_israel_career": 126760,
+          "candidate_cycles": [
+            "2026"
+          ],
+          "pro_israel_cycles": [
+            "2008",
+            "2009",
+            "2012",
+            "2013",
+            "2014",
+            "2015",
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "pacs": [
+            "JStreetPAC"
+          ],
+          "confidence": "high"
+        },
+        {
+          "name": "WELINSKY, HOWARD",
+          "state": "CA",
+          "to_candidate": 5300,
+          "to_pro_israel_career": 124230,
+          "candidate_cycles": [
+            "2024",
+            "2026"
+          ],
+          "pro_israel_cycles": [
+            "1994",
+            "1995",
+            "1997",
+            "1999",
+            "2000",
+            "2001",
+            "2003",
+            "2004",
+            "2005",
+            "2006",
+            "2007",
+            "2008",
+            "2009",
+            "2010",
+            "2011",
+            "2012",
+            "2013",
+            "2014",
+            "2015",
+            "2016",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025",
+            "2026"
+          ],
+          "pacs": [
+            "World Alliance for Israel PAC",
+            "National Action Committee",
+            "California Jewish Democrats-FED / Democrats for Israel Committee",
+            "Pro-Israel America PAC",
+            "DMFI PAC (Democratic Majority for Israel)",
+            "AIPAC PAC"
+          ],
+          "confidence": "high"
+        },
+        {
+          "name": "LIU, MARGARET",
+          "state": "CA",
+          "to_candidate": 250,
+          "to_pro_israel_career": 100000,
+          "candidate_cycles": [
+            "2026"
+          ],
+          "pro_israel_cycles": [
+            "2020"
+          ],
+          "pacs": [
+            "Preserve America PAC (Sheldon Adelson)"
+          ],
+          "confidence": "high"
+        },
+        {
+          "name": "DROR, BRIAN",
+          "state": "CA",
+          "to_candidate": 4500,
+          "to_pro_israel_career": 85000,
+          "candidate_cycles": [
+            "2024",
+            "2026"
+          ],
+          "pro_israel_cycles": [
+            "2018",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2026"
+          ],
+          "pacs": [
+            "Republican Jewish Coalition PAC (RJC-PAC)",
+            "Pro-Israel America PAC",
+            "AIPAC PAC"
+          ],
+          "confidence": "high"
+        },
+        {
+          "name": "GILBERT, GARY",
+          "state": "CA",
+          "to_candidate": 250,
+          "to_pro_israel_career": 71575,
+          "candidate_cycles": [
+            "2024"
+          ],
+          "pro_israel_cycles": [
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "pacs": [
+            "AIPAC PAC",
+            "United Democracy Project (UDP)"
+          ],
+          "confidence": "high"
+        },
+        {
+          "name": "SIEGEL, HERBERT",
+          "state": "NY",
+          "to_candidate": 500,
+          "to_pro_israel_career": 70200,
+          "candidate_cycles": [
+            "2024"
+          ],
+          "pro_israel_cycles": [
+            "1983",
+            "1984",
+            "1985",
+            "1986",
+            "1988",
+            "1990",
+            "1991",
+            "1996",
+            "1997",
+            "2000",
+            "2002",
+            "2014",
+            "2016",
+            "2022",
+            "2024"
+          ],
+          "pacs": [
+            "National PAC",
+            "Republican Jewish Coalition PAC (RJC-PAC)",
+            "AIPAC PAC"
+          ],
+          "confidence": "high"
+        },
+        {
+          "name": "HAUSNER, KERI",
+          "state": "CA",
+          "to_candidate": 750,
+          "to_pro_israel_career": 62249.990000000005,
+          "candidate_cycles": [
+            "2024",
+            "2026"
+          ],
+          "pro_israel_cycles": [
+            "2014",
+            "2016",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "pacs": [
+            "JStreetPAC"
+          ],
+          "confidence": "high"
+        },
+        {
+          "name": "HIRSH, STANLEY",
+          "state": "CA",
+          "to_candidate": 2250,
+          "to_pro_israel_career": 60000,
+          "candidate_cycles": [
+            "2024"
+          ],
+          "pro_israel_cycles": [
+            "1984",
+            "1985",
+            "1986",
+            "1987",
+            "1988",
+            "1989",
+            "1990",
+            "1991",
+            "1992",
+            "1993"
+          ],
+          "pacs": [
+            "National PAC",
+            "Citizens Organized Political Action Committee"
+          ],
+          "confidence": "high"
+        },
+        {
+          "name": "SALIMPOUR, PEJMAN",
+          "state": "CA",
+          "to_candidate": 500,
+          "to_pro_israel_career": 57400,
+          "candidate_cycles": [
+            "2024"
+          ],
+          "pro_israel_cycles": [
+            "2020",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "pacs": [
+            "DMFI PAC (Democratic Majority for Israel)",
+            "United Democracy Project (UDP)",
+            "AIPAC PAC"
+          ],
+          "confidence": "high"
+        },
+        {
+          "name": "BAR-ZEMER, YUVAL",
+          "state": "CA",
+          "to_candidate": 4300,
+          "to_pro_israel_career": 54450,
+          "candidate_cycles": [
+            "2024"
+          ],
+          "pro_israel_cycles": [
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "pacs": [
+            "JStreetPAC"
+          ],
+          "confidence": "high"
+        },
+        {
+          "name": "WERNER, KENNETH",
+          "state": "CA",
+          "to_candidate": 250,
+          "to_pro_israel_career": 53300,
+          "candidate_cycles": [
+            "2026"
+          ],
+          "pro_israel_cycles": [
+            "2018",
+            "2019",
+            "2020",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "pacs": [
+            "JStreetPAC"
+          ],
+          "confidence": "high"
+        },
+        {
+          "name": "TENENBLATT, DANIEL",
+          "state": "CA",
+          "to_candidate": 3300,
+          "to_pro_israel_career": 50150,
+          "candidate_cycles": [
+            "2024"
+          ],
+          "pro_israel_cycles": [
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2026"
+          ],
+          "pacs": [
+            "DMFI PAC (Democratic Majority for Israel)",
+            "Pro-Israel America PAC",
+            "AIPAC PAC"
+          ],
+          "confidence": "high"
+        },
+        {
+          "name": "BURKE, STACEY",
+          "state": "TX",
+          "to_candidate": 500,
+          "to_pro_israel_career": 43550,
+          "candidate_cycles": [
+            "2026"
+          ],
+          "pro_israel_cycles": [
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "pacs": [
+            "Republican Jewish Coalition PAC (RJC-PAC)",
+            "AIPAC PAC",
+            "United Democracy Project (UDP)"
+          ],
+          "confidence": "medium"
+        },
+        {
+          "name": "GRUBER, FRANK",
+          "state": "CA",
+          "to_candidate": 1000,
+          "to_pro_israel_career": 40150,
+          "candidate_cycles": [
+            "2026"
+          ],
+          "pro_israel_cycles": [
+            "2019",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2026"
+          ],
+          "pacs": [
+            "JStreetPAC",
+            "Pro-Israel America PAC",
+            "AIPAC PAC"
+          ],
+          "confidence": "high"
+        },
+        {
+          "name": "GOLD, STANLEY",
+          "state": "CA",
+          "to_candidate": 2000,
+          "to_pro_israel_career": 40000,
+          "candidate_cycles": [
+            "2024"
+          ],
+          "pro_israel_cycles": [
+            "2020",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "pacs": [
+            "JDCA PAC"
+          ],
+          "confidence": "high"
+        },
+        {
+          "name": "FISHMAN, ANDREW",
+          "state": "FL",
+          "to_candidate": 500,
+          "to_pro_israel_career": 39000,
+          "candidate_cycles": [
+            "2024"
+          ],
+          "pro_israel_cycles": [
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "pacs": [
+            "AIPAC PAC",
+            "United Democracy Project (UDP)"
+          ],
+          "confidence": "medium"
+        },
+        {
+          "name": "TENENBLATT, ANNA",
+          "state": "CA",
+          "to_candidate": 2500,
+          "to_pro_israel_career": 38900,
+          "candidate_cycles": [
+            "2024"
+          ],
+          "pro_israel_cycles": [
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2026"
+          ],
+          "pacs": [
+            "Pro-Israel America PAC",
+            "AIPAC PAC",
+            "DMFI PAC (Democratic Majority for Israel)"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "source": "refresh-friedman.ts:ca-30-2026-laura-friedman:cycles-2024+2026",
+      "generated_at": "2026-04-24T23:25:34.408Z"
+    }
+  },
+  "top5_donors": [
+    {
+      "name": "EMILY'S LIST",
+      "amount": 21500,
+      "type": "PAC",
+      "is_israel_lobby": false
+    },
+    {
+      "name": "AMALGAMATED TRANSIT UNION - COPE",
+      "amount": 17500,
+      "type": "PAC",
+      "is_israel_lobby": false
+    },
+    {
+      "name": "MADISON, STEVEN",
+      "amount": 17300,
+      "type": "Individual",
+      "is_israel_lobby": false
+    },
+    {
+      "name": "WOMEN'S POLITICAL COMMITTEE FEDERAL",
+      "amount": 15000,
+      "type": "PAC",
+      "is_israel_lobby": false
+    },
+    {
+      "name": "UNITED FOOD AND COMMERCIAL WORKERS INTERNATIONAL UNION ACTIVE BALLOT CLUB",
+      "amount": 15000,
+      "type": "PAC",
+      "is_israel_lobby": false
+    }
+  ],
+  "forensics": {
+    "missingEmployerRatio": 0.0015045135406218655,
+    "outOfStatePct": 0.07422266800401203,
+    "householdBundling": 0.015900621118012423,
+    "donationStdDev": 1.1127829877948752,
+    "platformOpacity": 0.3869704585641833,
+    "itemizedCount": 4025,
+    "computedAt": "2026-04-24T23:25:34.412Z"
+  },
+  "red_flags": [
+    {
+      "label": "[roster-match] 7.6% of itemized individual donors (151/1994) are documented pro-Israel PAC donors per registry (exact name+state match) — top donors gave $3,075,213 career to AIPAC/NorPAC/UDP/Pro-Israel America/DMFI/RJC",
+      "severity": "high"
+    },
+    {
+      "label": "[roster-match] GORDON, PATRICIA (CA): $750 to Laura Friedman, $747,050 career to pro-Israel PACs (JStreetPAC)",
+      "severity": "high"
+    },
+    {
+      "label": "[roster-match] FISHMAN, STEVEN (CA): $500 to Laura Friedman, $480,706 career to pro-Israel PACs (World Alliance for Israel PAC, Pro-Israel America PAC, +3)",
+      "severity": "high"
+    },
+    {
+      "label": "[roster-match] YOUNG, MICHAEL (NY): $350 to Laura Friedman, $310,827 career to pro-Israel PACs (JStreetPAC, J Street Action Fund, +1)",
+      "severity": "high"
+    },
+    {
+      "label": "[roster-match] HORWICH, ADA (CA): $3,500 to Laura Friedman, $207,494 career to pro-Israel PACs (World Alliance for Israel PAC, Joint Action Committee for Political Affairs, +5)",
+      "severity": "high"
+    },
+    {
+      "label": "[roster-match] LAINER, ELEANOR (CA): $3,300 to Laura Friedman, $160,500 career to pro-Israel PACs (JStreetPAC, JDCA PAC)",
+      "severity": "high"
+    }
+  ]
+}

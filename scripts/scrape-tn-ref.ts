@@ -109,7 +109,7 @@ interface CommitteeSummary {
 // Target committees
 // ---------------------------------------------------------------------------
 
-const TARGETS: Committee[] = [
+const ALL_TARGETS: Committee[] = [
   {
     key: 'fritts-gov-2026',
     label: 'Monty Fritts — TN Governor 2026',
@@ -129,7 +129,20 @@ const TARGETS: Committee[] = [
     officeFilter: 'House of Representatives',
     districtFilter: '32',
   },
+  {
+    key: 'rose-gov-2026',
+    label: 'John Rose — TN Governor 2026',
+    candidateName: 'ROSE',
+    officeFilter: 'Governor',
+  },
 ];
+
+// Support --only <key1,key2,...> flag to run a subset.
+const ONLY_FLAG_IDX = process.argv.indexOf('--only');
+const ONLY_KEYS = ONLY_FLAG_IDX > -1 ? process.argv[ONLY_FLAG_IDX + 1]?.split(',') : undefined;
+const TARGETS: Committee[] = ONLY_KEYS
+  ? ALL_TARGETS.filter(t => ONLY_KEYS.includes(t.key))
+  : ALL_TARGETS;
 
 // ---------------------------------------------------------------------------
 // Utilities

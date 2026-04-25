@@ -1,0 +1,502 @@
+{
+  "source": "FEC Schedule A all cycles 2020-2026 for C00652743 (John Rose)",
+  "method": "high-confidence-only (last + full-first-name + state exact; NFD-normalized, suffix-stripped)",
+  "registry": {
+    "years": "1978-2026",
+    "year_count": 49,
+    "unique_individuals": 40276,
+    "index_keys": 37768
+  },
+  "rose_donor_universe": {
+    "committee_id": "C00652743",
+    "candidate_id": "H8TN06094",
+    "unique_donors": 1262,
+    "total_itemized_receipts": 2983554.8,
+    "cycles": [
+      2020,
+      2022,
+      2024,
+      2026
+    ],
+    "by_cycle": {
+      "2020": {
+        "rows": 512,
+        "total": 666020
+      },
+      "2022": {
+        "rows": 989,
+        "total": 1118049.25
+      },
+      "2024": {
+        "rows": 8037,
+        "total": 1158879.9900000012
+      },
+      "2026": {
+        "rows": 894,
+        "total": 40605.55999999999
+      }
+    }
+  },
+  "matches": [
+    {
+      "name": "SLASS, JONATHAN",
+      "state": "NJ",
+      "employer_last_seen": "ROTO CLIP",
+      "occupation_last_seen": "MANAGER",
+      "to_rose_all_cycles": 3008.65,
+      "to_rose_by_cycle": {
+        "2022": 1425,
+        "2024": 1583.65
+      },
+      "career_to_pro_israel_pacs": 125368,
+      "pacs_given_to": [
+        "Pro-Israel America PAC",
+        "AIPAC PAC",
+        "United Democracy Project (UDP)"
+      ],
+      "pro_israel_cycles": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2026"
+      ],
+      "also_on_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_tn_gov": false,
+      "also_on_sc01_candidates": false
+    },
+    {
+      "name": "FISHER, JEFFREY",
+      "state": "NY",
+      "employer_last_seen": "TOURO UNIVERSITY",
+      "occupation_last_seen": "SPECIAL PROGRAMS ADMINISTRATOR",
+      "to_rose_all_cycles": 475,
+      "to_rose_by_cycle": {
+        "2024": 475
+      },
+      "career_to_pro_israel_pacs": 123783,
+      "pacs_given_to": [
+        "AIPAC PAC",
+        "Republican Jewish Coalition PAC (RJC-PAC)"
+      ],
+      "pro_israel_cycles": [
+        "2022",
+        "2023",
+        "2024",
+        "2026"
+      ],
+      "also_on_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_tn_gov": false,
+      "also_on_sc01_candidates": false
+    },
+    {
+      "name": "HYATT, LAWRENCE",
+      "state": "TN",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_rose_all_cycles": 8335,
+      "to_rose_by_cycle": {
+        "2020": 2800,
+        "2022": 2400,
+        "2024": 3135
+      },
+      "career_to_pro_israel_pacs": 39350,
+      "pacs_given_to": [
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2020",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_tn_gov": false,
+      "also_on_sc01_candidates": false
+    },
+    {
+      "name": "ADES, JACK",
+      "state": "NJ",
+      "employer_last_seen": "HSO",
+      "occupation_last_seen": "PRESIDENT",
+      "to_rose_all_cycles": 4338.65,
+      "to_rose_by_cycle": {
+        "2022": 2755,
+        "2024": 1583.65
+      },
+      "career_to_pro_israel_pacs": 37868,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_tn_gov": false,
+      "also_on_sc01_candidates": false
+    },
+    {
+      "name": "DAMSKI, SETH",
+      "state": "NJ",
+      "employer_last_seen": "OLD CITY INVESTMENT PARTNERS",
+      "occupation_last_seen": "FINANCIAL ADVISOR",
+      "to_rose_all_cycles": 3008.65,
+      "to_rose_by_cycle": {
+        "2022": 1425,
+        "2024": 1583.65
+      },
+      "career_to_pro_israel_pacs": 37001,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "also_on_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_tn_gov": false,
+      "also_on_sc01_candidates": false
+    },
+    {
+      "name": "CAPLAN, JONATHAN",
+      "state": "NJ",
+      "employer_last_seen": "SELF-EMPLOYED",
+      "occupation_last_seen": "ATTORNEY",
+      "to_rose_all_cycles": 3008.65,
+      "to_rose_by_cycle": {
+        "2022": 1425,
+        "2024": 1583.65
+      },
+      "career_to_pro_israel_pacs": 32968,
+      "pacs_given_to": [
+        "NorPAC / North Jersey PAC",
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2012",
+        "2013",
+        "2014",
+        "2017",
+        "2020",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_tn_gov": false,
+      "also_on_sc01_candidates": false
+    },
+    {
+      "name": "HERMAN, RUSSELL",
+      "state": "NJ",
+      "employer_last_seen": "WHITE PINE CAPITAL MANAGAMENT",
+      "occupation_last_seen": "FINANCE",
+      "to_rose_all_cycles": 1583.65,
+      "to_rose_by_cycle": {
+        "2024": 1583.65
+      },
+      "career_to_pro_israel_pacs": 31952,
+      "pacs_given_to": [
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_tn_gov": false,
+      "also_on_sc01_candidates": false
+    },
+    {
+      "name": "KUNTZ, STUART",
+      "state": "NJ",
+      "employer_last_seen": "VERIZON",
+      "occupation_last_seen": "ATTORNEY",
+      "to_rose_all_cycles": 3008.65,
+      "to_rose_by_cycle": {
+        "2022": 1425,
+        "2024": 1583.65
+      },
+      "career_to_pro_israel_pacs": 31468,
+      "pacs_given_to": [
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2020",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_tn_gov": false,
+      "also_on_sc01_candidates": false
+    },
+    {
+      "name": "KREITMAN, GAIL",
+      "state": "NJ",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_rose_all_cycles": 1425,
+      "to_rose_by_cycle": {
+        "2022": 1425
+      },
+      "career_to_pro_israel_pacs": 22900,
+      "pacs_given_to": [
+        "NorPAC / North Jersey PAC",
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2011",
+        "2018",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_tn_gov": false,
+      "also_on_sc01_candidates": false
+    },
+    {
+      "name": "WAINBERG, STUART",
+      "state": "NJ",
+      "employer_last_seen": "WAINCO REALTY LLC",
+      "occupation_last_seen": "REAL ESTATE BROKER",
+      "to_rose_all_cycles": 1425,
+      "to_rose_by_cycle": {
+        "2022": 1425
+      },
+      "career_to_pro_israel_pacs": 13000,
+      "pacs_given_to": [
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2020",
+        "2022",
+        "2024"
+      ],
+      "also_on_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_tn_gov": false,
+      "also_on_sc01_candidates": false
+    },
+    {
+      "name": "RUBENZAHL, MEREDITH",
+      "state": "NY",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_rose_all_cycles": 1425,
+      "to_rose_by_cycle": {
+        "2022": 1425
+      },
+      "career_to_pro_israel_pacs": 10500,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2022"
+      ],
+      "also_on_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_tn_gov": false,
+      "also_on_sc01_candidates": false
+    },
+    {
+      "name": "ZIMMERMAN, FRED",
+      "state": "TN",
+      "employer_last_seen": "SELF-EMPLOYED",
+      "occupation_last_seen": "INVESTMENT MANAGEMENT",
+      "to_rose_all_cycles": 2950,
+      "to_rose_by_cycle": {
+        "2020": 500,
+        "2022": 1500,
+        "2024": 950
+      },
+      "career_to_pro_israel_pacs": 8000,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_tn_gov": false,
+      "also_on_sc01_candidates": false
+    },
+    {
+      "name": "PERLEN, ARTHUR",
+      "state": "TN",
+      "employer_last_seen": "CENTENNIAL RETAIL SERVICES",
+      "occupation_last_seen": "PRINCIPAL",
+      "to_rose_all_cycles": 4950,
+      "to_rose_by_cycle": {
+        "2020": 1000,
+        "2022": 3000,
+        "2024": 950
+      },
+      "career_to_pro_israel_pacs": 7750,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_tn_gov": false,
+      "also_on_sc01_candidates": false
+    },
+    {
+      "name": "OLSWANGER, SAM",
+      "state": "DC",
+      "employer_last_seen": "AKIN GUMP STRAUSS HAUER AND FELD",
+      "occupation_last_seen": "SENIOR POLICY ADVISOR",
+      "to_rose_all_cycles": 1950,
+      "to_rose_by_cycle": {
+        "2024": 1950
+      },
+      "career_to_pro_israel_pacs": 6750,
+      "pacs_given_to": [
+        "Pro-Israel America PAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "also_on_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": true,
+      "also_on_rose_tn_gov": false,
+      "also_on_sc01_candidates": false,
+      "foreign_money_flag": "AKIN GUMP STRAUSS HAUER AND FELD is a FARA-registered firm representing foreign sovereigns"
+    },
+    {
+      "name": "MAY, ANDREW",
+      "state": "TN",
+      "employer_last_seen": "TRUXTON TRUST",
+      "occupation_last_seen": "BANKER",
+      "to_rose_all_cycles": 1950,
+      "to_rose_by_cycle": {
+        "2022": 1000,
+        "2024": 950
+      },
+      "career_to_pro_israel_pacs": 5000,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2023",
+        "2024"
+      ],
+      "also_on_aipac_earmark_list": true,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_tn_gov": false,
+      "also_on_sc01_candidates": false
+    },
+    {
+      "name": "FISHEL, JAMES",
+      "state": "TN",
+      "employer_last_seen": "RETIRED",
+      "occupation_last_seen": "RETIRED",
+      "to_rose_all_cycles": 2000,
+      "to_rose_by_cycle": {
+        "2020": 1000,
+        "2022": 1000
+      },
+      "career_to_pro_israel_pacs": 1500,
+      "pacs_given_to": [
+        "Republican Jewish Coalition PAC (RJC-PAC)",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2014",
+        "2016",
+        "2023"
+      ],
+      "also_on_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_tn_gov": false,
+      "also_on_sc01_candidates": false
+    },
+    {
+      "name": "BYRD, BARNEY",
+      "state": "TN",
+      "employer_last_seen": "GEN CAP AMERICA",
+      "occupation_last_seen": "FINANCE",
+      "to_rose_all_cycles": 5800,
+      "to_rose_by_cycle": {
+        "2022": 5800
+      },
+      "career_to_pro_israel_pacs": 1000,
+      "pacs_given_to": [
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "2023"
+      ],
+      "also_on_aipac_earmark_list": false,
+      "also_on_blackburn_tn_gov": true,
+      "also_on_rose_tn_gov": false,
+      "also_on_sc01_candidates": false
+    }
+  ],
+  "totals": {
+    "high_conf_match_count": 17,
+    "high_conf_total_to_rose": 50641.9,
+    "combined_career_to_pro_israel": 536158,
+    "cycle_2026_live_signal": 0,
+    "historical_cycles_signal": 50641.9,
+    "cross_identified_with_blackburn_tn_gov": [
+      "OLSWANGER, SAM",
+      "BYRD, BARNEY"
+    ],
+    "cross_identified_with_aipac_earmark_bundlers": [
+      "SLASS, JONATHAN",
+      "FISHER, JEFFREY",
+      "HYATT, LAWRENCE",
+      "ADES, JACK",
+      "DAMSKI, SETH",
+      "CAPLAN, JONATHAN",
+      "HERMAN, RUSSELL",
+      "KUNTZ, STUART",
+      "KREITMAN, GAIL",
+      "WAINBERG, STUART",
+      "RUBENZAHL, MEREDITH",
+      "ZIMMERMAN, FRED",
+      "PERLEN, ARTHUR",
+      "OLSWANGER, SAM",
+      "MAY, ANDREW"
+    ],
+    "cross_identified_with_sc01_candidates": [],
+    "cross_identified_with_rose_tn_gov": []
+  },
+  "generated_at": "2026-04-24T19:03:46.652Z"
+}

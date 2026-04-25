@@ -1,0 +1,102 @@
+{
+  "generated_at": "2026-04-24T22:45:15.969Z",
+  "candidate": {
+    "name": "Daniel Crawford",
+    "party": "D",
+    "state": "OH",
+    "district": "12",
+    "fec_candidate_id": "H6OH12143",
+    "committees": [
+      "C00934372"
+    ]
+  },
+  "totals": [
+    {
+      "committee_id": "C00934372",
+      "all_other_loans": 0,
+      "candidate_contribution": 153.69,
+      "cash_on_hand_beginning_period": 277.33,
+      "committee_designation": "P",
+      "committee_designation_full": "Principal campaign committee",
+      "committee_name": "CITIZENS FOR DANIEL CRAWFORD",
+      "committee_state": "OH",
+      "committee_type": "H",
+      "committee_type_full": "House",
+      "contribution_refunds": 0,
+      "contributions": 178.69,
+      "coverage_end_date": "2026-04-22T00:00:00",
+      "coverage_start_date": "2026-01-01T00:00:00",
+      "cycle": 2026,
+      "disbursements": 374.01,
+      "filing_frequency": "Q",
+      "filing_frequency_full": "Quarterly filer",
+      "first_f1_date": "2026-01-13",
+      "first_file_date": "2026-01-13",
+      "individual_contributions": 25,
+      "individual_itemized_contributions": 0,
+      "individual_unitemized_contributions": 25,
+      "last_beginning_image_number": "202604229866668602",
+      "last_cash_on_hand_end_period": 82.01,
+      "last_debts_owed_by_committee": 0,
+      "last_debts_owed_to_committee": 0,
+      "last_report_type_full": "PRE-PRIMARY",
+      "last_report_year": 2026,
+      "loan_repayments": 0,
+      "loan_repayments_candidate_loans": 0,
+      "loan_repayments_other_loans": 0,
+      "loans": 0,
+      "loans_made_by_candidate": 0,
+      "net_contributions": 178.69,
+      "net_operating_expenditures": 374.01,
+      "offsets_to_operating_expenditures": 0,
+      "operating_expenditures": 374.01,
+      "organization_type": null,
+      "organization_type_full": null,
+      "other_disbursements": 0,
+      "other_political_committee_contributions": 0,
+      "other_receipts": 0,
+      "party_full": "DEMOCRATIC PARTY",
+      "political_party_committee_contributions": 0,
+      "receipts": 178.69,
+      "refunded_individual_contributions": 0,
+      "refunded_other_political_committee_contributions": 0,
+      "refunded_political_party_committee_contributions": 0,
+      "transaction_coverage_date": "2026-04-22",
+      "transfers_from_other_authorized_committee": 0,
+      "transfers_to_other_authorized_committee": 0,
+      "treasurer_name": "CRAWFORD, DANIEL H"
+    }
+  ],
+  "current_cycle": {
+    "cycle": 2026,
+    "receipts": 178.69,
+    "individuals": 25,
+    "pacs": 0,
+    "self_funding": 153.69,
+    "israel_pac_total": 0,
+    "israel_pac_rows": [],
+    "top_pacs": [
+      {
+        "name": "CRAWFORD, DANIEL III",
+        "id": "",
+        "total": 153.69,
+        "count": 2,
+        "is_israel": false
+      }
+    ],
+    "top_individuals": [],
+    "registry_matches": 0,
+    "registry_high": 0,
+    "registry_match_to_candidate": 0
+  },
+  "score": 0,
+  "grade": "A",
+  "confidence": "high",
+  "juice_box_tier": "none",
+  "positive_flags": [
+    "[fec 2026-cycle] $0 in pro-Israel PAC contributions in current (2026) cycle.",
+    "[fec 2026-cycle] $0 in external PAC money — 2026 campaign is 100% individual-donor + self-funded.",
+    "[registry 2026-cycle] 0 of 0 unique individual donors match the 49-year pro-Israel registry."
+  ],
+  "red_flags": []
+}

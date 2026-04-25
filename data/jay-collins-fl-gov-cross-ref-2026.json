@@ -1,0 +1,98 @@
+{
+  "source": "FL DOE campaign-finance contributions portal (2026 GOV)",
+  "method": "high-confidence-only (last + full-first-name + state exact; NFD-normalized, suffix-stripped)",
+  "registry": {
+    "years": "1978-2026",
+    "year_count": 49,
+    "unique_individuals": 40276,
+    "index_keys": 37768
+  },
+  "candidate": {
+    "key": "jay-collins",
+    "name": "Jay Collins",
+    "total_raised": 375064.26,
+    "total_rows": 333,
+    "unique_donors": 246
+  },
+  "matches": [
+    {
+      "name": "ROBBINS, DAVID",
+      "state": "FL",
+      "city": "JACKSONVILLE",
+      "employer_last_seen": "EPSTEIN & ROBBINS",
+      "occupation_last_seen": "ATTORNEY",
+      "to_candidate": 1800,
+      "career_to_pro_israel_pacs": 59000,
+      "pacs_given_to": [
+        "I-PAC JAX",
+        "AIPAC PAC",
+        "United Democracy Project (UDP)"
+      ],
+      "pro_israel_cycles": [
+        "2014",
+        "2017",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal": false
+    },
+    {
+      "name": "LUBECK, JOSEPH",
+      "state": "FL",
+      "city": "WEST PALM BEACH",
+      "employer_last_seen": "AMERICAN LANDMARK",
+      "occupation_last_seen": "REAL ESTATE",
+      "to_candidate": 3000,
+      "career_to_pro_israel_pacs": 57000,
+      "pacs_given_to": [
+        "AIPAC PAC",
+        "United Democracy Project (UDP)"
+      ],
+      "pro_israel_cycles": [
+        "2024",
+        "2026"
+      ],
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal": false
+    },
+    {
+      "name": "GALBUT, RUSSELL",
+      "state": "FL",
+      "city": "MIAMI",
+      "employer_last_seen": "ALEXANDER HOTEL",
+      "occupation_last_seen": "REAL ESTATE",
+      "to_candidate": 3000,
+      "career_to_pro_israel_pacs": 16000,
+      "pacs_given_to": [
+        "National Action Committee",
+        "American Principles",
+        "SunPAC",
+        "AIPAC PAC"
+      ],
+      "pro_israel_cycles": [
+        "1991",
+        "1992",
+        "1993",
+        "1994",
+        "2011",
+        "2021",
+        "2022",
+        "2024"
+      ],
+      "also_on_blackburn_tn_gov": false,
+      "also_on_rose_federal": false
+    }
+  ],
+  "totals": {
+    "high_conf_match_count": 3,
+    "high_conf_total_to_candidate": 7800,
+    "combined_career_to_pro_israel": 132000,
+    "cross_with_blackburn": [],
+    "cross_with_rose": [],
+    "known_bundler_hits": []
+  },
+  "cross_candidate_known_bundlers": [],
+  "generated_at": "2026-04-24T22:25:41.283Z"
+}
