@@ -97,15 +97,6 @@ export default function TerminalHeader() {
 
   const stateQuery = selectedState && selectedState !== 'ALL' ? `?state=${selectedState}` : '';
 
-  // ?legacy_nav=1 short-circuit (D-30) — read query string and render today's
-  // header verbatim via the LegacyHeader() function below. Cleaned up in
-  // Phase F. SSR-safe: returns false when window is undefined.
-  const legacyNavRequested = (() => {
-    if (typeof window === 'undefined') return false;
-    const params = new URLSearchParams(window.location.search);
-    return params.get('legacy_nav') === '1';
-  })();
-
   // Close dropdown on click outside
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -135,10 +126,6 @@ export default function TerminalHeader() {
     handleStateSelect(code);
     setDrawerOpen(false);
   };
-
-  if (legacyNavRequested) {
-    return <LegacyHeader />;
-  }
 
   const navLinks = buildNavLinks(stateQuery);
 
@@ -254,9 +241,10 @@ export default function TerminalHeader() {
         </div>
 
         {/* lg:+ row: existing desktop layout [HOME][nav links][search] */}
-        <div className="hidden lg:flex items-center gap-4 lg:gap-8 w-full">
+        <nav className="hidden lg:flex items-center gap-4 lg:gap-8 w-full" aria-label="Primary">
           <button
             onClick={() => { exit(); router.push('/'); }}
+            aria-current={pathname === '/' ? 'page' : undefined}
             style={{
               background: 'none', border: 'none', cursor: 'pointer', padding: 0,
               color: pathname === '/' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
@@ -272,6 +260,7 @@ export default function TerminalHeader() {
           </button>
           <Link
             href={`/dashboard${stateQuery}`}
+            aria-current={pathname === '/dashboard' ? 'page' : undefined}
             style={{
               color: pathname === '/dashboard' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
               textDecoration: 'none',
@@ -285,6 +274,7 @@ export default function TerminalHeader() {
           </Link>
           <Link
             href={`/officials${stateQuery}`}
+            aria-current={pathname === '/officials' ? 'page' : undefined}
             style={{
               color: pathname === '/officials' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
               textDecoration: 'none',
@@ -298,6 +288,7 @@ export default function TerminalHeader() {
           </Link>
           <Link
             href={`/candidates${stateQuery}`}
+            aria-current={pathname === '/candidates' ? 'page' : undefined}
             style={{
               color: pathname === '/candidates' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
               textDecoration: 'none',
@@ -311,6 +302,7 @@ export default function TerminalHeader() {
           </Link>
           <Link
             href={`/hierarchy${stateQuery}`}
+            aria-current={pathname === '/hierarchy' ? 'page' : undefined}
             style={{
               color: pathname === '/hierarchy' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
               textDecoration: 'none',
@@ -324,6 +316,7 @@ export default function TerminalHeader() {
           </Link>
           <Link
             href={`/juicebox${stateQuery}`}
+            aria-current={pathname === '/juicebox' ? 'page' : undefined}
             style={{
               color: pathname === '/juicebox' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
               textDecoration: 'none',
@@ -337,6 +330,7 @@ export default function TerminalHeader() {
           </Link>
           <Link
             href={`/social${stateQuery}`}
+            aria-current={pathname === '/social' ? 'page' : undefined}
             style={{
               color: pathname === '/social' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
               textDecoration: 'none',
@@ -350,6 +344,7 @@ export default function TerminalHeader() {
           </Link>
           <Link
             href={`/browse${stateQuery}`}
+            aria-current={pathname === '/browse' ? 'page' : undefined}
             style={{
               color: pathname === '/browse' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
               textDecoration: 'none',
@@ -363,6 +358,7 @@ export default function TerminalHeader() {
           </Link>
           <Link
             href={`/connections${stateQuery}`}
+            aria-current={pathname === '/connections' ? 'page' : undefined}
             style={{
               color: pathname === '/connections' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
               textDecoration: 'none',
@@ -376,6 +372,7 @@ export default function TerminalHeader() {
           </Link>
           <Link
             href="/investigate"
+            aria-current={pathname === '/investigate' ? 'page' : undefined}
             style={{
               color: pathname === '/investigate' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
               textDecoration: 'none',
@@ -389,6 +386,7 @@ export default function TerminalHeader() {
           </Link>
           <Link
             href="/intel"
+            aria-current={pathname === '/intel' ? 'page' : undefined}
             style={{
               color: pathname === '/intel' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
               textDecoration: 'none',
@@ -406,7 +404,7 @@ export default function TerminalHeader() {
 
           {/* Global Search */}
           <SearchBar onOpenOverlay={() => setSearchOverlayOpen(true)} />
-        </div>
+        </nav>
       </div>
 
       <MobileNavDrawer
@@ -426,267 +424,3 @@ export default function TerminalHeader() {
   );
 }
 
-// TODO: remove with ?legacy_nav=1 flag cleanup in Phase F (per D-30).
-// LegacyHeader is the byte-equivalent copy of today's TerminalHeader return
-// block, preserved verbatim so `?legacy_nav=1` re-renders the production
-// header for emergency rollback. Do not refactor this function — its purpose
-// is identical-by-construction with the pre-Phase-10 header.
-function LegacyHeader() {
-  const pathname = usePathname();
-  const router = useRouter();
-  const { exit } = useTerminal();
-  const searchParams = useSearchParams();
-  const [stateOpen, setStateOpen] = useState(false);
-  const [selectedState, setSelectedState] = useState(searchParams.get('state') || 'FL');
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  const stateQuery = selectedState && selectedState !== 'ALL' ? `?state=${selectedState}` : '';
-
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setStateOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
-  }, []);
-
-  const handleStateSelect = (code: string) => {
-    setSelectedState(code);
-    setStateOpen(false);
-    const params = new URLSearchParams(searchParams.toString());
-    if (code === 'ALL') {
-      params.delete('state');
-    } else {
-      params.set('state', code);
-    }
-    const query = params.toString();
-    router.push(pathname + (query ? `?${query}` : ''));
-  };
-
-  return (
-    <>
-      {/* Top status bar */}
-      <div className="terminal-header">
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <div ref={dropdownRef} style={{ position: 'relative' }}>
-            <button
-              onClick={() => setStateOpen(!stateOpen)}
-              style={{
-                background: 'none', border: '1px solid var(--terminal-border)',
-                color: 'var(--terminal-green)', cursor: 'pointer', padding: '0.2rem 0.5rem',
-                fontFamily: 'JetBrains Mono, monospace', fontSize: '0.8rem', fontWeight: 700,
-                display: 'flex', alignItems: 'center', gap: '0.3rem',
-                letterSpacing: '0.05em',
-              }}
-            >
-              🇺🇸 {selectedState} <span style={{ fontSize: '0.5rem', opacity: 0.6 }}>▼</span>
-            </button>
-            {stateOpen && (
-              <div style={{
-                position: 'absolute', top: '100%', left: 0, zIndex: 1000,
-                background: 'var(--terminal-card)', border: '1px solid var(--terminal-border)',
-                maxHeight: '400px', overflowY: 'auto', width: '220px',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
-              }}>
-                {STATES.map(s => (
-                  <div
-                    key={s.code}
-                    onClick={() => handleStateSelect(s.code)}
-                    style={{
-                      padding: '0.4rem 0.75rem', cursor: 'pointer', fontSize: '0.75rem',
-                      fontFamily: 'JetBrains Mono, monospace',
-                      background: selectedState === s.code ? 'rgba(0, 255, 65, 0.15)' : 'transparent',
-                      color: selectedState === s.code ? 'var(--terminal-green)' : 'var(--terminal-text)',
-                      borderBottom: '1px solid var(--terminal-border)',
-                      display: 'flex', justifyContent: 'space-between',
-                    }}
-                    onMouseEnter={e => (e.currentTarget.style.background = 'rgba(0, 255, 65, 0.08)')}
-                    onMouseLeave={e => (e.currentTarget.style.background = selectedState === s.code ? 'rgba(0, 255, 65, 0.15)' : 'transparent')}
-                  >
-                    <span>{s.name}</span>
-                    <span style={{ color: 'var(--terminal-text-dim)', fontSize: '0.65rem' }}>{s.code}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-          <span>{new Date().toISOString().replace('T', ' ').slice(0, 19)}</span>
-          <span>POLITICAL INTELLIGENCE NETWORK</span>
-        </div>
-        <div className="terminal-status">
-          <div className="status-item">
-            <span className="status-live">●</span>
-            <span>LIVE</span>
-          </div>
-          <div className="status-item">
-            <span>SYSTEM OPERATIONAL</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Navigation */}
-      <div className="terminal-nav" style={{
-        background: 'var(--terminal-surface)',
-        borderBottom: '1px solid var(--terminal-border)',
-        padding: '0.75rem 2rem',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '2rem'
-      }}>
-        <button
-          onClick={() => { exit(); router.push('/'); }}
-          style={{
-            background: 'none', border: 'none', cursor: 'pointer', padding: 0,
-            color: pathname === '/' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            fontWeight: 600,
-            fontFamily: 'var(--font-terminal)',
-            transition: 'color 0.2s',
-          }}
-        >
-          🏠 HOME
-        </button>
-        <Link
-          href={`/dashboard${stateQuery}`}
-          style={{
-            color: pathname === '/dashboard' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
-            textDecoration: 'none',
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            fontWeight: 600
-          }}
-        >
-          📊 DASHBOARD
-        </Link>
-        <Link
-          href={`/officials${stateQuery}`}
-          style={{
-            color: pathname === '/officials' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
-            textDecoration: 'none',
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            fontWeight: 600
-          }}
-        >
-          👔 SEATED OFFICIALS
-        </Link>
-        <Link
-          href={`/candidates${stateQuery}`}
-          style={{
-            color: pathname === '/candidates' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
-            textDecoration: 'none',
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            fontWeight: 600
-          }}
-        >
-          🗳️ CANDIDATES
-        </Link>
-        <Link
-          href={`/hierarchy${stateQuery}`}
-          style={{
-            color: pathname === '/hierarchy' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
-            textDecoration: 'none',
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            fontWeight: 600
-          }}
-        >
-          📊 HIERARCHY
-        </Link>
-        <Link
-          href={`/juicebox${stateQuery}`}
-          style={{
-            color: pathname === '/juicebox' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
-            textDecoration: 'none',
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            fontWeight: 600
-          }}
-        >
-          💰 JUICE BOX LEADERBOARD
-        </Link>
-        <Link
-          href={`/social${stateQuery}`}
-          style={{
-            color: pathname === '/social' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
-            textDecoration: 'none',
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            fontWeight: 600
-          }}
-        >
-          📡 SOCIAL INTEL
-        </Link>
-        <Link
-          href={`/browse${stateQuery}`}
-          style={{
-            color: pathname === '/browse' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
-            textDecoration: 'none',
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            fontWeight: 600
-          }}
-        >
-          DATABASE
-        </Link>
-        <Link
-          href={`/connections${stateQuery}`}
-          style={{
-            color: pathname === '/connections' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
-            textDecoration: 'none',
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            fontWeight: 600
-          }}
-        >
-          🕸️ CONNECTIONS
-        </Link>
-        <Link
-          href="/investigate"
-          style={{
-            color: pathname === '/investigate' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
-            textDecoration: 'none',
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            fontWeight: 600
-          }}
-        >
-          🔬 INVESTIGATE
-        </Link>
-        <Link
-          href="/intel"
-          style={{
-            color: pathname === '/intel' ? 'var(--terminal-green)' : 'var(--terminal-text-dim)',
-            textDecoration: 'none',
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            fontWeight: 600
-          }}
-        >
-          📡 LIVE INTEL
-        </Link>
-
-        {/* Spacer to push search to the right */}
-        <div style={{ flex: 1 }} />
-
-        {/* Global Search */}
-        <SearchBar />
-      </div>
-    </>
-  );
-}
