@@ -1,0 +1,43 @@
+{
+  "source": "FEC Schedule A all cycles for ulrich-fl07 (C00927210)",
+  "method": "high-confidence-only (last + full-first-name + state exact; NFD-normalized, suffix-stripped)",
+  "registry": {
+    "years": "1978-2026",
+    "year_count": 49,
+    "unique_individuals": 40276,
+    "index_keys": 37768
+  },
+  "candidate_donor_universe": {
+    "committee_ids": [
+      "C00927210"
+    ],
+    "candidate_id": "H6FL07223",
+    "unique_donors": 6,
+    "total_itemized_receipts": 4100,
+    "cycles": [
+      2026
+    ],
+    "by_cycle": {
+      "2026": {
+        "rows": 11,
+        "total": 4100
+      }
+    }
+  },
+  "matches": [],
+  "named_interest_hits": [],
+  "totals": {
+    "high_conf_match_count": 0,
+    "high_conf_total_to_candidate": 0,
+    "combined_career_to_pro_israel": 0,
+    "cycle_2026_live_signal": 0,
+    "cycle_2024_live_signal": 0,
+    "cycle_2022_live_signal": 0,
+    "cross_identified_with_blackburn_tn_gov": [],
+    "cross_identified_with_rose_federal_49yr": [],
+    "cross_identified_with_rose_aipac_earmark": [],
+    "cross_identified_with_donalds_federal_49yr": [],
+    "cross_identified_with_donalds_aipac_earmark": []
+  },
+  "generated_at": "2026-04-25T02:02:46.159Z"
+}

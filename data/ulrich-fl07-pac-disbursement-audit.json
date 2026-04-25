@@ -1,0 +1,27 @@
+{
+  "candidate_id": "H6FL07223",
+  "candidate_name": "Sarah Ulrich (R, FL-07 challenger)",
+  "party": "R",
+  "principal_committee_id": "C00927210",
+  "cycles": [
+    2026
+  ],
+  "method": "schedule_b_by_disburser — corrected for earlier broken Schedule A contributor_committee_id filter",
+  "audited_at": "2026-04-25T01:59:22.858Z",
+  "finished_at": "2026-04-25T02:02:01.839Z",
+  "total_pacs_checked": 92,
+  "by_cycle": {},
+  "by_pac": {},
+  "independent_expenditures": [],
+  "summary": {
+    "cycle_2020_direct_and_earmarked": 0,
+    "cycle_2022_direct_and_earmarked": 0,
+    "cycle_2024_direct_and_earmarked": 0,
+    "cycle_2026_direct_and_earmarked": 0,
+    "total_all_cycles": 0,
+    "unique_earmarked_donors": 0,
+    "earmarked_donors_also_on_blackburn_tn_gov": [],
+    "earmarked_donors_also_on_donalds": [],
+    "top_earmark_donors": []
+  }
+}

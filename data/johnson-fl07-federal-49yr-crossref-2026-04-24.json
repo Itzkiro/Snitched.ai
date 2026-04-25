@@ -1,0 +1,48 @@
+{
+  "source": "FEC Schedule A all cycles for johnson-fl07 (C00876557)",
+  "method": "high-confidence-only (last + full-first-name + state exact; NFD-normalized, suffix-stripped)",
+  "registry": {
+    "years": "1978-2026",
+    "year_count": 49,
+    "unique_individuals": 40276,
+    "index_keys": 37768
+  },
+  "candidate_donor_universe": {
+    "committee_ids": [
+      "C00876557"
+    ],
+    "candidate_id": "H4FL07152",
+    "unique_donors": 3,
+    "total_itemized_receipts": 4782.23,
+    "cycles": [
+      2024,
+      2026
+    ],
+    "by_cycle": {
+      "2024": {
+        "rows": 3,
+        "total": 2282.23
+      },
+      "2026": {
+        "rows": 1,
+        "total": 2500
+      }
+    }
+  },
+  "matches": [],
+  "named_interest_hits": [],
+  "totals": {
+    "high_conf_match_count": 0,
+    "high_conf_total_to_candidate": 0,
+    "combined_career_to_pro_israel": 0,
+    "cycle_2026_live_signal": 0,
+    "cycle_2024_live_signal": 0,
+    "cycle_2022_live_signal": 0,
+    "cross_identified_with_blackburn_tn_gov": [],
+    "cross_identified_with_rose_federal_49yr": [],
+    "cross_identified_with_rose_aipac_earmark": [],
+    "cross_identified_with_donalds_federal_49yr": [],
+    "cross_identified_with_donalds_aipac_earmark": []
+  },
+  "generated_at": "2026-04-25T02:02:46.159Z"
+}

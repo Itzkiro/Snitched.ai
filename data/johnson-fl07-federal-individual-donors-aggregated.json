@@ -1,0 +1,76 @@
+{
+  "committee_ids": [
+    "C00876557"
+  ],
+  "candidate_id": "H4FL07152",
+  "cycles": [
+    2024,
+    2026
+  ],
+  "fetched_at": "2026-04-25T01:54:47.805Z",
+  "totals": {
+    "total_itemized_receipts": 4782.23,
+    "total_rows": 4,
+    "by_cycle": {
+      "2024": {
+        "rows": 3,
+        "total": 2282.23
+      },
+      "2026": {
+        "rows": 1,
+        "total": 2500
+      }
+    }
+  },
+  "donors": [
+    {
+      "last": "BURNETT",
+      "first": "WENDY",
+      "state": "FL",
+      "city": "LONGWOOD",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total_to_candidate": 3500,
+      "by_cycle": {
+        "2024": 1000,
+        "2026": 2500
+      },
+      "by_committee": {
+        "C00876557": 3500
+      },
+      "contrib_count": 2
+    },
+    {
+      "last": "SUESS",
+      "first": "LINDA",
+      "state": "IL",
+      "city": "WATERLOO",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total_to_candidate": 1000,
+      "by_cycle": {
+        "2024": 1000
+      },
+      "by_committee": {
+        "C00876557": 1000
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "JOHNSON",
+      "first": "MICHAEL",
+      "state": "FL",
+      "city": "LAKE MARY",
+      "employer": "",
+      "occupation": "RETIRED",
+      "total_to_candidate": 282.23,
+      "by_cycle": {
+        "2024": 282.23
+      },
+      "by_committee": {
+        "C00876557": 282.23
+      },
+      "contrib_count": 1
+    }
+  ]
+}

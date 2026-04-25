@@ -1,0 +1,118 @@
+{
+  "committee_ids": [
+    "C00927210"
+  ],
+  "candidate_id": "H6FL07223",
+  "cycles": [
+    2026
+  ],
+  "fetched_at": "2026-04-25T01:54:48.548Z",
+  "totals": {
+    "total_itemized_receipts": 4100,
+    "total_rows": 11,
+    "by_cycle": {
+      "2026": {
+        "rows": 11,
+        "total": 4100
+      }
+    }
+  },
+  "donors": [
+    {
+      "last": "ULRICH",
+      "first": "SUSAN",
+      "state": "FL",
+      "city": "PORT ORANGE",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total_to_candidate": 2350,
+      "by_cycle": {
+        "2026": 2350
+      },
+      "by_committee": {
+        "C00927210": 2350
+      },
+      "contrib_count": 6
+    },
+    {
+      "last": "ROBINSON",
+      "first": "THOMAS",
+      "state": "FL",
+      "city": "DAYTONA BEACH",
+      "employer": "",
+      "occupation": "",
+      "total_to_candidate": 500,
+      "by_cycle": {
+        "2026": 500
+      },
+      "by_committee": {
+        "C00927210": 500
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "MCSEVENY",
+      "first": "GAIL",
+      "state": "FL",
+      "city": "PORT ORANGE",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total_to_candidate": 500,
+      "by_cycle": {
+        "2026": 500
+      },
+      "by_committee": {
+        "C00927210": 500
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "MUNIZZI",
+      "first": "AMY",
+      "state": "FL",
+      "city": "DELEON SPRINGS",
+      "employer": "",
+      "occupation": "",
+      "total_to_candidate": 250,
+      "by_cycle": {
+        "2026": 250
+      },
+      "by_committee": {
+        "C00927210": 250
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "GIANNINI",
+      "first": "ANDREW",
+      "state": "FL",
+      "city": "PORT ORANGE",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total_to_candidate": 250,
+      "by_cycle": {
+        "2026": 250
+      },
+      "by_committee": {
+        "C00927210": 250
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "HASTINGS",
+      "first": "TRAVIS",
+      "state": "FL",
+      "city": "ORANGE PARK",
+      "employer": "SELF",
+      "occupation": "TUG BOAT CAPTAIN",
+      "total_to_candidate": 250,
+      "by_cycle": {
+        "2026": 250
+      },
+      "by_committee": {
+        "C00927210": 250
+      },
+      "contrib_count": 1
+    }
+  ]
+}

@@ -1,0 +1,1709 @@
+{
+  "candidate_id": "H2FL07156",
+  "candidate_name": "Cory Mills (R, FL-07 incumbent)",
+  "party": "R",
+  "principal_committee_id": "C00774943",
+  "cycles": [
+    2022,
+    2024,
+    2026
+  ],
+  "method": "schedule_b_by_disburser — corrected for earlier broken Schedule A contributor_committee_id filter",
+  "audited_at": "2026-04-25T01:53:30.140Z",
+  "finished_at": "2026-04-25T01:55:23.254Z",
+  "total_pacs_checked": 92,
+  "by_cycle": {
+    "2022": {
+      "total": 17007.4,
+      "entries": [
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2022,
+          "amount": 5000,
+          "date": "2022-11-01",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CONTRIBUTION TO COMMITTEE",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cand_cmte": "C00774943",
+          "cycle": 2022,
+          "amount": 7.2,
+          "date": "2022-09-26",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cand_cmte": "C00774943",
+          "cycle": 2022,
+          "amount": 0.2,
+          "date": "2022-09-26",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00127811",
+          "pac_name": "U.S. ISRAEL PAC (USI PAC)",
+          "cand_cmte": "C00774943",
+          "cycle": 2022,
+          "amount": 1000,
+          "date": "2022-11-06",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CAMPAIGN CONTRIBUTION",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00492579",
+          "pac_name": "American Principles",
+          "cand_cmte": "C00774943",
+          "cycle": 2022,
+          "amount": 500,
+          "date": "2022-11-08",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CAMPAIGN CONTRIBUTION",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00492579",
+          "pac_name": "American Principles",
+          "cand_cmte": "C00774943",
+          "cycle": 2022,
+          "amount": 500,
+          "date": "2022-08-23",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CAMPAIGN CONTRIBUTION",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "cand_cmte": "C00774943",
+          "cycle": 2022,
+          "amount": 5000,
+          "date": "2022-10-04",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "cand_cmte": "C00774943",
+          "cycle": 2022,
+          "amount": 5000,
+          "date": "2022-10-04",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        }
+      ]
+    },
+    "2024": {
+      "total": 39566.34,
+      "entries": [
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 9.14,
+          "date": "2024-04-21",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF ALEXANDER GRIMM. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF ALEXANDER GRIMM",
+          "earmark_donor": "ALEXANDER GRIMM"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 300,
+          "date": "2024-04-14",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF DIANE COHEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF DIANE COHEN",
+          "earmark_donor": "DIANE COHEN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-04-14",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF ALAN GINSBURG. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF ALAN GINSBURG",
+          "earmark_donor": "ALAN GINSBURG"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-04-14",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF EVAN SMIEDT. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF EVAN SMIEDT",
+          "earmark_donor": "EVAN SMIEDT"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1,
+          "date": "2024-04-14",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF RICHARD DIAMOND. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF RICHARD DIAMOND",
+          "earmark_donor": "RICHARD DIAMOND"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-04-07",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF JAY FALK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF JAY FALK",
+          "earmark_donor": "JAY FALK"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-04-07",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF SCOTT ZIMMERMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF SCOTT ZIMMERMAN",
+          "earmark_donor": "SCOTT ZIMMERMAN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-04-07",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF EDWARD KLEIMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF EDWARD KLEIMAN",
+          "earmark_donor": "EDWARD KLEIMAN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2024-04-07",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF STEVEN KANE. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF STEVEN KANE",
+          "earmark_donor": "STEVEN KANE"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-04-07",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF JEFFREY BAUMANN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF JEFFREY BAUMANN",
+          "earmark_donor": "JEFFREY BAUMANN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF WAYNE MILLER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF WAYNE MILLER",
+          "earmark_donor": "WAYNE MILLER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 400,
+          "date": "2024-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF JAY FISHER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF JAY FISHER",
+          "earmark_donor": "JAY FISHER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MARC SMITH. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MARC SMITH",
+          "earmark_donor": "MARC SMITH"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF FRANK MATTIOLI. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF FRANK MATTIOLI",
+          "earmark_donor": "FRANK MATTIOLI"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF WILLIAM DILLARD. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF WILLIAM DILLARD",
+          "earmark_donor": "WILLIAM DILLARD"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF GENE JOSEPHS. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF GENE JOSEPHS",
+          "earmark_donor": "GENE JOSEPHS"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MELVIN BERGER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MELVIN BERGER",
+          "earmark_donor": "MELVIN BERGER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF JOE BERT. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF JOE BERT",
+          "earmark_donor": "JOE BERT"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 250,
+          "date": "2024-03-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF ROBERT GEBAIDE. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF ROBERT GEBAIDE",
+          "earmark_donor": "ROBERT GEBAIDE"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 400,
+          "date": "2024-03-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF DEBORAH MEITIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF DEBORAH MEITIN",
+          "earmark_donor": "DEBORAH MEITIN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1,
+          "date": "2024-03-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF GAIL ROLLMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF GAIL ROLLMAN",
+          "earmark_donor": "GAIL ROLLMAN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-03-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF HENRIETTA KATZEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF HENRIETTA KATZEN",
+          "earmark_donor": "HENRIETTA KATZEN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MICHAEL BREHNE. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MICHAEL BREHNE",
+          "earmark_donor": "MICHAEL BREHNE"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1500,
+          "date": "2024-03-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF SCOTT ZIMMERMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF SCOTT ZIMMERMAN",
+          "earmark_donor": "SCOTT ZIMMERMAN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-03-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF PAUL FINER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF PAUL FINER",
+          "earmark_donor": "PAUL FINER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF LAWRENCE PINES. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF LAWRENCE PINES",
+          "earmark_donor": "LAWRENCE PINES"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF JONATHAN WALDBAUM. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF JONATHAN WALDBAUM",
+          "earmark_donor": "JONATHAN WALDBAUM"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-03-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF HOWARD LEFKOWITZ. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF HOWARD LEFKOWITZ",
+          "earmark_donor": "HOWARD LEFKOWITZ"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 200,
+          "date": "2024-03-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF ALLEN SAFT. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF ALLEN SAFT",
+          "earmark_donor": "ALLEN SAFT"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-03-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF DAVID KRINKER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF DAVID KRINKER",
+          "earmark_donor": "DAVID KRINKER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2024-03-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF JOY DAVIS. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF JOY DAVIS",
+          "earmark_donor": "JOY DAVIS"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF CHARLES WITTEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF CHARLES WITTEN",
+          "earmark_donor": "CHARLES WITTEN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-03-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF DAVID DIAMOND. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF DAVID DIAMOND",
+          "earmark_donor": "DAVID DIAMOND"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MICHELE WOLFSON. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MICHELE WOLFSON",
+          "earmark_donor": "MICHELE WOLFSON"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MARK KLAFTER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MARK KLAFTER",
+          "earmark_donor": "MARK KLAFTER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-03-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MARVIN SHAPIRO. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MARVIN SHAPIRO",
+          "earmark_donor": "MARVIN SHAPIRO"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-04-12",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM DEAN FARACCHIO. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM DEAN FARACCHIO",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 3300,
+          "date": "2024-03-11",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM JEFFREY MILLER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM JEFFREY MILLER",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 5.2,
+          "date": "2023-12-21",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM JOSEPH AUSTIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM JOSEPH AUSTIN",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2023-10-29",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM DEAN FARACCHIO. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM DEAN FARACCHIO",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00127811",
+          "pac_name": "U.S. ISRAEL PAC (USI PAC)",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-11-02",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CAMPAIGN CONTRIBUTION",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 5000,
+          "date": "2024-09-20",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 2000,
+          "date": "2024-05-24",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-02-21",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 2000,
+          "date": "2023-05-19",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        }
+      ]
+    },
+    "2026": {
+      "total": 3000,
+      "entries": [
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "cand_cmte": "C00774943",
+          "cycle": 2026,
+          "amount": 2000,
+          "date": "2025-02-05",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "cand_cmte": "C00774943",
+          "cycle": 2026,
+          "amount": 1000,
+          "date": "2025-02-05",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        }
+      ]
+    }
+  },
+  "by_pac": {
+    "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO": {
+      "committee_id": "C00797670",
+      "total_all_cycles": 28261.14,
+      "by_cycle": {
+        "2022": 5000,
+        "2024": 23261.14
+      },
+      "entries": [
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 9.14,
+          "date": "2024-04-21",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF ALEXANDER GRIMM. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF ALEXANDER GRIMM",
+          "earmark_donor": "ALEXANDER GRIMM"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 300,
+          "date": "2024-04-14",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF DIANE COHEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF DIANE COHEN",
+          "earmark_donor": "DIANE COHEN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-04-14",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF ALAN GINSBURG. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF ALAN GINSBURG",
+          "earmark_donor": "ALAN GINSBURG"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-04-14",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF EVAN SMIEDT. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF EVAN SMIEDT",
+          "earmark_donor": "EVAN SMIEDT"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1,
+          "date": "2024-04-14",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF RICHARD DIAMOND. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF RICHARD DIAMOND",
+          "earmark_donor": "RICHARD DIAMOND"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-04-07",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF JAY FALK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF JAY FALK",
+          "earmark_donor": "JAY FALK"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-04-07",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF SCOTT ZIMMERMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF SCOTT ZIMMERMAN",
+          "earmark_donor": "SCOTT ZIMMERMAN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-04-07",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF EDWARD KLEIMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF EDWARD KLEIMAN",
+          "earmark_donor": "EDWARD KLEIMAN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2024-04-07",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF STEVEN KANE. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF STEVEN KANE",
+          "earmark_donor": "STEVEN KANE"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-04-07",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF JEFFREY BAUMANN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF JEFFREY BAUMANN",
+          "earmark_donor": "JEFFREY BAUMANN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF WAYNE MILLER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF WAYNE MILLER",
+          "earmark_donor": "WAYNE MILLER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 400,
+          "date": "2024-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF JAY FISHER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF JAY FISHER",
+          "earmark_donor": "JAY FISHER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MARC SMITH. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MARC SMITH",
+          "earmark_donor": "MARC SMITH"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF FRANK MATTIOLI. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF FRANK MATTIOLI",
+          "earmark_donor": "FRANK MATTIOLI"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF WILLIAM DILLARD. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF WILLIAM DILLARD",
+          "earmark_donor": "WILLIAM DILLARD"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF GENE JOSEPHS. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF GENE JOSEPHS",
+          "earmark_donor": "GENE JOSEPHS"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MELVIN BERGER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MELVIN BERGER",
+          "earmark_donor": "MELVIN BERGER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-03-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF JOE BERT. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF JOE BERT",
+          "earmark_donor": "JOE BERT"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 250,
+          "date": "2024-03-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF ROBERT GEBAIDE. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF ROBERT GEBAIDE",
+          "earmark_donor": "ROBERT GEBAIDE"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 400,
+          "date": "2024-03-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF DEBORAH MEITIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF DEBORAH MEITIN",
+          "earmark_donor": "DEBORAH MEITIN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1,
+          "date": "2024-03-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF GAIL ROLLMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF GAIL ROLLMAN",
+          "earmark_donor": "GAIL ROLLMAN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-03-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF HENRIETTA KATZEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF HENRIETTA KATZEN",
+          "earmark_donor": "HENRIETTA KATZEN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MICHAEL BREHNE. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MICHAEL BREHNE",
+          "earmark_donor": "MICHAEL BREHNE"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1500,
+          "date": "2024-03-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF SCOTT ZIMMERMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF SCOTT ZIMMERMAN",
+          "earmark_donor": "SCOTT ZIMMERMAN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-03-24",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF PAUL FINER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF PAUL FINER",
+          "earmark_donor": "PAUL FINER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF LAWRENCE PINES. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF LAWRENCE PINES",
+          "earmark_donor": "LAWRENCE PINES"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF JONATHAN WALDBAUM. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF JONATHAN WALDBAUM",
+          "earmark_donor": "JONATHAN WALDBAUM"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-03-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF HOWARD LEFKOWITZ. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF HOWARD LEFKOWITZ",
+          "earmark_donor": "HOWARD LEFKOWITZ"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 200,
+          "date": "2024-03-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF ALLEN SAFT. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF ALLEN SAFT",
+          "earmark_donor": "ALLEN SAFT"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-03-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF DAVID KRINKER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF DAVID KRINKER",
+          "earmark_donor": "DAVID KRINKER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 100,
+          "date": "2024-03-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF JOY DAVIS. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF JOY DAVIS",
+          "earmark_donor": "JOY DAVIS"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF CHARLES WITTEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF CHARLES WITTEN",
+          "earmark_donor": "CHARLES WITTEN"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-03-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF DAVID DIAMOND. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF DAVID DIAMOND",
+          "earmark_donor": "DAVID DIAMOND"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-17",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MICHELE WOLFSON. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MICHELE WOLFSON",
+          "earmark_donor": "MICHELE WOLFSON"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-03-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MARK KLAFTER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MARK KLAFTER",
+          "earmark_donor": "MARK KLAFTER"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 500,
+          "date": "2024-03-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARK OF MARVIN SHAPIRO. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARK OF MARVIN SHAPIRO",
+          "earmark_donor": "MARVIN SHAPIRO"
+        },
+        {
+          "pac_id": "C00797670",
+          "pac_name": "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO",
+          "cand_cmte": "C00774943",
+          "cycle": 2022,
+          "amount": 5000,
+          "date": "2022-11-01",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CONTRIBUTION TO COMMITTEE",
+          "earmark_donor": null
+        }
+      ],
+      "earmarked_donors": [
+        "ALEXANDER GRIMM",
+        "DIANE COHEN",
+        "ALAN GINSBURG",
+        "EVAN SMIEDT",
+        "RICHARD DIAMOND",
+        "JAY FALK",
+        "SCOTT ZIMMERMAN",
+        "EDWARD KLEIMAN",
+        "STEVEN KANE",
+        "JEFFREY BAUMANN",
+        "WAYNE MILLER",
+        "JAY FISHER",
+        "MARC SMITH",
+        "FRANK MATTIOLI",
+        "WILLIAM DILLARD",
+        "GENE JOSEPHS",
+        "MELVIN BERGER",
+        "JOE BERT",
+        "ROBERT GEBAIDE",
+        "DEBORAH MEITIN",
+        "GAIL ROLLMAN",
+        "HENRIETTA KATZEN",
+        "MICHAEL BREHNE",
+        "PAUL FINER",
+        "LAWRENCE PINES",
+        "JONATHAN WALDBAUM",
+        "HOWARD LEFKOWITZ",
+        "ALLEN SAFT",
+        "DAVID KRINKER",
+        "JOY DAVIS",
+        "CHARLES WITTEN",
+        "DAVID DIAMOND",
+        "MICHELE WOLFSON",
+        "MARK KLAFTER",
+        "MARVIN SHAPIRO"
+      ]
+    },
+    "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE": {
+      "committee_id": "C00345132",
+      "total_all_cycles": 5312.599999999999,
+      "by_cycle": {
+        "2022": 7.4,
+        "2024": 5305.2
+      },
+      "entries": [
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-04-12",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM DEAN FARACCHIO. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM DEAN FARACCHIO",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 3300,
+          "date": "2024-03-11",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM JEFFREY MILLER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM JEFFREY MILLER",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 5.2,
+          "date": "2023-12-21",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM JOSEPH AUSTIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM JOSEPH AUSTIN",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2023-10-29",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM DEAN FARACCHIO. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM DEAN FARACCHIO",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cand_cmte": "C00774943",
+          "cycle": 2022,
+          "amount": 7.2,
+          "date": "2022-09-26",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cand_cmte": "C00774943",
+          "cycle": 2022,
+          "amount": 0.2,
+          "date": "2022-09-26",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED CONTRIBUTION FROM ALYSSA BLACK",
+          "earmark_donor": null
+        }
+      ],
+      "earmarked_donors": []
+    },
+    "U.S. ISRAEL PAC (USI PAC)": {
+      "committee_id": "C00127811",
+      "total_all_cycles": 2000,
+      "by_cycle": {
+        "2022": 1000,
+        "2024": 1000
+      },
+      "entries": [
+        {
+          "pac_id": "C00127811",
+          "pac_name": "U.S. ISRAEL PAC (USI PAC)",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-11-02",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CAMPAIGN CONTRIBUTION",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00127811",
+          "pac_name": "U.S. ISRAEL PAC (USI PAC)",
+          "cand_cmte": "C00774943",
+          "cycle": 2022,
+          "amount": 1000,
+          "date": "2022-11-06",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CAMPAIGN CONTRIBUTION",
+          "earmark_donor": null
+        }
+      ],
+      "earmarked_donors": []
+    },
+    "American Principles": {
+      "committee_id": "C00492579",
+      "total_all_cycles": 1000,
+      "by_cycle": {
+        "2022": 1000
+      },
+      "entries": [
+        {
+          "pac_id": "C00492579",
+          "pac_name": "American Principles",
+          "cand_cmte": "C00774943",
+          "cycle": 2022,
+          "amount": 500,
+          "date": "2022-11-08",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CAMPAIGN CONTRIBUTION",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00492579",
+          "pac_name": "American Principles",
+          "cand_cmte": "C00774943",
+          "cycle": 2022,
+          "amount": 500,
+          "date": "2022-08-23",
+          "type": "direct",
+          "memo": "",
+          "purpose": "CAMPAIGN CONTRIBUTION",
+          "earmark_donor": null
+        }
+      ],
+      "earmarked_donors": []
+    },
+    "NORPAC": {
+      "committee_id": "C00030718",
+      "total_all_cycles": 23000,
+      "by_cycle": {
+        "2022": 10000,
+        "2024": 10000,
+        "2026": 3000
+      },
+      "entries": [
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "cand_cmte": "C00774943",
+          "cycle": 2026,
+          "amount": 2000,
+          "date": "2025-02-05",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "cand_cmte": "C00774943",
+          "cycle": 2026,
+          "amount": 1000,
+          "date": "2025-02-05",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 5000,
+          "date": "2024-09-20",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 2000,
+          "date": "2024-05-24",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 1000,
+          "date": "2024-02-21",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "cand_cmte": "C00774943",
+          "cycle": 2024,
+          "amount": 2000,
+          "date": "2023-05-19",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "cand_cmte": "C00774943",
+          "cycle": 2022,
+          "amount": 5000,
+          "date": "2022-10-04",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00030718",
+          "pac_name": "NORPAC",
+          "cand_cmte": "C00774943",
+          "cycle": 2022,
+          "amount": 5000,
+          "date": "2022-10-04",
+          "type": "direct",
+          "memo": "",
+          "purpose": "",
+          "earmark_donor": null
+        }
+      ],
+      "earmarked_donors": []
+    }
+  },
+  "independent_expenditures": [],
+  "summary": {
+    "cycle_2020_direct_and_earmarked": 0,
+    "cycle_2022_direct_and_earmarked": 17007.4,
+    "cycle_2024_direct_and_earmarked": 39566.34,
+    "cycle_2026_direct_and_earmarked": 3000,
+    "total_all_cycles": 59573.74,
+    "unique_earmarked_donors": 35,
+    "earmarked_donors_also_on_blackburn_tn_gov": [],
+    "earmarked_donors_also_on_donalds": [
+      {
+        "name": "ALEXANDER GRIMM",
+        "total": 9.14,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "DIANE COHEN",
+        "total": 300,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "RICHARD DIAMOND",
+        "total": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      }
+    ],
+    "top_earmark_donors": [
+      {
+        "name": "SCOTT ZIMMERMAN",
+        "total": 2500,
+        "count": 2,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "ALAN GINSBURG",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "EVAN SMIEDT",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "EDWARD KLEIMAN",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "WAYNE MILLER",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "MARC SMITH",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "FRANK MATTIOLI",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "GENE JOSEPHS",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "MELVIN BERGER",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "MICHAEL BREHNE",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "LAWRENCE PINES",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "JONATHAN WALDBAUM",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "CHARLES WITTEN",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "MICHELE WOLFSON",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "MARK KLAFTER",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "JAY FALK",
+        "total": 500,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "JEFFREY BAUMANN",
+        "total": 500,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "WILLIAM DILLARD",
+        "total": 500,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "JOE BERT",
+        "total": 500,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      },
+      {
+        "name": "HENRIETTA KATZEN",
+        "total": 500,
+        "count": 1,
+        "pacs": [
+          "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE POLITICAL ACTION CO"
+        ],
+        "cycles": [
+          2024
+        ]
+      }
+    ]
+  }
+}

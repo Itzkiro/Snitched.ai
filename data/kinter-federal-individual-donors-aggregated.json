@@ -1,0 +1,2182 @@
+{
+  "committee_ids": [
+    "C00903633"
+  ],
+  "candidate_id": "H6FL07165",
+  "cycles": [
+    2026
+  ],
+  "fetched_at": "2026-04-25T01:54:46.284Z",
+  "totals": {
+    "total_itemized_receipts": 19804.17,
+    "total_rows": 165,
+    "by_cycle": {
+      "2026": {
+        "rows": 165,
+        "total": 19804.17
+      }
+    }
+  },
+  "donors": [
+    {
+      "last": "TAMARA",
+      "first": "TRIMBLE",
+      "state": "FL",
+      "city": "LAKE MARY",
+      "employer": "ADVENT HEALTH",
+      "occupation": "ATTORNEY",
+      "total_to_candidate": 3500,
+      "by_cycle": {
+        "2026": 3500
+      },
+      "by_committee": {
+        "C00903633": 3500
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "KINTER",
+      "first": "THERESA",
+      "state": "FL",
+      "city": "ORLANDO",
+      "employer": "UNEMPLOYED",
+      "occupation": "UNEMPLOYED",
+      "total_to_candidate": 3310,
+      "by_cycle": {
+        "2026": 3310
+      },
+      "by_committee": {
+        "C00903633": 3310
+      },
+      "contrib_count": 3
+    },
+    {
+      "last": "TOBER",
+      "first": "RON",
+      "state": "NC",
+      "city": "CHARLOTTE",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 2850,
+      "by_cycle": {
+        "2026": 2850
+      },
+      "by_committee": {
+        "C00903633": 2850
+      },
+      "contrib_count": 8
+    },
+    {
+      "last": "SCIARRINO",
+      "first": "MICHAEL",
+      "state": "FL",
+      "city": "WINTER PARK",
+      "employer": "AHP",
+      "occupation": "SELF EMPLOYED",
+      "total_to_candidate": 1000,
+      "by_cycle": {
+        "2026": 1000
+      },
+      "by_committee": {
+        "C00903633": 1000
+      },
+      "contrib_count": 2
+    },
+    {
+      "last": "SUSAN",
+      "first": "MORRIS",
+      "state": "FL",
+      "city": "ORLANDO",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total_to_candidate": 1000,
+      "by_cycle": {
+        "2026": 1000
+      },
+      "by_committee": {
+        "C00903633": 1000
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "OLSON",
+      "first": "NANCY",
+      "state": "FL",
+      "city": "NEW SMYRNA BEACH",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 700,
+      "by_cycle": {
+        "2026": 700
+      },
+      "by_committee": {
+        "C00903633": 700
+      },
+      "contrib_count": 2
+    },
+    {
+      "last": "CLAIBORNE",
+      "first": "KERRY",
+      "state": "CA",
+      "city": "ATASCADERO",
+      "employer": "PG&E",
+      "occupation": "TECHNICIAN",
+      "total_to_candidate": 500,
+      "by_cycle": {
+        "2026": 500
+      },
+      "by_committee": {
+        "C00903633": 500
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "PIERJOK",
+      "first": "MATTHEW",
+      "state": "WA",
+      "city": "STEVENSON",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 500,
+      "by_cycle": {
+        "2026": 500
+      },
+      "by_committee": {
+        "C00903633": 500
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "HESS",
+      "first": "GREGORY",
+      "state": "FL",
+      "city": "OVIEDO",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 500,
+      "by_cycle": {
+        "2026": 500
+      },
+      "by_committee": {
+        "C00903633": 500
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "MILLAR",
+      "first": "WILLIAM",
+      "state": "FL",
+      "city": "SANIBEL",
+      "employer": "RETIRED",
+      "occupation": "RETIRED",
+      "total_to_candidate": 300,
+      "by_cycle": {
+        "2026": 300
+      },
+      "by_committee": {
+        "C00903633": 300
+      },
+      "contrib_count": 5
+    },
+    {
+      "last": "KERIN",
+      "first": "BRITTON",
+      "state": "AK",
+      "city": "FAIRBANKS",
+      "employer": "SOFTWARE ENGINEER",
+      "occupation": "ALASKA VOLCANO OBSERVATORY",
+      "total_to_candidate": 300,
+      "by_cycle": {
+        "2026": 300
+      },
+      "by_committee": {
+        "C00903633": 300
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "MATHEWS",
+      "first": "KEVIN",
+      "state": "FL",
+      "city": "PORT ORANGE",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 275,
+      "by_cycle": {
+        "2026": 275
+      },
+      "by_committee": {
+        "C00903633": 275
+      },
+      "contrib_count": 11
+    },
+    {
+      "last": "ROTHENBERG",
+      "first": "EDWARD",
+      "state": "NY",
+      "city": "BROOKLYN",
+      "employer": "SELF EMPLOYED",
+      "occupation": "MUSICIAN",
+      "total_to_candidate": 250,
+      "by_cycle": {
+        "2026": 250
+      },
+      "by_committee": {
+        "C00903633": 250
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "SCHMIDT",
+      "first": "DAVID",
+      "state": "IN",
+      "city": "LAFAYETTE",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 250,
+      "by_cycle": {
+        "2026": 250
+      },
+      "by_committee": {
+        "C00903633": 250
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "HALL SCARPA",
+      "first": "LILI",
+      "state": "MN",
+      "city": "MINNEAPOLIS",
+      "employer": "KNOCK INC",
+      "occupation": "PROFESSIONAL",
+      "total_to_candidate": 250,
+      "by_cycle": {
+        "2026": 250
+      },
+      "by_committee": {
+        "C00903633": 250
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "STUART",
+      "first": "KEELAN",
+      "state": "FL",
+      "city": "GENEVA",
+      "employer": "N/A",
+      "occupation": "SOFTWARE ENGINEER",
+      "total_to_candidate": 250,
+      "by_cycle": {
+        "2026": 250
+      },
+      "by_committee": {
+        "C00903633": 250
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "SARGENT",
+      "first": "ALEXANDRA",
+      "state": "FL",
+      "city": "NEW SMYRNA BEACH",
+      "employer": "ALIGNED DENTAL",
+      "occupation": "DENTIST",
+      "total_to_candidate": 250,
+      "by_cycle": {
+        "2026": 250
+      },
+      "by_committee": {
+        "C00903633": 250
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "ALHALABI",
+      "first": "LAYLA",
+      "state": "FL",
+      "city": "BOYNTON BEACH",
+      "employer": "STATE OF FLORIDA",
+      "occupation": "ATTORNEY",
+      "total_to_candidate": 250,
+      "by_cycle": {
+        "2026": 250
+      },
+      "by_committee": {
+        "C00903633": 250
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "COMINS",
+      "first": "MAX",
+      "state": "FL",
+      "city": "PONTE VEDRA BEACH",
+      "employer": "SELF",
+      "occupation": "PROFESSIONAL INVESTOR/TRADER",
+      "total_to_candidate": 250,
+      "by_cycle": {
+        "2026": 250
+      },
+      "by_committee": {
+        "C00903633": 250
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "CORNWELL",
+      "first": "DAN",
+      "state": "FL",
+      "city": "LAKE MARY",
+      "employer": "LEONARDO DRS",
+      "occupation": "SUPERVISOR OF OPERATIONS",
+      "total_to_candidate": 210,
+      "by_cycle": {
+        "2026": 210
+      },
+      "by_committee": {
+        "C00903633": 210
+      },
+      "contrib_count": 2
+    },
+    {
+      "last": "NIETO",
+      "first": "DIANA",
+      "state": "FL",
+      "city": "MARGATE",
+      "employer": "CSUSA",
+      "occupation": "TEACHER",
+      "total_to_candidate": 150,
+      "by_cycle": {
+        "2026": 150
+      },
+      "by_committee": {
+        "C00903633": 150
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "KING",
+      "first": "JAMES",
+      "state": "NY",
+      "city": "MIDDLE GROVE",
+      "employer": "HOWARD HANNA CAPITAL INC",
+      "occupation": "RETIRED NAVY CHIEF NOW REALTOR",
+      "total_to_candidate": 100,
+      "by_cycle": {
+        "2026": 100
+      },
+      "by_committee": {
+        "C00903633": 100
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "JACKSON",
+      "first": "JENNIFER",
+      "state": "FL",
+      "city": "LUTZ",
+      "employer": "USI INSURANCE",
+      "occupation": "CONSULTANT",
+      "total_to_candidate": 100,
+      "by_cycle": {
+        "2026": 100
+      },
+      "by_committee": {
+        "C00903633": 100
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "BAILEY",
+      "first": "GEORGE",
+      "state": "FL",
+      "city": "PALM BAY",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 100,
+      "by_cycle": {
+        "2026": 100
+      },
+      "by_committee": {
+        "C00903633": 100
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "HARRINGTON",
+      "first": "MICHAEL",
+      "state": "FL",
+      "city": "JUPITER",
+      "employer": "NOT EMPLOYED",
+      "occupation": "",
+      "total_to_candidate": 100,
+      "by_cycle": {
+        "2026": 100
+      },
+      "by_committee": {
+        "C00903633": 100
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "SILVER",
+      "first": "ELAINE",
+      "state": "FL",
+      "city": "LONGWOOD",
+      "employer": "SELF EMPLOYED",
+      "occupation": "ATTORNEY/MEDIATOR",
+      "total_to_candidate": 100,
+      "by_cycle": {
+        "2026": 100
+      },
+      "by_committee": {
+        "C00903633": 100
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "PERSONS",
+      "first": "ROBERT",
+      "state": "FL",
+      "city": "CASSELBERRY",
+      "employer": "PENGUIN SOLUTIONS",
+      "occupation": "SR SALES ENGINEER",
+      "total_to_candidate": 100,
+      "by_cycle": {
+        "2026": 100
+      },
+      "by_committee": {
+        "C00903633": 100
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "LAMBERT",
+      "first": "SANDRA",
+      "state": "FL",
+      "city": "GAINESVILLE",
+      "employer": "NOT EMPLOYED",
+      "occupation": "",
+      "total_to_candidate": 100,
+      "by_cycle": {
+        "2026": 100
+      },
+      "by_committee": {
+        "C00903633": 100
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "SANBURG",
+      "first": "WILLIAM",
+      "state": "NC",
+      "city": "CHARLOTTE",
+      "employer": "CITY OF CHARLOTTE FIRE DEPARTM",
+      "occupation": "FIREFIGHTER",
+      "total_to_candidate": 100,
+      "by_cycle": {
+        "2026": 100
+      },
+      "by_committee": {
+        "C00903633": 100
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "GALLOWAY",
+      "first": "P",
+      "state": "FL",
+      "city": "POMONA PARK",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 50,
+      "by_cycle": {
+        "2026": 50
+      },
+      "by_committee": {
+        "C00903633": 50
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "WILSON",
+      "first": "LORI",
+      "state": "FL",
+      "city": "ORLANDO",
+      "employer": "JACOBS",
+      "occupation": "MANAGER",
+      "total_to_candidate": 50,
+      "by_cycle": {
+        "2026": 50
+      },
+      "by_committee": {
+        "C00903633": 50
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "NICHOLS",
+      "first": "FL",
+      "state": "AL",
+      "city": "GUNTERSVILLE",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 50,
+      "by_cycle": {
+        "2026": 50
+      },
+      "by_committee": {
+        "C00903633": 50
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "LAWSON",
+      "first": "CLAYTON",
+      "state": "FL",
+      "city": "GAINESVILLE",
+      "employer": "GRAND PRAIRIE FOODS",
+      "occupation": "SALES",
+      "total_to_candidate": 50,
+      "by_cycle": {
+        "2026": 50
+      },
+      "by_committee": {
+        "C00903633": 50
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "HERANDEZ",
+      "first": "ILICH",
+      "state": "FL",
+      "city": "JACKSONVILLE",
+      "employer": "WHATABURGER VENTURES LLC",
+      "occupation": "FACILITIES MANAGER",
+      "total_to_candidate": 50,
+      "by_cycle": {
+        "2026": 50
+      },
+      "by_committee": {
+        "C00903633": 50
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "A NELSON",
+      "first": "JOSHUA",
+      "state": "MA",
+      "city": "DRACUT",
+      "employer": "KLAVIYO",
+      "occupation": "2ND LEVEL CUSTOMER SUPPORT",
+      "total_to_candidate": 50,
+      "by_cycle": {
+        "2026": 50
+      },
+      "by_committee": {
+        "C00903633": 50
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "MANGOS",
+      "first": "HARRY",
+      "state": "FL",
+      "city": "WINTER SPRINGS",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 50,
+      "by_cycle": {
+        "2026": 50
+      },
+      "by_committee": {
+        "C00903633": 50
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "JOHNSON",
+      "first": "WILLIAM",
+      "state": "FL",
+      "city": "MELBOURNE",
+      "employer": "DEPT OF THE AIR FORCE",
+      "occupation": "SCIENTIST",
+      "total_to_candidate": 50,
+      "by_cycle": {
+        "2026": 50
+      },
+      "by_committee": {
+        "C00903633": 50
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "RAINBOW",
+      "first": "PAMELA",
+      "state": "FL",
+      "city": "DAYTONA BEACH",
+      "employer": "NOT EMPLOYED",
+      "occupation": "",
+      "total_to_candidate": 50,
+      "by_cycle": {
+        "2026": 50
+      },
+      "by_committee": {
+        "C00903633": 50
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "LOWE",
+      "first": "JOAN",
+      "state": "FL",
+      "city": "LAKE MARY",
+      "employer": "",
+      "occupation": "",
+      "total_to_candidate": 50,
+      "by_cycle": {
+        "2026": 50
+      },
+      "by_committee": {
+        "C00903633": 50
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "TUFTS",
+      "first": "IAN",
+      "state": "SC",
+      "city": "LADSON",
+      "employer": "US NAVY",
+      "occupation": "MILITARY",
+      "total_to_candidate": 50,
+      "by_cycle": {
+        "2026": 50
+      },
+      "by_committee": {
+        "C00903633": 50
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "FINNEGAN",
+      "first": "PAUL",
+      "state": "FL",
+      "city": "WINTER SPRINGS",
+      "employer": "NOT EMPLOYED",
+      "occupation": "",
+      "total_to_candidate": 50,
+      "by_cycle": {
+        "2026": 50
+      },
+      "by_committee": {
+        "C00903633": 50
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "PEOPLE",
+      "first": "ROBERT",
+      "state": "FL",
+      "city": "TAMPA",
+      "employer": "IQOR US INC",
+      "occupation": "PROPOSAL WRITER",
+      "total_to_candidate": 50,
+      "by_cycle": {
+        "2026": 50
+      },
+      "by_committee": {
+        "C00903633": 50
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "KIRK",
+      "first": "RYAN",
+      "state": "NC",
+      "city": "CHARLOTTE",
+      "employer": "APPORTO",
+      "occupation": "DEVOPS ENGINEER",
+      "total_to_candidate": 50,
+      "by_cycle": {
+        "2026": 50
+      },
+      "by_committee": {
+        "C00903633": 50
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "SANBURG",
+      "first": "RONNA",
+      "state": "NC",
+      "city": "CHARLOTTE",
+      "employer": "CAREGIVER",
+      "occupation": "PRIVATE",
+      "total_to_candidate": 50,
+      "by_cycle": {
+        "2026": 50
+      },
+      "by_committee": {
+        "C00903633": 50
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "PAHL",
+      "first": "HANNAH",
+      "state": "OH",
+      "city": "WILLARD",
+      "employer": "THE CLEANING AUTHORITY",
+      "occupation": "MANAGER",
+      "total_to_candidate": 50,
+      "by_cycle": {
+        "2026": 50
+      },
+      "by_committee": {
+        "C00903633": 50
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "HECKER",
+      "first": "DAVID",
+      "state": "CA",
+      "city": "SAN FRANCISCO",
+      "employer": "SOFTWARE ENGINEER",
+      "occupation": "ASANA",
+      "total_to_candidate": 50,
+      "by_cycle": {
+        "2026": 50
+      },
+      "by_committee": {
+        "C00903633": 50
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "COFFEY",
+      "first": "MARY",
+      "state": "FL",
+      "city": "LONGWOOD",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 40,
+      "by_cycle": {
+        "2026": 40
+      },
+      "by_committee": {
+        "C00903633": 40
+      },
+      "contrib_count": 2
+    },
+    {
+      "last": "PORTELL",
+      "first": "JOE",
+      "state": "IL",
+      "city": "EDWARDSVILLE",
+      "employer": "PHILLIPS 66",
+      "occupation": "MAINTENANCE PLANNER",
+      "total_to_candidate": 40,
+      "by_cycle": {
+        "2026": 40
+      },
+      "by_committee": {
+        "C00903633": 40
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "YOUNG",
+      "first": "ZACHARY",
+      "state": "WI",
+      "city": "MADISON",
+      "employer": "ADAM AND EVE",
+      "occupation": "CASHIER",
+      "total_to_candidate": 40,
+      "by_cycle": {
+        "2026": 40
+      },
+      "by_committee": {
+        "C00903633": 40
+      },
+      "contrib_count": 2
+    },
+    {
+      "last": "DIAZ MALDONADO",
+      "first": "LORRAINE",
+      "state": "FL",
+      "city": "ORLANDO",
+      "employer": "DON",
+      "occupation": "FINANCIAL ANALYST",
+      "total_to_candidate": 35,
+      "by_cycle": {
+        "2026": 35
+      },
+      "by_committee": {
+        "C00903633": 35
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "SULLIVAN",
+      "first": "PALOMA",
+      "state": "FL",
+      "city": "MIAMI",
+      "employer": "PIZZA JOINT",
+      "occupation": "CHEF",
+      "total_to_candidate": 30,
+      "by_cycle": {
+        "2026": 30
+      },
+      "by_committee": {
+        "C00903633": 30
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "PARRISH",
+      "first": "ROY",
+      "state": "FL",
+      "city": "ORLANDO",
+      "employer": "UNEMPLOYED",
+      "occupation": "UNEMPLOYED",
+      "total_to_candidate": 30,
+      "by_cycle": {
+        "2026": 30
+      },
+      "by_committee": {
+        "C00903633": 30
+      },
+      "contrib_count": 2
+    },
+    {
+      "last": "ROBERTS",
+      "first": "TOM",
+      "state": "FL",
+      "city": "PENSACOLA",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 27,
+      "by_cycle": {
+        "2026": 27
+      },
+      "by_committee": {
+        "C00903633": 27
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "FALBO",
+      "first": "TERRI",
+      "state": "FL",
+      "city": "OCOEE",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 25,
+      "by_cycle": {
+        "2026": 25
+      },
+      "by_committee": {
+        "C00903633": 25
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "SCOTT",
+      "first": "CATHERINE",
+      "state": "NY",
+      "city": "ROSCOE",
+      "employer": "MEADOW ENERGY",
+      "occupation": "EXECUTIVE",
+      "total_to_candidate": 25,
+      "by_cycle": {
+        "2026": 25
+      },
+      "by_committee": {
+        "C00903633": 25
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "MUNSHI",
+      "first": "SHARIF",
+      "state": "GA",
+      "city": "CUMMING",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 25,
+      "by_cycle": {
+        "2026": 25
+      },
+      "by_committee": {
+        "C00903633": 25
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "HAMM",
+      "first": "MARY",
+      "state": "NJ",
+      "city": "FLEMINGTON",
+      "employer": "RG LLP",
+      "occupation": "MANAGER",
+      "total_to_candidate": 25,
+      "by_cycle": {
+        "2026": 25
+      },
+      "by_committee": {
+        "C00903633": 25
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "GOGGIN-ROBERTS",
+      "first": "THERESA",
+      "state": "PA",
+      "city": "LANSFORD",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 25,
+      "by_cycle": {
+        "2026": 25
+      },
+      "by_committee": {
+        "C00903633": 25
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "DERY",
+      "first": "JENNIFER",
+      "state": "CA",
+      "city": "SAN DIEGO",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 25,
+      "by_cycle": {
+        "2026": 25
+      },
+      "by_committee": {
+        "C00903633": 25
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "BENNETT",
+      "first": "JACQUELINE",
+      "state": "MD",
+      "city": "NORTH POTOMAC",
+      "employer": "CREATORUP",
+      "occupation": "POST PRODUCER",
+      "total_to_candidate": 25,
+      "by_cycle": {
+        "2026": 25
+      },
+      "by_committee": {
+        "C00903633": 25
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "VAZQUEZ",
+      "first": "LUIS",
+      "state": "FL",
+      "city": "PORT ORANGE",
+      "employer": "303 DIGITAL LLP",
+      "occupation": "SOFTWARE DEVELOPER",
+      "total_to_candidate": 25,
+      "by_cycle": {
+        "2026": 25
+      },
+      "by_committee": {
+        "C00903633": 25
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "TWYFORD",
+      "first": "CHARLES",
+      "state": "FL",
+      "city": "MIAMI",
+      "employer": "NOT EMPLOYED",
+      "occupation": "",
+      "total_to_candidate": 25,
+      "by_cycle": {
+        "2026": 25
+      },
+      "by_committee": {
+        "C00903633": 25
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "LEDNICZKY",
+      "first": "JANET",
+      "state": "FL",
+      "city": "DELRAY BEACH",
+      "employer": "NOT EMPLOYED",
+      "occupation": "",
+      "total_to_candidate": 25,
+      "by_cycle": {
+        "2026": 25
+      },
+      "by_committee": {
+        "C00903633": 25
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "SCARBOROUGH",
+      "first": "JUDI",
+      "state": "FL",
+      "city": "VERO BEACH",
+      "employer": "NOT EMPLOYED",
+      "occupation": "",
+      "total_to_candidate": 25,
+      "by_cycle": {
+        "2026": 25
+      },
+      "by_committee": {
+        "C00903633": 25
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "KIRK",
+      "first": "JAMES",
+      "state": "FL",
+      "city": "ALTAMONTE SPRINGS",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 25,
+      "by_cycle": {
+        "2026": 25
+      },
+      "by_committee": {
+        "C00903633": 25
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "GARCIA",
+      "first": "CHERIE",
+      "state": "OH",
+      "city": "STRONGSVILLE",
+      "employer": "JENNE INC",
+      "occupation": "PURCHASING AGENT",
+      "total_to_candidate": 25,
+      "by_cycle": {
+        "2026": 25
+      },
+      "by_committee": {
+        "C00903633": 25
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "NEILL",
+      "first": "ELENA",
+      "state": "FL",
+      "city": "ORLANDO",
+      "employer": "NEILL CORP",
+      "occupation": "DATA ANALYST",
+      "total_to_candidate": 20,
+      "by_cycle": {
+        "2026": 20
+      },
+      "by_committee": {
+        "C00903633": 20
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "KING",
+      "first": "BRANDYE",
+      "state": "CA",
+      "city": "SHERMAN OAKS",
+      "employer": "BAKERY",
+      "occupation": "BAKER",
+      "total_to_candidate": 20,
+      "by_cycle": {
+        "2026": 20
+      },
+      "by_committee": {
+        "C00903633": 20
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "WHELPLEY",
+      "first": "PETER",
+      "state": "WI",
+      "city": "MILWAUKEE",
+      "employer": "KOHLER",
+      "occupation": "EDITOR",
+      "total_to_candidate": 20,
+      "by_cycle": {
+        "2026": 20
+      },
+      "by_committee": {
+        "C00903633": 20
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "RIPEPI",
+      "first": "ANITA",
+      "state": "MA",
+      "city": "WEYMOUTH",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 20,
+      "by_cycle": {
+        "2026": 20
+      },
+      "by_committee": {
+        "C00903633": 20
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "VISE",
+      "first": "RACHEL",
+      "state": "NY",
+      "city": "NEW YORK",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 20,
+      "by_cycle": {
+        "2026": 20
+      },
+      "by_committee": {
+        "C00903633": 20
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "HUBERS",
+      "first": "JACOB",
+      "state": "ID",
+      "city": "POCATELLO",
+      "employer": "SELF EMPLOYED",
+      "occupation": "SELF EMPLOYED",
+      "total_to_candidate": 20,
+      "by_cycle": {
+        "2026": 20
+      },
+      "by_committee": {
+        "C00903633": 20
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "SANBURG",
+      "first": "MARTHA",
+      "state": "NC",
+      "city": "GOLD HILL",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 20,
+      "by_cycle": {
+        "2026": 20
+      },
+      "by_committee": {
+        "C00903633": 20
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "KINTER",
+      "first": "JACOB",
+      "state": "FL",
+      "city": "ORLANDO",
+      "employer": "UNEMPLOYED",
+      "occupation": "UNEMPLOYED",
+      "total_to_candidate": 20,
+      "by_cycle": {
+        "2026": 20
+      },
+      "by_committee": {
+        "C00903633": 20
+      },
+      "contrib_count": 2
+    },
+    {
+      "last": "SMITH",
+      "first": "MADELINE",
+      "state": "GA",
+      "city": "STATESBORO",
+      "employer": "BLIND BEAR CREATIVE",
+      "occupation": "MARKETING CONSULTANT",
+      "total_to_candidate": 20,
+      "by_cycle": {
+        "2026": 20
+      },
+      "by_committee": {
+        "C00903633": 20
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "VANN",
+      "first": "JOHN",
+      "state": "MN",
+      "city": "MINNEAPOLIS",
+      "employer": "MEDTRONIC",
+      "occupation": "CALIBRATION TECHNICIAN",
+      "total_to_candidate": 20,
+      "by_cycle": {
+        "2026": 20
+      },
+      "by_committee": {
+        "C00903633": 20
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "STICKEL",
+      "first": "WESLEY",
+      "state": "FL",
+      "city": "CAPE CORAL",
+      "employer": "NOT EMPLOYED",
+      "occupation": "",
+      "total_to_candidate": 15,
+      "by_cycle": {
+        "2026": 15
+      },
+      "by_committee": {
+        "C00903633": 15
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "VARELA",
+      "first": "ALEXAS",
+      "state": "FL",
+      "city": "ORLANDO",
+      "employer": "N/A",
+      "occupation": "STUDENT",
+      "total_to_candidate": 13.75,
+      "by_cycle": {
+        "2026": 13.75
+      },
+      "by_committee": {
+        "C00903633": 13.75
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "SHADIX",
+      "first": "HEATHER",
+      "state": "FL",
+      "city": "CRESTVIEW",
+      "employer": "BEST CHOICE DELI",
+      "occupation": "MANAGER",
+      "total_to_candidate": 13,
+      "by_cycle": {
+        "2026": 13
+      },
+      "by_committee": {
+        "C00903633": 13
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "WILSON",
+      "first": "GARRETT",
+      "state": "FL",
+      "city": "PALMETTO",
+      "employer": "ASOLO REPERTORY THEATRE",
+      "occupation": "PROPS CRAFTSMAN",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "SMITH",
+      "first": "HAYDEN",
+      "state": "CO",
+      "city": "GRAND JUNCTION",
+      "employer": "ARIEL CLINICAL SERVICES",
+      "occupation": "CASE MANAGER",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "PEREZ-FERREIRO",
+      "first": "CECILIA",
+      "state": "FL",
+      "city": "TAMPA",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "NOLTING",
+      "first": "KIMBERLY",
+      "state": "FL",
+      "city": "DELTONA",
+      "employer": "SEMINOLE COUNTY PUBLIC SCHOOLS",
+      "occupation": "TEACHER",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "LEAL",
+      "first": "CLAUDIA",
+      "state": "FL",
+      "city": "HOLLYWOOD",
+      "employer": "COSTCO",
+      "occupation": "AUDITOR",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "HARMON",
+      "first": "LINDA",
+      "state": "FL",
+      "city": "FORT LAUDERDALE",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "FRY",
+      "first": "JENNIFER",
+      "state": "FL",
+      "city": "PORT ORANGE",
+      "employer": "LUCENT HEALTH",
+      "occupation": "RN",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "ARDITO",
+      "first": "CAROLINE",
+      "state": "FL",
+      "city": "LAKE MARY",
+      "employer": "LAW",
+      "occupation": "LEGAL ASSISTANT",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "ZENZ",
+      "first": "TERRY",
+      "state": "NV",
+      "city": "HENDERSON",
+      "employer": "PASTRY PALACE",
+      "occupation": "CAKE DECORATOR",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "WYKA",
+      "first": "LIANA",
+      "state": "WI",
+      "city": "SHOREWOOD",
+      "employer": "LIANA WYKA",
+      "occupation": "SELF-EMPLOYED",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "SOTO",
+      "first": "LILY",
+      "state": "CA",
+      "city": "SAN JOSE",
+      "employer": "SCHOOL DISTRICT",
+      "occupation": "TEACHER",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "SCHMITT",
+      "first": "KLARA",
+      "state": "VA",
+      "city": "ALEXANDRIA",
+      "employer": "ESRI",
+      "occupation": "PRODUCT DESIGNER",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "ROVERA",
+      "first": "FRANCESCA",
+      "state": "KY",
+      "city": "LEXINGTON",
+      "employer": "GREEN METALS",
+      "occupation": "BUSINESS ANALYST",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "MUNSON",
+      "first": "THERESA",
+      "state": "FL",
+      "city": "SAINT PETERSBURG",
+      "employer": "PINELLAS COUNTY SCHOOL BOARD",
+      "occupation": "TEACHER",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "MORLANDO",
+      "first": "DANIELLE",
+      "state": "FL",
+      "city": "PORT CHARLOTTE",
+      "employer": "HCA",
+      "occupation": "CNA",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "LUNDE",
+      "first": "DAWN",
+      "state": "MN",
+      "city": "PRIOR LAKE",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "KING",
+      "first": "CHERYL",
+      "state": "FL",
+      "city": "OCOEE",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "KEENE",
+      "first": "ANNA",
+      "state": "IL",
+      "city": "MARION",
+      "employer": "CITY OF MARION",
+      "occupation": "SHELVER",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "INGEME",
+      "first": "ANNA",
+      "state": "NH",
+      "city": "WINDHAM",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "HENNESSEY",
+      "first": "BRIAN",
+      "state": "FL",
+      "city": "WINTER SPRINGS",
+      "employer": "OCPS",
+      "occupation": "TEACHER",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "HARTMAN",
+      "first": "LORRAINE",
+      "state": "NJ",
+      "city": "CAPE MAY",
+      "employer": "HOT CAKES & STEAKS LLC",
+      "occupation": "WAITRESS",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "HANKINS",
+      "first": "KAYLI",
+      "state": "CA",
+      "city": "SANTA ANA",
+      "employer": "PREMIER HEALTH GROUP",
+      "occupation": "ADMISSIONS CONSULTANT",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "GORHAM",
+      "first": "AMY",
+      "state": "ME",
+      "city": "WESTBROOK",
+      "employer": "STATE OF MAINE",
+      "occupation": "CASE WORKER",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "FUENTES",
+      "first": "IVAN",
+      "state": "CA",
+      "city": "LOS ANGELES",
+      "employer": "AMGEN",
+      "occupation": "ENGINEER",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "FITCHNER",
+      "first": "ALISSA",
+      "state": "OR",
+      "city": "EUGENE",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "EVERT",
+      "first": "JENNIFER",
+      "state": "WI",
+      "city": "EAST TROY",
+      "employer": "WCTC",
+      "occupation": "COLLEGE TEACHER",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "DUNCAN",
+      "first": "BRITTNEY",
+      "state": "FL",
+      "city": "DAYTONA BEACH",
+      "employer": "ACCREDO",
+      "occupation": "CUSTOMER SERVICE",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "DUDLEY",
+      "first": "KYLE",
+      "state": "FL",
+      "city": "JACKSONVILLE",
+      "employer": "AMAZON",
+      "occupation": "RISK MANAGER",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "CLEMENTS",
+      "first": "TOM",
+      "state": "VT",
+      "city": "BRISTOL",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "CALHOUN",
+      "first": "KRYSTAL",
+      "state": "FL",
+      "city": "TAMPA",
+      "employer": "NA",
+      "occupation": "SALES MANAGER",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "BATEY",
+      "first": "PIPER",
+      "state": "MI",
+      "city": "BIRMINGHAM",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "CUEVAS",
+      "first": "HANNAH",
+      "state": "FL",
+      "city": "ORLANDO",
+      "employer": "PRACTITIONER",
+      "occupation": "STRETCH ZONE",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "BURKE",
+      "first": "JEANNE",
+      "state": "FL",
+      "city": "FORT LAUDERDALE",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "SIEBEL",
+      "first": "MICHAEL",
+      "state": "FL",
+      "city": "ST PETE",
+      "employer": "SELF-EMPLOYED",
+      "occupation": "NONE",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "PHOENIX",
+      "first": "BARBARA",
+      "state": "FL",
+      "city": "SANFORD",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "DAVIS",
+      "first": "EDNA",
+      "state": "FL",
+      "city": "SOUTH MIAMI",
+      "employer": "NOT EMPLOYED",
+      "occupation": "",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "BOLAND",
+      "first": "WILLIAM",
+      "state": "FL",
+      "city": "MIAMI",
+      "employer": "BODYFIX METHOD",
+      "occupation": "PHYSIOLOGIST",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "MCCALIP",
+      "first": "MARGARET",
+      "state": "FL",
+      "city": "DAYTONA BEACH",
+      "employer": "NOT EMPLOYED",
+      "occupation": "",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "ERIOLE",
+      "first": "JOANNE",
+      "state": "FL",
+      "city": "TAMPA",
+      "employer": "DEPARTMENT OF VETERAN AFFAIRS",
+      "occupation": "NURSE PRACTITIONER",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "QUENZER",
+      "first": "JEREMIAH",
+      "state": "PA",
+      "city": "MYERSTOWN",
+      "employer": "NOT EMPLOYED",
+      "occupation": "",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "HESSER",
+      "first": "JACQUELINE",
+      "state": "FL",
+      "city": "LABELLE",
+      "employer": "SCHOOL SPECIALTY",
+      "occupation": "SALES",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "BATHAUER",
+      "first": "BRIAN",
+      "state": "CA",
+      "city": "KINGSBURG",
+      "employer": "POWER ELECTRONICS",
+      "occupation": "ELECTRICIAN",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "ROHRER",
+      "first": "DEANNA",
+      "state": "DC",
+      "city": "WASHINGTON",
+      "employer": "ALEXANDRIA CITY PUBLIC SCHOOLS",
+      "occupation": "TEACHER",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "HARPER",
+      "first": "JAYLAN",
+      "state": "SC",
+      "city": "LADSON",
+      "employer": "NOT EMPLOYED",
+      "occupation": "",
+      "total_to_candidate": 10,
+      "by_cycle": {
+        "2026": 10
+      },
+      "by_committee": {
+        "C00903633": 10
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "WINSCO",
+      "first": "SHELBY",
+      "state": "FL",
+      "city": "DAYTONA BEACH",
+      "employer": "SHELBY WINSCO",
+      "occupation": "OFFICE MANAGER",
+      "total_to_candidate": 7,
+      "by_cycle": {
+        "2026": 7
+      },
+      "by_committee": {
+        "C00903633": 7
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "CISNEROS",
+      "first": "DAVID",
+      "state": "FL",
+      "city": "ORLANDO",
+      "employer": "NASA",
+      "occupation": "PATHWAYS",
+      "total_to_candidate": 6.42,
+      "by_cycle": {
+        "2026": 6.42
+      },
+      "by_committee": {
+        "C00903633": 6.42
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "SEXTON",
+      "first": "JOE",
+      "state": "TX",
+      "city": "FORT WORTH",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 5,
+      "by_cycle": {
+        "2026": 5
+      },
+      "by_committee": {
+        "C00903633": 5
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "LEDBETTER",
+      "first": "JAY",
+      "state": "TX",
+      "city": "HOUSTON",
+      "employer": "UNITED PARCEL SERVICE",
+      "occupation": "TRUCK DRIVER",
+      "total_to_candidate": 5,
+      "by_cycle": {
+        "2026": 5
+      },
+      "by_committee": {
+        "C00903633": 5
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "WILLS",
+      "first": "CHRISTOPHER",
+      "state": "FL",
+      "city": "WINTER SPRINGS",
+      "employer": "FIS",
+      "occupation": "AGILE COACH",
+      "total_to_candidate": 5,
+      "by_cycle": {
+        "2026": 5
+      },
+      "by_committee": {
+        "C00903633": 5
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "RATHKAMP",
+      "first": "MARIAH",
+      "state": "MD",
+      "city": "ODENTON",
+      "employer": "UW HEALTH",
+      "occupation": "HEALTH IT",
+      "total_to_candidate": 5,
+      "by_cycle": {
+        "2026": 5
+      },
+      "by_committee": {
+        "C00903633": 5
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "PHIPPS",
+      "first": "TAYLOR",
+      "state": "FL",
+      "city": "WEST PALM BEACH",
+      "employer": "PBSO",
+      "occupation": "LAW ENFORCEMENT",
+      "total_to_candidate": 5,
+      "by_cycle": {
+        "2026": 5
+      },
+      "by_committee": {
+        "C00903633": 5
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "DIUGUID",
+      "first": "ALEXIS",
+      "state": "FL",
+      "city": "WILLISTON",
+      "employer": "WALGREENS",
+      "occupation": "INVENTORY SPECIALIST",
+      "total_to_candidate": 5,
+      "by_cycle": {
+        "2026": 5
+      },
+      "by_committee": {
+        "C00903633": 5
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "ACOSTA",
+      "first": "SHANTAL",
+      "state": "TX",
+      "city": "HOUSTON",
+      "employer": "SELF EMPLOYED",
+      "occupation": "LASH TECH",
+      "total_to_candidate": 5,
+      "by_cycle": {
+        "2026": 5
+      },
+      "by_committee": {
+        "C00903633": 5
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "VACCARO",
+      "first": "JODY",
+      "state": "FL",
+      "city": "MIAMI",
+      "employer": "NOT EMPLOYED",
+      "occupation": "NOT EMPLOYED",
+      "total_to_candidate": 5,
+      "by_cycle": {
+        "2026": 5
+      },
+      "by_committee": {
+        "C00903633": 5
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "GREGG",
+      "first": "ELIZABETH",
+      "state": "FL",
+      "city": "JACKSONVILLE",
+      "employer": "UNF",
+      "occupation": "PROFESSOR",
+      "total_to_candidate": 5,
+      "by_cycle": {
+        "2026": 5
+      },
+      "by_committee": {
+        "C00903633": 5
+      },
+      "contrib_count": 1
+    },
+    {
+      "last": "CONCE",
+      "first": "WINIFFER",
+      "state": "NY",
+      "city": "NEW YORK",
+      "employer": "HARVARD",
+      "occupation": "STUDENT",
+      "total_to_candidate": 2,
+      "by_cycle": {
+        "2026": 2
+      },
+      "by_committee": {
+        "C00903633": 2
+      },
+      "contrib_count": 1
+    }
+  ]
+}
