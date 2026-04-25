@@ -433,6 +433,18 @@ export default function ConnectionsGraph({ politician }: { politician: Politicia
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const [layout, setLayout] = useState<'fcose' | 'circle' | 'concentric'>('fcose');
 
+  // Mobile config branch per D-04 (prefers-reduced-motion guard), D-30
+  // (?legacy_graph=1 rollback flag), AUDIT §1.4 (Cytoscape main-thread block
+  // mitigation on Moto G Power class devices). These flags are captured once
+  // at mount via matchMedia / URLSearchParams — not reactive, because
+  // re-initialising Cytoscape on viewport change would break user node
+  // positions. See RISKS §2.1 for the node-position drift tradeoff.
+  const isLegacyGraph = typeof window !== 'undefined'
+    && new URLSearchParams(window.location.search).get('legacy_graph') === '1';
+  const prefersReducedMotion = typeof window !== 'undefined'
+    && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+
   const { nodes: graphNodes, edges: graphEdges } = buildGraph(politician);
 
   // Only render if there's meaningful data beyond just the 4 pillars
@@ -456,13 +468,38 @@ export default function ConnectionsGraph({ politician }: { politician: Politicia
         } as unknown as cytoscape.LayoutOptions;
       case 'fcose':
       default:
+        if (isLegacyGraph) {
+          // ?legacy_graph=1 rollback — byte-equivalent to pre-phase-10
+          // production config. Every option key enumerated here matches
+          // today's production values exactly; changing any requires
+          // updating RISKS §2.1 and the checkpoint verification.
+          return {
+            name: 'fcose', animate: true, animationDuration: 500, randomize: true, quality: 'proof',
+            nodeSeparation: 80, idealEdgeLength: 150, nodeRepulsion: () => 20000,
+            edgeElasticity: () => 0.45, gravity: 0.2, gravityRange: 3.8, numIter: 2500,
+          } as unknown as cytoscape.LayoutOptions;
+        }
+        // Non-legacy (default) path — mobile reductions per UI-SPEC §10
+        // ConnectionsGraph row: numIter 600 on mobile, animate false on
+        // mobile or when prefers-reduced-motion: reduce, randomize false
+        // for deterministic layouts across runs (fcose has no public seed
+        // parameter; randomize:false is the documented determinism lever).
         return {
-          name: 'fcose', animate: true, animationDuration: 500, randomize: true, quality: 'proof',
-          nodeSeparation: 80, idealEdgeLength: 150, nodeRepulsion: () => 20000,
-          edgeElasticity: () => 0.45, gravity: 0.2, gravityRange: 3.8, numIter: 2500,
+          name: 'fcose',
+          animate: (isMobile || prefersReducedMotion) ? false : true,
+          animationDuration: 500,
+          randomize: false,
+          quality: 'proof',
+          nodeSeparation: 80,
+          idealEdgeLength: 150,
+          nodeRepulsion: () => 20000,
+          edgeElasticity: () => 0.45,
+          gravity: 0.2,
+          gravityRange: 3.8,
+          numIter: isMobile ? 600 : 2500,
         } as unknown as cytoscape.LayoutOptions;
     }
-  }, []);
+  }, [isLegacyGraph, isMobile, prefersReducedMotion]);
 
   // Init Cytoscape
   useEffect(() => {
@@ -475,7 +512,7 @@ export default function ConnectionsGraph({ politician }: { politician: Politicia
       elements,
       style: graphStyle,
       layout: getLayoutOpts(layout),
-      minZoom: 0.2,
+      minZoom: isMobile ? 0.5 : 0.2,
       maxZoom: 4,
       wheelSensitivity: 0.3,
     });
@@ -634,27 +671,21 @@ export default function ConnectionsGraph({ politician }: { politician: Politicia
         ))}
       </div>
 
-      {/* Graph container */}
-      <div style={{ position: 'relative', width: '100%' }}>
+      {/* Graph container — responsive height per PLAN-spec (UI-SPEC §10 mobile graph row) */}
+      <div className="relative w-full">
         <div
           ref={containerRef}
-          style={{
-            width: '100%',
-            height: 'min(550px, 70vw)',
-            minHeight: '300px',
-            background: 'rgba(0, 0, 0, 0.4)',
-            border: '1px solid var(--terminal-border)',
-            borderRadius: '2px',
-          }}
+          className="min-h-[280px] h-[60vw] sm:h-[400px] lg:h-[550px] w-full bg-black/40 border border-[var(--terminal-border)] rounded-sm"
         />
 
-        {/* Detail overlay */}
+        {/* Detail overlay — bottom-anchored on base (capped 35% of graph height
+            so it never covers >25% of graph area in practice), returns to
+            top-right on sm+ per UI-SPEC §8 overlays. Per plan Task 2 Step 3
+            GROUND TRUTH: this overlay lives in ConnectionsGraph.tsx, NOT
+            page.tsx. */}
         {selectedNode && (
-          <div style={{
-            position: 'absolute', top: 8, right: 8,
-            background: 'var(--terminal-card)', border: '1px solid var(--terminal-border)',
-            padding: '0.75rem', fontSize: '0.75rem', maxWidth: '260px', zIndex: 10,
-          }}>
+          <div className="absolute bottom-2 inset-x-2 max-h-[35%] overflow-y-auto sm:top-2 sm:right-2 sm:bottom-auto sm:inset-x-auto sm:max-w-[260px] sm:max-h-none p-3 text-xs z-10"
+               style={{ background: 'var(--terminal-card)', border: '1px solid var(--terminal-border)' }}>
             <div style={{ fontWeight: 700, color: getCategoryColor(selectedNode.category), marginBottom: '0.25rem' }}>
               {selectedNode.label}
             </div>
