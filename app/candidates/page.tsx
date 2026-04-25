@@ -138,12 +138,12 @@ function isIncumbentForSeat(pol: Politician): boolean {
 
 function CandidateCard({ pol, incumbent }: { pol: Politician; incumbent: boolean }) {
   return (
-    <Link href={`/politician/${pol.id}`} style={{ textDecoration: 'none', color: 'inherit', flex: '1 1 260px', maxWidth: '400px' }}>
-      <div className="terminal-card" style={{ height: '100%' }}>
+    <Link href={`/politician/${pol.id}`} className="block w-full" style={{ textDecoration: 'none', color: 'inherit' }}>
+      <div className="terminal-card h-full">
         <div className="card-header">
           <div>
             <div className="card-title">{pol.name}</div>
-            <div style={{ fontSize: '11px', color: 'var(--terminal-text-dim)', marginTop: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+            <div className="text-xs sm:text-[11px]" style={{ color: 'var(--terminal-text-dim)', marginTop: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
               <span>{pol.office}</span>
               <span style={{
                 fontSize: '10px', padding: '0.3rem 0.6rem',
@@ -237,7 +237,7 @@ function RaceBlock({ seat, candidates }: { seat: string; candidates: Politician[
           }}>
             CURRENT SEAT HOLDER
           </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+          <div className="flex flex-col gap-3 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-4">
             {incumbents.map(c => <CandidateCard key={c.id} pol={c} incumbent={true} />)}
           </div>
         </div>
@@ -252,7 +252,7 @@ function RaceBlock({ seat, candidates }: { seat: string; candidates: Politician[
           }}>
             {incumbents.length > 0 ? 'CHALLENGERS' : 'CANDIDATES'}
           </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+          <div className="flex flex-col gap-3 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-4">
             {challengers.map(c => <CandidateCard key={c.id} pol={c} incumbent={false} />)}
           </div>
         </div>
@@ -266,7 +266,7 @@ function RaceSection({ title, icon, races }: { title: string; icon: string; race
   const totalCandidates = races.reduce((s, r) => s + r.candidates.length, 0);
   return (
     <>
-      <div style={{ padding: '2rem 2rem 1rem', borderTop: '1px solid var(--terminal-border)' }}>
+      <div className="px-3 pt-3 pb-3 sm:px-6 sm:pt-6 lg:px-8 lg:pt-8" style={{ borderTop: '1px solid var(--terminal-border)' }}>
         <h2 style={{
           fontSize: '1.25rem', fontWeight: 600, color: 'var(--terminal-green)',
           textTransform: 'uppercase', letterSpacing: '0.1em',
@@ -278,7 +278,7 @@ function RaceSection({ title, icon, races }: { title: string; icon: string; race
           {races.length} race{races.length !== 1 ? 's' : ''}
         </div>
       </div>
-      <div style={{ padding: '0 2rem 1rem' }}>
+      <div className="px-3 pb-3 sm:px-6 lg:px-8">
         {races.map(r => <RaceBlock key={r.seat} seat={r.seat} candidates={r.candidates} />)}
       </div>
     </>
@@ -303,7 +303,7 @@ export default async function CandidatesPage({ searchParams }: { searchParams: P
   return (
     <div style={{ minHeight: '100vh', paddingBottom: '4rem' }}>
       {/* Title */}
-      <div style={{ padding: '2rem', borderBottom: '1px solid var(--terminal-border)' }}>
+      <div className="p-3 sm:p-6 lg:p-8" style={{ borderBottom: '1px solid var(--terminal-border)' }}>
         <h1 style={{ fontSize: '2.5rem', fontWeight: 400, letterSpacing: '0.05em', marginBottom: '0.5rem' }}>
           CANDIDATES
         </h1>
@@ -313,10 +313,10 @@ export default async function CandidatesPage({ searchParams }: { searchParams: P
       </div>
 
       {/* Stats bar */}
-      <div style={{
-        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-        gap: '1rem', padding: '1rem 2rem', borderBottom: '1px solid var(--terminal-border)',
-      }}>
+      <div
+        className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 p-3 sm:p-6 lg:p-8"
+        style={{ borderBottom: '1px solid var(--terminal-border)' }}
+      >
         <div className="terminal-card" style={{ padding: '1rem' }}>
           <div className="stat-value">{candidates.length}</div>
           <div className="stat-label">TOTAL CANDIDATES</div>
@@ -367,7 +367,7 @@ export default async function CandidatesPage({ searchParams }: { searchParams: P
           <RaceSection title="LOCAL RACES" icon="&#128203;" races={local} />
 
           {/* ── Compare Section ── */}
-          <div style={{ padding: '2rem', borderTop: '1px solid var(--terminal-border)', background: 'var(--terminal-surface)' }}>
+          <div className="p-3 sm:p-6 lg:p-8" style={{ borderTop: '1px solid var(--terminal-border)', background: 'var(--terminal-surface)' }}>
             <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
               <h2 style={{
                 fontSize: '1.25rem', fontWeight: 600, color: 'var(--terminal-blue)',
@@ -383,7 +383,7 @@ export default async function CandidatesPage({ searchParams }: { searchParams: P
           </div>
         </>
       ) : (
-        <div style={{ padding: '4rem 2rem', textAlign: 'center', color: 'var(--terminal-text-dim)' }}>
+        <div className="p-3 sm:p-6 lg:p-8 text-center" style={{ color: 'var(--terminal-text-dim)' }}>
           <div style={{ fontSize: '3rem', marginBottom: '1rem', opacity: 0.3 }}>&#128269;</div>
           <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--terminal-green)', marginBottom: '1rem' }}>
             NO ACTIVE CANDIDATES DETECTED
@@ -401,7 +401,7 @@ export default async function CandidatesPage({ searchParams }: { searchParams: P
       )}
 
       {/* Filing Calendar */}
-      <div style={{ padding: '2rem', background: 'var(--terminal-surface)', borderTop: '1px solid var(--terminal-border)' }}>
+      <div className="p-3 sm:p-6 lg:p-8" style={{ background: 'var(--terminal-surface)', borderTop: '1px solid var(--terminal-border)' }}>
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
           <h3 style={{
             fontSize: '0.85rem', fontWeight: 700, color: 'var(--terminal-green)',
