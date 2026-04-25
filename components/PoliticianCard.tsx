@@ -33,11 +33,12 @@ export default function PoliticianCard({ politician }: Props) {
   const isDangerous = politician.corruptionScore >= 60 || politician.juiceBoxTier === 'owned';
 
   return (
-    <Link 
+    <Link
       href={`/politician/${politician.id}`}
       style={{ textDecoration: 'none', color: 'inherit' }}
     >
-      <div 
+      <div
+        data-politician-card
         className={isDangerous ? 'card card-danger' : 'card'}
         style={{
           cursor: 'pointer',
@@ -66,7 +67,7 @@ export default function PoliticianCard({ politician }: Props) {
         )}
 
         {/* Header */}
-        <div style={{ display: 'flex', alignItems: 'start', gap: '1rem', marginBottom: '1.5rem' }}>
+        <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-3 mb-6">
           <div 
             style={{
               width: '64px',
@@ -106,9 +107,9 @@ export default function PoliticianCard({ politician }: Props) {
           </div>
           {/* Corruption Score */}
           <div style={{ textAlign: 'center' }}>
-            <div 
-              className={`corruption-score ${getScoreClass(politician.corruptionScore)}`}
-              style={{ color: getScoreColor(politician.corruptionScore), fontSize: '3rem' }}
+            <div
+              className={`corruption-score text-3xl sm:text-5xl ${getScoreClass(politician.corruptionScore)}`}
+              style={{ color: getScoreColor(politician.corruptionScore), fontFamily: 'Bebas Neue, sans-serif' }}
             >
               {politician.corruptionScore}
             </div>
@@ -137,37 +138,40 @@ export default function PoliticianCard({ politician }: Props) {
 
         {/* Juice Box Tag */}
         {politician.juiceBoxTier !== 'none' ? (
-          <div
-            className={`tag tag-${politician.juiceBoxTier.replace('_', '-')}`}
-            style={{ marginBottom: '1.5rem', display: 'inline-flex' }}
-          >
-            {getJuiceBoxLabel(politician.juiceBoxTier)}
-            <span style={{ marginLeft: '0.75rem', fontWeight: 700 }}>
-              ${Math.round(politician.aipacFunding).toLocaleString('en-US')}
-            </span>
+          <div className="flex flex-wrap gap-1 mb-6">
+            <div
+              className={`tag tag-${politician.juiceBoxTier.replace('_', '-')}`}
+              style={{ display: 'inline-flex' }}
+            >
+              {getJuiceBoxLabel(politician.juiceBoxTier)}
+              <span style={{ marginLeft: '0.75rem', fontWeight: 700 }}>
+                ${Math.round(politician.aipacFunding).toLocaleString('en-US')}
+              </span>
+            </div>
           </div>
         ) : ((politician.israelLobbyTotal ?? 0) === 0 && (politician.aipacFunding ?? 0) === 0) ? (
-          <div
-            style={{
-              marginBottom: '1.5rem',
-              display: 'inline-flex',
-              padding: '0.4rem 0.75rem',
-              border: '1px solid var(--terminal-green, #10b981)',
-              color: 'var(--terminal-green, #10b981)',
-              fontSize: '0.75rem',
-              fontWeight: 700,
-              letterSpacing: '0.1em',
-            }}
-          >
-            ✓ NO FOREIGN INFLUENCE DETECTED
+          <div className="flex flex-wrap gap-1 mb-6">
+            <div
+              style={{
+                display: 'inline-flex',
+                padding: '0.4rem 0.75rem',
+                border: '1px solid var(--terminal-green, #10b981)',
+                color: 'var(--terminal-green, #10b981)',
+                fontSize: '0.75rem',
+                fontWeight: 700,
+                letterSpacing: '0.1em',
+              }}
+            >
+              ✓ NO FOREIGN INFLUENCE DETECTED
+            </div>
           </div>
         ) : null}
 
         {/* Top Donor */}
         {politician.topDonor?.name && (
-          <div 
+          <div
+            className="p-2 sm:p-4"
             style={{
-              padding: '1rem',
               background: 'var(--bg-tertiary)',
               border: (politician.topDonor?.name?.includes('AIPAC') || politician.topDonor?.name?.includes('Israel')) ? '1px solid var(--red-blood)' : '1px solid var(--border-color)',
               marginBottom: '1rem',
