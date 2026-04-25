@@ -66,7 +66,15 @@ export default function SocialFeed({
   const [loading, setLoading] = useState(true);
   const [totalPosts, setTotalPosts] = useState<number>(0);
   const [platform, setPlatform] = useState<string>('');
-  const [autoRefresh, setAutoRefresh] = useState(true);
+  // Plan 10-05 / D-39: default autoRefresh based on viewport.
+  // base (< 640px) → false (battery drain on mobile, AUDIT §1.5)
+  // sm:+           → true (today's behavior preserved)
+  // SSR-safe: matchMedia is browser-only; useState initializer reads it lazily
+  // by guarding `typeof window !== 'undefined'`.
+  const [autoRefresh, setAutoRefresh] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    return !window.matchMedia('(max-width: 639px)').matches;
+  });
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const fetchPosts = useCallback(async () => {
@@ -145,6 +153,24 @@ export default function SocialFeed({
             <span style={{ color: 'var(--terminal-text-dim)' }}>
               {totalPosts} POSTS TRACKED
             </span>
+            {/* Explicit manual refresh — reachable on every viewport (plan 10-05 / D-39).
+                On base, this is the primary refresh path because autoRefresh defaults off. */}
+            <button
+              type="button"
+              onClick={() => {
+                fetchPosts();
+                fetchTotalPosts();
+              }}
+              className="min-h-[44px] px-3 font-mono text-xs uppercase tracking-[0.08em] border border-terminal-border hover:bg-terminal-green/10"
+              style={{
+                background: 'transparent',
+                color: 'var(--terminal-green)',
+                cursor: 'pointer',
+                fontFamily: 'inherit',
+              }}
+            >
+              REFRESH
+            </button>
             <button
               onClick={() => setAutoRefresh(!autoRefresh)}
               style={{
