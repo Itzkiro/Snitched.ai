@@ -24,7 +24,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **UI-01**: Politician detail page financial tab is fully functional with real data
 - [ ] **UI-02**: All "PHASE 2 COMING SOON" placeholders replaced with real features or removed
 - [ ] **UI-03**: Fake "LIVE" OSINT feed removed or replaced with real data source
-- [ ] **UI-04**: Mobile-responsive layout across all pages
+- [x] **UI-04**: Mobile-responsive layout across all pages
 
 ## v2 Requirements
 
@@ -69,7 +69,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | UI-01 | Phase 8: Politician Detail Page — Financial Tab | Mapped |
 | UI-02 | Phase 9: Placeholder Cleanup & OSINT Feed | Mapped |
 | UI-03 | Phase 9: Placeholder Cleanup & OSINT Feed | Mapped |
-| UI-04 | Phase 10: Mobile Responsive Layout | Mapped |
+| UI-04 | Phase 10: Mobile Responsive Layout | Complete |
 
 **Coverage:**
 - v1 requirements: 10 total
