@@ -99,7 +99,17 @@ function getLevelColor(officeLevel: string): string {
   return 'var(--terminal-blue)';
 }
 
-export default function SearchBar() {
+interface SearchBarProps {
+  /**
+   * Optional callback to open the full-screen SearchOverlay on (base). When
+   * provided, the (base) render path is a single trigger button that calls
+   * this; the inline input+dropdown is hidden until sm:+. When omitted (e.g.
+   * legacy callers), only the inline path renders and the trigger is absent.
+   */
+  onOpenOverlay?: () => void;
+}
+
+export default function SearchBar({ onOpenOverlay }: SearchBarProps = {}) {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<Array<Politician & { _score: number }>>([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -185,9 +195,36 @@ export default function SearchBar() {
   };
 
   return (
-    <div ref={containerRef} style={{ position: 'relative', flex: '1', maxWidth: '420px' }}>
+    <>
+      {/* (base) trigger — only rendered when an overlay handler is wired.
+          sm:hidden so it never co-renders with the inline input. */}
+      {onOpenOverlay && (
+        <button
+          type="button"
+          onClick={onOpenOverlay}
+          aria-label="Open search"
+          className="sm:hidden min-h-[44px] w-full flex items-center px-3 bg-black border border-terminal-border font-mono text-sm text-terminal-text-dim"
+          style={{
+            cursor: 'pointer',
+            letterSpacing: '0.05em',
+            textAlign: 'left',
+          }}
+        >
+          <span aria-hidden="true" style={{ marginRight: '0.5rem', opacity: 0.6 }}>&gt;_</span>
+          SEARCH POLITICIANS...
+        </button>
+      )}
+
+      {/* sm:+ inline input + dropdown. Wrapped in hidden sm:flex so at (base)
+          this entire branch is gone and only the trigger button above renders.
+          Both branches are mutually exclusive. */}
+      <div
+        ref={containerRef}
+        className={onOpenOverlay ? 'hidden sm:flex' : 'flex'}
+        style={{ position: 'relative', flex: '1', maxWidth: '420px' }}
+      >
       {/* Search Input */}
-      <div style={{ position: 'relative' }}>
+      <div style={{ position: 'relative', width: '100%' }}>
         <input
           ref={inputRef}
           type="text"
@@ -254,14 +291,15 @@ export default function SearchBar() {
         )}
       </div>
 
-      {/* Dropdown Results */}
+      {/* Dropdown Results — left-anchored to input via right-auto (D-18 fix
+          for clip past right edge at sm: when input is right-aligned). */}
       {isOpen && (
         <div
+          className="absolute left-0 right-auto"
           style={{
-            position: 'absolute',
             top: 'calc(100% + 4px)',
-            left: 0,
-            right: 0,
+            width: '100%',
+            minWidth: '320px',
             background: 'var(--terminal-surface)',
             border: `1px solid ${results.length > 0 ? 'var(--terminal-blue)' : 'var(--terminal-border)'}`,
             boxShadow: '0 8px 32px rgba(0, 191, 255, 0.15), 0 0 1px rgba(0, 191, 255, 0.3)',
@@ -421,6 +459,7 @@ export default function SearchBar() {
           )}
         </div>
       )}
-    </div>
+      </div>
+    </>
   );
 }
