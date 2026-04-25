@@ -49,6 +49,17 @@
   * { animation: none !important; transition: none !important; }
 }
 
+/* ============================================================
+   D-05 — Focus-visible rings: 2 px outline in --terminal-amber.
+   :focus-visible (not :focus) so mouse users do not see the ring;
+   keyboard / screen-reader users do. Applied globally so every
+   focusable element is covered without per-component edits.
+   ============================================================ */
+*:focus-visible {
+  outline: 2px solid var(--terminal-amber);
+  outline-offset: 2px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -619,11 +630,6 @@ a:hover {
   .dash-header {
     flex-direction: column !important;
     gap: 0.75rem !important;
-  }
-
-  /* Candidates */
-  .candidate-stats {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)) !important;
   }
 
   /* Terminal dashboard (entered mode) */
