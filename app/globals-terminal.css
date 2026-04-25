@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* Snitched.ai - Bloomberg Terminal / Intelligence Dashboard Theme */
 
 :root {
@@ -14,10 +16,37 @@
   --terminal-text: #c8d6c8;
   --terminal-text-dim: #6b8a6b;
   --terminal-text-dimmer: #3d5a3d;
-  
+
   /* Typography */
   --font-terminal: 'JetBrains Mono', 'IBM Plex Mono', 'Courier New', monospace;
   --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+}
+
+/* ============================================================
+   UI-SPEC §12 — Responsive design tokens
+   Mobile-first defaults; sm: (≥640px) and lg: (≥1024px) overrides.
+   ============================================================ */
+:root {
+  --space-page-x: 0.75rem;
+  --space-section-y: 1rem;
+  --tap-min: 44px;
+  --type-body: 14px;
+  --type-meta: 12px;
+}
+@media (min-width: 640px) {
+  :root {
+    --space-page-x: 1.5rem;
+    --space-section-y: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  :root {
+    --space-page-x: 2rem;
+    --space-section-y: 2rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
 }
 
 * {
