@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -24,6 +24,19 @@ interface USMapProps {
 export default function USMap({ onStateClick }: USMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<L.Map | null>(null);
+  // Tap-to-interact (UI-SPEC §10 / RISKS §2.3) — only relevant at base (<lg).
+  // Overlay sits on top of the Leaflet map until first user tap, preventing
+  // the iOS Safari single-finger drag from trapping page scroll.
+  const [interacted, setInteracted] = useState(false);
+
+  const handleInteract = () => {
+    setInteracted(true);
+    const map = mapInstance.current;
+    if (!map) return;
+    // Re-enable touch interactions that were disabled by initial Leaflet options.
+    map.scrollWheelZoom.enable();
+    map.dragging.enable();
+  };
 
   useEffect(() => {
     if (!mapRef.current) return;
@@ -32,12 +45,17 @@ export default function USMap({ onStateClick }: USMapProps) {
       mapInstance.current = null;
     }
 
+    // At lg:+ the map starts fully interactive (no overlay).
+    // At base, dragging+scrollWheelZoom are off until the user taps the overlay.
+    const isLg = typeof window !== 'undefined' && window.matchMedia('(min-width: 1024px)').matches;
+    if (isLg) setInteracted(true);
+
     const map = L.map(mapRef.current, {
       center: [38, -96],
       zoom: 4,
       zoomControl: false,
       attributionControl: false,
-      dragging: true,
+      dragging: isLg,
       scrollWheelZoom: false,
       doubleClickZoom: false,
       touchZoom: false,
@@ -148,13 +166,30 @@ export default function USMap({ onStateClick }: USMapProps) {
   }, [onStateClick]);
 
   return (
-    <div ref={mapRef} style={{
-      width: '100%',
-      height: '320px',
-      borderRadius: 0,
-      border: '1px solid rgba(0,255,65,0.12)',
-      background: '#000',
-    }} />
+    <div className="relative" style={{ width: '100%', height: '320px' }}>
+      <div ref={mapRef} style={{
+        width: '100%',
+        height: '100%',
+        borderRadius: 0,
+        border: '1px solid rgba(0,255,65,0.12)',
+        background: '#000',
+      }} />
+      {/* Tap-to-interact overlay (UI-SPEC §10 / RISKS §2.3).
+          Visible only at base (<lg) and only until first tap.
+          z-[400] sits above Leaflet tile layer; raise to z-[600] if popup bleed. */}
+      {!interacted && (
+        <div
+          className="lg:hidden absolute inset-0 z-[400] flex items-center justify-center cursor-pointer"
+          style={{ background: 'rgba(0,0,0,0.6)' }}
+          onClick={handleInteract}
+          onTouchStart={handleInteract}
+        >
+          <span className="font-mono text-sm uppercase tracking-[0.08em]" style={{ color: 'var(--terminal-green)' }}>
+            TAP TO INTERACT
+          </span>
+        </div>
+      )}
+    </div>
   );
 }
 

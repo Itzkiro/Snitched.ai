@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -46,6 +46,16 @@ async function fetchDistrictGeoJSON(stateFips: string, cd: string): Promise<GeoJ
 export default function ZipMap({ lat, lng, zip, stateCode, congressionalDistrict, county, city, stateName }: ZipMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<L.Map | null>(null);
+  // Tap-to-interact (UI-SPEC §10 / RISKS §2.3) — only relevant at base (<lg).
+  const [interacted, setInteracted] = useState(false);
+
+  const handleInteract = () => {
+    setInteracted(true);
+    const map = mapInstance.current;
+    if (!map) return;
+    map.scrollWheelZoom.enable();
+    map.dragging.enable();
+  };
 
   useEffect(() => {
     if (!mapRef.current) return;
@@ -54,11 +64,18 @@ export default function ZipMap({ lat, lng, zip, stateCode, congressionalDistrict
       mapInstance.current = null;
     }
 
+    // At lg:+ the map starts fully interactive (no overlay).
+    // At base, dragging+scrollWheelZoom are off until the user taps the overlay.
+    const isLg = typeof window !== 'undefined' && window.matchMedia('(min-width: 1024px)').matches;
+    if (isLg) setInteracted(true);
+
     const map = L.map(mapRef.current, {
       center: [lat, lng],
       zoom: 10,
       zoomControl: false,
       attributionControl: false,
+      dragging: isLg,
+      scrollWheelZoom: false,
     });
 
     // Dark tiles
@@ -143,6 +160,20 @@ export default function ZipMap({ lat, lng, zip, stateCode, congressionalDistrict
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
       <div ref={mapRef} style={{ position: 'absolute', inset: 0, background: '#000' }} />
+      {/* Tap-to-interact overlay (UI-SPEC §10 / RISKS §2.3).
+          Visible only at base (<lg) and only until first tap. */}
+      {!interacted && (
+        <div
+          className="lg:hidden absolute inset-0 z-[400] flex items-center justify-center cursor-pointer"
+          style={{ background: 'rgba(0,0,0,0.6)' }}
+          onClick={handleInteract}
+          onTouchStart={handleInteract}
+        >
+          <span className="font-mono text-sm uppercase tracking-[0.08em]" style={{ color: 'var(--terminal-green)' }}>
+            TAP TO INTERACT
+          </span>
+        </div>
+      )}
       <style>{`
         @keyframes mapPulse {
           0% { transform: scale(0.5); opacity: 0.8; }
