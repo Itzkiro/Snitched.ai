@@ -68,9 +68,53 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
   const [showSuggestions, setShowSuggestions] = useState(false);
   const nameRef = useRef<HTMLInputElement>(null);
   const sugRef = useRef<HTMLDivElement>(null);
-  const [cursorVisible, setCursorVisible] = useState(true);
+  const rainRef = useRef<HTMLDivElement>(null);
 
+  // Matrix-rain tier (Plan 10-05 / UI-SPEC §9 / D-19 / D-20):
+  // - 'gradient'  → no DOM nodes per column (base < 640px, or prefers-reduced-motion)
+  // - 'reduced'   → 12 columns, no text-shadow (sm: 640–1023px)
+  // - 'full'      → 35 columns, full text-shadow (lg: ≥ 1024px)
+  // Default 'gradient' on SSR; matchMedia runs in a useEffect on mount so SSR is safe.
+  type RainTier = 'gradient' | 'reduced' | 'full';
+  const [rainTier, setRainTier] = useState<RainTier>('gradient');
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const mqLg = window.matchMedia('(min-width: 1024px)');
+    const mqSm = window.matchMedia('(min-width: 640px)');
+    const compute = (): RainTier => {
+      if (reducedMotion) return 'gradient';
+      if (mqLg.matches) return 'full';
+      if (mqSm.matches) return 'reduced';
+      return 'gradient';
+    };
+    setRainTier(compute());
+    const handler = () => setRainTier(compute());
+    mqLg.addEventListener('change', handler);
+    mqSm.addEventListener('change', handler);
+    return () => {
+      mqLg.removeEventListener('change', handler);
+      mqSm.removeEventListener('change', handler);
+    };
+  }, []);
+
+  // IntersectionObserver pause for the reduced-tier rain.
+  // When the rain container scrolls off-screen, we pause its CSS animations
+  // (animation-play-state: paused) to spare battery on phones/tablets.
+  useEffect(() => {
+    if (rainTier !== 'reduced') return;
+    if (typeof window === 'undefined' || !rainRef.current) return;
+    const el = rainRef.current;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        el.style.setProperty('--rain-play-state', entry.isIntersecting ? 'running' : 'paused');
+      },
+      { threshold: 0 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [rainTier]);
 
   const politicians = initialPoliticians;
   const active = politicians.filter(p => p.isActive);
@@ -88,14 +132,10 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
     return { ...s, count };
   });
 
-  // Cursor blink
-  useEffect(() => {
-    const t = setInterval(() => setCursorVisible(v => !v), 530);
-    return () => clearInterval(t);
-  }, []);
-
-
-
+  // Cursor blink is now CSS-driven (.cursor-blink in globals-terminal.css).
+  // Eliminates the 530ms React re-render loop that previously toggled visibility.
+  // The global @media (prefers-reduced-motion: reduce) rule disables the blink
+  // for users who request reduced motion (D-04).
 
   const handleNameSearch = useCallback((q: string) => {
     setNameQuery(q);
@@ -140,12 +180,13 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
         </div></div>
 
         <div style={{ padding: '1.5rem 2rem', borderBottom: '1px solid var(--terminal-border)', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-          <form onSubmit={handleName} style={{ flex: '1 1 300px', position: 'relative' }}>
-            <div style={{ display: 'flex', background: 'var(--terminal-card)', border: '1px solid var(--terminal-border)' }}>
+          <form onSubmit={handleName} className="relative w-full" style={{ position: 'relative' }}>
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full" style={{ background: 'var(--terminal-card)', border: '1px solid var(--terminal-border)' }}>
               <input ref={nameRef} type="text" placeholder="Search by name..." value={nameQuery}
                 onChange={e => handleNameSearch(e.target.value)} onFocus={() => nameSuggestions.length > 0 && setShowSuggestions(true)}
-                style={{ flex: 1, padding: '0.7rem 1rem', background: 'transparent', border: 'none', color: 'var(--terminal-text)', fontFamily: mono, fontSize: '0.8rem', outline: 'none' }} />
-              <button type="submit" style={{ padding: '0.7rem 1rem', background: 'var(--terminal-blue)', border: 'none', color: '#000', fontFamily: mono, fontSize: '0.7rem', fontWeight: 700, cursor: 'pointer' }}>SEARCH</button>
+                className="flex-1 min-h-[44px] px-3 font-mono text-base"
+                style={{ background: 'transparent', border: 'none', color: 'var(--terminal-text)', fontFamily: mono, outline: 'none' }} />
+              <button type="submit" className="min-h-[44px] px-4 font-mono uppercase tracking-[0.08em]" style={{ background: 'var(--terminal-blue)', border: 'none', color: '#000', fontWeight: 700, cursor: 'pointer' }}>SEARCH</button>
             </div>
             {showSuggestions && (
               <div ref={sugRef} style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 50, background: 'var(--terminal-card)', border: '1px solid var(--terminal-border)', maxHeight: '280px', overflowY: 'auto' }}>
@@ -163,7 +204,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
         </div>
 
         <div className="terminal-dash-cols" style={{ display: 'flex', gap: '2rem', padding: '2rem', flexWrap: 'wrap' }}>
-          <div style={{ flex: '1 1 300px', minWidth: 0 }}>
+          <div style={{ flexGrow: 1, flexShrink: 1, flexBasis: '300px', minWidth: 0 }}>
             <h2 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--terminal-red)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem' }}>HIGHEST CORRUPTION SCORES</h2>
             <div className="data-grid" style={{ padding: 0 }}>
               {topCorrupt.map(pol => (
@@ -203,52 +244,77 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
   return (
     <div style={{ minHeight: '100vh', background: bg0, color: txt, fontFamily: mono, overflowX: 'hidden', position: 'relative' }}>
 
-      {/* ── MATRIX RAIN BACKGROUND (covers entire page height) ── */}
+      {/* ── MATRIX RAIN BACKGROUND (tiered per UI-SPEC §9 / D-19, D-20) ──
+          - 'gradient' tier renders ONLY a static backdrop — no per-column DOM nodes.
+          - 'reduced'  tier renders 12 columns, no text-shadow, paused when off-screen.
+          - 'full'     tier renders today's 35-column behavior.
+          Each column carries data-rain-column for Playwright instrumentation in plan 06.
+       */}
       <style>{`
         @keyframes matrixRain {
           0% { transform: translateY(-300px); }
           100% { transform: translateY(100vh); }
         }
       `}</style>
-      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 0, pointerEvents: 'none' }}>
-        {Array.from({ length: 35 }).map((_, col) => {
-          const words = [
-            'AIPAC', '$$$', 'PAC', 'LOBBY', 'BRIBE', 'DARK$', 'FEC', 'FRAUD',
-            'DONOR', 'CORP', 'SHELL', 'SUPER', 'IE$$', 'BUNDL', 'K ST',
-            '$10K', '$50K', '$1M', '$5M', 'LAUND', 'QUID', 'KICKB',
-            'FARA', 'AGENT', 'FOREI', 'MONEY', 'INFLU', 'CORRU',
-            'SNITCH', 'TRACE', 'EXPOS', 'FUND$', 'HIDE', 'LIE',
-            'STEAL', 'POWER', 'GREED', 'SELL', 'BETRY', 'OWNED',
-          ];
-          const isRed = col % 5 === 0;
-          const colColor = isRed ? 'rgba(255,8,68,' : 'rgba(0,255,65,';
-          const left = (col / 35 * 100);
-          const duration = 8 + (col % 6) * 2.5;
-          const delay = (col * 0.6) % 7;
-          const chars = Array.from({ length: 12 + (col % 6) }).map((_, i) => words[(col * 3 + i) % words.length]);
+      {rainTier === 'gradient' && (
+        <div
+          aria-hidden="true"
+          className="fixed inset-0 z-0 pointer-events-none bg-gradient-to-b from-terminal-green/5 via-black to-black"
+        />
+      )}
+      {(rainTier === 'reduced' || rainTier === 'full') && (
+        <div
+          ref={rainRef}
+          style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 0, pointerEvents: 'none' }}
+        >
+          {(() => {
+            const columnCount = rainTier === 'full' ? 35 : 12;
+            const showShadow = rainTier === 'full';
+            const words = [
+              'AIPAC', '$$$', 'PAC', 'LOBBY', 'BRIBE', 'DARK$', 'FEC', 'FRAUD',
+              'DONOR', 'CORP', 'SHELL', 'SUPER', 'IE$$', 'BUNDL', 'K ST',
+              '$10K', '$50K', '$1M', '$5M', 'LAUND', 'QUID', 'KICKB',
+              'FARA', 'AGENT', 'FOREI', 'MONEY', 'INFLU', 'CORRU',
+              'SNITCH', 'TRACE', 'EXPOS', 'FUND$', 'HIDE', 'LIE',
+              'STEAL', 'POWER', 'GREED', 'SELL', 'BETRY', 'OWNED',
+            ];
+            return Array.from({ length: columnCount }).map((_, col) => {
+              const isRed = col % 5 === 0;
+              const colColor = isRed ? 'rgba(255,8,68,' : 'rgba(0,255,65,';
+              const left = (col / columnCount) * 100;
+              const duration = 8 + (col % 6) * 2.5;
+              const delay = (col * 0.6) % 7;
+              const chars = Array.from({ length: 12 + (col % 6) }).map((_, i) => words[(col * 3 + i) % words.length]);
 
-          return (
-            <div key={col} style={{
-              position: 'fixed',
-              left: `${left}%`,
-              top: 0,
-              fontSize: '0.6rem',
-              fontFamily: mono,
-              lineHeight: '1.8em',
-              letterSpacing: '0.05em',
-              whiteSpace: 'nowrap',
-              animation: `matrixRain ${duration}s linear ${delay}s infinite`,
-            }}>
-              {chars.map((ch, i) => (
-                <div key={i} style={{
-                  color: `${colColor}${i === 0 ? '0.45' : i < 2 ? '0.2' : i < 4 ? '0.1' : '0.05'})`,
-                  textShadow: i === 0 ? `0 0 10px ${colColor}0.5)` : 'none',
-                }}>{ch}</div>
-              ))}
-            </div>
-          );
-        })}
-      </div>
+              return (
+                <div
+                  key={col}
+                  data-rain-column
+                  style={{
+                    position: 'fixed',
+                    left: `${left}%`,
+                    top: 0,
+                    fontSize: '0.6rem',
+                    fontFamily: mono,
+                    lineHeight: '1.8em',
+                    letterSpacing: '0.05em',
+                    whiteSpace: 'nowrap',
+                    animation: `matrixRain ${duration}s linear ${delay}s infinite`,
+                    animationPlayState: 'var(--rain-play-state, running)' as React.CSSProperties['animationPlayState'],
+                  }}
+                >
+                  {chars.map((ch, i) => (
+                    <div key={i} style={{
+                      color: `${colColor}${i === 0 ? '0.45' : i < 2 ? '0.2' : i < 4 ? '0.1' : '0.05'})`,
+                      textShadow: showShadow && i === 0 ? `0 0 10px ${colColor}0.5)` : 'none',
+                    }}>{ch}</div>
+                  ))}
+                </div>
+              );
+            });
+          })()}
+        </div>
+      )}
 
       {/* All content sits above the matrix rain */}
       <div style={{ position: 'relative', zIndex: 1 }}>
@@ -414,7 +480,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
             <div style={{ fontSize: '0.6rem', color: txtMuted, letterSpacing: '0.2em', marginBottom: '0.3rem' }}>COVERAGE.map</div>
             <h2 style={{ fontSize: '1rem', fontWeight: 700, color: g, marginBottom: '1rem' }}>
               Active Surveillance
-              <span style={{ color: cursorVisible ? g : 'transparent', marginLeft: 2 }}>_</span>
+              <span className="cursor-blink" style={{ color: g, marginLeft: 2 }}>_</span>
             </h2>
             {/* Real Leaflet US Map */}
             <USMap onStateClick={(code) => router.push(`/?state=${code}`)} />
@@ -447,7 +513,7 @@ export default function TerminalHome({ initialPoliticians, selectedState, platfo
             <div style={{ fontSize: '0.6rem', color: txtMuted, letterSpacing: '0.2em', marginBottom: '0.3rem' }}>SELECT TARGET</div>
             <div style={{ fontSize: '1.2rem', fontWeight: 700, color: g }}>
               Enter your state
-              <span style={{ color: cursorVisible ? g : 'transparent', marginLeft: 2 }}>_</span>
+              <span className="cursor-blink" style={{ color: g, marginLeft: 2 }}>_</span>
             </div>
           </div>
 
