@@ -260,6 +260,13 @@ function HierarchyContent() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--terminal-bg)', color: 'var(--terminal-text)' }}>
+      {/* Desktop-only banner (D-26 / plan 10-05).
+          /hierarchy is deprecated from v1 mobile scope. The page renders today's
+          desktop layout unchanged at every viewport; this banner sets expectations
+          for visitors on smaller screens. lg:hidden hides it at >= 1024px. */}
+      <div className="lg:hidden bg-terminal-amber/10 border-y border-terminal-amber px-3 py-2 text-xs font-mono uppercase tracking-[0.08em] text-terminal-amber text-center">
+        This view is optimised for desktop.
+      </div>
       {/* Terminal Title */}
       <div className="terminal-title">
         <div>
