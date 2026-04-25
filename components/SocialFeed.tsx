@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
+import DaemonStatusIndicator, { type DaemonStatus } from './DaemonStatusIndicator';
 
 interface SocialPost {
   id: string;
@@ -18,13 +19,6 @@ interface SocialPost {
   sentiment_score: number | null;
   is_deleted: boolean;
   scraped_at: string;
-}
-
-interface DaemonStatus {
-  status: string;
-  lastRun: { started_at: string; posts_found: number; status: string } | null;
-  lastRunMinutesAgo: number;
-  totalPosts: number;
 }
 
 const PLATFORM_ICONS: Record<string, string> = {
@@ -70,7 +64,7 @@ export default function SocialFeed({
 }) {
   const [posts, setPosts] = useState<SocialPost[]>([]);
   const [loading, setLoading] = useState(true);
-  const [daemonStatus, setDaemonStatus] = useState<DaemonStatus | null>(null);
+  const [totalPosts, setTotalPosts] = useState<number>(0);
   const [platform, setPlatform] = useState<string>('');
   const [autoRefresh, setAutoRefresh] = useState(true);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -93,11 +87,15 @@ export default function SocialFeed({
     }
   }, [politicianId, platform, compact]);
 
-  const fetchDaemonStatus = useCallback(async () => {
+  // POSTS TRACKED count comes from /api/daemon-status (totalPosts field).
+  // The daemon status dot + state label is rendered by DaemonStatusIndicator;
+  // SocialFeed only needs the count for the right-hand summary.
+  const fetchTotalPosts = useCallback(async () => {
     try {
       const res = await fetch('/api/daemon-status');
       if (res.ok) {
-        setDaemonStatus(await res.json());
+        const data = (await res.json()) as DaemonStatus;
+        setTotalPosts(data.totalPosts ?? 0);
       }
     } catch {
       // ignore
@@ -106,28 +104,21 @@ export default function SocialFeed({
 
   useEffect(() => {
     fetchPosts();
-    fetchDaemonStatus();
-  }, [fetchPosts, fetchDaemonStatus]);
+    fetchTotalPosts();
+  }, [fetchPosts, fetchTotalPosts]);
 
   // Auto-refresh every 30 seconds
   useEffect(() => {
     if (autoRefresh) {
       intervalRef.current = setInterval(() => {
         fetchPosts();
-        fetchDaemonStatus();
+        fetchTotalPosts();
       }, 30_000);
     }
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [autoRefresh, fetchPosts, fetchDaemonStatus]);
-
-  const statusColor =
-    daemonStatus?.status === 'online'
-      ? 'var(--terminal-green)'
-      : daemonStatus?.status === 'delayed'
-        ? 'var(--terminal-amber)'
-        : 'var(--terminal-red)';
+  }, [autoRefresh, fetchPosts, fetchTotalPosts]);
 
   return (
     <div style={{ fontFamily: 'var(--font-terminal)' }}>
@@ -148,38 +139,11 @@ export default function SocialFeed({
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <span style={{ color: 'var(--terminal-text-dim)' }}>SOCIAL MONITOR</span>
-            <span
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.4rem',
-                color: statusColor,
-              }}
-            >
-              <span
-                style={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: '50%',
-                  background: statusColor,
-                  display: 'inline-block',
-                  animation:
-                    daemonStatus?.status === 'online'
-                      ? 'pulse 2s infinite'
-                      : 'none',
-                }}
-              />
-              {daemonStatus?.status?.toUpperCase() || 'UNKNOWN'}
-            </span>
-            {daemonStatus?.lastRunMinutesAgo != null && daemonStatus.lastRunMinutesAgo >= 0 && (
-              <span style={{ color: 'var(--terminal-text-dimmer)' }}>
-                LAST RUN: {daemonStatus.lastRunMinutesAgo}M AGO
-              </span>
-            )}
+            <DaemonStatusIndicator variant="full" />
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <span style={{ color: 'var(--terminal-text-dim)' }}>
-              {daemonStatus?.totalPosts || 0} POSTS TRACKED
+              {totalPosts} POSTS TRACKED
             </span>
             <button
               onClick={() => setAutoRefresh(!autoRefresh)}
