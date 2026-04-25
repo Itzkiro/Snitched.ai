@@ -181,10 +181,12 @@ export default function ShareDossier({ politician }: ShareDossierProps) {
           }}
           onClick={e => { if (e.target === e.currentTarget) setShowModal(false); }}
         >
-          <div style={{
-            background: '#0a0f0a', border: '1px solid rgba(0,255,65,0.2)',
-            maxWidth: '660px', width: '100%', maxHeight: '90vh', overflowY: 'auto',
-          }}>
+          <div
+            className="max-w-[660px] max-h-[90vh] flex flex-col w-full overflow-y-auto"
+            style={{
+              background: '#0a0f0a', border: '1px solid rgba(0,255,65,0.2)',
+            }}
+          >
             {/* Modal header */}
             <div style={{
               padding: '0.75rem 1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
@@ -202,13 +204,12 @@ export default function ShareDossier({ politician }: ShareDossierProps) {
             <div style={{ padding: '1rem' }}>
               <div style={{ fontSize: '0.55rem', color: '#3d5a3d', letterSpacing: '0.2em', marginBottom: '0.5rem' }}>PREVIEW — LIVE DATA FROM DATABASE</div>
 
-              {/* Live iframe preview */}
+              {/* Live iframe preview — responsive height per UI-SPEC §10 ShareDossier row */}
               <div style={{ marginBottom: '1rem', border: '1px solid rgba(0,255,65,0.1)', overflow: 'hidden' }}>
                 <iframe
                   src={`/embed/${politician.id}`}
-                  width="100%"
-                  height="420"
-                  style={{ border: 'none', display: 'block' }}
+                  className="h-[60vh] sm:h-[420px] w-full block"
+                  style={{ border: 'none' }}
                 />
               </div>
 
