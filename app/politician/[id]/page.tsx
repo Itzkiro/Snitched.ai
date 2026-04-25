@@ -93,6 +93,27 @@ export default function PoliticianPage() {
     loadPolitician();
   }, [params.id]);
 
+  // Sync active tab with URL hash on mount (D-12) so share-links / browser-back
+  // work. Hash is validated against an allow-list to close the T-10-11 tamper
+  // threat — unknown hash falls back to the default tab (overview).
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const allowedTabs = ['overview', 'score', 'funding', 'legal', 'votes', 'social', 'network'];
+    const raw = window.location.hash.replace(/^#/, '');
+    if (raw && allowedTabs.includes(raw)) {
+      setActiveTab(raw);
+    }
+    // Keep tab in sync when user navigates with browser back/forward
+    const onHashChange = () => {
+      const h = window.location.hash.replace(/^#/, '');
+      if (h && allowedTabs.includes(h)) {
+        setActiveTab(h);
+      }
+    };
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
+
   // ---------------------------------------------------------------------------
   // Determine whether this is a federal or state politician
   // ---------------------------------------------------------------------------
@@ -695,49 +716,43 @@ export default function PoliticianPage() {
 
           {/* (Red Flags now live inside the score-card toggle in the header.) */}
 
-          {/* Tab Navigation */}
-          <div style={{ 
-            display: 'flex', 
-            gap: '0.5rem', 
-            marginBottom: '2rem',
-            overflowX: 'auto',
-            borderBottom: '2px solid var(--terminal-border)',
-          }}>
-            {tabs.map(tab => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                style={{
-                  padding: '1rem 1.5rem',
-                  background: activeTab === tab.id ? 'var(--terminal-amber)' : 'transparent',
-                  border: 'none',
-                  borderBottom: activeTab === tab.id ? '2px solid var(--terminal-amber)' : '2px solid transparent',
-                  color: activeTab === tab.id ? '#000' : 'var(--terminal-text)',
-                  fontSize: '0.875rem',
-                  fontFamily: 'JetBrains Mono, monospace',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s',
-                  whiteSpace: 'nowrap',
-                }}
-                onMouseEnter={(e) => {
-                  if (activeTab !== tab.id) {
-                    e.currentTarget.style.background = 'var(--terminal-bg)';
-                    e.currentTarget.style.color = 'var(--terminal-amber)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (activeTab !== tab.id) {
-                    e.currentTarget.style.background = 'transparent';
-                    e.currentTarget.style.color = 'var(--terminal-text)';
-                  }
-                }}
-              >
-                {tab.icon} {tab.label}
-              </button>
-            ))}
+          {/* Tab Navigation — sticky scroll-snap strip per UI-SPEC §6 + D-10/D-11/D-12 */}
+          <div className="relative mb-8">
+            <div
+              className="sticky top-[56px] z-30 flex overflow-x-auto snap-x snap-mandatory border-b-2 border-[var(--terminal-border)] bg-black/85 backdrop-blur"
+              role="tablist"
+            >
+              {tabs.map(tab => {
+                const isActive = activeTab === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    role="tab"
+                    aria-current={isActive ? 'page' : undefined}
+                    aria-selected={isActive}
+                    onClick={() => {
+                      setActiveTab(tab.id);
+                      if (typeof window !== 'undefined') {
+                        window.history.replaceState(null, '', '#' + tab.id);
+                      }
+                    }}
+                    className={`snap-start min-h-[44px] px-4 py-2 text-sm font-mono uppercase tracking-[0.08em] whitespace-nowrap cursor-pointer transition-colors ${
+                      isActive
+                        ? 'border-b-2 border-[var(--terminal-amber)] text-[var(--terminal-amber)] bg-[var(--terminal-amber)]/10'
+                        : 'border-b-2 border-transparent text-[var(--terminal-text-dim)] hover:text-[var(--terminal-amber)]'
+                    }`}
+                    style={{ fontWeight: 700 }}
+                  >
+                    {tab.icon} {tab.label}
+                  </button>
+                );
+              })}
+            </div>
+            {/* Right-edge gradient — scroll affordance per UI-SPEC §6 */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-black to-transparent"
+            />
           </div>
 
           {/* Tab Content */}
@@ -750,18 +765,18 @@ export default function PoliticianPage() {
                 <p style={{ lineHeight: 1.7, color: 'var(--terminal-text)', marginBottom: '1rem' }}>
                   {politician.bio || `${politician.name} serves as ${politician.office} representing ${politician.district || politician.jurisdiction}.`}
                 </p>
-                <div style={{ display: 'grid', gridTemplateColumns: '150px 1fr', gap: '0.75rem', fontSize: '0.875rem' }}>
-                  <div style={{ color: 'var(--terminal-text-dim)' }}>Office:</div>
+                <div className="flex flex-col gap-2 sm:grid sm:grid-cols-[150px_1fr] sm:gap-x-4 sm:gap-y-2 text-sm">
+                  <div className="font-mono text-xs uppercase text-[var(--terminal-text-dim)] sm:normal-case sm:text-sm">Office:</div>
                   <div>{politician.office}</div>
-                  <div style={{ color: 'var(--terminal-text-dim)' }}>Jurisdiction:</div>
+                  <div className="font-mono text-xs uppercase text-[var(--terminal-text-dim)] sm:normal-case sm:text-sm">Jurisdiction:</div>
                   <div>{politician.district || politician.jurisdiction}</div>
-                  <div style={{ color: 'var(--terminal-text-dim)' }}>Party:</div>
+                  <div className="font-mono text-xs uppercase text-[var(--terminal-text-dim)] sm:normal-case sm:text-sm">Party:</div>
                   <div>{politician.party}</div>
-                  <div style={{ color: 'var(--terminal-text-dim)' }}>Term Start:</div>
+                  <div className="font-mono text-xs uppercase text-[var(--terminal-text-dim)] sm:normal-case sm:text-sm">Term Start:</div>
                   <div>{politician.termStart}</div>
                   {politician.termEnd && (
                     <>
-                      <div style={{ color: 'var(--terminal-text-dim)' }}>Term End:</div>
+                      <div className="font-mono text-xs uppercase text-[var(--terminal-text-dim)] sm:normal-case sm:text-sm">Term End:</div>
                       <div>{politician.termEnd}</div>
                     </>
                   )}
@@ -774,35 +789,35 @@ export default function PoliticianPage() {
                   <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--terminal-amber)' }}>
                     📱 SOCIAL MEDIA ACCOUNTS
                   </h3>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.875rem' }}>
+                  <div className="flex flex-col gap-3 text-sm">
                     {politician.socialMedia.twitterHandle && (
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                        <span style={{ color: 'var(--terminal-text-dim)', width: '100px' }}>Twitter:</span>
-                        <a href={`https://twitter.com/${politician.socialMedia.twitterHandle}`} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--terminal-amber)', textDecoration: 'none' }}>
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 py-1">
+                        <span className="sm:min-w-[100px] font-mono text-xs uppercase text-[var(--terminal-text-dim)]">Twitter:</span>
+                        <a href={`https://twitter.com/${politician.socialMedia.twitterHandle}`} target="_blank" rel="noopener noreferrer" className="font-mono text-sm text-[var(--terminal-amber)] break-all no-underline">
                           @{politician.socialMedia.twitterHandle}
                         </a>
                       </div>
                     )}
                     {politician.socialMedia.facebookPageUrl && (
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                        <span style={{ color: 'var(--terminal-text-dim)', width: '100px' }}>Facebook:</span>
-                        <a href={politician.socialMedia.facebookPageUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--terminal-amber)', textDecoration: 'none' }}>
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 py-1">
+                        <span className="sm:min-w-[100px] font-mono text-xs uppercase text-[var(--terminal-text-dim)]">Facebook:</span>
+                        <a href={politician.socialMedia.facebookPageUrl} target="_blank" rel="noopener noreferrer" className="font-mono text-sm text-[var(--terminal-amber)] break-all no-underline">
                           Page
                         </a>
                       </div>
                     )}
                     {politician.socialMedia.instagramHandle && (
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                        <span style={{ color: 'var(--terminal-text-dim)', width: '100px' }}>Instagram:</span>
-                        <a href={`https://instagram.com/${politician.socialMedia.instagramHandle}`} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--terminal-amber)', textDecoration: 'none' }}>
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 py-1">
+                        <span className="sm:min-w-[100px] font-mono text-xs uppercase text-[var(--terminal-text-dim)]">Instagram:</span>
+                        <a href={`https://instagram.com/${politician.socialMedia.instagramHandle}`} target="_blank" rel="noopener noreferrer" className="font-mono text-sm text-[var(--terminal-amber)] break-all no-underline">
                           @{politician.socialMedia.instagramHandle}
                         </a>
                       </div>
                     )}
                     {politician.socialMedia.youtubeChannelId && (
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                        <span style={{ color: 'var(--terminal-text-dim)', width: '100px' }}>YouTube:</span>
-                        <a href={`https://youtube.com/channel/${politician.socialMedia.youtubeChannelId}`} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--terminal-amber)', textDecoration: 'none' }}>
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 py-1">
+                        <span className="sm:min-w-[100px] font-mono text-xs uppercase text-[var(--terminal-text-dim)]">YouTube:</span>
+                        <a href={`https://youtube.com/channel/${politician.socialMedia.youtubeChannelId}`} target="_blank" rel="noopener noreferrer" className="font-mono text-sm text-[var(--terminal-amber)] break-all no-underline">
                           Channel
                         </a>
                       </div>
@@ -1090,27 +1105,23 @@ export default function PoliticianPage() {
                           {formatLobbyAmount(politician.israelLobbyTotal)}
                         </div>
 
-                        {/* Breakdown */}
-                        <div style={{
-                          display: 'grid',
-                          gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-                          gap: '1rem',
-                        }}>
+                        {/* Breakdown — responsive grid per UI-SPEC §2/D-24 section padding, D-22 in-scope conversion */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 p-3 sm:p-6 lg:p-8">
                           <div style={{ padding: '1rem', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem' }} title="Direct contributions from pro-Israel lobby PACs (AIPAC PAC, United Democracy Project, DMFI, NORPAC, RJC, etc.)">Pro-Israel Lobby PACs</div>
-                            <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ef4444', fontFamily: 'Bebas Neue, sans-serif' }}>
+                            <div className="break-words" style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem' }} title="Direct contributions from pro-Israel lobby PACs (AIPAC PAC, United Democracy Project, DMFI, NORPAC, RJC, etc.)">Pro-Israel Lobby PACs</div>
+                            <div className="break-words" style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ef4444', fontFamily: 'Bebas Neue, sans-serif' }}>
                               {formatLobbyAmount(Number(politician.israelLobbyBreakdown?.pacs) || 0)}
                             </div>
                           </div>
                           <div style={{ padding: '1rem', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem' }} title="Independent expenditures by pro-Israel lobby Super PACs supporting or opposing this candidate">Pro-Israel Lobby IE</div>
-                            <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ef4444', fontFamily: 'Bebas Neue, sans-serif' }}>
+                            <div className="break-words" style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem' }} title="Independent expenditures by pro-Israel lobby Super PACs supporting or opposing this candidate">Pro-Israel Lobby IE</div>
+                            <div className="break-words" style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ef4444', fontFamily: 'Bebas Neue, sans-serif' }}>
                               {formatLobbyAmount(Number(politician.israelLobbyBreakdown?.ie) || 0)}
                             </div>
                           </div>
                           <div style={{ padding: '1rem', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem' }} title="Individuals who donated to this candidate AND have a history of heavy donations to pro-Israel lobby PACs">Pro-Israel Lobby-Tied Donors</div>
-                            <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ef4444', fontFamily: 'Bebas Neue, sans-serif' }}>
+                            <div className="break-words" style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', marginBottom: '0.25rem' }} title="Individuals who donated to this candidate AND have a history of heavy donations to pro-Israel lobby PACs">Pro-Israel Lobby-Tied Donors</div>
+                            <div className="break-words" style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ef4444', fontFamily: 'Bebas Neue, sans-serif' }}>
                               {formatLobbyAmount(Number(politician.israelLobbyBreakdown?.bundlers) || 0)}
                             </div>
                           </div>
@@ -1413,18 +1424,33 @@ export default function PoliticianPage() {
                     </div>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', padding: '1rem', background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--terminal-border)' }}>
-                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                    <div className="flex items-center gap-2 flex-wrap">
                       <div style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'JetBrains Mono, monospace', marginRight: '0.5rem' }}>FILTER:</div>
-                      {(['all', 'israel', 'defense', 'foreign', 'anti-america-first', 'domestic'] as VoteCategoryFilter[]).map((f) => (
-                        <button key={f} onClick={() => setVoteCategoryFilter(f)} style={{ padding: '0.4rem 0.75rem', background: voteCategoryFilter === f ? 'var(--terminal-amber)' : 'transparent', border: `1px solid ${voteCategoryFilter === f ? 'var(--terminal-amber)' : 'var(--terminal-border)'}`, color: voteCategoryFilter === f ? '#000' : 'var(--terminal-text)', fontSize: '0.7rem', fontFamily: 'JetBrains Mono, monospace', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', cursor: 'pointer', transition: 'all 0.2s' }}>
-                          {f.toUpperCase().replace(/-/g, ' ')}{f !== 'all' && ` (${filterByCategory(votingRecords, f).length})`}
-                        </button>
-                      ))}
+                      {/* Vote filter buttons — 44 px tap targets per AUDIT §1.4 + D-03; wrap on base, scroll-snap on sm+ */}
+                      <div className="flex flex-wrap gap-2 sm:flex-nowrap sm:overflow-x-auto sm:snap-x sm:snap-mandatory pb-2 w-full sm:w-auto">
+                        {(['all', 'israel', 'defense', 'foreign', 'anti-america-first', 'domestic'] as VoteCategoryFilter[]).map((f) => {
+                          const isActive = voteCategoryFilter === f;
+                          return (
+                            <button
+                              key={f}
+                              onClick={() => setVoteCategoryFilter(f)}
+                              className={`min-h-[44px] px-3 py-2 text-xs font-mono uppercase tracking-[0.08em] border rounded-sm snap-start whitespace-nowrap cursor-pointer transition-colors ${
+                                isActive
+                                  ? 'bg-[var(--terminal-amber)] text-black border-[var(--terminal-amber)]'
+                                  : 'bg-transparent text-[var(--terminal-text)] border-[var(--terminal-border)]'
+                              }`}
+                              style={{ fontWeight: 700 }}
+                            >
+                              {f.toUpperCase().replace(/-/g, ' ')}{f !== 'all' && ` (${filterByCategory(votingRecords, f).length})`}
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                       <span style={{ fontSize: '0.75rem', color: 'var(--terminal-text-dim)', fontFamily: 'JetBrains Mono, monospace', textTransform: 'uppercase', letterSpacing: '0.1em', flexShrink: 0 }}>SEARCH:</span>
                       <input type="text" value={voteSearchQuery} onChange={(e) => setVoteSearchQuery(e.target.value)} placeholder="keyword, bill number..." style={{ flex: 1, padding: '0.5rem 0.75rem', background: 'var(--terminal-bg)', border: '1px solid var(--terminal-border)', color: 'var(--terminal-text)', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.8rem', outline: 'none' }} />
-                      {voteSearchQuery && (<button onClick={() => setVoteSearchQuery('')} style={{ padding: '0.4rem 0.6rem', background: 'transparent', border: '1px solid var(--terminal-border)', color: 'var(--terminal-text-dim)', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', cursor: 'pointer' }}>CLEAR</button>)}
+                      {voteSearchQuery && (<button onClick={() => setVoteSearchQuery('')} className="min-h-[44px] px-3 py-2 text-xs font-mono uppercase bg-transparent border border-[var(--terminal-border)] text-[var(--terminal-text-dim)] cursor-pointer" style={{ fontWeight: 700 }}>CLEAR</button>)}
                     </div>
                   </div>
                   <div className="terminal-card">
@@ -1434,25 +1460,33 @@ export default function PoliticianPage() {
                       if (filtered.length === 0) return (<div style={{ textAlign: 'center', padding: '3rem 2rem', color: 'var(--terminal-text-dim)' }}><div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>--</div><div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.875rem' }}>No records match the current filters.{voteSearchQuery && ' Try a different keyword.'}</div></div>);
                       return (<div style={{ display: 'grid', gap: '0.75rem' }}>
                         {filtered.map((record) => { const posColor = getVoteColor(record.votePosition); const posLabel = normalizePosition(record.votePosition); return (
-                          <div key={record.id} style={{ padding: '1.25rem', background: 'rgba(255, 255, 255, 0.02)', border: `1px solid ${posColor}40`, borderLeft: `4px solid ${posColor}`, fontFamily: 'JetBrains Mono, monospace' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', gap: '1rem' }}>
-                              <div style={{ flex: 1, minWidth: 0 }}>
-                                <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dim)', marginBottom: '0.35rem', textTransform: 'uppercase', letterSpacing: '0.1em', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                                  <span>{record.billNumber || 'VOTE'}</span>
-                                  {record.category && (<span style={{ color: 'var(--terminal-cyan)', padding: '0 0.4rem', border: '1px solid var(--terminal-cyan)', fontSize: '0.6rem' }}>{record.category}</span>)}
-                                </div>
-                                <div style={{ fontSize: '0.9rem', fontWeight: 700, marginBottom: '0.4rem', color: 'var(--terminal-text)', lineHeight: 1.4 }}>
-                                  {record.billUrl ? (<a href={record.billUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--terminal-text)', textDecoration: 'none', borderBottom: '1px dashed var(--terminal-text-dim)' }}>{record.billTitle}</a>) : record.billTitle}
-                                </div>
-                                {record.billDescription && (<div style={{ fontSize: '0.8rem', color: 'var(--terminal-text-dim)', marginBottom: '0.5rem', lineHeight: 1.5 }}>{record.billDescription.length > 250 ? record.billDescription.substring(0, 250) + '...' : record.billDescription}</div>)}
-                                <div style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dimmer)' }}>
-                                  {record.voteDate && <span>{new Date(record.voteDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>}
-                                  {record.chamber && <span> | {record.chamber}</span>}
-                                  {record.result && <span> | {record.result}</span>}
-                                  <span> | src: {record.source}</span>
-                                </div>
+                          <div
+                            key={record.id}
+                            className="flex flex-col sm:flex-row gap-2 p-3 sm:p-4 font-mono"
+                            style={{ background: 'rgba(255, 255, 255, 0.02)', border: `1px solid ${posColor}40`, borderLeft: `4px solid ${posColor}` }}
+                          >
+                            {/* Badge — chip above bill title on (base), right-side on sm+ per UI-SPEC §7 Strategy A */}
+                            <div
+                              className="order-first sm:order-last self-start sm:self-center sm:ml-auto sm:min-w-[90px] sm:text-right px-2 py-0.5 sm:px-4 sm:py-2 text-xs font-mono uppercase tracking-[0.08em]"
+                              style={{ background: posColor, color: '#000', fontWeight: 700 }}
+                            >
+                              {posLabel}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex flex-wrap gap-3 text-[0.7rem] uppercase tracking-[0.1em] text-[var(--terminal-text-dim)] mb-1">
+                                <span>{record.billNumber || 'VOTE'}</span>
+                                {record.category && (<span style={{ color: 'var(--terminal-cyan)', padding: '0 0.4rem', border: '1px solid var(--terminal-cyan)', fontSize: '0.6rem' }}>{record.category}</span>)}
                               </div>
-                              <div style={{ padding: '0.6rem 1.25rem', background: posColor, color: '#000', fontWeight: 700, fontSize: '0.85rem', textAlign: 'center', minWidth: '90px', letterSpacing: '0.05em', flexShrink: 0, alignSelf: 'center' }}>{posLabel}</div>
+                              <div className="font-mono text-sm sm:text-base text-[var(--terminal-text)] break-words mb-1" style={{ fontWeight: 700, lineHeight: 1.4 }}>
+                                {record.billUrl ? (<a href={record.billUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--terminal-text)', textDecoration: 'none', borderBottom: '1px dashed var(--terminal-text-dim)' }}>{record.billTitle}</a>) : record.billTitle}
+                              </div>
+                              {record.billDescription && (<div className="break-words" style={{ fontSize: '0.8rem', color: 'var(--terminal-text-dim)', marginBottom: '0.5rem', lineHeight: 1.5 }}>{record.billDescription.length > 250 ? record.billDescription.substring(0, 250) + '...' : record.billDescription}</div>)}
+                              <div className="break-words" style={{ fontSize: '0.7rem', color: 'var(--terminal-text-dimmer)' }}>
+                                {record.voteDate && <span>{new Date(record.voteDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>}
+                                {record.chamber && <span> | {record.chamber}</span>}
+                                {record.result && <span> | {record.result}</span>}
+                                <span> | src: {record.source}</span>
+                              </div>
                             </div>
                           </div>
                         ); })}
@@ -1950,9 +1984,9 @@ function ConnectionsTree({ politician }: { politician: Politician }) {
     );
   }
 
-  // Render tree
+  // Render tree — wrap in overflow-x-auto so deep nesting doesn't overflow viewport on mobile (UI-SPEC §10, D-39)
   return (
-    <div>
+    <div className="overflow-x-auto">
       {/* Controls */}
       <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
         <button className="terminal-btn" onClick={expandAll} style={{ padding: '0.4rem 0.75rem', fontSize: '0.7rem' }}>EXPAND ALL</button>
@@ -2062,7 +2096,9 @@ function TreeBranch({ node, depth, expanded, toggle, isLast }: {
 }) {
   const isOpen = expanded.has(node.id);
   const hasChildren = node.children && node.children.length > 0;
-  const indent = depth * 24;
+  // Per UI-SPEC §10 / PLAN-spec: pl-3 (12 px) per nesting level instead of the
+  // old varying paddingLeft math. Keeps nesting readable on narrow viewports.
+  const indent = depth * 12;
 
   return (
     <div>
@@ -2073,10 +2109,10 @@ function TreeBranch({ node, depth, expanded, toggle, isLast }: {
           alignItems: 'center',
           gap: '0.5rem',
           padding: '0.6rem 1rem',
-          paddingLeft: `${indent + 16}px`,
+          paddingLeft: `${indent + 12}px`,
           cursor: hasChildren ? 'pointer' : 'default',
           borderLeft: depth > 0 ? `1px solid var(--terminal-border)` : 'none',
-          marginLeft: depth > 0 ? `${(depth - 1) * 24 + 28}px` : 0,
+          marginLeft: depth > 0 ? `${(depth - 1) * 12 + 16}px` : 0,
           transition: 'background 0.15s',
           ...(hasChildren ? {} : {}),
         }}
