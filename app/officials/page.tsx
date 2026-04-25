@@ -76,7 +76,7 @@ export default async function OfficialsPage({ searchParams }: { searchParams: Pr
   return (
     <div style={{ minHeight: '100vh', paddingBottom: '4rem' }}>
       {/* Title */}
-      <div style={{ padding: '2rem', borderBottom: '1px solid var(--terminal-border)' }}>
+      <div className="p-3 sm:p-6 lg:p-8" style={{ borderBottom: '1px solid var(--terminal-border)' }}>
         <h1 style={{ fontSize: '2.5rem', fontWeight: 400, letterSpacing: '0.05em', marginBottom: '0.5rem' }}>
           SEATED OFFICIALS
         </h1>
@@ -86,13 +86,10 @@ export default async function OfficialsPage({ searchParams }: { searchParams: Pr
       </div>
 
       {/* Stats */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-        gap: '1rem',
-        padding: '1rem',
-        borderBottom: '1px solid var(--terminal-border)'
-      }}>
+      <div
+        className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 p-3 sm:p-6 lg:p-8"
+        style={{ borderBottom: '1px solid var(--terminal-border)' }}
+      >
         <div className="terminal-card">
           <div className="stat-value">{seatedOfficials.length}</div>
           <div className="stat-label">TOTAL OFFICIALS</div>
@@ -112,7 +109,7 @@ export default async function OfficialsPage({ searchParams }: { searchParams: Pr
       </div>
 
       {/* Federal Officials */}
-      <div style={{ padding: '2rem' }}>
+      <div className="p-3 sm:p-6 lg:p-8">
         <h2 style={{
           fontSize: '1.25rem',
           fontWeight: 600,
@@ -183,7 +180,7 @@ export default async function OfficialsPage({ searchParams }: { searchParams: Pr
       </div>
 
       {/* State Officials */}
-      <div style={{ padding: '2rem', borderTop: '1px solid var(--terminal-border)' }}>
+      <div className="p-3 sm:p-6 lg:p-8" style={{ borderTop: '1px solid var(--terminal-border)' }}>
         <h2 style={{
           fontSize: '1.25rem',
           fontWeight: 600,
@@ -232,7 +229,7 @@ export default async function OfficialsPage({ searchParams }: { searchParams: Pr
       </div>
 
       {/* County Officials */}
-      <div style={{ padding: '2rem', borderTop: '1px solid var(--terminal-border)' }}>
+      <div className="p-3 sm:p-6 lg:p-8" style={{ borderTop: '1px solid var(--terminal-border)' }}>
         <h2 style={{
           fontSize: '1.25rem',
           fontWeight: 600,
