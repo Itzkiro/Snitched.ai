@@ -1,8 +1,40 @@
 import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
+import { Bebas_Neue, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals-terminal.css";
 import { TerminalProvider } from "@/components/TerminalContext";
 import TerminalShell from "@/components/TerminalShell";
+
+// Self-hosted via next/font (Phase 10 - A): eliminates third-party
+// Google Fonts CDN requests. Weight selection follows PLAN-spec.md
+// "Phase A":
+//  - Bebas Neue: one weight (display headlines)
+//  - Inter: four weights (400/500/600/700) for UI body; the heaviest
+//    weight previously requested via the Google Fonts URL is dropped
+//    because no component uses it.
+//  - JetBrains Mono: three weights (400/500/700) - terminal/data UI
+// CSS variables are applied to <body> so existing `font-family:
+// 'JetBrains Mono'` etc. rules in globals-terminal.css continue to resolve.
+const bebasNeue = Bebas_Neue({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-display',
+  display: 'swap',
+});
+
+const inter = Inter({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  weight: ['400', '500', '700'],
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+});
 
 export const viewport = {
   width: 'device-width',
@@ -46,12 +78,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
-      </head>
-      <body>
+      <body className={`${bebasNeue.variable} ${inter.variable} ${jetBrainsMono.variable}`}>
         <TerminalProvider>
           <Suspense>
             <TerminalShell>
