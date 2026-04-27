@@ -137,7 +137,7 @@ export default function PoliticianCard({ politician }: Props) {
         )}
 
         {/* Juice Box Tag */}
-        {politician.juiceBoxTier !== 'none' ? (
+        {politician.juiceBoxTier && politician.juiceBoxTier !== 'none' ? (
           <div className="flex flex-wrap gap-1 mb-6">
             <div
               className={`tag tag-${politician.juiceBoxTier.replace('_', '-')}`}

@@ -518,7 +518,7 @@ export default function PoliticianPage() {
                   }}>
                     {politician.party === 'Republican' ? '🐘 Republican' : politician.party === 'Democrat' ? '🫏 Democrat' : politician.party}
                   </span>
-                  {politician.juiceBoxTier !== 'none' && (
+                  {politician.juiceBoxTier && politician.juiceBoxTier !== 'none' && (
                     <span className={`tag tag-${politician.juiceBoxTier.replace('_', '-')}`}>
                       {getJuiceBoxLabel(politician.juiceBoxTier)}
                     </span>
