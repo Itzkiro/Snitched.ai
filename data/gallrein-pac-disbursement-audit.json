@@ -1,0 +1,1183 @@
+{
+  "candidate_id": "H6KY04171",
+  "principal_committee_id": "C00923995",
+  "method": "schedule_b_by_disburser — corrected for earlier broken Schedule A contributor_committee_id filter",
+  "audited_at": "2026-04-28T01:54:21.121Z",
+  "finished_at": "2026-04-28T01:56:08.852Z",
+  "total_pacs_checked": 92,
+  "by_cycle": {
+    "2026": {
+      "total": 62398,
+      "entries": [
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 3500,
+          "date": "2025-12-15",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY DAVID BUKZIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY DAVID BUKZIN",
+          "earmark_donor": "DAVID BUKZIN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 250,
+          "date": "2025-12-11",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY STANLEY SLATER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY STANLEY SLATER",
+          "earmark_donor": "STANLEY SLATER"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 36,
+          "date": "2025-12-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY STUART RUBIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY STUART RUBIN",
+          "earmark_donor": "STUART RUBIN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 100,
+          "date": "2025-12-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY PAUL ROSS. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY PAUL ROSS",
+          "earmark_donor": "PAUL ROSS"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 100,
+          "date": "2025-12-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY MICHAEL ROSEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY MICHAEL ROSEN",
+          "earmark_donor": "MICHAEL ROSEN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 50,
+          "date": "2025-12-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY CAROL WHITTON. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY CAROL WHITTON",
+          "earmark_donor": "CAROL WHITTON"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 75,
+          "date": "2025-12-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY RICHARD COHEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY RICHARD COHEN",
+          "earmark_donor": "RICHARD COHEN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 10,
+          "date": "2025-12-07",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY ANTHONY MOCCIARO. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY ANTHONY MOCCIARO",
+          "earmark_donor": "ANTHONY MOCCIARO"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 5000,
+          "date": "2025-12-04",
+          "type": "direct",
+          "memo": "",
+          "purpose": "POLITICAL CONTRIBUTION",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 1000,
+          "date": "2025-12-02",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY MICHAEL EPSTEIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY MICHAEL EPSTEIN",
+          "earmark_donor": "MICHAEL EPSTEIN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 2000,
+          "date": "2025-12-02",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY GEORGE KLEIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY GEORGE KLEIN",
+          "earmark_donor": "GEORGE KLEIN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 250,
+          "date": "2025-12-02",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY ANDY ALISBERG. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY ANDY ALISBERG",
+          "earmark_donor": "ANDY ALISBERG"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 1500,
+          "date": "2025-12-01",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY RICHARD GENIRBERG. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY RICHARD GENIRBERG",
+          "earmark_donor": "RICHARD GENIRBERG"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 500,
+          "date": "2025-12-01",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY STEVE SABBA. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY STEVE SABBA",
+          "earmark_donor": "STEVE SABBA"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 3500,
+          "date": "2025-12-01",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY LOIS BLOOM. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY LOIS BLOOM",
+          "earmark_donor": "LOIS BLOOM"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 3500,
+          "date": "2025-12-01",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY RONALD BLOOM. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY RONALD BLOOM",
+          "earmark_donor": "RONALD BLOOM"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 3500,
+          "date": "2025-11-26",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY NORMAN FREIDKIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY NORMAN FREIDKIN",
+          "earmark_donor": "NORMAN FREIDKIN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 200,
+          "date": "2025-11-25",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY YOEL TOBIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY YOEL TOBIN",
+          "earmark_donor": "YOEL TOBIN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 250,
+          "date": "2025-11-21",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY HARRY MITTELMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY HARRY MITTELMAN",
+          "earmark_donor": "HARRY MITTELMAN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 7000,
+          "date": "2025-11-20",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY HERB SHEAR. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY HERB SHEAR",
+          "earmark_donor": "HERB SHEAR"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 1000,
+          "date": "2025-11-20",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY BEN FARAHI. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY BEN FARAHI",
+          "earmark_donor": "BEN FARAHI"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 500,
+          "date": "2025-11-20",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY PHILIP COHEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY PHILIP COHEN",
+          "earmark_donor": "PHILIP COHEN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 3500,
+          "date": "2025-11-20",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY HERBERT LEVINE. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY HERBERT LEVINE",
+          "earmark_donor": "HERBERT LEVINE"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 3500,
+          "date": "2025-11-19",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY PETER FORMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY PETER FORMAN",
+          "earmark_donor": "PETER FORMAN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 3500,
+          "date": "2025-11-19",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY DAVID GEMUNDER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY DAVID GEMUNDER",
+          "earmark_donor": "DAVID GEMUNDER"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 1000,
+          "date": "2025-11-19",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY ELIOT LAUER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY ELIOT LAUER",
+          "earmark_donor": "ELIOT LAUER"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 75,
+          "date": "2025-11-13",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY DAVID SCHECHTER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY DAVID SCHECHTER",
+          "earmark_donor": "DAVID SCHECHTER"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 500,
+          "date": "2025-11-11",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY ERIC FRIEDBERG. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY ERIC FRIEDBERG",
+          "earmark_donor": "ERIC FRIEDBERG"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 2500,
+          "date": "2025-11-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY ALLAN POLUNSKY. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY ALLAN POLUNSKY",
+          "earmark_donor": "ALLAN POLUNSKY"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 1000,
+          "date": "2025-11-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY EDWARD WENGER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY EDWARD WENGER",
+          "earmark_donor": "EDWARD WENGER"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 1,
+          "date": "2025-11-05",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY ALEX SIEGEL. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY ALEX SIEGEL",
+          "earmark_donor": "ALEX SIEGEL"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 3500,
+          "date": "2025-11-05",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY IRIT TRATT. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY IRIT TRATT",
+          "earmark_donor": "IRIT TRATT"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 500,
+          "date": "2025-11-03",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY ERIC FRIEDBERG. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY ERIC FRIEDBERG",
+          "earmark_donor": "ERIC FRIEDBERG"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 1000,
+          "date": "2025-11-03",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY JOSHUA KATZEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY JOSHUA KATZEN",
+          "earmark_donor": "JOSHUA KATZEN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 1,
+          "date": "2025-10-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY DANIEL MAGAT. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY DANIEL MAGAT",
+          "earmark_donor": "DANIEL MAGAT"
+        },
+        {
+          "pac_id": "C00473249",
+          "pac_name": "Grand Canyon State Caucus",
+          "cycle": 2026,
+          "amount": 3000,
+          "date": "2026-03-29",
+          "type": "earmarked_bundle",
+          "memo": "",
+          "purpose": "EARMARKED TO CANDIDATE THROUGH AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00378216",
+          "pac_name": "SunPAC",
+          "cycle": 2026,
+          "amount": 5000,
+          "date": "2026-02-02",
+          "type": "direct",
+          "memo": "",
+          "purpose": "POLITICAL CONTRIBUTION",
+          "earmark_donor": null
+        }
+      ]
+    }
+  },
+  "by_pac": {
+    "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE": {
+      "committee_id": "C00345132",
+      "total_all_cycles": 54398,
+      "by_cycle": {
+        "2026": 54398
+      },
+      "entries": [
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 3500,
+          "date": "2025-12-15",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY DAVID BUKZIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY DAVID BUKZIN",
+          "earmark_donor": "DAVID BUKZIN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 250,
+          "date": "2025-12-11",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY STANLEY SLATER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY STANLEY SLATER",
+          "earmark_donor": "STANLEY SLATER"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 36,
+          "date": "2025-12-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY STUART RUBIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY STUART RUBIN",
+          "earmark_donor": "STUART RUBIN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 100,
+          "date": "2025-12-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY PAUL ROSS. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY PAUL ROSS",
+          "earmark_donor": "PAUL ROSS"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 100,
+          "date": "2025-12-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY MICHAEL ROSEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY MICHAEL ROSEN",
+          "earmark_donor": "MICHAEL ROSEN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 50,
+          "date": "2025-12-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY CAROL WHITTON. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY CAROL WHITTON",
+          "earmark_donor": "CAROL WHITTON"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 75,
+          "date": "2025-12-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY RICHARD COHEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY RICHARD COHEN",
+          "earmark_donor": "RICHARD COHEN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 10,
+          "date": "2025-12-07",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY ANTHONY MOCCIARO. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY ANTHONY MOCCIARO",
+          "earmark_donor": "ANTHONY MOCCIARO"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 5000,
+          "date": "2025-12-04",
+          "type": "direct",
+          "memo": "",
+          "purpose": "POLITICAL CONTRIBUTION",
+          "earmark_donor": null
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 1000,
+          "date": "2025-12-02",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY MICHAEL EPSTEIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY MICHAEL EPSTEIN",
+          "earmark_donor": "MICHAEL EPSTEIN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 2000,
+          "date": "2025-12-02",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY GEORGE KLEIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY GEORGE KLEIN",
+          "earmark_donor": "GEORGE KLEIN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 250,
+          "date": "2025-12-02",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY ANDY ALISBERG. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY ANDY ALISBERG",
+          "earmark_donor": "ANDY ALISBERG"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 1500,
+          "date": "2025-12-01",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY RICHARD GENIRBERG. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY RICHARD GENIRBERG",
+          "earmark_donor": "RICHARD GENIRBERG"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 500,
+          "date": "2025-12-01",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY STEVE SABBA. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY STEVE SABBA",
+          "earmark_donor": "STEVE SABBA"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 3500,
+          "date": "2025-12-01",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY LOIS BLOOM. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY LOIS BLOOM",
+          "earmark_donor": "LOIS BLOOM"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 3500,
+          "date": "2025-12-01",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY RONALD BLOOM. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY RONALD BLOOM",
+          "earmark_donor": "RONALD BLOOM"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 3500,
+          "date": "2025-11-26",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY NORMAN FREIDKIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY NORMAN FREIDKIN",
+          "earmark_donor": "NORMAN FREIDKIN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 200,
+          "date": "2025-11-25",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY YOEL TOBIN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY YOEL TOBIN",
+          "earmark_donor": "YOEL TOBIN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 250,
+          "date": "2025-11-21",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY HARRY MITTELMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY HARRY MITTELMAN",
+          "earmark_donor": "HARRY MITTELMAN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 7000,
+          "date": "2025-11-20",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY HERB SHEAR. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY HERB SHEAR",
+          "earmark_donor": "HERB SHEAR"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 1000,
+          "date": "2025-11-20",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY BEN FARAHI. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY BEN FARAHI",
+          "earmark_donor": "BEN FARAHI"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 500,
+          "date": "2025-11-20",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY PHILIP COHEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY PHILIP COHEN",
+          "earmark_donor": "PHILIP COHEN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 3500,
+          "date": "2025-11-20",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY HERBERT LEVINE. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY HERBERT LEVINE",
+          "earmark_donor": "HERBERT LEVINE"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 3500,
+          "date": "2025-11-19",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY PETER FORMAN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY PETER FORMAN",
+          "earmark_donor": "PETER FORMAN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 3500,
+          "date": "2025-11-19",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY DAVID GEMUNDER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY DAVID GEMUNDER",
+          "earmark_donor": "DAVID GEMUNDER"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 1000,
+          "date": "2025-11-19",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY ELIOT LAUER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY ELIOT LAUER",
+          "earmark_donor": "ELIOT LAUER"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 75,
+          "date": "2025-11-13",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY DAVID SCHECHTER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY DAVID SCHECHTER",
+          "earmark_donor": "DAVID SCHECHTER"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 500,
+          "date": "2025-11-11",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY ERIC FRIEDBERG. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY ERIC FRIEDBERG",
+          "earmark_donor": "ERIC FRIEDBERG"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 2500,
+          "date": "2025-11-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY ALLAN POLUNSKY. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY ALLAN POLUNSKY",
+          "earmark_donor": "ALLAN POLUNSKY"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 1000,
+          "date": "2025-11-10",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY EDWARD WENGER. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY EDWARD WENGER",
+          "earmark_donor": "EDWARD WENGER"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 1,
+          "date": "2025-11-05",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY ALEX SIEGEL. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY ALEX SIEGEL",
+          "earmark_donor": "ALEX SIEGEL"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 3500,
+          "date": "2025-11-05",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY IRIT TRATT. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY IRIT TRATT",
+          "earmark_donor": "IRIT TRATT"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 500,
+          "date": "2025-11-03",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY ERIC FRIEDBERG. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY ERIC FRIEDBERG",
+          "earmark_donor": "ERIC FRIEDBERG"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 1000,
+          "date": "2025-11-03",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY JOSHUA KATZEN. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY JOSHUA KATZEN",
+          "earmark_donor": "JOSHUA KATZEN"
+        },
+        {
+          "pac_id": "C00345132",
+          "pac_name": "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE",
+          "cycle": 2026,
+          "amount": 1,
+          "date": "2025-10-31",
+          "type": "earmarked_bundle",
+          "memo": "EARMARKED BY DANIEL MAGAT. TRANSMITTED BY CHECK/EFT",
+          "purpose": "EARMARKED BY DANIEL MAGAT",
+          "earmark_donor": "DANIEL MAGAT"
+        }
+      ],
+      "earmarked_donors": [
+        "DAVID BUKZIN",
+        "STANLEY SLATER",
+        "STUART RUBIN",
+        "PAUL ROSS",
+        "MICHAEL ROSEN",
+        "CAROL WHITTON",
+        "RICHARD COHEN",
+        "ANTHONY MOCCIARO",
+        "MICHAEL EPSTEIN",
+        "GEORGE KLEIN",
+        "ANDY ALISBERG",
+        "RICHARD GENIRBERG",
+        "STEVE SABBA",
+        "LOIS BLOOM",
+        "RONALD BLOOM",
+        "NORMAN FREIDKIN",
+        "YOEL TOBIN",
+        "HARRY MITTELMAN",
+        "HERB SHEAR",
+        "BEN FARAHI",
+        "PHILIP COHEN",
+        "HERBERT LEVINE",
+        "PETER FORMAN",
+        "DAVID GEMUNDER",
+        "ELIOT LAUER",
+        "DAVID SCHECHTER",
+        "ERIC FRIEDBERG",
+        "ALLAN POLUNSKY",
+        "EDWARD WENGER",
+        "ALEX SIEGEL",
+        "IRIT TRATT",
+        "JOSHUA KATZEN",
+        "DANIEL MAGAT"
+      ]
+    },
+    "Grand Canyon State Caucus": {
+      "committee_id": "C00473249",
+      "total_all_cycles": 3000,
+      "by_cycle": {
+        "2026": 3000
+      },
+      "entries": [
+        {
+          "pac_id": "C00473249",
+          "pac_name": "Grand Canyon State Caucus",
+          "cycle": 2026,
+          "amount": 3000,
+          "date": "2026-03-29",
+          "type": "earmarked_bundle",
+          "memo": "",
+          "purpose": "EARMARKED TO CANDIDATE THROUGH AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE",
+          "earmark_donor": null
+        }
+      ],
+      "earmarked_donors": []
+    },
+    "SunPAC": {
+      "committee_id": "C00378216",
+      "total_all_cycles": 5000,
+      "by_cycle": {
+        "2026": 5000
+      },
+      "entries": [
+        {
+          "pac_id": "C00378216",
+          "pac_name": "SunPAC",
+          "cycle": 2026,
+          "amount": 5000,
+          "date": "2026-02-02",
+          "type": "direct",
+          "memo": "",
+          "purpose": "POLITICAL CONTRIBUTION",
+          "earmark_donor": null
+        }
+      ],
+      "earmarked_donors": []
+    }
+  },
+  "independent_expenditures": [],
+  "summary": {
+    "cycle_2020_direct_and_earmarked": 0,
+    "cycle_2022_direct_and_earmarked": 0,
+    "cycle_2024_direct_and_earmarked": 0,
+    "cycle_2026_direct_and_earmarked": 62398,
+    "total_all_cycles": 62398,
+    "direct_total": 10000,
+    "earmarked_total": 52398,
+    "unique_earmarked_donors": 33,
+    "top_earmark_donors": [
+      {
+        "name": "HERB SHEAR",
+        "total": 7000,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "DAVID BUKZIN",
+        "total": 3500,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "LOIS BLOOM",
+        "total": 3500,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "RONALD BLOOM",
+        "total": 3500,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "NORMAN FREIDKIN",
+        "total": 3500,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "HERBERT LEVINE",
+        "total": 3500,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "PETER FORMAN",
+        "total": 3500,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "DAVID GEMUNDER",
+        "total": 3500,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "IRIT TRATT",
+        "total": 3500,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "ALLAN POLUNSKY",
+        "total": 2500,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "GEORGE KLEIN",
+        "total": 2000,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "RICHARD GENIRBERG",
+        "total": 1500,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "MICHAEL EPSTEIN",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "BEN FARAHI",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "ELIOT LAUER",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "ERIC FRIEDBERG",
+        "total": 1000,
+        "count": 2,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "EDWARD WENGER",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "JOSHUA KATZEN",
+        "total": 1000,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "STEVE SABBA",
+        "total": 500,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "PHILIP COHEN",
+        "total": 500,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "STANLEY SLATER",
+        "total": 250,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "ANDY ALISBERG",
+        "total": 250,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "HARRY MITTELMAN",
+        "total": 250,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "YOEL TOBIN",
+        "total": 200,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      },
+      {
+        "name": "PAUL ROSS",
+        "total": 100,
+        "count": 1,
+        "pacs": [
+          "REPUBLICAN JEWISH COALITION POLITICAL ACTION COMMITTEE"
+        ],
+        "cycles": [
+          2026
+        ]
+      }
+    ]
+  }
+}
