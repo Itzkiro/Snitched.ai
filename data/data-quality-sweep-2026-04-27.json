@@ -1,0 +1,91 @@
+{
+  "generated_at": "2026-04-28T02:23:09.866Z",
+  "mode": "post-write-verification",
+  "scope": {
+    "active_total": 49,
+    "with_fec_id": 37
+  },
+  "summary": "Sweep completed 2026-04-27/28 — Bug 1: 2 rows fixed; Bug 2: 0 rows (Gallrein/Bernard Taylor already manually patched, Acton/Vivek/Vega use intentional total-raised overrides with curated labels and were correctly skipped); Bug 3: 3 rows fixed, 7 JStreetPAC counter-signal flags moved to historical_red_flags.",
+  "fixes_applied": {
+    "bug1_total_funds_doubled": [
+      {
+        "bioguide_id": "sc-01-2026-tyler-dykes",
+        "name": "Tyler Dykes",
+        "fec_id": "H6SC01318",
+        "old_total_funds": 10530.46,
+        "new_total_funds": 5265.23,
+        "delta": -5265.23,
+        "data_source": "audit_2026-04-27_data_quality_sweep_bug1"
+      },
+      {
+        "bioguide_id": "fl-06-2026-aaron-baker",
+        "name": "Aaron Baker",
+        "fec_id": "H6FL06324",
+        "old_total_funds": 191449.9,
+        "new_total_funds": 95724.95,
+        "delta": -95724.95,
+        "data_source": "audit_2026-04-27_data_quality_sweep_bug1"
+      }
+    ],
+    "bug2_donation_status_amount_stale": [],
+    "bug3_jstreetpac_counter_signal_flags_moved": [
+      {
+        "bioguide_id": "ca-30-2026-laura-friedman",
+        "name": "Laura Friedman",
+        "flags_moved_count": 3,
+        "flags_moved": [
+          "[roster-match] GORDON, PATRICIA (CA): $750 to Laura Friedman, $747,050 career to pro-Israel PACs (JStreetPAC)",
+          "[roster-match] YOUNG, MICHAEL (NY): $350 to Laura Friedman, $310,827 career to pro-Israel PACs (JStreetPAC, J Street Action Fund, +1)",
+          "[roster-match] LAINER, ELEANOR (CA): $3,300 to Laura Friedman, $160,500 career to pro-Israel PACs (JStreetPAC, JDCA PAC)"
+        ],
+        "data_source": "audit_2026-04-27_data_quality_sweep_bug3"
+      },
+      {
+        "bioguide_id": "oh-gov-2026-amy-acton",
+        "name": "Amy Acton",
+        "flags_moved_count": 3,
+        "flags_moved": [
+          "[roster-match] KORNACKER, MELODEE (OH): $1,000 to Amy Acton, $560,600 career to pro-Israel PACs (JStreetPAC, J Street Action Fund, +1)",
+          "[roster-match] BLUME, JAMES (CA): $250 to Amy Acton, $291,350 career to pro-Israel PACs (JStreetPAC, J Street Action Fund)",
+          "[roster-match] SHAPIRO, ROBIN (NY): $200 to Amy Acton, $161,030 career to pro-Israel PACs (JStreetPAC, J Street Action Fund)"
+        ],
+        "data_source": "audit_2026-04-27_data_quality_sweep_bug3"
+      },
+      {
+        "bioguide_id": "ny-15-jose-vega",
+        "name": "Jose Vega",
+        "flags_moved_count": 1,
+        "flags_moved": [
+          "[roster-match] PEARL, MORRIS (NY): $1,500 to Jose Vega, $195,900 career to pro-Israel PACs (JStreetPAC)"
+        ],
+        "data_source": "audit_2026-04-27_data_quality_sweep_bug3"
+      }
+    ]
+  },
+  "totals": {
+    "bug1_count": 2,
+    "bug1_total_dollars_corrected": 100990.18,
+    "bug2_count": 0,
+    "bug2_note": "Gallrein + Bernard Taylor already manually fixed before sweep. Acton/Vivek/Vega have intentional total-raised donation_status overrides with custom labels (SKEPTICAL DONATIONS, MOSTLY INDIVIDUAL DONORS, GRASSROOTS / NO LOBBY CAPTURE) — these are NOT stale lobby figures and were correctly excluded by the lobby-mode badge filter.",
+    "bug3_rows": 3,
+    "bug3_flags_moved": 7
+  },
+  "skipped_rows": [
+    { "bioguide_id": "fl-06-2026-dan-bilzerian", "name": "Dan Bilzerian", "reason": "FEC H6FL06415 no 2026 totals (terminated/old cycle)" },
+    { "bioguide_id": "va-sen-2026-mark-moran", "name": "Mark Moran", "reason": "FEC S6VA00218 no 2026 totals (terminated/old cycle)" },
+    { "bioguide_id": "fl-07-2026-derrick-brantley", "name": "Derrick Brantley", "reason": "FEC H4FL07129 no 2026 totals (terminated/old cycle)" },
+    { "bioguide_id": "fl-07-2026-noah-widmann", "name": "Noah Widmann", "reason": "FEC H6FL07173 no 2026 totals (terminated/old cycle)" },
+    { "bioguide_id": "fl-07-2026-george-bock", "name": "George Louis Bock", "reason": "FEC H6FL07199 no 2026 totals (terminated/old cycle)" },
+    { "bioguide_id": "fl-07-2026-benjamin-ewers", "name": "Benjamin Richard Ewers", "reason": "FEC H6FL07207 no 2026 totals (terminated/old cycle)" },
+    { "bioguide_id": "fl-21-2026-bernard-taylor", "name": "Bernard Taylor", "reason": "manually fixed earlier 2026-04-27" },
+    { "bioguide_id": "ky-04-2026-ed-gallrein", "name": "Ed Gallrein", "reason": "manually fixed earlier 2026-04-27" }
+  ],
+  "manual_review_required": [],
+  "post_write_verification": {
+    "ran_at": "2026-04-28T02:23:09.866Z",
+    "bug1_remaining": 0,
+    "bug2_remaining": 0,
+    "bug3_remaining": 0,
+    "errors": 0
+  }
+}
